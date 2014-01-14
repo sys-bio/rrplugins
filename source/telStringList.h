@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "telConstants.h"
-#include "telUtilsExporter.h"
+#include "telExporter.h"
 
 namespace tlp
 {
@@ -15,7 +15,7 @@ using std::ostream;
  * @internal
  * @deprecated
  */
-class TLPUTILS_DS StringList
+class RRP_DECLSPEC StringList
 {
     protected:
         vector<string>              mStrings;
@@ -63,7 +63,7 @@ class TLPUTILS_DS StringList
         vector<string>::iterator    end();
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
-        TLPUTILS_DS
+        RRP_DECLSPEC
         friend ostream&             operator<<(ostream& stream, const StringList& list);
 
         /**

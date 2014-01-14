@@ -41,7 +41,7 @@
 #ifndef telCPluginH
 #define telCPluginH
 #include "telPlugin.h"
-#include "../utils/telStringList.h"
+#include "telStringList.h"
 //---------------------------------------------------------------------------
 
 namespace tlp

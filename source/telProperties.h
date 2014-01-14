@@ -46,7 +46,7 @@
 #include <utility>
 #include "telExporter.h"
 #include "telPropertyBase.h"
-#include "../utils/telStringList.h"
+#include "telStringList.h"
 //---------------------------------------------------------------------------
 
 namespace tlp

@@ -40,7 +40,7 @@
 */
 #ifndef telPropertyBaseH
 #define telPropertyBaseH
-#include "../utils/telConstants.h"
+#include "telConstants.h"
 #include "telExporter.h"
 #include <string>
 #include <ostream>

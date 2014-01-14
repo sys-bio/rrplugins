@@ -1,5 +1,5 @@
-#ifndef rrpExporterH
-#define rrpExporterH
+#ifndef telExporterH
+#define telExporterH
 
 #if defined(_WIN32)
     #if defined(STATIC_PLUGIN_API)

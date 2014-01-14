@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "../utils/telUtils.h"
+#include "telUtils.h"
 #include "telCPlugin.h"
 //---------------------------------------------------------------------------
 

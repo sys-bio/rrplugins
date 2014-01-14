@@ -16,7 +16,7 @@ using tlp::StringList;
 using std::vector;
 using std::string;
 
-class TLPUTILS_DS ArrayListItemBase
+class RRP_DECLSPEC ArrayListItemBase
 {
     public:
         virtual ~ArrayListItemBase();
@@ -27,7 +27,7 @@ class TLPUTILS_DS ArrayListItemBase
  * @deprecated
  * a proprietaty collection class that is massivly deprecated.
  */
-class TLPUTILS_DS ArrayList
+class RRP_DECLSPEC ArrayList
 {
     protected:
     public:
@@ -60,7 +60,7 @@ class TLPUTILS_DS ArrayList
 };
 
 
-TLPUTILS_DS std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
+RRP_DECLSPEC std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
 
 
 

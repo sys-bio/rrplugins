@@ -44,8 +44,8 @@
 #include <string>
 #include <ostream>
 #include "telExporter.h"
-#include "../utils/telConstants.h"
-#include "../utils/telStringList.h"
+#include "telConstants.h"
+#include "telStringList.h"
 #include "Poco/SharedLibrary.h"
 //---------------------------------------------------------------------------
 /* A minimalistic Plugin manager. */

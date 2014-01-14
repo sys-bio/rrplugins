@@ -10,8 +10,8 @@
 #include "telPluginManager.h"
 #include "telPlugin.h"
 #include "telCPlugin.h"
-#include "../utils/telStringList.h"
-#include "../utils/telUtils.h"
+#include "telStringList.h"
+#include "telUtils.h"
 
 //---------------------------------------------------------------------------
 namespace tlp

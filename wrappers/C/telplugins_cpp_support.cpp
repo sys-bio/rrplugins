@@ -1,11 +1,10 @@
 #pragma hdrstop
-#include "telplugins_cpp_support.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrException.h"
-#include "../utils/telStringUtils.h"
+#include "telStringUtils.h"
 #include "telplugins_utilities.h"
-
+#include "telplugins_cpp_support.h"
 namespace tlp
 {
 using rr::RoadRunnerData;

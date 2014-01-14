@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include "telConstants.h"
-#include "telUtilsExporter.h"
+#include "telExporter.h"
 
 using std::stringstream;
 using std::string;
@@ -11,12 +11,7 @@ using std::string;
 namespace tlp
 {
 
-
-/**
- * @internal
- * @deprecated
- */
-class TLPUTILS_DS StringBuilder
+class RRP_DECLSPEC StringBuilder
 {
     protected:
         stringstream                 mStringing;

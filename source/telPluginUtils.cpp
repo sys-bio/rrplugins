@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "telPluginUtils.h"
-#include "../utils/telStringList.h"
+#include "telStringList.h"
 //---------------------------------------------------------------------------
 namespace tlp
 {

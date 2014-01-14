@@ -44,10 +44,10 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "telExporter.h"
-#include "../utils/telStringList.h"
 #include "rr/rrSelectionRecord.h"
-#include "../utils/telUtils.h"
+#include "telExporter.h"
+#include "telStringList.h"
+#include "telUtils.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
