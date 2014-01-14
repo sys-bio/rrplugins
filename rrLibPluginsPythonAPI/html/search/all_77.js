@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['wasterminated',['wasTerminated',['../group__plugins.html#ga34dd6241165175ec35948c91fe50555a',1,'rrPlugins']]],
-  ['writeroadrunnerdata',['writeRoadRunnerData',['../group__utilities.html#gac440f57f63bc339615f69bab1fe093bf',1,'rrPlugins']]]
+  ['writedataseries',['writeDataSeries',['../class_python_1_1rr_plugins_1_1_data_series.html#a4333e20dfe61b03d9e722c840601fb1d',1,'Python::rrPlugins::DataSeries']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['readroadrunnerdata',['readRoadRunnerData',['../group__utilities.html#ga6e522621ca2fa85a9f4c307cc714a5dc',1,'rrPlugins']]],
-  ['resetplugin',['resetPlugin',['../group__plugins.html#gada7b96c01251795d0c14702d021196ef',1,'rrPlugins']]]
+  ['readalltext',['readAllText',['../class_python_1_1rr_plugins_1_1_plugin.html#a52f792bf84a0894f0c812b1d531036ad',1,'Python::rrPlugins::Plugin']]],
+  ['readdataseries',['readDataSeries',['../class_python_1_1rr_plugins_1_1_data_series.html#a53ffecea5ea4e97e96283a0afbf6cab5',1,'Python::rrPlugins::DataSeries']]]
 ];
