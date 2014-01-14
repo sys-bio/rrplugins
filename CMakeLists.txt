@@ -3,16 +3,22 @@ project(tellurium)
 
 # These will be the defaults ...
 if(WIN32)
-    SET(TL_BUILDS_ROOT      "c:/builds")
-    SET(TL_INSTALLS_ROOT    "c:/installs")
+    SET(TLP_BUILDS_ROOT      "c:/builds")
+    SET(TLP_INSTALLS_ROOT    "c:/installs")
 
-    if(BORLAND) set(FOLDER_POSTFIX "xe") endif()
-    if(MSVC) set(FOLDER_POSTFIX "vs") endif()
-    if(UNIX) set(FOLDER_POSTFIX "gcc") endif()
+    if(BORLAND) 
+        set(FOLDER_POSTFIX "xe") 
+    endif()
+    if(MSVC) 
+        set(FOLDER_POSTFIX "vs") 
+    endif()
+    if(UNIX) 
+        set(FOLDER_POSTFIX "gcc") 
+    endif()
 
-    set(THIRD_PARTY_INSTALL_FOLDER ${TL_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries.")
+    set(THIRD_PARTY_INSTALL_FOLDER ${TLP_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries.")
     if("${THIRD_PARTY_INSTALL_FOLDER}" STREQUAL "")
-        set(THIRD_PARTY_INSTALL_FOLDER ${TL_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries" FORCE)
+        set(THIRD_PARTY_INSTALL_FOLDER ${TLP_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries" FORCE)
     endif()
 else()
     # Default the third party dir to a more conventional unix type path
@@ -28,19 +34,18 @@ mark_as_advanced(
     INSTALL_STATIC_LIB
     )
 
-set(TL_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
-set(TL_ROADRUNNER_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
-set(TL_ROADRUNNER_INSTALL_LIB_PATH ${TL_ROADRUNNER_INSTALL_PATH}/lib)
-set(TL_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
+set(TLP_ROADRUNNER_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
+set(TLP_ROADRUNNER_INSTALL_LIB_PATH ${TLP_ROADRUNNER_INSTALL_PATH}/lib)
+set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
 OPTION (INSTALL_APPS            "Build and Install Apps"                         ON )
 OPTION (INSTALL_STATIC_LIB      "Install TelluriumPlugins CXX Static Lib"        OFF)
-OPTION (TL_BUILD_SHARED_CORE    "Build TelluriumPlugins Core Shared Library"     OFF)
-OPTION (BUILD_EXAMPLES          "Build and Install Examples"                     OFF)
-OPTION (BUILD_TEST_TOOLS        "Build TelluriumPlugins Test Tools"              OFF)
+OPTION (TLP_BUILD_SHARED_CORE   "Build TelluriumPlugins Core Shared Library"     ON)
+OPTION (BUILD_EXAMPLES          "Build and Install Tellurium Plugin Examples"    OFF)
+OPTION (BUILD_TEST_TOOLS        "Build Tellurium Plugins Test Tools"             OFF)
 
-set(TL_ROOT                      ${CMAKE_CURRENT_SOURCE_DIR})
-set(TL_SOURCE_ROOT               ${CMAKE_CURRENT_SOURCE_DIR}/source)
+set(TLP_ROOT                      ${CMAKE_CURRENT_SOURCE_DIR})
 set(THIRD_PARTY_FOLDER           ${CMAKE_CURRENT_SOURCE_DIR}/third_party)
 
 set(exe_path                     ${PROJECT_BINARY_DIR}/bin)
@@ -77,10 +82,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)
 
 include_directories(
-    ${TL_ROOT}
-    ${THIRD_PARTY_FOLDER}
+    ${TLP_ROOT}
+    ${TLP_ROOT}/manager
+    ${THIRD_PARTY_INSTALL_FOLDERa}/include
 )
 
+link_directories (
+    ${THIRD_PARTY_INSTALL_FOLDER}/lib
+)
 if(${MSVC})
     add_definitions(
         -DPOCO_NO_AUTOMATIC_LIBS
@@ -120,7 +129,7 @@ if(UNIX)
     endif()
 endif()
 
-add_subdirectory(libplugins)
+add_subdirectory(manager)
 add_subdirectory(plugins)
 
 if(INSTALL_APPS)

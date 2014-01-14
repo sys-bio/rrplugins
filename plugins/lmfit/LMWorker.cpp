@@ -1,17 +1,17 @@
 #pragma hdrstop
-#include "rrRoadRunnerData.h"
-#include "rrLogger.h"
+#include "rr/rrRoadRunnerData.h"
+#include "rr/rrLogger.h"
 #include "LMWorker.h"
 #include "lm.h"
 #include "lib/lmmin.h"
-#include "rrStringUtils.h"
-#include "rrUtils.h"
+#include "rr/rrStringUtils.h"
+#include "rr/rrUtils.h"
 #include "rrProperty.h"
 
 //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
-#include "../../wrappers/C/rrc_api.h"
-#include "../../wrappers/C/rrc_utilities.h"
-#include "../../wrappers/C/rrc_cpp_support.h"
+#include "rr/C/rrc_api.h"
+#include "rr/C/rrc_utilities.h"
+#include "rr/C/rrc_cpp_support.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {

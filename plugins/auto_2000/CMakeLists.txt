@@ -8,7 +8,7 @@ add_subdirectory(libAuto)
 add_subdirectory(rrAutoInterface)
 add_subdirectory(source)
 
-if(${RRP_BUILD_EXAMPLES})
+if(${TLP_BUILD_EXAMPLES})
 add_subdirectory(examples)
 endif()
 

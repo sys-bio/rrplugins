@@ -1,8 +1,8 @@
 #ifndef rrRRAutoH
 #define rrRRAutoH
 #include "rrProperty.h"
-#include "rrRoadRunner.h"
-#include "rrLogger.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrLogger.h"
 #include "rrRRAutoSetupControl.h"
 #include "rrRRAutoExporter.h"
 //---------------------------------------------------------------------------

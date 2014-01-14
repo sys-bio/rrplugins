@@ -1,7 +1,7 @@
 #ifndef lmUtilsH
 #define lmUtilsH
-#include "../../wrappers/C/rrc_types.h"
-#include "../wrappers/C/rrplugins_types.h"
+#include "rr/C/rrc_types.h"
+#include "./wrappers/C/rrplugins_types.h"
 #include "rrPluginsAPISettings.h"
 //---------------------------------------------------------------------------
 

@@ -1,10 +1,10 @@
 #pragma hdrstop
-#include "rrUtils.h"
+#include "rr/rrUtils.h"
 #include "rrRRAuto.h"
-#include "rrExecutableModel.h"
+#include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
-#include "rrLogger.h"
-#include "rrStringList.h"
+#include "rr/rrLogger.h"
+#include "rr/rrStringList.h"
 #include "rrPluginUtils.h"
 
 namespace rrauto

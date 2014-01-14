@@ -2,11 +2,11 @@
 #define rrAutoDataH
 #include <ostream>
 #include "rrRRAutoExporter.h"
-#include "rrStringList.h"
-#include "rrRoadRunnerData.h"
+#include "rr/rrStringList.h"
+#include "rr/rrRoadRunnerData.h"
 #include "rrProperty.h"
 #include "rrProperties.h"
-#include "rrLogger.h"
+#include "rr/rrLogger.h"
 //---------------------------------------------------------------------------
 
 //using namespace rr;

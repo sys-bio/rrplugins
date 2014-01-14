@@ -2,8 +2,8 @@
 #define rrAutoWorkerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "rrRoadRunner.h"
-#include "rrOSSpecifics.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrOSSpecifics.h"
 #include "rrpExporter.h"
 #include "auto_utils.h"
 //---------------------------------------------------------------------------

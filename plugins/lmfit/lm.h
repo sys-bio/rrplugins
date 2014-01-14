@@ -3,8 +3,8 @@
 #include <vector>
 #include "rrProperty.h"
 #include "rrCPPPlugin.h"
-#include "rrRoadRunner.h"
-#include "rrc_types.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/c/rrc_types.h"
 #include "LMWorker.h"
 #include "lib/lmmin.h"
 //---------------------------------------------------------------------------

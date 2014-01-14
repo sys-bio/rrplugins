@@ -1,7 +1,7 @@
 #pragma hdrstop
-#include "rrStringList.h"
-#include "c/rrStringBuilder.h"
-#include "rrStringUtils.h"
+#include "rr/rrStringList.h"
+#include "rrStringBuilder.h"
+#include "rr/rrStringUtils.h"
 #include "rrAutoInputConstants.h"
 #include "rrPluginUtils.h"
 //---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 #define LMWorkerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "rrRoadRunner.h"
+#include "rr/rrRoadRunner.h"
 #include "lmUtils.h"
 //---------------------------------------------------------------------------
 

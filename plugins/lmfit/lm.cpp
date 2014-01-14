@@ -1,12 +1,12 @@
 #pragma hdrstop
-#include "rrLogger.h"
-#include "rrException.h"
+#include "rr/rrLogger.h"
+#include "rr/rrException.h"
 #include "lm.h"
-#include "../../wrappers/C/rrc_api.h"
-#include "../../wrappers/C/rrc_utilities.h"
-#include "rrRoadRunner.h"
-#include "rrRoadRunnerData.h"
-#include "rrUtils.h"
+#include "rr/C/rrc_api.h"
+#include "rr/C/rrc_utilities.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrRoadRunnerData.h"
+#include "rr/rrUtils.h"
 #include "lmfit_doc.h"
 //---------------------------------------------------------------------------
 

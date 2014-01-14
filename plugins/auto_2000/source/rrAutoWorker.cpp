@@ -1,14 +1,14 @@
 #pragma hdrstop
 #include "Poco/Path.h"
 #include "Poco/File.h"
-#include "rrRoadRunnerData.h"
-#include "rrLogger.h"
+#include "rr/rrRoadRunnerData.h"
+#include "rr/rrLogger.h"
 #include "rrAutoWorker.h"
 #include "rrAutoPlugin.h"
-#include "rrStringUtils.h"
-#include "rrUtils.h"
-#include "rrc_api.h"
-#include "rrc_utilities.h"
+#include "rr/rrStringUtils.h"
+#include "rr/rrUtils.h"
+#include "rr/c/rrc_api.h"
+#include "rr/c/rrc_utilities.h"
 //---------------------------------------------------------------------------
 
 namespace autoplugin
