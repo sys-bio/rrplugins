@@ -18,7 +18,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-rrplugins
+telplugins
 )
 else() #UNIX
     if(APPLE)
@@ -45,7 +45,7 @@ else() #UNIX
         f2c
         pthread
         roadrunner_c_api
-        rrplugins_c_api
+        telplugins_c_api
         )
 endif()
 

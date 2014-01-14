@@ -5,7 +5,7 @@
 #include "../libAuto/vsAuto.h"
 #include "rr/rrLogger.h"
 #include "telStringList.h"
-#include "telPluginUtils.h"
+#include "telUtils.h"
 
 namespace rrauto
 {

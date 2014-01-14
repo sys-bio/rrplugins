@@ -5,11 +5,9 @@ if(${TLP_BUILD_EXAMPLES} STREQUAL ON)
 
 #Give access to headers in the following folders
 include_directories(
-	${RR_ROOT}/source
-	${RR_ROOT}/wrappers/C
-	${RR_ROOT}/libplugins/source
-	${RR_ROOT}/libplugins/wrappers/C
-    ${THIRD_PARTY_INSTALL_FOLDER}/include
+	${TLP_ROOT}/source
+	${TLP_ROOT}/wrappers/C
+    	${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
 add_subdirectory(c_plugin_demo_1)

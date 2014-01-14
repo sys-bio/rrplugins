@@ -1,22 +1,29 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-project(rrplugins)
+project(telplugins)
 
-set(target rrplugins)
+set(target telplugins)
 
 include_directories(
-    ${RR_ROOT}/source
+    ${TLP_ROOT}/source
     ${THIRD_PARTY_INSTALL_FOLDER}/include
     ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2
     )
 
 set(sources
-rrPropertyBase
-rrCPlugin
-rrCPPPlugin
-rrProperties
-rrPlugin
-rrPluginManager
-rrPluginUtils
+telArrayList
+telConstants
+telCPlugin
+telCPPPlugin
+telPlugin
+telPluginManager
+telProperties
+telPropertyBase
+telStringBuilder
+telStringList
+telStringListContainer
+telStringUtils
+#telUnresolvedSTDExternals
+telUtils
 )
 
 #SHARED VERSION ----------------
@@ -155,7 +162,7 @@ install(TARGETS ${target}-static
 FILE (GLOB headers rr*.h)
 install (   
     FILES ${headers}
-    DESTINATION include/libplugins
+    DESTINATION include/telplugins
     COMPONENT pluginsLib
     )
 

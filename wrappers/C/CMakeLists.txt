@@ -1,24 +1,28 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(rrplugins_c-api)
-set(target rrplugins_c_api)
+PROJECT(telplugins_c-api)
+set(target telplugins_c_api)
 
 include_directories(${RR_GENERATED_HEADER_PATH}) #we have to do this to get the generated header
 
 include_directories(
-${RR_ROOT}/source
-${RR_ROOT}/libplugins/source
+${TLP_ROOT}/source
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
+link_directories(
+${THIRD_PARTY_INSTALL_FOLDER}/lib
+)
+
 
 #The C-api is built as a shared library..
 add_library(${target} SHARED
-rrplugins_c_api
-rrplugins_cpp_support
-rrplugins_properties_api
+telplugins_c_api
+telplugins_cpp_support
+telplugins_properties_api
+telplugins_utilities
 )
 
 if(${BORLAND})
-    set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/rrplugins_c_api.def\"")
+    set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/telplugins_c_api.def\"")
 endif()
 
 #Link C_api dll statically to roadrunner and libsbml
@@ -35,7 +39,7 @@ if(WIN32)
     target_link_libraries ( ${target}
         roadrunner_c_api
         roadrunner
-        rrplugins
+        telplugins
         )
 
 else() 
@@ -56,7 +60,7 @@ else()
     target_link_libraries ( ${target}
         roadrunner_c_api
         roadrunner-static
-        rrplugins_api
+        telplugins_api
         rr-libstruct-static
         nleq-static
         sbml-static
@@ -80,7 +84,7 @@ endif()
 FILE (GLOB headers rrp*.h)
 install (   
     FILES ${headers}
-    DESTINATION include/libplugins
+    DESTINATION include/telplugins
     COMPONENT pluginsLib
     )
 

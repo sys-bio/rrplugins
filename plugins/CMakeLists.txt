@@ -3,10 +3,8 @@ project(plugins)
 
 #Give all plugins access to headers in the following folders
 include_directories(
-	${RR_ROOT}/source
-	${RR_ROOT}/wrappers/C
-	${RR_ROOT}/libplugins/source
-	${RR_ROOT}/libplugins/wrappers/C
+	${TLP_ROOT}/source
+	${TLP_ROOT}/wrappers/C
     ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 

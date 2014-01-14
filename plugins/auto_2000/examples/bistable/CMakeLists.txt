@@ -5,7 +5,7 @@ include_directories(${RR_GENERATED_HEADER_PATH}) #we have to do this to get the 
 
 include_directories(
 ${C_API_INCLUDE_ROOT}
-${RR_ROOT}/source
+${TLP_ROOT}/source
 ../../../source
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
@@ -24,7 +24,7 @@ add_definitions(
 
 target_link_libraries (${target} 
 roadrunner
-rrplugins
+telplugins
 libsbml-static
 poco_foundation-static
 rr-libstruct-static

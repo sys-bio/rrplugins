@@ -2,6 +2,7 @@
 #include <sstream>
 #include <string>
 #include <iomanip>
+#include <iostream>
 #include "Poco/Glob.h"
 #include "Poco/SharedLibrary.h"
 #include "rr/rrException.h"

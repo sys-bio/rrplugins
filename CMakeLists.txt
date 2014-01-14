@@ -129,8 +129,7 @@ if(UNIX)
     endif()
 endif()
 
-add_subdirectory(utils)
-add_subdirectory(manager)
+add_subdirectory(source)
 add_subdirectory(plugins)
 
 if(INSTALL_APPS)

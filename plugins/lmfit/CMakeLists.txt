@@ -35,8 +35,8 @@ if(WIN32)
 target_link_libraries (${target}
 roadrunner
 lmfit-static
-rrplugins
-rrplugins_c_api                 
+telplugins
+telplugins_c_api                 
 roadrunner_c_api                 
 )
 
@@ -59,7 +59,7 @@ else()
         roadrunner-static
         lmfit-static
         roadrunner_c_api
-        rrplugins_api-static
+        telplugins_api-static
         )
 endif()
 

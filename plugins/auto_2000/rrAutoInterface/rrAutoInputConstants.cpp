@@ -3,7 +3,7 @@
 #include "telStringBuilder.h"
 #include "telStringUtils.h"
 #include "rrAutoInputConstants.h"
-#include "telPluginUtils.h"
+#include "telUtils.h"
 //---------------------------------------------------------------------------
 namespace rrauto
 {

@@ -179,14 +179,6 @@ rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
 //*/
 //RRCDataPtr                          createRRCData(const rr::RoadRunnerData& result);
 
-/*!
- \brief Cast a RoadRunner Data handle to RoadRunner Data instance pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner data instance
- \return Pointer to a roadrunner data instance
- \ingroup cpp_support
-*/
-TLP_C_DS rr::RoadRunnerData*         castToRoadRunnerData(RRDataHandle rrDataHandle);
-
 }
 
 #endif

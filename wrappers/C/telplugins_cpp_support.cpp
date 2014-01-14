@@ -3,8 +3,13 @@
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrException.h"
 #include "telStringUtils.h"
+#include "telplugins_c_api.h"
 #include "telplugins_utilities.h"
 #include "telplugins_cpp_support.h"
+
+extern char* gLastError; 
+char* gLastError = 0;
+
 namespace tlp
 {
 using rr::RoadRunnerData;

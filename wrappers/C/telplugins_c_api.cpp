@@ -19,7 +19,7 @@ using namespace std;
 using rr::RoadRunnerData;
 using namespace rrc;
 
-char*       gLastError                  = NULL;
+char* gLastError                  = NULL;
 
 RRPluginManagerHandle rrp_cc createPluginManager(const char* _pluginDir)
 {
@@ -435,10 +435,10 @@ char* rrp_cc getLastPluginError()
     return NULL;
 }
 
-bool rrp_cc freeText(char* text)
-{
-    return false;//freeText(text);
-}
+//bool rrp_cc freeText(char* text)
+//{
+//    return false;//freeText(text);
+//}
 
 char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
 {

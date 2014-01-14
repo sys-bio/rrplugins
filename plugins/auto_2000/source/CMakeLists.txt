@@ -43,7 +43,7 @@ endif()
 
 target_link_libraries (${target}
 roadrunner
-rrplugins
+telplugins
 rrAutoInterface-static
 libAuto-static
 )

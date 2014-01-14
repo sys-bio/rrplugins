@@ -42,7 +42,7 @@ add_definitions( -DEXPORT_RR_PLUGIN)
 
 target_link_libraries (${target}
 roadrunner-static
-rrplugins_api-static
+telplugins_api-static
 rrAutoInterface-static
 libAuto-static
 poco_foundation-static

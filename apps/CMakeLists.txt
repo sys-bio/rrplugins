@@ -3,12 +3,16 @@ PROJECT(Apps)
 
 # rr Includes
 include_directories(
-${RR_ROOT}/source
-${RR_ROOT}/libplugins/source
+${TLP_ROOT}/source
 ${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/rr
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
 ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_INSTALL_FOLDER}/include/clapack
+)
+
+link_directories(
+${THIRD_PARTY_INSTALL_FOLDER}/lib
 )
 
 set(apps 	

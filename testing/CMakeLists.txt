@@ -33,7 +33,7 @@ PROJECT(RR_PLUGINS_API_TESTS)
 #
 #include_directories(
 #src
-#${RR_ROOT}
+#${TLP_ROOT}
 #${THIRD_PARTY_FOLDER}/unit_test/src
 #)
 #

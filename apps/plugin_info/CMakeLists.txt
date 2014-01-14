@@ -14,7 +14,7 @@ add_definitions(
 )
 
 target_link_libraries (${target} 
-rrplugins
+telplugins
 )
 endif()
 
@@ -23,7 +23,7 @@ add_definitions(
 -DPOCO_STATIC
 )
 target_link_libraries (${target} 
-rrplugins
+telplugins
 lapack
 blas
 f2c

@@ -17,15 +17,15 @@ install(
         rrPlugins_CAPI.py 
         rrFindSharedLib.py
         README.txt 
-        DESTINATION site-packages/rrplugins  	
+        DESTINATION site-packages/telplugins  	
         COMPONENT plugins_api
        )
 
 
 if(WIN32)
     install(
-    FILES install_rrplugins.py
+    FILES install_telplugins.py
     DESTINATION site-packages
-    COMPONENT plugins_api
+    COMPONENT tel_plugins
         )
 endif(WIN32)

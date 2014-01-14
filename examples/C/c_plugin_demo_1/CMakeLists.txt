@@ -4,10 +4,10 @@ ENABLE_LANGUAGE (C)
 set(target rrp_c_plugin_demo)
 
 include_directories(
-${RR_ROOT}/source
-${RR_ROOT}/plugins/source
-${RR_ROOT}/plugins/wrappers/C
-${RR_ROOT}/wrappers/C
+${TLP_ROOT}/source
+${TLP_ROOT}/plugins/source
+${TLP_ROOT}/plugins/wrappers/C
+${TLP_ROOT}/wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
@@ -27,7 +27,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-rrplugins_c_api
+telplugins_c_api
 )
 #else() #UNIX
 #    # OSX flags:
@@ -56,7 +56,7 @@ rrplugins_c_api
 #        f2c
 #        pthread
 #        roadrunner_c_api
-#        rrplugins_c_api
+#        telplugins_c_api
 #        )
 endif()
 
@@ -64,10 +64,10 @@ endif()
 set(main_target c_plugin_demo)
 
 include_directories(
-${RR_ROOT}/source
-${RR_ROOT}/plugins/source
-${RR_ROOT}/plugins/wrappers/C
-${RR_ROOT}/wrappers/C
+${TLP_ROOT}/source
+${TLP_ROOT}/plugins/source
+${TLP_ROOT}/plugins/wrappers/C
+${TLP_ROOT}/wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
@@ -85,7 +85,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${main_target}
 roadrunner
-rrplugins_c_api
+telplugins_c_api
 )
 endif()
 

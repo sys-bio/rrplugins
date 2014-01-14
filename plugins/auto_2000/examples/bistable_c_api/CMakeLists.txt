@@ -22,7 +22,7 @@ add_definitions(
 
 target_link_libraries (${target} 
 roadrunner-static
-rrplugins_api-static
+telplugins_api-static
 libxml2
 libsbml-static
 poco_foundation-static

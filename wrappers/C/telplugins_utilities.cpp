@@ -1,7 +1,7 @@
 #pragma hdrstop
 //#include "rrc_types.h"
 //#include "rrc_exporter.h"
-//#include "telplugins_utilities.h"         // Need to include this before the support header..
+#include "telplugins_utilities.h"         // Need to include this before the support header..
 //#include "rrc_macros.h"
 //#include "telplugins_cpp_support.h"
 //#include <string>
@@ -13,11 +13,11 @@
 //#include "rr/Exception.h"
 //---------------------------------------------------------------------------
 
-char*       gLastError                  = NULL;
 
 namespace tlp
 {
-//using namespace std;
+    char*       gLastError                  = 0;
+    //using namespace std;
 
 //using namespace rrc;
 
