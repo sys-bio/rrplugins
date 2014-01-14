@@ -44,7 +44,7 @@
 #include "rr/c/rrc_types.h"
 #include "telplugins_settings.h"
 #if defined(__cplusplus)
-namespace tlp { extern "C"  { using namespace rrc;
+namespace tlpc { extern "C"  { using namespace rrc;
 #endif
 
 /*!rrp_pch.h

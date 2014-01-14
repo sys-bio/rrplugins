@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
-project(rrp_c_plugin_demo C)
+project(tel_c_plugin_demo C)
 ENABLE_LANGUAGE (C)
-set(target rrp_c_plugin_demo)
+set(target tel_c_plugin_demo)
 
 include_directories(
 ${TLP_ROOT}/source
-${TLP_ROOT}/plugins/source
-${TLP_ROOT}/plugins/wrappers/C
 ${TLP_ROOT}/wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
@@ -65,8 +63,6 @@ set(main_target c_plugin_demo)
 
 include_directories(
 ${TLP_ROOT}/source
-${TLP_ROOT}/plugins/source
-${TLP_ROOT}/plugins/wrappers/C
 ${TLP_ROOT}/wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
@@ -91,7 +87,7 @@ endif()
 
 install (TARGETS ${target}
 DESTINATION plugins
-COMPONENT plugins
+COMPONENT examples
 )
 
 install (TARGETS ${main_target}

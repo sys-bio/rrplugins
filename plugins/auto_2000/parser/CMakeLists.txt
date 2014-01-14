@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(target rrp_auto2000)
+set(target tel_auto2000)
 
 include_directories(
 ../../source

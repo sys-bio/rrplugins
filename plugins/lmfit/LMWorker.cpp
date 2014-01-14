@@ -7,18 +7,16 @@
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-
-//Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
-#include "rr/C/rrc_api.h"
+#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
 #include "rr/C/rrc_utilities.h"
-//#include "rr/C/rrc_cpp_support.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {
 
 using namespace rrc;
 using namespace std;
-
+using namespace tlp;
+using namespace tlpc;
 LMWorker::LMWorker(LM& host)
 :
 mTheHost(host),
@@ -304,7 +302,7 @@ void evaluate(const double *par,       //Property vector
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
             double modelValue;
-            if(!tlp::getRRCDataElement(rrcData, j, i, &modelValue))
+            if(!tlpc::getRRCDataElement(rrcData, j, i, &modelValue))
             {
                 throw("Bad stuff...") ;
             }

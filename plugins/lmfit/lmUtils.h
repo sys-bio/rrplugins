@@ -8,7 +8,7 @@
 namespace lmfit
 {
 using namespace rrc;
-using namespace tlp;
+using namespace tlpc;
 
 /* data structure to transmit model data to function evalution */
 typedef struct

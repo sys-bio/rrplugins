@@ -14,9 +14,10 @@
 //---------------------------------------------------------------------------
 
 
-namespace tlp
+namespace tlpc
 {
-    char*       gLastError                  = 0;
+    char* gLastError = 0;
+    //char*       gLastError                  = 0;
     //using namespace std;
 
 //using namespace rrc;

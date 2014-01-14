@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include <string>
 #include "rr/rrRoadRunner.h"
+#include "rr/rrRoadRunnerData.h"
 #include "rr/rrException.h"
 #include "telplugins_properties_api.h"
 #include "rr/rrLogger.h"
@@ -13,9 +14,10 @@
 #include "telPropertyBase.h"
 //---------------------------------------------------------------------------
 
-namespace tlp
+namespace tlpc
 {
 using namespace std;
+using rr::RoadRunnerData;
 
 
 RRPropertyHandle rrp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
@@ -188,7 +190,7 @@ char* rrp_cc getPropertyInfo(RRPropertyHandle handle)
         PropertyBase* para = castToProperty(handle);
         stringstream s;
         s<<"Name="<<para->getName()<<"\tType="<<para->getType()<<"\tDescription="<<para->getDescription()<<"\tHint="<<para->getHint();
-        return createText(s.str());
+        return tlp::createText(s.str());
     catch_ptr_macro
 }
 
@@ -205,7 +207,7 @@ char* rrp_cc getPropertyDescription(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return createText(para->getDescription());                
+        return tlp::createText(para->getDescription());                
     catch_ptr_macro
 }
 
@@ -345,7 +347,7 @@ char* rrp_cc getPropertyValueAsString(RRPropertyHandle handle)
     start_try
         PropertyBase* para = castToProperty(handle);
         string val = para->getValueAsString();
-        return createText(val);
+        return tlp::createText(val);
     catch_ptr_macro
 }
 
@@ -361,7 +363,7 @@ char* rrp_cc getPropertyName(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return createText(para->getName());
+        return tlp::createText(para->getName());
     catch_ptr_macro
 }
 
@@ -369,7 +371,7 @@ char* rrp_cc getPropertyHint(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return createText(para->getHint());
+        return tlp::createText(para->getHint());
     catch_ptr_macro
 }
 
@@ -377,7 +379,7 @@ char* rrp_cc getPropertyType(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return createText(para->getType());
+        return tlp::createText(para->getType());
     catch_ptr_macro
 }
 
@@ -433,12 +435,12 @@ char* rrp_cc getNamesFromPropertyList(RRPropertiesHandle handle)
 {
     start_try
         Properties* paras = castToProperties(handle);
-        StringList aList;
+        tlp::StringList aList;
         for(int i = 0; i < paras->count(); i++)
         {
             aList.add((*paras)[i]->getName());
         }
-        return createText(aList.AsString().c_str());
+        return tlp::createText(aList.AsString().c_str());
 
     catch_ptr_macro
 }

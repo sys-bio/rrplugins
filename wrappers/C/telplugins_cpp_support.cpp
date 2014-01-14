@@ -8,9 +8,8 @@
 #include "telplugins_cpp_support.h"
 
 extern char* gLastError; 
-char* gLastError = 0;
 
-namespace tlp
+namespace tlpc
 {
 using rr::RoadRunnerData;
 using rr::RoadRunner;
@@ -21,7 +20,7 @@ void setError(const string& err)
         delete [] gLastError;
     }
 
-    gLastError = createText(err);
+    gLastError = tlp::createText(err);
 }
 
 PluginManager* castToPluginManager(RRPluginManagerHandle handle)

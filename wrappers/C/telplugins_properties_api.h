@@ -46,7 +46,7 @@
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
-namespace tlp { extern "C" {
+namespace tlpc { extern "C" {
 #endif
 
 /*! \addtogroup plugin_properties

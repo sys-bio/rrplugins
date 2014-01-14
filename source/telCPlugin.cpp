@@ -40,7 +40,7 @@ tlp::StringList CPlugin::getPropertyNames()
     char* propNames = getCPropertyNames();
     string _names(propNames);
     tlp::StringList names(_names, ",");
-    freeText(propNames);
+    freeCString(propNames);
     return names;
 }
 

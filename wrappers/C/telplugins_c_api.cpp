@@ -13,13 +13,12 @@
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
 
-namespace tlp
+namespace tlpc
 {
 using namespace std;
 using rr::RoadRunnerData;
-using namespace rrc;
+using namespace tlp;
 
-char* gLastError                  = NULL;
 
 RRPluginManagerHandle rrp_cc createPluginManager(const char* _pluginDir)
 {
@@ -395,7 +394,7 @@ RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle)
 //{
 //    start_try
 //        RoadRunnerData* data = castToRoadRunnerData(rrDataHandle);
-//        return rrp::createRRCData((*data));
+//        return tlp::createRRCData((*data));
 //    catch_ptr_macro
 //}
 //

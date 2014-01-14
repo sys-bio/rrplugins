@@ -136,7 +136,7 @@ if(INSTALL_APPS)
     add_subdirectory(apps)
 endif()
 
-if(INSTALL_EXAMPLES)
+if(BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 

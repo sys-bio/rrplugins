@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target rrp_add_noise)
+set(target tel_add_noise)
 
 include_directories(
 )

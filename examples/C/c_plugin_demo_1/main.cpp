@@ -40,11 +40,10 @@
 */
 #include <iostream>
 #include "telStringList.h"
-//#include "rrc_api.h"
 #include "telplugins_c_api.h"
 
-using namespace rrc;
 using namespace tlp;
+using namespace tlpc;
 using namespace std;
 
 int main()
@@ -69,7 +68,7 @@ int main()
         if(pluginInfo)
         {
             cout<<pluginInfo;
-            //rrc::freeText(pluginInfo);
+            freeText(pluginInfo);
         }
 
         //Retrieve any properties that the plugin has

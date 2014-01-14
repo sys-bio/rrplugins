@@ -46,20 +46,33 @@
 #include <string>
 #include "telplugins_c_api.h"
 #include "rr/rrRoadRunnerData.h"
+#include "telPluginManager.h"
+#include "telProperties.h"
+#include "telPlugin.h"
+#include "telProperty.h"
 namespace rr
 {
     class RoadRunner;
 }
-namespace tlp
+
+//namespace tlp
+//{
+//    template <class T>
+//    class Property;
+//    class Properties;
+//    class PropertyBase;
+//    class Plugin;
+//    class PluginManager;
+//}
+
+namespace tlpc
 {
 using std::string;
-template <class T>
-class Property;
-class Properties;
-class PropertyBase;
-class Plugin;
-class PluginManager;
-
+using tlp::PluginManager;
+using tlp::Properties;
+using tlp::PropertyBase;
+using tlp::Plugin;
+using tlp::Property;
 
 /*!
  \brief Set API error

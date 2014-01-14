@@ -38,7 +38,7 @@ char* createText(const int& count)
 	return text;
 }
 
-bool freeText(char* str)
+bool freeCString(char* str)
 {
 	delete [] str;
     return true;

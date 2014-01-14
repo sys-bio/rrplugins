@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target rrp_cpp_plugin_demo)
+set(target tel_cpp_plugin_demo)
 
 include_directories(
 )

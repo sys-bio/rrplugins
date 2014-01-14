@@ -1,11 +1,8 @@
 #pragma hdrstop
 #include "cpp_plugin_demo.h"
-#include "rrRoadRunner.h"
+#include "rr/rrRoadRunner.h"
 #include <iostream>
-
 //---------------------------------------------------------------------------
-namespace cpp_plugin_demo
-{
 
 using namespace tlp;
 using namespace std;
@@ -42,7 +39,5 @@ TestPlugin* plugins_cc createPlugin()
 const char* plugins_cc getImplementationLanguage()
 {
     return "CPP";
-}
-
 }
 

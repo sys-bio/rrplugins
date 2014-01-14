@@ -214,10 +214,10 @@ bool PluginManager::loadPlugin(const string& _libName)
     {
         //Make sure the plugin is prefixed with rrp, if not ignore
         //On linux, the plugin is in turn prefixed with "lib"
-        string prefix(mPluginPrefix + "rrp_");
+        string prefix(mPluginPrefix + "tel_");
         if(_libName.substr(0, prefix.size()) != prefix)
         {
-            Log(lWarning)<<"The Plugin: "<<_libName<<" lack the rrp_ prefix. Can't be loaded";
+            Log(lWarning)<<"The Plugin: "<<_libName<<" lack the tel_ prefix. Can't be loaded";
             return false;
         }
         string libName(_libName);

@@ -4,13 +4,10 @@
 #include "../source/telProperty.h"
 //---------------------------------------------------------------------------
 
-namespace cpp_plugin_demo
-{
-
-class TestPlugin : public rrp::CPPPlugin
+class TestPlugin : public tlp::CPPPlugin
 {
     private:
-        rrp::Property<int>         mTestProperty;
+        tlp::Property<int>         mTestProperty;
 
     public:
                                     TestPlugin();
@@ -26,13 +23,8 @@ RR_PLUGIN_DECLSPEC  const char*     plugins_cc    getImplementationLanguage();
 RR_PLUGIN_DECLSPEC  TestPlugin*     plugins_cc    createPlugin();
 
 // Plugin cleanup function
-RR_PLUGIN_DECLSPEC bool             plugins_cc    destroyPlugin(rrp::Plugin *plugin);
+RR_PLUGIN_DECLSPEC bool             plugins_cc    destroyPlugin(tlp::Plugin *plugin);
 
 }
-
-}    //Plugin Namespace
-
-
-
 
 #endif

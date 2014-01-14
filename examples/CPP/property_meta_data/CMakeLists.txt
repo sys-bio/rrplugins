@@ -1,31 +1,24 @@
 cmake_minimum_required(VERSION 2.8)
-set(target rrp_cpp_plugin_demo)
+set(target property_meta_data)
 
 include_directories(
-../../source
-../../../source
-../../wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
 set(sources
-cpp_plugin_demo
+main
 )
 
 add_library(${target} SHARED ${sources})
 
 add_definitions(
--DEXPORT_RR_PLUGIN
--DSTATIC_RR
--DSTATIC_RR_PLUGIN
--DSTATIC_PLUGIN_API
 -DPOCO_STATIC
 )
 
 if(WIN32)
 target_link_libraries (${target}
-roadrunner-static
-telplugins_api-static
+roadrunner
+telplugins
 )
 else() #UNIX
     # OSX flags:
@@ -65,6 +58,6 @@ endif()
 
 install (TARGETS ${target}
 DESTINATION plugins
-COMPONENT plugins
+COMPONENT examples
 )
 

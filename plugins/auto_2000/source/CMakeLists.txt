@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(target rrp_auto2000)
+set(target tel_auto2000)
 
 include_directories(
 ../../source   #RoadRunner Sources
@@ -36,7 +36,7 @@ add_library(${target} MODULE ${sources})
 
 if(WIN32)
 if(${BORLAND})
-    set (CMAKE_CXX_FLAGS   "${CMAKE_MODULE_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/rrp_auto2000.def\"")
+    set (CMAKE_CXX_FLAGS   "${CMAKE_MODULE_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/tel_auto2000.def\"")
 message(${CMAKE_MODULE_LINKER_FLAGS} )    
 endif()
 
