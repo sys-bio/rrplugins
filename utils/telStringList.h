@@ -1,11 +1,11 @@
-#ifndef rrStringListH
-#define rrStringListH
+#ifndef telStringListH
+#define telStringListH
 #include <vector>
 #include <string>
-#include "rrConstants.h"
-#include "../wrappers/C/rrc_types.h"
+#include "telConstants.h"
+#include "telUtilsExporter.h"
 
-namespace rr
+namespace tlp
 {
 using std::vector;
 using std::string;
@@ -15,7 +15,7 @@ using std::ostream;
  * @internal
  * @deprecated
  */
-class RR_DECLSPEC StringList
+class TLPUTILS_DS StringList
 {
     protected:
         vector<string>              mStrings;
@@ -27,7 +27,7 @@ class RR_DECLSPEC StringList
                                     StringList(const string& str, const string& delimiters = ", ");
                                     StringList(const vector<string>& strings);
                                     StringList(const StringList& cp);
-                                    StringList(rrc::RRStringArrayPtr cp);
+//                                    StringList(rrc::RRStringArrayPtr cp);
                                    ~StringList();
 
         void                        InsertAt(const int& index, const string& item);
@@ -63,7 +63,7 @@ class RR_DECLSPEC StringList
         vector<string>::iterator    end();
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
-        RR_DECLSPEC
+        TLPUTILS_DS
         friend ostream&             operator<<(ostream& stream, const StringList& list);
 
         /**

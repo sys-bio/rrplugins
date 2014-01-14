@@ -2,17 +2,17 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
-#include "rrStringUtils.h"
-#include "rrStringList.h"
-#include "rrUtils.h"
-#include "rrException.h"
+#include "telStringUtils.h"
+#include "telStringList.h"
+#include "telUtils.h"
+#include "rr/rrException.h"
 
 using namespace std;
 
-namespace rr
+namespace tlp
 {
 
-using namespace rrc;
+using namespace tlp;
 
 StringList::StringList()
 {}
@@ -22,18 +22,18 @@ StringList::StringList(const vector<string>& strings)
 mStrings(strings)
 {}
 
-StringList::StringList(RRStringArray* cp)
-{
-    if(!cp)
-    {
-        return;
-    }
-
-    for(int i = 0; i < cp->Count; i++)
-    {
-        mStrings.push_back(cp->String[i]);
-    }
-}
+//StringList::StringList(RRStringArray* cp)
+//{
+//    if(!cp)
+//    {
+//        return;
+//    }
+//
+//    for(int i = 0; i < cp->Count; i++)
+//    {
+//        mStrings.push_back(cp->String[i]);
+//    }
+//}
 
 StringList::StringList(const string& str, const string& delimiter)
 {
@@ -77,7 +77,7 @@ string& StringList::operator[](const int& index)
         stringstream msg;
         msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
 
-        throw(CoreException(msg.str()));
+        throw(rr::CoreException(msg.str()));
     }
     return mStrings[index];
 }
@@ -89,7 +89,7 @@ const string& StringList::operator[](const int& index) const
         stringstream msg;
         msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
 
-        throw(CoreException(msg.str()));
+        throw(rr::CoreException(msg.str()));
     }
 
     return mStrings[index];
@@ -172,12 +172,12 @@ void StringList::add(const string& item)
 
 int StringList::find(const string& item)
 {
-    return rr::indexOf(mStrings, item);
+    return tlp::indexOf(mStrings, item);
 }
 
 int StringList::indexOf(const string& item)
 {
-    return rr::indexOf(mStrings, item);
+    return tlp::indexOf(mStrings, item);
 }
 
 void StringList::removeAt(const int& index)
@@ -252,5 +252,5 @@ ostream& operator<<(ostream& stream, const StringList& list)
 }
 
 
-} //namespace rr
+} //namespace tlp
 

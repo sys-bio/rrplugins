@@ -129,6 +129,7 @@ if(UNIX)
     endif()
 endif()
 
+add_subdirectory(utils)
 add_subdirectory(manager)
 add_subdirectory(plugins)
 

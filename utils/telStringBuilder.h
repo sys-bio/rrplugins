@@ -1,22 +1,22 @@
-#ifndef rrStringBuilderH
-#define rrStringBuilderH
+#ifndef telStringBuilderH
+#define telStringBuilderH
 #include <sstream>
 #include <string>
-#include "rrConstants.h"
-#include "rrExporter.h"
+#include "telConstants.h"
+#include "telUtilsExporter.h"
 
 using std::stringstream;
 using std::string;
 
-namespace rr
+namespace tlp
 {
-using rr::gEmptyString;
+
 
 /**
  * @internal
  * @deprecated
  */
-class RR_DECLSPEC StringBuilder
+class TLPUTILS_DS StringBuilder
 {
     protected:
         stringstream                 mStringing;

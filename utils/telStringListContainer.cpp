@@ -1,10 +1,10 @@
 #pragma hdrstop
 #include <sstream>
-#include "rrStringListContainer.h"
+#include "telStringListContainer.h"
 
 using namespace std;
 
-namespace rr
+namespace tlp
 {
 
 StringListContainer::StringListContainer()

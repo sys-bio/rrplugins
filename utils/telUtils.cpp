@@ -33,11 +33,10 @@
 #include "Poco/Thread.h"
 #include "Poco/Glob.h"
 #include "Poco/File.h"
-#include "rrStringUtils.h"
-#include "rrUtils.h"
-#include "rrLogger.h"
-#include "rrSelectionRecord.h"
-#include "rrException.h"
+#include "telStringUtils.h"
+#include "telUtils.h"
+#include "rr/rrSelectionRecord.h"
+#include "rr/rrException.h"
 
 // Most Unix systems have a getch in libcurses, but this introduces
 // an un-needed depencency, as we can write our own getch easily.
@@ -53,10 +52,10 @@
 #endif
 
 //---------------------------------------------------------------------------
-namespace rr
+namespace tlp
 {
 using namespace std;
-
+using rr::Logger;
 bool cleanFolder(const string& folder, const string& baseName, const std::vector<std::string>& extensions)
 {
     for(int i = 0; i < extensions.size(); i++)
@@ -596,7 +595,7 @@ string getWINAPIError(DWORD errorCode, LPTSTR lpszFunction)
 int populateFileSet(const string& folder, set<string>& files)
 {
      //Get models file names in models folder
-    string globPath =  rr::joinPath(folder, "*.xml");
+    string globPath =  joinPath(folder, "*.xml");
     Poco::Glob::glob(globPath, files);
     return files.size();
 }

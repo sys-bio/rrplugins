@@ -1,20 +1,20 @@
-#ifndef rrStringListContainerH
-#define rrStringListContainerH
+#ifndef telStringListContainerH
+#define telStringListContainerH
 #include <vector>
 #include <string>
-#include "rrExporter.h"
-#include "rrStringList.h"
+#include "telUtilsExporter.h"
+#include "telStringList.h"
 using std::vector;
 using std::string;
 
-namespace rr
+namespace tlp
 {
 
 /**
  * @internal
  * @deprecated
  */
-class RR_DECLSPEC StringListContainer
+class TLPUTILS_DS StringListContainer
 {
     protected:
         vector<StringList>              mContainer;

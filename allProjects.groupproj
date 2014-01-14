@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9D2F6A51-22D8-4937-81DE-48830B3456CF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="utils\telutils-static.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="utils\telutils.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="manager\telmanager.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="telutils-static">
+        <MSBuild Projects="utils\telutils-static.cbproj"/>
+    </Target>
+    <Target Name="telutils-static:Clean">
+        <MSBuild Projects="utils\telutils-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telutils-static:Make">
+        <MSBuild Projects="utils\telutils-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telutils">
+        <MSBuild Projects="utils\telutils.cbproj"/>
+    </Target>
+    <Target Name="telutils:Clean">
+        <MSBuild Projects="utils\telutils.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telutils:Make">
+        <MSBuild Projects="utils\telutils.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telmanager">
+        <MSBuild Projects="manager\telmanager.cbproj"/>
+    </Target>
+    <Target Name="telmanager:Clean">
+        <MSBuild Projects="manager\telmanager.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telmanager:Make">
+        <MSBuild Projects="manager\telmanager.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="telutils-static;telutils;telmanager"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="telutils-static:Clean;telutils:Clean;telmanager:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="telutils-static:Make;telutils:Make;telmanager:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

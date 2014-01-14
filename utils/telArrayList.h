@@ -1,29 +1,33 @@
-#ifndef rrArrayListH
-#define rrArrayListH
+#ifndef telArrayListH
+#define telArrayListH
 #include <vector>
 #include <string>
 #include <list>
 #include <ostream>
-#include "rrArrayListItem.h"
-#include "rrc_exporter.h"
 
-namespace rr
+namespace tlp
 {
 class StringList;
 }
 
-namespace rrc
+namespace tlpc
 {
-using rr::StringList;
+using tlp::StringList;
 using std::vector;
 using std::string;
+
+class TLPUTILS_DS ArrayListItemBase
+{
+    public:
+        virtual ~ArrayListItemBase();
+};
 
 /**
  * @internal
  * @deprecated
  * a proprietaty collection class that is massivly deprecated.
  */
-class C_DECL_SPEC ArrayList
+class TLPUTILS_DS ArrayList
 {
     protected:
     public:
@@ -56,7 +60,43 @@ class C_DECL_SPEC ArrayList
 };
 
 
-C_DECL_SPEC std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
+TLPUTILS_DS std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
+
+
+
+template <class T>
+class ArrayListItem : public ArrayListItemBase
+{
+    private:
+        T                           mItemValue;
+
+    public:
+                                    ArrayListItem(const T& val);
+
+        virtual                    ~ArrayListItem(){}
+                                    operator T(){return mItemValue;}
+        virtual const char          operator[](const int& pos) const {return '\0';}     //Make sense for string types
+        ArrayListItem<T>&           operator=(const ArrayListItem<T>& rhs);
+};
+
+template<class T>
+ArrayListItem<T>::ArrayListItem(const T& val)
+:
+mItemValue(val)
+{}
+
+template<class T>
+ArrayListItem<T>& ArrayListItem<T>::operator=(const ArrayListItem<T>& rhs)
+{
+    if(this != &rhs)
+    {
+        mItemValue = rhs.mItemValue;
+    }
+
+    return *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const ArrayListItemBase& item);
 
 }
 #endif

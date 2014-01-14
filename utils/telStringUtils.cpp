@@ -6,11 +6,11 @@
 #include <time.h>
 #include <sstream>
 #include <cstring>
-#include "rrStringUtils.h"
+#include "telStringUtils.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-namespace rr
+namespace tlp
 {
 
 char* createText(const string& str)
@@ -468,7 +468,7 @@ string format(const string& str1, const unsigned int& arg1, const string& arg2, 
     string token3("{2}");
     string newString(str1);
 
-    newString = substitute(newString, token1, rr::toString(arg1));
+    newString = substitute(newString, token1, toString(arg1));
     newString = substitute(newString, token2, arg2);
       newString = substitute(newString, token3, arg3);
 

@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include <iomanip>
-#include "rrStringBuilder.h"
-#include "rrStringUtils.h"
-#include "rrLogger.h"
+#include "telStringBuilder.h"
+#include "telStringUtils.h"
+#include "rr/rrLogger.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-namespace rr
+namespace tlp
 {
 
 StringBuilder::StringBuilder(const string& aStr)
