@@ -26,7 +26,7 @@ DOXYFILE_ENCODING      = UTF-8
 # identify the project. Note that if you do not use Doxywizard you need 
 # to put quotes around the project name if it contains spaces.
 
-PROJECT_NAME           = "rrpluginslib python wrapper"
+PROJECT_NAME           = "Teullurium Plugins"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
 # This could be handy for archiving the generated documentation or 
@@ -38,7 +38,7 @@ PROJECT_NUMBER         =
 # for a project that appears at the top of each page and should give viewer 
 # a quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "CTypes Wrapper for the rrpluginlib C API"
+PROJECT_BRIEF          = "CTypes Wrapper for the Tellurium Plugins C API"
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is 
 # included in the documentation. The maximum height of the logo should not 
@@ -662,7 +662,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = . \
-                         Examples/rrPluginTester.py \
+                         Examples/telPluginTester.py \
                          ./Examples
 
 # This tag can be used to specify the character encoding of the source files 
@@ -728,9 +728,9 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is 
 # run.
 
-EXCLUDE                = rrPlugins.py \
+EXCLUDE                = telPlugins.py \
                          __init__.py \
-                         install_roadrunner_plugins_win.py
+                         install_telplugins.py
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or 
 # directories that are symbolic links (a Unix file system feature) are excluded 
