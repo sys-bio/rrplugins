@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace tlpc
+namespace tlp
 {
 
 ArrayList::ArrayList()

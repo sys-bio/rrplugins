@@ -39,6 +39,15 @@
         <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="R:\rre\source\rrextended.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="R:\rre\wrappers\C\rrextended_c.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -155,14 +164,41 @@
     <Target Name="c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="rrextended">
+        <MSBuild Projects="R:\rre\source\rrextended.cbproj"/>
+    </Target>
+    <Target Name="rrextended:Clean">
+        <MSBuild Projects="R:\rre\source\rrextended.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rrextended:Make">
+        <MSBuild Projects="R:\rre\source\rrextended.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="rrextended_c">
+        <MSBuild Projects="R:\rre\wrappers\C\rrextended_c.cbproj"/>
+    </Target>
+    <Target Name="rrextended_c:Clean">
+        <MSBuild Projects="R:\rre\wrappers\C\rrextended_c.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rrextended_c:Make">
+        <MSBuild Projects="R:\rre\wrappers\C\rrextended_c.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="rrWinC">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
+    </Target>
+    <Target Name="rrWinC:Clean">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rrWinC:Make">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;rrp_lm;rrp_add_noise;rrp_auto2000;rrp_c_plugin_demo;property_meta_data;c_plugin_demo"/>
+        <CallTarget Targets="telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;rrp_lm;rrp_add_noise;rrp_auto2000;rrp_c_plugin_demo;property_meta_data;c_plugin_demo;rrextended;rrextended_c;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;rrp_lm:Clean;rrp_add_noise:Clean;rrp_auto2000:Clean;rrp_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean"/>
+        <CallTarget Targets="telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;rrp_lm:Clean;rrp_add_noise:Clean;rrp_auto2000:Clean;rrp_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;rrp_lm:Make;rrp_add_noise:Make;rrp_auto2000:Make;rrp_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make"/>
+        <CallTarget Targets="telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;rrp_lm:Make;rrp_add_noise:Make;rrp_auto2000:Make;rrp_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

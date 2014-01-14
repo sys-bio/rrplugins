@@ -10,7 +10,9 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include "rr/rrSelectionRecord.h"
 #include "rr/rrLogger.h"
+#include "telStringList.h"
 #include "telStringUtils.h"
 #include "telExporter.h"
 //---------------------------------------------------------------------------
@@ -21,7 +23,6 @@ namespace tlp
 using std::vector;
 using std::string;
 using std::set;
-
 
 enum LogLevel
 {
@@ -38,11 +39,12 @@ enum LogLevel
     lUser       = rr::Logger::LOG_TRACE
 };
 
-RRP_DECLSPEC bool            cleanFolder(const string& folder, const string& baseName,  const std::vector<std::string>& extensions);
-RRP_DECLSPEC string          getTime();
-RRP_DECLSPEC string          getDateTime();
-RRP_DECLSPEC string          getMD5(const string& text);
-RRP_DECLSPEC void            sleep(int ms);
+RRP_DECLSPEC StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
+RRP_DECLSPEC bool           cleanFolder(const string& folder, const string& baseName,  const std::vector<std::string>& extensions);
+RRP_DECLSPEC string         getTime();
+RRP_DECLSPEC string         getDateTime();
+RRP_DECLSPEC string         getMD5(const string& text);
+RRP_DECLSPEC void           sleep(int ms);
 
 //Misc.
 /*!

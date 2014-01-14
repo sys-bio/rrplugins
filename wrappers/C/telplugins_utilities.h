@@ -43,7 +43,7 @@
 #define telplugins_utilitiesH
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
-#include "rrc_macros.h"
+#include "tel_macros.h"
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)

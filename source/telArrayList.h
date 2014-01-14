@@ -4,14 +4,11 @@
 #include <string>
 #include <list>
 #include <ostream>
-
+#include "telExporter.h"
 namespace tlp
 {
-class StringList;
-}
 
-namespace tlpc
-{
+class StringList;
 using tlp::StringList;
 using std::vector;
 using std::string;
@@ -22,11 +19,6 @@ class RRP_DECLSPEC ArrayListItemBase
         virtual ~ArrayListItemBase();
 };
 
-/**
- * @internal
- * @deprecated
- * a proprietaty collection class that is massivly deprecated.
- */
 class RRP_DECLSPEC ArrayList
 {
     protected:
