@@ -59,7 +59,7 @@
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <ILINK_LibraryPath>..\;R:\rrl\third_party\poco\Foundation\src\;R:\rrl\libplugins\source\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;lmfit-3.5\lib\;..\full_space_minimization\;..\test_plugin\;R:\rrl\plugins\TestPlugin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\;R:\rrl\third_party\poco\Foundation\src\;R:\rrl\libplugins\source\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;$(RR_ROOT)\Wrappers\C;$(RR_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>..\;R:\rrl\third_party\poco\Foundation\src\;R:\rrl\libplugins\source\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;$(TLP_ROOT)\Wrappers\C;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -76,7 +76,7 @@
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <PackageImports>VCLCommon;bindcompfmx;DBXSqliteDriver;vcldbx;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;bcbsmp;websnap;CustomIPTransport;dsnap;IndyIPServer;fmxase;vcl;IndyCore;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;bdertl;DuneComponents;dbexpress;bcbie;adortl;IndyIPClient;$(PackageImports)</PackageImports>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>$(RR_ROOT)\source;$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">

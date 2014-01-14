@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{02769FCB-E61F-4945-B3C8-A7305CFB2C55}</ProjectGuid>
+        <ProjectGuid>{D3261685-C317-48E6-B0E0-974788B148B5}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -50,7 +50,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <Defines>LIBSBML_USE_CPP_NAMESPACE;CG_UI;$(Defines)</Defines>
+        <Defines>LIBSBML_USE_CPP_NAMESPACE;EXPORT_RR_PLUGIN;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -58,9 +58,9 @@
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppDynamicLibrary</ProjectType>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_LibraryPath>..\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;lmfit-3.5\lib\;..\full_space_minimization\;..\test_plugin\;R:\rrl\plugins\TestPlugin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;$(TLP_ROOT)\Wrappers\C;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <ILINK_LibraryPath>..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>$(TLP_ROOT)\libplugins\source;$(TLP_ROOT)\libwrappers\C;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -75,10 +75,14 @@
         <PackageImports>bindcompfmx;DBXSqliteDriver;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;bindcomp;inetdb;DBXInterBaseDriver;DataSnapCommon;xmlrtl;DbxCommonDriver;IndyProtocols;dbxcds;DBXMySQLDriver;soaprtl;bindengine;bindcompdbx;CustomIPTransport;dsnap;IndyIPServer;fmxase;IndyCore;IndyIPCommon;inet;fmxobj;inetdbxpress;fmxdae;dbexpress;IndyIPClient;$(PackageImports)</PackageImports>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <ILINK_LibraryPath>R:\installs\cg_debug\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <PackageImports>VCLCommon;bindcompfmx;DBXSqliteDriver;vcldbx;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;bcbsmp;websnap;CustomIPTransport;dsnap;IndyIPServer;fmxase;vcl;IndyCore;IndyIPCommon;CloudService;dsnapcon;FmxTeeUI;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;bdertl;DuneComponents;dbexpress;bcbie;adortl;IndyIPClient;$(PackageImports)</PackageImports>
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <Manifest_File>None</Manifest_File>
         <IncludePath>$(TLP_ROOT)\source;$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>VCLCommon;bindcompfmx;DBXSqliteDriver;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;bindcomp;inetdb;DBXInterBaseDriver;DataSnapCommon;xmlrtl;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;vclie;vcltouch;websnap;CustomIPTransport;dsnap;IndyIPServer;fmxase;vcl;IndyCore;IndyIPCommon;dsnapcon;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;dbexpress;IndyIPClient;$(PackageImports)</PackageImports>
@@ -106,11 +110,10 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <IncludePath>$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <Debugger_HostApplication>R:\installs\cgd-static\bin\plugin_demo.exe</Debugger_HostApplication>
+        <Defines>EXPORT_PLUGIN;$(Defines)</Defines>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>
-        <BPILibOutputDir>$(TLP_INSTALL)\plugins</BPILibOutputDir>
-        <BCC_PCHInject>auto_pch.h</BCC_PCHInject>
-        <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;PCRE_STATIC;STATIC_RR;$(Defines)</Defines>
-        <Debugger_HostApplication>R:\installs\cg\bin\bistable-static.exe</Debugger_HostApplication>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
@@ -122,20 +125,12 @@
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="auto_link.cpp">
+        <CppCompile Include="autolink.cpp">
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="c_plugin_demo.c">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="rrAutoOutputParser.cpp">
-            <DependentOn>rrAutoOutputParser.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="rrAutoOutputParserWorker.cpp">
-            <DependentOn>rrAutoOutputParserWorker.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <DefFile Include="rrp_autoOutput.def">
-            <BuildOrder>4</BuildOrder>
-        </DefFile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

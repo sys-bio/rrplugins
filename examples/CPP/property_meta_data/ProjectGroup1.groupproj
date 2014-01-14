@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DFF4E4B3-73C0-474A-82FB-1F98237003F0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\source\rrplugins_api.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="property_meta_data.cbproj">
+            <Dependencies>..\..\source\rrplugins_api.cbproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rrplugins_api">
+        <MSBuild Projects="..\..\source\rrplugins_api.cbproj"/>
+    </Target>
+    <Target Name="rrplugins_api:Clean">
+        <MSBuild Projects="..\..\source\rrplugins_api.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rrplugins_api:Make">
+        <MSBuild Projects="..\..\source\rrplugins_api.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="property_meta_data" DependsOnTargets="rrplugins_api">
+        <MSBuild Projects="property_meta_data.cbproj"/>
+    </Target>
+    <Target Name="property_meta_data:Clean" DependsOnTargets="rrplugins_api:Clean">
+        <MSBuild Projects="property_meta_data.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_meta_data:Make" DependsOnTargets="rrplugins_api:Make">
+        <MSBuild Projects="property_meta_data.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rrplugins_api;property_meta_data"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rrplugins_api:Clean;property_meta_data:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rrplugins_api:Make;property_meta_data:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

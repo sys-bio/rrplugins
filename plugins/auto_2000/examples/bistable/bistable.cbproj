@@ -94,7 +94,7 @@
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <BCC_PCHInject>bistable_pch.h</BCC_PCHInject>
-        <IncludePath>$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(TLP_INSTALL)\include;$(RR_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(TLP_ROOT)\libplugins\source;$(TLP_INSTALL)\include;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(TLP_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <Debugger_DebugSourcePath>R:\rre\plugins\bifurcation\rrAutoInterface\;R:\rre\plugins\bifurcation\libAuto\;R:\rre\source\;R:\rrl\libplugins\source\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>

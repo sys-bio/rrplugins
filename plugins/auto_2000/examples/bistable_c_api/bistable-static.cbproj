@@ -44,7 +44,7 @@
         <Manifest_File>None</Manifest_File>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>R:\rre\plugins\bifurcation\examples\bistable\;$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(RR_ROOT)\wrappers\C;$(RR_ROOT)\plugins\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>R:\rre\plugins\bifurcation\examples\bistable\;$(TLP_ROOT)\source;$(TLP_ROOT)\libplugins\source;$(TLP_ROOT)\wrappers\C;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <_TCHARMapping>char</_TCHARMapping>
         <ILINK_LibraryPath>R:\rre\plugins\bifurcation\examples\bistable\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>

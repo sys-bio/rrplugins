@@ -95,7 +95,7 @@
         <Manifest_File>None</Manifest_File>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;..\rrAutoInterface;$(RR_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;..\rrAutoInterface;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

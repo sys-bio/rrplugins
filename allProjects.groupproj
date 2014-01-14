@@ -30,6 +30,15 @@
         <Projects Include="plugins\auto_2000\source\rrp_auto2000.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -119,14 +128,41 @@
     <Target Name="rrp_auto2000:Make">
         <MSBuild Projects="plugins\auto_2000\source\rrp_auto2000.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="rrp_c_plugin_demo">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj"/>
+    </Target>
+    <Target Name="rrp_c_plugin_demo:Clean">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rrp_c_plugin_demo:Make">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="property_meta_data">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
+    </Target>
+    <Target Name="property_meta_data:Clean">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_meta_data:Make">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="c_plugin_demo">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj"/>
+    </Target>
+    <Target Name="c_plugin_demo:Clean">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="c_plugin_demo:Make">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;rrp_lm;rrp_add_noise;rrp_auto2000"/>
+        <CallTarget Targets="telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;rrp_lm;rrp_add_noise;rrp_auto2000;rrp_c_plugin_demo;property_meta_data;c_plugin_demo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;rrp_lm:Clean;rrp_add_noise:Clean;rrp_auto2000:Clean"/>
+        <CallTarget Targets="telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;rrp_lm:Clean;rrp_add_noise:Clean;rrp_auto2000:Clean;rrp_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;rrp_lm:Make;rrp_add_noise:Make;rrp_auto2000:Make"/>
+        <CallTarget Targets="telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;rrp_lm:Make;rrp_add_noise:Make;rrp_auto2000:Make;rrp_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
