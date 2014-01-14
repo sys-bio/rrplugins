@@ -3,7 +3,7 @@
 #include <vector>
 #include "rrCapability.h"
 #include "rrParameter.h"
-#include "rrCPPPlugin.h"
+#include "telCPPPlugin.h"
 #include "rrRoadRunner.h"
 #include "telStringList.h"
 #include "../rrAutoInterface/rrAutoData.h"

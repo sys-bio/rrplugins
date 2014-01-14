@@ -2,7 +2,7 @@
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrLogger.h"
 #include "add_noise_worker.h"
-#include "rr/telUtils.h"
+#include "telUtils.h"
 #include "noise.h"
 #include "add_noise.h"
 //---------------------------------------------------------------------------
@@ -21,7 +21,7 @@ bool AddNoiseWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(Logger::LOG_ERROR)<<"Tried to start a working thread!";
+            Log(lError)<<"Tried to start a working thread!";
             return false;
         }
 
@@ -35,7 +35,7 @@ bool AddNoiseWorker::start(bool runInThread)
     return true;
 }
 
-bool AddNoiseWorker::isRunning()
+bool AddNoiseWorker::isRunning() const
 {
     return mThread.isRunning();
 }

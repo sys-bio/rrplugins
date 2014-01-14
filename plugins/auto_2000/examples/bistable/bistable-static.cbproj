@@ -91,13 +91,13 @@
         <BCC_CPPCompileAlways>true</BCC_CPPCompileAlways>
         <IntermediateOutputDir>.\$(Platform)\$(Config)-static</IntermediateOutputDir>
         <BCC_PCHInject>bistable_pch.h</BCC_PCHInject>
-        <IncludePath>$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(RR_INSTALL)\include;$(RR_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(TLP_INSTALL)\include;$(RR_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
-        <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(RR_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(TLP_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>POCO_STATIC;STATIC_AUTO;STATIC_RR_AUTO;STATIC_RRC;STATIC_APP;STATIC_RR;STATIC_PLUGIN_API;$(Defines)</Defines>
         <Debugger_DebugSourcePath>R:\rrl\plugins\auto_2000\source;R:\rrl\source;R:\rrl\plugins\auto_2000\rrAutoInterface\;R:\rrl\plugins\auto_2000\libAuto\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

@@ -85,7 +85,7 @@
         <DynamicRTL>true</DynamicRTL>
         <Defines>STATIC_PLUGIN;STATIC_RR;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
-        <FinalOutputDir>$(RR_INSTALL)\lib</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\lib</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">

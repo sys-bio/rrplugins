@@ -1,12 +1,14 @@
 #pragma hdrstop
+#include <sstream>
 #include "rr/rrLogger.h"
 #include "rr/rrException.h"
+//#include "rr/C/rrc_api.h"
+//#include "rr/C/rrc_utilities.h"
+
 #include "lm.h"
-#include "rr/C/rrc_api.h"
-#include "rr/C/rrc_utilities.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
-#include "rr/telUtils.h"
+#include "telUtils.h"
 #include "lmfit_doc.h"
 //---------------------------------------------------------------------------
 
@@ -20,8 +22,8 @@
 
 namespace lmfit
 {
-
-using namespace rrc;
+using namespace std;
+//using namespace rrc;
 using tlp::StringList;
 
 LM::LM()

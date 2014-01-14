@@ -47,7 +47,7 @@
         <IncludePath>R:\rrl\plugins\add_noise\;$(TLP_ROOT)\source;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
-        <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppDynamicLibrary</ProjectType>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -98,9 +98,9 @@
         <BCC_PCHInject>add_noise_pch.h</BCC_PCHInject>
         <Debugger_HostApplication>R:\installs\cgd-static\bin\rrWinC.exe</Debugger_HostApplication>
         <Defines>POCO_STATIC;EXPORT_RR_PLUGIN;$(Defines)</Defines>
-        <IncludePath>..\..\Source;$(RR_INSTALL)\include;..\..\Wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\Source;$(TLP_INSTALL)\include;..\..\Wrappers\C;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <FinalOutputDir>$(RR_INSTALL)\plugins</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

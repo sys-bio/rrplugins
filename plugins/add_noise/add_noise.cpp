@@ -49,7 +49,7 @@ unsigned int AddNoise::getPDFManualByteSize()
     return sizeofPDF;
 }
 
-bool AddNoise::isWorking()
+bool AddNoise::isWorking() const
 {
     return mAddNoiseWorker.isRunning();
 }

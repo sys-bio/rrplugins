@@ -20,7 +20,7 @@ class AddNoiseWorker : public Poco::Runnable
                                 AddNoiseWorker(AddNoise& mTheHost);
         bool                    start(bool runInThread = true);
         void                    run();
-        bool                    isRunning();
+        bool                    isRunning() const;
 };
 
 }

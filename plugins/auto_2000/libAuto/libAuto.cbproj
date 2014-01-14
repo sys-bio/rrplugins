@@ -95,9 +95,9 @@
         <DynamicRTL>true</DynamicRTL>
         <BCC_PCHInject>libAuto_pch.h</BCC_PCHInject>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
-        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
+        <BPILibOutputDir>$(TLP_INSTALL)\lib</BPILibOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

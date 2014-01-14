@@ -91,7 +91,7 @@
         <IntermediateOutputDir>.\$(Platform)\$(Config)-static</IntermediateOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Defines>_WIN32;STATIC_AUTO;$(Defines)</Defines>
-        <FinalOutputDir>$(RR_INSTALL)\lib</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\lib</FinalOutputDir>
         <Manifest_File>None</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">

@@ -1,17 +1,17 @@
 #pragma hdrstop
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrLogger.h"
+#include "rr/rrRoadRunnerOptions.h"
 #include "LMWorker.h"
 #include "lm.h"
 #include "lib/lmmin.h"
-#include "../utils/telStringUtils.h"
-#include "rr/telUtils.h"
+#include "telUtils.h"
 #include "telProperty.h"
 
 //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
 #include "rr/C/rrc_api.h"
 #include "rr/C/rrc_utilities.h"
-#include "rr/C/rrc_cpp_support.h"
+//#include "rr/C/rrc_cpp_support.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {
@@ -255,7 +255,7 @@ bool LMWorker::setupRoadRunner()
 
 /* function evaluation, determination of residues */
 void evaluate(const double *par,       //Property vector
-              int          m_dat,      //Dimension of residue vector
+              int           m_dat,      //Dimension of residue vector
               const void   *userData,  //Data structure
               double       *fvec,      //residue vector..
               int          *userBreak  //Non zero value means termination
@@ -272,6 +272,7 @@ void evaluate(const double *par,       //Property vector
         return;
     }
 
+    //Reset RoadRunner
     reset(myData->rrHandle);
 
     for(int i = 0; i < myData->nrOfParameters; i++)
@@ -289,11 +290,12 @@ void evaluate(const double *par,       //Property vector
     {
         char* lastError = getLastError();
         Log(lError)<<"Error in simulateEx: "<<lastError;
-        rr::freeText(lastError);
+        rrc::freeText(lastError);
         return;
     }
 
-    RRCDataPtr rrcData = createRRCData( *((RoadRunnerData*) rrData));
+//    RRCDataPtr rrcData = createRRCData( *((RoadRunnerData*) rrData));
+    RRCDataPtr rrcData = createRRCData(rrData);
     //calculate fvec for each specie
     int count = 0;
     for(int i = 0; i < myData->nrOfSpecies; i++)
@@ -302,7 +304,7 @@ void evaluate(const double *par,       //Property vector
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
             double modelValue;
-            if(!rrp::getRRCDataElement(rrcData, j, i, &modelValue))
+            if(!tlp::getRRCDataElement(rrcData, j, i, &modelValue))
             {
                 throw("Bad stuff...") ;
             }
@@ -359,11 +361,11 @@ void LMWorker::createModelData(RoadRunnerData* _data)
         mRRI->setValue(mLMData.parameterLabels[i], mLMData.parameters[i]);
     }
 
-    SimulateOptions options;
+    rr::SimulateOptions options;
     options.start = mLMData.timeStart;
     options.duration = mLMData.timeEnd - mLMData.timeStart;
     options.steps = mLMData.nrOfTimePoints - 1;
-    options.flags = options.flags | SimulateOptions::RESET_MODEL;
+    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
 
     if(mRRI->simulate(&options))
     {

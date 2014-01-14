@@ -1,15 +1,13 @@
 #ifndef add_noiseH
 #define add_noiseH
 #include "telProperty.h"
-#include "rrCPPPlugin.h"
+#include "telCPPPlugin.h"
 #include "add_noise_worker.h"
 
 //---------------------------------------------------------------------------
 namespace addNoise
 {
 
-//
-using namespace rrc;
 using namespace tlp;
 
 class AddNoise : public CPPPlugin
@@ -31,7 +29,7 @@ class AddNoise : public CPPPlugin
 
                                 
         bool                        execute(bool inThread = false);
-        bool                        isWorking(); //Returns true as long the thread is active..
+        bool                        isWorking() const; //Returns true as long the thread is active..
         unsigned char*              getManualAsPDF() const;
         unsigned int                getPDFManualByteSize();
 };

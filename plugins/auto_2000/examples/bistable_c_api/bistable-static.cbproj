@@ -47,7 +47,7 @@
         <IncludePath>R:\rre\plugins\bifurcation\examples\bistable\;$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(RR_ROOT)\wrappers\C;$(RR_ROOT)\plugins\wrappers\C;$(IncludePath)</IncludePath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <_TCHARMapping>char</_TCHARMapping>
-        <ILINK_LibraryPath>R:\rre\plugins\bifurcation\examples\bistable\;$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>R:\rre\plugins\bifurcation\examples\bistable\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -91,11 +91,11 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <IntermediateOutputDir>.\$(Platform)\$(Config)-static</IntermediateOutputDir>
         <BCC_PCHInject>bistable_pch.h</BCC_PCHInject>
-        <IncludePath>$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>$(RR_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>$(TLP_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>POCO_STATIC;PCRE_STATIC;STATIC_RR;STATIC_AUTO;STATIC_RR_AUTO;STATIC_RRC;STATIC_APP;STATIC_PLUGIN_API;$(Defines)</Defines>
         <Debugger_DebugSourcePath>R:\rre\plugins\bifurcation\rrAutoInterface\;R:\rre\plugins\bifurcation\libAuto\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

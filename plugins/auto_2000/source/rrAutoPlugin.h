@@ -1,7 +1,7 @@
 #ifndef rrAutoPluginH
 #define rrAutoPluginH
 #include "telProperty.h"
-#include "rrCPPPlugin.h"
+#include "telCPPPlugin.h"
 #include "telPluginManager.h"
 #include "../rrAutoInterface/rrAutoData.h"
 #include "../rrAutoInterface/rrRRAuto.h"

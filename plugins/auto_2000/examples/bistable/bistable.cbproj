@@ -94,11 +94,11 @@
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <BCC_PCHInject>bistable_pch.h</BCC_PCHInject>
-        <IncludePath>$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(RR_INSTALL)\include;$(RR_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(RR_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>$(RR_ROOT)\source;$(RR_ROOT)\libplugins\source;$(TLP_INSTALL)\include;$(RR_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(TLP_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <Debugger_DebugSourcePath>R:\rre\plugins\bifurcation\rrAutoInterface\;R:\rre\plugins\bifurcation\libAuto\;R:\rre\source\;R:\rrl\libplugins\source\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

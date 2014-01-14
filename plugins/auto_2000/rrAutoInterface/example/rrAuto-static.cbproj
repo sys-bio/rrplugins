@@ -46,7 +46,7 @@
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppConsoleApplication</ProjectType>
         <IncludePath>R:\rrl\third_party\poco\Foundation\src\;$(RR_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>R:\rrl\third_party\poco\Foundation\src\;$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>R:\rrl\third_party\poco\Foundation\src\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -94,12 +94,12 @@
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>
-        <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>CG_IDE;STATIC_APP;STATIC_RR_AUTO;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
-        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <IncludePath>$(RR_SOURCE);$(RR_INSTALL)\include;..\;$(IncludePath)</IncludePath>
+        <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;..\;$(IncludePath)</IncludePath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
