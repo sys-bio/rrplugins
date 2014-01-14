@@ -1,15 +1,15 @@
 #pragma hdrstop
 #include "telPluginUtils.h"
-#include "rr/rrStringList.h"
+#include "../utils/telStringList.h"
 //---------------------------------------------------------------------------
-namespace rrp
+namespace tlp
 {
 using namespace std;
 
 
-rr::StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
+tlp::StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
 {
-    rr::StringList sels;
+    tlp::StringList sels;
     for(int i = 0; i < _sels.size(); i++)
     {
         sels.add(_sels[i].to_string());

@@ -2,7 +2,7 @@
 #include "telCPPPlugin.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 
 CPPPlugin::CPPPlugin(const string& name, const string& cat, RoadRunner* aRR, const PluginManager* pm)

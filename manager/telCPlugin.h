@@ -1,5 +1,5 @@
 /**
- * @file rrCPlugin.h
+ * @file telCPlugin.h
  * @brief RoadRunner C plugin class
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -40,11 +40,11 @@
 */
 #ifndef telCPluginH
 #define telCPluginH
-#include "rrPlugin.h"
-#include "rr/rrStringList.h"
+#include "telPlugin.h"
+#include "../utils/telStringList.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 
 /**
@@ -74,7 +74,7 @@ class RRP_DECLSPEC CPlugin : public Plugin
         virtual                ~CPlugin();
         string                  getImplementationLanguage();
         virtual bool            execute(bool useThread = false);
-        rr::StringList          getPropertyNames();
+        tlp::StringList          getPropertyNames();
         PropertyBase*           getProperty(const string& param);
 
     protected:

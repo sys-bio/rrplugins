@@ -1,5 +1,5 @@
 /**
- * @file rrPlugin.h
+ * @file telPlugin.h
  * @brief RoadRunner plugin implementation
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -36,26 +36,26 @@
  *
  * YOU CANNOT:
  *
- * redistribute any piece of this software without proper attribution;
+ * redyistribute any piece of this software without proper attribution;
 */
 #ifndef telPluginH
 #define telPluginH
 #include <sstream>
 #include <string>
-#include "rrpExporter.h"
-#include "rrPluginsAPISettings.h"
-#include "rrProperties.h"
+#include "telExporter.h"
+#include "telPluginsManagerSettings.h"
+#include "telProperties.h"
 
 namespace rr
 {
 class RoadRunner;
 }
 
-namespace rrp
+namespace tlp
 {
     using rr::RoadRunner;
-    using rr::gEmptyString;
-    using rr::gNoneString;
+    using tlp::gEmptyString;
+    using tlp::gNoneString;
     using std::string;
 
     class PluginManager;
@@ -183,7 +183,7 @@ class RRP_DECLSPEC Plugin
         /**
             Retieves the names of the propertys
         */
-        virtual rr::StringList          getPropertyNames();
+        virtual tlp::StringList          getPropertyNames();
 
         /**
             Retieves a plugin properties, as XML

@@ -20,9 +20,9 @@
 
 namespace lmfit
 {
-using namespace rr;
+
 using namespace rrc;
-using rr::StringList;
+using tlp::StringList;
 
 LM::LM()
 :
@@ -183,7 +183,7 @@ bool LM::execute(bool inThread)
         mLMWorker.start(inThread);
         return true;
     }
-    catch(const Exception& ex)
+    catch(const rr::Exception& ex)
     {
         Log(lError) << "There was a problem in the execute of the LMFIT plugin: " << ex.getMessage();
         throw(ex);

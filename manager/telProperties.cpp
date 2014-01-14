@@ -4,9 +4,9 @@
 #include "rr/rrLogger.h"
 #include "telProperties.h"
 
-namespace rrp
+namespace tlp
 {
-using namespace rr;
+
 
 Properties::Properties(bool canClientClear)
     :mCanClientClearList(canClientClear)

@@ -1,7 +1,7 @@
 #ifndef telUtilsH
 #define telUtilsH
 
-#if defined(_WIN32) || defined(__WIN32__)
+#if defined(_WIN32)
 #include <windows.h>
 #endif
 
@@ -10,9 +10,9 @@
 #include <string>
 #include <iostream>
 #include <set>
-#include "telUtilsExporter.h"
 #include "rr/rrLogger.h"
 #include "telStringUtils.h"
+#include "telUtilsExporter.h"
 //---------------------------------------------------------------------------
 
 namespace tlp

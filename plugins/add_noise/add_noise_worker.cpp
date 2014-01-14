@@ -9,7 +9,7 @@
 
 namespace addNoise
 {
-using namespace rr;
+
 AddNoiseWorker::AddNoiseWorker(AddNoise& host)
 :
 mTheHost(host)

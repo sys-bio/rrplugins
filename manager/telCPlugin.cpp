@@ -3,7 +3,7 @@
 #include "telCPlugin.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 
 CPlugin::CPlugin(const string& name, const string& cat, RoadRunner* aRR)
@@ -35,11 +35,11 @@ bool CPlugin::execute(bool useThread)
     return false;
 }
 
-rr::StringList CPlugin::getPropertyNames()
+tlp::StringList CPlugin::getPropertyNames()
 {
     char* propNames = getCPropertyNames();
     string _names(propNames);
-    rr::StringList names(_names, ",");
+    tlp::StringList names(_names, ",");
     rr::freeText(propNames);
     return names;
 }

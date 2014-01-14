@@ -10,7 +10,7 @@
 namespace autoplugin
 {
 
-using namespace rr;
+
 using namespace rrc;
 
 AutoOutputParser::AutoOutputParser()

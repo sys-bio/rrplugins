@@ -1,7 +1,7 @@
 #ifndef lmH
 #define lmH
 #include <vector>
-#include "rrProperty.h"
+#include "telProperty.h"
 #include "rrCPPPlugin.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/c/rrc_types.h"
@@ -12,7 +12,7 @@
 namespace lmfit
 {
 using namespace rrc;
-using namespace rrp;
+using namespace tlp;
 using rr::RoadRunner;
 using std::string;
 
@@ -27,8 +27,8 @@ class LM : public CPPPlugin
         Property<RoadRunnerData>			    mResidualsData;
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
-        Property<rr::StringList>                mExperimentalDataSelectionList; //Species selection list for observed data
-        Property<rr::StringList>                mModelDataSelectionList;        //Species selection list for observed data
+        Property<tlp::StringList>                mExperimentalDataSelectionList; //Species selection list for observed data
+        Property<tlp::StringList>                mModelDataSelectionList;        //Species selection list for observed data
         Property<double>                        mNorm;                          //Part of minimization result
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
@@ -64,7 +64,7 @@ class LM : public CPPPlugin
 
         unsigned char*                          getManualAsPDF() const;
         unsigned int                            getPDFManualByteSize();
-        rr::StringList                          getExperimentalDataSelectionList();
+        tlp::StringList                          getExperimentalDataSelectionList();
         void                                    assignPropertyDescriptions();
 };
 

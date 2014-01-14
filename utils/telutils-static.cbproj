@@ -88,7 +88,7 @@
         <IncludePath>$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
         <BPILibOutputDir>$(TLP_ INSTALL)\lib</BPILibOutputDir>
         <Manifest_File>None</Manifest_File>
-        <FinalOutputDir>$(TLP_ INSTALL)\lib</FinalOutputDir>
+        <FinalOutputDir>$(TLP_INSTALL)\lib</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ILINK_LibraryPath>$(TLP_ INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
@@ -100,6 +100,9 @@
         <CppCompile Include="telArrayList.cpp">
             <DependentOn>telArrayList.h</DependentOn>
             <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telConstants.cpp">
+            <BuildOrder>6</BuildOrder>
         </CppCompile>
         <CppCompile Include="telStringBuilder.cpp">
             <DependentOn>telStringBuilder.h</DependentOn>

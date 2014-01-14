@@ -13,7 +13,7 @@
 namespace autoplugin
 {
 
-using namespace rr;
+
 
 AutoOutputParserWorker::AutoOutputParserWorker(AutoOutputParser& host)
 :

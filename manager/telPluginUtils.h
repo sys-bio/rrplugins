@@ -1,5 +1,5 @@
 /**
- * @file rrPluginUtils.h
+ * @file telPluginUtils.h
  * @brief Utility functions for the plugin framework
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -44,13 +44,13 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "rrpExporter.h"
-#include "rr/rrStringList.h"
+#include "telExporter.h"
+#include "../utils/telStringList.h"
 #include "rr/rrSelectionRecord.h"
 #include "rr/rrUtils.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 
 using std::vector;
@@ -60,7 +60,7 @@ using std::string;
     \brief Takes a vector of SelectionRecords and returns their representation as
     a StringList
 */
-RRP_DECLSPEC rr::StringList      getRecordsAsStrings(const vector<rr::SelectionRecord>& recs);
+RRP_DECLSPEC tlp::StringList      getRecordsAsStrings(const vector<rr::SelectionRecord>& recs);
 
 
 /**

@@ -5,7 +5,7 @@
 #include "rr/rrLogger.h"
 #include "rrAutoWorker.h"
 #include "rrAutoPlugin.h"
-#include "rr/rrStringUtils.h"
+#include "../utils/telStringUtils.h"
 #include "rr/rrUtils.h"
 #include "rr/c/rrc_api.h"
 #include "rr/c/rrc_utilities.h"
@@ -14,7 +14,7 @@
 namespace autoplugin
 {
 
-using namespace rr;
+
 
 AutoWorker::AutoWorker(AutoPlugin& host)
 :
@@ -104,7 +104,7 @@ void AutoWorker::run()
     string fName = joinPath(tempFolder, "fort.7");
     if(!fileExists(fName))
     {
-        throw(Exception("No Auto output data exists!"));
+        throw(rr::Exception("No Auto output data exists!"));
     }
 
     string f7(getFileContent(fName));

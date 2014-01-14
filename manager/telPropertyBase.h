@@ -1,5 +1,5 @@
 /**
- * @file rrPropertyBase.h
+ * @file telPropertyBase.h
  * @brief RoadRunner Property class implementation
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -40,13 +40,13 @@
 */
 #ifndef telPropertyBaseH
 #define telPropertyBaseH
-#include "rr/rrConstants.h"
-#include "rrpExporter.h"
+#include "../utils/telConstants.h"
+#include "telExporter.h"
 #include <string>
 #include <ostream>
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 
 using std::string;
@@ -72,7 +72,7 @@ class RRP_DECLSPEC PropertyBase
          */
                                             PropertyBase(   const string& type, const string& name,
                                                             const string& hint, const string& descr,
-                                                            const string& alias = rr::gEmptyString, bool  readOnly = false);
+                                                            const string& alias = tlp::gEmptyString, bool  readOnly = false);
         /**
          * De-allocate any memory allocated.
          */

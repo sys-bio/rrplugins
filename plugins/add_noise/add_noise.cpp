@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 namespace addNoise
 {
-using namespace rr;
+
 
 AddNoise::AddNoise(rr::RoadRunner* aRR, PluginEvent fn1, PluginEvent fn2, PluginEvent fn3)
 :

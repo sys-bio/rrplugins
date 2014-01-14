@@ -1,6 +1,6 @@
 #ifndef add_noiseH
 #define add_noiseH
-#include "rrProperty.h"
+#include "telProperty.h"
 #include "rrCPPPlugin.h"
 #include "add_noise_worker.h"
 
@@ -8,9 +8,9 @@
 namespace addNoise
 {
 
-//using namespace rr;
+//
 using namespace rrc;
-using namespace rrp;
+using namespace tlp;
 
 class AddNoise : public CPPPlugin
 {
@@ -44,7 +44,7 @@ RR_PLUGIN_DECLSPEC const char*  plugins_cc getImplementationLanguage();
 
 }
 
-namespace rrp
+namespace tlp
 {
 
 template<>

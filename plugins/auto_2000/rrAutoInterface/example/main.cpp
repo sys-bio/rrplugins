@@ -5,7 +5,7 @@
 #include "rrException.h"
 #include "../rrRRAuto.h"
 
-using namespace rr;
+
 using namespace rrauto;
 int main(int argc, char* argv[])
 {
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
         string testFile("../models/bistable.xml");
         if(!rr.load(testFile))
         {
-            throw(Exception("Failed loading SBML"));
+            throw(rr::Exception("Failed loading SBML"));
         }
 
         rrAuto.selectParameter("k3");
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
         Log(lInfo)<<rrAuto.getAutoData();
         pause(true);
     }
-    catch(const Exception& ex)
+    catch(const rr::Exception& ex)
     {
         Log(lError)<<"There was a problem: "<<ex.getMessage();
     }

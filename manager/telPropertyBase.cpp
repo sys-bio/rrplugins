@@ -1,14 +1,14 @@
 #pragma hdrstop
 #include <iostream>
 #include <iomanip>
-#include "rr/rrStringUtils.h"
+#include "../utils/telStringUtils.h"
 #include "telPropertyBase.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 using namespace std;
-using namespace rr;
+
 
 PropertyBase::PropertyBase(const string& type, const string& name, const string& hint, const string& descr, const string& alias, bool readOnly)
 :

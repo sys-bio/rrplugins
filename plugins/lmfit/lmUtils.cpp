@@ -11,6 +11,6 @@
 namespace lmfit
 {
 using namespace std;
-using namespace rr;
+
 }
 

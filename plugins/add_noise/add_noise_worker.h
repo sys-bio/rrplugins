@@ -2,7 +2,7 @@
 #define add_noise_workerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "rrpExporter.h"
+#include "telExporter.h"
 //---------------------------------------------------------------------------
 
 namespace addNoise

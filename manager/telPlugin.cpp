@@ -3,13 +3,13 @@
 #include <iomanip>
 #include "rr/rrUtils.h"
 #include "telPlugin.h"
-#include "rrProperty.h"
+#include "telProperty.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 using namespace std;
-using namespace rr;
+
 Plugin::Plugin( const string&           name,
                 const string&           category,
                 RoadRunner*             aRR,
@@ -273,7 +273,7 @@ unsigned char* Plugin::getManualAsPDF() const
     return NULL;
 }
 
-StringList Plugin::getPropertyNames()
+tlp::StringList Plugin::getPropertyNames()
 {
     return mProperties.getNames();
 }

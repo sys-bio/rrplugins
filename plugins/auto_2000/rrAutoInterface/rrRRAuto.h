@@ -1,6 +1,6 @@
 #ifndef rrRRAutoH
 #define rrRRAutoH
-#include "rrProperty.h"
+#include "telProperty.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrLogger.h"
 #include "rrRRAutoSetupControl.h"
@@ -46,7 +46,7 @@ class RRA_DECLSPEC RRAuto
 };
 }
 
-namespace rrp
+namespace tlp
 {
 template<>
 inline string getPropertyType<rrauto::ScanDirection>(const rrauto::ScanDirection& a)

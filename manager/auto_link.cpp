@@ -7,6 +7,8 @@
     #pragma comment(lib, "roadrunner.lib")
 #endif
 
+#pragma comment(lib, "telutils-static.lib")
+
 #pragma comment(lib, "sundials_cvode.lib")
 #pragma comment(lib, "sundials_nvecserial.lib")
 #pragma comment(lib, "nleq-static.lib")

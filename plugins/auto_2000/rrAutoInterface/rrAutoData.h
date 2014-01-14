@@ -2,15 +2,15 @@
 #define rrAutoDataH
 #include <ostream>
 #include "rrRRAutoExporter.h"
-#include "rr/rrStringList.h"
+#include "../utils/telStringList.h"
 #include "rr/rrRoadRunnerData.h"
-#include "rrProperty.h"
-#include "rrProperties.h"
+#include "telProperty.h"
+#include "telProperties.h"
 #include "rr/rrLogger.h"
 //---------------------------------------------------------------------------
 
-//using namespace rr;
-using namespace rrp;
+//
+using namespace tlp;
 using std::ostream;
 
 class RRA_DECLSPEC AutoData
@@ -50,7 +50,7 @@ inline void Property< AutoData >::setValue(AutoData* val)
     mValue = *(val);
 }
 
-namespace rrp{
+namespace tlp{
 
 template<>
 inline std::string getPropertyType<AutoData>(const AutoData& val)

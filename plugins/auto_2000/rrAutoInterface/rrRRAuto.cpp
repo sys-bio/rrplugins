@@ -4,13 +4,13 @@
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
 #include "rr/rrLogger.h"
-#include "rr/rrStringList.h"
-#include "rrPluginUtils.h"
+#include "../utils/telStringList.h"
+#include "telPluginUtils.h"
 
 namespace rrauto
 {
-using namespace rr;
-using namespace rrp;
+
+using namespace tlp;
 using namespace autolib;
 
 //Statics
@@ -291,7 +291,7 @@ void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const 
 //
 //
     static vector<rr::SelectionRecord> selRecs = mRR->getSteadyStateSelections();
-    static rr::StringList selList = getRecordsAsStrings(selRecs);
+    static tlp::StringList selList = getRecordsAsStrings(selRecs);
 //    vector<string> selList = mRR->getSteadyStateSelections();
 //    var variableTemp = new double[CurrentModel.y.Length];
 

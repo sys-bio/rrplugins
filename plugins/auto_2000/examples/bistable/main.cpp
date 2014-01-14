@@ -1,16 +1,16 @@
 #pragma hdrstop
 #include <iostream>
-#include "rrPluginManager.h"
+#include "telPluginManager.h"
 #include "rrException.h"
 #include "rrLogger.h"
-#include "rrPlugin.h"
+#include "telPlugin.h"
 #include "rrUtils.h"
-#include "rrProperty.h"
+#include "telProperty.h"
 #include "../../source/rrAutoPlugin.h"
 #include "../../rrAutoInterface/rrRRAuto.h"
 
-using namespace rr;
-using namespace rrp;
+
+using namespace tlp;
 using namespace autoplugin;
 using namespace std;
 
@@ -80,7 +80,7 @@ int main()
         //Check plugin data..
         pm.unload(autoPlugin);
     }
-    catch(Exception& ex)
+    catch(rr::Exception& ex)
     {
         Log(lError)<<ex.getMessage();
     }

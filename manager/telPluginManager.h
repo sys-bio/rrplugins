@@ -1,5 +1,5 @@
 /**
- * @file rrPluginManager.h
+ * @file telPluginManager.h
  * @brief The plugin manager implementation
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -43,23 +43,23 @@
 #include <vector>
 #include <string>
 #include <ostream>
-#include "rrpExporter.h"
-#include "rr/rrConstants.h"
-#include "rr/rrStringList.h"
+#include "telExporter.h"
+#include "../utils/telConstants.h"
+#include "../utils/telStringList.h"
 #include "Poco/SharedLibrary.h"
 //---------------------------------------------------------------------------
 /* A minimalistic Plugin manager. */
 
-namespace rrp
+namespace tlp
 {
 
 using std::string;
 using std::vector;
 using std::pair;
 using std::ostream;
-using rr::gEmptyString;
+using tlp::gEmptyString;
 
-//using rr::StringList;
+//using tlp::StringList;
 using Poco::SharedLibrary;
 
 class Plugin;
@@ -67,7 +67,7 @@ class Plugin;
 /**
 Typedef for a plugins record in the plugins container
 */
-typedef pair< Poco::SharedLibrary*, Plugin* > rrPlugin;
+typedef pair< Poco::SharedLibrary*, Plugin* > telPlugin;
 
 /**
  * The PluginManager class is responsible for loading and unloading plugins.
@@ -176,13 +176,13 @@ class RRP_DECLSPEC PluginManager
             Retrieves the names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the name of each loaded Plugin.
         */
-        rr::StringList                  getPluginNames();
+        tlp::StringList                  getPluginNames();
 
         /**
             Retrieves the shared library names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the file name of each loaded Plugin.
         */
-        rr::StringList                  getPluginLibraryNames();
+        tlp::StringList                  getPluginLibraryNames();
 
         /**
             Output plugin information to a std ostream
@@ -198,8 +198,8 @@ class RRP_DECLSPEC PluginManager
         string                          mPluginFolder;
         string                          mPluginExtension;   //Different on different OS's
         string                          mPluginPrefix;      //Different on different OS's
-        vector< rrPlugin >              mPlugins;
-        vector< rrPlugin >::iterator    mPluginsIter;
+        vector< telPlugin >              mPlugins;
+        vector< telPlugin >::iterator    mPluginsIter;
 
         bool                            loadPlugin(const string& sharedLib);
         bool                            checkImplementationLanguage(SharedLibrary* plugin);
@@ -238,7 +238,6 @@ class RRP_DECLSPEC PluginManager
  \par
 
  \author Totte Karlsson (totte@dunescientific.com)
- \author Andy Somogyi (andy.somogyi@gmail.com, somogyie@indiana.edu)
  \author Herbert M. Sauro  (hsauro@u.washington.edu)
 
  \par

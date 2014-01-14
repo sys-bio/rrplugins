@@ -1,8 +1,8 @@
 #ifndef rrAutoPluginH
 #define rrAutoPluginH
-#include "rrProperty.h"
+#include "telProperty.h"
 #include "rrCPPPlugin.h"
-#include "rrPluginManager.h"
+#include "telPluginManager.h"
 #include "../rrAutoInterface/rrAutoData.h"
 #include "../rrAutoInterface/rrRRAuto.h"
 #include "rrAutoWorker.h"
@@ -75,7 +75,7 @@ RR_PLUGIN_DECLSPEC const char* auto_cc       getImplementationLanguage();
 }
 
 
-namespace rrp
+namespace tlp
 {
 
 template<>

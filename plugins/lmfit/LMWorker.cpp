@@ -4,9 +4,9 @@
 #include "LMWorker.h"
 #include "lm.h"
 #include "lib/lmmin.h"
-#include "rr/rrStringUtils.h"
+#include "../utils/telStringUtils.h"
 #include "rr/rrUtils.h"
-#include "rrProperty.h"
+#include "telProperty.h"
 
 //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
 #include "rr/C/rrc_api.h"
@@ -15,7 +15,7 @@
 //---------------------------------------------------------------------------
 namespace lmfit
 {
-using namespace rr;
+
 using namespace rrc;
 using namespace std;
 

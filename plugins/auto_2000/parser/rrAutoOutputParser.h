@@ -34,7 +34,7 @@ class AutoOutputParser : public CPPPlugin
     protected:
         Capability                              mAutoOutputParser;
         Property<string>                       mBiFurcationDiagram;        //This is the input
-        Property< rr::StringList >             mLabeledSolutionPoints;     //Part of output
+        Property< tlp::StringList >             mLabeledSolutionPoints;     //Part of output
 
 
         //The worker
@@ -53,7 +53,7 @@ RR_PLUGIN_DECLSPEC const char* plugins_cc           getImplementationLanguage();
 
 }
 
-namespace rrp
+namespace tlp
 {
 template<>
 inline std::string Property< rrauto::ScanDirection >::getType() const

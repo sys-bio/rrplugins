@@ -4,17 +4,17 @@
 #include <iomanip>
 #include "Poco/Glob.h"
 #include "Poco/SharedLibrary.h"
-#include "telPluginManager.h"
-#include "rrPlugin.h"
-#include "rr/rrUtils.h"
 #include "rr/rrException.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunner.h"
-#include "rrCPlugin.h"
-#include "rr/rrStringList.h"
-//---------------------------------------------------------------------------
+#include "telPluginManager.h"
+#include "telPlugin.h"
+#include "telCPlugin.h"
+#include "../utils/telStringList.h"
+#include "../utils/telUtils.h"
 
-namespace rrp
+//---------------------------------------------------------------------------
+namespace tlp
 {
 static bool  hasFileExtension(const string& fName);
 static const char* getPluginExtension();
@@ -27,7 +27,7 @@ static const char* getPluginPrefix();
 #endif
 
 using namespace std;
-using namespace rr;
+using namespace tlp;
 using Poco::SharedLibrary;
 using Poco::Glob;
 
@@ -166,7 +166,7 @@ int PluginManager::load(const string& pluginName)
     if(!folderExists(mPluginFolder))
     {
         Log(lError)<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
-        throw(Exception("Plugin folder don't exist"));
+        throw(rr::Exception("Plugin folder don't exist"));
     }
 
     set<string> files;
@@ -266,7 +266,7 @@ bool PluginManager::loadPlugin(const string& _libName)
             }
             aPlugin->setLibraryName(getFileNameNoExtension(libName));
 
-            rrPlugin storeMe(libHandle, aPlugin);
+            telPlugin storeMe(libHandle, aPlugin);
             mPlugins.push_back( storeMe );
             return true;
         }
@@ -280,7 +280,7 @@ bool PluginManager::loadPlugin(const string& _libName)
             {
                 aPlugin->setLibraryName(getFileNameNoExtension(libName));
 
-                rrPlugin storeMe(libHandle, aPlugin);
+                telPlugin storeMe(libHandle, aPlugin);
                 mPlugins.push_back( storeMe );
             }
             return true;
@@ -299,7 +299,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         Log(lError)<<"Plugin loading exception: "<<msg;
         return false;
     }
-    catch(const Exception& e)
+    catch(const rr::Exception& e)
     {
         msg<<"RoadRunner exception: "<<e.what()<<endl;
         Log(lError)<<msg.str();
@@ -324,7 +324,7 @@ bool PluginManager::unloadAll()
     int nrPlugins = getNumberOfPlugins();
     for(int i = 0; i < nrPlugins; i++)
     {
-        rrPlugin* aPluginLib = &(mPlugins[i]);
+        telPlugin* aPluginLib = &(mPlugins[i]);
         if(aPluginLib)
         {
             SharedLibrary *pluginLibHandle    = aPluginLib->first;
@@ -360,9 +360,9 @@ bool PluginManager::unload(Plugin* plugin)
     bool result(false);
     int nrPlugins = getNumberOfPlugins();
 
-    for(vector< rrPlugin >::iterator it = mPlugins.begin(); it != mPlugins.end(); it++)
+    for(vector< telPlugin >::iterator it = mPlugins.begin(); it != mPlugins.end(); it++)
     {
-        rrPlugin *aPluginLib = &(*it);
+        telPlugin *aPluginLib = &(*it);
         if(aPluginLib)
         {
             SharedLibrary *pluginLibHandle    = aPluginLib->first;
@@ -481,7 +481,7 @@ Plugin* PluginManager::getPlugin(const string& name)
 {
     for(int i = 0; i < getNumberOfPlugins(); i++)
     {
-        rrPlugin aPluginLib = mPlugins[i];
+        telPlugin aPluginLib = mPlugins[i];
         if(aPluginLib.first && aPluginLib.second)
         {
             Plugin* aPlugin = (Plugin*) aPluginLib.second;

@@ -1,5 +1,5 @@
 /**
- * @file rrCPPPlugin.h
+ * @file telCPPPlugin.h
  * @brief RoadRunner CPP plugin class
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -40,10 +40,10 @@
 */
 #ifndef telCPPPluginH
 #define telCPPPluginH
-#include "rrPlugin.h"
+#include "telPlugin.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 /**
  * Plugins written in C++ should inherit from this class.

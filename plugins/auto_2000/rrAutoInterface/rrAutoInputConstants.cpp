@@ -1,14 +1,14 @@
 #pragma hdrstop
-#include "rr/rrStringList.h"
+#include "../utils/telStringList.h"
 #include "rrStringBuilder.h"
-#include "rr/rrStringUtils.h"
+#include "../utils/telStringUtils.h"
 #include "rrAutoInputConstants.h"
-#include "rrPluginUtils.h"
+#include "telPluginUtils.h"
 //---------------------------------------------------------------------------
 namespace rrauto
 {
-    using namespace rrp;
-    using namespace rr;
+    using namespace tlp;
+    
     using namespace std;
 
 string getWhiteSpaces(string& line, int maxLength);

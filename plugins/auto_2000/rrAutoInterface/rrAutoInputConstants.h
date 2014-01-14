@@ -2,8 +2,8 @@
 #define rrAutoInputConstantsH
 #include <vector>
 #include <string>
-#include "rrProperties.h"
-#include "rrProperty.h"
+#include "telProperties.h"
+#include "telProperty.h"
 #include "rrRRAutoExporter.h"
 //---------------------------------------------------------------------------
 

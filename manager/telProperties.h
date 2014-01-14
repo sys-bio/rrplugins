@@ -1,5 +1,5 @@
 /**
- * @file rrProperties.h
+ * @file telProperties.h
  * @brief Properties implementation - a container for Plugin parameters
  * @author Totte Karlsson & Herbert M Sauro
  *
@@ -44,12 +44,12 @@
 #include <list>
 #include <vector>
 #include <utility>
-#include "rrpExporter.h"
-#include "rrPropertyBase.h"
-#include "rr/rrStringList.h"
+#include "telExporter.h"
+#include "telPropertyBase.h"
+#include "../utils/telStringList.h"
 //---------------------------------------------------------------------------
 
-namespace rrp
+namespace tlp
 {
 using std::vector;
 using std::list;
@@ -86,7 +86,7 @@ class RRP_DECLSPEC Properties
         /**
            Return parameters in the container as a list of strings.
         */
-        rr::StringList                      getNames() const;
+        tlp::StringList                      getNames() const;
 
         /**
            Return number of parameters in the container.
