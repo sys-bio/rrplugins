@@ -87,7 +87,7 @@ inline string Property< rrauto::ScanDirection >::getValueAsString() const
 template<>
 inline void Property< rrauto::ScanDirection >::setValueFromString(const string& val)
 {
-    mValue = rr::compareNoCase(val, "Positive") == 0 ? rrauto::sdPositive : rrauto::sdNegative;
+    mValue = compareNoCase(val, "Positive") == 0 ? rrauto::sdPositive : rrauto::sdNegative;
 }
 
 template<>

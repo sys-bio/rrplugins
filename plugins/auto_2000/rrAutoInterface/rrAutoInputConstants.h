@@ -76,10 +76,10 @@ class RRA_DECLSPEC InputConstants
         int             NMX;
 
         /// bifurcation diagram lower limit for the “first” parameter
-        rrp::Property<double>    RL0;
+        tlp::Property<double>    RL0;
 
         /// bifurcation diagram upper limit for the “first” parameter
-        rrp::Property<double>    RL1;
+        tlp::Property<double>    RL1;
 
         /// bifurcation diagram lower limit for the “principal solution measure”
         double          A0;
@@ -154,8 +154,8 @@ class RRA_DECLSPEC InputConstants
     public:
                         InputConstants();
         string          getConstantsAsString();
-        string              ToInputString();
-        rrp::Properties      mInputConstants;
+        string          ToInputString();
+        tlp::Properties mInputConstants;
 };
 }
 #endif

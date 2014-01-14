@@ -5,16 +5,12 @@
 #include "rr/rrLogger.h"
 #include "rrAutoWorker.h"
 #include "rrAutoPlugin.h"
-#include "../utils/telStringUtils.h"
-#include "rr/telUtils.h"
-#include "rr/c/rrc_api.h"
-#include "rr/c/rrc_utilities.h"
+#include "telStringUtils.h"
+#include "telUtils.h"
 //---------------------------------------------------------------------------
 
 namespace autoplugin
 {
-
-
 
 AutoWorker::AutoWorker(AutoPlugin& host)
 :

@@ -1,12 +1,14 @@
 #ifndef rrAutoDataH
 #define rrAutoDataH
 #include <ostream>
-#include "rrRRAutoExporter.h"
-#include "../utils/telStringList.h"
 #include "rr/rrRoadRunnerData.h"
+#include "rr/rrLogger.h"
+
+#include "rrRRAutoExporter.h"
+#include "telStringList.h"
 #include "telProperty.h"
 #include "telProperties.h"
-#include "rr/rrLogger.h"
+
 //---------------------------------------------------------------------------
 
 //

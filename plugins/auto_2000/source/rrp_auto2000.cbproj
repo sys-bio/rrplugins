@@ -61,7 +61,7 @@
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <ILINK_LibraryPath>..\..\source\;..\..\..\third_party\poco\Foundation\src\;lib\;lib\lib\;..\add_noise\;..\..\vcl_source\;lmfit-3.5\lib\;..\full_space_minimization\;..\test_plugin\;R:\rrl\plugins\TestPlugin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\..\..\third_party\poco\Foundation\src\;$(RR_ROOT)\Wrappers\C;$(RR_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>

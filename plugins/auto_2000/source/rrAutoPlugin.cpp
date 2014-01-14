@@ -1,17 +1,14 @@
 #pragma hdrstop
 #include <sstream>
 #include "rr/rrLogger.h"
-#include "rrAutoPlugin.h"
-#include "rr/c/rrc_api.h"
-#include "rr/c/rrc_utilities.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
-#include "rr/telUtils.h"
+#include "rrAutoPlugin.h"
+#include "telUtils.h"
 //---------------------------------------------------------------------------
 namespace autoplugin
 {
 
-using namespace rrc;
 using namespace std;
 
 AutoPlugin::AutoPlugin()

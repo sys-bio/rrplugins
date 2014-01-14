@@ -84,7 +84,7 @@
         <DynamicRTL>true</DynamicRTL>
         <Defines>POCO_STATIC;PCRE_STATIC;STATIC_RR_AUTO;$(Defines)</Defines>
         <FinalOutputDir>$(TLP_INSTALL)\lib</FinalOutputDir>
-        <IncludePath>$(RR_ROOT)\source;$(TLP_INSTALL)\include;$(RR_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
         <IntermediateOutputDir>.\$(Platform)\$(Config)-static</IntermediateOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <BPILibOutputDir>$(TLP_INSTALL)\lib</BPILibOutputDir>

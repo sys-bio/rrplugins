@@ -1,10 +1,10 @@
 #pragma hdrstop
-#include "rr/telUtils.h"
+#include "telUtils.h"
 #include "rrRRAuto.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
 #include "rr/rrLogger.h"
-#include "../utils/telStringList.h"
+#include "telStringList.h"
 #include "telPluginUtils.h"
 
 namespace rrauto
@@ -135,7 +135,7 @@ string RRAuto::getConstantsAsString()
 //Called by Auto
 int autoCallConv RRAuto::ModelInitializationCallback(long ndim, double t, double* u, double* par)
 {
-    ExecutableModel* lModel = mRR->getModel();
+    rr::ExecutableModel* lModel = mRR->getModel();
 
     int numBoundaries = 0;  //ToDo: to be set from the outside
     int numParameters = 1;  //ToDo: to be set from the outside
@@ -247,7 +247,7 @@ void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const 
 {
     int numBoundaries = 0;
     int numParameters = 1;
-    ExecutableModel* lModel = mRR->getModel();
+    rr::ExecutableModel* lModel = mRR->getModel();
 
     if (numBoundaries > 0)
     {

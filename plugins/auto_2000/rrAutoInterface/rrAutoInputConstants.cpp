@@ -1,7 +1,7 @@
 #pragma hdrstop
-#include "../utils/telStringList.h"
-#include "rrStringBuilder.h"
-#include "../utils/telStringUtils.h"
+#include "telStringList.h"
+#include "telStringBuilder.h"
+#include "telStringUtils.h"
 #include "rrAutoInputConstants.h"
 #include "telPluginUtils.h"
 //---------------------------------------------------------------------------
