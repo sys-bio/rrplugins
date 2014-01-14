@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include <sstream>
 #include <iomanip>
-#include "rr/telUtils.h"
+#include "../utils/telUtils.h"
 #include "telPlugin.h"
 #include "telProperty.h"
 //---------------------------------------------------------------------------

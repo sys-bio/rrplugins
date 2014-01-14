@@ -1,13 +1,24 @@
 #pragma hdrstop
-#include "rr/c/rrc_cpp_support.h"
 #include "telplugins_cpp_support.h"
+#include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrException.h"
 #include "../utils/telStringUtils.h"
+#include "telplugins_utilities.h"
 
 namespace tlp
 {
+using rr::RoadRunnerData;
+using rr::RoadRunner;
+void setError(const string& err)
+{
+    if(gLastError)
+    {
+        delete [] gLastError;
+    }
 
+    gLastError = createText(err);
+}
 
 PluginManager* castToPluginManager(RRPluginManagerHandle handle)
 {
@@ -137,14 +148,28 @@ Property<Properties>* castToPropertiesProperty(RRPropertyHandle handle)
 
 RoadRunnerData* castToRoadRunnerData(RRDataHandle handle)
 {
-    RoadRunnerData* para = (RoadRunnerData*) handle;
+    rr::RoadRunnerData* para = (RoadRunnerData*) handle;
     if(para) //Will only fail if handle is NULL...
     {
         return para;
     }
     else
     {
-        rr::Exception ex("Failed to cast to a valid string Property handle");
+        rr::Exception ex("Failed to cast to a valid RoadRunner Data handle");
+        throw(ex);
+    }
+}
+
+RoadRunner* castToRoadRunner(RRHandle handle)
+{
+    rr::RoadRunner* para = (RoadRunner*) handle;
+    if(para) //Will only fail if handle is NULL...
+    {
+        return para;
+    }
+    else
+    {
+        rr::Exception ex("Failed to cast to a valid RoadRunner data handle");
         throw(ex);
     }
 }
@@ -163,10 +188,10 @@ Property<RoadRunnerData>* castToRoadRunnerDataProperty(RRPropertyHandle handle)
     }
 }
 
-RRCDataPtr createRRCData(const RoadRunnerData& result)
-{
-    return rrc::createRRCData(result);     
-}
+//RRCDataPtr createRRCData(const RoadRunnerData& result)
+//{
+//    return rrc::createRRCData(result);
+//}
 
 
 }

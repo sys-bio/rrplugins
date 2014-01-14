@@ -6,7 +6,7 @@
 #include "rr/rrLogger.h"
 #include "rr/c/rrc_api.h"
 #include "rr/c/rrc_utilities.h"              //Support functions, not exposed as api functions and or data
-#include "rr/c/rrc_cpp_support.h"            //Support functions, not exposed as api functions and or data
+//#include "rr/c/rrc_cpp_support.h"            //Support functions, not exposed as api functions and or data
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
 #include "telProperty.h"
@@ -345,7 +345,7 @@ char* rrp_cc getPropertyValueAsString(RRPropertyHandle handle)
     start_try
         PropertyBase* para = castToProperty(handle);
         string val = para->getValueAsString();
-        return rr::createText(val);
+        return createText(val);
     catch_ptr_macro
 }
 
@@ -361,7 +361,7 @@ char* rrp_cc getPropertyName(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return rr::createText(para->getName());
+        return createText(para->getName());
     catch_ptr_macro
 }
 
@@ -369,7 +369,7 @@ char* rrp_cc getPropertyHint(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return rr::createText(para->getHint());
+        return createText(para->getHint());
     catch_ptr_macro
 }
 
@@ -377,7 +377,7 @@ char* rrp_cc getPropertyType(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
-        return rr::createText(para->getType());
+        return createText(para->getType());
     catch_ptr_macro
 }
 

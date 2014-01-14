@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "rr/telUtils.h"
+#include "../utils/telUtils.h"
 #include "telCPlugin.h"
 //---------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ tlp::StringList CPlugin::getPropertyNames()
     char* propNames = getCPropertyNames();
     string _names(propNames);
     tlp::StringList names(_names, ",");
-    rr::freeText(propNames);
+    freeText(propNames);
     return names;
 }
 

@@ -13,6 +13,8 @@
 //#include "rr/Exception.h"
 //---------------------------------------------------------------------------
 
+char*       gLastError                  = NULL;
+
 namespace tlp
 {
 //using namespace std;
@@ -21,14 +23,14 @@ namespace tlp
 
 //const char* ALLOCATE_API_ERROR_MSG      = "Allocate a handle to the roadrunner API before calling any API function";
 //const char* INVALID_HANDLE_ERROR_MSG    = "The HANDLE passed to this function was invalid";
-//char*       gLastError                  = NULL;
+
 //char        gInstallFolderBuffer[RR_MAX_PATH] = {0};
 //char*       gInstallFolder = gInstallFolderBuffer;
 
 
 //char* rrcCallConv createText(const char* text)
 //{
-//    return rr::createText(text);
+//    return createText(text);
 //}
 //
 //char* rrcCallConv getFileContent(const char* fName)
@@ -36,7 +38,7 @@ namespace tlp
 //    start_try
 //    {
 //        string fContent = rr::getFileContent(fName);
-//        return rr::createText(fContent);
+//        return createText(fContent);
 //    }
 //    catch_ptr_macro
 //}
@@ -49,7 +51,7 @@ namespace tlp
 //
 //char* rrcCallConv createTextMemory(const int count)
 //{
-//    return rr::createText(count);
+//    return createText(count);
 //}
 //
 //
@@ -118,7 +120,7 @@ namespace tlp
 //{
 //    RRListItemPtr item = new RRListItem;
 //    item->ItemType = litString;
-//    item->data.sValue = rr::createText(value);
+//    item->data.sValue = createText(value);
 //    return item;
 //}
 //
@@ -285,7 +287,7 @@ namespace tlp
 //            }
 //        }
 //        resStr<<"}";
-//        return rr::createText(resStr.str());
+//        return createText(resStr.str());
 //
 //    }
 //    catch(Exception& ex)
@@ -759,7 +761,7 @@ namespace tlp
 //         return NULL;
 //      }
 //
-//      return rr::createText(list->String[index]);
+//      return createText(list->String[index]);
 //    }
 //    catch(Exception& ex)
 //    {
@@ -789,7 +791,7 @@ namespace tlp
 //            }
 //        }
 //
-//        return rr::createText(resStr.str());
+//        return createText(resStr.str());
 //    }
 //    catch(Exception& ex)
 //    {
@@ -835,7 +837,7 @@ namespace tlp
 //            }
 //            resStr <<"\n";
 //        }
-//        return rr::createText(resStr.str());
+//        return createText(resStr.str());
 //    }
 //    catch_ptr_macro
 //}
@@ -865,7 +867,7 @@ namespace tlp
 //            }
 //            ss<<endl;
 //        }
-//        return rr::createText(ss.str());
+//        return createText(ss.str());
 //    }
 //    catch(Exception& ex)
 //    {
@@ -901,7 +903,7 @@ namespace tlp
 //            }
 //            ss<<endl;
 //        }
-//        return rr::createText(ss.str());
+//        return createText(ss.str());
 //    }
 //    catch_ptr_macro
 //}
@@ -929,7 +931,7 @@ namespace tlp
 //            }
 //        }
 //        ss<<endl;
-//        return rr::createText(ss.str());
+//        return createText(ss.str());
 //    }
 //    catch_ptr_macro
 //}
@@ -956,7 +958,7 @@ namespace tlp
 //            }
 //        }
 //        ss<<endl;
-//        return rr::createText(ss.str());
+//        return createText(ss.str());
 //    }
 //    catch_ptr_macro
 //}

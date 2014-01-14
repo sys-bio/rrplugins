@@ -45,7 +45,11 @@
 #define telplugins_cpp_supportH
 #include <string>
 #include "telplugins_c_api.h"
-#include "rrRoadRunnerData.h"
+#include "rr/rrRoadRunnerData.h"
+namespace rr
+{
+    class RoadRunner;
+}
 namespace tlp
 {
 using std::string;
@@ -55,6 +59,15 @@ class Properties;
 class PropertyBase;
 class Plugin;
 class PluginManager;
+
+
+/*!
+ \brief Set API error
+
+ \param[in] error A string containg the error
+ \ingroup cpp_support
+*/
+TLP_C_DS void                        setError(const string& err);
 
 
 /*!
@@ -145,16 +158,34 @@ rr::RoadRunnerData*                 castToRoadRunnerData(RRPropertyHandle handle
   data.
  \ingroup cpp_support
 */
-Property<rr::RoadRunnerData>*      castToRoadRunnerDataProperty(RRPropertyHandle handle);
+Property<rr::RoadRunnerData>*       castToRoadRunnerDataProperty(RRPropertyHandle handle);
 
-//Result data
+
 /*!
- \brief Creates a RRData structure from rr::RoadRunnerData object
- \param[in] data  Input RoadRunner data
- \return A handle to a RRData structure. Null if it fails
+ \brief Cast a handle to RoadRunner instance pointer, throws if it fails
+ \param[in] handle  A handle to a roadrunner instance
+ \return Pointer to a roadrunner instance
  \ingroup cpp_support
 */
-RRCDataPtr                          createRRCData(const rr::RoadRunnerData& result);
+rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
+
+
+////Result data
+///*!
+// \brief Creates a RRData structure from rr::RoadRunnerData object
+// \param[in] data  Input RoadRunner data
+// \return A handle to a RRData structure. Null if it fails
+// \ingroup cpp_support
+//*/
+//RRCDataPtr                          createRRCData(const rr::RoadRunnerData& result);
+
+/*!
+ \brief Cast a RoadRunner Data handle to RoadRunner Data instance pointer, throws if it fails
+ \param[in] handle  A handle to a roadrunner data instance
+ \return Pointer to a roadrunner data instance
+ \ingroup cpp_support
+*/
+TLP_C_DS rr::RoadRunnerData*         castToRoadRunnerData(RRDataHandle rrDataHandle);
 
 }
 

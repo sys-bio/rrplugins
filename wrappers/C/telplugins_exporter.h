@@ -44,17 +44,17 @@
 
 //Export/Import API functions
 #if defined(_WIN32) || defined(__WIN32__)
-    #if defined(STATIC_RRP)
-        #define RRP_C_DS
+    #if defined(STATIC_TLP_C)
+        #define TLP_C_DS
     #else
         #if defined(EXPORT_RRP)
-            #define RRP_C_DS __declspec(dllexport)
+            #define TLP_C_DS __declspec(dllexport)
         #else
-            #define RRP_C_DS __declspec(dllimport)
+            #define TLP_C_DS __declspec(dllimport)
         #endif
     #endif
 #else
-    #define RRP_C_DS
+    #define TLP_C_DS
 #endif
 
 #endif

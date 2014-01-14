@@ -9,7 +9,10 @@
         <Projects Include="utils\telutils.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="manager\telmanager.cbproj">
+        <Projects Include="manager\telplugins.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="wrappers\C\telplugins_c_api.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -38,23 +41,32 @@
     <Target Name="telutils:Make">
         <MSBuild Projects="utils\telutils.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="telmanager">
-        <MSBuild Projects="manager\telmanager.cbproj"/>
+    <Target Name="telplugins">
+        <MSBuild Projects="manager\telplugins.cbproj"/>
     </Target>
-    <Target Name="telmanager:Clean">
-        <MSBuild Projects="manager\telmanager.cbproj" Targets="Clean"/>
+    <Target Name="telplugins:Clean">
+        <MSBuild Projects="manager\telplugins.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="telmanager:Make">
-        <MSBuild Projects="manager\telmanager.cbproj" Targets="Make"/>
+    <Target Name="telplugins:Make">
+        <MSBuild Projects="manager\telplugins.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_c_api">
+        <MSBuild Projects="wrappers\C\telplugins_c_api.cbproj"/>
+    </Target>
+    <Target Name="telplugins_c_api:Clean">
+        <MSBuild Projects="wrappers\C\telplugins_c_api.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_c_api:Make">
+        <MSBuild Projects="wrappers\C\telplugins_c_api.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="telutils-static;telutils;telmanager"/>
+        <CallTarget Targets="telutils-static;telutils;telplugins;telplugins_c_api"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telutils-static:Clean;telutils:Clean;telmanager:Clean"/>
+        <CallTarget Targets="telutils-static:Clean;telutils:Clean;telplugins:Clean;telplugins_c_api:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telutils-static:Make;telutils:Make;telmanager:Make"/>
+        <CallTarget Targets="telutils-static:Make;telutils:Make;telplugins:Make;telplugins_c_api:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

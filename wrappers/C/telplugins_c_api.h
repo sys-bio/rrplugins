@@ -57,7 +57,7 @@ namespace tlp { extern "C" {
  \return On success, a handle to a Plugin manager, on failure, NULL.
  \ingroup plugin_manager
  */
-RRP_C_DS RRPluginManagerHandle rrp_cc createPluginManager(const char* pluginDir);
+TLP_C_DS RRPluginManagerHandle rrp_cc createPluginManager(const char* pluginDir);
 
 /*!
  \brief Free the plugin manager. A call to this function will also unload any loaded plugins.
@@ -65,7 +65,7 @@ RRP_C_DS RRPluginManagerHandle rrp_cc createPluginManager(const char* pluginDir)
  \return true if success, false otherwise. 
  \ingroup plugin_manager
  */
-RRP_C_DS bool rrp_cc freePluginManager(RRPluginManagerHandle handle);
+TLP_C_DS bool rrp_cc freePluginManager(RRPluginManagerHandle handle);
 
 /*!
  \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
@@ -73,7 +73,7 @@ RRP_C_DS bool rrp_cc freePluginManager(RRPluginManagerHandle handle);
  \return Returns an integer holding number of succesfully loaded plugins
  \ingroup plugin_manager
 */
-RRP_C_DS int rrp_cc loadPlugins(RRPluginManagerHandle handle);
+TLP_C_DS int rrp_cc loadPlugins(RRPluginManagerHandle handle);
 
 /*!
  \brief Unload plugins
@@ -81,7 +81,7 @@ RRP_C_DS int rrp_cc loadPlugins(RRPluginManagerHandle handle);
  \return Returns true if Plugins are unloaded succesfully, false otherwise
  \ingroup plugin_manager
 */
-RRP_C_DS bool rrp_cc unLoadPlugins(RRPluginManagerHandle handle);
+TLP_C_DS bool rrp_cc unLoadPlugins(RRPluginManagerHandle handle);
 
 /*!
  \brief Load a particular plugin
@@ -90,7 +90,7 @@ RRP_C_DS bool rrp_cc unLoadPlugins(RRPluginManagerHandle handle);
  \return Returns a handle to a plugin, NULL if unsuccesfull
  \ingroup plugin_manager 
 */
-RRP_C_DS RRPluginHandle rrp_cc loadPlugin(RRPluginManagerHandle handle, const char* pluginName);
+TLP_C_DS RRPluginHandle rrp_cc loadPlugin(RRPluginManagerHandle handle, const char* pluginName);
 
 /*!
  \brief unload a particular plugin
@@ -99,7 +99,7 @@ RRP_C_DS RRPluginHandle rrp_cc loadPlugin(RRPluginManagerHandle handle, const ch
  \return Returns true if the Plugin are unloaded succesfully, false otherwise
  \ingroup plugin_manager
 */
-RRP_C_DS bool rrp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin);
+TLP_C_DS bool rrp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin);
 
 /*!
  \brief Get Number of loaded plugins.
@@ -107,7 +107,7 @@ RRP_C_DS bool rrp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle p
  \return Returns the number of loaded plugins, -1 if a problem is encountered
  \ingroup plugin_manager
 */
-RRP_C_DS int rrp_cc getNumberOfPlugins(RRPluginManagerHandle handle);
+TLP_C_DS int rrp_cc getNumberOfPlugins(RRPluginManagerHandle handle);
 
 /*!
  \brief Function to retrieve the names of currently loaded plugins.
@@ -115,7 +115,7 @@ RRP_C_DS int rrp_cc getNumberOfPlugins(RRPluginManagerHandle handle);
  \return Returns names for loaded plugins as a RRStringArrayPtr, NULL otherwise
  \ingroup plugin_manager
 */
-RRP_C_DS char* rrp_cc getPluginNames(RRPluginManagerHandle handle);
+TLP_C_DS char* rrp_cc getPluginNames(RRPluginManagerHandle handle);
 
 /*!
  \brief Function to retrieve the library name of currently loaded plugins.
@@ -123,7 +123,7 @@ RRP_C_DS char* rrp_cc getPluginNames(RRPluginManagerHandle handle);
  \return Returns names for loaded plugins as a RRStringArrayPtr, NULL otherwise
  \ingroup plugin_manager
 */
-RRP_C_DS char* rrp_cc getPluginLibraryNames(RRPluginManagerHandle handle);
+TLP_C_DS char* rrp_cc getPluginLibraryNames(RRPluginManagerHandle handle);
 
 /*!
  \brief getFirstPlugin retrieves the "first" plugin in the plugin managers internal list of plugins.
@@ -132,7 +132,7 @@ RRP_C_DS char* rrp_cc getPluginLibraryNames(RRPluginManagerHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-RRP_C_DS RRPluginHandle rrp_cc getFirstPlugin(RRPluginManagerHandle handle);
+TLP_C_DS RRPluginHandle rrp_cc getFirstPlugin(RRPluginManagerHandle handle);
 
 /*!
  \brief getNextPlugin retrieves the "next" plugin in the plugin managers internal list of plugins. This function
@@ -141,7 +141,7 @@ RRP_C_DS RRPluginHandle rrp_cc getFirstPlugin(RRPluginManagerHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-RRP_C_DS RRPluginHandle rrp_cc getNextPlugin(RRPluginManagerHandle handle);
+TLP_C_DS RRPluginHandle rrp_cc getNextPlugin(RRPluginManagerHandle handle);
 
 /*!
  \brief getPreviousPlugin retrieves the "previous" plugin in the plugin managers internal list of plugins. This function
@@ -150,7 +150,7 @@ RRP_C_DS RRPluginHandle rrp_cc getNextPlugin(RRPluginManagerHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-RRP_C_DS RRPluginHandle rrp_cc getPreviousPlugin(RRPluginManagerHandle handle);
+TLP_C_DS RRPluginHandle rrp_cc getPreviousPlugin(RRPluginManagerHandle handle);
 
 /*!
  \brief getCurrentPlugin retrieves the "current" plugin in the plugin managers internal list of plugins. This function
@@ -159,7 +159,7 @@ RRP_C_DS RRPluginHandle rrp_cc getPreviousPlugin(RRPluginManagerHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-RRP_C_DS RRPluginHandle rrp_cc getCurrentPlugin(RRPluginManagerHandle handle);
+TLP_C_DS RRPluginHandle rrp_cc getCurrentPlugin(RRPluginManagerHandle handle);
 
 /*!
  \brief GetPluginHandle
@@ -169,7 +169,7 @@ RRP_C_DS RRPluginHandle rrp_cc getCurrentPlugin(RRPluginManagerHandle handle);
  Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-RRP_C_DS RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const char* pluginName);
+TLP_C_DS RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const char* pluginName);
 
 /*!
  \brief Get a handle to a plugins shared library
@@ -179,7 +179,7 @@ RRP_C_DS RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const cha
  \note This function is not yet implemented..
  \ingroup plugin_manager
 */
-RRP_C_DS long rrp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginHandle);
+TLP_C_DS long rrp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginHandle);
 
 
 //==========================  PLUGIN HANDLE functions
@@ -189,7 +189,7 @@ RRP_C_DS long rrp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPl
  \return Returns a string on success, NULL otherwise
   \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginName(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginName(RRPluginHandle handle);
 
 /*!
  \brief Return a plugins Category. A plugin developer may assign this information. 
@@ -198,7 +198,7 @@ RRP_C_DS char* rrp_cc getPluginName(RRPluginHandle handle);
 
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginCategory(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginCategory(RRPluginHandle handle);
 
 /*!
  \brief Return a plugins description. This is assigned by the plugin developer. 
@@ -206,7 +206,7 @@ RRP_C_DS char* rrp_cc getPluginCategory(RRPluginHandle handle);
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginDescription(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginDescription(RRPluginHandle handle);
 
 /*!
  \brief Return a plugins Hint. This information is assigned by the plugin developer.
@@ -214,7 +214,7 @@ RRP_C_DS char* rrp_cc getPluginDescription(RRPluginHandle handle);
  \return Returns a string on success, NULL otherwise
   \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginHint(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginHint(RRPluginHandle handle);
 
 /*!
  \brief Return some information about a Plugin. 
@@ -222,7 +222,7 @@ RRP_C_DS char* rrp_cc getPluginHint(RRPluginHandle handle);
  \return Returns info, as a string, for the plugin, NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginInfo(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginInfo(RRPluginHandle handle);
 
 /*!
  \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string. 
@@ -231,7 +231,7 @@ RRP_C_DS char* rrp_cc getPluginInfo(RRPluginHandle handle);
  \return Returns the plugins manuals pdf file as a unsigned char*. If not available, returns NULL.
  \ingroup plugins
 */
-RRP_C_DS unsigned char* rrp_cc getPluginManualAsPDF(RRPluginHandle handle);
+TLP_C_DS unsigned char* rrp_cc getPluginManualAsPDF(RRPluginHandle handle);
 
 /*!
  \brief Get the byte size for the PDF manual.
@@ -239,7 +239,7 @@ RRP_C_DS unsigned char* rrp_cc getPluginManualAsPDF(RRPluginHandle handle);
  \return Returns the nr of bytes in the plugins manuals pdf file as an unsigned int.
  \ingroup plugins
 */
-RRP_C_DS unsigned int rrp_cc getPluginManualNrOfBytes(RRPluginHandle handle);
+TLP_C_DS unsigned int rrp_cc getPluginManualNrOfBytes(RRPluginHandle handle);
 
 /*!
  \brief Assign a roadrunner instance handle for the plugin to use.
@@ -249,7 +249,7 @@ RRP_C_DS unsigned int rrp_cc getPluginManualNrOfBytes(RRPluginHandle handle);
   \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle rrHandle);
+TLP_C_DS bool rrp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle rrHandle);
 
 /*!
  \brief The executePlugin function is the function designated to fire of a Plugins "worker".
@@ -260,7 +260,7 @@ RRP_C_DS bool rrp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle r
  the executePluginEx function that have the option to execute the plugin code in a thread.
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc executePlugin(RRPluginHandle handle);
+TLP_C_DS bool rrp_cc executePlugin(RRPluginHandle handle);
 
 /*!
  \brief The executePluginEx is similar to the executePlugin function, except it takes two extra arguments.
@@ -269,7 +269,7 @@ RRP_C_DS bool rrp_cc executePlugin(RRPluginHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc executePluginEx(RRPluginHandle handle, bool inAThread);
+TLP_C_DS bool rrp_cc executePluginEx(RRPluginHandle handle, bool inAThread);
 
 /*!
  \brief Get some status of a plugin. See the plugins documentation on what to expect. 
@@ -277,7 +277,7 @@ RRP_C_DS bool rrp_cc executePluginEx(RRPluginHandle handle, bool inAThread);
  \return Returns plugin status if available, as a string. NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginStatus(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginStatus(RRPluginHandle handle);
 
 /*!
  \brief Returns a plugins result, as a string. See the plugins documentation on what to expect. 
@@ -285,7 +285,7 @@ RRP_C_DS char* rrp_cc getPluginStatus(RRPluginHandle handle);
  \return Returns a plugins result if available. NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginResult(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginResult(RRPluginHandle handle);
 
 /*!
  \brief Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state
@@ -293,7 +293,7 @@ RRP_C_DS char* rrp_cc getPluginResult(RRPluginHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc resetPlugin(RRPluginHandle handle);
+TLP_C_DS bool rrp_cc resetPlugin(RRPluginHandle handle);
 
 /*!
  \brief check if plugin is actively working
@@ -301,7 +301,7 @@ RRP_C_DS bool rrp_cc resetPlugin(RRPluginHandle handle);
  \return Returns true or false indicating i the plugin is busy or not
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc isPluginWorking(RRPluginHandle handle);
+TLP_C_DS bool rrp_cc isPluginWorking(RRPluginHandle handle);
 
 /*!
  \brief Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function
@@ -310,7 +310,7 @@ RRP_C_DS bool rrp_cc isPluginWorking(RRPluginHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS void rrp_cc terminateWork(RRPluginHandle handle);
+TLP_C_DS void rrp_cc terminateWork(RRPluginHandle handle);
 
 /*!
  \brief Check if the work of a plugin is currently being terminated
@@ -318,7 +318,7 @@ RRP_C_DS void rrp_cc terminateWork(RRPluginHandle handle);
  \return Returns true or false indicating if the work within the plugin is in the process of being terminated
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc isBeingTerminated(RRPluginHandle handle);
+TLP_C_DS bool rrp_cc isBeingTerminated(RRPluginHandle handle);
 
 /*!
  \brief wasTerminated. query a  plugin if work was terminated before completion
@@ -326,7 +326,7 @@ RRP_C_DS bool rrp_cc isBeingTerminated(RRPluginHandle handle);
  \return Returns true or false indicating if the work in the plugin was terminated or not
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc wasTerminated(RRPluginHandle handle);
+TLP_C_DS bool rrp_cc wasTerminated(RRPluginHandle handle);
 
 /*!
  \brief Assign event function fired when a plugin starts its work
@@ -337,7 +337,7 @@ RRP_C_DS bool rrp_cc wasTerminated(RRPluginHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc assignOnStartedEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool rrp_cc assignOnStartedEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 /*!
  \brief Assign event function fired as a plugin progresses
@@ -348,7 +348,7 @@ RRP_C_DS bool rrp_cc assignOnStartedEvent(RRPluginHandle handle, PluginEvent cb,
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc assignOnProgressEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool rrp_cc assignOnProgressEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 /*!
  \brief Assign event function fired when a plugin finishes its work
@@ -359,7 +359,7 @@ RRP_C_DS bool rrp_cc assignOnProgressEvent(RRPluginHandle handle, PluginEvent cb
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 ///*
 // \brief Hand external data to a plugin
@@ -368,7 +368,7 @@ RRP_C_DS bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent cb
 // \return Returns true or false indicating success/failure
 // \ingroup plugins
 //*/
-//RRP_C_DS bool rrp_cc assignPluginInput(RRPluginHandle handle, void* userData);
+//TLP_C_DS bool rrp_cc assignPluginInput(RRPluginHandle handle, void* userData);
 
 /*!
  \brief Get roadrunner instance handle from plugin
@@ -376,7 +376,7 @@ RRP_C_DS bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent cb
  \return Returns a handle to a rrInstance if available, returns NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS RRHandle rrp_cc getRRHandleFromPlugin(RRPluginHandle handle);
+TLP_C_DS RRHandle rrp_cc getRRHandleFromPlugin(RRPluginHandle handle);
 
 /*!
  \brief Get a Plugins Propertiese as an xml document. The string returned from this function is formated as xml.
@@ -384,7 +384,7 @@ RRP_C_DS RRHandle rrp_cc getRRHandleFromPlugin(RRPluginHandle handle);
  \return Returns available properties in the plugin, as a pointer to a string, NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle);
 
 /*!
  \brief Get a handle to a plugins properties
@@ -392,7 +392,7 @@ RRP_C_DS char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle);
   \return Returns a handle to a plugins property container, NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS RRPropertiesHandle rrp_cc getPluginProperties(RRPluginHandle handle);
+TLP_C_DS RRPropertiesHandle rrp_cc getPluginProperties(RRPluginHandle handle);
 
 /*!
  \brief Get a list of a plugins property names, as a string. Space being the delimiter.
@@ -400,7 +400,7 @@ RRP_C_DS RRPropertiesHandle rrp_cc getPluginProperties(RRPluginHandle handle);
   \return Returns a string if succesfull, NULL otherwise
  \ingroup plugins
 */
-RRP_C_DS char* rrp_cc getListOfPluginPropertyNames(RRPluginHandle handle);
+TLP_C_DS char* rrp_cc getListOfPluginPropertyNames(RRPluginHandle handle);
 
 /*!
  \brief Get a handle to a property.
@@ -409,7 +409,7 @@ RRP_C_DS char* rrp_cc getListOfPluginPropertyNames(RRPluginHandle handle);
  \return Returns a handle to a property. Returns NULL if not found
  \ingroup plugins
 */
-RRP_C_DS RRPropertyHandle rrp_cc getPluginProperty(RRPluginHandle handle, const char* propertyName);
+TLP_C_DS RRPropertyHandle rrp_cc getPluginProperty(RRPluginHandle handle, const char* propertyName);
 
 /*!
  \brief Set the value of a PluginProperty by a string.
@@ -419,7 +419,7 @@ RRP_C_DS RRPropertyHandle rrp_cc getPluginProperty(RRPluginHandle handle, const 
  \return true if succesful, false otherwise
  \ingroup plugins
 */
-RRP_C_DS bool rrp_cc setPluginProperty(RRPluginHandle handle, const char* propertyName, const char* value);
+TLP_C_DS bool rrp_cc setPluginProperty(RRPluginHandle handle, const char* propertyName, const char* value);
 
 /*!
  \brief Retrieve a handle to RoadRunners internal data
@@ -427,7 +427,7 @@ RRP_C_DS bool rrp_cc setPluginProperty(RRPluginHandle handle, const char* proper
  \return Returns an handle to roadrunners internal data object
  \ingroup simulation
 */
-RRP_C_DS RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle);
+TLP_C_DS RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle);
 
 /*!
  \brief Create a RoadRunner C data structure (RRCDataPtr) from RoadRunner data
@@ -435,7 +435,7 @@ RRP_C_DS RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle);
  \return Returns NULL if fails, otherwise returns a RRCData handle
  \ingroup utilities
 */
-RRP_C_DS RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle);
+TLP_C_DS RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle);
 
 /*!
  \brief Retrieve the number of rows in the given RoadRunner C numberical data (returned from simulate(RRHandle handle))
@@ -446,7 +446,7 @@ RRP_C_DS RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle);
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup utilities
 */
-RRP_C_DS int rrp_cc getRRCDataNumRows (RRCDataPtr rrData);
+TLP_C_DS int rrp_cc getRRCDataNumRows (RRCDataPtr rrData);
 
 /*!
  \brief Retrieve the number of columns in the given rrCData data (returned form simulat(RRHandle handle))
@@ -457,7 +457,7 @@ RRP_C_DS int rrp_cc getRRCDataNumRows (RRCDataPtr rrData);
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup utilities
 */
-RRP_C_DS int rrp_cc getRRCDataNumCols (RRCDataPtr rrData);
+TLP_C_DS int rrp_cc getRRCDataNumCols (RRCDataPtr rrData);
 
 /*!
  \brief Retrieves an element at a given row and column from a RRCData struct type variable
@@ -474,7 +474,7 @@ RRP_C_DS int rrp_cc getRRCDataNumCols (RRCDataPtr rrData);
  \note The F indicate this is a forwarde fucntion from RoadRUnners C API.
  \ingroup utilities
 */
-RRP_C_DS bool rrp_cc getRRCDataElementF(RRCDataPtr rrcData, int r, int c, double *value);
+TLP_C_DS bool rrp_cc getRRCDataElementF(RRCDataPtr rrcData, int r, int c, double *value);
 
 
 /*!
@@ -491,7 +491,7 @@ RRP_C_DS bool rrp_cc getRRCDataElementF(RRCDataPtr rrcData, int r, int c, double
  \return Returns true if succesful
  \ingroup utilities
 */
-RRP_C_DS bool rrp_cc getRoadRunnerDataElement(RRDataHandle rrData, int r, int c, double *value);
+TLP_C_DS bool rrp_cc getRoadRunnerDataElement(RRDataHandle rrData, int r, int c, double *value);
 
 /*!
  \brief Retrieves a RoadRunner data column header. The column header is a string 
@@ -501,7 +501,7 @@ RRP_C_DS bool rrp_cc getRoadRunnerDataElement(RRDataHandle rrData, int r, int c,
  \return Returns a string containing the header as a string, NULL if unsuccesful
  \ingroup utilities
 */
-RRP_C_DS char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
+TLP_C_DS char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
 
 
 /*!
@@ -511,7 +511,7 @@ RRP_C_DS char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
  \return Returns the number of rows in the underlying data object.
  \ingroup utilities
 */
-RRP_C_DS int rrp_cc getRoadRunnerDataNumRows(RRDataHandle data);
+TLP_C_DS int rrp_cc getRoadRunnerDataNumRows(RRDataHandle data);
 
 /*!
  \brief Retrieves the number of cols in a RoadRunner data object.
@@ -520,7 +520,7 @@ RRP_C_DS int rrp_cc getRoadRunnerDataNumRows(RRDataHandle data);
  \return Returns the number of cols in the underlying data object.
  \ingroup utilities
 */
-RRP_C_DS int rrp_cc getRoadRunnerDataNumCols(RRDataHandle data);
+TLP_C_DS int rrp_cc getRoadRunnerDataNumCols(RRDataHandle data);
 
 /*!
  \brief Creates a RoadRunner data object, and returns a handle to it.
@@ -531,7 +531,7 @@ RRP_C_DS int rrp_cc getRoadRunnerDataNumCols(RRDataHandle data);
  \return Returns a handle to a RoadRunner data object, NULL if unsuccessfull.
  \ingroup utilities
 */
-RRP_C_DS RRDataHandle rrp_cc createRoadRunnerData(int rows, int cols, char* colNames);
+TLP_C_DS RRDataHandle rrp_cc createRoadRunnerData(int rows, int cols, char* colNames);
 
 /*!
  \brief Free the memory allocated by a RoadRunner data object.
@@ -540,7 +540,7 @@ RRP_C_DS RRDataHandle rrp_cc createRoadRunnerData(int rows, int cols, char* colN
  \return Returns a boolean indicating success.
  \ingroup utilities
 */
-RRP_C_DS bool rrp_cc freeRoadRunnerData(RRDataHandle handle);
+TLP_C_DS bool rrp_cc freeRoadRunnerData(RRDataHandle handle);
 
 /*!
  \brief Returns a string list in string form.
@@ -548,7 +548,7 @@ RRP_C_DS bool rrp_cc freeRoadRunnerData(RRDataHandle handle);
  \ingroup utilities
  \note Forwarded from roadruners C API
 */
-RRP_C_DS char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list);
+TLP_C_DS char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list);
 
 /*!
  \brief Write roadrunner data to file a RoadRunner data object.
@@ -557,7 +557,7 @@ RRP_C_DS char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list);
  \return Returns a boolean indicating success.
  \ingroup utilities
 */
-RRP_C_DS bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName);
+TLP_C_DS bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName);
 
 /*!
  \brief Read roadrunner data from a file, into a RoadRunner data object.
@@ -565,7 +565,7 @@ RRP_C_DS bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
  \param fName File name to read data from.
  \return Returns a boolean indicating success.
  \ingroup utilities
-*/RRP_C_DS bool rrp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName);
+*/TLP_C_DS bool rrp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName);
 
 /*!
  \brief Return last API error
@@ -573,13 +573,13 @@ RRP_C_DS bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
  \ingroup utilities
  \note Forwarded from roadruners C API
 */
-RRP_C_DS char* rrp_cc getLastPluginError();
+TLP_C_DS char* rrp_cc getLastPluginError();
 
-/*!
- \brief Free char* generated by library routines
- \ingroup freeRoutines
-*/
-RRP_C_DS bool rrp_cc freeText(char* text);
+///*!
+// \brief Free char* generated by library routines
+// \ingroup freeRoutines
+//*/
+//TLP_C_DS bool rrp_cc freeText(char* text);
 
 
 #if defined(__cplusplus)

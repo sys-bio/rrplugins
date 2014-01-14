@@ -47,7 +47,7 @@
 #include "telExporter.h"
 #include "../utils/telStringList.h"
 #include "rr/rrSelectionRecord.h"
-#include "rr/telUtils.h"
+#include "../utils/telUtils.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
@@ -220,18 +220,18 @@ string formatN(const string& src, const A& arg1, const B& arg2, const C& arg3, c
 template <class T>
 inline string substituteN(const string& source, const string& target, const T& item, const int& howMany= -1)
 {
-    return rr::substitute(source, target, rr::toString(item), howMany);
+    return substitute(source, target, toString(item), howMany);
 }
 
 /**
     \brief Template function, substituting an occurence of a string, target, within the source string, with another, item. The howMany argument
-    limits the number of substitutions. A value of -1 causes all occurences to be substituted. 
+    limits the number of substitutions. A value of -1 causes all occurences to be substituted.
     The new string with the substitions is returned.
 */
 template<>
 inline string substituteN<double>(const string& source, const string& target, const double& item, const int& howMany)
 {
-    return rr::substitute(source, target, rr::toString(item, "%G"), howMany);
+    return substitute(source, target, toString(item, "%G"), howMany);
 }
 
 }

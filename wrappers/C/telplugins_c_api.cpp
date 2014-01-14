@@ -1,8 +1,8 @@
 #pragma hdrstop
-#include "telplugins_c_api.h"
 #include <sstream>
-
+#include "rr-libstruct/lsMatrix.h"
 #include "rr/rrRoadRunner.h"
+#include "rr/rrRoadRunnerData.h"
 #include "rr/rrLogger.h"
 //#include "rr/Exception.h"
 #include "../utils/telUtils.h"
@@ -10,16 +10,17 @@
 #include "telPlugin.h"
 #include "telProperty.h"
 #include "telStringUtils.h"
-#include "rrc_api.h"
-#include "rrc_utilities.h"
-#include "rrc_macros.h"
+//#include "rrc_api.h"
+//#include "rrc_utilities.h"
+#include "tel_macros.h"
 //#include "rrc_cpp_support.h"
+#include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
 
 namespace tlp
 {
 using namespace std;
-
+using rr::RoadRunnerData;
 using namespace rrc;
 
 char*       gLastError                  = NULL;
@@ -195,7 +196,7 @@ char* rrp_cc getPluginName(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        return rr::createText(aPlugin->getName());
+        return createText(aPlugin->getName());
     catch_ptr_macro
 }
 
@@ -203,7 +204,7 @@ char* rrp_cc getPluginCategory(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        return rr::createText(aPlugin->getCategory());
+        return createText(aPlugin->getCategory());
     catch_ptr_macro
 }
 
@@ -211,7 +212,7 @@ char* rrp_cc getPluginDescription(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-    return rr::createText(aPlugin->getDescription());
+    return createText(aPlugin->getDescription());
     catch_ptr_macro
 }
 
@@ -219,7 +220,7 @@ char* rrp_cc getPluginHint(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-    return rr::createText(aPlugin->getHint());
+    return createText(aPlugin->getHint());
     catch_ptr_macro
 }
 
@@ -265,7 +266,7 @@ char* rrp_cc getPluginInfo(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        return rr::createText(aPlugin->getInfo());
+        return createText(aPlugin->getInfo());
     catch_ptr_macro
 }
 
@@ -289,7 +290,7 @@ char* rrp_cc getPluginStatus(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        return rr::createText(aPlugin->getStatus());
+        return createText(aPlugin->getStatus());
     catch_ptr_macro
 }
 
@@ -342,7 +343,7 @@ char* rrp_cc getPluginResult(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        return rr::createText(aPlugin->getResult());
+        return createText(aPlugin->getResult());
     catch_ptr_macro
 }
 
@@ -394,52 +395,53 @@ RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle)
     catch_ptr_macro
 }
 
-RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle)
-{
-    start_try
-        RoadRunnerData* data = rrc::castToRRData(rrDataHandle);
-        return rrp::createRRCData((*data));
-    catch_ptr_macro
-}
+//RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle)
+//{
+//    start_try
+//        RoadRunnerData* data = castToRoadRunnerData(rrDataHandle);
+//        return rrp::createRRCData((*data));
+//    catch_ptr_macro
+//}
+//
+//int rrp_cc  getRRCDataNumRows (RRCDataPtr result)
+//{
+//    if (result == NULL)
+//    {
+//       setError ("result argument is null in getResultNumRows");
+//       return -1;
+//    }
+//    return result->RSize;
+//}
+//
+//int  rrp_cc  getRRCDataNumCols (RRCDataPtr result)
+//{
+//    if (result == NULL)
+//    {
+//       setError ("result argument is null in getResultNumCols");
+//       return -1;
+//    }
+//    return result->CSize;
+//}
+//
+//bool rrp_cc getRRCDataElementF(RRCDataPtr result, int r, int c, double *value)
+//{
+//    return rrc::getRRCDataElement(result, r, c, value);
+//}
 
-int rrp_cc  getRRCDataNumRows (RRCDataPtr result)
-{
-    if (result == NULL)
-    {
-       setError ("result argument is null in getResultNumRows");
-       return -1;
-    }
-    return result->RSize;
-}
-
-int  rrp_cc  getRRCDataNumCols (RRCDataPtr result)
-{
-    if (result == NULL)
-    {
-       setError ("result argument is null in getResultNumCols");
-       return -1;
-    }
-    return result->CSize;
-}
-
-bool rrp_cc getRRCDataElementF(RRCDataPtr result, int r, int c, double *value)
-{
-    return rrc::getRRCDataElement(result, r, c, value);
-}
-
-char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list)
-{
-    return rrc::stringArrayToString(list);
-}
+//char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list)
+//{
+//    return rrc::stringArrayToString(list);
+//}
 
 char* rrp_cc getLastPluginError()
 {   
-    return rrc::getLastError();
+//    return tlp::getLastError(); //Todo
+    return NULL;
 }
 
 bool rrp_cc freeText(char* text)
 {
-    return rr::freeText(text);
+    return false;//freeText(text);
 }
 
 char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
@@ -450,12 +452,11 @@ char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-
 bool rrp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double* value)
 {
     start_try
-        RoadRunnerData* rrData = castToRRData(data);
-        const DoubleMatrix& theData = rrData->getData();
+        RoadRunnerData* rrData = castToRoadRunnerData(data);
+        const ls::DoubleMatrix& theData = rrData->getData();
         *value = theData.Element(row, col);
         return true;
     catch_bool_macro
@@ -464,7 +465,7 @@ bool rrp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double
 char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle _data)
 {
     start_try
-        RoadRunnerData* data = castToRRData(_data);
+        RoadRunnerData* data = castToRoadRunnerData(_data);
         return createText(data->getColumnNamesAsString());        
     catch_ptr_macro
 }
@@ -472,7 +473,7 @@ char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle _data)
 int rrp_cc getRoadRunnerDataNumRows(RRDataHandle _data)
 {
     start_try
-        RoadRunnerData* data = castToRRData(_data);
+        RoadRunnerData* data = castToRoadRunnerData(_data);
         return data->rSize();        
     catch_int_macro
 }
@@ -480,7 +481,7 @@ int rrp_cc getRoadRunnerDataNumRows(RRDataHandle _data)
 int rrp_cc getRoadRunnerDataNumCols(RRDataHandle _data)
 {
     start_try
-        RoadRunnerData* data = castToRRData(_data);
+        RoadRunnerData* data = castToRoadRunnerData(_data);
         return data->cSize();        
     catch_int_macro
 }
@@ -502,7 +503,7 @@ RRDataHandle rrp_cc createRoadRunnerData(int nRows, int nCols, char* colNames)
 bool rrp_cc freeRoadRunnerData(RRDataHandle rrData)
 {
     start_try
-        RoadRunnerData* data = castToRRData(rrData);
+        RoadRunnerData* data = castToRoadRunnerData(rrData);
         delete data;
         return true;
     catch_bool_macro
@@ -511,7 +512,7 @@ bool rrp_cc freeRoadRunnerData(RRDataHandle rrData)
 bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
 {
     start_try
-        RoadRunnerData* data = castToRRData(rrData);
+        RoadRunnerData* data = castToRoadRunnerData(rrData);
         return data->writeTo(fName);        
     catch_bool_macro
 }
@@ -519,7 +520,7 @@ bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
 bool rrp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName)
 {
     start_try
-        RoadRunnerData* data = castToRRData(rrData);
+        RoadRunnerData* data = castToRoadRunnerData(rrData);
         return data->readFrom(fName);        
     catch_bool_macro
 
