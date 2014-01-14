@@ -94,7 +94,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <BCC_PCHInject>telplugins_pch.h</BCC_PCHInject>
         <BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
-        <IncludePath>$(TLP_ROOT)\manager;$(RR_ROOT)\Wrappers\C;$(RR_INSTALL)\include;$(TLP_ROOT)\utils;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(RR_ROOT)\Wrappers\C;$(RR_INSTALL)\include;$(TLP_ROOT)\utils;$(IncludePath)</IncludePath>
         <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
         <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>

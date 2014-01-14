@@ -44,7 +44,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Manifest_File>None</Manifest_File>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
-        <IncludePath>R:\rrl\plugins\add_noise\;$(TLP_ROOT)\manager;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>R:\rrl\plugins\add_noise\;$(TLP_ROOT)\source;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
