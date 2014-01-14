@@ -1,20 +1,20 @@
 """ 
 Usage:
-   python install_rrplugins.py
+   python install_telplugins.py
    This file will install files needed to 
-   use roadrunner plugins from Python. Specifically, it will install a module named
-   rrplugins in the systems Python sitepackage folder
+   use Tellurium plugins from Python. Specifically, it will install a module named
+   telplugins in the systems Python sitepackage folder
 """
 import site
 import shutil
 import os.path
 import os
 
-rrPackage = 'rrplugins'
-def rmrrplugins(path):
-    print('deleting ' + rrPackage +' from ' + path)
+telPackage = 'telplugins'
+def rmplugins(path):
+    print('deleting ' + telPackage +' from ' + path)
 
-    files = ['rrPlugins', 'rrPlugins_CAPI', 'rrPluginUtils', 'rrFindSharedLib']
+    files = ['telPlugins', 'telPlugins_CAPI', 'telPluginUtils', 'telFindSharedLib']
     for file in files:
         try:
             fName = file + '.py'
@@ -29,7 +29,7 @@ def rmrrplugins(path):
         except:
 		  pass
 		
-    shutil.rmtree(os.path.join(path, rrPackage), ignore_errors=True)
+    shutil.rmtree(os.path.join(path, telPackage), ignore_errors=True)
 
 splist = site.getsitepackages()
 spFolder = ''
@@ -37,16 +37,16 @@ spFolder = ''
 for s in splist:
     if s.find('site-packages') > 0:
         spFolder = s
-    	rmrrplugins(spFolder)
+    	rmplugins(spFolder)
 		
-print('installing ' + rrPackage +' to site packages dir: ' + spFolder)
+print('installing ' + telPackage +' to site packages dir: ' + spFolder)
 
-destination = os.path.join(spFolder, rrPackage)
+destination = os.path.join(spFolder, telPackage)
 
 #Figure out where we are
 cwd = os.path.dirname(os.path.abspath(__file__))
 
-src = os.path.abspath(os.path.join(cwd, rrPackage))
+src = os.path.abspath(os.path.join(cwd, telPackage))
 
 print('src directory is :' + src)
 print("destination directory is: " + destination)
