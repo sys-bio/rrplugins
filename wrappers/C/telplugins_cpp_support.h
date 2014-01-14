@@ -41,10 +41,10 @@
  * 
 */
 
-#ifndef rrplugins_cpp_supportH
-#define rrplugins_cpp_supportH
+#ifndef telplugins_cpp_supportH
+#define telplugins_cpp_supportH
 #include <string>
-#include "rrplugins_c_api.h"
+#include "telplugins_c_api.h"
 #include "rrRoadRunnerData.h"
 namespace tlp
 {

@@ -2,7 +2,7 @@
 #include <time.h>
 #include <math.h>
 #include "noise.h"
-#include "rr/rrUtils.h"
+#include "rr/telUtils.h"
 //---------------------------------------------------------------------------
 namespace addNoise
 {

@@ -1,23 +1,23 @@
 #pragma hdrstop
-#include "rrc_types.h"
-#include "rrc_exporter.h"
-#include "rrplugins_utilities.h"         // Need to include this before the support header..
-#include "rrc_macros.h"
-#include "rrplugins_cpp_support.h"
-#include <string>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include "rrRoadRunner.h"
-#include "rrUtils.h"
-#include "rrrr::Exception.h"
+//#include "rrc_types.h"
+//#include "rrc_exporter.h"
+//#include "telplugins_utilities.h"         // Need to include this before the support header..
+//#include "rrc_macros.h"
+//#include "telplugins_cpp_support.h"
+//#include <string>
+//#include <iostream>
+//#include <sstream>
+//#include <fstream>
+//#include "rrRoadRunner.h"
+//#include "../../utils/telUtils.h"
+//#include "rr/Exception.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
 {
-using namespace std;
+//using namespace std;
 
-using namespace rrc;
+//using namespace rrc;
 
 //const char* ALLOCATE_API_ERROR_MSG      = "Allocate a handle to the roadrunner API before calling any API function";
 //const char* INVALID_HANDLE_ERROR_MSG    = "The HANDLE passed to this function was invalid";

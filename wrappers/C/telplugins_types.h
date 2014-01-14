@@ -39,10 +39,10 @@
  * redistribute any piece of this software without proper attribution;
 */
 
-#ifndef rrplugins_typesH
-#define rrplugins_typesH
+#ifndef telplugins_typesH
+#define telplugins_typesH
 #include "rr/c/rrc_types.h"
-#include "rrplugins_settings.h"
+#include "telplugins_settings.h"
 #if defined(__cplusplus)
 namespace tlp { extern "C"  { using namespace rrc;
 #endif

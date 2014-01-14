@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "rr/c/rrc_cpp_support.h"
-#include "rrplugins_cpp_support.h"
+#include "telplugins_cpp_support.h"
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrException.h"
 #include "../utils/telStringUtils.h"

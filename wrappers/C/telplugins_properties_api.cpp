@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include <string>
 #include "rr/rrRoadRunner.h"
-#include "rr/rrrr::Exception.h"
+#include "rr/rrException.h"
 #include "telplugins_properties_api.h"
 #include "rr/rrLogger.h"
 #include "rr/c/rrc_api.h"

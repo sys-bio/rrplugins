@@ -6,7 +6,7 @@
 #include "rr/c/rrc_utilities.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
-#include "rr/rrUtils.h"
+#include "rr/telUtils.h"
 //---------------------------------------------------------------------------
 namespace autoplugin
 {

@@ -1,5 +1,5 @@
-#ifndef rrplugins_settingsH
-#define rrplugins_settingsH
+#ifndef telplugins_settingsH
+#define telplugins_settingsH
 
 //C function calling conventions
 #if defined(_MSC_VER)

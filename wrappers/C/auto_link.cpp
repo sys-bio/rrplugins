@@ -4,11 +4,11 @@
 #if defined(RRP_STATIC)
     #pragma comment(lib, "roadrunner-static.lib")
     #pragma comment(lib, "roadrunner_c_api-static.lib")
-    #pragma comment(lib, "rrplugins-static.lib")
+    #pragma comment(lib, "telplugins-static.lib")
 #else
     #pragma comment(lib, "roadrunner.lib")
     #pragma comment(lib, "roadrunner_c_api.lib")
-    #pragma comment(lib, "rrplugins.lib")
+    #pragma comment(lib, "telplugins.lib")
 #endif
 
 #pragma comment(lib, "sundials_cvode.lib")

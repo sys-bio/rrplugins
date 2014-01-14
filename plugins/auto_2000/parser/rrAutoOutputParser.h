@@ -5,7 +5,7 @@
 #include "rrParameter.h"
 #include "rrCPPPlugin.h"
 #include "rrRoadRunner.h"
-#include "rrStringList.h"
+#include "telStringList.h"
 #include "../rrAutoInterface/rrAutoData.h"
 #include "../rrAutoInterface/rrRRAuto.h"
 #include "rrAutoOutputParserWorker.h"

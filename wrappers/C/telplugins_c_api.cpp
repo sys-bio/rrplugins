@@ -1,19 +1,20 @@
 #pragma hdrstop
-#include "rrplugins_c_api.h"
+#include "telplugins_c_api.h"
 #include <sstream>
-#include "telProperty.h"
-#include "rrRoadRunner.h"
+
+#include "rr/rrRoadRunner.h"
+#include "rr/rrLogger.h"
+//#include "rr/Exception.h"
+#include "../utils/telUtils.h"
 #include "telPluginManager.h"
 #include "telPlugin.h"
-#include "rrLogger.h"
-#include "rrrr::Exception.h"
-#include "rrUtils.h"
-#include "rrStringUtils.h"
+#include "telProperty.h"
+#include "telStringUtils.h"
 #include "rrc_api.h"
 #include "rrc_utilities.h"
 #include "rrc_macros.h"
-#include "rrc_cpp_support.h"
-#include "rrplugins_cpp_support.h"
+//#include "rrc_cpp_support.h"
+#include "telplugins_cpp_support.h"
 
 namespace tlp
 {

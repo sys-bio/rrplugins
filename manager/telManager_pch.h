@@ -38,7 +38,7 @@
 //#include "rrLogger.h"
 //#include "rrModelFromC.h"
 //#include "rrCGenerator.h"
-//#include "rrUtils.h"
+//#include "telUtils.h"
 //#include "rrCapability.h"
 //#include "rrCapabilities.h"
 //#include "rrCGenerator.h"
@@ -52,9 +52,9 @@
 //#include "rrRule.h"
 //#include "rrScanner.h"
 //#include "rrStringListContainer.h"
-//#include "rrStringUtils.h"
-//#include "rrStringUtils.h"
-//#include "rrUtils.h"
+//#include "telStringUtils.h"
+//#include "telStringUtils.h"
+//#include "telUtils.h"
 //
 //
 

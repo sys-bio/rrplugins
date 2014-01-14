@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include "rrc_api.h"
-#include "rrplugins_c_api.h"
+#include "telplugins_c_api.h"
 
 using namespace std;
 using namespace rrc;
@@ -121,14 +121,14 @@ int main()
 
 #if defined(STATIC_APP)
     #pragma comment(lib, "roadrunner-static.lib")
-    #pragma comment(lib, "rrplugins-static.lib")
+    #pragma comment(lib, "telplugins-static.lib")
     #pragma comment(lib, "roadrunner_c_api-static.lib")
-    #pragma comment(lib, "rrplugins_c_api-static.lib")
+    #pragma comment(lib, "telplugins_c_api-static.lib")
     #pragma comment(lib, "libsbml-static.lib")
     #pragma comment(lib, "libxml2_xe.lib")
 #else
     #pragma comment(lib, "roadrunner_c_api.lib")
-    #pragma comment(lib, "rrplugins_c_api.lib")
+    #pragma comment(lib, "telplugins_c_api.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")

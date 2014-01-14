@@ -6,7 +6,7 @@
 #include "rrAutoWorker.h"
 #include "rrAutoPlugin.h"
 #include "../utils/telStringUtils.h"
-#include "rr/rrUtils.h"
+#include "rr/telUtils.h"
 #include "rr/c/rrc_api.h"
 #include "rr/c/rrc_utilities.h"
 //---------------------------------------------------------------------------

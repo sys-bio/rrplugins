@@ -38,11 +38,11 @@
  *
  * redistribute any piece of this software without proper attribution;
 */
-#ifndef rrplugins_c_apiH
-#define rrplugins_c_apiH
-#include "rrplugins_exporter.h"
-#include "rrplugins_types.h"
-#include "rrplugins_properties_api.h"
+#ifndef telplugins_c_apiH
+#define telplugins_c_apiH
+#include "telplugins_exporter.h"
+#include "telplugins_types.h"
+#include "telplugins_properties_api.h"
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
@@ -602,7 +602,7 @@ RRP_C_DS bool rrp_cc freeText(char* text);
 \code
 #include <iostream>
 #include "rrc_api.h"
-#include "rrplugins_c_api.h"
+#include "telplugins_c_api.h"
 
 using namespace std;
 using namespace rrc;

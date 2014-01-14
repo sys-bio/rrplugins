@@ -5,7 +5,7 @@
 #include "lm.h"
 #include "lib/lmmin.h"
 #include "../utils/telStringUtils.h"
-#include "rr/rrUtils.h"
+#include "rr/telUtils.h"
 #include "telProperty.h"
 
 //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly

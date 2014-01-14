@@ -4,8 +4,8 @@
 #include "rrAutoOutputParserWorker.h"
 #include "rrAutoOutputParser.h"
 #include "lmfit/lmmin.h"
-#include "rrStringUtils.h"
-#include "rrUtils.h"
+#include "telStringUtils.h"
+#include "telUtils.h"
 #include "rrc_api.h"
 #include "rrc_utilities.h"
 //---------------------------------------------------------------------------

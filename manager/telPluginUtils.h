@@ -47,7 +47,7 @@
 #include "telExporter.h"
 #include "../utils/telStringList.h"
 #include "rr/rrSelectionRecord.h"
-#include "rr/rrUtils.h"
+#include "rr/telUtils.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
