@@ -3,7 +3,7 @@ import roadrunner
 import matplotlib.pyplot as plot
 import numpy
 import ctypes
-from rrplugins import *
+from telplugins import *
 
 #Create a plugin manager
 pm = createPluginManager()
@@ -24,7 +24,7 @@ try:
     rr = roadrunner.RoadRunner()
     
     #Check if model file exists
-    sbmlModel ="../../models/bistable.xml"
+    sbmlModel ="bistable.xml"
     if os.path.exists(sbmlModel):
         model = open(sbmlModel, 'r').read()
         rr.load(model)
@@ -38,7 +38,7 @@ try:
     rr.simulate(timeStart, timeEnd, numPoints)
     
     #Load the 'noise' plugin in order to add some noise to the data
-    pluginHandle = loadPlugin(pm, "rrp_add_noise")
+    pluginHandle = loadPlugin(pm, "tel_add_noise")
     
     print getPluginInfo(pluginHandle)
     

@@ -5,10 +5,10 @@ PROJECT(plugins_wrappers)
 install(
         FILES 
         __init__.py
-        telPlugins.py 
-        telPluginUtils.py 
-        telPlugins_CAPI.py 
-        telFindSharedLib.py
+        telplugins.py 
+        telpluginutils.py 
+        telplugins_c_api.py 
+        telfindsharedlib.py
         README.txt 
         DESTINATION site-packages/telplugins  	
         COMPONENT telplugins

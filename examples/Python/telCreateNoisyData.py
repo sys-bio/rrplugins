@@ -1,8 +1,8 @@
 import roadrunner
-import rrplugins as rrp
+import telplugins as tel
 
 try:
-    noisePlugin = rrp.Plugin ("rrp_add_noise")
+    noisePlugin = tel.Plugin ("tel_add_noise")
     
     print noisePlugin.listOfProperties()
     
@@ -14,7 +14,7 @@ try:
     rr.simulate(0, 10, 511) # Want 512 points
     
     # The plugin will need a handle to the underlying roadrunner data
-    d = rrp.getRoadRunnerData (rr)
+    d = tel.getRoadRunnerData (rr)
     
     noisePlugin.InputData = d
     
@@ -26,9 +26,9 @@ try:
     numpydata = noisePlugin.InputData.AsNumpy;
     
     data = numpydata[:,[0,2]]
-    rrp.rrPlugins.plot (data, myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
+    tel.telplugins.plot (data, myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
     
-    rrp.show()
+    tel.show()
     
     d.writeDataSeries ("testData2.dat")
     

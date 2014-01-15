@@ -1,11 +1,10 @@
-from rrPlugins_CAPI import *
-from rrPlugins import *
+from telplugins import *
 
 try:  
-    sbmlModel ="../../models/bistable.xml"                   
+    sbmlModel ="bistable.xml"                   
     
     #Get an auto2000 plugin object
-    auto = Plugin("rrp_auto2000")
+    auto = Plugin("tel_auto2000")
           
     #Load Auto plugin
     if not auto.plugin:

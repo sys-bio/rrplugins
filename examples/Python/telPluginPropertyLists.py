@@ -1,4 +1,4 @@
-from rrplugins import *
+from telplugins import *
 
 listParaHandle = createProperty("myList", "listOfProperties", "a Hint")
 

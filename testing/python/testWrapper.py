@@ -1,4 +1,4 @@
-from rrPlugins import *
+from telPlugins import *
 
 pm = createPluginManager()
 print `loadPlugins(pm)`

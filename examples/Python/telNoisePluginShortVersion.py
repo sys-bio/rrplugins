@@ -1,6 +1,6 @@
-import rrplugins as rrp
+import telplugins as tel
 
-p = rrp.Plugin ("rrp_add_noise")
+p = tel.Plugin ("tel_add_noise")
 
 p.Sigma = 0.00005
 

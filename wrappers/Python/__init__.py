@@ -1,4 +1,4 @@
-from telPlugins import *
-from telPlugins_CAPI import *
+from telplugins import *
+from telplugins_c_api import *
 
 __version__ = '1.0.0'

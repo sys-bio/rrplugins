@@ -1,7 +1,6 @@
-from rrplugins import *
+from telplugins import *
 
 try:
-
     rrDataHandle = createRoadRunnerDataFromFile("testData.dat")
     hdr = getRoadRunnerDataColumnHeader(rrDataHandle)
     npData = getNumpyData(rrDataHandle)

@@ -1,5 +1,5 @@
-##@Module rrPlugins_CAPI
-#This module allows access to the rrplugins_api.dll from python"""
+##@Module telPlugins_C_API
+#This module allows access to the telplugins_api.dll from python"""
 import os
 import sys
 import numpy as np
@@ -8,7 +8,7 @@ import tempfile
 import time
 from ctypes import *
 import matplotlib.pyplot as plot
-from rrPluginUtils import *
+from telpluginutils import *
 
 """
 CTypes Python Bindings to the RoadRunner Plugin API.
@@ -18,10 +18,10 @@ Currently this is a fairly raw implementation with few Pythonic refinements
 
 __version__ = "1.0.0"
 
-# Get folder of where rrplugins_CAPI shared library is installed and construct an absolute path to
+# Get folder of where telplugins_CAPI shared library is installed and construct an absolute path to
 # the plugins from that.
 
-sharedLib='rrplugins_c_api'
+sharedLib='telplugins_c_api'
 dirPath = getPathToParentFolderOf(sharedLib)
 
 if os.path.exists(dirPath):
@@ -30,14 +30,14 @@ else:
     print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
     gDefaultPluginsPath = ''
 
-rrpLib=None
+telLib=None
 try:
     if sys.platform.startswith('win32'):
         sharedLib = sharedLib + '.dll'
-        rrpLib=CDLL(sharedLib)
+        telLib=CDLL(sharedLib)
     elif sys.platform.startswith('Linux'):
         sharedLib = sharedLib + '.a'
-        rrpLib = cdll.LoadLibrary(sharedLib)
+        telLib = cdll.LoadLibrary(sharedLib)
 except:
     print 'ERROR: Unable to locate shared library: ' + sharedLib
     exit()
@@ -45,7 +45,7 @@ except:
 
 # Experimental parameter object class
 # Usage:
-# p = rrPlugins.PropertyObject ("k1", "hint", 0.1)
+# p = telPlugins.PropertyObject ("k1", "hint", 0.1)
 # p.value = 0.5
 # print p.name
 
@@ -91,7 +91,7 @@ except:
 #    handle = property (__getHandle)
 
 
-#=======================rrp_api========================#
+#=======================tel_api========================#
 #Type of plugin events, first argument is return type
 
 ## \brief Plugin function event type definition
@@ -119,41 +119,41 @@ NotifyEventEx  = CFUNCTYPE(None, c_void_p)
 ## \return On success, a handle to a Plugin manager, on failure, None.
 ##
 ## @code
-## pm = rrPlugins.createPluginManager()
+## pm = telPlugins.createPluginManager()
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
 
-rrpLib.createPluginManager.restype = c_void_p
+telLib.createPluginManager.restype = c_void_p
 def createPluginManager(pluginDir = None):
     if pluginDir == None:
         pluginDir = gDefaultPluginsPath
-    return rrpLib.createPluginManager(pluginDir)
+    return telLib.createPluginManager(pluginDir)
 
 ## \brief Free the plugin manager. A call to this function will also unload any loaded plugins.
 ## \param pm Handle to a plugin manager.
 ## \return true if success, false otherwise.
 ##
 ## \ingroup plugin_manager
-rrpLib.freePluginManager.restype = c_bool
+telLib.freePluginManager.restype = c_bool
 def freePluginManager(pm):
-    return rrpLib.freePluginManager(pm)
+    return telLib.freePluginManager(pm)
 
 ##
 ## \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true if Plugins are loaded, false otherwise
 ##
-## @code sucess = rrPlugins.loadPlugins (pm)
+## @code sucess = telPlugins.loadPlugins (pm)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
 ##
-rrpLib.loadPlugins.restype = c_bool
+telLib.loadPlugins.restype = c_bool
 def loadPlugins(pm):
-    return rrpLib.loadPlugins(pm)
+    return telLib.loadPlugins(pm)
 
 ##
 ## \brief Unload all plugins.
@@ -162,9 +162,9 @@ def loadPlugins(pm):
 ##
 ## \ingroup plugin_manager
 ##
-rrpLib.unLoadPlugins.restype = c_bool
+telLib.unLoadPlugins.restype = c_bool
 def unLoadPlugins(pm):
-    return rrpLib.unLoadPlugins(pm)
+    return telLib.unLoadPlugins(pm)
 
 ##
 ## \brief Load a particular plugin
@@ -174,14 +174,14 @@ def unLoadPlugins(pm):
 ## \return Returns a handle to a plugin, None if unsuccesful
 ##
 ## @code
-## lmPlugin = rrPlugins.loadPlugin(pm, "rrp_lm")
+## lmPlugin = telPlugins.loadPlugin(pm, "tel_lm")
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
 ##
 def loadPlugin(pm, pluginName):
-    return rrpLib.loadPlugin(pm, pluginName)
+    return telLib.loadPlugin(pm, pluginName)
 
 ##
 ## \brief Unload a particular plugin
@@ -191,33 +191,33 @@ def loadPlugin(pm, pluginName):
 ## \ingroup plugin_manager
 ##
 def unLoadPlugin(pm, pHandle):
-    return rrpLib.unLoadPlugin(pm, pHandle)
+    return telLib.unLoadPlugin(pm, pHandle)
 
 ## \brief Get number of loaded plugins.
 ## \param pm Handle to a PluginManager instance
-## \return Returns the number of loaded plugins, -1 if a problem is encountered. Call rrPlugins.getLastError() to obtain error message.
+## \return Returns the number of loaded plugins, -1 if a problem is encountered. Call telPlugins.getLastError() to obtain error message.
 ## \ingroup plugin_manager
-rrpLib.getNumberOfPlugins.restype = c_int
+telLib.getNumberOfPlugins.restype = c_int
 def getNumberOfPlugins(pm):
-    return rrpLib.getNumberOfPlugins(pm)
+    return telLib.getNumberOfPlugins(pm)
 
 ## \brief Function to retrieve the names of all currently loaded plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns names for all loaded plugins as a string, None otherwise
 ##
 ## @code
-## names = rrPlugins.getPluginNames(pm)
+## names = telPlugins.getPluginNames(pm)
 ## print names
 ## ['AddNoise', 'Levenberg-Marquardt']
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-rrpLib.getPluginNames.restype = c_char_p
+telLib.getPluginNames.restype = c_char_p
 def getPluginNames(pm):
-    names = rrpLib.getPluginNames(pm)
+    names = telLib.getPluginNames(pm)
     res = names
-    rrpLib.freeText(c_char_p(names))
+    telLib.freeText(c_char_p(names))
     if not res:
         return list()
     return res.split(",")
@@ -227,16 +227,16 @@ def getPluginNames(pm):
 ## \return Returns library names for all loaded plugins as a string, None otherwise
 ##
 ## @code
-## names = rrPlugins.getPluginLibraryNames(pm)
+## names = telPlugins.getPluginLibraryNames(pm)
 ## print names
-## ['rrp_add_noise', 'rrp_lm']
+## ['tel_add_noise', 'tel_lm']
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-rrpLib.getPluginLibraryNames.restype = c_char_p
+telLib.getPluginLibraryNames.restype = c_char_p
 def getPluginLibraryNames(pm):
-    names = rrpLib.getPluginLibraryNames(pm)
+    names = telLib.getPluginLibraryNames(pm)
     if not names:
         return list()
     return names.split(",")
@@ -246,36 +246,36 @@ def getPluginLibraryNames(pm):
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-rrpLib.getFirstPlugin.restype = c_void_p
+telLib.getFirstPlugin.restype = c_void_p
 def getFirstPlugin(pm):
-    return rrpLib.getFirstPlugin(pm)
+    return telLib.getFirstPlugin(pm)
 
 ## \brief getNextPlugin retrieves the "next" plugin in the plugin managers internal list of plugins. This function
 ## is typically used together with the getFirstPlugin and getPreviousPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-rrpLib.getNextPlugin.restype = c_void_p
+telLib.getNextPlugin.restype = c_void_p
 def getNextPlugin(pm):
-    return rrpLib.getNextPlugin(pm)
+    return telLib.getNextPlugin(pm)
 
 ## \brief getPreviousPlugin retrieves the "previous" plugin in the plugin managers internal list of plugins. This function
 ##    is typically used together with the getFirstPlugin and getNextPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-rrpLib.getPreviousPlugin.restype = c_void_p
+telLib.getPreviousPlugin.restype = c_void_p
 def getPreviousPlugin(pm):
-    return rrpLib.getPreviousPlugin(pm)
+    return telLib.getPreviousPlugin(pm)
 
 ## \brief getCurrentPlugin retrieves the "current" plugin in the plugin managers internal list of plugins. This function
 ##    is typically used together with the getFirst, Next and getPreviousPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-rrpLib.getCurrentPlugin.restype = c_void_p
+telLib.getCurrentPlugin.restype = c_void_p
 def getCurrentPlugin(pm):
-    return rrpLib.getCurrentPlugin(pm)
+    return telLib.getCurrentPlugin(pm)
 
 
 ## \brief Get the plugin handle for the named plugin
@@ -284,9 +284,9 @@ def getCurrentPlugin(pm):
 ## \return Returns a handle to a plugin, with name as supplied in the property pluginName.
 ## Returns None if the plugin is not found
 ## \ingroup plugin_manager
-rrpLib.getPlugin.restype = c_void_p
+telLib.getPlugin.restype = c_void_p
 def getPlugin(pm, pluginName):
-    return rrpLib.getPlugin(pm, c_char_p(pluginName))
+    return telLib.getPlugin(pm, c_char_p(pluginName))
 
 
 #---------- PLUGIN HANDLING FUNCTIONS ============================================
@@ -295,30 +295,30 @@ def getPlugin(pm, pluginName):
 ## \return Returns the internal name of a plugin. None otherwise
 ##
 ## @code
-## name = rrPlugins.getPluginName(pluginHandle)
+## name = telPlugins.getPluginName(pluginHandle)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-rrpLib.getPluginName.restype = c_char_p
+telLib.getPluginName.restype = c_char_p
 def getPluginName(pluginHandle):
-    return rrpLib.getPluginName(pluginHandle)
+    return telLib.getPluginName(pluginHandle)
 
 ## \brief Get the Category of a Plugin. This is assigned by the pluging developer
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ##
 ## @code
-## name = rrPlugins.getPluginCategory(pluginHandle)
+## name = telPlugins.getPluginCategory(pluginHandle)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-rrpLib.getPluginCategory.restype = c_char_p
+telLib.getPluginCategory.restype = c_char_p
 def getPluginCategory(pluginHandle):
-    data =  rrpLib.getPluginCategory(pluginHandle)
+    data =  telLib.getPluginCategory(pluginHandle)
     res = data
-    rrpLib.freeText(data)
+    telLib.freeText(data)
     return res
 
 ## \brief Get the Description of a Plugin. This is assigned by the pluging developer
@@ -326,16 +326,16 @@ def getPluginCategory(pluginHandle):
 ## \return Returns a string if successful, None otherwise
 ##
 ## @code
-## name = rrPlugins.getPluginDescription(pluginHandle)
+## name = telPlugins.getPluginDescription(pluginHandle)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-rrpLib.getPluginDescription.restype = c_char_p
+telLib.getPluginDescription.restype = c_char_p
 def getPluginDescription(pluginHandle):
-    data =  rrpLib.getPluginDescription(pluginHandle)
+    data =  telLib.getPluginDescription(pluginHandle)
     res = data
-    rrpLib.freeText(data)
+    telLib.freeText(data)
     return res
 
 ## \brief Get a plugins Hint. A plugins hint is a short description on what the plugin is doing.This is assigned by the pluging developer
@@ -343,25 +343,25 @@ def getPluginDescription(pluginHandle):
 ## \return Returns a string if successful, None otherwise
 ##
 ## @code
-## name = rrPlugins.getPluginHint(pluginHandle)
+## name = telPlugins.getPluginHint(pluginHandle)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-rrpLib.getPluginHint.restype = c_char_p
+telLib.getPluginHint.restype = c_char_p
 def getPluginHint(pluginHandle):
-    data =  rrpLib.getPluginHint(pluginHandle)
+    data =  telLib.getPluginHint(pluginHandle)
     res = data
-    rrpLib.freeText(data)
+    telLib.freeText(data)
     return res
 
 ## \brief Returns information about a Plugin.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns information as a string for the plugin, None otherwise
 ## \ingroup plugins
-rrpLib.getPluginInfo.restype = c_char_p
+telLib.getPluginInfo.restype = c_char_p
 def getPluginInfo(pluginHandle):
-    return rrpLib.getPluginInfo(pluginHandle)
+    return telLib.getPluginInfo(pluginHandle)
 
 ## \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF.
 ## Use the function getPluginManualNrOfBytes to get the exact length of this string.
@@ -384,16 +384,16 @@ def getPluginInfo(pluginHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-rrpLib.getPluginManualAsPDF.restype =  POINTER(c_ubyte)
+telLib.getPluginManualAsPDF.restype =  POINTER(c_ubyte)
 def getPluginManualAsPDF(pluginHandle):
-    return rrpLib.getPluginManualAsPDF(pluginHandle)
+    return telLib.getPluginManualAsPDF(pluginHandle)
 
 ## \brief Get the byte size for the PDF manual.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns the number of bytes in the plugin's manual pdf file as an unsigned int.
 ## \ingroup plugins
 def getPluginManualNrOfBytes(pluginHandle):
-    return rrpLib.getPluginManualNrOfBytes(pluginHandle)
+    return telLib.getPluginManualNrOfBytes(pluginHandle)
 
 
 ## \brief If a plugin has a built-in PDF manual, display it.
@@ -426,9 +426,9 @@ def displayPluginManual(pluginHandle):
 ##  \param rrHandle Handle to a roadrunner instance
 ##  \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.assignRoadRunnerInstance.restype = c_bool
+telLib.assignRoadRunnerInstance.restype = c_bool
 def assignRoadRunnerInstance(pluginHandle, rrHandle):
-    return rrpLib.assignRoadRunnerInstance(pluginHandle, rrHandle)
+    return telLib.assignRoadRunnerInstance(pluginHandle, rrHandle)
 
 ## \brief The executePlugin function is called to start the plugin so that it can carry out its
 ## function. The call is plugin dependent meaning that it could result in a calculation, starting up a GUI etc.
@@ -438,26 +438,26 @@ def assignRoadRunnerInstance(pluginHandle, rrHandle):
 ## If the plugin is asked to carry out a lengthy calculation, consider using
 ## the executePluginEx function that has the option to execute the plugin code in the background (in a thread);
 ## \ingroup plugins
-rrpLib.executePlugin.restype = c_bool
+telLib.executePlugin.restype = c_bool
 def executePlugin(pluginHandle):
-    return rrpLib.executePlugin(pluginHandle)
+    return telLib.executePlugin(pluginHandle)
 
 ## \brief The executePluginEx is similar to the executePlugin function, except it takes one extra argument.
 ## \param pluginHandle Handle to a plugin
 ## \param inAThread bool indicating if the plugin should be executed in the background (in a thread)
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.executePluginEx.restype = c_bool
+telLib.executePluginEx.restype = c_bool
 def executePluginEx(pluginHandle, inAThread=False):
-    return rrpLib.executePluginEx(pluginHandle, c_bool(inAThread))
+    return telLib.executePluginEx(pluginHandle, c_bool(inAThread))
 
 ## \brief Get status information from a plugin. This call is plugin dependent, see the plugin documentation for details
 ## \param pluginHandle Handle to a plugin
 ## \return Returns plugin status if available, as a string. None otherwise
 ## \ingroup plugins
-rrpLib.getPluginStatus.restype = c_char_p
+telLib.getPluginStatus.restype = c_char_p
 def getPluginStatus(pluginHandle):
-    return rrpLib.getPluginStatus(pluginHandle)
+    return telLib.getPluginStatus(pluginHandle)
 
 ## \brief Returns a plugins result, as a string. This is plugin dependent, and a plugin designer may, or may not, implement
 ## this function. See the plugin documentation for details.
@@ -466,17 +466,17 @@ def getPluginStatus(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a plugins result if available. None otherwise
 ## \ingroup plugins
-rrpLib.getPluginResult.restype = c_char_p
+telLib.getPluginResult.restype = c_char_p
 def getPluginResult(pluginHandle):
-    return rrpLib.getPluginResult(pluginHandle)
+    return telLib.getPluginResult(pluginHandle)
 
 ## \brief Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.resetPlugin.restype = c_bool
+telLib.resetPlugin.restype = c_bool
 def resetPlugin(pluginHandle):
-    return rrpLib.resetPlugin(pluginHandle)
+    return telLib.resetPlugin(pluginHandle)
 
 ## \brief Check if a plugin is actively working. This function is used when the work in the plugin is
 ## executed in a thread (see executeEx). The isPluginWorking will return true as long work is being active
@@ -485,35 +485,35 @@ def resetPlugin(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating if the plugin is busy or not
 ## \ingroup plugins
-rrpLib.isPluginWorking.restype = c_bool
+telLib.isPluginWorking.restype = c_bool
 def isPluginWorking(pluginHandle):
-    return rrpLib.isPluginWorking(pluginHandle)
+    return telLib.isPluginWorking(pluginHandle)
 
 ## \brief Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function
 ## will signal the internals of the plugin to terminate. This function is used when a plugins work is executed in a thread.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.terminateWork.restype = c_bool
+telLib.terminateWork.restype = c_bool
 def terminateWork(pluginHandle):
-    return rrpLib.terminateWork(pluginHandle)
+    return telLib.terminateWork(pluginHandle)
 
 ## \brief Check if the work of a plugin is currently being terminated. This function is useful when a plugin is executed in a thread.
 ## \param pluginHandle Handle to the plugin
 ## \return Returns true or false indicating if the work within the plugin is in the process of being terminated
 ## \ingroup plugins
-rrpLib.isBeingTerminated.restype = c_bool
+telLib.isBeingTerminated.restype = c_bool
 def isBeingTerminated(pluginHandle):
-    return rrpLib.isBeingTerminated(pluginHandle)
+    return telLib.isBeingTerminated(pluginHandle)
 
 ## \brief Query a plugin if work was terminated succesfully. This function may be used in combination with
 ## the terminateWork, and isBeingTerminated functions.
 ## \param pluginHandle Handle to the plugin
 ## \return Returns true or false indicating if the work in the plugin was terminated or not
 ## \ingroup plugins
-rrpLib.wasTerminated.restype = c_bool
+telLib.wasTerminated.restype = c_bool
 def wasTerminated(pluginHandle):
-    return rrpLib.wasTerminated(pluginHandle)
+    return telLib.wasTerminated(pluginHandle)
 
 ## \brief Assigns a plugins OnStartedEvent function.Plugin dependent. Intended usage is to report back on plugin initialization.
 ## \param pluginHandle Handle to a plugin
@@ -522,9 +522,9 @@ def wasTerminated(pluginHandle):
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.assignOnStartedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+telLib.assignOnStartedEvent.args =[c_void_p, NotifyEvent, c_void_p]
 def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return rrpLib.assignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return telLib.assignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 ## \brief Assigns a plugins OnProgressEvent function. Plugin dependent. Intended usage is to report back progress
 ## \param pluginHandle Handle to a pluginevent routine
@@ -532,9 +532,9 @@ def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.assignOnProgressEvent.args =[c_void_p, c_void_p, c_void_p]
+telLib.assignOnProgressEvent.args =[c_void_p, c_void_p, c_void_p]
 def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return rrpLib.assignOnProgressEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return telLib.assignOnProgressEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 ## \brief Assigns a plugins OnFinishedEvent function. Plugin dependent. Intended usage is to report back on plugin finalization.
 
@@ -544,43 +544,43 @@ def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.assignOnFinishedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+telLib.assignOnFinishedEvent.args =[c_void_p, NotifyEvent, c_void_p]
 def assignOnFinishedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return rrpLib.assignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return telLib.assignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 #### \brief Hand external data to a plugin: THIS METHOD IS UNDER REVIEW
 #### \param pluginHandle Handle to a plugin
 #### \param userData void* pointer to user data. Plugin dependent, see the specific documentation on the plugin for details.
 #### \return Returns true or false indicating success/failure
 #### \ingroup plugins
-##rrpLib.assignPluginInput.restype = c_bool
+##telLib.assignPluginInput.restype = c_bool
 ##def assignPluginInput(pluginHandle, userData):
-##    return rrpLib.assignPluginInput(pluginHandle, c_void_p(userData))
+##    return telLib.assignPluginInput(pluginHandle, c_void_p(userData))
 
 ## \brief Get the roadrunner instance handle from plugin assuming the plugin has one
 ## \param pluginHandle Handle to a Plugin instance
 ## \return Returns a handle to a rrInstance if available, returns None otherwise
 ## \ingroup plugins
-rrpLib.getRRHandleFromPlugin.restype = c_void_p
+telLib.getRRHandleFromPlugin.restype = c_void_p
 def getRRHandleFromPlugin(pluginHandle):
-    return rrpLib.getRRHandleFromPlugin(pluginHandle)
+    return telLib.getRRHandleFromPlugin(pluginHandle)
 
 #================ Plugin Property functionality ======================
 ## \brief Get a handle to the list of properties for a plugin
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a handle to a list of Properties on success, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPluginProperties.restype = c_void_p
+telLib.getPluginProperties.restype = c_void_p
 def getPluginProperties(pluginHandle):
-    return rrpLib.getPluginProperties(pluginHandle)
+    return telLib.getPluginProperties(pluginHandle)
 
 ## \brief Get a list of property names in a plugin
 ## \param pluginHandle Handle to a plugin
 ## \return Returns the netire list of top level property names, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getListOfPluginPropertyNames.restype = c_char_p
+telLib.getListOfPluginPropertyNames.restype = c_char_p
 def getListOfPluginPropertyNames(pluginHandle):
-    paraNames =  rrpLib.getListOfPluginPropertyNames(pluginHandle)
+    paraNames =  telLib.getListOfPluginPropertyNames(pluginHandle)
     if not paraNames:
         return list()
     else:
@@ -592,22 +592,22 @@ def getListOfPluginPropertyNames(pluginHandle):
 ## \param parasHandle Handle to a list of properties
 ## \return True or false, indicating result. The top level list of properties in a plugin can not be cleared.
 ## \ingroup plugin_properties
-rrpLib.clearPropertyList.restype = c_bool
+telLib.clearPropertyList.restype = c_bool
 def clearPropertyList(propertyListHandle):
     handle = getPropertyValueHandle(propertyListHandle)
-    return rrpLib.clearPropertyList(handle)
+    return telLib.clearPropertyList(handle)
 
 ## \brief If the property is a list, this method returns the list of property names in that list
 ## \param propertyHandle Handle to a property
 ## \return Returns names for all properties in the list
 ## \ingroup plugin_properties
-rrpLib.getNamesFromPropertyList.restype = c_char_p
+telLib.getNamesFromPropertyList.restype = c_char_p
 def getNamesFromPropertyList(propertyMeterHandle):
     paraType = getPropertyType(propertyMeterHandle)
     if paraType != 'listOfProperties':
         raise 'That is not a valid list property'
     listHandle = getPropertyValueHandle(propertyMeterHandle)
-    paras = rrpLib.getNamesFromPropertyList(listHandle)
+    paras = telLib.getNamesFromPropertyList(listHandle)
     if not paras:
         return list()
     else:
@@ -618,9 +618,9 @@ def getNamesFromPropertyList(propertyMeterHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string on success, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPluginPropertiesAsXML.restype = c_char_p
+telLib.getPluginPropertiesAsXML.restype = c_char_p
 def getPluginPropertiesAsXML(pluginHandle):
-    return rrpLib.getPluginPropertiesAsXML(pluginHandle)
+    return telLib.getPluginPropertiesAsXML(pluginHandle)
 
 ## \brief Get the 'first' property handle to a property in a list of properties
 ## \param paraListHandle Handle to a propertyList
@@ -628,14 +628,14 @@ def getPluginPropertiesAsXML(pluginHandle):
 ## \ingroup plugin_properties
 def getFirstProperty(paraListHandle):
     handle = getPropertyValueHandle(paraListHandle)
-    return rrpLib.getFirstProperty(handle)
+    return telLib.getFirstProperty(handle)
 
 ## \brief Get the 'next' property handle to a property in a list of properties
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
 def getNextProperty(propertyListHandle):
-    return rrpLib.getNextProperty(paraListHandle)
+    return telLib.getNextProperty(paraListHandle)
 
 ## \brief Get a property handle to a property given the name of the property.
 ## \param pluginHandle Handle to a plugin
@@ -643,7 +643,7 @@ def getNextProperty(propertyListHandle):
 ## \return Returns a propertyHandle to a property. Returns None if not found
 ## \ingroup plugin_properties
 def getPluginProperty(pluginHandle, propertyName):
-    return rrpLib.getPluginProperty(pluginHandle, propertyName)
+    return telLib.getPluginProperty(pluginHandle, propertyName)
 
 ## \brief Set the value of a PluginProperty
 ## \param pluginHandle Handle to a plugin
@@ -651,7 +651,7 @@ def getPluginProperty(pluginHandle, propertyName):
 ## \param propertyValue Value of property
 ## \return true if succesful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setPluginProperty.restype = c_bool
+telLib.setPluginProperty.restype = c_bool
 def setPluginProperty(pluginHandle, propertyName, propertyValue):
     propertyHandle = getPluginProperty(pluginHandle, propertyName)
     if propertyHandle:
@@ -713,23 +713,23 @@ def setProperty(propertyHandle, paraValue):
 ## \param descr String holding the description
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setPropertyDescription.restype = c_bool
+telLib.setPropertyDescription.restype = c_bool
 def setPropertyDescription(propertyHandle, descr):
-    return rrpLib.setPropertyDescription(propertyHandle, descr)
+    return telLib.setPropertyDescription(propertyHandle, descr)
 
 ## \brief Get the description of a Property
 ## \param propertyHandle Handle to a Property instance
 ## \param descr String holding the description
 ## \return Returns the description if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyDescription.restype = c_char_p
+telLib.getPropertyDescription.restype = c_char_p
 def getPropertyDescription(propertyHandle):
-    descr = rrpLib.getPropertyDescription(propertyHandle)
+    descr = telLib.getPropertyDescription(propertyHandle)
     if descr is None:
         return None
     
     val = descr
-    rrpLib.freeText(descr)
+    telLib.freeText(descr)
     return val
 
 ## \brief Set the hint property of a Property
@@ -737,9 +737,9 @@ def getPropertyDescription(propertyHandle):
 ## \param descr String holding the hint text
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setPropertyHint.restype = c_bool
+telLib.setPropertyHint.restype = c_bool
 def setPropertyHint(propertyHandle, descr):
-    return rrpLib.setPropertyHint(propertyHandle, descr)
+    return telLib.setPropertyHint(propertyHandle, descr)
 
 ## \brief Create a Property of type "type" with a name and hint property
 ##  Valid types include: 'bool', 'int', 'double', 'string', and 'listOfProperties'
@@ -750,21 +750,21 @@ def setPropertyHint(propertyHandle, descr):
 ## \return Returns a handle to a new Property, if succesful, None otherwise
 ##
 ## @code
-## propertyHandle = rrPlugins.createProperty ("k1", string", "A message")
+## propertyHandle = telPlugins.createProperty ("k1", string", "A message")
 ##
-##propertyHandle = rrPlugins.createProperty ("k1", "double", "A rate constant", 0.3)
+##propertyHandle = telPlugins.createProperty ("k1", "double", "A rate constant", 0.3)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-rrpLib.createProperty.restype = c_void_p
+telLib.createProperty.restype = c_void_p
 def createProperty(name, the_type, hint="", value=None):
     if value == None:
-       return rrpLib.createProperty(name, the_type, hint, value)
+       return telLib.createProperty(name, the_type, hint, value)
     else:
         if the_type == 'string':    #Otherwise underlying string type will be char*, don't
             the_type = 'std::string'
-        ptr = rrpLib.createProperty(name, the_type, hint)
+        ptr = telLib.createProperty(name, the_type, hint)
         if the_type is "bool":
            setBoolProperty (ptr, value)
         elif the_type is "int":
@@ -786,9 +786,9 @@ def createProperty(name, the_type, hint="", value=None):
 ## \param propertyHandle Handle to a Property instance
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.freeProperty.restype = c_bool
+telLib.freeProperty.restype = c_bool
 def freeProperty(propertyHandle):
-    return rrpLib.freeProperty(propertyHandle)
+    return telLib.freeProperty(propertyHandle)
 
 
 ## \brief Add a Property to a list of Property.
@@ -808,12 +808,12 @@ def freeProperty(propertyHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-rrpLib.addPropertyToList.restype = c_bool
+telLib.addPropertyToList.restype = c_bool
 def addPropertyToList(propertyHandle, addMe):
     #Make sure the Property is of type list
     if getPropertyType(propertyHandle) == 'listOfProperties':
         listHandle = getPropertyValue(propertyHandle)
-        return rrpLib.addPropertyToList(listHandle, addMe)
+        return telLib.addPropertyToList(listHandle, addMe)
     else:
         return False
 
@@ -822,25 +822,25 @@ def addPropertyToList(propertyHandle, addMe):
 ## \param value Pointer to string holding the value to assign to the Property, e.g. "0.01" to set a double to 0.01
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setPropertyByString.restype = c_bool
+telLib.setPropertyByString.restype = c_bool
 def setPropertyByString(PropertyHandle, value):
-    return rrpLib.setPropertyByString(PropertyHandle, value)
+    return telLib.setPropertyByString(PropertyHandle, value)
 
 ## \brief Get inforamtion on a Property
 ## \param propertyHandle Handle to a Property instance
 ## \return Returns informational text about the Property if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyInfo.restype = c_char_p
+telLib.getPropertyInfo.restype = c_char_p
 def getPropertyInfo(propertyHandle):
-    return rrpLib.getPropertyInfo(propertyHandle)
+    return telLib.getPropertyInfo(propertyHandle)
 
 ## \brief Get a Property value in the form of a string
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties value if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyValueAsString.restype = c_char_p
+telLib.getPropertyValueAsString.restype = c_char_p
 def getPropertyValueAsString(propertyHandle):
-    return rrpLib.getPropertyValueAsString(propertyHandle)
+    return telLib.getPropertyValueAsString(propertyHandle)
 
 ## \brief Get a handle to a Property value. Such properties could be any type, including a list of Properties.
 ## Use getlistProperty(propertyaHandle) instead.
@@ -848,48 +848,48 @@ def getPropertyValueAsString(propertyHandle):
 ## \return Returns a Handle to the property value if successful, None otherwise
 #
 ## @code
-## propertyHandle = rrPlugins.getPropertyValueHandle (prophandle)
+## propertyHandle = telPlugins.getPropertyValueHandle (prophandle)
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-rrpLib.getPropertyValueHandle.restype = c_void_p
+telLib.getPropertyValueHandle.restype = c_void_p
 def getPropertyValueHandle(propertyHandle):
-    return rrpLib.getPropertyValueHandle(propertyHandle)
+    return telLib.getPropertyValueHandle(propertyHandle)
 
 ## \brief Get the name of a Property
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties name if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyName.restype = c_char_p
+telLib.getPropertyName.restype = c_char_p
 def getPropertyName(propertyHandle):
-    return rrpLib.getPropertyName(propertyHandle)
+    return telLib.getPropertyName(propertyHandle)
 
 ## \brief Get the hint text for a Property
 ## \param propertyHandle to a Property instance
 ## \return Returns the hint value for a Property if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyHint.restype = c_char_p
+telLib.getPropertyHint.restype = c_char_p
 def getPropertyHint(propertyHandle):
-    return rrpLib.getPropertyHint(propertyHandle)
+    return telLib.getPropertyHint(propertyHandle)
 
 ## \brief Get the type of a property
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties type as a string if successful, None otherwise
 ## \ingroup plugin_properties
-rrpLib.getPropertyType.restype = c_char_p
+telLib.getPropertyType.restype = c_char_p
 def getPropertyType(propertyHandle):
-    return rrpLib.getPropertyType(propertyHandle)
+    return telLib.getPropertyType(propertyHandle)
 
 ## \brief Get the Boolean value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a Boolean value. Throws an exception if the property type is not a Boolean
 ## \ingroup plugin_properties
-rrpLib.getBoolProperty.restype = c_bool
+telLib.getBoolProperty.restype = c_bool
 def getBoolProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "bool":
         val = c_bool()
-        if rrpLib.getBoolProperty (propertyHandle, byref(val)) == True:
+        if telLib.getBoolProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -901,19 +901,19 @@ def getBoolProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setBoolProperty.restype = c_bool
+telLib.setBoolProperty.restype = c_bool
 def setBoolProperty(propertyHandle, value):
-    return rrpLib.setBoolProperty (propertyHandle, c_bool(value))
+    return telLib.setBoolProperty (propertyHandle, c_bool(value))
 
 ## \brief Get the integer value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns an integer value. Throws an exception if the property type is not an integer
 ## \ingroup plugin_properties
-rrpLib.getIntProperty.restype = c_int
+telLib.getIntProperty.restype = c_int
 def getIntProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "int":
         val = c_int()
-        if rrpLib.getIntProperty (propertyHandle, byref(val)) == True:
+        if telLib.getIntProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -925,20 +925,20 @@ def getIntProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setIntProperty.restype = c_bool
+telLib.setIntProperty.restype = c_bool
 def setIntProperty(propertyHandle, value):
-    return rrpLib.setIntProperty(propertyHandle, c_int(value))
+    return telLib.setIntProperty(propertyHandle, c_int(value))
 
 
 ## \brief Get the double value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a double value. Throws an exception if the property type is not a double
 ## \ingroup plugin_properties
-rrpLib.getDoubleProperty.restype = c_bool
+telLib.getDoubleProperty.restype = c_bool
 def getDoubleProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "double":
         val = c_double()
-        if rrpLib.getDoubleProperty (propertyHandle, byref(val)) == True:
+        if telLib.getDoubleProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -950,19 +950,19 @@ def getDoubleProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setDoubleProperty.restype = c_bool
+telLib.setDoubleProperty.restype = c_bool
 def setDoubleProperty(propertyHandle, value):
-    return rrpLib.setDoubleProperty(propertyHandle, c_double(value))
+    return telLib.setDoubleProperty(propertyHandle, c_double(value))
 
 ## \brief Get the string value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a string value. Throws an exception if the property type is not a string
 ## \ingroup plugin_properties
-rrpLib.getStringProperty.restype = c_bool
+telLib.getStringProperty.restype = c_bool
 def getStringProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "string" or getPropertyType (propertyHandle) == "std::string":
         val = c_char_p()
-        if rrpLib.getStringProperty (propertyHandle, byref(val)) == True:
+        if telLib.getStringProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -974,15 +974,15 @@ def getStringProperty (propertyHandle):
 ## \param value Value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setStringProperty.restype = c_bool
+telLib.setStringProperty.restype = c_bool
 def setStringProperty(propertyHandle, value):
-    return rrpLib.setStringProperty(propertyHandle, c_char_p(value))
+    return telLib.setStringProperty(propertyHandle, c_char_p(value))
 
 ## \brief Get the list value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a handle to a ListProperty. Throws an exception of the property type is not a list of properties
 ## \ingroup plugin_properties
-rrpLib.getListProperty.restype = c_bool
+telLib.getListProperty.restype = c_bool
 def getListProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "listOfProperty":
         return getPropertyValueHandle(propertyHandle)
@@ -994,10 +994,10 @@ def getListProperty (propertyHandle):
 ## \param value Value to assign to the property (must be a handle to a Property of listOfProperties.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setListProperty.restype = c_bool
+telLib.setListProperty.restype = c_bool
 def setListProperty(propertyHandle, value):
     handle = getPropertyValueHandle(value)
-    return rrpLib.setListProperty(propertyHandle, c_void_p(handle))
+    return telLib.setListProperty(propertyHandle, c_void_p(handle))
 
 ## \brief Get the value of a roadRunnerData property
 ## \param propertyHandle A Handle to a property
@@ -1011,9 +1011,9 @@ def getRoadRunnerDataProperty(propertyHandle):
 ## \param value Value to assign to the property (must be a handle to roadRunnerData.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-rrpLib.setRoadRunnerDataProperty.restype = c_bool
+telLib.setRoadRunnerDataProperty.restype = c_bool
 def setRoadRunnerDataProperty(propertyHandle, value):
-    return rrpLib.setRoadRunnerDataProperty(propertyHandle, c_void_p(value))
+    return telLib.setRoadRunnerDataProperty(propertyHandle, c_void_p(value))
 
 ## \brief Get the value of a property.
 ## \param propertyHandle A Handle to a property
@@ -1082,22 +1082,22 @@ def getPropertyValue(propertyHandle):
 ## \ingroup utilities
 def getRoadRunnerDataHandle(rrInstance):
     rrHandle = cast(int(rrInstance.this), c_void_p)
-    return rrpLib.getRoadRunnerDataHandle(rrHandle)
+    return telLib.getRoadRunnerDataHandle(rrHandle)
 
 ## \brief Convert roadrunner data to Numpy data
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-rrpLib.getRoadRunnerDataElement.restype = c_bool
+telLib.getRoadRunnerDataElement.restype = c_bool
 def getNumpyData(rrDataHandle):
-    colHeader = rrpLib.getRoadRunnerDataColumnHeader(rrDataHandle)
-    rowCount = rrpLib.getRoadRunnerDataNumRows(rrDataHandle)
-    colCount = rrpLib.getRoadRunnerDataNumCols(rrDataHandle)
+    colHeader = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
+    rowCount = telLib.getRoadRunnerDataNumRows(rrDataHandle)
+    colCount = telLib.getRoadRunnerDataNumCols(rrDataHandle)
     resultArray = np.zeros([rowCount, colCount])
     for row in range(rowCount):
         for col in range(colCount):
                 val = c_double()
-                if rrpLib.getRoadRunnerDataElement(rrDataHandle, row, col, byref(val)) == True:
+                if telLib.getRoadRunnerDataElement(rrDataHandle, row, col, byref(val)) == True:
                     resultArray[row, col] = val.value
                 else:
                     print "problem"
@@ -1130,13 +1130,13 @@ def plotRoadRunnerData(data, colHeaders):
 ## \return Returns a numpy data object
 ## \ingroup utilities
 
-rrpLib.getRoadRunnerDataColumnHeader.restype = c_char_p
+telLib.getRoadRunnerDataColumnHeader.restype = c_char_p
 def getRoadRunnerDataColumnHeader(rrDataHandle):
-    hdr = rrpLib.getRoadRunnerDataColumnHeader(rrDataHandle)
+    hdr = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
 
     if hdr:
         res = hdr
-        rrpLib.freeText(hdr)
+        telLib.freeText(hdr)
         return res.split(',')
     else:
         return None
@@ -1148,9 +1148,9 @@ def getRoadRunnerDataColumnHeader(rrDataHandle):
 ## current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-rrpLib.writeRoadRunnerDataToFile.restype = c_bool
+telLib.writeRoadRunnerDataToFile.restype = c_bool
 def writeRoadRunnerData(rrDataHandle, fName):
-    return rrpLib.writeRoadRunnerDataToFile(rrDataHandle, fName)
+    return telLib.writeRoadRunnerDataToFile(rrDataHandle, fName)
 
 
 ## \brief Read RoadRunnerData from a file
@@ -1159,9 +1159,9 @@ def writeRoadRunnerData(rrDataHandle, fName):
 ## in current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-rrpLib.readRoadRunnerDataFromFile.restype = c_bool
+telLib.readRoadRunnerDataFromFile.restype = c_bool
 def readRoadRunnerData(rrDataHandle, fName):
-    return rrpLib.readRoadRunnerDataFromFile(rrDataHandle, fName)
+    return telLib.readRoadRunnerDataFromFile(rrDataHandle, fName)
 
 ## \brief Create RoadRunnerData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
@@ -1169,11 +1169,11 @@ def readRoadRunnerData(rrDataHandle, fName):
 ## \return Returns a handle to RoadRunner data if successful, None otherwise
 ## \note Use the freeRoadRunnerData to free memory allocated by the returned data
 ## \ingroup utilities
-rrpLib.createRoadRunnerData.restype = c_void_p
+telLib.createRoadRunnerData.restype = c_void_p
 def createRoadRunnerDataFromFile(fName):
     #Create a RoadRunner data object
-    rrDataHandle = rrpLib.createRoadRunnerData(0,0,"")
-    if rrpLib.readRoadRunnerDataFromFile(rrDataHandle, fName) == False:
+    rrDataHandle = telLib.createRoadRunnerData(0,0,"")
+    if telLib.readRoadRunnerDataFromFile(rrDataHandle, fName) == False:
         print 'Failed to read data'
     return rrDataHandle
 
@@ -1196,21 +1196,21 @@ def readAllText(fName):
 ## \param dataHandle Handle to a roadrunner data object
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-rrpLib.freeRoadRunnerData.restype = c_bool
+telLib.freeRoadRunnerData.restype = c_bool
 def freeRoadRunnerData(rrDataHandle):
-    return rrpLib.freeRoadRunnerData(rrDataHandle)
+    return telLib.freeRoadRunnerData(rrDataHandle)
 
 ## \brief Get last (API) error. This returns the last error if any.
 ## \return Returns a string with an error success, None otherwise
 ## \ingroup utilities
-rrpLib.getLastPluginError.restype = c_char_p
+telLib.getLastPluginError.restype = c_char_p
 def getLastError():
-    return rrpLib.getLastPluginError()
+    return telLib.getLastPluginError()
 
 ## \brief Unload the plugins api shared library
 ## \ingroup utilities
 def unLoadAPI():
-    windll.kernel32.FreeLibrary(rrpLib._handle)
+    windll.kernel32.FreeLibrary(telLib._handle)
 
 
 ##\mainpage Front page for RoadRunners PluginLib Python wrapper
@@ -1284,8 +1284,8 @@ def unLoadAPI():
 #    \section plugins_writing How to write plugins
 #    \note Writing plugins in Python is not yet supported
 #
-# \section main_section Using rrPlugins.py
-# In order to use this wrapper (rrPlugins.py), your systems environmental Python path variable, i.e. PYTHONPATH, needs to include the folder where the wrapper script is located, e.g.
+# \section main_section Using telPlugins.py
+# In order to use this wrapper (telPlugins.py), your systems environmental Python path variable, i.e. PYTHONPATH, needs to include the folder where the wrapper script is located, e.g.
 # "c:\\roadrunner-1.0.0\\plugins\\python". Currently, this need to be set manually by the user.
 #
 # \defgroup plugin_manager Plugin Manager

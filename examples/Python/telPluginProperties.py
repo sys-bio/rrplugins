@@ -1,10 +1,10 @@
-from rrplugins import *
+from telplugins import *
 
 #Create a plugin manager
 pm = createPluginManager()
 
 #Load the 'noise' plugin in order to add some noise to the data
-plugin = loadPlugin(pm, "rrp_add_noise")
+plugin = loadPlugin(pm, "tel_add_noise")
 if not plugin:
     print getLastError()
     exit()

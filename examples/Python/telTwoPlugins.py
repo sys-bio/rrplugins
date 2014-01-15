@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plot
 from numpy import *
-from rrplugins import *
+from telplugins import *
 
 #Create a plugin manager
 pm = createPluginManager()
@@ -17,7 +17,7 @@ rr.simulate(0, 10, 512)
 rrDataHandle = getRoadRunnerDataHandle(rr)
 
 #Load the 'noise' plugin in order to add some noise to the data
-noisePlugin = loadPlugin(pm, "rrp_add_noise")
+noisePlugin = loadPlugin(pm, "tel_add_noise")
 
 #Set data "input" Property, named InputData
 dataPara = getPluginProperty(noisePlugin, "InputData")
@@ -35,7 +35,7 @@ inputDataHandle = getProperty(dataPara)
 inputData = getNumpyData(inputDataHandle)
 
 #Load the LevenbergMarquardt plugin
-lmPlugin = loadPlugin(pm, "rrp_lm")
+lmPlugin = loadPlugin(pm, "tel_lm")
 
 #Setup the plugin for minimization
 #set input sbml model

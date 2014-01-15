@@ -1,9 +1,9 @@
-from rrplugins import *
+from telplugins import *
 
 #Create a plugin manager
 pm = createPluginManager()
 
-pluginName = "rrp_lm"
+pluginName = "tel_lm"
 plugin = loadPlugin(pm, pluginName)
 if not plugin:
     print getLastError()

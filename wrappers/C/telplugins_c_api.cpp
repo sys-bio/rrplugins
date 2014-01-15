@@ -434,10 +434,10 @@ char* rrp_cc getLastPluginError()
     return NULL;
 }
 
-//bool rrp_cc freeText(char* text)
-//{
-//    return false;//freeText(text);
-//}
+bool rrp_cc freeText(char* text)
+{
+    return tlp::freeCString(text);
+}
 
 char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
 {

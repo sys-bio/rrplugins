@@ -1,9 +1,9 @@
 import ctypes
-from rrPlugins_CAPI import *
-import rrPlugins as rrp
+from telPlugins_CAPI import *
+import telPlugins as tel
 
 #Get a lmfit plugin object
-lm = rrp.Plugin("rrp_lm")
+lm = tel.Plugin("tel_lm")
 
 #========== EVENT FUNCTION SETUP ===========================
 def pluginIsProgressing(lmP, dummy):
@@ -44,10 +44,10 @@ experimentalData = experimentalData.AsNumpy
 fittedData = lm.getProperty ("FittedData").AsNumpy
 residuals  = lm.getProperty ("Residuals").AsNumpy
 
-rrp.plot(fittedData         [:,[0,1]], "blue", "-",    "",    "S1 Fitted")
-rrp.plot(fittedData         [:,[0,2]], "blue", "-",    "",    "S2 Fitted")
-rrp.plot(residuals          [:,[0,1]], "blue", "None", "x",   "S1 Residual")
-rrp.plot(residuals          [:,[0,2]], "red",  "None", "x",   "S2 Residual")
-rrp.plot(experimentalData   [:,[0,1]], "red",  "",     "*",   "S1 Data")
-rrp.plot(experimentalData   [:,[0,2]], "blue", "",     "*",   "S2 Data")
-rrp.plt.show()
+tel.plot(fittedData         [:,[0,1]], "blue", "-",    "",    "S1 Fitted")
+tel.plot(fittedData         [:,[0,2]], "blue", "-",    "",    "S2 Fitted")
+tel.plot(residuals          [:,[0,1]], "blue", "None", "x",   "S1 Residual")
+tel.plot(residuals          [:,[0,2]], "red",  "None", "x",   "S2 Residual")
+tel.plot(experimentalData   [:,[0,1]], "red",  "",     "*",   "S1 Data")
+tel.plot(experimentalData   [:,[0,2]], "blue", "",     "*",   "S2 Data")
+tel.plt.show()

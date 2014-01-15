@@ -13,10 +13,13 @@ CPPPlugin("TestPlugin", "No Category"),
 mTestProperty(123, "NrOfIterations", "Hint for Nr of iterations")
 {
     mProperties.add( &mTestProperty);
+    mRR= new RoadRunner;
 }
 
 TestPlugin::~TestPlugin()
-{}
+{
+    delete mRR;
+}
 
 bool TestPlugin::execute(bool inThread)
 {

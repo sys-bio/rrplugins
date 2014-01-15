@@ -9,7 +9,7 @@ set(sources
 main
 )
 
-add_library(${target} SHARED ${sources})
+add_executable(${target} ${sources})
 
 add_definitions(
 -DPOCO_STATIC
@@ -20,10 +20,7 @@ target_link_libraries (${target}
 roadrunner
 telplugins
 )
-else() #UNIX
-    # OSX flags:
-    #"${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-    # OSX seems to link fine without this flag
+else()
     if(APPLE)
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     else()
@@ -52,12 +49,8 @@ else() #UNIX
         )
 endif()
 
-if(${MSVC})
-#set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/add_noise.def\"")
-endif()
-
 install (TARGETS ${target}
-DESTINATION plugins
+DESTINATION bin
 COMPONENT examples
 )
 

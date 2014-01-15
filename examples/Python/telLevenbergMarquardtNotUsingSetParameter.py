@@ -1,4 +1,4 @@
-import rrplugins as rrp
+import telplugins as tel
 import ctypes as ct
 
 def pluginIsProgressing(lm):
@@ -6,7 +6,7 @@ def pluginIsProgressing(lm):
     print 'Norm = ' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
     print 'Nr of Iterations = ' + `lmObject.getProperty("NrOfIter")`
 
-lm = rrp.Plugin ("rrp_lm")
+lm = tel.Plugin ("tel_lm")
 experimentalData = lm.loadDataSeries ("testData.dat")
 
 lm.ExperimentalData = experimentalData;
@@ -30,13 +30,13 @@ experimentalData = experimentalData.AsNumpy
 fittedData = lm.FittedData.AsNumpy
 residuals  = lm.Residuals.AsNumpy
 
-rrp.rrPlugins.plot (fittedData[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
-rrp.rrPlugins.plot (fittedData[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S2 Fitted")
-rrp.rrPlugins.plot (residuals[:,[0,1]], myColor="blue", myLinestyle="None", myMarker="x", myLabel="S1 Residual")
-rrp.rrPlugins.plot (residuals[:,[0,2]], myColor="red", myLinestyle="None", myMarker="x", myLabel="S2 Residual")
-rrp.rrPlugins.plot (experimentalData[:,[0,1]], myColor="red", myLinestyle="", myMarker="*", myLabel="S1 Data")
-rrp.rrPlugins.plot (experimentalData[:,[0,2]], myColor="blue", myLinestyle="", myMarker="*", myLabel="S2 Data")
+tel.telplugins.plot (fittedData[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
+tel.telplugins.plot (fittedData[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S2 Fitted")
+tel.telplugins.plot (residuals[:,[0,1]], myColor="blue", myLinestyle="None", myMarker="x", myLabel="S1 Residual")
+tel.telplugins.plot (residuals[:,[0,2]], myColor="red", myLinestyle="None", myMarker="x", myLabel="S2 Residual")
+tel.telplugins.plot (experimentalData[:,[0,1]], myColor="red", myLinestyle="", myMarker="*", myLabel="S1 Data")
+tel.telplugins.plot (experimentalData[:,[0,2]], myColor="blue", myLinestyle="", myMarker="*", myLabel="S2 Data")
 
-rrp.plt.show()
+tel.plt.show()
 
 

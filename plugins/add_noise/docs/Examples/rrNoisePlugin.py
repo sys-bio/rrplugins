@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plot
 import roadrunner
-from rrPlugins_CAPI import *
+from telPlugins_CAPI import *
 
 #Create a plugin manager
 pm = createPluginManager()
@@ -30,7 +30,7 @@ rr.simulate(0, 10, 500)
 rrDataHandle = getRoadRunnerDataHandle(rr)
 
 #Load the 'noise' plugin in order to add some noise to roadrunner data
-noisePlugin = loadPlugin(pm, "rrp_add_noise")
+noisePlugin = loadPlugin(pm, "tel_add_noise")
 
 #The noise plugin has one parameter named, InputData.
 #Assigning our data to it allow the plugin to do work on it

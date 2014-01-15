@@ -17,7 +17,12 @@ telReadDataFromFile.py
 )
 
 install(    
-FILES ${examples} README.txt testData.dat sbml_test_0001.xml lmFitTestModel.xml
+FILES ${examples} 
+    README.txt 
+    testData.dat 
+    bistable.xml 
+    sbml_test_0001.xml 
+    lmFitTestModel.xml
 DESTINATION python_examples 	
 COMPONENT plugins_api
 )
