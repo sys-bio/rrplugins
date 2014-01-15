@@ -1,0 +1,13 @@
+   Tellurium Plugins v 0.8
+   Copyright 2012-2013 Totte Karlsson and Herbert Sauro
+
+
+This product makes use of the following software packages:
+
+RoadRunner
+
+POCO
+    Distributed under the Boost License
+    http://pocoproject.org/license.html
+
+

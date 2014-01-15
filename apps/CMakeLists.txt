@@ -1,0 +1,35 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
+PROJECT(Apps)
+
+# rr Includes
+include_directories(
+${TLP_ROOT}/source
+${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/rr
+${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
+${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
+${THIRD_PARTY_INSTALL_FOLDER}/include/clapack
+)
+
+link_directories(
+${THIRD_PARTY_INSTALL_FOLDER}/lib
+)
+
+set(apps 	
+	plugin_info
+    )
+
+set(app_dir Apps/cpp)
+
+foreach(app ${apps})
+ 	add_subdirectory(${app})
+#	FILE (GLOB hdrs ${app}/*.h)
+# 	install (FILES ${hdrs} 						DESTINATION ${app_dir}/${app}	COMPONENT example_files)
+#	FILE (GLOB source ${app}/*.cpp)
+# 	install (FILES ${source} 					DESTINATION ${app_dir}/${app}	COMPONENT example_files)
+# 	install (FILES ${app}/Readme.txt 			DESTINATION ${app_dir}/${app}	COMPONENT example_files)
+# 	install (FILES ${app}/CMakeLists.txt 		DESTINATION ${app_dir}/${app}	COMPONENT example_files)
+endforeach(app)
+#
+#install (FILES Readme.txt 			DESTINATION ${app_dir} COMPONENT info)
+#install (FILES CMakeLists.txt 		DESTINATION ${app_dir} COMPONENT example_files)
