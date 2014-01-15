@@ -44,10 +44,17 @@
 #include "rr/c/rrc_types.h"
 #include "telplugins_settings.h"
 #if defined(__cplusplus)
-namespace tlpc { extern "C"  { using namespace rrc;
+
+using rrc::RRHandle;
+using rrc::RRHandle;
+using rrc::RRDataHandle;
+using rrc::RRCDataPtr;
+using rrc::RRStringArrayPtr;
+
+namespace tlpc { extern "C"  {
 #endif
 
-/*!rrp_pch.h
+/*!
  \brief Typedef for plugin event function
  \ingroup pluginRoutines
 */

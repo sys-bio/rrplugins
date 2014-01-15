@@ -55,16 +55,6 @@ namespace rr
     class RoadRunner;
 }
 
-//namespace tlp
-//{
-//    template <class T>
-//    class Property;
-//    class Properties;
-//    class PropertyBase;
-//    class Plugin;
-//    class PluginManager;
-//}
-
 namespace tlpc
 {
 using std::string;
@@ -81,7 +71,6 @@ using tlp::Property;
  \ingroup cpp_support
 */
 TLP_C_DS void                        setError(const string& err);
-
 
 /*!
  \brief Cast a handle to RoadRunner PluginManager pointer, throws if it fails

@@ -20,7 +20,7 @@ using namespace std;
 using rr::RoadRunnerData;
 
 
-RRPropertyHandle rrp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
+RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
 {
     start_try
         char* hint = (char*) _hint;
@@ -141,7 +141,7 @@ RRPropertyHandle rrp_cc createProperty(const char* label, const char* type, cons
     catch_ptr_macro
 }
 
-bool rrp_cc freeProperty(RRPropertyHandle paraHandle)
+bool tlp_cc freeProperty(RRPropertyHandle paraHandle)
 {
     start_try
         PropertyBase* para   = castToProperty(paraHandle);
@@ -150,7 +150,7 @@ bool rrp_cc freeProperty(RRPropertyHandle paraHandle)
     catch_bool_macro
 }
 
-RRPropertiesHandle rrp_cc createPropertyList()
+RRPropertiesHandle tlp_cc createPropertyList()
 {
     start_try
         Properties* props   = new Properties();
@@ -165,7 +165,7 @@ RRPropertiesHandle rrp_cc createPropertyList()
     catch_ptr_macro
 }
 
-bool rrp_cc freeProperties(RRPropertiesHandle propsHandle)
+bool tlp_cc freeProperties(RRPropertiesHandle propsHandle)
 {
     start_try
         Properties* props   = castToProperties(propsHandle);
@@ -174,7 +174,7 @@ bool rrp_cc freeProperties(RRPropertiesHandle propsHandle)
     catch_ptr_macro
 }
 
-bool rrp_cc addPropertyToList(RRPropertiesHandle handle, RRPropertyHandle para)
+bool tlp_cc addPropertyToList(RRPropertiesHandle handle, RRPropertyHandle para)
 {
     start_try
         Properties* paras   = castToProperties(handle);
@@ -184,7 +184,7 @@ bool rrp_cc addPropertyToList(RRPropertiesHandle handle, RRPropertyHandle para)
     catch_bool_macro
 }
 
-char* rrp_cc getPropertyInfo(RRPropertyHandle handle)
+char* tlp_cc getPropertyInfo(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -194,7 +194,7 @@ char* rrp_cc getPropertyInfo(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc setPropertyDescription(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyDescription(RRPropertyHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -203,7 +203,7 @@ bool rrp_cc setPropertyDescription(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-char* rrp_cc getPropertyDescription(RRPropertyHandle handle)
+char* tlp_cc getPropertyDescription(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -211,7 +211,7 @@ char* rrp_cc getPropertyDescription(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc setPropertyHint(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyHint(RRPropertyHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -220,7 +220,7 @@ bool rrp_cc setPropertyHint(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-bool rrp_cc setPropertyByString(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyByString(RRPropertyHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -229,7 +229,7 @@ bool rrp_cc setPropertyByString(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-bool rrp_cc setBoolProperty(RRPropertyHandle handle, bool value)
+bool tlp_cc setBoolProperty(RRPropertyHandle handle, bool value)
 {
     start_try
         Property<bool>* para = castToBoolProperty(handle);
@@ -238,7 +238,7 @@ bool rrp_cc setBoolProperty(RRPropertyHandle handle, bool value)
     catch_bool_macro
 }
 
-bool rrp_cc getBoolProperty(RRPropertyHandle handle, bool* value)
+bool tlp_cc getBoolProperty(RRPropertyHandle handle, bool* value)
 {
     start_try
         Property<bool>* para = castToBoolProperty(handle);
@@ -248,7 +248,7 @@ bool rrp_cc getBoolProperty(RRPropertyHandle handle, bool* value)
 }
 
 
-bool rrp_cc setIntProperty(RRPropertyHandle handle, int value)
+bool tlp_cc setIntProperty(RRPropertyHandle handle, int value)
 {
     start_try
         Property<int>* para = castToIntProperty(handle);
@@ -257,7 +257,7 @@ bool rrp_cc setIntProperty(RRPropertyHandle handle, int value)
     catch_bool_macro
 }
 
-bool rrp_cc getIntProperty(RRPropertyHandle handle, int *value)
+bool tlp_cc getIntProperty(RRPropertyHandle handle, int *value)
 {
     start_try
         Property<int>* para = castToIntProperty(handle);
@@ -266,7 +266,7 @@ bool rrp_cc getIntProperty(RRPropertyHandle handle, int *value)
     catch_bool_macro
 }
 
-bool rrp_cc setDoubleProperty(RRPropertyHandle handle, double value)
+bool tlp_cc setDoubleProperty(RRPropertyHandle handle, double value)
 {
     start_try
         Property<double>* para = castToDoubleProperty(handle);
@@ -275,7 +275,7 @@ bool rrp_cc setDoubleProperty(RRPropertyHandle handle, double value)
     catch_bool_macro
 }
 
-bool rrp_cc getDoubleProperty(RRPropertyHandle handle, double *value)
+bool tlp_cc getDoubleProperty(RRPropertyHandle handle, double *value)
 {
     start_try
         Property<double>* para = castToDoubleProperty(handle);
@@ -284,7 +284,7 @@ bool rrp_cc getDoubleProperty(RRPropertyHandle handle, double *value)
     catch_bool_macro
 }
 
-bool rrp_cc setStringProperty(RRPropertyHandle handle, char* value)
+bool tlp_cc setStringProperty(RRPropertyHandle handle, char* value)
 {
     start_try
         Property<string>* para = castToStringProperty(handle);
@@ -293,7 +293,7 @@ bool rrp_cc setStringProperty(RRPropertyHandle handle, char* value)
     catch_bool_macro
 }
 
-bool rrp_cc getStringProperty(RRPropertyHandle handle, const char* (*value))
+bool tlp_cc getStringProperty(RRPropertyHandle handle, const char* (*value))
 {
     start_try
         Property<string>* para = castToStringProperty(handle);
@@ -303,7 +303,7 @@ bool rrp_cc getStringProperty(RRPropertyHandle handle, const char* (*value))
     catch_bool_macro
 }
 
-bool rrp_cc setListProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc setListProperty(RRPropertyHandle handle, void* value)
 {
     start_try
         Property<Properties>* para = castToPropertiesProperty(handle);
@@ -312,7 +312,7 @@ bool rrp_cc setListProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-bool rrp_cc getListProperty(RRPropertyHandle handle, void* (value))
+bool tlp_cc getListProperty(RRPropertyHandle handle, void* (value))
 {
     start_try
         Property<Properties>* para = castToPropertiesProperty(handle);
@@ -323,7 +323,7 @@ bool rrp_cc getListProperty(RRPropertyHandle handle, void* (value))
     catch_bool_macro
 }
 
-bool rrp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
 {
     start_try
         Property<RoadRunnerData>* para = castToRoadRunnerDataProperty(handle);
@@ -332,7 +332,7 @@ bool rrp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-bool rrp_cc getRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc getRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
 {
     start_try
         Property<RoadRunnerData>* para = castToRoadRunnerDataProperty(handle);
@@ -342,7 +342,7 @@ bool rrp_cc getRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-char* rrp_cc getPropertyValueAsString(RRPropertyHandle handle)
+char* tlp_cc getPropertyValueAsString(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -351,7 +351,7 @@ char* rrp_cc getPropertyValueAsString(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-void* rrp_cc getPropertyValueHandle(RRPropertyHandle handle)
+void* tlp_cc getPropertyValueHandle(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -359,7 +359,7 @@ void* rrp_cc getPropertyValueHandle(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPropertyName(RRPropertyHandle handle)
+char* tlp_cc getPropertyName(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -367,7 +367,7 @@ char* rrp_cc getPropertyName(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPropertyHint(RRPropertyHandle handle)
+char* tlp_cc getPropertyHint(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -375,7 +375,7 @@ char* rrp_cc getPropertyHint(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPropertyType(RRPropertyHandle handle)
+char* tlp_cc getPropertyType(RRPropertyHandle handle)
 {
     start_try
         PropertyBase* para = castToProperty(handle);
@@ -383,7 +383,7 @@ char* rrp_cc getPropertyType(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle rrp_cc getFirstProperty(RRPropertiesHandle handle)
+RRPropertyHandle tlp_cc getFirstProperty(RRPropertiesHandle handle)
 {
     start_try
         Properties *paras = castToProperties(handle);
@@ -391,7 +391,7 @@ RRPropertyHandle rrp_cc getFirstProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle rrp_cc getNextProperty(RRPropertiesHandle handle)
+RRPropertyHandle tlp_cc getNextProperty(RRPropertiesHandle handle)
 {
     start_try
         Properties *paras = castToProperties(handle);
@@ -399,7 +399,7 @@ RRPropertyHandle rrp_cc getNextProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle rrp_cc getPreviousProperty(RRPropertiesHandle handle)
+RRPropertyHandle tlp_cc getPreviousProperty(RRPropertiesHandle handle)
 {
     start_try
         Properties *paras = castToProperties(handle);
@@ -407,7 +407,7 @@ RRPropertyHandle rrp_cc getPreviousProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle rrp_cc getCurrentProperty(RRPropertiesHandle handle)
+RRPropertyHandle tlp_cc getCurrentProperty(RRPropertiesHandle handle)
 {
     start_try
         Properties *paras = castToProperties(handle);
@@ -415,7 +415,7 @@ RRPropertyHandle rrp_cc getCurrentProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc clearPropertyList(RRPropertiesHandle handle)
+bool tlp_cc clearPropertyList(RRPropertiesHandle handle)
 {
     start_try
         Properties* paras = castToProperties(handle);
@@ -423,7 +423,7 @@ bool rrp_cc clearPropertyList(RRPropertiesHandle handle)
     catch_bool_macro
 }
 
-RRPropertyHandle rrp_cc getProperty(RRPropertiesHandle handle, const char* name)
+RRPropertyHandle tlp_cc getProperty(RRPropertiesHandle handle, const char* name)
 {
     start_try
         Properties* props = castToProperties(handle);
@@ -431,7 +431,7 @@ RRPropertyHandle rrp_cc getProperty(RRPropertiesHandle handle, const char* name)
     catch_ptr_macro
 }
 
-char* rrp_cc getNamesFromPropertyList(RRPropertiesHandle handle)
+char* tlp_cc getNamesFromPropertyList(RRPropertiesHandle handle)
 {
     start_try
         Properties* paras = castToProperties(handle);

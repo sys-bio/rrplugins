@@ -302,7 +302,7 @@ void evaluate(const double *par,       //Property vector
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
             double modelValue;
-            if(!tlpc::getRRCDataElement(rrcData, j, i, &modelValue))
+            if(!rrc::getRRCDataElement(rrcData, j, i, &modelValue))
             {
                 throw("Bad stuff...") ;
             }
