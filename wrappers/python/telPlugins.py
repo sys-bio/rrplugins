@@ -1,9 +1,9 @@
-##@Module rrPlugins_CAPI
+##@Module telPlugins_C_API
 
 ## Wrapper around C API to help avoid use of handle.
 # An example is given at the end of the code.
 
-import rrPlugins_CAPI as rrp
+import telplugins_c_api as tel
 import matplotlib.pyplot as plt
 import os.path
 import ctypes
@@ -23,14 +23,14 @@ class DataSeries(object):
     ##@endcode
     def __init__ (self, handle=None):
         if handle == None:
-           self._data = rrp.rrpLib.createRoadRunnerData(0,0,"")
+           self._data = tel.telLib.createRoadRunnerData(0,0,"")
         else:   
            self._data = handle
 
     def __del__ (self):
         if (self._data != 0):
             try:
-               rrp.freeRoadRunnerData (self._data)
+               tel.freeRoadRunnerData (self._data)
             except:
                 print "Exception"
             self._data = 0
@@ -40,33 +40,33 @@ class DataSeries(object):
         
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
-        return rrp.rrpLib.getRoadRunnerDataNumRows(self._data)
+        return tel.telLib.getRoadRunnerDataNumRows(self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
-        return rrp.rrpLib.getRoadRunnerDataNumCols(self._data)
+        return tel.telLib.getRoadRunnerDataNumCols(self._data)
         
     ## \brief Retrive the column headers as a list
     ##@code
     ## print d.getColumnHeaders()
     ##@endcode
     def getColumnHeaders (self):
-        value = rrp.rrpLib.getRoadRunnerDataColumnHeader(self._data)
+        value = tel.telLib.getRoadRunnerDataColumnHeader(self._data)
         if value == None:
            value = []
         return value
 
     # Use x.AsNumpy to get NumPy array
     def __AsNumpy (self):
-        return rrp.getNumpyData (self._data)
+        return tel.getNumpyData (self._data)
         
     ## \brief Get a specific element from a dataseries
     ##@code
     ## print d.getElement (1,2)
     ##@endcode       
     def getElement (self, row, col):
-        rowCount = rrp.rrpLib.getRoadRunnerDataNumRows(self._data)
-        colCount = rrp.rrpLib.getRoadRunnerDataNumCols(self._data)
+        rowCount = tel.telLib.getRoadRunnerDataNumRows(self._data)
+        colCount = tel.telLib.getRoadRunnerDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be postive")
         if row >= rowCount:
@@ -75,7 +75,7 @@ class DataSeries(object):
             raise Exception("Column index out of bounds in dataseries element access")
 
         val = ctypes.c_double()
-        if rrp.rrpLib.getRoadRunnerDataElement(self._data, row, col, ctypes.byref(val)) == True:
+        if tel.telLib.getRoadRunnerDataElement(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:
            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
@@ -96,14 +96,14 @@ class DataSeries(object):
     def readDataSeries(self, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
-        self._data = rrp.createRoadRunnerDataFromFile (fileName)
+        self._data = tel.createRoadRunnerDataFromFile (fileName)
 
     ## \brief Write a dataseries to a file
     ##@code
     ## d.writeDataSeries ("myDataSeries.txt")
     ##@endcode       
     def writeDataSeries(self, fileName):
-        rrp.writeRoadRunnerData(self._data, fileName)
+        tel.writeRoadRunnerData(self._data, fileName)
 
     data = property (__getHandle)
 
@@ -153,7 +153,7 @@ class Event(object):
 
 # ------------------------------------------------------------------------
 
-_pluginManager = rrp.createPluginManager()
+_pluginManager = tel.createPluginManager()
 _pluginsAlreadyLoaded = False
 
 class Plugin (object):
@@ -164,11 +164,11 @@ class Plugin (object):
 
     ## \brief Create a Plugin instance
     ##@code
-    ## myPlugin = Plugin ("rrp_add_noise")
+    ## myPlugin = Plugin ("tel_add_noise")
     ##@endcode         
     def __init__(self, pluginName):
         self.pluginName = pluginName
-        self.plugin = rrp.loadPlugin (_pluginManager, pluginName)
+        self.plugin = tel.loadPlugin (_pluginManager, pluginName)
         if not self.plugin:
             return
         else:
@@ -182,13 +182,13 @@ class Plugin (object):
     ##@endcode         
     def setProperty(self, name, value):
         if (isinstance (value, DataSeries)):
-           if not rrp.setPluginProperty (self.plugin, name, value.data):
+           if not tel.setPluginProperty (self.plugin, name, value.data):
               raise TypeError ("Unable to locate property: ", name)
         else:
-           handle  = rrp.getPluginProperty(self.plugin, name);
+           handle  = tel.getPluginProperty(self.plugin, name);
            if handle == 0:
               raise ValueError ("Unable to locate property: ", name)
-           t1 = rrp.getPropertyType (handle)
+           t1 = tel.getPropertyType (handle)
            if (t1 == "listOfProperties"):
               if isinstance (value, list):
                  if len(value) != 2:
@@ -197,23 +197,23 @@ class Plugin (object):
                      raise TypeError("Expecting property name in first element of list")
                  if (not isinstance(value[1], float)) and (isinstance(value[1], int)):
                      raise TypeError("Expecting floating value in second element of list")
-                 para1 = rrp.createProperty(value[0], "double", "", value[1])
-                 rrp.addPropertyToList (handle, para1)
+                 para1 = tel.createProperty(value[0], "double", "", value[1])
+                 tel.addPropertyToList (handle, para1)
               else:
                  raise  TypeError ("Expecting a list in setProperty")
            else:
-              rrp.setPluginProperty (self.plugin, name, value)
+              tel.setPluginProperty (self.plugin, name, value)
 
     ## \brief Get the value for a given propoerty in the plugin.
     ##@code
     ## print myPlugin.getProperty("Sigma")
     ##@endcode         
     def getProperty (self, name):
-        handle = rrp.getPluginProperty (self.plugin, name)
+        handle = tel.getPluginProperty (self.plugin, name)
         if handle == 0:
             raise ValueError ("Property: " + name + " does not exist")
-        value = rrp.getProperty (handle)
-        if (rrp.getPropertyType(handle) == "roadRunnerData"):
+        value = tel.getProperty (handle)
+        if (tel.getPropertyType(handle) == "roadRunnerData"):
             return DataSeries (value)
         else:
            return value
@@ -236,12 +236,12 @@ class Plugin (object):
     def listOfProperties (self):
         if not self:
             return []
-        nameList = rrp.getListOfPluginPropertyNames (self.plugin)
+        nameList = tel.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = rrp.getPluginProperty(self.plugin, nameList[i])
-            hint = rrp.getPropertyHint(handle)
+            handle = tel.getPluginProperty(self.plugin, nameList[i])
+            hint = tel.getPropertyHint(handle)
             aList.append ([name, hint])
         return aList
 
@@ -254,12 +254,12 @@ class Plugin (object):
     ## print pprint.pprint (na.listOfProperties())  
     ##@endcode    
     def listOfPropertyDescriptions (self):
-        nameList = rrp.getListOfPluginPropertyNames (self.plugin)
+        nameList = tel.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = rrp.getPluginProperty(self.plugin, nameList[i])
-            descr = rrp.getPropertyDescription(handle)
+            handle = tel.getPluginProperty(self.plugin, nameList[i])
+            descr = tel.getPropertyDescription(handle)
             aList.append ([name, descr])
         return aList
 
@@ -268,12 +268,12 @@ class Plugin (object):
     ## print myPlugin.listOfPropertyHints()
     ##@endcode         
     def listOfPropertyHints (self):
-        nameList = rrp.getListOfPluginPropertyNames (self.plugin)
+        nameList = tel.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = rrp.getPluginProperty(self.plugin, nameList[i])
-            descr = rrp.getPropertyHint(handle)
+            handle = tel.getPluginProperty(self.plugin, nameList[i])
+            descr = tel.getPropertyHint(handle)
             aList.append ([name, descr])
         return aList
 
@@ -282,44 +282,44 @@ class Plugin (object):
     ## print myPlugin.listOfPropertyHints()
     ##@endcode         
     def loadDataSeriesAsNumPy (self, fileName):
-        rrDataHandle = rrp.createRoadRunnerDataFromFile (fileName)
-        return rrp.getNumpyData (rrDataHandle)
+        rrDataHandle = tel.createRoadRunnerDataFromFile (fileName)
+        return tel.getNumpyData (rrDataHandle)
 
     ## \brief Load a data series from a file
     ##@code
     ## print myPlugin.loadDataSeries("myDataSeries.txt")
     ##@endcode         
     def loadDataSeries (self, fileName):
-        handle = rrp.createRoadRunnerDataFromFile (fileName)
+        handle = tel.createRoadRunnerDataFromFile (fileName)
         return DataSeries(handle)
 
     def OnProgress (self, f):
         # Make sure garbage collector doens't remove the event pointer
         global _onProgressEvent
 
-        _onProgressEvent =  rrp.NotifyEventEx (f)
+        _onProgressEvent =  tel.NotifyEventEx (f)
         # Pass the address of the self object
         theId = id (self)
-        rrp.assignOnProgressEvent(self.plugin, _onProgressEvent, theId, None)
+        tel.assignOnProgressEvent(self.plugin, _onProgressEvent, theId, None)
 
     ## \brief Execute the plugin
     ##@code
     ## print myPlugin.execute()
     ##@endcode         
     def execute (self):
-        return rrp.executePlugin (self.plugin)
+        return tel.executePlugin (self.plugin)
 
     def executeEx (self, inThread):
-        return rrp.executePluginEx (self.plugin, inThread)
+        return tel.executePluginEx (self.plugin, inThread)
 
 
     def plotDataSeries (self, dataSeries):
         if (isinstance (dataSeries, DataSeries)):
            if dataSeries.data == 0:
               exit()
-           hdr = rrp.getRoadRunnerDataColumnHeader(dataSeries.data)
-           npData = rrp.getNumpyData(dataSeries.data)
-           rrp.plotRoadRunnerData(npData, hdr)
+           hdr = tel.getRoadRunnerDataColumnHeader(dataSeries.data)
+           npData = tel.getNumpyData(dataSeries.data)
+           tel.plotRoadRunnerData(npData, hdr)
         else:
            raise TypeError ("Expecting DataSeries type")
 
@@ -335,7 +335,7 @@ class Plugin (object):
         return str
 
     def loadPlugins(self):
-        rrp.loadPlugins (self.pluginsManager)
+        tel.loadPlugins (self.pluginsManager)
 
     ## \brief Static method to list all plugins
     ##@code
@@ -346,17 +346,17 @@ class Plugin (object):
         global _pluginsAlreadyLoaded
         # Hack to get round bug in loadPlugins
         if not _pluginsAlreadyLoaded:
-           rrp.loadPlugins (_pluginManager)
+           tel.loadPlugins (_pluginManager)
            _pluginsAlreadyLoaded = True
 
         aList = []
-        names = rrp.getPluginLibraryNames (_pluginManager)
-        n = rrp.getNumberOfPlugins (_pluginManager)
+        names = tel.getPluginLibraryNames (_pluginManager)
+        n = tel.getNumberOfPlugins (_pluginManager)
         # This is a hack to get round thelack of metadata in the plugin
         # Will be resolved in next revision of library
         for i in range (0, n):
-            handle = rrp.getPlugin(_pluginManager, names[i])
-            info = rrp.getPluginInfo (handle)
+            handle = tel.getPlugin(_pluginManager, names[i])
+            info = tel.getPluginInfo (handle)
             info = info.split ("\n")
             hint = info[2]
             hint = hint.replace("Category......................", "")
@@ -368,32 +368,32 @@ class Plugin (object):
     ## myPlugin.viewManual()
     ##@endcode         
     def viewManual (self):
-        rrp.displayPluginManual(self.plugin)
+        tel.displayPluginManual(self.plugin)
 
     ## \brief Returns the name of the plugin
     ##@code
     ## print myPlugin.name()
     ##@endcode         
     def name (self):
-        return rrp.getPluginName(self.plugin)
+        return tel.getPluginName(self.plugin)
 
     ## \brief Returns the description of the plugin
     ##@code
     ## print myPlugin.description()
     ##@endcode         
     def description (self):
-        return rrp.getPluginDescription(self.plugin)
+        return tel.getPluginDescription(self.plugin)
 
     ## \brief Returns the hint of the plugin
     ##@code
     ## print myPlugin.hint()
     ##@endcode         
     def hint (self):
-        return rrp.getPluginHint(self.plugin)
+        return tel.getPluginHint(self.plugin)
 
      
     def info (self):
-        return rrp.rrpLib.getPluginInfo(self.plugin)
+        return tel.telLib.getPluginInfo(self.plugin)
 
 # ----------------------------------------------------------------
 
@@ -412,14 +412,14 @@ def show():
     plt.show()
 
 def getRoadRunnerData (rr):
-    rrDataHandle = rrp.getRoadRunnerDataHandle(rr)
+    rrDataHandle = tel.getRoadRunnerDataHandle(rr)
     return DataSeries (rrDataHandle)
 
 if __name__=='__main__':
 
     print "Starting Test"
 
-    p = Plugin ("rrp_add_noise")
+    p = Plugin ("tel_add_noise")
     p.viewManual()
     #pl = p.listOfProperties()
     #for item in pl:
@@ -442,10 +442,10 @@ if __name__=='__main__':
 #
 #@code
 ##import roadrunner
-##from rrPlugins_CAPI import *
-##import rrPlugins as rrp
+##from telPlugins_CAPI import *
+##import telPlugins as tel
 ##
-##noisePlugin = rrp.Plugin ("rrp_add_noise")
+##noisePlugin = tel.Plugin ("tel_add_noise")
 ##print noisePlugin.name()
 ##print noisePlugin.hint()
 ##print noisePlugin.description()
@@ -460,7 +460,7 @@ if __name__=='__main__':
 ##rr.simulate(0, 10, 511) # Want 512 points
 ##
 ## The plugin will need a handle to the underlying roadrunner data
-##d = rrp.getRoadRunnerData (rr)
+##d = tel.getRoadRunnerData (rr)
 ##
 ##noisePlugin.InputData = d
 ##
@@ -471,9 +471,9 @@ if __name__=='__main__':
 ##
 ##numpydata = noisePlugin.InputData.AsNumpy;
 ##
-##rrp.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
+##tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
 ##
-##rrp.show()
+##tel.show()
 ##
 ##d.writeDataSeries ("testData2.dat")
 ##
@@ -502,9 +502,9 @@ if __name__=='__main__':
 #the plugin will take the values in x and y, compute the sum and assign it to result. The plugin can therefore
 #be used as follows:
 #@code
-p = Plugin("add")
-p.x = 3.4
-p.y = 5.6
-p.execute()
-print p.result
+#p = Plugin("add")
+#p.x = 3.4
+#p.y = 5.6
+#p.execute()
+#print p.result
 #@endcode
