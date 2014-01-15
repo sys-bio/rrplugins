@@ -14,7 +14,7 @@ telPackage = 'telplugins'
 def rmplugins(path):
     print('deleting ' + telPackage +' from ' + path)
 
-    files = ['telplugins', 'telplugins_c_api', 'telpluginutils', 'telfindsharedlib']
+    files = ['telplugins', 'telplugins_c_api', 'telplugins_roadrunnerdata', 'telpluginutils', 'telfindsharedlib']
     for file in files:
         try:
             fName = file + '.py'

@@ -19,6 +19,7 @@ telplugins_c_api
 telplugins_cpp_support
 telplugins_properties_api
 telplugins_utilities
+telplugins_roadrunnerdata_api
 )
 
 if(${BORLAND})

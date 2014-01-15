@@ -51,8 +51,6 @@ bool tlp_cc freePluginManager(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-//PLUGIN Functions
-
 RRPluginHandle tlp_cc getFirstPlugin(RRPluginManagerHandle handle)
 {
     start_try
@@ -382,10 +380,9 @@ bool tlp_cc isPluginWorking(RRPluginHandle handle)
     catch_bool_macro
 }
 
-char* tlp_cc getLastPluginError()
+char* tlp_cc getLastError()
 {   
-//    return tlp::getLastError(); //Todo
-    return NULL;
+    return gLastError; 
 }
 
 bool tlp_cc freeText(char* text)
