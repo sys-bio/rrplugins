@@ -47,10 +47,8 @@ finally:
        #Change back to our original working directory
        os.chdir(originalWorkingDirectory)
 
-dirPath = telplugins_path # + '\\plugins' 
-if os.path.exists(dirPath):
-    gDefaultPluginsPath  = dirPath + os.sep + 'plugins'
-else:
+gDefaultPluginsPath   = telplugins_path # + '\\plugins' 
+if not os.path.exists(gDefaultPluginsPath):
     print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
     gDefaultPluginsPath = ''
 
