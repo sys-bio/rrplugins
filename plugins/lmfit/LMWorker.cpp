@@ -7,13 +7,13 @@
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
-#include "rr/C/rrc_utilities.h"
+//#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
+//#include "rr/C/rrc_utilities.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {
 
-using namespace rrc;
+//using namespace rrc;
 using namespace std;
 using namespace tlp;
 using namespace tlpc;
@@ -219,7 +219,8 @@ bool LMWorker::setup()
         {
             for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
             {
-                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
+                //mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
+                mLMData.experimentalDataWeights[i][timePoint] = obsData.weight(timePoint, i + 1);
             }
         }
     }

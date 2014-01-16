@@ -40,7 +40,7 @@
 */
 #ifndef telplugins_c_apiH
 #define telplugins_c_apiH
-#include "rr/c/rrc_types.h"
+//#include "rr/c/rrc_types.h"
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
 #include "telplugins_utilities.h"

@@ -109,20 +109,22 @@ TLP_C_DS bool tlp_cc getRoadRunnerDataWeight(RRDataHandle rrData, int r, int c, 
 /*!
  \brief Query if a RoadRunnerData object have enabled its weights feature
  \param rrData A handle to RoadRunnerData
- \return Returns true if weights are enabled, false otherwise
+ \param answer Boolean indicating if the data has weights or not
+ \return Returns true or false indicating function success
  \note Related functions allocateWeights(), getRoadRunnerDataWeight(), setRoadRunnerDataWeight()
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc hasWeights(RRDataHandle rrData);
+TLP_C_DS bool tlp_cc hasWeights(RRDataHandle rrData, bool* answer);
 
 /*!
  \brief Allocate roadrunner data weights. Initially, all weights are set to '1'
- \param rrData A handle to RoadRunnerData
- \return Returns true if succesful, false otherwise
+ \param rrData A handle to RoadRunnerData 
+ \param success Boolean indicating if allocation was succesful or not 
+ \return Returns true or false indicating function success
  \note Related functions hasWeights(), getRoadRunnerDataWeight(), setRoadRunnerDataWeight()
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc allocateWeights(RRDataHandle rrData);
+TLP_C_DS bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success);
 
 /*!
  \brief Set the weight for a RoadRunner data element at a given row and column in a RoadRunner data type variable

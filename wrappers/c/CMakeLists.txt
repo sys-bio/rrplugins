@@ -38,7 +38,7 @@ if(WIN32)
         )
 
     target_link_libraries ( ${target}
-        roadrunner_c_api
+        #roadrunner_c_api
         roadrunner
         telplugins
         )
@@ -59,7 +59,7 @@ else()
         )
 
     target_link_libraries ( ${target}
-        roadrunner_c_api
+        #roadrunner_c_api
         roadrunner-static
         telplugins_api
         rr-libstruct-static

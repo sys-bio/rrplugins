@@ -25,7 +25,8 @@ bool tlp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double
 {
     start_try
         RoadRunnerData* rrData = castToRoadRunnerData(data);
-        *value = rrData->getDataElement(row, col);
+        //*value = rrData->getDataElement(row, col);
+        *value = (*rrData)(row, col);
         return true;
     catch_bool_macro
 }
@@ -34,7 +35,8 @@ bool tlp_cc setRoadRunnerDataElement(RRDataHandle data, int row, int col, double
 {
     start_try
         RoadRunnerData* rrData = castToRoadRunnerData(data);
-        rrData->setDataElement(row, col, value);
+        //rrData->setDataElement(row, col, value);
+        (*rrData)(row, col) = value;
         return true;
     catch_bool_macro
 }
@@ -46,7 +48,8 @@ bool tlp_cc getRoadRunnerDataWeight(RRDataHandle data, int row, int col, double*
 
         if(rrData->hasWeights())
         {
-            (*value) = rrData->getWeight(row, col);
+            //(*value) = rrData->getWeight(row, col);
+            (*value) = rrData->weight(row, col);
             return true;
         }
         else
@@ -62,7 +65,8 @@ bool tlp_cc setRoadRunnerDataWeight(RRDataHandle data, int row, int col, double 
         RoadRunnerData* rrData = castToRoadRunnerData(data);
         if(rrData->hasWeights())
         {
-            rrData->setWeight(row, col, value);
+            //rrData->setWeight(row, col, value);
+            rrData->setWeight(row, col) =  value;
             return true;
         }
         else
@@ -72,19 +76,21 @@ bool tlp_cc setRoadRunnerDataWeight(RRDataHandle data, int row, int col, double 
     catch_bool_macro
 }
 
-bool tlp_cc hasWeights(RRDataHandle rrData)
+bool tlp_cc hasWeights(RRDataHandle rrData, bool* value)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(rrData);
-        return rrData->hasWeights();
+        RoadRunnerData* Data = castToRoadRunnerData(rrData);
+        (*value) = Data->hasWeights();
+        return true;
     catch_bool_macro
 }
 
-bool tlp_cc allocateWeights(RRDataHandle rrData)
+bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(rrData);
-        rrData->allocateWeights();
+        RoadRunnerData* Data = castToRoadRunnerData(rrData);
+        Data->allocateWeights();
+        (*success) = Data->hasWeights();
         return true;
     catch_bool_macro
 }

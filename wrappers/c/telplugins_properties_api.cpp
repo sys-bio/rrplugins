@@ -5,8 +5,8 @@
 #include "rr/rrException.h"
 #include "telplugins_properties_api.h"
 #include "rr/rrLogger.h"
-#include "rr/c/rrc_api.h"
-#include "rr/c/rrc_utilities.h"              //Support functions, not exposed as api functions and or data
+//#include "rr/c/rrc_api.h"
+//#include "rr/c/rrc_utilities.h"              //Support functions, not exposed as api functions and or data
 //#include "rr/c/rrc_cpp_support.h"            //Support functions, not exposed as api functions and or data
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"

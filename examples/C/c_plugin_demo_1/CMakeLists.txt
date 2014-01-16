@@ -7,6 +7,7 @@ include_directories(
 ${TLP_ROOT}/source
 ${TLP_ROOT}/wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
 )
 
 SET_SOURCE_FILES_PROPERTIES( c_plugin_demo.c PROPERTIES LANGUAGE C)
@@ -26,6 +27,7 @@ if(WIN32)
 target_link_libraries (${target}
 roadrunner
 telplugins_c_api
+rrc_api
 )
 #else() #UNIX
 #    # OSX flags:
@@ -81,6 +83,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${main_target}
 roadrunner
+rrc_api
 telplugins_c_api
 )
 endif()
