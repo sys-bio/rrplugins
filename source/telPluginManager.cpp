@@ -171,7 +171,7 @@ int PluginManager::load(const string& pluginName)
     }
 
     set<string> files;
-    string globPath =  joinPath(mPluginFolder, "*." + mPluginExtension);
+    string globPath =  joinPath(mPluginFolder, "tel*." + mPluginExtension);
 
     if(pluginName.size())
     {
@@ -181,7 +181,7 @@ int PluginManager::load(const string& pluginName)
     else
     {
         //Get all plugins in plugin folder
-        Glob::glob(globPath, files);
+        Glob::glob(globPath, files, Glob::GLOB_CASELESS);
     }
 
     set<string>::iterator it = files.begin();
