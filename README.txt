@@ -3,8 +3,8 @@ Copyright 2013-2014
 
 M. T. Karlsson 1, M. Galdzicki 2  and H. M Sauro 2
 
-2 Dune Scientific, 10522 Lake City Way NE, #302 Seattle WA
-3 Department of Bioengineering, University of Washington, Seattle, WA, 98195
+1 Dune Scientific, 10522 Lake City Way NE, #302 Seattle WA
+2 Department of Bioengineering, University of Washington, Seattle, WA, 98195
 
 Availability
 
@@ -24,7 +24,7 @@ file except in compliance with the License. You may obtain a copy of the License
 http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed 
-under the License is distributed on an ÎAS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+under the License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 OF ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
 
