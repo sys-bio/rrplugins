@@ -196,6 +196,7 @@ int PluginManager::load(const string& pluginName)
             if(!res)
             {
                 Log(lError)<<"There was a problem loading plugin: "<<plugin;
+                continue;
             }
             nrOfLoadedPlugins++;
         }

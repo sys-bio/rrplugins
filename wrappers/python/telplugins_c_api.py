@@ -23,7 +23,6 @@ __version__ = "1.0.0"
 
 sharedLib='telplugins_c_api'
 
-
 originalWorkingDirectory = os.getcwd()
 #telLib will be our handle returned by ctypes
 telLib=None

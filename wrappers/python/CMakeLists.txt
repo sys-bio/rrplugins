@@ -2,13 +2,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(plugins_wrappers)
 
 #=============== INSTALL =====================
+
+FILE (GLOB pyFiles *.py)
+
 install(
         FILES 
-        __init__.py
-        telplugins.py 
-        telpluginutils.py 
-        telplugins_c_api.py 
-        telfindsharedlib.py
+        ${pyFiles}
         README.txt 
         DESTINATION site-packages/telplugins  	
         COMPONENT telplugins

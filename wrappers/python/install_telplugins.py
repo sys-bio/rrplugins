@@ -58,7 +58,7 @@ try:
         shutil.copy(file, spFolder)
     
     #Copy plugins
-    destPluginFolder = os.path.join(spFolder, 'plugins')
+    destPluginFolder = spFolder #Copy plugins into sme folder as the other dll's :( os.path.join(spFolder, 'plugins')
     
     if not os.path.exists(destPluginFolder):
         os.makedirs(destPluginFolder)
