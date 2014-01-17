@@ -38,8 +38,7 @@ roadrunner
 lmfit-static
 telplugins
 telplugins_c_api                 
-#roadrunner_c_api                 
-rrc_api                 
+roadrunner_c_api                 
 )
 
 else() 

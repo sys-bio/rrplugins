@@ -27,7 +27,7 @@ if(WIN32)
 target_link_libraries (${target}
 roadrunner
 telplugins_c_api
-rrc_api
+roadrunner_c_api
 )
 #else() #UNIX
 #    # OSX flags:
@@ -83,7 +83,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${main_target}
 roadrunner
-rrc_api
+roadrunner_c_api
 telplugins_c_api
 )
 endif()
