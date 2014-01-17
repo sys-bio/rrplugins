@@ -171,7 +171,7 @@ int PluginManager::load(const string& pluginName)
     }
 
     set<string> files;
-    string globPath =  joinPath(mPluginFolder, "tel*." + mPluginExtension);
+    string globPath =  joinPath(mPluginFolder, "tel_*." + mPluginExtension);
 
     if(pluginName.size())
     {
