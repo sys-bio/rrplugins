@@ -1,23 +1,22 @@
 Example scripts on how to use plugins.
 
-OBSERVE. Make sure your python path includes the parent folder where the rrPlugins.py are located.
-and that roadrunners bin folder is on the system path
-
-rrPluginTester.py
+telPluginTester.py
     Simple script that loads plugins and prints the names of loaded plugins
 
-rrCallBackFunctionDemo.py
-    Script demonstrating how to use callbacks with plugins
+telEvents.py
+    Script demonstrating how to define and use events with plugins
 
-rrPluginDocumentationDemo.py
+telPluginDocumentationDemo.py
     Script demonstrating how to load a plugin and extract its documentation as a PDF.
  
-rrPluginParameterDemo.py
-    Script demonstrating some functionality realted to PluginParameters
+tePluginProperties.py
+    Script demonstrating functionality and features related to PluginProperties
 
-OBS: There may be other example scripts in this folder, not mentioned here,
+There may be other example scripts in this folder, not mentioned here,
 included as examples for individual plugins.
 
-
-
-   
+==============================================================================================
+OBSERVE: Make sure you have properly installed Tellurium plugins in your python environment 
+before running any of these scripts. A good test is to execute import telplugins at your python 
+prompt. It should come back with no message.
+==============================================================================================

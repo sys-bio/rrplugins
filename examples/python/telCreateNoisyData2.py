@@ -22,7 +22,7 @@ noisePlugin.InputData = d
 noisePlugin.Sigma = 3.e-5
 
 # Add the noise
-noisePlugin.execute ()
+noisePlugin.execute()
 
 # Get the data to plot
 numpydata = noisePlugin.InputData.AsNumpy;
