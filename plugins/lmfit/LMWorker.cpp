@@ -219,8 +219,7 @@ bool LMWorker::setup()
         {
             for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
             {
-                //mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
-                mLMData.experimentalDataWeights[i][timePoint] = obsData.weight(timePoint, i + 1);
+                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);                
             }
         }
     }

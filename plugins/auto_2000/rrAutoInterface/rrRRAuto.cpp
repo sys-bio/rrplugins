@@ -338,7 +338,8 @@ void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const 
     int stateVecSize    = lModel->getNumFloatingSpecies() + lModel->getNumRules();
     double* dydts       = new double[stateVecSize];
 
-    lModel->evalModel(time, NULL, dydts);
+    //lModel->evalModel(time, NULL, dydts);
+    lModel->getStateVectorRate(time, NULL, dydts);
 
 //    Marshal.Copy(CurrentModel.dydt, 0, oResult, Math.Min(CurrentModel.dydt.Length, nDim));
     nMin = min(stateVecSize, ndim);

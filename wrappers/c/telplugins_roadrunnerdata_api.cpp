@@ -48,8 +48,7 @@ bool tlp_cc getRoadRunnerDataWeight(RRDataHandle data, int row, int col, double*
 
         if(rrData->hasWeights())
         {
-            //(*value) = rrData->getWeight(row, col);
-            (*value) = rrData->weight(row, col);
+            (*value) = rrData->getWeight(row, col);            
             return true;
         }
         else
@@ -65,8 +64,7 @@ bool tlp_cc setRoadRunnerDataWeight(RRDataHandle data, int row, int col, double 
         RoadRunnerData* rrData = castToRoadRunnerData(data);
         if(rrData->hasWeights())
         {
-            //rrData->setWeight(row, col, value);
-            rrData->setWeight(row, col) =  value;
+            rrData->setWeight(row, col, value);            
             return true;
         }
         else
