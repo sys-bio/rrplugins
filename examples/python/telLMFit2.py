@@ -3,9 +3,8 @@ import ctypes as ct
 
 def pluginIsProgressing(lm):
     lmObject = ct.cast(lm, ct.py_object).value
-    print 'Norm = ' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
-    print 'Nr of Iterations = ' + `lmObject.getProperty("NrOfIter")`
-
+    print 'Iteration, Norm = ' + `lmObject.getProperty("NrOfIter")` + ',' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
+    
 lm = tel.Plugin ("tel_lm")
 experimentalData = lm.loadDataSeries ("testData.dat")
 
