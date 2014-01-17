@@ -30,32 +30,28 @@ try:
     spFolder = os.path.join(getSitePackagesFolder(), telPackageName)
     if DEBUG: print "spFolder " + spFolder
     
-    #clean the folder   
-    cleanFolder(spFolder)
-    		
     print('Installing Tellurium plugins to folder: ' + spFolder)   
-    
+    #clean destination folder   
+    cleanFolder(spFolder)
+
     #Figure what to copy        
     currentFolder = os.path.dirname(os.path.abspath(__file__))
     if DEBUG: print "currentFolder " + currentFolder
-    pyFilesFolder = os.path.join(currentFolder, telPackageName)
+    pyFilesFolder = os.path.join(currentFolder, 'site-packages', telPackageName)    
     if DEBUG: print "pyFilesFolder " + pyFilesFolder
-    
     pyFiles = glob.glob(os.path.join(pyFilesFolder, '*.py'))
     if DEBUG: print "pyFiles " + str(pyFiles)
+    #Plugins 
+    pluginsFolder = os.path.join(currentFolder,  'plugins')   
+    plugins = glob.glob(os.path.join(pluginsFolder, '*.dll'))
                        
     #Copy the dlls that are in ..\bin folder
-    #Assume we are installing from a 'release'       
-    binFolder = os.path.join(os.path.split(currentFolder)[0],'bin')   
+    #Binaries       
+    binFolder = os.path.join(currentFolder, 'bin')   
     if DEBUG: print "binFolder " + binFolder
     bins = glob.glob(os.path.join(binFolder, '*.dll'))
     if DEBUG: print "bins " + str(bins)
     
-    #Copy the plugins 
-    pluginsFolder = os.path.join(os.path.split(currentFolder)[0],'plugins')   
-    if DEBUG: print "pluginsFolder " + pluginsFolder
-    plugins = glob.glob(os.path.join(pluginsFolder, '*.dll'))
-    if DEBUG: print "plugins " + str(plugins)
        
     rootFiles = pyFiles + bins
     
@@ -68,7 +64,7 @@ try:
         shutil.copy(file, spFolder)
     
     #Copy plugins
-    destPluginFolder = os.path.join(spFolder, 'plugins')
+    destPluginFolder = spFolder #Copy plugins into the same folder as the other dll's :( os.path.join(spFolder, 'plugins')
     if DEBUG: print "destPluginFolder " + destPluginFolder
     
     if not os.path.exists(destPluginFolder):
