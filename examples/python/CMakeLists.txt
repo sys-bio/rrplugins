@@ -1,20 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(RR_PYTHON_EXAMPLES)
+PROJECT(TEL_PYTHON_EXAMPLES)
 
-set(examples 	
-telPluginTester.py
-telBifurcation.py
-telEvents.py
-telPluginDocumentation.py
-telPluginProperties.py
-telPluginPropertyLists.py
-telLevenbergMarquardt.py
-telLevenbergMarquardtShortVersion.py
-telNoisePlugin.py
-telTwoPlugins.py
-telCreateNoisyData.py
-telReadDataFromFile.py
-)
+FILE (GLOB examples *.py)
 
 install(    
 FILES ${examples} 
@@ -27,12 +14,11 @@ DESTINATION python_examples
 COMPONENT plugins_api
 )
 
-
-if(BUILD_TEST_TOOLS)
-install(    
-FILES runAllPythonExamples.sh 
-DESTINATION python_examples 	
-COMPONENT plugins_api
-)
+#if(BUILD_TEST_TOOLS)
+#install(    
+#FILES runAllPythonExamples.sh 
+#DESTINATION python_examples 	
+#COMPONENT plugins_api
+#)
 endif()
 

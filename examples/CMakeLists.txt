@@ -8,10 +8,9 @@ include_directories(
  	${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
-#add_subdirectory(cpp_plugin_demo_1)
-add_subdirectory(C)
-add_subdirectory(CPP)
-add_subdirectory(Python)
+add_subdirectory(c)
+add_subdirectory(cpp)
+add_subdirectory(python)
 
 
 install(
