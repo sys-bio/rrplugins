@@ -19,6 +19,7 @@ telplugins_c_api
 telplugins_cpp_support
 telplugins_properties_api
 telplugins_utilities
+telplugins_roadrunnerdata_api
 )
 
 if(${BORLAND})
@@ -37,7 +38,7 @@ if(WIN32)
         )
 
     target_link_libraries ( ${target}
-        roadrunner_c_api
+        #roadrunner_c_api
         roadrunner
         telplugins
         )
@@ -58,7 +59,7 @@ else()
         )
 
     target_link_libraries ( ${target}
-        roadrunner_c_api
+        #roadrunner_c_api
         roadrunner-static
         telplugins_api
         rr-libstruct-static

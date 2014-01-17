@@ -4,14 +4,14 @@
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/c/rrc_types.h"
+//#include "rr/c/rrc_types.h"
 #include "LMWorker.h"
 #include "lib/lmmin.h"
 //---------------------------------------------------------------------------
 
 namespace lmfit
 {
-using namespace rrc;
+//using namespace rrc;
 using namespace tlp;
 using rr::RoadRunner;
 using std::string;

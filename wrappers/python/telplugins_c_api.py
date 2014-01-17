@@ -1,4 +1,4 @@
-##@Module telPlugins_C_API
+##@Module telplugins_c_api
 #This module allows access to the telplugins_api.dll from python"""
 import os
 import sys
@@ -22,74 +22,35 @@ __version__ = "1.0.0"
 # the plugins from that.
 
 sharedLib='telplugins_c_api'
-dirPath = getPathToParentFolderOf(sharedLib)
 
-if os.path.exists(dirPath):
-    gDefaultPluginsPath  = dirPath + os.sep + 'plugins'
-else:
-    print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
-    gDefaultPluginsPath = ''
-
+originalWorkingDirectory = os.getcwd()
+#telLib will be our handle returned by ctypes
 telLib=None
 try:
     if sys.platform.startswith('win32'):
         sharedLib = sharedLib + '.dll'
-        telLib=CDLL(sharedLib)
-    elif sys.platform.startswith('Linux'):
-        sharedLib = sharedLib + '.a'
-        telLib = cdll.LoadLibrary(sharedLib)
-except:
-    print 'ERROR: Unable to locate shared library: ' + sharedLib
-    exit()
+                
+        telplugins_path = os.path.dirname(os.path.realpath(__file__))
+                                                 
+        #temporary change into this path so we can load our shared libs
+        os.chdir(telplugins_path)                 
+        telLib=CDLL(sharedLib)                         
+    
+    #elif sys.platform.startswith('Linux'):
+    #    sharedLib = sharedLib + '.a'
+    #    telLib = cdll.LoadLibrary(sharedLib)
+    else:
+        raise Exception('Tellurium plugins are not supported on this platform')
+except Exception as e:
+    print 'Exception when trying to load Tellurium plugins: ' + `e`        
+finally:    
+       #Change back to our original working directory
+       os.chdir(originalWorkingDirectory)
 
-
-# Experimental parameter object class
-# Usage:
-# p = telPlugins.PropertyObject ("k1", "hint", 0.1)
-# p.value = 0.5
-# print p.name
-
-#class PropertyObject:
-#    _parameterHandle = -1
-
-#    def __getValue (self):
-#        return getPropertyValue (self._parameterHandle)
-
-#    def __setValue (self, value):
-#       if type (value) is int:
-#           setIntProperty (self._parameterHandle, value)
-#       if type (value) is float:
-#           setDoubleProperty (self._parameterHandle, value)
-#       if type (value) is str:
-#           setStringProperty (self._parameterHandle, value)
-#    value = property (__getValue, __setValue)
-
-#    def __getName (self):
-#        return getPropertyName(self._parameterHandle)
-#    name = property (__getName)
-
-#    def __getHint (self):
-#        return getPropertyHint(self._parameterHandle)
-#    hint = property (__getHint)
-
-#    def __getType (self):
-#        return getPropertyType(self._parameterHandle)
-#    pType = property (__getType)
-
-#    def __init__(self, name, hint, value):
-#      if type (value) is int:
-#        self._parameterHandle = createProperty (name, "int", hint)
-#      if type (value) is float:
-#        self._parameterHandle = createProperty (name, "double", hint)
-#      if type (value) is str:
-#        self._parameterHandle = createProperty (name, "string", hint)
-#      self.__setValue (value)
-
-#    def __getHandle (self):
-#        return self._parameterHandle
-
-#    handle = property (__getHandle)
-
+gDefaultPluginsPath   = telplugins_path # + '\\plugins' 
+if not os.path.exists(gDefaultPluginsPath):
+    print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
+    gDefaultPluginsPath = ''
 
 #=======================tel_api========================#
 #Type of plugin events, first argument is return type
@@ -1125,11 +1086,11 @@ def plotRoadRunnerData(data, colHeaders):
     plot.xlabel(xlbl)
     plot.ylabel('Concentration (moles/L)')
     plot.show()
+    
 ## \brief Get column header in roadrunner data
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-
 telLib.getRoadRunnerDataColumnHeader.restype = c_char_p
 def getRoadRunnerDataColumnHeader(rrDataHandle):
     hdr = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
@@ -1141,6 +1102,61 @@ def getRoadRunnerDataColumnHeader(rrDataHandle):
     else:
         return None
 
+## \brief Get RoadRunner data element at row,col
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns the numeric value at row,col
+## \ingroup utilities
+telLib.getRoadRunnerDataElement.restype = c_bool
+def getRoadRunnerDataElement(rrDataHandle, row, col):
+    val = c_double()
+    if telLib.getRoadRunnerDataElement(rrDataHandle, row, col, byref(val)) == True:
+        return val.value
+    else:
+        throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
+
+## \brief Set RoadRunner data element at row,col
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns the numeric value at row,col
+## \ingroup utilities
+telLib.setRoadRunnerDataElement.restype = c_bool
+def setRoadRunnerDataElement(rrDataHandle, row, col, number):    
+    return telLib.setRoadRunnerDataElement(rrDataHandle, row, col, c_double(number))
+
+## \brief Get RoadRunner data element at row,col
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns the numeric value at row,col
+## \ingroup utilities
+telLib.getRoadRunnerDataWeight.restype = c_bool
+def getRoadRunnerDataWeight(rrDataHandle, row, col):
+    val = c_double()
+    if telLib.getRoadRunnerDataWeight(rrDataHandle, row, col, byref(val)) == True:
+        return val.value
+    else:
+        throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
+
+## \brief Set RoadRunner data element at row,col
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns the numeric value at row,col
+## \ingroup utilities
+telLib.setRoadRunnerDataWeight.restype = c_bool
+def setRoadRunnerDataWeight(rrDataHandle, row, col, number):    
+    return telLib.setRoadRunnerDataWeight(rrDataHandle, row, col, c_double(number))
+
+    
+## \brief Get number of rows in a roadrunner data object
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns number of rows in the data object
+## \ingroup utilities
+def getRoadRunnerDataNumRows(rrDataHandle):
+    return telLib.getRoadRunnerDataNumRows(rrDataHandle)
+    
+
+## \brief Get number of columns in a roadrunner data object
+## \param rrDataHandle A handle to a roadrunner data object
+## \return Returns number of cols in the data object
+## \ingroup utilities
+def getRoadRunnerDataNumCols(rrDataHandle):
+    return telLib.getRoadRunnerDataNumCols(rrDataHandle)
 
 ## \brief Write RoadRunnerData to a file
 ## \param rrDataHandle A handle to roadunnerdata
@@ -1163,6 +1179,20 @@ telLib.readRoadRunnerDataFromFile.restype = c_bool
 def readRoadRunnerData(rrDataHandle, fName):
     return telLib.readRoadRunnerDataFromFile(rrDataHandle, fName)
 
+## \brief Create a RoadRunnerData object
+## \param rows Number of rows in the data to be created
+## \param cols Number of columns in the data to be created
+## \return Returns a handle to RoadRunner data if successful, None otherwise
+## \note Use the freeRoadRunnerData to free memory allocated 
+## \ingroup utilities
+telLib.createRoadRunnerData.restype = c_void_p
+def createRoadRunnerData(rows, cols):
+    #Create a RoadRunner data object
+    #Create a column header
+    nrs = range(cols)
+    col_hdr = str(nrs).strip('[]')     
+    return telLib.createRoadRunnerData(rows, cols, col_hdr)    
+
 ## \brief Create RoadRunnerData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
@@ -1172,11 +1202,36 @@ def readRoadRunnerData(rrDataHandle, fName):
 telLib.createRoadRunnerData.restype = c_void_p
 def createRoadRunnerDataFromFile(fName):
     #Create a RoadRunner data object
-    rrDataHandle = telLib.createRoadRunnerData(0,0,"")
+    rrDataHandle = telLib.createRoadRunnerData(0,0, None)
     if telLib.readRoadRunnerDataFromFile(rrDataHandle, fName) == False:
         print 'Failed to read data'
     return rrDataHandle
 
+## \brief Check if roadrunner data has weights allocated
+## \param dataHandle Handle to a roadrunner data object
+## \return Returns true or false indicating if the data object has weights or not
+## \ingroup utilities
+telLib.hasWeights.restype = c_bool
+def hasWeights(dataHandle):
+    hasIt = c_bool()
+    if not telLib.hasWeights(dataHandle, byref(hasIt)):
+        throw(getLastError())
+    else:
+        return hasIt.value                
+        
+       
+## \brief Allocate weights for roadrunner data object
+## \param dataHandle Handle to a roadrunner data object
+## \return Returns true or false indicating if allocating weights were successful or not
+## \ingroup utilities
+telLib.allocateWeights.restype = c_bool
+def allocateWeights(dataHandle):
+    success = c_bool()    
+    if not telLib.allocateWeights(dataHandle, byref(success)):
+        throw(getLastError())
+    else:
+        return success.value        
+    
 def getText(fName):
     file = open(fName, 'r')
     return file.read()
@@ -1203,9 +1258,9 @@ def freeRoadRunnerData(rrDataHandle):
 ## \brief Get last (API) error. This returns the last error if any.
 ## \return Returns a string with an error success, None otherwise
 ## \ingroup utilities
-telLib.getLastPluginError.restype = c_char_p
+telLib.getLastError.restype = c_char_p
 def getLastError():
-    return telLib.getLastPluginError()
+    return telLib.getLastError()
 
 ## \brief Unload the plugins api shared library
 ## \ingroup utilities

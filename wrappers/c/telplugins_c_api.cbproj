@@ -118,6 +118,10 @@
         <CppCompile Include="telplugins_properties_api.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telplugins_roadrunnerdata_api.cpp">
+            <DependentOn>telplugins_roadrunnerdata_api.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telplugins_utilities.cpp">
             <DependentOn>telplugins_utilities.h</DependentOn>
             <BuildOrder>0</BuildOrder>

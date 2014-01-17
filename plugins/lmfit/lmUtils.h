@@ -1,13 +1,13 @@
 #ifndef lmUtilsH
 #define lmUtilsH
-#include "rr/C/rrc_types.h"
+//#include "rr/C/rrc_types.h"
 #include "telplugins_types.h"
 #include "telPluginsManagerSettings.h"
 //---------------------------------------------------------------------------
 
 namespace lmfit
 {
-using namespace rrc;
+//using namespace rrc;
 using namespace tlpc;
 
 /* data structure to transmit model data to function evalution */

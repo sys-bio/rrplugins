@@ -5,7 +5,7 @@ project(plugins_examples)
 include_directories(
 	${TLP_ROOT}/source
 	${TLP_ROOT}/wrappers/C
-    	${THIRD_PARTY_INSTALL_FOLDER}/include
+ 	${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
 #add_subdirectory(cpp_plugin_demo_1)

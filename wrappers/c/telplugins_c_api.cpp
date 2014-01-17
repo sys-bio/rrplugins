@@ -20,7 +20,7 @@ using rr::RoadRunnerData;
 using namespace tlp;
 
 
-RRPluginManagerHandle rrp_cc createPluginManager(const char* _pluginDir)
+RRPluginManagerHandle tlp_cc createPluginManager(const char* _pluginDir)
 {
     start_try
         string pluginDir;
@@ -42,7 +42,7 @@ RRPluginManagerHandle rrp_cc createPluginManager(const char* _pluginDir)
 /**
  * free the plugin manager
  */
-bool rrp_cc freePluginManager(RRPluginManagerHandle handle)
+bool tlp_cc freePluginManager(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -51,9 +51,7 @@ bool rrp_cc freePluginManager(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-//PLUGIN Functions
-
-RRPluginHandle rrp_cc getFirstPlugin(RRPluginManagerHandle handle)
+RRPluginHandle tlp_cc getFirstPlugin(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -61,7 +59,7 @@ RRPluginHandle rrp_cc getFirstPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle rrp_cc getNextPlugin(RRPluginManagerHandle handle)
+RRPluginHandle tlp_cc getNextPlugin(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -69,7 +67,7 @@ RRPluginHandle rrp_cc getNextPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle rrp_cc getPreviousPlugin(RRPluginManagerHandle handle)
+RRPluginHandle tlp_cc getPreviousPlugin(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -77,7 +75,7 @@ RRPluginHandle rrp_cc getPreviousPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle rrp_cc getCurrentPlugin(RRPluginManagerHandle handle)
+RRPluginHandle tlp_cc getCurrentPlugin(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -85,7 +83,7 @@ RRPluginHandle rrp_cc getCurrentPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle rrp_cc loadPlugin(RRPluginManagerHandle handle, const char* pluginName)
+RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* pluginName)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -101,7 +99,7 @@ RRPluginHandle rrp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
     catch_ptr_macro
 }
 
-int rrp_cc loadPlugins(RRPluginManagerHandle handle)
+int tlp_cc loadPlugins(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -109,7 +107,7 @@ int rrp_cc loadPlugins(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-bool rrp_cc unLoadPlugins(RRPluginManagerHandle handle)
+bool tlp_cc unLoadPlugins(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -117,7 +115,7 @@ bool rrp_cc unLoadPlugins(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-bool rrp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin)
+bool tlp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -134,7 +132,7 @@ bool rrp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin)
     catch_bool_macro
 }
 
-int rrp_cc getNumberOfPlugins(RRPluginManagerHandle handle)
+int tlp_cc getNumberOfPlugins(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -142,7 +140,7 @@ int rrp_cc getNumberOfPlugins(RRPluginManagerHandle handle)
     catch_int_macro
 }
 
-RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const char* pluginName)
+RRPluginHandle tlp_cc getPlugin(RRPluginManagerHandle handle, const char* pluginName)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -151,7 +149,7 @@ RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const char* plugin
     catch_ptr_macro
 }
 
-//long rrp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginName)
+//long tlp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginName)
 //{
 //    start_try
 //        PluginManager *pm = castToPluginManager(handle);
@@ -161,7 +159,7 @@ RRPluginHandle rrp_cc getPlugin(RRPluginManagerHandle handle, const char* plugin
 //    catch_ptr_macro
 //}
 
-RRHandle rrp_cc getRRHandleFromPlugin(RRPluginHandle handle)
+RRHandle tlp_cc getRRHandleFromPlugin(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -169,7 +167,7 @@ RRHandle rrp_cc getRRHandleFromPlugin(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginNames(RRPluginManagerHandle handle)
+char* tlp_cc getPluginNames(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -178,7 +176,7 @@ char* rrp_cc getPluginNames(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginLibraryNames(RRPluginManagerHandle handle)
+char* tlp_cc getPluginLibraryNames(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
@@ -187,7 +185,7 @@ char* rrp_cc getPluginLibraryNames(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginName(RRPluginHandle handle)
+char* tlp_cc getPluginName(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -195,7 +193,7 @@ char* rrp_cc getPluginName(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginCategory(RRPluginHandle handle)
+char* tlp_cc getPluginCategory(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -203,7 +201,7 @@ char* rrp_cc getPluginCategory(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginDescription(RRPluginHandle handle)
+char* tlp_cc getPluginDescription(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -211,7 +209,7 @@ char* rrp_cc getPluginDescription(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginHint(RRPluginHandle handle)
+char* tlp_cc getPluginHint(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -219,7 +217,7 @@ char* rrp_cc getPluginHint(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-RRPropertiesHandle rrp_cc getPluginProperties(RRPluginHandle handle)
+RRPropertiesHandle tlp_cc getPluginProperties(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -227,7 +225,7 @@ RRPropertiesHandle rrp_cc getPluginProperties(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
+char* tlp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);        
@@ -235,7 +233,7 @@ char* rrp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle rrp_cc getPluginProperty(RRPluginHandle handle, const char* parameterName)
+RRPropertyHandle tlp_cc getPluginProperty(RRPluginHandle handle, const char* parameterName)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -248,7 +246,7 @@ RRPropertyHandle rrp_cc getPluginProperty(RRPluginHandle handle, const char* par
     catch_ptr_macro
 }
 
-bool rrp_cc setPluginProperty(RRPluginHandle handle, const char* parameterName, const char* value)
+bool tlp_cc setPluginProperty(RRPluginHandle handle, const char* parameterName, const char* value)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -257,7 +255,7 @@ bool rrp_cc setPluginProperty(RRPluginHandle handle, const char* parameterName, 
     catch_bool_macro
 }
 
-char* rrp_cc getPluginInfo(RRPluginHandle handle)
+char* tlp_cc getPluginInfo(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -265,7 +263,7 @@ char* rrp_cc getPluginInfo(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-unsigned int rrp_cc getPluginManualNrOfBytes(RRPluginHandle handle)
+unsigned int tlp_cc getPluginManualNrOfBytes(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -273,7 +271,7 @@ unsigned int rrp_cc getPluginManualNrOfBytes(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-unsigned char* rrp_cc getPluginManualAsPDF(RRPluginHandle handle)
+unsigned char* tlp_cc getPluginManualAsPDF(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -281,7 +279,7 @@ unsigned char* rrp_cc getPluginManualAsPDF(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* rrp_cc getPluginStatus(RRPluginHandle handle)
+char* tlp_cc getPluginStatus(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -289,7 +287,7 @@ char* rrp_cc getPluginStatus(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle rrHandle)
+bool tlp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle rrHandle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(pHandle);
@@ -297,12 +295,12 @@ bool rrp_cc assignRoadRunnerInstance(RRPluginHandle pHandle, RRHandle rrHandle)
     catch_bool_macro
 }
 
-bool rrp_cc executePlugin(RRPluginHandle handle)
+bool tlp_cc executePlugin(RRPluginHandle handle)
 {
     return executePluginEx(handle, false);
 }
 
-bool rrp_cc executePluginEx(RRPluginHandle handle, bool inAThread)
+bool tlp_cc executePluginEx(RRPluginHandle handle, bool inAThread)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -310,7 +308,7 @@ bool rrp_cc executePluginEx(RRPluginHandle handle, bool inAThread)
     catch_bool_macro
 }
 
-bool rrp_cc assignOnStartedEvent(RRPluginHandle handle, PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnStartedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -318,7 +316,7 @@ bool rrp_cc assignOnStartedEvent(RRPluginHandle handle, PluginEvent theCB, void*
     catch_bool_macro
 }
 
-bool rrp_cc assignOnProgressEvent(RRPluginHandle handle, PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnProgressEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -326,7 +324,7 @@ bool rrp_cc assignOnProgressEvent(RRPluginHandle handle, PluginEvent theCB, void
     catch_bool_macro
 }
 
-bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnFinishedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -334,7 +332,7 @@ bool rrp_cc assignOnFinishedEvent(RRPluginHandle handle, PluginEvent theCB, void
     catch_bool_macro
 }
 
-char* rrp_cc getPluginResult(RRPluginHandle handle)
+char* tlp_cc getPluginResult(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -342,7 +340,7 @@ char* rrp_cc getPluginResult(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc resetPlugin(RRPluginHandle handle)
+bool tlp_cc resetPlugin(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -350,7 +348,7 @@ bool rrp_cc resetPlugin(RRPluginHandle handle)
     catch_bool_macro
 }
 
-bool rrp_cc isBeingTerminated(RRPluginHandle handle)
+bool tlp_cc isBeingTerminated(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -358,7 +356,7 @@ bool rrp_cc isBeingTerminated(RRPluginHandle handle)
     catch_bool_macro
 }
 
-void rrp_cc terminateWork(RRPluginHandle handle)
+void tlp_cc terminateWork(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -366,7 +364,7 @@ void rrp_cc terminateWork(RRPluginHandle handle)
     catch_void_macro
 }
 
-bool rrp_cc wasTerminated(RRPluginHandle handle)
+bool tlp_cc wasTerminated(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -374,7 +372,7 @@ bool rrp_cc wasTerminated(RRPluginHandle handle)
     catch_bool_macro
 }
 
-bool rrp_cc isPluginWorking(RRPluginHandle handle)
+bool tlp_cc isPluginWorking(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -382,64 +380,17 @@ bool rrp_cc isPluginWorking(RRPluginHandle handle)
     catch_bool_macro
 }
 
-RRDataHandle rrp_cc getRoadRunnerDataHandle(RRHandle handle)
-{
-    start_try
-        RoadRunner* rri = castToRoadRunner(handle);
-        return rri->getSimulationResult();
-    catch_ptr_macro
-}
-
-//RRCDataPtr rrp_cc createRRCData(RRDataHandle rrDataHandle)
-//{
-//    start_try
-//        RoadRunnerData* data = castToRoadRunnerData(rrDataHandle);
-//        return tlp::createRRCData((*data));
-//    catch_ptr_macro
-//}
-//
-//int rrp_cc  getRRCDataNumRows (RRCDataPtr result)
-//{
-//    if (result == NULL)
-//    {
-//       setError ("result argument is null in getResultNumRows");
-//       return -1;
-//    }
-//    return result->RSize;
-//}
-//
-//int  rrp_cc  getRRCDataNumCols (RRCDataPtr result)
-//{
-//    if (result == NULL)
-//    {
-//       setError ("result argument is null in getResultNumCols");
-//       return -1;
-//    }
-//    return result->CSize;
-//}
-//
-//bool rrp_cc getRRCDataElementF(RRCDataPtr result, int r, int c, double *value)
-//{
-//    return rrc::getRRCDataElement(result, r, c, value);
-//}
-
-//char* rrp_cc stringArrayToStringFWD(const RRStringArrayPtr list)
-//{
-//    return rrc::stringArrayToString(list);
-//}
-
-char* rrp_cc getLastPluginError()
+char* tlp_cc getLastError()
 {   
-//    return tlp::getLastError(); //Todo
-    return NULL;
+    return gLastError; 
 }
 
-bool rrp_cc freeText(char* text)
+bool tlp_cc freeText(char* text)
 {
-    return tlp::freeCString(text);
+    return tlp::freeText(text);
 }
 
-char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
+char* tlp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
@@ -447,79 +398,6 @@ char* rrp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-bool rrp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double* value)
-{
-    start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(data);
-        const ls::DoubleMatrix& theData = rrData->getData();
-        *value = theData.Element(row, col);
-        return true;
-    catch_bool_macro
-}
-
-char* rrp_cc getRoadRunnerDataColumnHeader(RRDataHandle _data)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(_data);
-        return createText(data->getColumnNamesAsString());        
-    catch_ptr_macro
-}
-
-int rrp_cc getRoadRunnerDataNumRows(RRDataHandle _data)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(_data);
-        return data->rSize();        
-    catch_int_macro
-}
-
-int rrp_cc getRoadRunnerDataNumCols(RRDataHandle _data)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(_data);
-        return data->cSize();        
-    catch_int_macro
-}
-
-RRDataHandle rrp_cc createRoadRunnerData(int nRows, int nCols, char* colNames)
-{
-    start_try
-        RoadRunnerData* data = new RoadRunnerData(nRows, nCols);
-        if (colNames)
-        {
-            string cNames(colNames);
-            StringList colNames(cNames, ",");
-            data->setColumnNames(colNames);
-        }
-        return data;        
-    catch_ptr_macro
-}
-
-bool rrp_cc freeRoadRunnerData(RRDataHandle rrData)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
-        delete data;
-        return true;
-    catch_bool_macro
-}
-
-bool rrp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
-        return data->writeTo(fName);        
-    catch_bool_macro
-}
-
-bool rrp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName)
-{
-    start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
-        return data->readFrom(fName);        
-    catch_bool_macro
-
-}
 
 
 }

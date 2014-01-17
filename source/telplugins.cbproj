@@ -138,10 +138,6 @@
             <DependentOn>telPluginManager.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="telPluginUtils.cpp">
-            <DependentOn>telPluginUtils.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
-        </CppCompile>
         <CppCompile Include="telProperties.cpp">
             <DependentOn>telProperties.h</DependentOn>
             <BuildOrder>16</BuildOrder>

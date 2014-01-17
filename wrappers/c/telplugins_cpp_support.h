@@ -55,16 +55,6 @@ namespace rr
     class RoadRunner;
 }
 
-//namespace tlp
-//{
-//    template <class T>
-//    class Property;
-//    class Properties;
-//    class PropertyBase;
-//    class Plugin;
-//    class PluginManager;
-//}
-
 namespace tlpc
 {
 using std::string;
@@ -81,7 +71,6 @@ using tlp::Property;
  \ingroup cpp_support
 */
 TLP_C_DS void                        setError(const string& err);
-
 
 /*!
  \brief Cast a handle to RoadRunner PluginManager pointer, throws if it fails
@@ -161,7 +150,7 @@ Property<Properties>*              castToPropertiesProperty(RRPropertyHandle han
  \return Pointer to a RoadRunnerData instance
  \ingroup cpp_support
 */
-rr::RoadRunnerData*                 castToRoadRunnerData(RRPropertyHandle handle);
+rr::RoadRunnerData*                 castPropertyToRoadRunnerData(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<RoadRunnerData> pointer, throws if it fails
@@ -182,6 +171,13 @@ Property<rr::RoadRunnerData>*       castToRoadRunnerDataProperty(RRPropertyHandl
 */
 rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
 
+/*!
+ \brief Cast a RRDataHandle to RoadRunnerData instance pointer, throws if it fails
+ \param[in] handle  A handle to a roadrunner data instance
+ \return Pointer to a roadrunner instance
+ \ingroup cpp_support
+*/
+rr::RoadRunnerData*                     castToRoadRunnerData(RRDataHandle rrHandle);
 
 ////Result data
 ///*!

@@ -3,6 +3,12 @@
         <ProjectGuid>{9D2F6A51-22D8-4937-81DE-48830B3456CF}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="R:\rrl\source\roadrunner.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="R:\rrl\wrappers\C\roadrunner_c_api.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="source\telplugins.cbproj">
             <Dependencies/>
         </Projects>
@@ -21,16 +27,16 @@
         <Projects Include="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\lmfit\rrp_lm.cbproj">
+        <Projects Include="plugins\lmfit\tel_lm.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\add_noise\rrp_add_noise.cbproj">
+        <Projects Include="plugins\add_noise\tel_add_noise.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\auto_2000\source\rrp_auto2000.cbproj">
+        <Projects Include="plugins\auto_2000\source\tel_auto2000.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj">
+        <Projects Include="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
@@ -56,6 +62,24 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="roadrunner">
+        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj"/>
+    </Target>
+    <Target Name="roadrunner:Clean">
+        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="roadrunner:Make">
+        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="roadrunner_c_api">
+        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj"/>
+    </Target>
+    <Target Name="roadrunner_c_api:Clean">
+        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="roadrunner_c_api:Make">
+        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="telplugins">
         <MSBuild Projects="source\telplugins.cbproj"/>
     </Target>
@@ -110,41 +134,41 @@
     <Target Name="rrAutoInterface-static:Make">
         <MSBuild Projects="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrp_lm">
-        <MSBuild Projects="plugins\lmfit\rrp_lm.cbproj"/>
+    <Target Name="tel_lm">
+        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj"/>
     </Target>
-    <Target Name="rrp_lm:Clean">
-        <MSBuild Projects="plugins\lmfit\rrp_lm.cbproj" Targets="Clean"/>
+    <Target Name="tel_lm:Clean">
+        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="rrp_lm:Make">
-        <MSBuild Projects="plugins\lmfit\rrp_lm.cbproj" Targets="Make"/>
+    <Target Name="tel_lm:Make">
+        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrp_add_noise">
-        <MSBuild Projects="plugins\add_noise\rrp_add_noise.cbproj"/>
+    <Target Name="tel_add_noise">
+        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj"/>
     </Target>
-    <Target Name="rrp_add_noise:Clean">
-        <MSBuild Projects="plugins\add_noise\rrp_add_noise.cbproj" Targets="Clean"/>
+    <Target Name="tel_add_noise:Clean">
+        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="rrp_add_noise:Make">
-        <MSBuild Projects="plugins\add_noise\rrp_add_noise.cbproj" Targets="Make"/>
+    <Target Name="tel_add_noise:Make">
+        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrp_auto2000">
-        <MSBuild Projects="plugins\auto_2000\source\rrp_auto2000.cbproj"/>
+    <Target Name="tel_auto2000">
+        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj"/>
     </Target>
-    <Target Name="rrp_auto2000:Clean">
-        <MSBuild Projects="plugins\auto_2000\source\rrp_auto2000.cbproj" Targets="Clean"/>
+    <Target Name="tel_auto2000:Clean">
+        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="rrp_auto2000:Make">
-        <MSBuild Projects="plugins\auto_2000\source\rrp_auto2000.cbproj" Targets="Make"/>
+    <Target Name="tel_auto2000:Make">
+        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrp_c_plugin_demo">
-        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj"/>
+    <Target Name="tel_c_plugin_demo">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj"/>
     </Target>
-    <Target Name="rrp_c_plugin_demo:Clean">
-        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj" Targets="Clean"/>
+    <Target Name="tel_c_plugin_demo:Clean">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="rrp_c_plugin_demo:Make">
-        <MSBuild Projects="examples\C\c_plugin_demo_1\rrp_c_plugin_demo.cbproj" Targets="Make"/>
+    <Target Name="tel_c_plugin_demo:Make">
+        <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj" Targets="Make"/>
     </Target>
     <Target Name="property_meta_data">
         <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
@@ -192,13 +216,13 @@
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;rrp_lm;rrp_add_noise;rrp_auto2000;rrp_c_plugin_demo;property_meta_data;c_plugin_demo;rrextended;rrextended_c;rrWinC"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;property_meta_data;c_plugin_demo;rrextended;rrextended_c;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;rrp_lm:Clean;rrp_add_noise:Clean;rrp_auto2000:Clean;rrp_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;rrp_lm:Make;rrp_add_noise:Make;rrp_auto2000:Make;rrp_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

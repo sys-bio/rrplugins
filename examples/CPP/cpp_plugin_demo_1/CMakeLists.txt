@@ -44,7 +44,7 @@ else() #UNIX
         blas
         f2c
         pthread
-        roadrunner_c_api
+        #roadrunner_c_api
         telplugins_c_api
         )
 endif()

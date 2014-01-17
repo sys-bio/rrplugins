@@ -23,6 +23,7 @@ void setError(const string& err)
     gLastError = tlp::createText(err);
 }
 
+
 PluginManager* castToPluginManager(RRPluginManagerHandle handle)
 {
     PluginManager *pm = static_cast<PluginManager*>(handle);
@@ -149,20 +150,6 @@ Property<Properties>* castToPropertiesProperty(RRPropertyHandle handle)
     }
 }
 
-RoadRunnerData* castToRoadRunnerData(RRDataHandle handle)
-{
-    rr::RoadRunnerData* para = (RoadRunnerData*) handle;
-    if(para) //Will only fail if handle is NULL...
-    {
-        return para;
-    }
-    else
-    {
-        rr::Exception ex("Failed to cast to a valid RoadRunner Data handle");
-        throw(ex);
-    }
-}
-
 RoadRunner* castToRoadRunner(RRHandle handle)
 {
     rr::RoadRunner* para = (RoadRunner*) handle;
@@ -173,6 +160,20 @@ RoadRunner* castToRoadRunner(RRHandle handle)
     else
     {
         rr::Exception ex("Failed to cast to a valid RoadRunner data handle");
+        throw(ex);
+    }
+}
+
+RoadRunnerData* castToRoadRunnerData(RRDataHandle handle)
+{
+    rr::RoadRunnerData* para = (RoadRunnerData*) handle;
+    if(para) //Will only fail if handle is NULL...
+    {
+        return para;
+    }
+    else
+    {
+        rr::Exception ex("Failed to cast to a valid RoadRunner Data handle");
         throw(ex);
     }
 }

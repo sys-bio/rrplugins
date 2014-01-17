@@ -1,5 +1,8 @@
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "telplugins_c_api.h"
+#include "telplugins_types.h"
 #include "c_plugin_demo.h"
 
 const char* call_conv getImplementationLanguage()
@@ -60,7 +63,7 @@ bool call_conv execute()
 {
     char *text1, *text2;
     RRHandle rrHandle;
-    text1       = createTextMemory(4096);
+    text1       = (char*) malloc(4096 * sizeof(char));
     rrHandle    = createRRInstance();
 
     strcpy(text1, "CPP API Version: ");
@@ -78,6 +81,6 @@ bool call_conv execute()
     //cleanup
     freeRRInstance(rrHandle);
     freeText(text2);
-    freeText(text1);
+    free(text1);
     return true;
 }

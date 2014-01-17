@@ -7,8 +7,8 @@
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
-#include "rr/C/rrc_utilities.h"
+#include "rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
+#include "rrc_utilities.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {
@@ -219,7 +219,8 @@ bool LMWorker::setup()
         {
             for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
             {
-                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
+                //mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
+                mLMData.experimentalDataWeights[i][timePoint] = obsData.weight(timePoint, i + 1);
             }
         }
     }
@@ -279,7 +280,7 @@ void evaluate(const double *par,       //Property vector
         Log(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
     }
 
-    RRDataHandle rrData = simulateEx(   myData->rrHandle,
+    rrc::RRDataHandle rrData = simulateEx(   myData->rrHandle,
                                         myData->timeStart,
                                         myData->timeEnd,
                                         myData->nrOfTimePoints);
@@ -302,7 +303,7 @@ void evaluate(const double *par,       //Property vector
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
             double modelValue;
-            if(!tlpc::getRRCDataElement(rrcData, j, i, &modelValue))
+            if(!rrc::getRRCDataElement(rrcData, j, i, &modelValue))
             {
                 throw("Bad stuff...") ;
             }

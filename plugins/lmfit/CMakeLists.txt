@@ -6,6 +6,7 @@ include_directories(
 ../../source
 ../../wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
 ${CMAKE_INSTALL_PREFIX}/include
 )
 
@@ -37,7 +38,8 @@ roadrunner
 lmfit-static
 telplugins
 telplugins_c_api                 
-roadrunner_c_api                 
+#roadrunner_c_api                 
+rrc_api                 
 )
 
 else() 
@@ -58,7 +60,7 @@ else()
     target_link_libraries ( ${target}
         roadrunner-static
         lmfit-static
-        roadrunner_c_api
+        #roadrunner_c_api
         telplugins_api-static
         )
 endif()

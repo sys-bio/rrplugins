@@ -3,13 +3,13 @@
 
 //C function calling conventions
 #if defined(_MSC_VER)
-    #define rrp_cc    __cdecl
+    #define tlp_cc    __cdecl
     #define event_cc  __cdecl
 #elif defined(__BORLANDC__)
-    #define rrp_cc      __cdecl
+    #define tlp_cc      __cdecl
     #define event_cc    __cdecl
 #else
-    #define rrp_cc
+    #define tlp_cc
 #endif
 
 #if !defined(__cplusplus)
