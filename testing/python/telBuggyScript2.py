@@ -13,7 +13,7 @@ try:
 
     # Generate data
     data = rr.simulate(0, 10, 511) # Want 512 points
-
+        
     # Get the dataseries from roadrunner
     d = tel.getDataSeries (data)        
 
@@ -21,7 +21,7 @@ try:
     noisePlugin.InputData = d
 
     # Set parameter for the 'size' of the noise
-    noisePlugin.Sigma = 3.e+2
+    noisePlugin.Sigma = 3.e-6
 
     # Add the noise
     noisePlugin.execute()
