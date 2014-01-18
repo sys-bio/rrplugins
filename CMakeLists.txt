@@ -108,10 +108,6 @@ if(${MSVC})
 endif()
 
 #=== COMPILER FLAGS
-if(${MINGW})
-    SET (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} -std=gnu++0x")
-endif()
-
 if(${BORLAND})
 add_definitions(
     -DUSE_PCH                   #Enable pre-compiled headers
@@ -131,6 +127,7 @@ endif()
 
 add_subdirectory(source)
 add_subdirectory(plugins)
+add_subdirectory(scripts)
 
 if(INSTALL_APPS)
     add_subdirectory(apps)
