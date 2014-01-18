@@ -1,36 +1,41 @@
 import roadrunner
 import telplugins as tel
 
-noisePlugin = tel.Plugin ("tel_add_noise")
+try:
 
-print noisePlugin.listOfProperties()
+    noisePlugin = tel.Plugin ("tel_add_noise")
 
-# Create a roadrunner instance
-rr = roadrunner.RoadRunner()
-rr.load("sbml_test_0001.xml")
+    print noisePlugin.listOfProperties()
 
-# Generate data
-rr.simulate(0, 10, 511) # Want 512 points
+    # Create a roadrunner instance
+    rr = roadrunner.RoadRunner()
+    rr.load("sbml_test_0001.xml")
 
-# Get the dataseries from roadrunner
-d = tel.getRoadRunnerData (rr)
+    # Generate data
+    rr.simulate(0, 10, 511) # Want 512 points
 
-# Assign the dataseries to the plugin inputdata
-noisePlugin.InputData = d
+    # Get the dataseries from roadrunner
+    d = tel.getRoadRunnerData (rr)
 
-# Set parameter for the 'size' of the noise
-noisePlugin.Sigma = 3.e-5
+    # Assign the dataseries to the plugin inputdata
+    noisePlugin.InputData = d
 
-# Add the noise
-noisePlugin.execute()
+    # Set parameter for the 'size' of the noise
+    noisePlugin.Sigma = 3.e-5
 
-# Get the data to plot
-numpydata = noisePlugin.InputData.AsNumpy;
+    # Add the noise
+    noisePlugin.execute()
 
-tel.telplugins.plot (numpydata[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
-tel.show()
+    # Get the data to plot
+    numpydata = noisePlugin.InputData.AsNumpy;
 
-d.writeDataSeries ("testData2.dat")
+    tel.telplugins.plot (numpydata[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
+    tel.show()
 
-d.readDataSeries ("testData2.dat")
-print "done"
+    d.writeDataSeries ("testData2.dat")
+
+    d.readDataSeries ("testData2.dat")
+    print "done"
+
+except Exception as e:
+    print 'Problem: ' + `e`
