@@ -11,7 +11,6 @@ import ctypes
 __version__ = "0.6.3"
 
 ## \brief DataSeries class for handling roadrunner data types
-
 class DataSeries(object):
 
     _data = 0
@@ -21,14 +20,30 @@ class DataSeries(object):
     ## d = DataSeries()
     ## d = DataSeries (rr)
     ##@endcode
-    def __init__ (self, rows=0, cols=0, handle=None):
+    def __init__ (self, handle=None):
         if handle == None:
-           self._data = tel.telLib.createRoadRunnerData(rows, cols,"")
+           self._data = tel.telLib.createRoadRunnerData(0, 0, "")
            self._myData = True
         else:   
            self._myData = False 
            self._data = handle
 
+    @classmethod
+    def fromRRPyData(cls, pyData):
+        colHdr  = pyData.dtype.names        
+        nrCols  = len(pyData.dtype.names)
+        nrRows  = len(pyData)                        
+        dataHandle = tel.telLib.createRoadRunnerData(nrRows,nrCols, str(colHdr).strip('[]'))        
+        
+        
+        #Copy the data
+        for row in range(nrRows):
+            for col in range(nrCols):                
+                #val = pyData.dtype.array[row,col] 
+                tel.setRoadRunnerDataElement(dataHandle, row, col, row+col)
+        
+        return cls(dataHandle)
+    
     def __del__ (self):
         if (self._data != 0):
             try:
@@ -418,7 +433,10 @@ def show():
 
 def getRoadRunnerData (rr):
     rrDataHandle = tel.getRoadRunnerDataHandle(rr)
-    return DataSeries (0,0, rrDataHandle)
+    return DataSeries (rrDataHandle)
+
+def getDataSeries (rrPyData):    
+    return DataSeries.fromRRPyData(rrPyData)
 
 ##if __name__=='__main__':
 ##

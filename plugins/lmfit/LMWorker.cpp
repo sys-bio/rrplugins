@@ -7,8 +7,8 @@
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
-#include "rrc_utilities.h"
+#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
+#include "rr/C/rrc_utilities.h"
 //---------------------------------------------------------------------------
 namespace lmfit
 {

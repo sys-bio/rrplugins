@@ -25,8 +25,7 @@ bool tlp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double
 {
     start_try
         RoadRunnerData* rrData = castToRoadRunnerData(data);
-        //*value = rrData->getDataElement(row, col);
-        *value = (*rrData)(row, col);
+        *value = rrData->getDataElement(row, col);        
         return true;
     catch_bool_macro
 }
@@ -35,8 +34,7 @@ bool tlp_cc setRoadRunnerDataElement(RRDataHandle data, int row, int col, double
 {
     start_try
         RoadRunnerData* rrData = castToRoadRunnerData(data);
-        //rrData->setDataElement(row, col, value);
-        (*rrData)(row, col) = value;
+        rrData->setDataElement(row, col, value);        
         return true;
     catch_bool_macro
 }
