@@ -6,15 +6,15 @@ import telplugins as tel
 ## Running in remote session seem to be ok..
 ##===============
 
+for i in range(100):
 # Create a roadrunner instance
-rr = roadrunner.RoadRunner()
-rr.load("sbml_test_0001.xml")
-
-# Generate data
-rr.simulate(0, 10, 511) # Want 512 points
-
-### Comment this out and the crash do not happen
-d = tel.getRoadRunnerData (rr)
-
-print 'done'
-
+    rr = roadrunner.RoadRunner()
+    rr.load("sbml_test_0001.xml")
+    
+    # Generate data
+    rr.simulate(0, 10, i + 1) # Want 512 points
+    
+    ### Comment this out and the crash do not happen    
+    d = tel.getRoadRunnerData (rr)
+        
+    print i

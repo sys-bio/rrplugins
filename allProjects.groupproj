@@ -39,10 +39,10 @@
         <Projects Include="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
+        <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
+        <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="R:\rre\source\rrextended.cbproj">
@@ -170,15 +170,6 @@
     <Target Name="tel_c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="property_meta_data">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
-    </Target>
-    <Target Name="property_meta_data:Clean">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="property_meta_data:Make">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="c_plugin_demo">
         <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj"/>
     </Target>
@@ -187,6 +178,15 @@
     </Target>
     <Target Name="c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="property_meta_data">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
+    </Target>
+    <Target Name="property_meta_data:Clean">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_meta_data:Make">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Make"/>
     </Target>
     <Target Name="rrextended">
         <MSBuild Projects="R:\rre\source\rrextended.cbproj"/>
@@ -216,13 +216,13 @@
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;property_meta_data;c_plugin_demo;rrextended;rrextended_c;rrWinC"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;plugin_info;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;c_plugin_demo;property_meta_data;rrextended;rrextended_c;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;property_meta_data:Clean;c_plugin_demo:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;c_plugin_demo:Clean;property_meta_data:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;property_meta_data:Make;c_plugin_demo:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;plugin_info:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;c_plugin_demo:Make;property_meta_data:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

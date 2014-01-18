@@ -15,24 +15,29 @@ __version__ = "0.6.3"
 class DataSeries(object):
 
     _data = 0
-
+    _myData = False
     ## \brief Constructor for DataSeries class 
     ##@code
     ## d = DataSeries()
     ## d = DataSeries (rr)
     ##@endcode
-    def __init__ (self, handle=None):
+    def __init__ (self, rows=0, cols=0, handle=None):
         if handle == None:
-           self._data = tel.telLib.createRoadRunnerData(0,0,"")
+           self._data = tel.telLib.createRoadRunnerData(rows, cols,"")
+           self._myData = True
         else:   
+           self._myData = False 
            self._data = handle
 
     def __del__ (self):
         if (self._data != 0):
             try:
-               tel.freeRoadRunnerData (self._data)
+                if self._myData == True:
+                    tel.freeRoadRunnerData (self._data)
+                #else:                    
+                #    print 'not freeing data'
             except:
-                print "Exception"
+                print "Failed freeing data in DataSeries"
             self._data = 0
 
     def __getHandle (self):
@@ -68,7 +73,7 @@ class DataSeries(object):
         rowCount = tel.telLib.getRoadRunnerDataNumRows(self._data)
         colCount = tel.telLib.getRoadRunnerDataNumCols(self._data)
         if (row < 0) or (col < 0):
-            raise Exception("DataSeries indices must be postive")
+            raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
             raise Exception("Row index out of bounds in dataseries element access")
         if col >= colCount:
@@ -413,27 +418,27 @@ def show():
 
 def getRoadRunnerData (rr):
     rrDataHandle = tel.getRoadRunnerDataHandle(rr)
-    return DataSeries (rrDataHandle)
+    return DataSeries (0,0, rrDataHandle)
 
-if __name__=='__main__':
-
-    print "Starting Test"
-
-    p = Plugin ("tel_add_noise")
-    p.viewManual()
-    #pl = p.listOfProperties()
-    #for item in pl:
-    #    print item
-
-    p.Sigma = 0.00005
-
-    series = p.loadDataSeries ("..\\Examples\\testData.dat")
-    p.plotDataSeries (series)
-    p.InputData = series
-    p.execute()
-    p.plotDataSeries (p.InputData)
-
-    print "Test Finished"
+##if __name__=='__main__':
+##
+##    print "Starting Test"
+##
+##    p = Plugin ("tel_add_noise")
+##    p.viewManual()
+##    #pl = p.listOfProperties()
+##    #for item in pl:
+##    #    print item
+##
+##    p.Sigma = 0.00005
+##
+##    series = p.loadDataSeries ("..\\Examples\\testData.dat")
+##    p.plotDataSeries (series)
+##    p.InputData = series
+##    p.execute()
+##    p.plotDataSeries (p.InputData)
+##
+##    print "Test Finished"
 
 ##\mainpage Python support code for working with RoadRUnner Plugins
 ##\section Introduction
