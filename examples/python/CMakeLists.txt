@@ -20,5 +20,5 @@ COMPONENT plugins_api
 #DESTINATION python_examples 	
 #COMPONENT plugins_api
 #)
-endif()
+#endif()
 
