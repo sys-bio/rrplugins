@@ -12,10 +12,10 @@ try:
     rr.load("sbml_test_0001.xml")
 
     # Generate data
-    rr.simulate(0, 10, 511) # Want 512 points
+    data = rr.simulate(0, 10, 511) # Want 512 points
 
     # Get the dataseries from roadrunner
-    d = tel.getRoadRunnerData (rr)
+    d = tel.getDataSeries (data)
 
     # Assign the dataseries to the plugin inputdata
     noisePlugin.InputData = d
