@@ -31,10 +31,22 @@ class DataSeries(object):
 
     @classmethod
     def fromNumPy(cls, numPyData):
-        colHdr  = numPyData.dtype.names        
-        nrCols  = len(numPyData.dtype.names)
-        nrRows  = len(numPyData)                        
-        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, str(colHdr).strip('[]'))        
+           
+        if size (numPyData.shape != 2):
+            raise ValueError ('fromNumPy only accepts two dimensional arrays')
+            
+        nrCols  = numPyData.shape[1]
+        nrRows  = len(numPyData)   
+        # If there are no column names then make some up                     
+        if numPyData.dtype.names == None:
+            colHdr = []
+            for i in range (nrCols):
+                colHdr.append ('x' + str (i))               
+        else:
+           colHdr  = numPyData.dtype.names 
+
+        columnStr = str(colHdr).strip('[]')
+        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, columnStr)        
                 
         #Copy the data
         for row in range(nrRows):
