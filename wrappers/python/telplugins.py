@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import os.path
 import ctypes
 
-__version__ = "0.6.3"
+__version__ = "0.6.5"
 
 ## \brief DataSeries class for handling roadrunner data types
 class DataSeries(object):
@@ -30,7 +30,7 @@ class DataSeries(object):
            
 
     @classmethod
-    def fromNumPyData(cls, numPyData):
+    def fromNumPy(cls, numPyData):
         colHdr  = numPyData.dtype.names        
         nrCols  = len(numPyData.dtype.names)
         nrRows  = len(numPyData)                        
@@ -60,11 +60,18 @@ class DataSeries(object):
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
         return tpc.telLib.getRoadRunnerDataNumRows(self._data)
+    # Use x.toNumpy to get NumPy array
+    def __toNumpy (self):
+        return tpc.getNumpyData (self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
         return tpc.telLib.getRoadRunnerDataNumCols(self._data)
-        
+     
+    # Use x.toNumpy to get NumPy array
+    def __toNumpy (self):
+        return tpc.getNumpyData (self._data)
+
     ## \brief Retrive the column headers as a list
     ##@code
     ## print d.getColumnHeaders()
@@ -75,10 +82,6 @@ class DataSeries(object):
            value = []
         return value
 
-    # Use x.AsNumpy to get NumPy array
-    def __AsNumpy (self):
-        return tpc.getNumpyData (self._data)
-        
     ## \brief Get a specific element from a dataseries
     ##@code
     ## print d.getElement (1,2)
@@ -111,11 +114,13 @@ class DataSeries(object):
     ## \brief Read a dataseries from a file
     ##@code
     ## d.readDataSeries ("myDataSeries.txt")
-    ##@endcode       
-    def readDataSeries(self, fileName):
+    ##@endcode 
+    @classmethod      
+    def readDataSeries(cls, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
-        self._data = tpc.createRoadRunnerDataFromFile (fileName)
+        data = tpc.createRoadRunnerDataFromFile (fileName)
+        return cls (data, True)
 
     ## \brief Write a dataseries to a file
     ##@code
@@ -124,13 +129,22 @@ class DataSeries(object):
     def writeDataSeries(self, fileName):
         tpc.writeRoadRunnerData(self._data, fileName)
 
+    ## \brief Plot a dataseries as a graph
+    ##@code
+    ## d.plot()
+    ##@endcode       
+    def plot (self):
+         hdr = tpc.getRoadRunnerDataColumnHeader(self._data)
+         npData = tpc.getNumpyData(self._data)
+         tpc.plotRoadRunnerData(npData, hdr)
+
     data = property (__getHandle)
 
     ## \brief Return a numpy array from a data series
     ##@code
-    ## myarray = d.AsNumpy
+    ## myarray = d.toNumpy
     ##@endcode         
-    AsNumpy = property (__AsNumpy)
+    toNumpy = property (__toNumpy)
     
     ## \brief Return the number of rows in the data series
     ##@code
@@ -304,14 +318,6 @@ class Plugin (object):
         rrDataHandle = tpc.createRoadRunnerDataFromFile (fileName)
         return tpc.getNumpyData (rrDataHandle)
 
-    ## \brief Load a data series from a file
-    ##@code
-    ## print myPlugin.loadDataSeries("myDataSeries.txt")
-    ##@endcode         
-    def loadDataSeries (self, fileName):
-        handle = tpc.createRoadRunnerDataFromFile (fileName)
-        return DataSeries(handle)
-
     def OnProgress (self, f):
         # Make sure garbage collector doens't remove the event pointer
         global _onProgressEvent
@@ -330,18 +336,6 @@ class Plugin (object):
 
     def executeEx (self, inThread):
         return tpc.executePluginEx (self.plugin, inThread)
-
-
-    def plotDataSeries (self, dataSeries):
-        if (isinstance (dataSeries, DataSeries)):
-           if dataSeries.data == 0:
-              exit()
-           hdr = tpc.getRoadRunnerDataColumnHeader(dataSeries.data)
-           npData = tpc.getNumpyData(dataSeries.data)
-           tpc.plotRoadRunnerData(npData, hdr)
-        else:
-           raise TypeError ("Expecting DataSeries type")
-
 
     ## \brief Read all text from a file
     ##@code
@@ -438,7 +432,14 @@ def getDataSeries (numPyData):
     return DataSeries.fromNumPyData(numPyData)
 
 ##if __name__=='__main__':
-##
+##    ## \brief Load a data series from a file
+    ##@code
+    ## print myPlugin.loadDataSeries("myDataSeries.txt")
+    ##@endcode         
+    def loadDataSeries (self, fileName):
+        handle = tpc.createRoadRunnerDataFromFile (fileName)
+        return DataSeries(handle)
+
 ##    print "Starting Test"
 ##
 ##    p = Plugin ("tel_add_noise")
@@ -491,7 +492,7 @@ def getDataSeries (numPyData):
 ##
 ##noisePlugin.execute ()
 ##
-##numpydata = noisePlugin.InputData.AsNumpy;
+##numpydata = noisePlugin.InputData.toNumpy;
 ##
 ##tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
 ##
