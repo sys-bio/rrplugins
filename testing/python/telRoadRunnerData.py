@@ -1,4 +1,4 @@
-import  telplugins_c_api as c
+import  telplugins as c
 
 
 try:

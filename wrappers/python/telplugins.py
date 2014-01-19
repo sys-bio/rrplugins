@@ -3,7 +3,7 @@
 ## Wrapper around C API to help avoid use of handle.
 # An example is given at the end of the code.
 
-import telplugins_c_api as tel
+import telplugins_c_api as tpc
 import matplotlib.pyplot as plt
 import os.path
 import ctypes
@@ -20,35 +20,34 @@ class DataSeries(object):
     ## d = DataSeries()
     ## d = DataSeries (rr)
     ##@endcode
-    def __init__ (self, handle=None):
+    def __init__ (self, handle=None, myData = False):
         if handle == None:
-           self._data = tel.telLib.createRoadRunnerData(0, 0, "")
            self._myData = True
+           self._data = tpc.telLib.createRoadRunnerData(0, 0, "")           
         else:   
-           self._myData = False 
            self._data = handle
+           self._myData = myData 
+           
 
     @classmethod
-    def fromRRPyData(cls, pyData):
-        colHdr  = pyData.dtype.names        
-        nrCols  = len(pyData.dtype.names)
-        nrRows  = len(pyData)                        
-        dataHandle = tel.telLib.createRoadRunnerData(nrRows,nrCols, str(colHdr).strip('[]'))        
-        
-        
+    def fromNumPyData(cls, numPyData):
+        colHdr  = numPyData.dtype.names        
+        nrCols  = len(numPyData.dtype.names)
+        nrRows  = len(numPyData)                        
+        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, str(colHdr).strip('[]'))        
+                
         #Copy the data
         for row in range(nrRows):
             for col in range(nrCols):                
-                #val = pyData.dtype.array[row,col] 
-                tel.setRoadRunnerDataElement(dataHandle, row, col, row+col)
-        
-        return cls(dataHandle)
+                val = numPyData[row][col] 
+                tpc.setRoadRunnerDataElement(dataHandle, row, col, val)        
+        return cls(dataHandle, True)
     
     def __del__ (self):
         if (self._data != 0):
             try:
                 if self._myData == True:
-                    tel.freeRoadRunnerData (self._data)
+                    tpc.freeRoadRunnerData (self._data)
                 #else:                    
                 #    print 'not freeing data'
             except:
@@ -60,33 +59,33 @@ class DataSeries(object):
         
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
-        return tel.telLib.getRoadRunnerDataNumRows(self._data)
+        return tpc.telLib.getRoadRunnerDataNumRows(self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
-        return tel.telLib.getRoadRunnerDataNumCols(self._data)
+        return tpc.telLib.getRoadRunnerDataNumCols(self._data)
         
     ## \brief Retrive the column headers as a list
     ##@code
     ## print d.getColumnHeaders()
     ##@endcode
     def getColumnHeaders (self):
-        value = tel.telLib.getRoadRunnerDataColumnHeader(self._data)
+        value = tpc.telLib.getRoadRunnerDataColumnHeader(self._data)
         if value == None:
            value = []
         return value
 
     # Use x.AsNumpy to get NumPy array
     def __AsNumpy (self):
-        return tel.getNumpyData (self._data)
+        return tpc.getNumpyData (self._data)
         
     ## \brief Get a specific element from a dataseries
     ##@code
     ## print d.getElement (1,2)
     ##@endcode       
     def getElement (self, row, col):
-        rowCount = tel.telLib.getRoadRunnerDataNumRows(self._data)
-        colCount = tel.telLib.getRoadRunnerDataNumCols(self._data)
+        rowCount = tpc.telLib.getRoadRunnerDataNumRows(self._data)
+        colCount = tpc.telLib.getRoadRunnerDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -95,7 +94,7 @@ class DataSeries(object):
             raise Exception("Column index out of bounds in dataseries element access")
 
         val = ctypes.c_double()
-        if tel.telLib.getRoadRunnerDataElement(self._data, row, col, ctypes.byref(val)) == True:
+        if tpc.telLib.getRoadRunnerDataElement(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:
            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
@@ -116,14 +115,14 @@ class DataSeries(object):
     def readDataSeries(self, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
-        self._data = tel.createRoadRunnerDataFromFile (fileName)
+        self._data = tpc.createRoadRunnerDataFromFile (fileName)
 
     ## \brief Write a dataseries to a file
     ##@code
     ## d.writeDataSeries ("myDataSeries.txt")
     ##@endcode       
     def writeDataSeries(self, fileName):
-        tel.writeRoadRunnerData(self._data, fileName)
+        tpc.writeRoadRunnerData(self._data, fileName)
 
     data = property (__getHandle)
 
@@ -173,7 +172,7 @@ class Event(object):
 
 # ------------------------------------------------------------------------
 
-_pluginManager = tel.createPluginManager()
+_pluginManager = tpc.createPluginManager()
 _pluginsAlreadyLoaded = False
 
 class Plugin (object):
@@ -188,7 +187,7 @@ class Plugin (object):
     ##@endcode         
     def __init__(self, pluginName):
         self.pluginName = pluginName
-        self.plugin = tel.loadPlugin (_pluginManager, pluginName)
+        self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
         if not self.plugin:
             return
         else:
@@ -202,13 +201,13 @@ class Plugin (object):
     ##@endcode         
     def setProperty(self, name, value):
         if (isinstance (value, DataSeries)):
-           if not tel.setPluginProperty (self.plugin, name, value.data):
+           if not tpc.setPluginProperty (self.plugin, name, value.data):
               raise TypeError ("Unable to locate property: ", name)
         else:
-           handle  = tel.getPluginProperty(self.plugin, name);
+           handle  = tpc.getPluginProperty(self.plugin, name);
            if handle == 0:
               raise ValueError ("Unable to locate property: ", name)
-           t1 = tel.getPropertyType (handle)
+           t1 = tpc.getPropertyType (handle)
            if (t1 == "listOfProperties"):
               if isinstance (value, list):
                  if len(value) != 2:
@@ -217,23 +216,23 @@ class Plugin (object):
                      raise TypeError("Expecting property name in first element of list")
                  if (not isinstance(value[1], float)) and (isinstance(value[1], int)):
                      raise TypeError("Expecting floating value in second element of list")
-                 para1 = tel.createProperty(value[0], "double", "", value[1])
-                 tel.addPropertyToList (handle, para1)
+                 para1 = tpc.createProperty(value[0], "double", "", value[1])
+                 tpc.addPropertyToList (handle, para1)
               else:
                  raise  TypeError ("Expecting a list in setProperty")
            else:
-              tel.setPluginProperty (self.plugin, name, value)
+              tpc.setPluginProperty (self.plugin, name, value)
 
     ## \brief Get the value for a given propoerty in the plugin.
     ##@code
     ## print myPlugin.getProperty("Sigma")
     ##@endcode         
     def getProperty (self, name):
-        handle = tel.getPluginProperty (self.plugin, name)
+        handle = tpc.getPluginProperty (self.plugin, name)
         if handle == 0:
             raise ValueError ("Property: " + name + " does not exist")
-        value = tel.getProperty (handle)
-        if (tel.getPropertyType(handle) == "roadRunnerData"):
+        value = tpc.getProperty (handle)
+        if (tpc.getPropertyType(handle) == "roadRunnerData"):
             return DataSeries (value)
         else:
            return value
@@ -256,12 +255,12 @@ class Plugin (object):
     def listOfProperties (self):
         if not self:
             return []
-        nameList = tel.getListOfPluginPropertyNames (self.plugin)
+        nameList = tpc.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = tel.getPluginProperty(self.plugin, nameList[i])
-            hint = tel.getPropertyHint(handle)
+            handle = tpc.getPluginProperty(self.plugin, nameList[i])
+            hint = tpc.getPropertyHint(handle)
             aList.append ([name, hint])
         return aList
 
@@ -274,12 +273,12 @@ class Plugin (object):
     ## print pprint.pprint (na.listOfProperties())  
     ##@endcode    
     def listOfPropertyDescriptions (self):
-        nameList = tel.getListOfPluginPropertyNames (self.plugin)
+        nameList = tpc.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = tel.getPluginProperty(self.plugin, nameList[i])
-            descr = tel.getPropertyDescription(handle)
+            handle = tpc.getPluginProperty(self.plugin, nameList[i])
+            descr = tpc.getPropertyDescription(handle)
             aList.append ([name, descr])
         return aList
 
@@ -288,12 +287,12 @@ class Plugin (object):
     ## print myPlugin.listOfPropertyHints()
     ##@endcode         
     def listOfPropertyHints (self):
-        nameList = tel.getListOfPluginPropertyNames (self.plugin)
+        nameList = tpc.getListOfPluginPropertyNames (self.plugin)
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
-            handle = tel.getPluginProperty(self.plugin, nameList[i])
-            descr = tel.getPropertyHint(handle)
+            handle = tpc.getPluginProperty(self.plugin, nameList[i])
+            descr = tpc.getPropertyHint(handle)
             aList.append ([name, descr])
         return aList
 
@@ -302,44 +301,44 @@ class Plugin (object):
     ## print myPlugin.listOfPropertyHints()
     ##@endcode         
     def loadDataSeriesAsNumPy (self, fileName):
-        rrDataHandle = tel.createRoadRunnerDataFromFile (fileName)
-        return tel.getNumpyData (rrDataHandle)
+        rrDataHandle = tpc.createRoadRunnerDataFromFile (fileName)
+        return tpc.getNumpyData (rrDataHandle)
 
     ## \brief Load a data series from a file
     ##@code
     ## print myPlugin.loadDataSeries("myDataSeries.txt")
     ##@endcode         
     def loadDataSeries (self, fileName):
-        handle = tel.createRoadRunnerDataFromFile (fileName)
+        handle = tpc.createRoadRunnerDataFromFile (fileName)
         return DataSeries(handle)
 
     def OnProgress (self, f):
         # Make sure garbage collector doens't remove the event pointer
         global _onProgressEvent
 
-        _onProgressEvent =  tel.NotifyEventEx (f)
+        _onProgressEvent =  tpc.NotifyEventEx (f)
         # Pass the address of the self object
         theId = id (self)
-        tel.assignOnProgressEvent(self.plugin, _onProgressEvent, theId, None)
+        tpc.assignOnProgressEvent(self.plugin, _onProgressEvent, theId, None)
 
     ## \brief Execute the plugin
     ##@code
     ## print myPlugin.execute()
     ##@endcode         
     def execute (self):
-        return tel.executePlugin (self.plugin)
+        return tpc.executePlugin (self.plugin)
 
     def executeEx (self, inThread):
-        return tel.executePluginEx (self.plugin, inThread)
+        return tpc.executePluginEx (self.plugin, inThread)
 
 
     def plotDataSeries (self, dataSeries):
         if (isinstance (dataSeries, DataSeries)):
            if dataSeries.data == 0:
               exit()
-           hdr = tel.getRoadRunnerDataColumnHeader(dataSeries.data)
-           npData = tel.getNumpyData(dataSeries.data)
-           tel.plotRoadRunnerData(npData, hdr)
+           hdr = tpc.getRoadRunnerDataColumnHeader(dataSeries.data)
+           npData = tpc.getNumpyData(dataSeries.data)
+           tpc.plotRoadRunnerData(npData, hdr)
         else:
            raise TypeError ("Expecting DataSeries type")
 
@@ -355,7 +354,7 @@ class Plugin (object):
         return str
 
     def loadPlugins(self):
-        tel.loadPlugins (self.pluginsManager)
+        tpc.loadPlugins (self.pluginsManager)
 
     ## \brief Static method to list all plugins
     ##@code
@@ -366,17 +365,17 @@ class Plugin (object):
         global _pluginsAlreadyLoaded
         # Hack to get round bug in loadPlugins
         if not _pluginsAlreadyLoaded:
-           tel.loadPlugins (_pluginManager)
+           tpc.loadPlugins (_pluginManager)
            _pluginsAlreadyLoaded = True
 
         aList = []
-        names = tel.getPluginLibraryNames (_pluginManager)
-        n = tel.getNumberOfPlugins (_pluginManager)
+        names = tpc.getPluginLibraryNames (_pluginManager)
+        n = tpc.getNumberOfPlugins (_pluginManager)
         # This is a hack to get round thelack of metadata in the plugin
         # Will be resolved in next revision of library
         for i in range (0, n):
-            handle = tel.getPlugin(_pluginManager, names[i])
-            info = tel.getPluginInfo (handle)
+            handle = tpc.getPlugin(_pluginManager, names[i])
+            info = tpc.getPluginInfo (handle)
             info = info.split ("\n")
             hint = info[2]
             hint = hint.replace("Category......................", "")
@@ -388,32 +387,32 @@ class Plugin (object):
     ## myPlugin.viewManual()
     ##@endcode         
     def viewManual (self):
-        tel.displayPluginManual(self.plugin)
+        tpc.displayPluginManual(self.plugin)
 
     ## \brief Returns the name of the plugin
     ##@code
     ## print myPlugin.name()
     ##@endcode         
     def name (self):
-        return tel.getPluginName(self.plugin)
+        return tpc.getPluginName(self.plugin)
 
     ## \brief Returns the description of the plugin
     ##@code
     ## print myPlugin.description()
     ##@endcode         
     def description (self):
-        return tel.getPluginDescription(self.plugin)
+        return tpc.getPluginDescription(self.plugin)
 
     ## \brief Returns the hint of the plugin
     ##@code
     ## print myPlugin.hint()
     ##@endcode         
     def hint (self):
-        return tel.getPluginHint(self.plugin)
+        return tpc.getPluginHint(self.plugin)
 
      
     def info (self):
-        return tel.telLib.getPluginInfo(self.plugin)
+        return tpc.telLib.getPluginInfo(self.plugin)
 
 # ----------------------------------------------------------------
 
@@ -432,11 +431,11 @@ def show():
     plt.show()
 
 def getRoadRunnerData (rr):
-    rrDataHandle = tel.getRoadRunnerDataHandle(rr)
+    rrDataHandle = tpc.getRoadRunnerDataHandle(rr)
     return DataSeries (rrDataHandle)
 
-def getDataSeries (rrPyData):    
-    return DataSeries.fromRRPyData(rrPyData)
+def getDataSeries (numPyData):    
+    return DataSeries.fromNumPyData(numPyData)
 
 ##if __name__=='__main__':
 ##
