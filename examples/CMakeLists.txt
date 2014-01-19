@@ -6,6 +6,8 @@ include_directories(
 	${TLP_ROOT}/source
 	${TLP_ROOT}/wrappers/C
  	${THIRD_PARTY_INSTALL_FOLDER}/include
+ 	${THIRD_PARTY_INSTALL_FOLDER}/include/rr
+ 	${THIRD_PARTY_INSTALL_FOLDER}/include/rr/C
 )
 
 add_subdirectory(c)

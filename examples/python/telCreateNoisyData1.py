@@ -2,13 +2,13 @@ import telplugins as tel
 
 p = tel.Plugin ("tel_add_noise")
 
-data = p.loadDataSeries ("testData.dat")
+data = tel.DataSeries.readDataSeries ("testData.dat")
 
-p.plotDataSeries (data)
+data.plot ()
 
 p.InputData = data
 p.Sigma = 0.00005
 
 p.execute()
 
-p.plotDataSeries (p.InputData)
+p.InputData.plot()

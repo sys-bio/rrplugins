@@ -1,10 +1,10 @@
 import roadrunner
 import telplugins as tel
 
+i = 0
+#for i in range(100):
 try:
-
     noisePlugin = tel.Plugin ("tel_add_noise")
-
     print noisePlugin.listOfProperties()
 
     # Create a roadrunner instance
@@ -13,21 +13,21 @@ try:
 
     # Generate data
     data = rr.simulate(0, 10, 511) # Want 512 points
-
+        
     # Get the dataseries from roadrunner
-    d = tel.getDataSeries (data)
+    d = tel.getDataSeries (data)        
 
     # Assign the dataseries to the plugin inputdata
     noisePlugin.InputData = d
 
     # Set parameter for the 'size' of the noise
-    noisePlugin.Sigma = 3.e-5
+    noisePlugin.Sigma = 3.e-6
 
     # Add the noise
     noisePlugin.execute()
 
     # Get the data to plot
-    numpydata = noisePlugin.InputData.toNumpy;
+    numpydata = noisePlugin.InputData.AsNumpy;
 
     tel.telplugins.plot (numpydata[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
     tel.show()
@@ -36,6 +36,11 @@ try:
 
     d.readDataSeries ("testData2.dat")
     print "done"
+    
+
+    
+    print i
 
 except Exception as e:
     print 'Problem: ' + `e`
+        

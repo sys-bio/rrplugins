@@ -22,7 +22,7 @@ tel.assignOnProgressEvent(lm.plugin, progressEvent, theId)
 
 #Setup lmfit properties.
 lm.setProperty("SBML", lm.readAllText("lmFitTestModel.xml"))
-experimentalData = lm.loadDataSeries ("testData.dat")
+experimentalData = tel.DataSeries.readDataSeries ("testData.dat")
 lm.setProperty("ExperimentalData", experimentalData)
 
 # Add the parameters that we're going to fit and a initial 'start' value
@@ -37,11 +37,11 @@ print 'Minimization finished. \n==== Result ===='
 print tel.getPluginResult(lm.plugin)
 
 # Get the experimental data as a numpy array
-experimentalData = experimentalData.AsNumpy
+experimentalData = experimentalData.toNumpy
 
 # Get the fitted and residual data
-fittedData = lm.getProperty ("FittedData").AsNumpy
-residuals  = lm.getProperty ("Residuals").AsNumpy
+fittedData = lm.getProperty ("FittedData").toNumpy
+residuals  = lm.getProperty ("Residuals").toNumpy
 
 tel.telplugins.plot(fittedData         [:,[0,1]], "blue", "-",    "",    "S1 Fitted")
 tel.telplugins.plot(fittedData         [:,[0,2]], "blue", "-",    "",    "S2 Fitted")
