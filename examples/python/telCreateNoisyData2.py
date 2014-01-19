@@ -27,7 +27,7 @@ try:
     noisePlugin.execute()
 
     # Get the data to plot
-    numpydata = noisePlugin.InputData.AsNumpy;
+    numpydata = noisePlugin.InputData.toNumpy;
 
     tel.telplugins.plot (numpydata[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
     tel.show()

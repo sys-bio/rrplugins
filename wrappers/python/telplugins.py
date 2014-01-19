@@ -429,7 +429,7 @@ def getRoadRunnerData (rr):
     return DataSeries (rrDataHandle)
 
 def getDataSeries (numPyData):    
-    return DataSeries.fromNumPyData(numPyData)
+    return DataSeries.fromNumPy(numPyData)
 
 ##if __name__=='__main__':
 ##    ## \brief Load a data series from a file

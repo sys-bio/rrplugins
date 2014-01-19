@@ -6,7 +6,7 @@ def pluginIsProgressing(lm):
     print 'Iteration, Norm = ' + `lmObject.getProperty("NrOfIter")` + ',' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
     
 lm = tel.Plugin ("tel_lm")
-experimentalData = lm.loadDataSeries ("testData.dat")
+experimentalData = tel.DataSeries.readDataSeries ("testData.dat")
 
 lm.ExperimentalData = experimentalData;
 lm.SBML = lm.readAllText("sbml_test_0001.xml")
@@ -23,11 +23,11 @@ lm.OnProgress (pluginIsProgressing)
 res = lm.execute()
 
 # Get the experimental data as a numpy array
-experimentalData = experimentalData.AsNumpy
+experimentalData = experimentalData.toNumpy
 
 # Get the fitted and residual data
-fittedData = lm.FittedData.AsNumpy
-residuals  = lm.Residuals.AsNumpy
+fittedData = lm.FittedData.toNumpy
+residuals  = lm.Residuals.toNumpy
 
 tel.telplugins.plot (fittedData[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
 tel.telplugins.plot (fittedData[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S2 Fitted")
