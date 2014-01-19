@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['resetplugin',['resetPlugin',['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'rrp::resetPlugin()'],['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'resetPlugin():&#160;rrp_api.cpp']]],
-  ['rrp_5fapi_2eh',['rrp_api.h',['../rrp__api_8h.html',1,'']]],
-  ['rrp_5fcpp_5fsupport_2eh',['rrp_cpp_support.h',['../rrp__cpp__support_8h.html',1,'']]],
-  ['rrp_5fexporter_2eh',['rrp_exporter.h',['../rrp__exporter_8h.html',1,'']]],
-  ['rrp_5fparameter_5fapi_2eh',['rrp_parameter_api.h',['../rrp__parameter__api_8h.html',1,'']]],
-  ['rrp_5ftypes_2eh',['rrp_types.h',['../rrp__types_8h.html',1,'']]],
-  ['rrp_5futilities_2eh',['rrp_utilities.h',['../rrp__utilities_8h.html',1,'']]],
-  ['rrparameterhandle',['RRParameterHandle',['../rrp__types_8h.html#ad617fcede4fcb97c61b03ea93b06c63a',1,'rrp_types.h']]],
-  ['rrparametershandle',['RRParametersHandle',['../rrp__types_8h.html#a32d0a20840be1873694cf354129d5051',1,'rrp_types.h']]],
-  ['rrpluginhandle',['RRPluginHandle',['../rrp__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7',1,'rrp_types.h']]],
-  ['rrpluginmanagerhandle',['RRPluginManagerHandle',['../rrp__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d',1,'rrp_types.h']]]
+  ['readroadrunnerdatafromfile',['readRoadRunnerDataFromFile',['../group__roadrunnerdata.html#gae3f9c9101ed1a4ea8c83617691fa9e8c',1,'tlpc::readRoadRunnerDataFromFile()'],['../group__roadrunnerdata.html#gae3f9c9101ed1a4ea8c83617691fa9e8c',1,'readRoadRunnerDataFromFile():&#160;telplugins_roadrunnerdata_api.cpp']]],
+  ['resetplugin',['resetPlugin',['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'tlpc::resetPlugin()'],['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'resetPlugin():&#160;telplugins_c_api.cpp']]],
+  ['roadrunnerdata_20manipulation',['RoadRunnerData Manipulation',['../group__roadrunnerdata.html',1,'']]],
+  ['rrdatahandle',['RRDataHandle',['../telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9',1,'telplugins_types.h']]],
+  ['rrhandle',['RRHandle',['../telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae',1,'telplugins_types.h']]],
+  ['rrpluginhandle',['RRPluginHandle',['../telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7',1,'telplugins_types.h']]],
+  ['rrpluginmanagerhandle',['RRPluginManagerHandle',['../telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d',1,'telplugins_types.h']]],
+  ['rrpropertieshandle',['RRPropertiesHandle',['../telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204',1,'telplugins_types.h']]],
+  ['rrpropertyhandle',['RRPropertyHandle',['../telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649',1,'telplugins_types.h']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['displaypluginmanual',['displayPluginManual',['../group__plugins.html#ga11fa5a8c4e1f57a79d346fd0869fa275',1,'Python::rrPlugins_CAPI']]]
+  ['dataseries',['DataSeries',['../classpython_1_1telplugins_1_1_data_series.html',1,'python::telplugins']]],
+  ['description',['description',['../classpython_1_1telplugins_1_1_plugin.html#a812538882080efe71a5999584fe662ff',1,'python::telplugins::Plugin']]],
+  ['displaypluginmanual',['displayPluginManual',['../group__plugins.html#ga7665c9b302ac38f299bb28ab038c66e6',1,'python::telplugins_c_api']]]
 ];

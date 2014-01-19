@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['terminate',['terminate',['../classrrp_1_1_plugin.html#a9710171fa309c7238138ec4b5f1c843e',1,'rrp::Plugin']]]
+  ['terminate',['terminate',['../classtlp_1_1_plugin.html#adf65a1fa123978cb5fef8fb37f95e772',1,'tlp::Plugin']]]
 ];

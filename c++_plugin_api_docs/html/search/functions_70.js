@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['parameters',['Parameters',['../classrrp_1_1_parameters.html#afbf0d7c80a0b85a85c2fa05f8fdf63f9',1,'rrp::Parameters::Parameters(bool canClear=true)'],['../classrrp_1_1_parameters.html#af3e258d03b351df05ddab3c17702442b',1,'rrp::Parameters::Parameters(const Parameters &amp;cpyMe)']]],
-  ['plugin',['Plugin',['../classrrp_1_1_plugin.html#aebe02adf5e0c2ef290dda3b9e8c4568e',1,'rrp::Plugin']]],
-  ['pluginmanager',['PluginManager',['../classrrp_1_1_plugin_manager.html#a80357025610a976cd88b507c19bf298e',1,'rrp::PluginManager']]],
-  ['pluginparameter',['PluginParameter',['../classrrp_1_1_plugin_parameter.html#a47ce2cf09d44a200c05b4db42992462e',1,'rrp::PluginParameter']]]
+  ['plugin',['Plugin',['../classtlp_1_1_plugin.html#ab8f3b3164d230ad6567028b9e3c64663',1,'tlp::Plugin']]],
+  ['pluginmanager',['PluginManager',['../classtlp_1_1_plugin_manager.html#af4eeb5f6b88b3184fc8f62fa2ca655c9',1,'tlp::PluginManager']]],
+  ['properties',['Properties',['../classtlp_1_1_properties.html#aa807f2805a0f1b4b621907c3b1492088',1,'tlp::Properties::Properties(bool canClear=true)'],['../classtlp_1_1_properties.html#a5e1196f5490e6eae736eea820cbfd633',1,'tlp::Properties::Properties(const Properties &amp;cpyMe)']]],
+  ['property',['Property',['../classtlp_1_1_property.html#ab14190bb395ef9821180a329eec4d26e',1,'tlp::Property::Property(const T &amp;value=T(), const string &amp;name=gNoneString, const string &amp;hint=gNoneString, const string &amp;descr=gNoneString, const string &amp;alias=gEmptyString, bool readonly=false)'],['../classtlp_1_1_property.html#a9b64dc6faad51e6ed2af4bcc8fd6c888',1,'tlp::Property::Property(const Property&lt; T &gt; &amp;para)']]],
+  ['propertybase',['PropertyBase',['../classtlp_1_1_property_base.html#a28b05832ff772d28cddd5ea3cfc2cdb1',1,'tlp::PropertyBase::PropertyBase(const string &amp;type, const string &amp;name, const string &amp;hint, const string &amp;descr, const string &amp;alias=tlp::gEmptyString, bool readOnly=false)'],['../classtlp_1_1_property_base.html#a6e6dc22407533926af4a45e3f0f6e754',1,'tlp::PropertyBase::PropertyBase(const PropertyBase &amp;pp)']]]
 ];
