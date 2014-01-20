@@ -222,16 +222,17 @@ bool PluginManager::loadPlugin(const string& _libName)
             return false;
         }
         string libName(_libName);
-        if(!hasFileExtension(libName))
-        {
-            libName = libName + "." + getPluginExtension();
-        }
 
-        //Check if Plugin is already loaded first
+        //Check if Plugin is already loaded first 
         if(getPlugin(libName))
         {
             Log(lWarning)<<"The Plugin: "<<libName<<" is already loaded";
             return true;
+        }
+
+        if(!hasFileExtension(libName))
+        {
+            libName = libName + "." + getPluginExtension();
         }
 
         SharedLibrary *libHandle = new SharedLibrary;
@@ -479,8 +480,10 @@ int PluginManager::getNumberOfCategories()
     return -1;
 }
 
-Plugin* PluginManager::getPlugin(const string& name)
+Plugin* PluginManager::getPlugin(const string& _name)
 {
+    //Strip the extension
+    string name = getFileNameNoExtension(_name);
     for(int i = 0; i < getNumberOfPlugins(); i++)
     {
         telPlugin aPluginLib = mPlugins[i];
