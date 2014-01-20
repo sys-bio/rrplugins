@@ -31,8 +31,8 @@ class DataSeries(object):
 
     @classmethod
     def fromNumPy(cls, numPyData):
-           
-        if size (numPyData.shape != 2):
+        
+        if len (numPyData.shape) != 2:
             raise ValueError ('fromNumPy only accepts two dimensional arrays')
             
         nrCols  = numPyData.shape[1]
@@ -377,6 +377,8 @@ class Plugin (object):
         aList = []
         names = tpc.getPluginLibraryNames (_pluginManager)
         n = tpc.getNumberOfPlugins (_pluginManager)
+        print names
+        print n
         # This is a hack to get round thelack of metadata in the plugin
         # Will be resolved in next revision of library
         for i in range (0, n):
