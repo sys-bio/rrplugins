@@ -155,6 +155,19 @@ TLP_C_DS bool tlp_cc setRoadRunnerDataWeight(RRDataHandle rrData, int r, int c, 
 TLP_C_DS char* tlp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
 
 /*!
+ \brief Assign RoadRunner data column header from a string. 
+ The header string is composed of comma delimited (with optional spaces) values. Each value is a header for correseponding data column.
+
+ \param data A handle to a RoadRunner data type variable
+ \param hdr A Cstring containing the column labels
+ \return Returns a boolean indicating if assignement was succesful or not
+ \note The number of labels in the string MUST correspond to the number of columns in the data. If not, the assignment is aborted and 
+ false is returned
+ \ingroup roadrunnerdata
+*/
+TLP_C_DS bool tlp_cc setRoadRunnerDataColumnHeader(RRDataHandle data, char* hdr);
+
+/*!
  \brief Retrieves the number of rows in a RoadRunner data object.
 
  \param data A handle to a RoadRunner data type variable

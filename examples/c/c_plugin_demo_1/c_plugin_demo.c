@@ -52,7 +52,7 @@ void*  call_conv getCPluginProperty(const char* name)
 bool call_conv setupCPlugin(RRPluginHandle aPlugin)
 {
     gPlugin = aPlugin;
-    gDemoProperty   = createProperty("Demo Property", "string", "Demo Hint", 0);
+    gDemoProperty   = createProperty("DemoProperty", "string", "Demo Hint", 0);
     if(!gDemoProperty)
     {
         //Failed to create property! Set last error and return false
