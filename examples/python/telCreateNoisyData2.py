@@ -12,7 +12,7 @@ try:
     rr.load("sbml_test_0001.xml")
 
     # Generate data
-    data = rr.simulate(0, 10, 1024) # Want 512 points
+    data = rr.simulate(0, 10, 511) # Want 512 points
 
     # Get the dataseries from roadrunner
     d = tel.getDataSeries (data)

@@ -1084,7 +1084,6 @@ def plotRoadRunnerData(data, colHeaders):
 
     plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plot.xlabel(xlbl)
-    plot.ylabel('Concentration (moles/L)')
     plot.show()
     
 ## \brief Get column header in roadrunner data

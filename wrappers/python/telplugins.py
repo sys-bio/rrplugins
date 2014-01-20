@@ -31,10 +31,22 @@ class DataSeries(object):
 
     @classmethod
     def fromNumPy(cls, numPyData):
-        colHdr  = numPyData.dtype.names        
-        nrCols  = len(numPyData.dtype.names)
-        nrRows  = len(numPyData)                        
-        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, str(colHdr).strip('[]'))        
+        
+        if len (numPyData.shape) != 2:
+            raise ValueError ('fromNumPy only accepts two dimensional arrays')
+            
+        nrCols  = numPyData.shape[1]
+        nrRows  = len(numPyData)   
+        # If there are no column names then make some up                     
+        if numPyData.dtype.names == None:
+            colHdr = []
+            for i in range (nrCols):
+                colHdr.append ('x' + str (i))               
+        else:
+           colHdr  = numPyData.dtype.names 
+
+        columnStr = str(colHdr).strip('[]')
+        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, columnStr)        
                 
         #Copy the data
         for row in range(nrRows):
@@ -365,6 +377,8 @@ class Plugin (object):
         aList = []
         names = tpc.getPluginLibraryNames (_pluginManager)
         n = tpc.getNumberOfPlugins (_pluginManager)
+        print names
+        print n
         # This is a hack to get round thelack of metadata in the plugin
         # Will be resolved in next revision of library
         for i in range (0, n):
