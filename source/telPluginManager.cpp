@@ -516,12 +516,21 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
         char* cat   = getCategory();
         CPlugin* aPlugin = new CPlugin(name, cat);
 
-        aPlugin->executeFunction = (executeF)         libHandle->getSymbol(string(exp_fnc_prefix) + "execute");
-        aPlugin->destroyFunction = (destroyF)         libHandle->getSymbol(string(exp_fnc_prefix) + "destroyPlugin");
-        setupCPluginFnc     setupCPlugin        = (setupCPluginFnc)    libHandle->getSymbol(string(exp_fnc_prefix) + "setupCPlugin");
+        aPlugin->executeFunction            = (executeF)         libHandle->getSymbol(string(exp_fnc_prefix) + "execute");
+        aPlugin->destroyFunction            = (destroyF)         libHandle->getSymbol(string(exp_fnc_prefix) + "destroyPlugin");
+        aPlugin->getCLastError              = (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getCLastError");
+        setupCPluginFnc setupCPlugin        = (setupCPluginFnc)  libHandle->getSymbol(string(exp_fnc_prefix) + "setupCPlugin");
 
         //This give the C plugin an opaque Handle to the CPlugin object
-        setupCPlugin(aPlugin);
+        if(!setupCPlugin(aPlugin))
+        {
+            //Failed setting up C Plugin!
+            //Check for error
+            string error = aPlugin->getLastError();
+            stringstream  msg;
+            msg<<"Failure creating C plugin: "<<error;
+            throw(rr::Exception(msg.str()));
+        }
         aPlugin->getCPropertyNames  =    (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getListOfCPluginPropertyNames");
         aPlugin->getCProperty       =    (getAPropertyF)    libHandle->getSymbol(string(exp_fnc_prefix) + "getCPluginProperty");
         return aPlugin;
@@ -529,6 +538,16 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
     catch(const Poco::NotFoundException& ex)
     {
         Log(lError)<<"Error in createCPlugin: " <<ex.message();
+        return NULL;
+    }
+    catch(const rr::Exception& ex)
+    {
+        Log(lError)<<"Error in createCPlugin: " <<ex.getMessage();
+        return NULL;
+    }
+    catch(const exception& ex)
+    {
+        Log(lError)<<"Error in createCPlugin: " <<ex.what();
         return NULL;
     }
     return NULL;

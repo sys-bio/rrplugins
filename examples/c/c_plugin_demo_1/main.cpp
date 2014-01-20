@@ -39,6 +39,8 @@
  * redistribute any piece of this software without proper attribution;
 */
 #include <iostream>
+#include "telPluginManager.h"
+#include "telPlugin.h"
 #include "telStringList.h"
 #include "telplugins_c_api.h"
 
@@ -50,46 +52,42 @@ int main()
 {
     try
     {
-        RRPluginManagerHandle pm = createPluginManager("..\\plugins");
-        int nrOfPlugins = loadPlugins(pm);
+        PluginManager pm("..\\plugins");
+        pm.load();
+
+        int nrOfPlugins = pm.getNumberOfPlugins();
         if(!nrOfPlugins)
         {
-            throw("No plugins was loaded");
+            throw("No plugins were loaded");
         }
 
         //Retrieve a handle to the C plugin demo
-        RRPluginHandle plugin = getPlugin(pm, "C Plugin Demo");
+        Plugin* plugin = pm.getPlugin("C Plugin Demo");
         if(!plugin)
         {
             throw("Demo plugin could not be loaded");
         }
 
-        char* pluginInfo = getPluginInfo(plugin);
-        if(pluginInfo)
-        {
-            cout<<pluginInfo;
-            freeText(pluginInfo);
-        }
+        string pluginInfo = plugin->getExtendedInfo();
+        cout<<pluginInfo;
 
         //Retrieve any properties that the plugin has
-        char* properties = getListOfPluginPropertyNames(plugin);
-        if(!properties)
+        StringList properties = plugin->getPropertyNames();
+        if(!properties.Count())
         {
             throw("Plugin do not have any properties. For this demo, this is an error!");
         }
 
-        StringList propNames(properties, ",");
-
-        for(int i = 0; i < propNames.size(); i++)
+        for(int i = 0; i < properties.Count(); i++)
         {
-            cout << propNames[i] << endl;
+            cout << properties[i] << endl;
         }
 
         //We know the name of the Demo property, being "Demo Property"
-        RRPropertyHandle prop = getPluginProperty(plugin, "Demo Property");
+        PropertyBase* prop = plugin->getProperty("DemoProperty");
         if(prop)
         {
-            cout << "Before execute: "<<getPropertyValueAsString(prop)<<endl;
+            cout << "Before execute: "<<prop->getValueAsString()<<endl;
         }
 
         if(!executePlugin(plugin))
@@ -99,11 +97,11 @@ int main()
 
         if(prop)
         {
-            cout << "After execute: "<<getPropertyValueAsString(prop)<<endl;
+            cout << "After execute: "<<prop->getValueAsString()<<endl;
         }
 
         //This will unload all plugins..
-        freePluginManager(pm);
+        pm.unload();
     }
     catch(const char* msg)
     {

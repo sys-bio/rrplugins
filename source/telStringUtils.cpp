@@ -38,6 +38,18 @@ char* createText(const int& count)
 	return text;
 }
 
+unsigned int indexOf(const string& text, char checkFor)
+{    
+    return text.find(checkFor);    
+}
+
+string substituteCharInString(const string& text, char chToReplace, char withChar)
+{
+    string sOut(text);
+    std::replace(sOut.begin(), sOut.end(), chToReplace, withChar);
+    return sOut;
+}
+
 bool freeText(char* str)
 {
 	delete [] str;
@@ -154,28 +166,6 @@ int getNumberOfFunctionArguments(const string& expression)
      return nrOfArgs;
 }
 
-//    double result = 0.0;
-//    int i;
-//    va_list listPointer;
-//    va_start(listPointer, nrOfArguments);
-//
-//    for(i = 0; i < nrOfArguments; i++)
-//    {
-//        // Get an argument.  Must know
-//        // the type of the arg to retrieve
-//        // it from the va_list.
-//        double arg = va_arg( listPointer, double);
-//
-///*        printf("The %dth arg is %f\n", i, arg);*/
-//        if(arg == 1.0)
-//        {
-//            result = 1.0;
-//            break;
-//        }
-//    }
-//    va_end( listPointer );
-//    return result;
-
 string joinPath(const string& aPath, const string& aFile, const char pathSeparator)
 {
     //Just check the paths last position. it has to be a "/"
@@ -229,7 +219,6 @@ string NL()
     newLine << endl;
     return newLine.str();
 }
-
 
 string getFileName(const string& fileN)
 {

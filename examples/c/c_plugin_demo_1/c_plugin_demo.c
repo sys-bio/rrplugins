@@ -5,6 +5,9 @@
 #include "telplugins_types.h"
 #include "c_plugin_demo.h"
 
+char* gLastError = 0;
+void setError(const char* err);
+
 const char* call_conv getImplementationLanguage()
 {
     return "C";
@@ -50,6 +53,12 @@ bool call_conv setupCPlugin(RRPluginHandle aPlugin)
 {
     gPlugin = aPlugin;
     gDemoProperty   = createProperty("Demo Property", "string", "Demo Hint", 0);
+    if(!gDemoProperty)
+    {
+        //Failed to create property! Set last error and return false
+        setError("Failed creating Property in c_plugin_demo");
+        return false;
+    }
     setPropertyByString(gDemoProperty, "Intial Demo Property Value");
 
     //Add the property to the property container
@@ -59,7 +68,7 @@ bool call_conv setupCPlugin(RRPluginHandle aPlugin)
     return true;
 }
 
-bool call_conv execute()
+bool call_conv execute(bool inThread)
 {
     char *text1, *text2;
     RRHandle rrHandle;
@@ -84,3 +93,19 @@ bool call_conv execute()
     free(text1);
     return true;
 }
+
+char* getCLastError()
+{
+    return gLastError;
+}
+
+void setError(const char* err)
+{
+    if(gLastError)
+    {
+        freeText(gLastError);
+    }
+
+    gLastError = createText(err);
+}
+

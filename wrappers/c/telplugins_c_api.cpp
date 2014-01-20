@@ -237,12 +237,7 @@ RRPropertyHandle tlp_cc getPluginProperty(RRPluginHandle handle, const char* par
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        PropertyBase *para = NULL;
-        if(aPlugin)
-        {           
-            return aPlugin->getProperty(parameterName);
-        }
-        return NULL;
+        return aPlugin->getProperty(parameterName);
     catch_ptr_macro
 }
 

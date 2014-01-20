@@ -18,6 +18,9 @@ using std::complex;
 RRP_DECLSPEC char*   	        createText(const string& str);
 RRP_DECLSPEC char*   			createText(const int& count);
 RRP_DECLSPEC bool   			freeText(char* str);
+
+RRP_DECLSPEC string             substituteCharInString(const string& text, char chToReplace, char withChar);
+RRP_DECLSPEC unsigned int       indexOf(const string& text, char checkFor);
 RRP_DECLSPEC string             replaceWord(const string& str1, const string& str2, const string& theString);
 RRP_DECLSPEC bool               convertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression);
 RRP_DECLSPEC string             removeChars(const string& str, const string& chars);
