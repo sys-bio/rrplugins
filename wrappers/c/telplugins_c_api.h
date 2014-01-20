@@ -633,8 +633,8 @@ int main()
  \defgroup plugin_properties Plugin Properties
  \brief Plugins Property related functions
 
- \defgroup roadrunnerdata RoadRunnerData Manipulation
- \brief Functions to manpiulate numerical data using RoadRunnerData objects
+ \defgroup roadrunnerdata TelluriumData Manipulation
+ \brief Functions to manpiulate numerical data using TelluriumData objects
 
  \defgroup utilities Utility Functions
  \brief Functions to help and assist in the use of the Plugins framework

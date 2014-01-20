@@ -129,6 +129,18 @@
             <DependentOn>telCPPPlugin.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telFileName.cpp">
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telIniFile.cpp">
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telIniKey.cpp">
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telIniSection.cpp">
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telPlugin.cpp">
             <DependentOn>telPlugin.h</DependentOn>
             <BuildOrder>16</BuildOrder>
@@ -160,6 +172,9 @@
         <CppCompile Include="telStringUtils.cpp">
             <DependentOn>telStringUtils.h</DependentOn>
             <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telTelluriumData.cpp">
+            <BuildOrder>16</BuildOrder>
         </CppCompile>
         <CppCompile Include="telUnresolvedSTDExternals.cpp">
             <BuildOrder>6</BuildOrder>

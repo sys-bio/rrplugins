@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 #include "add_noise_worker.h"
 #include "telUtils.h"
@@ -47,7 +47,7 @@ void AddNoiseWorker::run()
         mTheHost.mWorkStartedEvent(mTheHost.mWorkStartedData1, mTheHost.mWorkStartedData2);
     }
 
-    RoadRunnerData& data = (mTheHost.mData.getValueReference());
+    TelluriumData& data = (mTheHost.mData.getValueReference());
     Noise noise(0, mTheHost.mSigma.getValue());
     noise.randomize();
 

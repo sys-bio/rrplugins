@@ -1,7 +1,7 @@
 #ifndef rrAutoDataH
 #define rrAutoDataH
 #include <ostream>
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 
 #include "rrRRAutoExporter.h"

@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include <string>
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrException.h"
 #include "telplugins_properties_api.h"
 #include "rr/rrLogger.h"
@@ -17,7 +17,7 @@
 namespace tlpc
 {
 using namespace std;
-using rr::RoadRunnerData;
+using tlp::TelluriumData;
 
 
 RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
@@ -125,15 +125,15 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
 
         if(string(type) == string("roadRunnerData"))
         {
-            RoadRunnerData iniVal;
+            TelluriumData iniVal;
             if(value != NULL)
             {
                 //cast it
-                RoadRunnerData* val = (RoadRunnerData*) value;
+                TelluriumData* val = (TelluriumData*) value;
                 iniVal = (*val);
             }
 
-            Property<RoadRunnerData> *para = new Property<RoadRunnerData>(iniVal, label, hint);
+            Property<TelluriumData> *para = new Property<TelluriumData>(iniVal, label, hint);
             return para;
         }
 
@@ -323,20 +323,20 @@ bool tlp_cc getListProperty(RRPropertyHandle handle, void* (value))
     catch_bool_macro
 }
 
-bool tlp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc setTelluriumDataProperty(RRPropertyHandle handle, void* value)
 {
     start_try
-        Property<RoadRunnerData>* para = castToRoadRunnerDataProperty(handle);
-        para->setValue(*((RoadRunnerData*) value));
+        Property<TelluriumData>* para = castToTelluriumDataProperty(handle);
+        para->setValue(*((TelluriumData*) value));
         return true;
     catch_bool_macro
 }
 
-bool tlp_cc getRoadRunnerDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc getTelluriumDataProperty(RRPropertyHandle handle, void* value)
 {
     start_try
-        Property<RoadRunnerData>* para = castToRoadRunnerDataProperty(handle);
-        RoadRunnerData* assignTo = castToRoadRunnerData(value);
+        Property<TelluriumData>* para = castToTelluriumDataProperty(handle);
+        TelluriumData* assignTo = castToTelluriumData(value);
         (*assignTo) = (para->getValueReference()); 
         return true;
     catch_bool_macro

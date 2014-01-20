@@ -27,7 +27,7 @@ if not rr.load(sbmlModel):
 rr.simulate(0, 10, 500)
 
 #The plugin will need a handle to the underlying roadrunner data
-rrDataHandle = getRoadRunnerDataHandle(rr)
+rrDataHandle = getTelluriumDataHandle(rr)
 
 #Load the 'noise' plugin in order to add some noise to roadrunner data
 noisePlugin = loadPlugin(pm, "tel_add_noise")
@@ -55,9 +55,9 @@ executePlugin(noisePlugin)
 
 #Retrieve data from plugin
 rrData = getNumpyData(getParameter(dataPara))
-colNames = getRoadRunnerDataColumnHeader(rrDataHandle)
+colNames = getTelluriumDataColumnHeader(rrDataHandle)
 
-plotRoadRunnerData(rrData, colNames)
+plotTelluriumData(rrData, colNames)
 
 unLoadPlugins(pm)
 print "done"

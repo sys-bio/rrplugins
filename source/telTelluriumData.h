@@ -1,8 +1,8 @@
 #ifndef telTelluriumDataH
 #define telTelluriumDataH
-
+#include "telExporter.h"
 #include "rr-libstruct/lsMatrix.h"
-#include "rrExporter.h"
+
 
 #include <string>
 #include <vector>
@@ -11,14 +11,18 @@
 
 namespace rr
 {
+    class RoadRunnerData;
+}
+namespace tlp
+{
 
 using namespace ls;
 using std::ofstream;
 using std::stringstream;
 
 /**
- * \brief RoadRunnerData is a general purpose container for numerical data, e.g. simulation output.
- \section rrData RoadRunnerData
+ * \brief TelluriumData is a general purpose container for numerical data, e.g. simulation output.
+ \section rrData TelluriumData
  * The class provide the ability to read and write data from file (see Format specification below).
  * For certain problems, weights can be specified as a property of the object as well. Weights are not allocated automatically, but can 
  * be allocated using the allocateWeights() member function.
@@ -26,10 +30,10 @@ using std::stringstream;
  * The column header store information on the content in data columns, e.g time, S1, S2, etc.. 
 
  * \subsection dataFormat DataFormat
- * When RoadRunnerData is written or read from file, a pre defined data format is used. This format
- * is defined here. 
+ * When TelluriumData is written or read from file, a pre defined data format is used. This format
+ * is defined here.
  * 
- * The following shows the format of a RoadRunnerData object as written to file
+ * The following shows the format of a TelluriumData object as written to file
     \code
         [INFO]
         DATA_FORMAT_VERSION=1.0
@@ -84,7 +88,7 @@ using std::stringstream;
     The [WEIGHTS] section is required to have the same dimension as the [DATA] section. 
     Weigts are read into the internal data container, named mWeights, and accessed trough the 
     member functions getWeights(), weight(row, col) and setWeight(row,col).
-    
+
     As an example of how weights can be used is shown below:
 
    \code
@@ -105,9 +109,9 @@ using std::stringstream;
  *
  * If data is read from file, and the size of the COLUMNM_HEADERS don't match the underlying data, reading will fail
  * and an exception will be thrown.
- * 
+ *
  */
-class RR_DECLSPEC RoadRunnerData
+class RRP_DECLSPEC TelluriumData
 {
 
 public:
@@ -117,7 +121,7 @@ public:
      * \param rSize: number of rows
      * \param cSize: number of columns.
      */
-    RoadRunnerData(const int& rSize = 0, const int& cSize = 0);
+    TelluriumData(const int& rSize = 0, const int& cSize = 0);
     
     /**
      * \brief Constructor -- copy the names and data from the given
@@ -126,21 +130,21 @@ public:
      * \param colNames List of column names
      * \param data Source data matrix.
      */
-    RoadRunnerData(const std::vector<std::string>& colNames,
+    TelluriumData(const std::vector<std::string>& colNames,
             const DoubleMatrix& data);
 
     /**
      *   \brief Destructor. De allocate any memory allocated in the class.    
      */
-    ~RoadRunnerData();
+    ~TelluriumData();
 
     /**
-     *   \brief allocate. Allocate an underlying data matrix of size cSize x rSize. 
+     *   \brief allocate. Allocate an underlying data matrix of size cSize x rSize.
      */
     void allocate(const int& cSize, const int& rSize);
-    
+
     /**
-     *   \brief allocate. Allocate an underlying data (weights) matrix of size cSize x rSize. 
+     *   \brief allocate. Allocate an underlying data (weights) matrix of size cSize x rSize.
      */
     void allocateWeights();
 
@@ -152,14 +156,14 @@ public:
     /**
      * \brief Get the names of the variables stored in this data structure, as a vector<string>
      */
-    const std::vector<std::string>& getColumnNames() const;
-    std::string getColumnName(const int col) const;
-    std::string getColumnNamesAsString() const;
-    void setColumnNames(const std::vector<std::string>& colNames);
-    int getColumnIndex(const std::string& colName) const;
-    void setTimeDataPrecision(const int& prec);
-    void setDataPrecision(const int& prec);
-    void reSize(int rows, int cols);
+    const std::vector<std::string>&         getColumnNames() const;
+    std::string                             getColumnName(const int col) const;
+    std::string                             getColumnNamesAsString() const;
+    void                                    setColumnNames(const std::vector<std::string>& colNames);
+    int                                     getColumnIndex(const std::string& colName) const;
+    void                                    setTimeDataPrecision(const int& prec);
+    void                                    setDataPrecision(const int& prec);
+    void                                    reSize(int rows, int cols);
 
     /**
      * Clear all data allocated
@@ -189,10 +193,10 @@ public:
      *
      * First line, comma separated values defining the column header, e.g. "time, S1, S2" etc
      *
-     * Second line to end of file: Numeric values in comma (and/or space) separated columns, corresponding to the 
+     * Second line to end of file: Numeric values in comma (and/or space) separated columns, corresponding to the
      * column header
      * \code
-           time,S1,S2 
+           time,S1,S2
            0,0.00015,0
            0.1,0.0001357256127053939,1.427438729460607e-005
            0.2,0.0001228096129616973,2.719038703830272e-005
@@ -205,14 +209,14 @@ public:
     bool loadSimpleFormat(const std::string& fileName);
 
     /**
-        \brief Write data to file. See required format in the RoadRunnerData general description.
+        \brief Write data to file. See required format in the TelluriumData general description.
         \param fileName Name, including path, for the output file.
         \todo Rename to writeToFile
     */
     bool writeTo(const std::string& fileName) const;    
 
     /**
-        \brief Read data from file. See required format in the RoadRunnerData general description.
+        \brief Read data from file. See required format in the TelluriumData general description.
         \param fileName Name, including path, for the output file.
         \todo Rename to readFromFile
     */
@@ -234,14 +238,14 @@ public:
     /** 
     * \brief Stream friend function, allowing RoadRunner data to be streamed to a std::ostream.
     */
-    RR_DECLSPEC
-    friend std::ostream& operator <<(std::ostream& ss, const RoadRunnerData& data);
+    RRP_DECLSPEC
+    friend std::ostream& operator <<(std::ostream& ss, const TelluriumData& data);
 
     /** 
     * \brief Stream friend function, allowing RoadRunner data to be streamed from a std::istream.
     */
-    RR_DECLSPEC
-    friend std::istream& operator >>(std::istream& ss, RoadRunnerData& data);
+    RRP_DECLSPEC
+    friend std::istream& operator >>(std::istream& ss, TelluriumData& data);
 
     /** 
     * \brief Access data element operator.
@@ -290,11 +294,18 @@ public:
     /** 
     * \brief Assignment operator. Deep copy of data in an assignment expression.
     *
-    * \param rhs RoadRunnerdata object on the right side of the assignment ().
+    * \param rhs TelluriumData object on the right side of the assignment ().
     */
-    RoadRunnerData& operator=(const RoadRunnerData& rhs);
+    TelluriumData& operator=(const TelluriumData& rhs);
 
-    /** 
+    /**
+    * \brief Assignment operator. Deep copy of data in an assignment expression.
+    *
+    * \param rhs RoadRunnerData object on the right side of the assignment ().
+    */
+    TelluriumData& operator=(const rr::RoadRunnerData& rhs);
+
+    /**
     * \brief Access a weight element.
     *
     * The following code will print the weight element at row 3 and column 4
@@ -306,7 +317,7 @@ public:
     */
     double getWeight(int row, int col) const;
 
-    /** 
+    /**
     * \brief Set data weight at number at row,col index.
     * \param row Index of row
     * \param col Index of col
@@ -314,10 +325,10 @@ public:
     */
     void setWeight(int row, int col, double val);
 
-    /** 
+    /**
     * \brief Set data object name.
     * \param name The name as a string
-    * \deprecated Left over function from debugging session ?? 
+    * \deprecated Left over function from debugging session ??
     */
     void setName(const std::string& name);
 
@@ -344,7 +355,7 @@ public:
 
     \Todo Rename this function to appendDataColumns
     */
-    bool append(const RoadRunnerData& data);
+    bool append(const TelluriumData& data);
 
     /** 
     * \brief If the data has a column named 'time', the function will return the first time element.

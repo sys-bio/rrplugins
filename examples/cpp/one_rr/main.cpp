@@ -41,11 +41,11 @@ int main(int argc, char** argv)
         
         rr1.simulate(&simOpt);
 
-        rrc::RRDataHandle dataHandle = getRoadRunnerDataHandle(&rr1);
+        rrc::RRDataHandle dataHandle = getTelluriumDataHandle(&rr1);
 
-        int nrRows = getRoadRunnerDataNumRows(dataHandle);
-        int nrCols = getRoadRunnerDataNumCols(dataHandle);
-        char* colHeader = getRoadRunnerDataColumnHeader(dataHandle);
+        int nrRows = getTelluriumDataNumRows(dataHandle);
+        int nrCols = getTelluriumDataNumCols(dataHandle);
+        char* colHeader = getTelluriumDataColumnHeader(dataHandle);
 
         cout<<"NrRows: "<<nrRows<<endl;
         cout<<"NrCols "<<nrCols<<endl;
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
         //    for(int col = 0; col < nrCols; col++)
         //    {
         //        double value;    
-        //        //getRoadRunnerDataElement(dataHandle, row, col, &value);
+        //        //getTelluriumDataElement(dataHandle, row, col, &value);
         //        //cout<<value<<"\t";            
         //    }
         //    cout<<endl;

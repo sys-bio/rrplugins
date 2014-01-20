@@ -7,7 +7,7 @@
 
 #include "lm.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "telUtils.h"
 #include "lmfit_doc.h"
 //---------------------------------------------------------------------------
@@ -30,9 +30,9 @@ LM::LM()
 :
 CPPPlugin(                      "Levenberg-Marquardt", "Fitting",       NULL, NULL),
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
-mExperimentalData(              RoadRunnerData(),       "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
-mModelData(                     RoadRunnerData(),       "FittedData",                           "Data object holding model data: Handed to client"),
-mResidualsData(                 RoadRunnerData(),       "Residuals",                            "Data object holding residuals: Handed to client"),
+mExperimentalData(              TelluriumData(),       "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
+mModelData(                     TelluriumData(),       "FittedData",                           "Data object holding model data: Handed to client"),
+mResidualsData(                 TelluriumData(),       "Residuals",                            "Data object holding residuals: Handed to client"),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
 mOutputParameterList(           Properties(),           "OutputParameterList",                  "List of parameters that was fittedt"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
@@ -75,8 +75,8 @@ patience(                       100,                     "patience"    ,        
 //    mProperties.addProperty(&scale_diag);
 
     //Allocate model and Residuals data
-    mResidualsData.setValue(new RoadRunnerData());
-    mModelData.setValue(new RoadRunnerData());
+    mResidualsData.setValue(new TelluriumData());
+    mModelData.setValue(new TelluriumData());
 
     mHint ="Parameter fitting using the Levenberg-Marquardt algorithm";
     mDescription="The Levenberg-Marquardt plugin is used to fit a proposed \

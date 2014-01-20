@@ -1,21 +1,24 @@
 #pragma hdrstop
 #include <iomanip>
-#include "rrException.h"
-#include "rrLogger.h"
-#include "rrUtils.h"
-#include "rrStringUtils.h"
-#include "rrIniFile.h"
-#include "rrUtils.h"
+
+#include "rr/rrException.h"
+#include "rr/rrLogger.h"
+#include "rr/rrRoadRunnerData.h"
+#include "telUtils.h"
+#include "telStringUtils.h"
+#include "telIniFile.h"
 #include "Poco/TemporaryFile.h"
 #include "telTelluriumData.h"
 
 //---------------------------------------------------------------------------
 using namespace std;
 
-namespace rr
+using rr::Logger;
+using rr::CoreException;
+namespace tlp
 {
 
-RoadRunnerData::RoadRunnerData(const int& rSize, const int& cSize ) :
+TelluriumData::TelluriumData(const int& rSize, const int& cSize ) :
         structuredResult(true),
         mTimePrecision(6),
         mDataPrecision(16)
@@ -26,7 +29,7 @@ RoadRunnerData::RoadRunnerData(const int& rSize, const int& cSize ) :
     }
 }
 
-RoadRunnerData::RoadRunnerData(const std::vector<std::string>& colNames,
+TelluriumData::TelluriumData(const std::vector<std::string>& colNames,
         const DoubleMatrix& theData) :
         structuredResult(true),
         mTimePrecision(6),
@@ -35,30 +38,30 @@ RoadRunnerData::RoadRunnerData(const std::vector<std::string>& colNames,
         mTheData(theData)
 {}
 
-RoadRunnerData::~RoadRunnerData()
+TelluriumData::~TelluriumData()
 {}
 
-void RoadRunnerData::clear()
+void TelluriumData::clear()
 {
     mColumnNames.clear();
     mTheData.resize(0,0);
     mWeights.resize(0,0);
 }
 
-int RoadRunnerData::cSize() const
+int TelluriumData::cSize() const
 {
     return mTheData.CSize();
 }
 
-int RoadRunnerData::rSize() const
+int TelluriumData::rSize() const
 {
     return mTheData.RSize();
 }
 
-double RoadRunnerData::getTimeStart() const
+double TelluriumData::getTimeStart() const
 {
     //Find time column
-    int timeCol = rr::indexOf(mColumnNames, "time");
+    int timeCol = indexOf(mColumnNames, "time");
     if(timeCol != -1)
     {
         return mTheData(0,timeCol);
@@ -66,10 +69,10 @@ double RoadRunnerData::getTimeStart() const
     return gDoubleNaN;
 }
 
-double RoadRunnerData::getTimeEnd() const
+double TelluriumData::getTimeEnd() const
 {
     //Find time column
-    int timeCol = rr::indexOf(mColumnNames, "time");
+    int timeCol = indexOf(mColumnNames, "time");
     if(timeCol != -1)
     {
         return mTheData(rSize() -1 ,timeCol);
@@ -77,12 +80,12 @@ double RoadRunnerData::getTimeEnd() const
     return gDoubleNaN;
 }
 
-void RoadRunnerData::setName(const string& name)
+void TelluriumData::setName(const string& name)
 {
     mName = name;
 }
 
-RoadRunnerData& RoadRunnerData::operator= (const RoadRunnerData& rhs)
+TelluriumData& TelluriumData::operator= (const TelluriumData& rhs)
 {
     if(this == &rhs)
     {
@@ -95,7 +98,15 @@ RoadRunnerData& RoadRunnerData::operator= (const RoadRunnerData& rhs)
     return *this;
 }
 
-void RoadRunnerData::allocateWeights()
+TelluriumData& TelluriumData::operator= (const rr::RoadRunnerData& rhs)
+{
+    mTheData = rhs.getData();
+    mWeights = rhs.getWeights();
+    mColumnNames = rhs.getColumnNames();
+    return *this;
+}
+
+void TelluriumData::allocateWeights()
 {
     //Create matrix with weights... initialize all elements to 1
     mWeights.Allocate(mTheData.RSize(), mTheData.CSize());
@@ -108,7 +119,7 @@ void RoadRunnerData::allocateWeights()
     }
 }
 
-bool RoadRunnerData::append(const RoadRunnerData& data)
+bool TelluriumData::append(const TelluriumData& data)
 {
     //When appending data, the number of rows have to match with current data
     if(mTheData.RSize() > 0)
@@ -126,7 +137,7 @@ bool RoadRunnerData::append(const RoadRunnerData& data)
 
     int currColSize = cSize();
 
-    RoadRunnerData temp(mColumnNames, mTheData);
+    TelluriumData temp(mColumnNames, mTheData);
 
     int newCSize = cSize() + data.cSize();
     mTheData.resize(data.rSize(), newCSize );
@@ -154,12 +165,12 @@ bool RoadRunnerData::append(const RoadRunnerData& data)
     return true;
 }
 
-const std::vector<std::string>& RoadRunnerData::getColumnNames() const
+const std::vector<std::string>& TelluriumData::getColumnNames() const
 {
     return mColumnNames;
 }
 
-string RoadRunnerData::getColumnName(const int col) const
+string TelluriumData::getColumnName(const int col) const
 {
     if(col < mColumnNames.size())
     {
@@ -169,32 +180,32 @@ string RoadRunnerData::getColumnName(const int col) const
     return "Bad Column..";
 }
 
-int RoadRunnerData::getColumnIndex(const string& colName) const
+int TelluriumData::getColumnIndex(const string& colName) const
 {
-    return rr::indexOf(mColumnNames, colName);
+    return indexOf(mColumnNames, colName);
 }
 
-pair<int,int> RoadRunnerData::dimension() const
+pair<int,int> TelluriumData::dimension() const
 {
     return pair<int,int>(mTheData.RSize(), mTheData.CSize());
 }
 
-string RoadRunnerData::getName() const
+string TelluriumData::getName() const
 {
     return mName;
 }
 
-void RoadRunnerData::setTimeDataPrecision(const int& prec)
+void TelluriumData::setTimeDataPrecision(const int& prec)
 {
     mTimePrecision = prec;
 }
 
-void RoadRunnerData::setDataPrecision(const int& prec)
+void TelluriumData::setDataPrecision(const int& prec)
 {
     mDataPrecision = prec;
 }
 
-string RoadRunnerData::getColumnNamesAsString() const
+string TelluriumData::getColumnNamesAsString() const
 {
     string lbls;
     for(int i = 0; i < mColumnNames.size(); i++)
@@ -208,70 +219,68 @@ string RoadRunnerData::getColumnNamesAsString() const
     return lbls;
 }
 
-void RoadRunnerData::allocate(const int& cSize, const int& rSize)
+void TelluriumData::allocate(const int& cSize, const int& rSize)
 {
     mTheData.Allocate(cSize, rSize);
 }
 
 //=========== OPERATORS
-double& RoadRunnerData::operator() (const unsigned& row, const unsigned& col)
+double& TelluriumData::operator() (const unsigned& row, const unsigned& col)
 {
     return mTheData(row,col);
 }
 
-bool RoadRunnerData::hasWeights() const
+bool TelluriumData::hasWeights() const
 {
     return (mWeights.size() > 0) ? true : false;
 }
 
 
-double RoadRunnerData::getDataElement(int row, int col)
+double TelluriumData::getDataElement(int row, int col)
 {
     return mTheData(row,col);    
 }
 
-void   RoadRunnerData::setDataElement(int row, int col, double value)
+void   TelluriumData::setDataElement(int row, int col, double value)
 {
     mTheData(row,col) = value;
 }
 
-
-
-double RoadRunnerData::getWeight(int row, int col) const
+double TelluriumData::getWeight(int row, int col) const
 {
     return mWeights(row, col);
 }
 
-void RoadRunnerData::setWeight(int row, int col, double value)
+void TelluriumData::setWeight(int row, int col, double value)
 {
     mWeights(row, col) = value;
 }
 
-double RoadRunnerData::operator() (const unsigned& row, const unsigned& col) const
+double TelluriumData::operator() (const unsigned& row, const unsigned& col) const
 {
     return mTheData(row,col);
 }
 
-void RoadRunnerData::setColumnNames(const std::vector<std::string>& colNames)
+void TelluriumData::setColumnNames(const std::vector<std::string>& colNames)
 {
     mColumnNames = colNames;
-    Log(Logger::LOG_DEBUG) << "Simulation Data Columns: " << rr::toString(mColumnNames);
+    Log(Logger::LOG_DEBUG) << "Simulation Data Columns: " << toString(mColumnNames);
 }
 
 
-void RoadRunnerData::reSize(int rows, int cols)
+void TelluriumData::reSize(int rows, int cols)
 {
     mTheData.Allocate(rows, cols);
 }
 
-void RoadRunnerData::setData(const DoubleMatrix& theData)
+void TelluriumData::setData(const DoubleMatrix& theData)
 {
     mTheData = theData;
     Log(Logger::LOG_DEBUG) << "Simulation Data =========== \n" << mTheData;
     check();
 }
 
-bool RoadRunnerData::check() const
+bool TelluriumData::check() const
 {
     if(mTheData.CSize() != mColumnNames.size())
     {
@@ -281,7 +290,7 @@ bool RoadRunnerData::check() const
     return true;
 }
 
-bool RoadRunnerData::loadSimpleFormat(const string& fName)
+bool TelluriumData::loadSimpleFormat(const string& fName)
 {
     if(!fileExists(fName))
     {
@@ -295,8 +304,8 @@ bool RoadRunnerData::loadSimpleFormat(const string& fName)
         return false;
     }
 
-    mColumnNames = rr::splitString(lines[0], ",");
-    Log(lInfo) << rr::toString(mColumnNames);
+    mColumnNames = splitString(lines[0], ",");
+    Log(lInfo) << toString(mColumnNames);
 
     mTheData.resize(lines.size() -1, mColumnNames.size());
 
@@ -312,7 +321,7 @@ bool RoadRunnerData::loadSimpleFormat(const string& fName)
     return true;
 }
 
-bool RoadRunnerData::writeTo(const string& fileName) const
+bool TelluriumData::writeTo(const string& fileName) const
 {
     ofstream aFile(fileName.c_str());
     if(!aFile)
@@ -332,7 +341,7 @@ bool RoadRunnerData::writeTo(const string& fileName) const
     return true;
 }
 
-bool RoadRunnerData::readFrom(const string& fileName)
+bool TelluriumData::readFrom(const string& fileName)
 {
     ifstream aFile(fileName.c_str());
     if(!aFile)
@@ -346,7 +355,7 @@ bool RoadRunnerData::readFrom(const string& fileName)
     return true;
 }
 
-ostream& operator << (ostream& ss, const RoadRunnerData& data)
+ostream& operator << (ostream& ss, const TelluriumData& data)
 {
     //Check that the dimensions of col header and data is ok
     if(!data.check())
@@ -424,7 +433,7 @@ ostream& operator << (ostream& ss, const RoadRunnerData& data)
 }
 
 //Stream data from a file
-istream& operator >> (istream& ss, RoadRunnerData& data)
+istream& operator >> (istream& ss, TelluriumData& data)
 {
     //Read in all lines into a string
     std::string oneLine((std::istreambuf_iterator<char>(ss)), std::istreambuf_iterator<char>());
@@ -527,12 +536,12 @@ istream& operator >> (istream& ss, RoadRunnerData& data)
     return ss;
 }
 
-const DoubleMatrix& RoadRunnerData::getData() const
+const DoubleMatrix& TelluriumData::getData() const
 {
     return mTheData;
 }
 
-const DoubleMatrix& RoadRunnerData::getWeights() const
+const DoubleMatrix& TelluriumData::getWeights() const
 {
     return mWeights;
 }

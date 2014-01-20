@@ -23,7 +23,7 @@ class DataSeries(object):
     def __init__ (self, handle=None, myData = False):
         if handle == None:
            self._myData = True
-           self._data = tpc.telLib.createRoadRunnerData(0, 0, "")           
+           self._data = tpc.telLib.createTelluriumData(0, 0, "")           
         else:   
            self._data = handle
            self._myData = myData 
@@ -46,20 +46,20 @@ class DataSeries(object):
            colHdr  = numPyData.dtype.names 
 
         columnStr = str(colHdr).strip('[]')
-        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, columnStr)        
+        dataHandle = tpc.telLib.createTelluriumData(nrRows,nrCols, columnStr)        
                 
         #Copy the data
         for row in range(nrRows):
             for col in range(nrCols):                
                 val = numPyData[row][col] 
-                tpc.setRoadRunnerDataElement(dataHandle, row, col, val)        
+                tpc.setTelluriumDataElement(dataHandle, row, col, val)        
         return cls(dataHandle, True)
     
     def __del__ (self):
         if (self._data != 0):
             try:
                 if self._myData == True:
-                    tpc.freeRoadRunnerData (self._data)
+                    tpc.freeTelluriumData (self._data)
                 #else:                    
                 #    print 'not freeing data'
             except:
@@ -71,14 +71,14 @@ class DataSeries(object):
         
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
-        return tpc.telLib.getRoadRunnerDataNumRows(self._data)
+        return tpc.telLib.getTelluriumDataNumRows(self._data)
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
-        return tpc.telLib.getRoadRunnerDataNumCols(self._data)
+        return tpc.telLib.getTelluriumDataNumCols(self._data)
      
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
@@ -89,7 +89,7 @@ class DataSeries(object):
     ## print d.getColumnHeaders()
     ##@endcode
     def getColumnHeaders (self):
-        value = tpc.telLib.getRoadRunnerDataColumnHeader(self._data)
+        value = tpc.telLib.getTelluriumDataColumnHeader(self._data)
         if value == None:
            value = []
         return value
@@ -99,8 +99,8 @@ class DataSeries(object):
     ## print d.getElement (1,2)
     ##@endcode       
     def getElement (self, row, col):
-        rowCount = tpc.telLib.getRoadRunnerDataNumRows(self._data)
-        colCount = tpc.telLib.getRoadRunnerDataNumCols(self._data)
+        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -109,7 +109,7 @@ class DataSeries(object):
             raise Exception("Column index out of bounds in dataseries element access")
 
         val = ctypes.c_double()
-        if tpc.telLib.getRoadRunnerDataElement(self._data, row, col, ctypes.byref(val)) == True:
+        if tpc.telLib.getTelluriumDataElement(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:
            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
@@ -131,7 +131,7 @@ class DataSeries(object):
     def readDataSeries(cls, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
-        data = tpc.createRoadRunnerDataFromFile (fileName)
+        data = tpc.createTelluriumDataFromFile (fileName)
         return cls (data, True)
 
     ## \brief Write a dataseries to a file
@@ -139,16 +139,16 @@ class DataSeries(object):
     ## d.writeDataSeries ("myDataSeries.txt")
     ##@endcode       
     def writeDataSeries(self, fileName):
-        tpc.writeRoadRunnerData(self._data, fileName)
+        tpc.writeTelluriumData(self._data, fileName)
 
     ## \brief Plot a dataseries as a graph
     ##@code
     ## d.plot()
     ##@endcode       
     def plot (self):
-         hdr = tpc.getRoadRunnerDataColumnHeader(self._data)
+         hdr = tpc.getTelluriumDataColumnHeader(self._data)
          npData = tpc.getNumpyData(self._data)
-         tpc.plotRoadRunnerData(npData, hdr)
+         tpc.plotTelluriumData(npData, hdr)
 
     data = property (__getHandle)
 
@@ -327,7 +327,7 @@ class Plugin (object):
     ## print myPlugin.listOfPropertyHints()
     ##@endcode         
     def loadDataSeriesAsNumPy (self, fileName):
-        rrDataHandle = tpc.createRoadRunnerDataFromFile (fileName)
+        rrDataHandle = tpc.createTelluriumDataFromFile (fileName)
         return tpc.getNumpyData (rrDataHandle)
 
     def OnProgress (self, f):
@@ -438,8 +438,8 @@ def plot (data, myColor="red", myLinestyle="None", myMarker="None", myLabel=""):
 def show():
     plt.show()
 
-def getRoadRunnerData (rr):
-    rrDataHandle = tpc.getRoadRunnerDataHandle(rr)
+def getTelluriumData (rr):
+    rrDataHandle = tpc.getTelluriumDataHandle(rr)
     return DataSeries (rrDataHandle)
 
 def getDataSeries (numPyData):    
@@ -451,7 +451,7 @@ def getDataSeries (numPyData):
     ## print myPlugin.loadDataSeries("myDataSeries.txt")
     ##@endcode         
     def loadDataSeries (self, fileName):
-        handle = tpc.createRoadRunnerDataFromFile (fileName)
+        handle = tpc.createTelluriumDataFromFile (fileName)
         return DataSeries(handle)
 
 ##    print "Starting Test"
@@ -497,7 +497,7 @@ def getDataSeries (numPyData):
 ##rr.simulate(0, 10, 511) # Want 512 points
 ##
 ## The plugin will need a handle to the underlying roadrunner data
-##d = tel.getRoadRunnerData (rr)
+##d = tel.getTelluriumData (rr)
 ##
 ##noisePlugin.InputData = d
 ##

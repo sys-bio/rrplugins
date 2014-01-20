@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
 #include "LMWorker.h"
@@ -171,7 +171,7 @@ bool LMWorker::setup()
         }
     }
 
-    RoadRunnerData& obsData             = (mTheHost.mExperimentalData.getValueReference());
+    TelluriumData& obsData             = (mTheHost.mExperimentalData.getValueReference());
     mLMData.nrOfTimePoints              = obsData.rSize();
     mLMData.timeStart                   = obsData.getTimeStart();
     mLMData.timeEnd                     = obsData.getTimeEnd();
@@ -292,7 +292,7 @@ void evaluate(const double *par,       //Property vector
         return;
     }
 
-//    RRCDataPtr rrcData = createRRCData( *((RoadRunnerData*) rrData));
+//    RRCDataPtr rrcData = createRRCData( *((TelluriumData*) rrData));
     RRCDataPtr rrcData = createRRCData(rrData);
     //calculate fvec for each specie
     int count = 0;
@@ -343,9 +343,9 @@ void evaluate(const double *par,       //Property vector
     }
 }
 
-void LMWorker::createModelData(RoadRunnerData* _data)
+void LMWorker::createModelData(TelluriumData* _data)
 {
-    RoadRunnerData& data = *(_data);
+    TelluriumData& data = *(_data);
     //We now have the parameters
     StringList selList("time");
     selList.Append(mTheHost.mModelDataSelectionList.getValue());
@@ -367,16 +367,17 @@ void LMWorker::createModelData(RoadRunnerData* _data)
 
     if(mRRI->simulate(&options))
     {
-         data = *mRRI->getSimulationResult();
+        rr::RoadRunnerData rrData = *mRRI->getSimulationResult();
+        data = rrData;
     }
 }
 
-void LMWorker::createResidualsData(RoadRunnerData* _data)
+void LMWorker::createResidualsData(TelluriumData* _data)
 {
-    RoadRunnerData& resData = *(_data);        
+    TelluriumData& resData = *(_data);        
     //We now have the parameters
-    RoadRunnerData& obsData = (mTheHost.mExperimentalData.getValueReference());
-    RoadRunnerData& modData = (mTheHost.mModelData.getValueReference());
+    TelluriumData& obsData = (mTheHost.mExperimentalData.getValueReference());
+    TelluriumData& modData = (mTheHost.mModelData.getValueReference());
 
     resData.reSize(modData.rSize(), modData.cSize());
 

@@ -3,16 +3,16 @@ import  telplugins as c
 
 try:
     
-    rrDataH = c.createRoadRunnerData(4,2)    
-    nrRows = c.getRoadRunnerDataNumRows(rrDataH)
-    nrCols = c.getRoadRunnerDataNumCols(rrDataH)
-    colHdr = c.getRoadRunnerDataColumnHeader(rrDataH)
+    rrDataH = c.createTelluriumData(4,2)    
+    nrRows = c.getTelluriumDataNumRows(rrDataH)
+    nrCols = c.getTelluriumDataNumCols(rrDataH)
+    colHdr = c.getTelluriumDataColumnHeader(rrDataH)
     
     nr = 1
     
     for row in range(nrRows):        
         for col in range(nrCols):            
-            c.setRoadRunnerDataElement(rrDataH, row, col, nr)
+            c.setTelluriumDataElement(rrDataH, row, col, nr)
             nr = nr + 1            
         
     #Print the data        
@@ -22,7 +22,7 @@ try:
             if row == 0 and col ==0:
                 print colHdr
                 
-            rowLine = rowLine +  `c.getRoadRunnerDataElement(rrDataH, row, col)` + ' '
+            rowLine = rowLine +  `c.getTelluriumDataElement(rrDataH, row, col)` + ' '
         print rowLine
              
              
@@ -35,7 +35,7 @@ try:
     print 'Weights======== '
     for row in range(nrRows):        
         for col in range(nrCols):
-            val = c.getRoadRunnerDataWeight(rrDataH, row, col)
+            val = c.getTelluriumDataWeight(rrDataH, row, col)
             print '( ' + `val` + ' )'
                 
         

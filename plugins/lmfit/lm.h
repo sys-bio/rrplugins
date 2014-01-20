@@ -22,9 +22,9 @@ class LM : public CPPPlugin
 
     public:
         Property<string>                        mSBML;                          //This is the model
-        Property<RoadRunnerData>				mExperimentalData;
-        Property<RoadRunnerData>			    mModelData;
-        Property<RoadRunnerData>			    mResidualsData;
+        Property<TelluriumData>				mExperimentalData;
+        Property<TelluriumData>			    mModelData;
+        Property<TelluriumData>			    mResidualsData;
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
         Property<tlp::StringList>                mExperimentalDataSelectionList; //Species selection list for observed data

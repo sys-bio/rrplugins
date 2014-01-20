@@ -11,7 +11,7 @@ import matplotlib.pyplot as plot
 from telpluginutils import *
 
 """
-CTypes Python Bindings to the RoadRunnerData API.
+CTypes Python Bindings to the TelluriumData API.
 """
 __version__ = "0.8.0"
 
@@ -35,18 +35,18 @@ except:
 ## \param rrInstance A RoadRunner instance, as returned from roadrunner.RoadRunner()
 ## \return Returns a handle to roadrunners internal data object
 ## \ingroup utilities
-def getRoadRunnerDataHandle(rrInstance):
+def getTelluriumDataHandle(rrInstance):
     rrHandle = cast(int(rrInstance.this), c_void_p)
-    return telLib.getRoadRunnerDataHandle(rrHandle)
+    return telLib.getTelluriumDataHandle(rrHandle)
 
 ## \brief Get column header in roadrunner data
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
 
-telLib.getRoadRunnerDataColumnHeader.restype = c_char_p
-def getRoadRunnerDataColumnHeader(rrDataHandle):
-    hdr = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
+telLib.getTelluriumDataColumnHeader.restype = c_char_p
+def getTelluriumDataColumnHeader(rrDataHandle):
+    hdr = telLib.getTelluriumDataColumnHeader(rrDataHandle)
 
     if hdr:
         res = hdr
@@ -55,46 +55,46 @@ def getRoadRunnerDataColumnHeader(rrDataHandle):
     else:
         return None
 
-## \brief Write RoadRunnerData to a file
+## \brief Write TelluriumData to a file
 ## \param rrDataHandle A handle to roadunnerdata
 ## \param fName Name of output file, including path. If no path is given, the file is written to the
 ## current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.writeRoadRunnerDataToFile.restype = c_bool
-def writeRoadRunnerData(rrDataHandle, fName):
-    return telLib.writeRoadRunnerDataToFile(rrDataHandle, fName)
+telLib.writeTelluriumDataToFile.restype = c_bool
+def writeTelluriumData(rrDataHandle, fName):
+    return telLib.writeTelluriumDataToFile(rrDataHandle, fName)
 
-## \brief Read RoadRunnerData from a file
+## \brief Read TelluriumData from a file
 ## \param rrDataHandle A handle to roadunnerdata
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.readRoadRunnerDataFromFile.restype = c_bool
-def readRoadRunnerData(rrDataHandle, fName):
-    return telLib.readRoadRunnerDataFromFile(rrDataHandle, fName)
+telLib.readTelluriumDataFromFile.restype = c_bool
+def readTelluriumData(rrDataHandle, fName):
+    return telLib.readTelluriumDataFromFile(rrDataHandle, fName)
 
-## \brief Create RoadRunnerData from a file
+## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
 ## \return Returns a handle to RoadRunner data if successful, None otherwise
-## \note Use the freeRoadRunnerData to free memory allocated by the returned data
+## \note Use the freeTelluriumData to free memory allocated by the returned data
 ## \ingroup utilities
-telLib.createRoadRunnerData.restype = c_void_p
-def createRoadRunnerDataFromFile(fName):
+telLib.createTelluriumData.restype = c_void_p
+def createTelluriumDataFromFile(fName):
     #Create a RoadRunner data object
-    rrDataHandle = telLib.createRoadRunnerData(0,0,"")
-    if telLib.readRoadRunnerDataFromFile(rrDataHandle, fName) == False:
+    rrDataHandle = telLib.createTelluriumData(0,0,"")
+    if telLib.readTelluriumDataFromFile(rrDataHandle, fName) == False:
         print 'Failed to read data'
     return rrDataHandle
 
-## \brief Free RoadRunnerData
+## \brief Free TelluriumData
 ## \param dataHandle Handle to a roadrunner data object
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.freeRoadRunnerData.restype = c_bool
-def freeRoadRunnerData(rrDataHandle):
-    return telLib.freeRoadRunnerData(rrDataHandle)
+telLib.freeTelluriumData.restype = c_bool
+def freeTelluriumData(rrDataHandle):
+    return telLib.freeTelluriumData(rrDataHandle)
 
 

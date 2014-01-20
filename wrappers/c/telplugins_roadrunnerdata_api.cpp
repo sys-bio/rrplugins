@@ -5,15 +5,15 @@
 #include "telplugins_cpp_support.h"
 #include "telStringUtils.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 
 namespace tlpc
 {
 using namespace std;
 using namespace tlp;
-using rr::RoadRunnerData;
+using tlp::TelluriumData;
 
-RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle)
+RRDataHandle tlp_cc getTelluriumDataHandle(RRHandle handle)
 {
     start_try
         RoadRunner* rri = castToRoadRunner(handle);
@@ -21,28 +21,28 @@ RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc getRoadRunnerDataElement(RRDataHandle data, int row, int col, double* value)
+bool tlp_cc getTelluriumDataElement(RRDataHandle data, int row, int col, double* value)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(data);
+        TelluriumData* rrData = castToTelluriumData(data);
         *value = rrData->getDataElement(row, col);        
         return true;
     catch_bool_macro
 }
 
-bool tlp_cc setRoadRunnerDataElement(RRDataHandle data, int row, int col, double value)
+bool tlp_cc setTelluriumDataElement(RRDataHandle data, int row, int col, double value)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(data);
+        TelluriumData* rrData = castToTelluriumData(data);
         rrData->setDataElement(row, col, value);        
         return true;
     catch_bool_macro
 }
 
-bool tlp_cc getRoadRunnerDataWeight(RRDataHandle data, int row, int col, double* value)
+bool tlp_cc getTelluriumDataWeight(RRDataHandle data, int row, int col, double* value)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(data);
+        TelluriumData* rrData = castToTelluriumData(data);
 
         if(rrData->hasWeights())
         {
@@ -56,10 +56,10 @@ bool tlp_cc getRoadRunnerDataWeight(RRDataHandle data, int row, int col, double*
     catch_bool_macro
 }
 
-bool tlp_cc setRoadRunnerDataWeight(RRDataHandle data, int row, int col, double value)
+bool tlp_cc setTelluriumDataWeight(RRDataHandle data, int row, int col, double value)
 {
     start_try
-        RoadRunnerData* rrData = castToRoadRunnerData(data);
+        TelluriumData* rrData = castToTelluriumData(data);
         if(rrData->hasWeights())
         {
             rrData->setWeight(row, col, value);            
@@ -75,7 +75,7 @@ bool tlp_cc setRoadRunnerDataWeight(RRDataHandle data, int row, int col, double 
 bool tlp_cc hasWeights(RRDataHandle rrData, bool* value)
 {
     start_try
-        RoadRunnerData* Data = castToRoadRunnerData(rrData);
+        TelluriumData* Data = castToTelluriumData(rrData);
         (*value) = Data->hasWeights();
         return true;
     catch_bool_macro
@@ -84,41 +84,41 @@ bool tlp_cc hasWeights(RRDataHandle rrData, bool* value)
 bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success)
 {
     start_try
-        RoadRunnerData* Data = castToRoadRunnerData(rrData);
+        TelluriumData* Data = castToTelluriumData(rrData);
         Data->allocateWeights();
         (*success) = Data->hasWeights();
         return true;
     catch_bool_macro
 }
 
-char* tlp_cc getRoadRunnerDataColumnHeader(RRDataHandle rrData)
+char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle rrData)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         return createText(data->getColumnNamesAsString());
     catch_ptr_macro
 }
 
-int tlp_cc getRoadRunnerDataNumRows(RRDataHandle rrData)
+int tlp_cc getTelluriumDataNumRows(RRDataHandle rrData)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         return data->rSize();
     catch_int_macro
 }
 
-int tlp_cc getRoadRunnerDataNumCols(RRDataHandle rrData)
+int tlp_cc getTelluriumDataNumCols(RRDataHandle rrData)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         return data->cSize();
     catch_int_macro
 }
 
-RRDataHandle tlp_cc createRoadRunnerData(int nRows, int nCols, char* colNames)
+RRDataHandle tlp_cc createTelluriumData(int nRows, int nCols, char* colNames)
 {
     start_try
-        RoadRunnerData* data = new RoadRunnerData(nRows, nCols);
+        TelluriumData* data = new TelluriumData(nRows, nCols);
         if (colNames)
         {
             string cNames(colNames);
@@ -129,27 +129,27 @@ RRDataHandle tlp_cc createRoadRunnerData(int nRows, int nCols, char* colNames)
     catch_ptr_macro
 }
 
-bool tlp_cc freeRoadRunnerData(RRDataHandle rrData)
+bool tlp_cc freeTelluriumData(RRDataHandle rrData)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         delete data;
         return true;
     catch_bool_macro
 }
 
-bool tlp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
+bool tlp_cc writeTelluriumDataToFile(RRDataHandle rrData, char* fName)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         return data->writeTo(fName);
     catch_bool_macro
 }
 
-bool tlp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName)
+bool tlp_cc readTelluriumDataFromFile(RRDataHandle rrData, char* fName)
 {
     start_try
-        RoadRunnerData* data = castToRoadRunnerData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);
         return data->readFrom(fName);
     catch_bool_macro
 

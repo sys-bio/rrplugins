@@ -66,7 +66,7 @@ try:
     
     #Assign data to the plugin
     pluginData = getPluginProperty(pluginHandle,"InputData")
-    setProperty(pluginData, getRoadRunnerDataHandle(rr))
+    setProperty(pluginData, getTelluriumDataHandle(rr))
     
     #Execute the noise plugin which will add some noise to the (internal) data
     executePluginEx(pluginHandle)
@@ -74,8 +74,8 @@ try:
     #Retrieve data from plugin
     
     rrData = getNumpyData(getProperty(pluginData))
-    colNames = getRoadRunnerDataColumnHeader(getProperty(pluginData))
-    plotRoadRunnerData(rrData, colNames)
+    colNames = getTelluriumDataColumnHeader(getProperty(pluginData))
+    plotTelluriumData(rrData, colNames)
     unLoadPlugins(pm)
     unLoadAPI()
     print "done"

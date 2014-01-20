@@ -1,12 +1,12 @@
 from telplugins import *
 
 try:
-    rrDataHandle = createRoadRunnerDataFromFile("testData.dat")
-    hdr = getRoadRunnerDataColumnHeader(rrDataHandle)
+    rrDataHandle = createTelluriumDataFromFile("testData.dat")
+    hdr = getTelluriumDataColumnHeader(rrDataHandle)
     npData = getNumpyData(rrDataHandle)
     print `hdr` + `npData`
 
-    plotRoadRunnerData(npData, hdr)
+    plotTelluriumData(npData, hdr)
 
     print "done"
 except Exception as e:
