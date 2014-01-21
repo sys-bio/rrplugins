@@ -56,7 +56,7 @@ if not os.path.exists(gDefaultPluginsPath):
 #Type of plugin events, first argument is return type
 
 ## \brief Plugin function event type definition
-## This is a helper object that a client can use as an argument to a roadrunner plugin.
+## This is a helper object that a client can use as an argument to a tellurium plugin.
 ## The exact number of plugins functions required arguments, and their type, is plugin dependent. A client of the
 ## the plugin needs to get this information from the plugin specific documentation.
 ## An example of using NotifyEvent is shown below. The NotifyEvent takes no arguments.
@@ -1062,20 +1062,20 @@ def getTelluriumDataHandle(rrInstance):
     rrHandle = cast(int(rrInstance.this), c_void_p)
     return telLib.getTelluriumDataHandle(rrHandle)
 
-## \brief Convert roadrunner data to Numpy data
-## \param rrDataHandle A handle to a roadrunner data object
+## \brief Convert tellurium data to Numpy data
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
 telLib.getTelluriumDataElement.restype = c_bool
-def getNumpyData(rrDataHandle):
-    colHeader = telLib.getTelluriumDataColumnHeader(rrDataHandle)
-    rowCount = telLib.getTelluriumDataNumRows(rrDataHandle)
-    colCount = telLib.getTelluriumDataNumCols(rrDataHandle)
+def getNumpyData(telDataHandle):
+    colHeader = telLib.getTelluriumDataColumnHeader(telDataHandle)
+    rowCount = telLib.getTelluriumDataNumRows(telDataHandle)
+    colCount = telLib.getTelluriumDataNumCols(telDataHandle)
     resultArray = np.zeros([rowCount, colCount])
     for row in range(rowCount):
         for col in range(colCount):
                 val = c_double()
-                if telLib.getTelluriumDataElement(rrDataHandle, row, col, byref(val)) == True:
+                if telLib.getTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
                     resultArray[row, col] = val.value
                 else:
                     print "problem"
@@ -1103,13 +1103,13 @@ def plotTelluriumData(data, colHeaders):
     plot.xlabel(xlbl)
     plot.show()
     
-## \brief Get column header in roadrunner data
-## \param rrDataHandle A handle to a roadrunner data object
+## \brief Get column header in tellurium data
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
 telLib.getTelluriumDataColumnHeader.restype = c_char_p
-def getTelluriumDataColumnHeader(rrDataHandle):
-    hdr = telLib.getTelluriumDataColumnHeader(rrDataHandle)
+def getTelluriumDataColumnHeader(telDataHandle):
+    hdr = telLib.getTelluriumDataColumnHeader(telDataHandle)
 
     if hdr:
         res = hdr
@@ -1119,81 +1119,81 @@ def getTelluriumDataColumnHeader(rrDataHandle):
         return None
 
 ## \brief Get RoadRunner data element at row,col
-## \param rrDataHandle A handle to a roadrunner data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 telLib.getTelluriumDataElement.restype = c_bool
-def getTelluriumDataElement(rrDataHandle, row, col):
+def getTelluriumDataElement(telDataHandle, row, col):
     val = c_double()
-    if telLib.getTelluriumDataElement(rrDataHandle, row, col, byref(val)) == True:
+    if telLib.getTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
 
 ## \brief Set RoadRunner data element at row,col
-## \param rrDataHandle A handle to a roadrunner data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 telLib.setTelluriumDataElement.restype = c_bool
-def setTelluriumDataElement(rrDataHandle, row, col, number):    
-    return telLib.setTelluriumDataElement(rrDataHandle, row, col, c_double(number))
+def setTelluriumDataElement(telDataHandle, row, col, number):    
+    return telLib.setTelluriumDataElement(telDataHandle, row, col, c_double(number))
 
 ## \brief Get RoadRunner data element at row,col
-## \param rrDataHandle A handle to a roadrunner data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 telLib.getTelluriumDataWeight.restype = c_bool
-def getTelluriumDataWeight(rrDataHandle, row, col):
+def getTelluriumDataWeight(telDataHandle, row, col):
     val = c_double()
-    if telLib.getTelluriumDataWeight(rrDataHandle, row, col, byref(val)) == True:
+    if telLib.getTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
 
 ## \brief Set RoadRunner data element at row,col
-## \param rrDataHandle A handle to a roadrunner data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 telLib.setTelluriumDataWeight.restype = c_bool
-def setTelluriumDataWeight(rrDataHandle, row, col, number):    
-    return telLib.setTelluriumDataWeight(rrDataHandle, row, col, c_double(number))
+def setTelluriumDataWeight(telDataHandle, row, col, number):    
+    return telLib.setTelluriumDataWeight(telDataHandle, row, col, c_double(number))
 
     
-## \brief Get number of rows in a roadrunner data object
-## \param rrDataHandle A handle to a roadrunner data object
+## \brief Get number of rows in a tellurium data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of rows in the data object
 ## \ingroup utilities
-def getTelluriumDataNumRows(rrDataHandle):
-    return telLib.getTelluriumDataNumRows(rrDataHandle)
+def getTelluriumDataNumRows(telDataHandle):
+    return telLib.getTelluriumDataNumRows(telDataHandle)
     
 
-## \brief Get number of columns in a roadrunner data object
-## \param rrDataHandle A handle to a roadrunner data object
+## \brief Get number of columns in a tellurium data object
+## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of cols in the data object
 ## \ingroup utilities
-def getTelluriumDataNumCols(rrDataHandle):
-    return telLib.getTelluriumDataNumCols(rrDataHandle)
+def getTelluriumDataNumCols(telDataHandle):
+    return telLib.getTelluriumDataNumCols(telDataHandle)
 
 ## \brief Write TelluriumData to a file
-## \param rrDataHandle A handle to roadunnerdata
+## \param telDataHandle A handle to roadunnerdata
 ## \param fName Name of output file, including path. If no path is given, the file is written to the
 ## current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 telLib.writeTelluriumDataToFile.restype = c_bool
-def writeTelluriumData(rrDataHandle, fName):
-    return telLib.writeTelluriumDataToFile(rrDataHandle, fName)
+def writeTelluriumData(telDataHandle, fName):
+    return telLib.writeTelluriumDataToFile(telDataHandle, fName)
 
 
 ## \brief Read TelluriumData from a file
-## \param rrDataHandle A handle to roadunnerdata
+## \param telDataHandle A handle to roadunnerdata
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 telLib.readTelluriumDataFromFile.restype = c_bool
-def readTelluriumData(rrDataHandle, fName):
-    return telLib.readTelluriumDataFromFile(rrDataHandle, fName)
+def readTelluriumData(telDataHandle, fName):
+    return telLib.readTelluriumDataFromFile(telDataHandle, fName)
 
 ## \brief Create a TelluriumData object
 ## \param rows Number of rows in the data to be created
@@ -1218,13 +1218,13 @@ def createTelluriumData(rows, cols):
 telLib.createTelluriumData.restype = c_void_p
 def createTelluriumDataFromFile(fName):
     #Create a RoadRunner data object
-    rrDataHandle = telLib.createTelluriumData(0,0, None)
-    if telLib.readTelluriumDataFromFile(rrDataHandle, fName) == False:
+    telDataHandle = telLib.createTelluriumData(0,0, None)
+    if telLib.readTelluriumDataFromFile(telDataHandle, fName) == False:
         print 'Failed to read data'
-    return rrDataHandle
+    return telDataHandle
 
-## \brief Check if roadrunner data has weights allocated
-## \param dataHandle Handle to a roadrunner data object
+## \brief Check if tellurium data has weights allocated
+## \param dataHandle Handle to a tellurium data object
 ## \return Returns true or false indicating if the data object has weights or not
 ## \ingroup utilities
 telLib.hasWeights.restype = c_bool
@@ -1236,8 +1236,8 @@ def hasWeights(dataHandle):
         return hasIt.value                
         
        
-## \brief Allocate weights for roadrunner data object
-## \param dataHandle Handle to a roadrunner data object
+## \brief Allocate weights for tellurium data object
+## \param dataHandle Handle to a tellurium data object
 ## \return Returns true or false indicating if allocating weights were successful or not
 ## \ingroup utilities
 telLib.allocateWeights.restype = c_bool
@@ -1264,12 +1264,12 @@ def readAllText(fName):
     return str
 
 ## \brief Free TelluriumData
-## \param dataHandle Handle to a roadrunner data object
+## \param dataHandle Handle to a tellurium data object
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 telLib.freeTelluriumData.restype = c_bool
-def freeTelluriumData(rrDataHandle):
-    return telLib.freeTelluriumData(rrDataHandle)
+def freeTelluriumData(telDataHandle):
+    return telLib.freeTelluriumData(telDataHandle)
 
 ## \brief Get last (API) error. This returns the last error if any.
 ## \return Returns a string with an error success, None otherwise
@@ -1284,13 +1284,13 @@ def unLoadAPI():
     windll.kernel32.FreeLibrary(telLib._handle)
 
 
-##\mainpage Front page for RoadRunners PluginLib Python wrapper
+##\mainpage Plugins for RoadRunner
 #\section Introduction
-#Roadrunners plugin library exposes a simple framework for adding functionality to RoadRunner core, by means of
-#external plugins.
+#The Tellurium plugin library exposes a simple framework for adding functionality to the RoadRunner core, by means of
+#external plugins. 
 #The code fragment below shows briefly how to load plugins, check for plugins, and use an individual plugin.
 #
-#\include rrPluginTester.py
+#\include telPluginTester.py
 #
 # The above code produces the following output:
 #@code
@@ -1356,8 +1356,8 @@ def unLoadAPI():
 #    \note Writing plugins in Python is not yet supported
 #
 # \section main_section Using telPlugins.py
-# In order to use this wrapper (telPlugins.py), your systems environmental Python path variable, i.e. PYTHONPATH, needs to include the folder where the wrapper script is located, e.g.
-# "c:\\roadrunner-1.0.0\\plugins\\python". Currently, this need to be set manually by the user.
+# In order to use this wrapper, telplugins need to be installed properly. Typically all neeeded to be done is to run the install_tellurium_plugins.py script, available in the
+# root folder of the release.
 #
 # \defgroup plugin_manager Plugin Manager
 # \brief Plugin Manager Library Functions
@@ -1397,31 +1397,31 @@ def unLoadAPI():
 # \defgroup examples Python Example Scripts
 # \brief Scripts illuminating concepts regarding RoadRunner Plugins
 
-## \example rrPluginTester.py
+## \example telPluginTester.py
 ## This Example shows
 ## -# How to create a plugin manager
 ## -# Get Plugin Names
 ## -# Get a handle to a plugin
 ## -# Obtain some info from the plugin
 
-## \example rrPluginProperty.py
+## \example telPluginProperties.py
 ## This Example shows
 ## -# Get a handle to a property in a Plugin
 ## -# Obtain some info about the property
 ## -# Getting the value of the property
 ## -# Setting the value of the property
 
-## \example rrPluginDocumentation.py
+## \example telPluginDocumentation.py
 ## This Example shows
 ## -# Get a plugin's categories in the form of an XML string
 ## -# Obtain and view a Plugin's documentation as a PDF (Needs a system PDF reader)
 
-## \example rrEventFunction.py
+## \example telEvents.py
 ## This Example shows
 ## -# How to define Python event functions and passing them to a plugin
 
-## \example rrNoisePlugin.py
+## \example telCreateNoisyData1.py
 ## This Example Demonstrate the use of the AddNoise plugin
 
-## \example rrLevenbergMarquardt.py
+## \example telLMFit1.py
 ## This Example Demonstrate the use of the Minimization Plugin, using the Levenberg-Marquardt algorithm.
