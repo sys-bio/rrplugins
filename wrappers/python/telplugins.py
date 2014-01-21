@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import os.path
 import ctypes
 
-__version__ = "0.6.5"
+__version__ = "0.6.6"
 
 ## \brief DataSeries class for handling roadrunner data types
 class DataSeries(object):
@@ -32,8 +32,9 @@ class DataSeries(object):
     @classmethod
     def fromNumPy(cls, numPyData):
         
-        # We have to check the following because roadrunner issues tructured arrays
-        if numPyData.dtype.names != None:        
+        # We have to check the following because roadrunner issues structured arrays
+        if numPyData.dtype.names != None: 
+            # Convert to a unstructured type to obtain array dims
             unstructNumPyData = numPyData.view((float, len (numPyData.dtype.names)))
             nrCols  = unstructNumPyData.shape[1]
             nrRows  = len(unstructNumPyData) 
@@ -154,6 +155,9 @@ class DataSeries(object):
     ## d.plot()
     ##@endcode       
     def plot (self):
+print "mean=", numpy.mean (values[:,1])
+
+print "std=", numpy.std (values[:,1]) 
          hdr = tpc.getRoadRunnerDataColumnHeader(self._data)
          npData = tpc.getNumpyData(self._data)
          tpc.plotRoadRunnerData(npData, hdr)
