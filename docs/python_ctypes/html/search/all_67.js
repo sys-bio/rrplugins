@@ -1,10 +1,8 @@
 var searchData=
 [
   ['getboolproperty',['getBoolProperty',['../group__plugin__properties.html#ga075b02bf4853e3245fc0e256b50c09d6',1,'python::telplugins_c_api']]],
-  ['getcolumnheaders',['getColumnHeaders',['../classpython_1_1telplugins_1_1_data_series.html#ace23540a192e59586d4fcf14bb96833f',1,'python::telplugins::DataSeries']]],
   ['getcurrentplugin',['getCurrentPlugin',['../group__plugin__manager.html#gaf426e48ea275db07a74e28cb9a7e3595',1,'python::telplugins_c_api']]],
   ['getdoubleproperty',['getDoubleProperty',['../group__plugin__properties.html#gacb149460b60b19f682d1f222955bc9fa',1,'python::telplugins_c_api']]],
-  ['getelement',['getElement',['../classpython_1_1telplugins_1_1_data_series.html#a0c2c08ce2d865d58bb8e9661ba55658d',1,'python::telplugins::DataSeries']]],
   ['getfirstplugin',['getFirstPlugin',['../group__plugin__manager.html#ga9f19ce1f85059e9770efb792fae46d68',1,'python::telplugins_c_api']]],
   ['getfirstproperty',['getFirstProperty',['../group__plugin__properties.html#ga432c4c14b364ef1fedd00273fa7d7f62',1,'python::telplugins_c_api']]],
   ['getintproperty',['getIntProperty',['../group__plugin__properties.html#ga4a26f21aae2d39e5c88772e0caa9b289',1,'python::telplugins_c_api']]],
@@ -33,7 +31,7 @@ var searchData=
   ['getpluginresult',['getPluginResult',['../group__plugins.html#gadb3d3fd9d80a70e11e8b076b75a5c96a',1,'python::telplugins_c_api']]],
   ['getpluginstatus',['getPluginStatus',['../group__plugins.html#gab9bf021fedc121b4367c5d6698f6309a',1,'python::telplugins_c_api']]],
   ['getpreviousplugin',['getPreviousPlugin',['../group__plugin__manager.html#ga7c063620355e3880de56a303ee05237e',1,'python::telplugins_c_api']]],
-  ['getproperty',['getProperty',['../classpython_1_1telplugins_1_1_plugin.html#aaeaf0cdf9fd98f2386add1282e18bde3',1,'python.telplugins.Plugin.getProperty()'],['../group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8',1,'python.telplugins_c_api.getProperty()']]],
+  ['getproperty',['getProperty',['../group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8',1,'python::telplugins_c_api']]],
   ['getpropertydescription',['getPropertyDescription',['../group__plugin__properties.html#ga42d38a8b05bd644ecc89df8a5e8c4ea5',1,'python::telplugins_c_api']]],
   ['getpropertyhint',['getPropertyHint',['../group__plugin__properties.html#ga28037c28c234490ad2fafc0bf87175bc',1,'python::telplugins_c_api']]],
   ['getpropertyinfo',['getPropertyInfo',['../group__plugin__properties.html#ga5df96ff59119ce817a25bb89eb1e8d27',1,'python::telplugins_c_api']]],
