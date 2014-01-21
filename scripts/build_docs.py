@@ -1,69 +1,84 @@
 import sys
 import os
+import os.path
+import show_status as ss
 import subprocess
 import datetime
+import shutil
 
-from pbs import ls
+
+import pbs as sc
 from pbs import git
+from pbs import ls
 
+def cleanFolder(path):
+    print('Removing folder ' + path)
+    shutil.rmtree(path, ignore_errors=True)
+
+
+    #==== C DOCS ====
+def generateDocs(doxyFile, inputFolder, outputFolder):
+    os.chdir(inputFolder)    
+    print 'Generating Docs from: ' + inputFolder     
+    
+    #Clean the folder first
+    cleanFolder(outputFolder)
+             
+    cmd ='(type ' + doxyFile + ' & echo OUTPUT_DIRECTORY='+ outputFolder + ' )| doxygen -'
+    print 'Executing: ' + cmd
+        
+    output = subprocess.check_output(cmd, shell=True)    
 
 from os.path import *
 try:
-    originalWorkingDirectory = os.getcwd()
+    originalWorkingDirectory = os.getcwd()    
     buildFolder= os.path.dirname(os.path.realpath(__file__))
     repoFolder= join(buildFolder,'telPlugins')
     docsDir  = join(buildFolder,'ghPages', 'docs')
     cppDir= join(repoFolder,'source')
-    cDir= join(repoFolder,'wrappers', 'c')
+    
     pythonDir= join(repoFolder,'wrappers', 'python')
-
+    
     #Change into repo folder
-    os.chdir(repoFolder)
-
-    #Check status
+    os.chdir(repoFolder)    
+    
+    #Check status    
     print git("status")
-
+    
     #Pull from origin
     #print git("pull")
     os.chdir(buildFolder)
-
-    #Now update doxygen documentation
-    #==== CPP DOCS ====
-    os.chdir(cppDir)
-    print 'Generating CPP Docs'
-    docsOutput=join(buildFolder, docsDir,'cpp')
-    cmd ='(type docs.doxy & echo OUTPUT_DIRECTORY='+ docsOutput + ' )| doxygen -'
-    output = subprocess.check_output(cmd, shell=True)
-
+    
+    #Update doxygen documentation
     #==== C DOCS ====
-    os.chdir(cDir)
-    print 'Generating C Docs'
-    docsOutput=join(buildFolder, docsDir,'c')
-    cmd ='(type docs.doxy & echo OUTPUT_DIRECTORY='+ docsOutput + ' )| doxygen -'
-    output = subprocess.check_output(cmd, shell=True)
-
+    docsInput = join(repoFolder,'wrappers', 'c')
+    docsOutput=join(buildFolder, docsDir, 'c')
+    generateDocs('docs.doxy', docsInput, docsOutput)           
+          
+    #==== CPP DOCS ====
+    docsInput = join(repoFolder,'source')
+    docsOutput=join(buildFolder, docsDir, 'cpp')
+    generateDocs('docs.doxy', docsInput, docsOutput)           
+    
     #==== Python DOCS ====
-    os.chdir(pythonDir)
-    print 'Generating Python Docs'
+    docsInput = join(repoFolder,'wrappers', 'python')
     docsOutput=join(buildFolder, docsDir, 'python')
-    doxyFile = 'docs.doxy'
-    cmd ='(type ' + doxyFile + ' & echo OUTPUT_DIRECTORY='+ docsOutput + ' )| doxygen -'
-    output = subprocess.check_output(cmd, shell=True)
-
-    print 'Generating Low Level Python Docs'
-    docsOutput=join(buildFolder,docsDir,'python_c')
-    doxyFile = 'docs_c_api.doxy'
-    cmd ='(type ' + doxyFile + ' & echo OUTPUT_DIRECTORY='+ docsOutput + ' )| doxygen -'
-    output = subprocess.check_output(cmd, shell=True)
-
+    generateDocs('docs.doxy', docsInput, docsOutput)           
+    
+    #==== Low level Python DOCS ====
+    docsInput = join(repoFolder,'wrappers', 'python')
+    docsOutput=join(buildFolder, docsDir, 'python_ctypes')
+    generateDocs('docs_ctypes.doxy', docsInput, docsOutput)           
+       
+    
     #Git add any new files
-
-
+    
+    
     #git push
     #print git("push")
-
+     
 except Exception as e:
    print e
-##
+##        
 
 
