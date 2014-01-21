@@ -99,6 +99,15 @@ char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle rrData)
     catch_ptr_macro
 }
 
+bool tlp_cc setTelluriumDataColumnHeader(RRDataHandle rrData, char* hdr)
+{
+    start_try
+        TelluriumData* data = castToTelluriumData(rrData);
+        StringList hdrList(hdr, ", ");
+        return data->setColumnNames(hdrList);
+    catch_bool_macro
+}
+
 int tlp_cc getTelluriumDataNumRows(RRDataHandle rrData)
 {
     start_try

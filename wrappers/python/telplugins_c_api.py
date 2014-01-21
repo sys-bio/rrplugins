@@ -1118,6 +1118,15 @@ def getTelluriumDataColumnHeader(telDataHandle):
     else:
         return None
 
+## \brief Set column header in tellurium data
+## \param telDataHandle A handle to a tellurium data object
+## \param colHeader A string containing the column header as comma separated values (spaces allowed too)
+## \return True or false indicating success
+## \ingroup utilities
+telLib.setTelluriumDataColumnHeader.restype = c_bool
+def setTelluriumDataColumnHeader(telDataHandle, hdr):
+    return telLib.setTelluriumDataColumnHeader(telDataHandle, hdr)
+
 ## \brief Get RoadRunner data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col

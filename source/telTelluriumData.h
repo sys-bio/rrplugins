@@ -1,5 +1,6 @@
 #ifndef telTelluriumDataH
 #define telTelluriumDataH
+#include "telStringList.h"
 #include "telExporter.h"
 #include "rr-libstruct/lsMatrix.h"
 
@@ -130,8 +131,7 @@ public:
      * \param colNames List of column names
      * \param data Source data matrix.
      */
-    TelluriumData(const std::vector<std::string>& colNames,
-            const DoubleMatrix& data);
+    TelluriumData(const StringList& colNames, const DoubleMatrix& data);
 
     /**
      *   \brief Destructor. De allocate any memory allocated in the class.    
@@ -156,10 +156,10 @@ public:
     /**
      * \brief Get the names of the variables stored in this data structure, as a vector<string>
      */
-    const std::vector<std::string>&         getColumnNames() const;
+    const StringList&                       getColumnNames() const;
     std::string                             getColumnName(const int col) const;
     std::string                             getColumnNamesAsString() const;
-    void                                    setColumnNames(const std::vector<std::string>& colNames);
+    bool                                    setColumnNames(const StringList& colNames);
     int                                     getColumnIndex(const std::string& colName) const;
     void                                    setTimeDataPrecision(const int& prec);
     void                                    setDataPrecision(const int& prec);
@@ -386,7 +386,7 @@ protected:
     /** 
     * \brief Container holding column names.
     */
-    std::vector<std::string> mColumnNames;
+    StringList mColumnNames;
     
     /** 
     * \brief Container holding the actual data.

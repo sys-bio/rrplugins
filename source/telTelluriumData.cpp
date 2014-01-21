@@ -18,10 +18,10 @@ using rr::CoreException;
 namespace tlp
 {
 
-TelluriumData::TelluriumData(const int& rSize, const int& cSize ) :
-        structuredResult(true),
-        mTimePrecision(6),
-        mDataPrecision(16)
+TelluriumData::TelluriumData(const int& rSize, const int& cSize ) 
+    :        
+    mTimePrecision(6),
+    mDataPrecision(16)
 {
     if(cSize && rSize)
     {
@@ -29,13 +29,12 @@ TelluriumData::TelluriumData(const int& rSize, const int& cSize ) :
     }
 }
 
-TelluriumData::TelluriumData(const std::vector<std::string>& colNames,
-        const DoubleMatrix& theData) :
-        structuredResult(true),
-        mTimePrecision(6),
-        mDataPrecision(16),
-        mColumnNames(colNames),
-        mTheData(theData)
+TelluriumData::TelluriumData(const StringList& colNames, const DoubleMatrix& theData) 
+    :        
+    mTimePrecision(6),
+    mDataPrecision(16),
+    mColumnNames(colNames),
+    mTheData(theData)
 {}
 
 TelluriumData::~TelluriumData()
@@ -160,12 +159,12 @@ bool TelluriumData::append(const TelluriumData& data)
 
     for(int col = 0; col < data.cSize(); col++)
     {
-        mColumnNames.push_back(data.getColumnName(col));
+        mColumnNames.add(data.getColumnName(col));
     }
     return true;
 }
 
-const std::vector<std::string>& TelluriumData::getColumnNames() const
+const StringList& TelluriumData::getColumnNames() const
 {
     return mColumnNames;
 }
@@ -261,10 +260,17 @@ double TelluriumData::operator() (const unsigned& row, const unsigned& col) cons
     return mTheData(row,col);
 }
 
-void TelluriumData::setColumnNames(const std::vector<std::string>& colNames)
+bool TelluriumData::setColumnNames(const StringList& colNames)
 {
-    mColumnNames = colNames;
-    Log(Logger::LOG_DEBUG) << "Simulation Data Columns: " << toString(mColumnNames);
+    if(colNames.size() != mTheData.CSize())
+    {
+        return false;
+    }
+    else
+    {
+        mColumnNames = colNames;
+        return true;
+    }    
 }
 
 
