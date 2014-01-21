@@ -2,7 +2,7 @@ var searchData=
 [
   ['readalltext',['readAllText',['../classpython_1_1telplugins_1_1_plugin.html#a52f792bf84a0894f0c812b1d531036ad',1,'python::telplugins::Plugin']]],
   ['readdataseries',['readDataSeries',['../classpython_1_1telplugins_1_1_data_series.html#a53ffecea5ea4e97e96283a0afbf6cab5',1,'python::telplugins::DataSeries']]],
-  ['readroadrunnerdata',['readRoadRunnerData',['../group__utilities.html#gad0e0b826273bd8b9dcd80aa30e463d04',1,'python.telplugins_c_api.readRoadRunnerData()'],['../group__utilities.html#ga3d16cb38d8a718ed5805a8ead4de6da6',1,'python.telplugins_roadrunnerdata_api.readRoadRunnerData()']]],
+  ['readtelluriumdata',['readTelluriumData',['../group__utilities.html#ga9b5751ae04608985ee46c2df25c15134',1,'python.telplugins_c_api.readTelluriumData()'],['../group__utilities.html#gac1753fd8c820b63e47084eb0906443f0',1,'python.telplugins_roadrunnerdata_api.readTelluriumData()']]],
   ['resetplugin',['resetPlugin',['../group__plugins.html#ga284e82f870ebf6d10d6b0c619d9ff2fc',1,'python::telplugins_c_api']]],
   ['rows',['rows',['../classpython_1_1telplugins_1_1_data_series.html#a74742cb5c8e2ac354a60cb73383d8176',1,'python::telplugins::DataSeries']]]
 ];

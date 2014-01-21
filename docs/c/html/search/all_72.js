@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['readroadrunnerdatafromfile',['readRoadRunnerDataFromFile',['../group__roadrunnerdata.html#gae3f9c9101ed1a4ea8c83617691fa9e8c',1,'tlpc::readRoadRunnerDataFromFile()'],['../group__roadrunnerdata.html#gae3f9c9101ed1a4ea8c83617691fa9e8c',1,'readRoadRunnerDataFromFile():&#160;telplugins_roadrunnerdata_api.cpp']]],
+  ['readtelluriumdatafromfile',['readTelluriumDataFromFile',['../group__roadrunnerdata.html#ga0fef9bf23ad123a615fc133b50c97c27',1,'tlpc::readTelluriumDataFromFile()'],['../group__roadrunnerdata.html#ga0fef9bf23ad123a615fc133b50c97c27',1,'readTelluriumDataFromFile():&#160;telplugins_roadrunnerdata_api.cpp']]],
   ['resetplugin',['resetPlugin',['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'tlpc::resetPlugin()'],['../group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224',1,'resetPlugin():&#160;telplugins_c_api.cpp']]],
-  ['roadrunnerdata_20manipulation',['RoadRunnerData Manipulation',['../group__roadrunnerdata.html',1,'']]],
   ['rrdatahandle',['RRDataHandle',['../telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9',1,'telplugins_types.h']]],
   ['rrhandle',['RRHandle',['../telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae',1,'telplugins_types.h']]],
   ['rrpluginhandle',['RRPluginHandle',['../telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7',1,'telplugins_types.h']]],

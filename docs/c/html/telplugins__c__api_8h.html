@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>libRoadRunner Plugin C API: telplugins_c_api.h File Reference</title>
+<title>Tellurium Plugin C API: telplugins_c_api.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,10 +22,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">libRoadRunner Plugin C API
+   <div id="projectname">Tellurium Plugin C API
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Plugin Framework for libRoadRunner</div>
+   <div id="projectbrief">Plugin Framework for Tellurium</div>
   </td>
  </tr>
  </tbody>
@@ -106,9 +106,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5dd2745e4d12a6afdf29090f24b29d10"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga5dd2745e4d12a6afdf29090f24b29d10">freePluginManager</a> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
 <tr class="memdesc:ga5dd2745e4d12a6afdf29090f24b29d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the plugin manager. A call to this function will also unload any loaded plugins.  <a href="group__plugin__manager.html#ga5dd2745e4d12a6afdf29090f24b29d10">More...</a><br/></td></tr>
 <tr class="separator:ga5dd2745e4d12a6afdf29090f24b29d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac16cec6298858dec6317b766aaa0d3a6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#gac16cec6298858dec6317b766aaa0d3a6">loadPlugins</a> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
-<tr class="memdesc:gac16cec6298858dec6317b766aaa0d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load plugins. The function will look in the default plugin folder for plugins, and load them.  <a href="group__plugin__manager.html#gac16cec6298858dec6317b766aaa0d3a6">More...</a><br/></td></tr>
-<tr class="separator:gac16cec6298858dec6317b766aaa0d3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39328aa0dc5d7f42e939ef1fa7ef26e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga39328aa0dc5d7f42e939ef1fa7ef26e1">loadPlugins</a> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
+<tr class="memdesc:ga39328aa0dc5d7f42e939ef1fa7ef26e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load plugins. The function will look in the default plugin folder for plugins, and load them.  <a href="group__plugin__manager.html#ga39328aa0dc5d7f42e939ef1fa7ef26e1">More...</a><br/></td></tr>
+<tr class="separator:ga39328aa0dc5d7f42e939ef1fa7ef26e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga876c4f0d6741479b3e5e837aaf48605a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga876c4f0d6741479b3e5e837aaf48605a"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga876c4f0d6741479b3e5e837aaf48605a">getPluginLoadErrors</a> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
+<tr class="memdesc:ga876c4f0d6741479b3e5e837aaf48605a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve any errors that occured durig loading of plugins. <br/></td></tr>
+<tr class="separator:ga876c4f0d6741479b3e5e837aaf48605a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabc3a28ce89a1446eb537ebf106fa3252"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#gabc3a28ce89a1446eb537ebf106fa3252">unLoadPlugins</a> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
 <tr class="memdesc:gabc3a28ce89a1446eb537ebf106fa3252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unload plugins.  <a href="group__plugin__manager.html#gabc3a28ce89a1446eb537ebf106fa3252">More...</a><br/></td></tr>
 <tr class="separator:gabc3a28ce89a1446eb537ebf106fa3252"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,7 +253,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telp
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 11:29:28 for libRoadRunner Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 12:32:08 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

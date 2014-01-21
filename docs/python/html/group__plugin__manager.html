@@ -96,6 +96,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gabd76ede2c1cd54e82c18be206a60de2e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#gabd76ede2c1cd54e82c18be206a60de2e">loadPlugins</a></td></tr>
 <tr class="memdesc:gabd76ede2c1cd54e82c18be206a60de2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load plugins.  <a href="#gabd76ede2c1cd54e82c18be206a60de2e">More...</a><br/></td></tr>
 <tr class="separator:gabd76ede2c1cd54e82c18be206a60de2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1a94ceee3d0d73657587523fd632f8a8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga1a94ceee3d0d73657587523fd632f8a8">hasLoadPluginErrors</a></td></tr>
+<tr class="memdesc:ga1a94ceee3d0d73657587523fd632f8a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there was any Errors catched during loading of plugins.  <a href="#ga1a94ceee3d0d73657587523fd632f8a8">More...</a><br/></td></tr>
+<tr class="separator:ga1a94ceee3d0d73657587523fd632f8a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga12188a984b06e5e21a0a6b89493ee418"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga12188a984b06e5e21a0a6b89493ee418">getPluginLoadErrors</a></td></tr>
+<tr class="memdesc:ga12188a984b06e5e21a0a6b89493ee418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get any Errors catched during loading of plugins.  <a href="#ga12188a984b06e5e21a0a6b89493ee418">More...</a><br/></td></tr>
+<tr class="separator:ga12188a984b06e5e21a0a6b89493ee418"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5a1acf994e66cb9c19344e9b2824ad5c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugin__manager.html#ga5a1acf994e66cb9c19344e9b2824ad5c">unLoadPlugins</a></td></tr>
 <tr class="memdesc:ga5a1acf994e66cb9c19344e9b2824ad5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unload all plugins.  <a href="#ga5a1acf994e66cb9c19344e9b2824ad5c">More...</a><br/></td></tr>
 <tr class="separator:ga5a1acf994e66cb9c19344e9b2824ad5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -365,6 +371,31 @@ Functions</h2></td></tr>
   
 </div>
 </div>
+<a class="anchor" id="ga12188a984b06e5e21a0a6b89493ee418"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.getPluginLoadErrors </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>pm</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get any Errors catched during loading of plugins. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pm</td><td>Handle to a PluginManager instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string if there was errors, None otherwise </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga6cda597795199112440fa43ba870d56c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -417,6 +448,31 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns a handle to a plugin. Returns None if the plugin is not found </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga1a94ceee3d0d73657587523fd632f8a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.hasLoadPluginErrors </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>pm</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if there was any Errors catched during loading of plugins. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pm</td><td>Handle to a PluginManager instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true or false indicating if there was errors </dd></dl>
 
 </div>
 </div>
@@ -550,7 +606,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 11:30:44 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 12:32:10 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

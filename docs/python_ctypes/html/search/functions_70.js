@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plot',['plot',['../classpython_1_1telplugins_1_1_data_series.html#ab0394ec3bced7aafedc829f80d3d95f5',1,'python::telplugins::DataSeries']]]
+  ['plot',['plot',['../classpython_1_1telplugins_1_1_data_series.html#aeb8e4daabd433513f8261dcd2e788c74',1,'python::telplugins::DataSeries']]]
 ];

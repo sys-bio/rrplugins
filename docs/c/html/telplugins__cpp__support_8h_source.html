@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>libRoadRunner Plugin C API: telplugins_cpp_support.h Source File</title>
+<title>Tellurium Plugin C API: telplugins_cpp_support.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,10 +22,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">libRoadRunner Plugin C API
+   <div id="projectname">Tellurium Plugin C API
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Plugin Framework for libRoadRunner</div>
+   <div id="projectbrief">Plugin Framework for Tellurium</div>
   </td>
  </tr>
  </tbody>
@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define telplugins_cpp_supportH</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="telplugins__c__api_8h.html" title="Plugins Core C-API Header. ">telplugins_c_api.h</a>&quot;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;rr/rrRoadRunnerData.h&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;telTelluriumData.h&quot;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;telPluginManager.h&quot;</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &quot;telProperties.h&quot;</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &quot;telPlugin.h&quot;</span></div>
@@ -129,21 +129,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;Property&lt;Properties&gt;*              castToPropertiesProperty(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;rr::RoadRunnerData*                 castPropertyToRoadRunnerData(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;tlp::TelluriumData*                 castPropertyToTelluriumData(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;Property&lt;rr::RoadRunnerData&gt;*       castToRoadRunnerDataProperty(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;Property&lt;tlp::TelluriumData&gt;*       castToTelluriumDataProperty(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;rr::RoadRunner*                     castToRoadRunner(<a class="code" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae" title="Void pointer to a RoadRunner instance. ">RRHandle</a> rrHandle);</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;rr::RoadRunnerData*                     castToRoadRunnerData(<a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9" title="Void pointer to a RoadRunner data instance. ">RRDataHandle</a> rrHandle);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;tlp::TelluriumData*                     castToTelluriumData(<a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9" title="Void pointer to a RoadRunner data instance. ">RRDataHandle</a> rrHandle);</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">// \brief Creates a RRData structure from rr::RoadRunnerData object</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">// \brief Creates a RRData structure from tlp::TelluriumData object</span></div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">// \param[in] data  Input RoadRunner data</span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">// \return A handle to a RRData structure. Null if it fails</span></div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">// \ingroup cpp_support</span></div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">//*/</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">//RRCDataPtr                          createRRCData(const rr::RoadRunnerData&amp; result);</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">//RRCDataPtr                          createRRCData(const tlp::TelluriumData&amp; result);</span></div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
@@ -151,7 +151,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 11:29:28 for libRoadRunner Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 12:32:08 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

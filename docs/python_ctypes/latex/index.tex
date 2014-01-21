@@ -1,0 +1,21 @@
+\hypertarget{index_Introduction}{}\section{Introduction}\label{index_Introduction}
+
+\begin{DoxyCode}
+1 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"Starting Test"}
+2 input telplugins \textcolor{keyword}{as} *
+3 p = Plugin (\textcolor{stringliteral}{"tel\_add\_noise"})
+4 p.viewManual()
+5 pl = p.listOfProperties()
+6 \textcolor{keywordflow}{for} item \textcolor{keywordflow}{in} pl:
+7     \textcolor{keywordflow}{print} item
+8 
+9 p.Sigma = 0.00005
+10 series = DataSeries.loadDataSeries (\textcolor{stringliteral}{"..\(\backslash\)\(\backslash\)Examples\(\backslash\)\(\backslash\)testData.dat"})
+11 series.plot()
+12 p.InputData = series
+13 p.execute()
+14 p.InputData.plot()
+15 
+16 \textcolor{keywordflow}{print} \textcolor{stringliteral}{"Test Finished"}
+\end{DoxyCode}
+ 

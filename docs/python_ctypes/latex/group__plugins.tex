@@ -1,0 +1,587 @@
+\hypertarget{group__plugins}{\section{Plugin Functions}
+\label{group__plugins}\index{Plugin Functions@{Plugin Functions}}
+}
+
+
+Functions operating on Plugin Handles.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__plugins_ga530acb5427e828f9e7207722c63f050d}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Name}
+\begin{DoxyCompactList}\small\item\em Get the name of a Plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga7b5b231df505052b8736d4791ecc0bbe}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Category}
+\begin{DoxyCompactList}\small\item\em Get the Category of a Plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga848654b1e49b52c48a4a61d7852e9a43}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Description}
+\begin{DoxyCompactList}\small\item\em Get the Description of a Plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gab899dd3d0097a54cf6759a2733ee83d3}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Hint}
+\begin{DoxyCompactList}\small\item\em Get a plugins Hint. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gab0ebad86bd5e782373250db6960f4fbe}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Info}
+\begin{DoxyCompactList}\small\item\em Returns information about a Plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga6c06cbacb7c5aa475d111cf4cba8d8c4}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Manual\-As\-P\-D\-F}
+\begin{DoxyCompactList}\small\item\em Get Plugin manual as P\-D\-F. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga9b3d3389c445c3ddf0968e8f8dcb5bc8}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Manual\-Nr\-Of\-Bytes}
+\begin{DoxyCompactList}\small\item\em Get the byte size for the P\-D\-F manual. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga7665c9b302ac38f299bb28ab038c66e6}{python.\-telplugins\-\_\-c\-\_\-api.\-display\-Plugin\-Manual}
+\begin{DoxyCompactList}\small\item\em If a plugin has a built-\/in P\-D\-F manual, display it. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga8865aaf00281ac78a5c6fd36160a5c4c}{python.\-telplugins\-\_\-c\-\_\-api.\-assign\-Road\-Runner\-Instance}
+\begin{DoxyCompactList}\small\item\em Assign a roadrunner instance handle for the plugin to use. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga71ef8ba0927f7816f8cd679b8057920b}{python.\-telplugins\-\_\-c\-\_\-api.\-execute\-Plugin}
+\begin{DoxyCompactList}\small\item\em The execute\-Plugin function is called to start the plugin so that it can carry out its function. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gad6d3512c7d27f6dab98f60febe9a5146}{python.\-telplugins\-\_\-c\-\_\-api.\-execute\-Plugin\-Ex}
+\begin{DoxyCompactList}\small\item\em The execute\-Plugin\-Ex is similar to the execute\-Plugin function, except it takes one extra argument. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gab9bf021fedc121b4367c5d6698f6309a}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Status}
+\begin{DoxyCompactList}\small\item\em Get status information from a plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gadb3d3fd9d80a70e11e8b076b75a5c96a}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Result}
+\begin{DoxyCompactList}\small\item\em Returns a plugins result, as a string. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga284e82f870ebf6d10d6b0c619d9ff2fc}{python.\-telplugins\-\_\-c\-\_\-api.\-reset\-Plugin}
+\begin{DoxyCompactList}\small\item\em Reset a Plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gafbc49170f2ed10069c43f5d4c9dfb9f8}{python.\-telplugins\-\_\-c\-\_\-api.\-is\-Plugin\-Working}
+\begin{DoxyCompactList}\small\item\em Check if a plugin is actively working. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga9ff00098759b9787daded977f7e6e989}{python.\-telplugins\-\_\-c\-\_\-api.\-terminate\-Work}
+\begin{DoxyCompactList}\small\item\em Terminate any work that is in progress in a plugin. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga150f1be5ee4e3684370bc891ec77c5db}{python.\-telplugins\-\_\-c\-\_\-api.\-is\-Being\-Terminated}
+\begin{DoxyCompactList}\small\item\em Check if the work of a plugin is currently being terminated. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gaa630bfdee489843279262216745ea7fb}{python.\-telplugins\-\_\-c\-\_\-api.\-was\-Terminated}
+\begin{DoxyCompactList}\small\item\em Query a plugin if work was terminated succesfully. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_gafdfeebd9388d22d44fcf4e1ab210172a}{python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Started\-Event}
+\begin{DoxyCompactList}\small\item\em Assigns a plugins On\-Started\-Event function.\-Plugin dependent. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga3ffaafb2750775f6a12aca579aeae3eb}{python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Progress\-Event}
+\begin{DoxyCompactList}\small\item\em Assigns a plugins On\-Progress\-Event function. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga5b36525c4e4aa07a487743962188d52a}{python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Finished\-Event}
+\begin{DoxyCompactList}\small\item\em Assigns a plugins On\-Finished\-Event function. \end{DoxyCompactList}\item 
+def \hyperlink{group__plugins_ga4148c2d510b803e0b89195bc0c57b7df}{python.\-telplugins\-\_\-c\-\_\-api.\-get\-R\-R\-Handle\-From\-Plugin}
+\begin{DoxyCompactList}\small\item\em Hand external data to a plugin\-: T\-H\-I\-S M\-E\-T\-H\-O\-D I\-S U\-N\-D\-E\-R R\-E\-V\-I\-E\-W. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{group__plugins_ga2a3c0a71c0c5e030bfda4f885e12f104}{python.\-telplugins\-\_\-c\-\_\-api.\-Notify\-Event} = C\-F\-U\-N\-C\-T\-Y\-P\-E(None)
+\begin{DoxyCompactList}\small\item\em Plugin function event type definition This is a helper object that a client can use as an argument to a roadrunner plugin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions operating on Plugin Handles. 
+
+\subsection{Function Documentation}
+\hypertarget{group__plugins_ga5b36525c4e4aa07a487743962188d52a}{\index{Plugin Functions@{Plugin Functions}!assign\-On\-Finished\-Event@{assign\-On\-Finished\-Event}}
+\index{assign\-On\-Finished\-Event@{assign\-On\-Finished\-Event}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{assign\-On\-Finished\-Event}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Finished\-Event (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle, }
+\item[{}]{plugin\-Event, }
+\item[{}]{user\-Data1 = {\ttfamily None}, }
+\item[{}]{user\-Data2 = {\ttfamily None}}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga5b36525c4e4aa07a487743962188d52a}
+
+
+Assigns a plugins On\-Finished\-Event function. 
+
+Plugin dependent. Intended usage is to report back on plugin finalization. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+{\em plugin\-Event} & Function pointer to event routine \\
+\hline
+{\em user\-Data1} & void$\ast$ pointer to user data. \\
+\hline
+{\em user\-Data2} & void$\ast$ pointer to user data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga3ffaafb2750775f6a12aca579aeae3eb}{\index{Plugin Functions@{Plugin Functions}!assign\-On\-Progress\-Event@{assign\-On\-Progress\-Event}}
+\index{assign\-On\-Progress\-Event@{assign\-On\-Progress\-Event}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{assign\-On\-Progress\-Event}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Progress\-Event (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle, }
+\item[{}]{plugin\-Event, }
+\item[{}]{user\-Data1 = {\ttfamily None}, }
+\item[{}]{user\-Data2 = {\ttfamily None}}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga3ffaafb2750775f6a12aca579aeae3eb}
+
+
+Assigns a plugins On\-Progress\-Event function. 
+
+Plugin dependent. Intended usage is to report back progress 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a pluginevent routine \\
+\hline
+{\em user\-Data1} & void$\ast$ pointer to user data. \\
+\hline
+{\em user\-Data2} & void$\ast$ pointer to user data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_gafdfeebd9388d22d44fcf4e1ab210172a}{\index{Plugin Functions@{Plugin Functions}!assign\-On\-Started\-Event@{assign\-On\-Started\-Event}}
+\index{assign\-On\-Started\-Event@{assign\-On\-Started\-Event}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{assign\-On\-Started\-Event}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-assign\-On\-Started\-Event (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle, }
+\item[{}]{plugin\-Event, }
+\item[{}]{user\-Data1 = {\ttfamily None}, }
+\item[{}]{user\-Data2 = {\ttfamily None}}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gafdfeebd9388d22d44fcf4e1ab210172a}
+
+
+Assigns a plugins On\-Started\-Event function.\-Plugin dependent. 
+
+Intended usage is to report back on plugin initialization. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+{\em plugin\-Event} & Function pointer to On\-Event routine \\
+\hline
+{\em user\-Data1} & void$\ast$ pointer to user data. \\
+\hline
+{\em user\-Data2} & void$\ast$ pointer to user data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga8865aaf00281ac78a5c6fd36160a5c4c}{\index{Plugin Functions@{Plugin Functions}!assign\-Road\-Runner\-Instance@{assign\-Road\-Runner\-Instance}}
+\index{assign\-Road\-Runner\-Instance@{assign\-Road\-Runner\-Instance}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{assign\-Road\-Runner\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-assign\-Road\-Runner\-Instance (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle, }
+\item[{}]{rr\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga8865aaf00281ac78a5c6fd36160a5c4c}
+
+
+Assign a roadrunner instance handle for the plugin to use. 
+
+\begin{DoxyVerb}A plugin may use an externally created roadrunner instance for its internal work.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+{\em rr\-Handle} & Handle to a roadrunner instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga7665c9b302ac38f299bb28ab038c66e6}{\index{Plugin Functions@{Plugin Functions}!display\-Plugin\-Manual@{display\-Plugin\-Manual}}
+\index{display\-Plugin\-Manual@{display\-Plugin\-Manual}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{display\-Plugin\-Manual}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-display\-Plugin\-Manual (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga7665c9b302ac38f299bb28ab038c66e6}
+
+
+If a plugin has a built-\/in P\-D\-F manual, display it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns False if the plugin has no manual
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 success = \hyperlink{group__plugins_ga7665c9b302ac38f299bb28ab038c66e6}{displayPluginManual}(pluginHandle)
+\end{DoxyCode}
+  \hypertarget{group__plugins_ga71ef8ba0927f7816f8cd679b8057920b}{\index{Plugin Functions@{Plugin Functions}!execute\-Plugin@{execute\-Plugin}}
+\index{execute\-Plugin@{execute\-Plugin}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{execute\-Plugin}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-execute\-Plugin (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga71ef8ba0927f7816f8cd679b8057920b}
+
+
+The execute\-Plugin function is called to start the plugin so that it can carry out its function. 
+
+The call is plugin dependent meaning that it could result in a calculation, starting up a G\-U\-I etc. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The execute function is a regular blocking function, meaning it won't return to the caller until the task is complete. If the plugin is asked to carry out a lengthy calculation, consider using the execute\-Plugin\-Ex function that has the option to execute the plugin code in the background (in a thread); 
+\end{DoxyNote}
+\hypertarget{group__plugins_gad6d3512c7d27f6dab98f60febe9a5146}{\index{Plugin Functions@{Plugin Functions}!execute\-Plugin\-Ex@{execute\-Plugin\-Ex}}
+\index{execute\-Plugin\-Ex@{execute\-Plugin\-Ex}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{execute\-Plugin\-Ex}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-execute\-Plugin\-Ex (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle, }
+\item[{}]{in\-A\-Thread = {\ttfamily False}}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gad6d3512c7d27f6dab98f60febe9a5146}
+
+
+The execute\-Plugin\-Ex is similar to the execute\-Plugin function, except it takes one extra argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+{\em in\-A\-Thread} & bool indicating if the plugin should be executed in the background (in a thread) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga7b5b231df505052b8736d4791ecc0bbe}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Category@{get\-Plugin\-Category}}
+\index{get\-Plugin\-Category@{get\-Plugin\-Category}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Category}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Category (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga7b5b231df505052b8736d4791ecc0bbe}
+
+
+Get the Category of a Plugin. 
+
+This is assigned by the pluging developer 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a string if successful, None otherwise
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 name = telPlugins.getPluginCategory(pluginHandle)
+\end{DoxyCode}
+  \hypertarget{group__plugins_ga848654b1e49b52c48a4a61d7852e9a43}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Description@{get\-Plugin\-Description}}
+\index{get\-Plugin\-Description@{get\-Plugin\-Description}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Description}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Description (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga848654b1e49b52c48a4a61d7852e9a43}
+
+
+Get the Description of a Plugin. 
+
+This is assigned by the pluging developer 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a string if successful, None otherwise
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 name = telPlugins.getPluginDescription(pluginHandle)
+\end{DoxyCode}
+  \hypertarget{group__plugins_gab899dd3d0097a54cf6759a2733ee83d3}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Hint@{get\-Plugin\-Hint}}
+\index{get\-Plugin\-Hint@{get\-Plugin\-Hint}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Hint}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Hint (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gab899dd3d0097a54cf6759a2733ee83d3}
+
+
+Get a plugins Hint. 
+
+A plugins hint is a short description on what the plugin is doing.\-This is assigned by the pluging developer 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a string if successful, None otherwise
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 name = telPlugins.getPluginHint(pluginHandle)
+\end{DoxyCode}
+  \hypertarget{group__plugins_gab0ebad86bd5e782373250db6960f4fbe}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Info@{get\-Plugin\-Info}}
+\index{get\-Plugin\-Info@{get\-Plugin\-Info}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Info}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Info (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gab0ebad86bd5e782373250db6960f4fbe}
+
+
+Returns information about a Plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns information as a string for the plugin, None otherwise 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga6c06cbacb7c5aa475d111cf4cba8d8c4}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Manual\-As\-P\-D\-F@{get\-Plugin\-Manual\-As\-P\-D\-F}}
+\index{get\-Plugin\-Manual\-As\-P\-D\-F@{get\-Plugin\-Manual\-As\-P\-D\-F}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Manual\-As\-P\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Manual\-As\-P\-D\-F (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga6c06cbacb7c5aa475d111cf4cba8d8c4}
+
+
+Get Plugin manual as P\-D\-F. 
+
+A plugin may embedd a help manual as a P\-D\-F. Use the function get\-Plugin\-Manual\-Nr\-Of\-Bytes to get the exact length of this string. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the plugin's manual pdf file as a unsigned char$\ast$. If not available, returns None.
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 ptr = \hyperlink{group__plugins_ga6c06cbacb7c5aa475d111cf4cba8d8c4}{getPluginManualAsPDF}(pluginHandle)
+2 numOfBytes = \hyperlink{group__plugins_ga9b3d3389c445c3ddf0968e8f8dcb5bc8}{getPluginManualNrOfBytes}(pluginHandle)
+3 manual = cast(ptr, POINTER(c\_char * numOfBytes))[0]
+4 \textcolor{keywordflow}{if} numOfBytes == 0:
+5    \textcolor{keywordflow}{print} \textcolor{stringliteral}{'This plugin does not have a manual.'}
+6    exit()
+7 outFName = getPluginName (pluginHandle) + \textcolor{stringliteral}{'.pdf'}
+8 with open(outFName, \textcolor{stringliteral}{'wb'}) \textcolor{keyword}{as} output:
+9    output.write(manual)
+10 os.system(\textcolor{stringliteral}{'start '} + outFName)
+\end{DoxyCode}
+  \hypertarget{group__plugins_ga9b3d3389c445c3ddf0968e8f8dcb5bc8}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Manual\-Nr\-Of\-Bytes@{get\-Plugin\-Manual\-Nr\-Of\-Bytes}}
+\index{get\-Plugin\-Manual\-Nr\-Of\-Bytes@{get\-Plugin\-Manual\-Nr\-Of\-Bytes}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Manual\-Nr\-Of\-Bytes}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Manual\-Nr\-Of\-Bytes (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga9b3d3389c445c3ddf0968e8f8dcb5bc8}
+
+
+Get the byte size for the P\-D\-F manual. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of bytes in the plugin's manual pdf file as an unsigned int. 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga530acb5427e828f9e7207722c63f050d}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Name@{get\-Plugin\-Name}}
+\index{get\-Plugin\-Name@{get\-Plugin\-Name}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Name}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Name (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga530acb5427e828f9e7207722c63f050d}
+
+
+Get the name of a Plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the internal name of a plugin. None otherwise
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+1 name = telPlugins.getPluginName(pluginHandle)
+\end{DoxyCode}
+  \hypertarget{group__plugins_gadb3d3fd9d80a70e11e8b076b75a5c96a}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Result@{get\-Plugin\-Result}}
+\index{get\-Plugin\-Result@{get\-Plugin\-Result}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Result}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Result (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gadb3d3fd9d80a70e11e8b076b75a5c96a}
+
+
+Returns a plugins result, as a string. 
+
+This is plugin dependent, and a plugin designer may, or may not, implement this function. See the plugin documentation for details. \begin{DoxyNote}{Note}
+If a plugin wants to returns specific result, e.\-g. an Array, or a a float, these are better communicated through the use of Plugin properties. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a plugins result if available. None otherwise 
+\end{DoxyReturn}
+\hypertarget{group__plugins_gab9bf021fedc121b4367c5d6698f6309a}{\index{Plugin Functions@{Plugin Functions}!get\-Plugin\-Status@{get\-Plugin\-Status}}
+\index{get\-Plugin\-Status@{get\-Plugin\-Status}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-Plugin\-Status}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-Plugin\-Status (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gab9bf021fedc121b4367c5d6698f6309a}
+
+
+Get status information from a plugin. 
+
+This call is plugin dependent, see the plugin documentation for details 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns plugin status if available, as a string. None otherwise 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga4148c2d510b803e0b89195bc0c57b7df}{\index{Plugin Functions@{Plugin Functions}!get\-R\-R\-Handle\-From\-Plugin@{get\-R\-R\-Handle\-From\-Plugin}}
+\index{get\-R\-R\-Handle\-From\-Plugin@{get\-R\-R\-Handle\-From\-Plugin}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{get\-R\-R\-Handle\-From\-Plugin}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-get\-R\-R\-Handle\-From\-Plugin (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga4148c2d510b803e0b89195bc0c57b7df}
+
+
+Hand external data to a plugin\-: T\-H\-I\-S M\-E\-T\-H\-O\-D I\-S U\-N\-D\-E\-R R\-E\-V\-I\-E\-W. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+{\em user\-Data} & void$\ast$ pointer to user data. Plugin dependent, see the specific documentation on the plugin for details. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure
+\end{DoxyReturn}
+tel\-Lib.\-assign\-Plugin\-Input.\-restype = c\-\_\-bool def assign\-Plugin\-Input(plugin\-Handle, user\-Data)\-: return tel\-Lib.\-assign\-Plugin\-Input(plugin\-Handle, c\-\_\-void\-\_\-p(user\-Data)) Get the roadrunner instance handle from plugin assuming the plugin has one 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a Plugin instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a handle to a rr\-Instance if available, returns None otherwise 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga150f1be5ee4e3684370bc891ec77c5db}{\index{Plugin Functions@{Plugin Functions}!is\-Being\-Terminated@{is\-Being\-Terminated}}
+\index{is\-Being\-Terminated@{is\-Being\-Terminated}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{is\-Being\-Terminated}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-is\-Being\-Terminated (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga150f1be5ee4e3684370bc891ec77c5db}
+
+
+Check if the work of a plugin is currently being terminated. 
+
+This function is useful when a plugin is executed in a thread. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to the plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating if the work within the plugin is in the process of being terminated 
+\end{DoxyReturn}
+\hypertarget{group__plugins_gafbc49170f2ed10069c43f5d4c9dfb9f8}{\index{Plugin Functions@{Plugin Functions}!is\-Plugin\-Working@{is\-Plugin\-Working}}
+\index{is\-Plugin\-Working@{is\-Plugin\-Working}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{is\-Plugin\-Working}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-is\-Plugin\-Working (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gafbc49170f2ed10069c43f5d4c9dfb9f8}
+
+
+Check if a plugin is actively working. 
+
+This function is used when the work in the plugin is executed in a thread (see execute\-Ex). The is\-Plugin\-Working will return true as long work is being active and false when the work is done. This is useful in U\-I environments. Also, see the various event types on how to get status back from a plugin during its execution. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating if the plugin is busy or not 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga284e82f870ebf6d10d6b0c619d9ff2fc}{\index{Plugin Functions@{Plugin Functions}!reset\-Plugin@{reset\-Plugin}}
+\index{reset\-Plugin@{reset\-Plugin}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{reset\-Plugin}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-reset\-Plugin (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga284e82f870ebf6d10d6b0c619d9ff2fc}
+
+
+Reset a Plugin. 
+
+Plugin dependent. A reset function should bring the internal state of a plugin to a known state 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_ga9ff00098759b9787daded977f7e6e989}{\index{Plugin Functions@{Plugin Functions}!terminate\-Work@{terminate\-Work}}
+\index{terminate\-Work@{terminate\-Work}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{terminate\-Work}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-terminate\-Work (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_ga9ff00098759b9787daded977f7e6e989}
+
+
+Terminate any work that is in progress in a plugin. 
+
+If the plugins worker is executed in a thread, this function will signal the internals of the plugin to terminate. This function is used when a plugins work is executed in a thread. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to a plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating success/failure 
+\end{DoxyReturn}
+\hypertarget{group__plugins_gaa630bfdee489843279262216745ea7fb}{\index{Plugin Functions@{Plugin Functions}!was\-Terminated@{was\-Terminated}}
+\index{was\-Terminated@{was\-Terminated}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{was\-Terminated}]{\setlength{\rightskip}{0pt plus 5cm}def python.\-telplugins\-\_\-c\-\_\-api.\-was\-Terminated (
+\begin{DoxyParamCaption}
+\item[{}]{plugin\-Handle}
+\end{DoxyParamCaption}
+)}}\label{group__plugins_gaa630bfdee489843279262216745ea7fb}
+
+
+Query a plugin if work was terminated succesfully. 
+
+This function may be used in combination with the terminate\-Work, and is\-Being\-Terminated functions. 
+\begin{DoxyParams}{Parameters}
+{\em plugin\-Handle} & Handle to the plugin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true or false indicating if the work in the plugin was terminated or not 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\hypertarget{group__plugins_ga2a3c0a71c0c5e030bfda4f885e12f104}{\index{Plugin Functions@{Plugin Functions}!Notify\-Event@{Notify\-Event}}
+\index{Notify\-Event@{Notify\-Event}!Plugin Functions@{Plugin Functions}}
+\subsubsection[{Notify\-Event}]{\setlength{\rightskip}{0pt plus 5cm}tuple python.\-telplugins\-\_\-c\-\_\-api.\-Notify\-Event = C\-F\-U\-N\-C\-T\-Y\-P\-E(None)}}\label{group__plugins_ga2a3c0a71c0c5e030bfda4f885e12f104}
+
+
+Plugin function event type definition This is a helper object that a client can use as an argument to a roadrunner plugin. 
+
+The exact number of plugins functions required arguments, and their type, is plugin dependent. A client of the the plugin needs to get this information from the plugin specific documentation. An example of using Notify\-Event is shown below. The Notify\-Event takes no arguments. 
+\begin{DoxyCode}
+1 \textcolor{keyword}{def }myPluginFunction():
+2     \textcolor{keywordflow}{print} \textcolor{stringliteral}{'The plugin can call this function!'}
+3  \textcolor{comment}{#The user can assign this function as a plugin event to monitor the start of the plugin as follows.}
+4  \textcolor{comment}{#Note, make sure you assign the event to a variable (c\_event) so that the Python garbage}
+5  \textcolor{comment}{#collector doesn't delete it}
+6  c\_event = \hyperlink{group__plugins_ga2a3c0a71c0c5e030bfda4f885e12f104}{NotifyEvent}(myPluginFunction)
+7  \hyperlink{group__plugins_gafdfeebd9388d22d44fcf4e1ab210172a}{assignOnStartedEvent}(plugin,  c\_event)
+\end{DoxyCode}
+ 

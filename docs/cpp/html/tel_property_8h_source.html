@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>libRoadRunner Plugin C++ API: telProperty.h Source File</title>
+<title>Tellurium Plugin C++ API: telProperty.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">libRoadRunner Plugin C++ API
+   <div id="projectname">Tellurium Plugin C++ API
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
   </td>
@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;rr/rrException.h&quot;</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &quot;rr/rrLogger.h&quot;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;rr/rrRoadRunnerData.h&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &quot;telTelluriumData.h&quot;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tel_property_base_8h.html" title="RoadRunner Property class implementation. ">telPropertyBase.h</a>&quot;</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tel_properties_8h.html" title="Properties implementation - a container for Plugin parameters. ">telProperties.h</a>&quot;</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &quot;telStringUtils.h&quot;</span></div>
@@ -104,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">namespace </span>tlp</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">using</span> rr::RoadRunnerData;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">using</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">tlp::TelluriumData</a>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> tlp::gNoneString;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">using</span> std::string;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
@@ -269,7 +269,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">//============= RoadRunner data ===========================</span></div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00300"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a5b2c33ea568dd67f955e314f72a02d50">  300</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classtlp_1_1_property.html#aa796f002ec554f2aba80bd564233c775">Property&lt;tlp::RoadRunnerData&gt;::getValueAsString</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a51abb3ea0fee9048c8fc7308df1f390e">  300</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classtlp_1_1_property.html#aa796f002ec554f2aba80bd564233c775">Property&lt;tlp::TelluriumData&gt;::getValueAsString</a>()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    std::stringstream rrData;</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    rrData &lt;&lt; (mValue);</div>
@@ -277,18 +277,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;}</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00312"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#adf3fe8dd0976f4768fb8af225feaf671">  312</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#ad8e7b6e7ceb3bfb558c20c69574c5d11">Property&lt;tlp::RoadRunnerData&gt;::setValueFromString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; val)</div>
+<div class="line"><a name="l00312"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#aa4176bed236d41e38b057f3b1978fcc0">  312</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#ad8e7b6e7ceb3bfb558c20c69574c5d11">Property&lt;tlp::TelluriumData&gt;::setValueFromString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; val)</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;{</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;}</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a4a2a00d5c041ad3ff2dd1c809e4da197">  320</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;rr::RoadRunnerData&gt;::setValue</a>(<span class="keyword">const</span> rr::RoadRunnerData&amp; val)</div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a405d096fa9e4421d6fe38ee4f1699a44">  320</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;tlp::TelluriumData&gt;::setValue</a>(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">tlp::TelluriumData</a>&amp; val)</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    mValue = val;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;}</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00329"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ab8dabb8a9516bdd3ca72723f25c22129">  329</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;rr::RoadRunnerData&gt;::setValue</a>(rr::RoadRunnerData* val)</div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ac6ec81189ffac4b1a1ab49b5ed2db6cd">  329</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;tlp::TelluriumData&gt;::setValue</a>(<a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">tlp::TelluriumData</a>* val)</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    mValue = (*val);</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
@@ -381,7 +381,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;}</div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;</div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;RoadRunnerData&gt;(<span class="keyword">const</span> RoadRunnerData&amp; a)</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;TelluriumData&gt;(<span class="keyword">const</span> TelluriumData&amp; a)</div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;{</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;roadRunnerData&quot;</span>;</div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;}</div>
@@ -398,7 +398,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 11:30:42 for libRoadRunner Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 12:32:09 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['tellurium_20plugin_20framework_20for_20libroadrunner',['Tellurium Plugin Framework for libRoadRunner',['../index.html',1,'']]],
+  ['telluriumdata_20manipulation',['TelluriumData Manipulation',['../group__roadrunnerdata.html',1,'']]],
   ['tel_5fmacros_2eh',['tel_macros.h',['../tel__macros_8h.html',1,'']]],
   ['telplugins_5fc_5fapi_2eh',['telplugins_c_api.h',['../telplugins__c__api_8h.html',1,'']]],
   ['telplugins_5fcpp_5fsupport_2eh',['telplugins_cpp_support.h',['../telplugins__cpp__support_8h.html',1,'']]],

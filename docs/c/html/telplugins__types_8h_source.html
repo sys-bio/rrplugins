@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.4"/>
-<title>libRoadRunner Plugin C API: telplugins_types.h Source File</title>
+<title>Tellurium Plugin C API: telplugins_types.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,10 +22,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">libRoadRunner Plugin C API
+   <div id="projectname">Tellurium Plugin C API
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">Plugin Framework for libRoadRunner</div>
+   <div id="projectbrief">Plugin Framework for Tellurium</div>
   </td>
  </tr>
  </tbody>
@@ -92,38 +92,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;telplugins_settings.h&quot;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//using rrc::RRHandle;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//using rrc::RRDataHandle;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//using rrc::RRCDataPtr;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">//using rrc::RRStringArrayPtr;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">namespace </span>tlpc { <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>  {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">   57</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae" title="Void pointer to a RoadRunner instance. ">RRHandle</a>; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9">   60</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9" title="Void pointer to a RoadRunner data instance. ">RRDataHandle</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">namespace </span>tlpc { <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>  {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">   52</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae" title="Void pointer to a RoadRunner instance. ">RRHandle</a>; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9">   55</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9" title="Void pointer to a RoadRunner data instance. ">RRDataHandle</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">   61</a></span>&#160;<span class="keyword">typedef</span> void (event_cc *<a class="code" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e" title="Typedef for plugin event function. ">PluginEvent</a>)(<span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">   68</a></span>&#160;<span class="keyword">typedef</span> void (event_cc *<a class="code" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e" title="Typedef for plugin event function. ">PluginEvent</a>)(<span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">   71</a></span>&#160; <span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d" title="Void pointer to a PluginManager instance. ">RRPluginManagerHandle</a>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">   74</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7" title="Void pointer to a Plugin instance. ">RRPluginHandle</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">   77</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">   80</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204" title="Void pointer to a RRProperties instance (Container for properties) ">RRPropertiesHandle</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#if defined( __cplusplus)</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor"></span>} }<span class="comment">//Namespace</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">   64</a></span>&#160; <span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d" title="Void pointer to a PluginManager instance. ">RRPluginManagerHandle</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">   67</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7" title="Void pointer to a Plugin instance. ">RRPluginHandle</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">   70</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">   73</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204" title="Void pointer to a RRProperties instance (Container for properties) ">RRPropertiesHandle</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#if defined( __cplusplus)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span>} }<span class="comment">//Namespace</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 11:29:28 for libRoadRunner Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 12:32:08 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

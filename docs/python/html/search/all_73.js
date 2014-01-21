@@ -10,8 +10,8 @@ var searchData=
   ['setpropertybystring',['setPropertyByString',['../group__plugin__properties.html#ga28dfe2274917c2b8b072843a03156c3c',1,'python::telplugins_c_api']]],
   ['setpropertydescription',['setPropertyDescription',['../group__plugin__properties.html#gaab9ba5f65a756ec0351a98fed0340bc9',1,'python::telplugins_c_api']]],
   ['setpropertyhint',['setPropertyHint',['../group__plugin__properties.html#gaaf40d279324bff12793912e7beef3cb7',1,'python::telplugins_c_api']]],
-  ['setroadrunnerdataelement',['setRoadRunnerDataElement',['../group__utilities.html#ga7ee5ab92f839652a02c06886b0e1b49b',1,'python::telplugins_c_api']]],
-  ['setroadrunnerdataproperty',['setRoadRunnerDataProperty',['../group__plugin__properties.html#gaf6becb0f16726354fbc903eaaf8aa3fc',1,'python::telplugins_c_api']]],
-  ['setroadrunnerdataweight',['setRoadRunnerDataWeight',['../group__utilities.html#ga2ce1af9f7f3f2524452d575c28e82108',1,'python::telplugins_c_api']]],
-  ['setstringproperty',['setStringProperty',['../group__plugin__properties.html#gabe10d486982f18de948ea5933d1209eb',1,'python::telplugins_c_api']]]
+  ['setstringproperty',['setStringProperty',['../group__plugin__properties.html#gabe10d486982f18de948ea5933d1209eb',1,'python::telplugins_c_api']]],
+  ['settelluriumdataelement',['setTelluriumDataElement',['../group__utilities.html#ga78017e8add631fa4887d5afe03962a7b',1,'python::telplugins_c_api']]],
+  ['settelluriumdataproperty',['setTelluriumDataProperty',['../group__plugin__properties.html#ga5a5905f864cb1853ecb1226c2a417876',1,'python::telplugins_c_api']]],
+  ['settelluriumdataweight',['setTelluriumDataWeight',['../group__utilities.html#ga1f18e55238b916acf09167b7c48d9828',1,'python::telplugins_c_api']]]
 ];
