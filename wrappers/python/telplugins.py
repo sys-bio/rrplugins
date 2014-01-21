@@ -130,7 +130,15 @@ class DataSeries(object):
     ## d.setElement (1,2, 3.1415)
     ##@endcode       
     def setElement (self, row, col, value):
-        raise Exception ("setElement not yet implemented")
+        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        if (row < 0) or (col < 0):
+            raise Exception("DataSeries indices must be positive")
+        if row >= rowCount:
+            raise Exception("Row index out of bounds in dataseries element access")
+        if col >= colCount:
+            raise Exception("Column index out of bounds in dataseries element access")
+        setTelluriumDataElement(self._data, row, col, value)    
 
     ## \brief Read a dataseries from a file
     ##@code
