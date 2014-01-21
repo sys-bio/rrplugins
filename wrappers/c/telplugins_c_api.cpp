@@ -93,7 +93,11 @@ RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
         }
         else
         {
-            setError("Failed loading plugin: " + string(pluginName));
+            stringstream s;
+            s << "Failed loading plugin: " + string(pluginName);
+            s << "\n" <<pm->getLoadErrors();
+            
+            setError(s.str());
             return NULL;
         }
     catch_ptr_macro
@@ -157,16 +161,6 @@ RRPluginHandle tlp_cc getPlugin(RRPluginManagerHandle handle, const char* plugin
         return aPlugin;
     catch_ptr_macro
 }
-
-//long tlp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginName)
-//{
-//    start_try
-//        PluginManager *pm = castToPluginManager(handle);
-//        Plugin* aPlugin = pm->getPlugin(pluginName);
-//
-//        return aPlugin;
-//    catch_ptr_macro
-//}
 
 RRHandle tlp_cc getRRHandleFromPlugin(RRPluginHandle handle)
 {

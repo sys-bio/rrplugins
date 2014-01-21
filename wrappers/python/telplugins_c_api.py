@@ -101,7 +101,7 @@ telLib.freePluginManager.restype = c_bool
 def freePluginManager(pm):
     return telLib.freePluginManager(pm)
 
-##
+
 ## \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true if Plugins are loaded, false otherwise
@@ -111,12 +111,29 @@ def freePluginManager(pm):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-##
 telLib.loadPlugins.restype = c_bool
 def loadPlugins(pm):
     return telLib.loadPlugins(pm)
 
-##
+## \brief Check if there was any Errors catched during loading of plugins. 
+## \param pm Handle to a PluginManager instance
+## \return Returns true or false indicating if there was errors
+## \ingroup plugin_manager
+def hasLoadPluginErrors(pm):
+    aStr = telLib.getPluginLoadErrors(pm)
+    if len(aStr) > 0:
+        return True
+    else:
+        return False
+
+## \brief Get any Errors catched during loading of plugins. 
+## \param pm Handle to a PluginManager instance
+## \return Returns a string if there was errors, None otherwise
+## \ingroup plugin_manager
+telLib.getPluginLoadErrors.restype = c_char_p
+def getPluginLoadErrors(pm):
+    return telLib.getPluginLoadErrors(pm)
+
 ## \brief Unload all plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true if Plugins are unloaded succesfully, false otherwise

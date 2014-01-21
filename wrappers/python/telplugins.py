@@ -61,7 +61,7 @@ class DataSeries(object):
         for row in range(nrRows):
             for col in range(nrCols):                
                 val = unstructNumPyData[row][col] 
-                tpc.setRoadRunnerDataElement(dataHandle, row, col, val)        
+                tpc.setTelluriumDataElement(dataHandle, row, col, val)        
         return cls(dataHandle, True)
     
     def __del__ (self):
@@ -155,12 +155,11 @@ class DataSeries(object):
     ## d.plot()
     ##@endcode       
     def plot (self):
-print "mean=", numpy.mean (values[:,1])
-
-print "std=", numpy.std (values[:,1]) 
-         hdr = tpc.getRoadRunnerDataColumnHeader(self._data)
-         npData = tpc.getNumpyData(self._data)
-         tpc.plotRoadRunnerData(npData, hdr)
+        #print "mean=", numpy.mean (values[:,1])
+        #print "std=", numpy.std (values[:,1]) 
+        hdr = tpc.getTelluriumDataColumnHeader(self._data)
+        npData = tpc.getNumpyData(self._data)
+        tpc.plotTelluriumData(npData, hdr)
 
     data = property (__getHandle)
 
@@ -227,7 +226,7 @@ class Plugin (object):
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
         if not self.plugin:
-            return
+            raise Exception(tpc.getLastError())             
         else:
             lp = self.listOfProperties()
             for element in lp:
