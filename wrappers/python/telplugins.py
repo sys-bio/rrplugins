@@ -32,7 +32,7 @@ class DataSeries(object):
     @classmethod
     def fromNumPy(cls, numPyData):
         
-        if len (numPyData.shape) != 2:
+        if len (numPyData.shape) < 2:
             raise ValueError ('fromNumPy only accepts two dimensional arrays')
             
         nrCols  = numPyData.shape[1]
