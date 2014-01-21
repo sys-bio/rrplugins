@@ -3,7 +3,7 @@ var searchData=
   ['getalias',['getAlias',['../classtlp_1_1_property_base.html#a38b47bfc6b8e5bc15916401c41ba82bb',1,'tlp::PropertyBase']]],
   ['getauthor',['getAuthor',['../classtlp_1_1_plugin.html#a3809d80322b71cc5a05f7b46bc6f544a',1,'tlp::Plugin']]],
   ['getcategory',['getCategory',['../classtlp_1_1_plugin.html#a08a35aad6873a7c663f4001e04f40b9c',1,'tlp::Plugin']]],
-  ['getcolumnnames',['getColumnNames',['../classtlp_1_1_tellurium_data.html#ac5adb56514c6f5b987206c0cf1b4a52e',1,'tlp::TelluriumData']]],
+  ['getcolumnnames',['getColumnNames',['../classtlp_1_1_tellurium_data.html#a4bbee8ec29eb2b00cce1a688a52a5101',1,'tlp::TelluriumData']]],
   ['getcopyright',['getCopyright',['../classtlp_1_1_plugin.html#a03c0ae29ad6e41bb20a69873d91e4f96',1,'tlp::Plugin']]],
   ['getcpropertynames',['getCPropertyNames',['../classtlp_1_1_c_plugin.html#a772feaf95273f0e221c980484ecc6121',1,'tlp::CPlugin']]],
   ['getcurrent',['getCurrent',['../classtlp_1_1_properties.html#aa75d8068fadca4b1034a84ba0443c139',1,'tlp::Properties']]],

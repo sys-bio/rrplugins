@@ -79,26 +79,83 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="Introduction"></a>
 Introduction</h1>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;Starting Test&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;input telplugins <span class="keyword">as</span> *</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;p = Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;p.viewManual()</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;pl = p.listOfProperties()</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordflow">for</span> item <span class="keywordflow">in</span> pl:</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keywordflow">print</span> item</div>
+<p>The plugin API allows users to easily access and roadrunner plugins. Only three concepts need be understood:</p>
+<ol type="1">
+<li>Load a plugin</li>
+<li>Set of get plugin properties</li>
+<li>Execute the plugin <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;input telplugins <span class="keyword">as</span> *</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;p = Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;p.viewManual()</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;pl = p.listOfProperties()</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordflow">for</span> item <span class="keywordflow">in</span> pl:</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">print</span> item</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;p.Sigma = 0.00005</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;series = DataSeries.loadDataSeries (<span class="stringliteral">&quot;..\\Examples\\testData.dat&quot;</span>)</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;series.plot()</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;p.InputData = series</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;p.execute()</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;p.InputData.plot()</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;Test Finished&quot;</span></div>
+</div><!-- fragment --></li>
+</ol>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> roadrunner</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">import</span> telPlugins <span class="keyword">as</span> tel</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;noisePlugin = tel.Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordflow">print</span> noisePlugin.name()</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordflow">print</span> noisePlugin.hint()</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordflow">print</span> noisePlugin.description()</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;p.Sigma = 0.00005</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;series = DataSeries.loadDataSeries (<span class="stringliteral">&quot;..\\Examples\\testData.dat&quot;</span>)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;series.plot()</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;p.InputData = series</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;p.execute()</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;p.InputData.plot()</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;Test Finished&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordflow">print</span> noisePlugin.listOfProperties()</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; Create a roadrunner instance</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;rr = roadrunner.RoadRunner()</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;rr.load(<span class="stringliteral">&quot;sbml_test_0001.xml&quot;</span>)</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; Generate data</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;rr.simulate(0, 10, 511) <span class="comment"># Want 512 points</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; The plugin will need a handle to the underlying roadrunner data</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;d = tel.getTelluriumData (rr)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;noisePlugin.InputData = d</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; Get parameter <span class="keywordflow">for</span> the <span class="stringliteral">&#39;size&#39;</span> of the noise</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;noisePlugin.Sigma = 3.e-5</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;noisePlugin.execute ()</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;numpydata = noisePlugin.InputData.toNumpy;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;tel.plot (numpydata[:,[0,2]], myColor=<span class="stringliteral">&quot;blue&quot;</span>, myLinestyle=<span class="stringliteral">&quot;-&quot;</span>, myMarker=<span class="stringliteral">&quot;&quot;</span>, myLabel=<span class="stringliteral">&quot;S1&quot;</span>)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;tel.show()</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;d.writeDataSeries (<span class="stringliteral">&quot;testData2.dat&quot;</span>)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;d.readDataSeries (<span class="stringliteral">&quot;testData2.dat&quot;</span>)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;done&quot;</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="Plugins"></a>
+Plugins</h1>
+<p><a class="el" href="classpython_1_1telplugins_1_1_plugin.html">Plugin</a> objects are instanciated using <a class="el" href="classpython_1_1telplugins_1_1_plugin.html">Plugin</a> class. For example to instanciate a plugin called myplugin, we would use the code: </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p = Plugin (<span class="stringliteral">&quot;myplugin&quot;</span>)</div>
+</div><!-- fragment --><p> All interactions with plugins are via plugin properties. Values can be set and retrieved via plugin properties. For example, if a plugin has a property sigma, we can assign or access the value using the code: </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p.sigma = 0.1</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keywordflow">print</span> p.sigma</div>
+</div><!-- fragment --><p> Plugins have a single method that can be used to excecute the plugin's functionality: </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p.execute()</div>
+</div><!-- fragment --><p> Once a plugin has been executed, any output from the plugin can be retrieved via propoerties. Let's suppose for example there is a plugin all add, which has three properties called, x, y and result. When executed the plugin will take the values in x and y, compute the sum and assign it to result. The plugin can therefore be used as follows: </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p = Plugin(<span class="stringliteral">&quot;add&quot;</span>)</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;p.x = 3.4</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;p.y = 5.6</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;p.execute()</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordflow">print</span> p.result</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 13:35:22 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 15:47:31 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

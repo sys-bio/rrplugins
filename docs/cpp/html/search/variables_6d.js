@@ -4,7 +4,7 @@ var searchData=
   ['mauthor',['mAuthor',['../classtlp_1_1_plugin.html#af65144889a74fe882fad63c363c526f5',1,'tlp::Plugin']]],
   ['mcanclientclearlist',['mCanClientClearList',['../classtlp_1_1_properties.html#a2a758b351172dc45e4206f6470382b78',1,'tlp::Properties']]],
   ['mcategory',['mCategory',['../classtlp_1_1_plugin.html#a6a70bef783c7a28957519f22347398d9',1,'tlp::Plugin']]],
-  ['mcolumnnames',['mColumnNames',['../classtlp_1_1_tellurium_data.html#a3f7325d6ecb9b721467e8f75e234bb49',1,'tlp::TelluriumData']]],
+  ['mcolumnnames',['mColumnNames',['../classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a',1,'tlp::TelluriumData']]],
   ['mcopyright',['mCopyright',['../classtlp_1_1_plugin.html#a7dc30a80a7e9f89930cb0531a2204942',1,'tlp::Plugin']]],
   ['mdataprecision',['mDataPrecision',['../classtlp_1_1_tellurium_data.html#a140a553f17b040f85f48b58ce35d9741',1,'tlp::TelluriumData']]],
   ['mdescription',['mDescription',['../classtlp_1_1_plugin.html#a742da6cb80707e5937c48781a4eb25b6',1,'tlp::Plugin::mDescription()'],['../classtlp_1_1_property_base.html#afb707f106479255008183547b176d53a',1,'tlp::PropertyBase::mDescription()']]],

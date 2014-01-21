@@ -86,34 +86,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef telTelluriumDataH</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define telTelluriumDataH</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;telExporter.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;rr-libstruct/lsMatrix.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;telStringList.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;telExporter.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;rr-libstruct/lsMatrix.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>rr</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">class </span>RoadRunnerData;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>tlp</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span>ls;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::ofstream;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::stringstream;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html">  114</a></span>&#160;<span class="keyword">class </span>RRP_DECLSPEC <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; rSize = 0, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; cSize = 0);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; colNames,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keyword">const</span> DoubleMatrix&amp; data);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>rr</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">class </span>RoadRunnerData;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>tlp</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using namespace </span>ls;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> std::ofstream;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using</span> std::stringstream;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html">  115</a></span>&#160;<span class="keyword">class </span>RRP_DECLSPEC <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; rSize = 0, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; cSize = 0);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>(<span class="keyword">const</span> StringList&amp; colNames, <span class="keyword">const</span> DoubleMatrix&amp; data);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    ~<a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>();</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
@@ -123,10 +123,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">bool</span> hasWeights() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp;         getColumnNames() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">const</span> StringList&amp;                       getColumnNames() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    std::string                             getColumnName(<span class="keyword">const</span> <span class="keywordtype">int</span> col) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    std::string                             getColumnNamesAsString() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">void</span>                                    setColumnNames(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; colNames);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">bool</span>                                    setColumnNames(<span class="keyword">const</span> StringList&amp; colNames);</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">int</span>                                     getColumnIndex(<span class="keyword">const</span> std::string&amp; colName) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">void</span>                                    setTimeDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span>                                    setDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
@@ -191,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
-<div class="line"><a name="l00389"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a3f7325d6ecb9b721467e8f75e234bb49">  389</a></span>&#160;    std::vector&lt;std::string&gt; <a class="code" href="classtlp_1_1_tellurium_data.html#a3f7325d6ecb9b721467e8f75e234bb49" title="Container holding column names. ">mColumnNames</a>;</div>
+<div class="line"><a name="l00389"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a">  389</a></span>&#160;    StringList <a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a" title="Container holding column names. ">mColumnNames</a>;</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    </div>
 <div class="line"><a name="l00394"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109">  394</a></span>&#160;    DoubleMatrix <a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109" title="Container holding the actual data. ">mTheData</a>;</div>
 <div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    </div>
@@ -210,7 +210,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 13:28:19 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 15:47:30 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

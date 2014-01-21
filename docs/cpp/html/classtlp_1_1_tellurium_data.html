@@ -108,9 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6c04bff659b559c4c03afbd70de8bb6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a6c04bff659b559c4c03afbd70de8bb6c">TelluriumData</a> (const int &amp;<a class="el" href="classtlp_1_1_tellurium_data.html#adb39cde1a1e1d2f2e76deae8f4e9e65e">rSize</a>=0, const int &amp;<a class="el" href="classtlp_1_1_tellurium_data.html#a8a84cdc44dc98526ad107ea86ad83fd2">cSize</a>=0)</td></tr>
 <tr class="memdesc:a6c04bff659b559c4c03afbd70de8bb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Create a RoadRunner data object with dimension rSize x cSize.  <a href="#a6c04bff659b559c4c03afbd70de8bb6c">More...</a><br/></td></tr>
 <tr class="separator:a6c04bff659b559c4c03afbd70de8bb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8a0a4a28e6b08f908ba0268d4cc7a08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#af8a0a4a28e6b08f908ba0268d4cc7a08">TelluriumData</a> (const std::vector&lt; std::string &gt; &amp;colNames, const DoubleMatrix &amp;data)</td></tr>
-<tr class="memdesc:af8a0a4a28e6b08f908ba0268d4cc7a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor &ndash; copy the names and data from the given parameters.  <a href="#af8a0a4a28e6b08f908ba0268d4cc7a08">More...</a><br/></td></tr>
-<tr class="separator:af8a0a4a28e6b08f908ba0268d4cc7a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea8afdd497a5af2d9873aa3ec906876"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a9ea8afdd497a5af2d9873aa3ec906876">TelluriumData</a> (const StringList &amp;colNames, const DoubleMatrix &amp;data)</td></tr>
+<tr class="memdesc:a9ea8afdd497a5af2d9873aa3ec906876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor &ndash; copy the names and data from the given parameters.  <a href="#a9ea8afdd497a5af2d9873aa3ec906876">More...</a><br/></td></tr>
+<tr class="separator:a9ea8afdd497a5af2d9873aa3ec906876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d1440a5185c89a940fc31a7fa6c9ece"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d1440a5185c89a940fc31a7fa6c9ece"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a1d1440a5185c89a940fc31a7fa6c9ece">~TelluriumData</a> ()</td></tr>
 <tr class="memdesc:a1d1440a5185c89a940fc31a7fa6c9ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. De allocate any memory allocated in the class. <br/></td></tr>
@@ -127,19 +127,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a2267e0f19be595d51f3a4ae3bcb8f12a">hasWeights</a> () const </td></tr>
 <tr class="memdesc:a2267e0f19be595d51f3a4ae3bcb8f12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">hasWeights returns true or false indiciating if current object have weights allocated or not. <br/></td></tr>
 <tr class="separator:a2267e0f19be595d51f3a4ae3bcb8f12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5adb56514c6f5b987206c0cf1b4a52e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5adb56514c6f5b987206c0cf1b4a52e"></a>
-const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#ac5adb56514c6f5b987206c0cf1b4a52e">getColumnNames</a> () const </td></tr>
-<tr class="memdesc:ac5adb56514c6f5b987206c0cf1b4a52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the names of the variables stored in this data structure, as a vector&lt;string&gt; <br/></td></tr>
-<tr class="separator:ac5adb56514c6f5b987206c0cf1b4a52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bbee8ec29eb2b00cce1a688a52a5101"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4bbee8ec29eb2b00cce1a688a52a5101"></a>
+const StringList &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a4bbee8ec29eb2b00cce1a688a52a5101">getColumnNames</a> () const </td></tr>
+<tr class="memdesc:a4bbee8ec29eb2b00cce1a688a52a5101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the names of the variables stored in this data structure, as a vector&lt;string&gt; <br/></td></tr>
+<tr class="separator:a4bbee8ec29eb2b00cce1a688a52a5101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca1eb7d66a03cdc75081e61d3802fcfc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca1eb7d66a03cdc75081e61d3802fcfc"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getColumnName</b> (const int col) const </td></tr>
 <tr class="separator:aca1eb7d66a03cdc75081e61d3802fcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3716bee9b521a3c6a4a861e1fdbcc447"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3716bee9b521a3c6a4a861e1fdbcc447"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getColumnNamesAsString</b> () const </td></tr>
 <tr class="separator:a3716bee9b521a3c6a4a861e1fdbcc447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd719be55f2cd8fa2024fbc42139437b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd719be55f2cd8fa2024fbc42139437b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setColumnNames</b> (const std::vector&lt; std::string &gt; &amp;colNames)</td></tr>
-<tr class="separator:acd719be55f2cd8fa2024fbc42139437b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57f68dcbb3b992b681a93c8f378e8695"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57f68dcbb3b992b681a93c8f378e8695"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setColumnNames</b> (const StringList &amp;colNames)</td></tr>
+<tr class="separator:a57f68dcbb3b992b681a93c8f378e8695"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf8ce473129e9c614304d9990085c480"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf8ce473129e9c614304d9990085c480"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getColumnIndex</b> (const std::string &amp;colName) const </td></tr>
 <tr class="separator:acf8ce473129e9c614304d9990085c480"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,10 +239,10 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a3f7325d6ecb9b721467e8f75e234bb49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f7325d6ecb9b721467e8f75e234bb49"></a>
-std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a3f7325d6ecb9b721467e8f75e234bb49">mColumnNames</a></td></tr>
-<tr class="memdesc:a3f7325d6ecb9b721467e8f75e234bb49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container holding column names. <br/></td></tr>
-<tr class="separator:a3f7325d6ecb9b721467e8f75e234bb49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c787721a683eb90b4b9ce5d4d692f6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c787721a683eb90b4b9ce5d4d692f6a"></a>
+StringList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a">mColumnNames</a></td></tr>
+<tr class="memdesc:a4c787721a683eb90b4b9ce5d4d692f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container holding column names. <br/></td></tr>
+<tr class="separator:a4c787721a683eb90b4b9ce5d4d692f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6792b0920491458b39fddf390cf9f109"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6792b0920491458b39fddf390cf9f109"></a>
 DoubleMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109">mTheData</a></td></tr>
 <tr class="memdesc:a6792b0920491458b39fddf390cf9f109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Container holding the actual data. <br/></td></tr>
@@ -373,14 +373,14 @@ Weights</h3>
 
 </div>
 </div>
-<a class="anchor" id="af8a0a4a28e6b08f908ba0268d4cc7a08"></a>
+<a class="anchor" id="a9ea8afdd497a5af2d9873aa3ec906876"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">tlp::TelluriumData::TelluriumData </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramtype">const StringList &amp;&#160;</td>
           <td class="paramname"><em>colNames</em>, </td>
         </tr>
         <tr>
@@ -905,7 +905,7 @@ Weights</h3>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 21 2014 13:28:19 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 21 2014 15:47:30 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
