@@ -33,14 +33,18 @@ class DataSeries(object):
     def fromNumPy(cls, numPyData):
         
         # We have to check the following because roadrunner issues tructured arrays
-        # Taken out for now        
-        #if numPyData.dtype.names != None:        
-        #    numPyData = numPyData.view((float, len (numPyData.dtype.names)))
-        #if len (numPyData.shape) < 2:
-        #    raise ValueError ('fromNumPy only accepts two dimensional arrays')
-            
-        nrCols  = numPyData.shape[1]
-        nrRows  = len(numPyData)   
+        if numPyData.dtype.names != None:        
+            unstructNumPyData = numPyData.view((float, len (numPyData.dtype.names)))
+            nrCols  = unstructNumPyData.shape[1]
+            nrRows  = len(unstructNumPyData) 
+        else:
+            nrCols  = numPyData.shape[1]
+            nrRows  = len(numPyData) 
+            unstructNumPyData = numPyData
+         
+        if len (unstructNumPyData.shape) < 2:
+            raise ValueError ('fromNumPy only accepts two dimensional arrays')
+        
         # If there are no column names then make some up                     
         if numPyData.dtype.names == None:
             colHdr = []
@@ -50,12 +54,12 @@ class DataSeries(object):
            colHdr  = numPyData.dtype.names 
 
         columnStr = str(colHdr).strip('[]')
-        dataHandle = tpc.telLib.createRoadRunnerData(nrRows,nrCols, columnStr)        
+        dataHandle = tpc.telLib.createRoadRunnerData(nrRows, nrCols, columnStr)        
                 
         #Copy the data
         for row in range(nrRows):
             for col in range(nrCols):                
-                val = numPyData[row][col] 
+                val = unstructNumPyData[row][col] 
                 tpc.setRoadRunnerDataElement(dataHandle, row, col, val)        
         return cls(dataHandle, True)
     
