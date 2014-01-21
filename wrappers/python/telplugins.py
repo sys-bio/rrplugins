@@ -155,8 +155,6 @@ class DataSeries(object):
     ## d.plot()
     ##@endcode       
     def plot (self):
-        #print "mean=", numpy.mean (values[:,1])
-        #print "std=", numpy.std (values[:,1]) 
         hdr = tpc.getTelluriumDataColumnHeader(self._data)
         npData = tpc.getNumpyData(self._data)
         tpc.plotTelluriumData(npData, hdr)
