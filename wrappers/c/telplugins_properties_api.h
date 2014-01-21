@@ -185,7 +185,7 @@ TLP_C_DS bool tlp_cc getListProperty(RRPropertyHandle handle, void* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* value);
+TLP_C_DS bool tlp_cc setTelluriumDataProperty(RRPropertyHandle handle, void* value);
 
 /*!
  \brief Get the value of a roadRunnerDataProperty property
@@ -193,7 +193,7 @@ TLP_C_DS bool tlp_cc setRoadRunnerDataProperty(RRPropertyHandle handle, void* va
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getRoadRunnerDataProperty(RRPropertyHandle handle, void* value);
+TLP_C_DS bool tlp_cc getTelluriumDataProperty(RRPropertyHandle handle, void* value);
 
 /*!
  \brief Get a property's info

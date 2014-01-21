@@ -74,8 +74,12 @@ class RRP_DECLSPEC CPlugin : public Plugin
         virtual                ~CPlugin();
         string                  getImplementationLanguage();
         virtual bool            execute(bool useThread = false);
-        tlp::StringList          getPropertyNames();
+        tlp::StringList         getPropertyNames();
         PropertyBase*           getProperty(const string& param);
+
+        /** \brief Function to retrieve last error in a C plugin
+        */
+        string                  getLastError();
 
     protected:
 
@@ -92,11 +96,13 @@ class RRP_DECLSPEC CPlugin : public Plugin
         destroyF                destroyFunction;
 
         /**
-          Function pointer to retrieve the C plugins list ofproperties.
+          Function pointer to retrieve the C plugins list of properties.
          */
         getACharStarF           getCPropertyNames;
 
         getAPropertyF           getCProperty;
+
+        getACharStarF           getCLastError;
 };
 
 }

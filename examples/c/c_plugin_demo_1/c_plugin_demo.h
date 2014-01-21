@@ -3,6 +3,10 @@
 #include "telExporter.h"
 #include "telplugins_types.h"
 //-----------------------------------------------------------
+/*!
+ \brief Global parameter holding last error, if any
+*/
+extern char*        gLastError;
 
 //Global Plugin Data
 RRPluginHandle      gPlugin;
@@ -14,11 +18,12 @@ RR_PLUGIN_DECLSPEC const char*     call_conv getImplementationLanguage(void);
 RR_PLUGIN_DECLSPEC const char*     call_conv getName(void);
 RR_PLUGIN_DECLSPEC const char*     call_conv getCategory(void);
 RR_PLUGIN_DECLSPEC bool            call_conv setupCPlugin(RRPluginHandle aPlugin);
-RR_PLUGIN_DECLSPEC bool            call_conv execute(void* userData);
+RR_PLUGIN_DECLSPEC bool            call_conv execute(bool inThread);
 RR_PLUGIN_DECLSPEC bool            call_conv destroyPlugin(RRPluginHandle plugin);
 RR_PLUGIN_DECLSPEC char*           call_conv getListOfCPluginPropertyNames(RRPluginHandle plugin);
 RR_PLUGIN_DECLSPEC void*           call_conv getCPluginProperty(const char* name);
 
+RR_PLUGIN_DECLSPEC char*           call_conv getCLastError();
 #endif
 
 

@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrException.h"
 #include "telStringUtils.h"
 #include "telplugins_c_api.h"
@@ -11,7 +11,7 @@ extern char* gLastError;
 
 namespace tlpc
 {
-using rr::RoadRunnerData;
+using tlp::TelluriumData;
 using rr::RoadRunner;
 void setError(const string& err)
 {
@@ -164,9 +164,9 @@ RoadRunner* castToRoadRunner(RRHandle handle)
     }
 }
 
-RoadRunnerData* castToRoadRunnerData(RRDataHandle handle)
+TelluriumData* castToTelluriumData(RRDataHandle handle)
 {
-    rr::RoadRunnerData* para = (RoadRunnerData*) handle;
+    tlp::TelluriumData* para = (TelluriumData*) handle;
     if(para) //Will only fail if handle is NULL...
     {
         return para;
@@ -178,21 +178,21 @@ RoadRunnerData* castToRoadRunnerData(RRDataHandle handle)
     }
 }
 
-Property<RoadRunnerData>* castToRoadRunnerDataProperty(RRPropertyHandle handle)
+Property<TelluriumData>* castToTelluriumDataProperty(RRPropertyHandle handle)
 {
-    Property<RoadRunnerData>* para = (Property<RoadRunnerData>*) handle;
+    Property<TelluriumData>* para = (Property<TelluriumData>*) handle;
     if(para) //Will only fail if handle is NULL...
     {
         return para;
     }
     else
     {
-        rr::Exception ex("Failed to cast to a valid RoadRunnerData Property handle");
+        rr::Exception ex("Failed to cast to a valid TelluriumData Property handle");
         throw(ex);
     }
 }
 
-//RRCDataPtr createRRCData(const RoadRunnerData& result)
+//RRCDataPtr createRRCData(const TelluriumData& result)
 //{
 //    return rrc::createRRCData(result);
 //}

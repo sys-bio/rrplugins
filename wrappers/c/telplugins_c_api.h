@@ -73,10 +73,18 @@ TLP_C_DS bool tlp_cc freePluginManager(RRPluginManagerHandle handle);
 /*!
  \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
  \param handle Handle to a PluginManager instance
- \return Returns an integer holding number of succesfully loaded plugins
+ \return Returns a boolean indicating success/failure
+ \note Failure during the loadPlugins call can be retrieved using the getPluginsLoadError() function
  \ingroup plugin_manager
 */
-TLP_C_DS int tlp_cc loadPlugins(RRPluginManagerHandle handle);
+TLP_C_DS bool tlp_cc loadPlugins(RRPluginManagerHandle handle);
+
+/*!
+ \brief Retrieve any errors that occured durig loading of plugins
+ \ingroup plugin_manager
+*/
+TLP_C_DS char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle);
+
 
 /*!
  \brief Unload plugins
@@ -633,8 +641,8 @@ int main()
  \defgroup plugin_properties Plugin Properties
  \brief Plugins Property related functions
 
- \defgroup roadrunnerdata RoadRunnerData Manipulation
- \brief Functions to manpiulate numerical data using RoadRunnerData objects
+ \defgroup roadrunnerdata TelluriumData Manipulation
+ \brief Functions to manpiulate numerical data using TelluriumData objects
 
  \defgroup utilities Utility Functions
  \brief Functions to help and assist in the use of the Plugins framework

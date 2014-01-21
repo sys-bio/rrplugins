@@ -19,7 +19,7 @@ typedef void (*ThreadCB)(void*, void*);
 
 class AutoPlugin;
 
-using rr::RoadRunnerData;
+using tlp::TelluriumData;
 
 class AutoWorker : public Poco::Runnable
 {
@@ -28,7 +28,7 @@ class AutoWorker : public Poco::Runnable
                                    ~AutoWorker();
         bool                        start(bool runInThread = false);
         void                        run();
-        bool                        isRunning();
+        bool                        isRunning() const;
 
     protected:
         Poco::Thread                mThread;
@@ -36,8 +36,8 @@ class AutoWorker : public Poco::Runnable
         rrauto::RRAuto&             mRRAuto;        //This class communicate with auto
 
         bool                        setup();
-        RoadRunnerData              createModelData();
-        RoadRunnerData              createResidualsData();
+        TelluriumData              createModelData();
+        TelluriumData              createResidualsData();
 };
 }
 #endif

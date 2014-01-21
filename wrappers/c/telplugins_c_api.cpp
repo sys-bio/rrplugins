@@ -2,7 +2,7 @@
 #include <sstream>
 #include "rr-libstruct/lsMatrix.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 #include "telUtils.h"
 #include "telPluginManager.h"
@@ -16,7 +16,7 @@
 namespace tlpc
 {
 using namespace std;
-using rr::RoadRunnerData;
+using tlp::TelluriumData;
 using namespace tlp;
 
 
@@ -93,18 +93,31 @@ RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
         }
         else
         {
-            setError("Failed loading plugin: " + string(pluginName));
+            stringstream s;
+            s << "Failed loading plugin: " + string(pluginName);
+            s << "\n" <<pm->getLoadErrors();
+            
+            setError(s.str());
             return NULL;
         }
     catch_ptr_macro
 }
 
-int tlp_cc loadPlugins(RRPluginManagerHandle handle)
+bool tlp_cc loadPlugins(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
-        return pm->load();
+        pm->load();
+        return pm->hasLoadErrors() ? false : true;
     catch_bool_macro
+}
+
+char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle)
+{
+    start_try
+        PluginManager *pm = castToPluginManager(handle);
+        return createText(pm->getLoadErrors());
+    catch_ptr_macro
 }
 
 bool tlp_cc unLoadPlugins(RRPluginManagerHandle handle)
@@ -148,16 +161,6 @@ RRPluginHandle tlp_cc getPlugin(RRPluginManagerHandle handle, const char* plugin
         return aPlugin;
     catch_ptr_macro
 }
-
-//long tlp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPluginHandle pluginName)
-//{
-//    start_try
-//        PluginManager *pm = castToPluginManager(handle);
-//        Plugin* aPlugin = pm->getPlugin(pluginName);
-//
-//        return aPlugin;
-//    catch_ptr_macro
-//}
 
 RRHandle tlp_cc getRRHandleFromPlugin(RRPluginHandle handle)
 {
@@ -237,12 +240,7 @@ RRPropertyHandle tlp_cc getPluginProperty(RRPluginHandle handle, const char* par
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-        PropertyBase *para = NULL;
-        if(aPlugin)
-        {           
-            return aPlugin->getProperty(parameterName);
-        }
-        return NULL;
+        return aPlugin->getProperty(parameterName);
     catch_ptr_macro
 }
 

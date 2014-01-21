@@ -54,14 +54,14 @@ namespace tlpc { extern "C" {
  \return Returns an handle to roadrunners internal data object
  \ingroup roadrunnerdata
 */
-TLP_C_DS RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle);
+TLP_C_DS RRDataHandle tlp_cc getTelluriumDataHandle(RRHandle handle);
 
 /*!
  \brief Retrieves an element at a given row and column from a RoadRunner data type variable
 
  RoadRunner numerical data are indexed from zero
 
- Example: \code status = getRoadRunnerDataElement (rrDataHandle, 2, 4, *value); \endcode
+ Example: \code status = getTelluriumDataElement (rrDataHandle, 2, 4, *value); \endcode
 
  \param rrData A Handle o a RoadRunner data type variable
  \param r The row index to the rrData data
@@ -70,14 +70,14 @@ TLP_C_DS RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle);
  \return Returns true if succesful;
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc getRoadRunnerDataElement(RRDataHandle rrData, int r, int c, double *value);
+TLP_C_DS bool tlp_cc getTelluriumDataElement(RRDataHandle rrData, int r, int c, double *value);
 
 /*!
  \brief Set an data element at a given row and column in a RoadRunner data type variable
 
  RoadRunner numerical data are indexed from zero
 
- Example: \code status = setRoadRunnerDataElement (rrDataHandle, 2, 4, 42); \endcode
+ Example: \code status = setTelluriumDataElement (rrDataHandle, 2, 4, 42); \endcode
 
  \param rrData A Handle o a RoadRunner data type variable
  \param r The row index to the rrData data
@@ -86,14 +86,14 @@ TLP_C_DS bool tlp_cc getRoadRunnerDataElement(RRDataHandle rrData, int r, int c,
  \return Returns true if succesful
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc setRoadRunnerDataElement(RRDataHandle rrData, int r, int c, double value);
+TLP_C_DS bool tlp_cc setTelluriumDataElement(RRDataHandle rrData, int r, int c, double value);
 
 /*!
  \brief Retrieves the weight for a data element at a given row and column from a RoadRunner data type variable
 
  RoadRunner numerical data are indexed from zero
 
- Example: \code status = getRoadRunnerDataWeight (rrDataHandle, 2, 4, *value); \endcode
+ Example: \code status = getTelluriumDataWeight (rrDataHandle, 2, 4, *value); \endcode
 
  \param rrData A Handle o a RoadRunner data type variable
  \param r The row index to the rrData data
@@ -104,24 +104,24 @@ TLP_C_DS bool tlp_cc setRoadRunnerDataElement(RRDataHandle rrData, int r, int c,
  allocateWeights(rrDataHandle).
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc getRoadRunnerDataWeight(RRDataHandle rrData, int r, int c, double *value);
+TLP_C_DS bool tlp_cc getTelluriumDataWeight(RRDataHandle rrData, int r, int c, double *value);
 
 /*!
- \brief Query if a RoadRunnerData object have enabled its weights feature
- \param rrData A handle to RoadRunnerData
+ \brief Query if a TelluriumData object have enabled its weights feature
+ \param rrData A handle to TelluriumData
  \param answer Boolean indicating if the data has weights or not
  \return Returns true or false indicating function success
- \note Related functions allocateWeights(), getRoadRunnerDataWeight(), setRoadRunnerDataWeight()
+ \note Related functions allocateWeights(), getTelluriumDataWeight(), setTelluriumDataWeight()
  \ingroup roadrunnerdata
 */
 TLP_C_DS bool tlp_cc hasWeights(RRDataHandle rrData, bool* answer);
 
 /*!
  \brief Allocate roadrunner data weights. Initially, all weights are set to '1'
- \param rrData A handle to RoadRunnerData 
+ \param rrData A handle to TelluriumData 
  \param success Boolean indicating if allocation was succesful or not 
  \return Returns true or false indicating function success
- \note Related functions hasWeights(), getRoadRunnerDataWeight(), setRoadRunnerDataWeight()
+ \note Related functions hasWeights(), getTelluriumDataWeight(), setTelluriumDataWeight()
  \ingroup roadrunnerdata
 */
 TLP_C_DS bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success);
@@ -131,7 +131,7 @@ TLP_C_DS bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success);
 
  RoadRunner numerical data are indexed from zero
 
- Example: \code status = setRoadRunnerDataWeight (rrDataHandle, 2, 4, .89); \endcode
+ Example: \code status = setTelluriumDataWeight (rrDataHandle, 2, 4, .89); \endcode
 
  \param rrData A Handle o a RoadRunner data type variable
  \param r The row index to the rrData data
@@ -142,7 +142,7 @@ TLP_C_DS bool tlp_cc allocateWeights(RRDataHandle rrData, bool* success);
  allocateWeights(rrDataHandle).
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc setRoadRunnerDataWeight(RRDataHandle rrData, int r, int c, double value);
+TLP_C_DS bool tlp_cc setTelluriumDataWeight(RRDataHandle rrData, int r, int c, double value);
 
 /*!
  \brief Retrieves a RoadRunner data column header. The column header is a string
@@ -152,7 +152,20 @@ TLP_C_DS bool tlp_cc setRoadRunnerDataWeight(RRDataHandle rrData, int r, int c, 
  \return Returns a string containing the header as a string, NULL if unsuccesful
  \ingroup roadrunnerdata
 */
-TLP_C_DS char* tlp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
+TLP_C_DS char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle data);
+
+/*!
+ \brief Assign RoadRunner data column header from a string. 
+ The header string is composed of comma delimited (with optional spaces) values. Each value is a header for correseponding data column.
+
+ \param data A handle to a RoadRunner data type variable
+ \param hdr A Cstring containing the column labels
+ \return Returns a boolean indicating if assignement was succesful or not
+ \note The number of labels in the string MUST correspond to the number of columns in the data. If not, the assignment is aborted and 
+ false is returned
+ \ingroup roadrunnerdata
+*/
+TLP_C_DS bool tlp_cc setTelluriumDataColumnHeader(RRDataHandle data, char* hdr);
 
 /*!
  \brief Retrieves the number of rows in a RoadRunner data object.
@@ -161,7 +174,7 @@ TLP_C_DS char* tlp_cc getRoadRunnerDataColumnHeader(RRDataHandle data);
  \return Returns the number of rows in the underlying data object.
  \ingroup roadrunnerdata
 */
-TLP_C_DS int tlp_cc getRoadRunnerDataNumRows(RRDataHandle data);
+TLP_C_DS int tlp_cc getTelluriumDataNumRows(RRDataHandle data);
 
 /*!
  \brief Retrieves the number of cols in a RoadRunner data object.
@@ -170,7 +183,7 @@ TLP_C_DS int tlp_cc getRoadRunnerDataNumRows(RRDataHandle data);
  \return Returns the number of cols in the underlying data object.
  \ingroup roadrunnerdata
 */
-TLP_C_DS int tlp_cc getRoadRunnerDataNumCols(RRDataHandle data);
+TLP_C_DS int tlp_cc getTelluriumDataNumCols(RRDataHandle data);
 
 /*!
  \brief Creates a RoadRunner data object, and returns a handle to it.
@@ -181,16 +194,16 @@ TLP_C_DS int tlp_cc getRoadRunnerDataNumCols(RRDataHandle data);
  \return Returns a handle to a RoadRunner data object, NULL if unsuccessfull.
  \ingroup roadrunnerdata
 */
-TLP_C_DS RRDataHandle tlp_cc createRoadRunnerData(int rows, int cols, char* colNames);
+TLP_C_DS RRDataHandle tlp_cc createTelluriumData(int rows, int cols, char* colNames);
 
 /*!
  \brief Free the memory allocated by a RoadRunner data object.
- \param handle A RRDataHandle handle to an underlying RoadRunnerData object.
+ \param handle A RRDataHandle handle to an underlying TelluriumData object.
 
  \return Returns a boolean indicating success.
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc freeRoadRunnerData(RRDataHandle handle);
+TLP_C_DS bool tlp_cc freeTelluriumData(RRDataHandle handle);
 
 /*!
  \brief Write roadrunner data to file a RoadRunner data object.
@@ -199,7 +212,7 @@ TLP_C_DS bool tlp_cc freeRoadRunnerData(RRDataHandle handle);
  \return Returns a boolean indicating success.
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName);
+TLP_C_DS bool tlp_cc writeTelluriumDataToFile(RRDataHandle rrData, char* fName);
 
 /*!
  \brief Read roadrunner data from a file, into a RoadRunner data object.
@@ -208,7 +221,7 @@ TLP_C_DS bool tlp_cc writeRoadRunnerDataToFile(RRDataHandle rrData, char* fName)
  \return Returns a boolean indicating success.
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc readRoadRunnerDataFromFile(RRDataHandle rrData, char* fName);
+TLP_C_DS bool tlp_cc readTelluriumDataFromFile(RRDataHandle rrData, char* fName);
 
 
 #if defined(__cplusplus)

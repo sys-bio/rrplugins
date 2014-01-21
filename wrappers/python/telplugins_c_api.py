@@ -101,7 +101,7 @@ telLib.freePluginManager.restype = c_bool
 def freePluginManager(pm):
     return telLib.freePluginManager(pm)
 
-##
+
 ## \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true if Plugins are loaded, false otherwise
@@ -111,12 +111,29 @@ def freePluginManager(pm):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-##
 telLib.loadPlugins.restype = c_bool
 def loadPlugins(pm):
     return telLib.loadPlugins(pm)
 
-##
+## \brief Check if there was any Errors catched during loading of plugins. 
+## \param pm Handle to a PluginManager instance
+## \return Returns true or false indicating if there was errors
+## \ingroup plugin_manager
+def hasLoadPluginErrors(pm):
+    aStr = telLib.getPluginLoadErrors(pm)
+    if len(aStr) > 0:
+        return True
+    else:
+        return False
+
+## \brief Get any Errors catched during loading of plugins. 
+## \param pm Handle to a PluginManager instance
+## \return Returns a string if there was errors, None otherwise
+## \ingroup plugin_manager
+telLib.getPluginLoadErrors.restype = c_char_p
+def getPluginLoadErrors(pm):
+    return telLib.getPluginLoadErrors(pm)
+
 ## \brief Unload all plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true if Plugins are unloaded succesfully, false otherwise
@@ -630,7 +647,7 @@ def setPluginProperty(pluginHandle, propertyName, propertyValue):
         if paraType == 'listOfProperties':
             return setListProperty(propertyHandle, propertyValue)
         if paraType == 'roadRunnerData': #The value of this is a handle
-            return setRoadRunnerDataProperty (propertyHandle, propertyValue)
+            return setTelluriumDataProperty (propertyHandle, propertyValue)
         if paraType == 'StringList':
             return setPropertyByString(propertyHandle, propertyValue)
         else:
@@ -660,7 +677,7 @@ def setProperty(propertyHandle, paraValue):
         if paraType == 'listOfProperties':
             return setListProperty(propertyHandle, paraValue)
         if paraType == 'roadRunnerData': #The value of this is a handle
-            return setRoadRunnerDataProperty(propertyHandle, paraValue)
+            return setTelluriumDataProperty(propertyHandle, paraValue)
         if paraType == 'StringList':
             return setPropertyByString(propertyHandle, paraValue)
         else:
@@ -964,7 +981,7 @@ def setListProperty(propertyHandle, value):
 ## \param propertyHandle A Handle to a property
 ## \return Returns the value of the property if succesful, None otherwise
 ## \ingroup plugin_properties
-def getRoadRunnerDataProperty(propertyHandle):
+def getTelluriumDataProperty(propertyHandle):
         return getPropertyValue(propertyHandle)
 
 ## \brief Set a roadRunnerData property
@@ -972,9 +989,9 @@ def getRoadRunnerDataProperty(propertyHandle):
 ## \param value Value to assign to the property (must be a handle to roadRunnerData.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.setRoadRunnerDataProperty.restype = c_bool
-def setRoadRunnerDataProperty(propertyHandle, value):
-    return telLib.setRoadRunnerDataProperty(propertyHandle, c_void_p(value))
+telLib.setTelluriumDataProperty.restype = c_bool
+def setTelluriumDataProperty(propertyHandle, value):
+    return telLib.setTelluriumDataProperty(propertyHandle, c_void_p(value))
 
 ## \brief Get the value of a property.
 ## \param propertyHandle A Handle to a property
@@ -1041,24 +1058,24 @@ def getPropertyValue(propertyHandle):
 ## \param rrInstance A RoadRunner instance, as returned from roadrunner.RoadRunner()
 ## \return Returns a handle to roadrunners internal data object
 ## \ingroup utilities
-def getRoadRunnerDataHandle(rrInstance):
+def getTelluriumDataHandle(rrInstance):
     rrHandle = cast(int(rrInstance.this), c_void_p)
-    return telLib.getRoadRunnerDataHandle(rrHandle)
+    return telLib.getTelluriumDataHandle(rrHandle)
 
 ## \brief Convert roadrunner data to Numpy data
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-telLib.getRoadRunnerDataElement.restype = c_bool
+telLib.getTelluriumDataElement.restype = c_bool
 def getNumpyData(rrDataHandle):
-    colHeader = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
-    rowCount = telLib.getRoadRunnerDataNumRows(rrDataHandle)
-    colCount = telLib.getRoadRunnerDataNumCols(rrDataHandle)
+    colHeader = telLib.getTelluriumDataColumnHeader(rrDataHandle)
+    rowCount = telLib.getTelluriumDataNumRows(rrDataHandle)
+    colCount = telLib.getTelluriumDataNumCols(rrDataHandle)
     resultArray = np.zeros([rowCount, colCount])
     for row in range(rowCount):
         for col in range(colCount):
                 val = c_double()
-                if telLib.getRoadRunnerDataElement(rrDataHandle, row, col, byref(val)) == True:
+                if telLib.getTelluriumDataElement(rrDataHandle, row, col, byref(val)) == True:
                     resultArray[row, col] = val.value
                 else:
                     print "problem"
@@ -1066,7 +1083,7 @@ def getNumpyData(rrDataHandle):
     #Not sure how to append the col names.
     return resultArray
 
-def plotRoadRunnerData(data, colHeaders):
+def plotTelluriumData(data, colHeaders):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
@@ -1090,9 +1107,9 @@ def plotRoadRunnerData(data, colHeaders):
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-telLib.getRoadRunnerDataColumnHeader.restype = c_char_p
-def getRoadRunnerDataColumnHeader(rrDataHandle):
-    hdr = telLib.getRoadRunnerDataColumnHeader(rrDataHandle)
+telLib.getTelluriumDataColumnHeader.restype = c_char_p
+def getTelluriumDataColumnHeader(rrDataHandle):
+    hdr = telLib.getTelluriumDataColumnHeader(rrDataHandle)
 
     if hdr:
         res = hdr
@@ -1105,10 +1122,10 @@ def getRoadRunnerDataColumnHeader(rrDataHandle):
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.getRoadRunnerDataElement.restype = c_bool
-def getRoadRunnerDataElement(rrDataHandle, row, col):
+telLib.getTelluriumDataElement.restype = c_bool
+def getTelluriumDataElement(rrDataHandle, row, col):
     val = c_double()
-    if telLib.getRoadRunnerDataElement(rrDataHandle, row, col, byref(val)) == True:
+    if telLib.getTelluriumDataElement(rrDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
@@ -1117,18 +1134,18 @@ def getRoadRunnerDataElement(rrDataHandle, row, col):
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.setRoadRunnerDataElement.restype = c_bool
-def setRoadRunnerDataElement(rrDataHandle, row, col, number):    
-    return telLib.setRoadRunnerDataElement(rrDataHandle, row, col, c_double(number))
+telLib.setTelluriumDataElement.restype = c_bool
+def setTelluriumDataElement(rrDataHandle, row, col, number):    
+    return telLib.setTelluriumDataElement(rrDataHandle, row, col, c_double(number))
 
 ## \brief Get RoadRunner data element at row,col
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.getRoadRunnerDataWeight.restype = c_bool
-def getRoadRunnerDataWeight(rrDataHandle, row, col):
+telLib.getTelluriumDataWeight.restype = c_bool
+def getTelluriumDataWeight(rrDataHandle, row, col):
     val = c_double()
-    if telLib.getRoadRunnerDataWeight(rrDataHandle, row, col, byref(val)) == True:
+    if telLib.getTelluriumDataWeight(rrDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
@@ -1137,72 +1154,72 @@ def getRoadRunnerDataWeight(rrDataHandle, row, col):
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.setRoadRunnerDataWeight.restype = c_bool
-def setRoadRunnerDataWeight(rrDataHandle, row, col, number):    
-    return telLib.setRoadRunnerDataWeight(rrDataHandle, row, col, c_double(number))
+telLib.setTelluriumDataWeight.restype = c_bool
+def setTelluriumDataWeight(rrDataHandle, row, col, number):    
+    return telLib.setTelluriumDataWeight(rrDataHandle, row, col, c_double(number))
 
     
 ## \brief Get number of rows in a roadrunner data object
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns number of rows in the data object
 ## \ingroup utilities
-def getRoadRunnerDataNumRows(rrDataHandle):
-    return telLib.getRoadRunnerDataNumRows(rrDataHandle)
+def getTelluriumDataNumRows(rrDataHandle):
+    return telLib.getTelluriumDataNumRows(rrDataHandle)
     
 
 ## \brief Get number of columns in a roadrunner data object
 ## \param rrDataHandle A handle to a roadrunner data object
 ## \return Returns number of cols in the data object
 ## \ingroup utilities
-def getRoadRunnerDataNumCols(rrDataHandle):
-    return telLib.getRoadRunnerDataNumCols(rrDataHandle)
+def getTelluriumDataNumCols(rrDataHandle):
+    return telLib.getTelluriumDataNumCols(rrDataHandle)
 
-## \brief Write RoadRunnerData to a file
+## \brief Write TelluriumData to a file
 ## \param rrDataHandle A handle to roadunnerdata
 ## \param fName Name of output file, including path. If no path is given, the file is written to the
 ## current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.writeRoadRunnerDataToFile.restype = c_bool
-def writeRoadRunnerData(rrDataHandle, fName):
-    return telLib.writeRoadRunnerDataToFile(rrDataHandle, fName)
+telLib.writeTelluriumDataToFile.restype = c_bool
+def writeTelluriumData(rrDataHandle, fName):
+    return telLib.writeTelluriumDataToFile(rrDataHandle, fName)
 
 
-## \brief Read RoadRunnerData from a file
+## \brief Read TelluriumData from a file
 ## \param rrDataHandle A handle to roadunnerdata
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.readRoadRunnerDataFromFile.restype = c_bool
-def readRoadRunnerData(rrDataHandle, fName):
-    return telLib.readRoadRunnerDataFromFile(rrDataHandle, fName)
+telLib.readTelluriumDataFromFile.restype = c_bool
+def readTelluriumData(rrDataHandle, fName):
+    return telLib.readTelluriumDataFromFile(rrDataHandle, fName)
 
-## \brief Create a RoadRunnerData object
+## \brief Create a TelluriumData object
 ## \param rows Number of rows in the data to be created
 ## \param cols Number of columns in the data to be created
 ## \return Returns a handle to RoadRunner data if successful, None otherwise
-## \note Use the freeRoadRunnerData to free memory allocated 
+## \note Use the freeTelluriumData to free memory allocated 
 ## \ingroup utilities
-telLib.createRoadRunnerData.restype = c_void_p
-def createRoadRunnerData(rows, cols):
+telLib.createTelluriumData.restype = c_void_p
+def createTelluriumData(rows, cols):
     #Create a RoadRunner data object
     #Create a column header
     nrs = range(cols)
     col_hdr = str(nrs).strip('[]')     
-    return telLib.createRoadRunnerData(rows, cols, col_hdr)    
+    return telLib.createTelluriumData(rows, cols, col_hdr)    
 
-## \brief Create RoadRunnerData from a file
+## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
 ## \return Returns a handle to RoadRunner data if successful, None otherwise
-## \note Use the freeRoadRunnerData to free memory allocated by the returned data
+## \note Use the freeTelluriumData to free memory allocated by the returned data
 ## \ingroup utilities
-telLib.createRoadRunnerData.restype = c_void_p
-def createRoadRunnerDataFromFile(fName):
+telLib.createTelluriumData.restype = c_void_p
+def createTelluriumDataFromFile(fName):
     #Create a RoadRunner data object
-    rrDataHandle = telLib.createRoadRunnerData(0,0, None)
-    if telLib.readRoadRunnerDataFromFile(rrDataHandle, fName) == False:
+    rrDataHandle = telLib.createTelluriumData(0,0, None)
+    if telLib.readTelluriumDataFromFile(rrDataHandle, fName) == False:
         print 'Failed to read data'
     return rrDataHandle
 
@@ -1246,13 +1263,13 @@ def readAllText(fName):
     file.close()
     return str
 
-## \brief Free RoadRunnerData
+## \brief Free TelluriumData
 ## \param dataHandle Handle to a roadrunner data object
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.freeRoadRunnerData.restype = c_bool
-def freeRoadRunnerData(rrDataHandle):
-    return telLib.freeRoadRunnerData(rrDataHandle)
+telLib.freeTelluriumData.restype = c_bool
+def freeTelluriumData(rrDataHandle):
+    return telLib.freeTelluriumData(rrDataHandle)
 
 ## \brief Get last (API) error. This returns the last error if any.
 ## \return Returns a string with an error success, None otherwise

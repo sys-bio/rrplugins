@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include <iostream>
 #include <iomanip>
+#include "rr/rrException.h"
 #include "telStringUtils.h"
 #include "telPropertyBase.h"
 //---------------------------------------------------------------------------
@@ -18,7 +19,20 @@ mDescription(descr),
 mType(type),
 mAlias(alias),
 mReadOnly(readOnly)
-{}
+{
+    //Convert any spaces in mName and mAlias to '_'
+    //Chech name
+    if(indexOf(mName, ' ') != -1 )
+    {
+        throw(rr::CoreException("Zero size or space character found in a property's Name attribute"));
+    }
+
+    //Chek Alias
+    if( mAlias.size() > 0  && indexOf(mAlias, ' ') != -1)
+    {
+        throw(rr::CoreException("Space character found in a property's Alias attribute"));
+    }
+}
 
 PropertyBase::~PropertyBase()
 {}

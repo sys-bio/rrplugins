@@ -4,7 +4,7 @@
 #include "rrc_api.h"
 #include "rrc_utilities.h"
 #include "rrRoadRunner.h"
-#include "rrRoadRunnerData.h"
+#include "rrTelluriumData.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 namespace autoplugin

@@ -160,13 +160,16 @@ Plugin* PluginManager::operator[](const int& i)
 
 int PluginManager::load(const string& pluginName)
 {
-    Log(lInfo) << "load: " << pluginName;
+    stringstream errors;
+    clearLoadErrors();
     int nrOfLoadedPlugins = 0;
 
     //Throw if plugin folder don't exist
     if(!folderExists(mPluginFolder))
     {
-        Log(lError)<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
+        errors<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
+        Log(lError)<<errors.str();
+        mLoadPluginErrors << errors.str();
         throw(rr::Exception("Plugin folder don't exist"));
     }
 
@@ -210,7 +213,9 @@ int PluginManager::load(const string& pluginName)
 
 bool PluginManager::loadPlugin(const string& _libName)
 {
-    stringstream msg;
+    //This is a private function that catches any throws occuring
+    //Catch and save the error message below, in the catch
+    stringstream info;
     try
     {
         //Make sure the plugin is prefixed with rrp, if not ignore
@@ -218,20 +223,21 @@ bool PluginManager::loadPlugin(const string& _libName)
         string prefix(mPluginPrefix + "tel_");
         if(_libName.substr(0, prefix.size()) != prefix)
         {
-            Log(lWarning)<<"The Plugin: "<<_libName<<" lack the tel_ prefix. Can't be loaded";
-            return false;
+            info<<"ERROR: The Plugin: "<<_libName<<" lack the tel_ prefix.";
+            throw(info.str());
         }
         string libName(_libName);
-        if(!hasFileExtension(libName))
-        {
-            libName = libName + "." + getPluginExtension();
-        }
 
         //Check if Plugin is already loaded first
         if(getPlugin(libName))
         {
-            Log(lWarning)<<"The Plugin: "<<libName<<" is already loaded";
-            return true;
+            info<<"The Plugin: "<<libName<<" is already loaded";
+            throw(info.str());
+        }
+
+        if(!hasFileExtension(libName))
+        {
+            libName = libName + "." + getPluginExtension();
         }
 
         SharedLibrary *libHandle = new SharedLibrary;
@@ -239,19 +245,18 @@ bool PluginManager::loadPlugin(const string& _libName)
 
         if(!fileExists(fullName))
         {
-            Log(lWarning)<<"The Plugin: "<<fullName<<" could not be found";
-            return false;
+            info<<"The Plugin: "<<fullName<<" could not be found";
+            throw(info.str());
         }
+
         //This one throws if there is a problem..
         libHandle->load(fullName);
 
         //Validate the plugin
         if(!checkImplementationLanguage(libHandle))
         {
-            stringstream msg;
-            msg<<"The plugin: "<<_libName<<" has not implemented the function getImplementationLanguage properly. Plugin can not be loaded";
-
-            throw(msg.str());            
+            info<<"The plugin: "<<_libName<<" has not implemented the function getImplementationLanguage properly. Plugin can not be loaded";
+            throw(info.str());
         }
 
         //Check plugin language
@@ -264,15 +269,16 @@ bool PluginManager::loadPlugin(const string& _libName)
             Plugin* aPlugin = createCPlugin(libHandle);
             if(!aPlugin)
             {
-                return false;
+                info<<"Failed creating C Plugin";
+                throw(info.str());
             }
-            aPlugin->setLibraryName(getFileNameNoExtension(libName));
 
+            aPlugin->setLibraryName(getFileNameNoExtension(libName));
             telPlugin storeMe(libHandle, aPlugin);
             mPlugins.push_back( storeMe );
             return true;
         }
-        else if(libHandle->hasSymbol(string(exp_fnc_prefix) +"createPlugin"))
+        else if(libHandle->hasSymbol(string(exp_fnc_prefix) + "createPlugin"))
         {
             createRRPluginFunc create = (createRRPluginFunc) libHandle->getSymbol(string(exp_fnc_prefix) + "createPlugin");
 
@@ -289,32 +295,41 @@ bool PluginManager::loadPlugin(const string& _libName)
         }
         else
         {
-            stringstream msg;
-            msg<<"The plugin library: "<<libName<<" do not have enough data in order to create a plugin. Can't load";
-            Log(lWarning)<<msg.str();
-            return false;
+            throw("This can't happen!");
         }
     }
+
     //We have to catch exceptions here. Failing to load a plugin should not throw, just return false.
     catch(const string& msg)
     {
-        Log(lError)<<"Plugin loading exception: "<<msg;
+        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
+        info<<"Plugin loading exception: "<<msg;
+        mLoadPluginErrors<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
     catch(const rr::Exception& e)
     {
-        msg<<"RoadRunner exception: "<<e.what()<<endl;
-        Log(lError)<<msg.str();
+        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
+        info<<"Exception: "<<e.what()<<endl;
+        mLoadPluginErrors<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
     catch(const Poco::Exception& ex)
     {
-        msg<<"Poco exception: "<<ex.displayText()<<endl;
-        Log(lError)<<msg.str();
+        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
+        info<<"POCO Exception: "<<ex.displayText()<<endl;
+        mLoadPluginErrors<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
     catch(...)
     {
+        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;        
+        info<<"Unknown error occured attempting to load plugin"<<_libName;
+        mLoadPluginErrors<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
 }
@@ -479,8 +494,10 @@ int PluginManager::getNumberOfCategories()
     return -1;
 }
 
-Plugin* PluginManager::getPlugin(const string& name)
+Plugin* PluginManager::getPlugin(const string& _name)
 {
+    //Strip the extension
+    string name = getFileNameNoExtension(_name);
     for(int i = 0; i < getNumberOfPlugins(); i++)
     {
         telPlugin aPluginLib = mPlugins[i];
@@ -501,36 +518,52 @@ Plugin* PluginManager::getPlugin(const string& name)
 }
 
 Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
-{
-    try
+{    
+    //Minimum bare bone plugin need these
+    charStarFnc         getName                 = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getName");
+    charStarFnc         getCategory             = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getCategory");
+
+    //All 'data' that we need to create the plugin
+    char* name  = getName();
+    char* cat   = getCategory();
+    CPlugin* aPlugin = new CPlugin(name, cat);
+
+    aPlugin->executeFunction            = (executeF)         libHandle->getSymbol(string(exp_fnc_prefix) + "execute");
+    aPlugin->destroyFunction            = (destroyF)         libHandle->getSymbol(string(exp_fnc_prefix) + "destroyPlugin");
+    aPlugin->getCLastError              = (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getCLastError");
+    setupCPluginFnc setupCPlugin        = (setupCPluginFnc)  libHandle->getSymbol(string(exp_fnc_prefix) + "setupCPlugin");
+
+    //This give the C plugin an opaque Handle to the CPlugin object
+    if(!setupCPlugin(aPlugin))
     {
-        //Minimum bare bone plugin need these
-        charStarFnc         getName                 = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getName");
-        charStarFnc         getCategory             = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getCategory");
-
-        //All 'data' that we need to create the plugin
-        char* name  = getName();
-        char* cat   = getCategory();
-        CPlugin* aPlugin = new CPlugin(name, cat);
-
-        aPlugin->executeFunction = (executeF)         libHandle->getSymbol(string(exp_fnc_prefix) + "execute");
-        aPlugin->destroyFunction = (destroyF)         libHandle->getSymbol(string(exp_fnc_prefix) + "destroyPlugin");
-        setupCPluginFnc     setupCPlugin        = (setupCPluginFnc)    libHandle->getSymbol(string(exp_fnc_prefix) + "setupCPlugin");
-
-        //This give the C plugin an opaque Handle to the CPlugin object
-        setupCPlugin(aPlugin);
-        aPlugin->getCPropertyNames  =    (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getListOfCPluginPropertyNames");
-        aPlugin->getCProperty       =    (getAPropertyF)    libHandle->getSymbol(string(exp_fnc_prefix) + "getCPluginProperty");
-        return aPlugin;
+        //Failed setting up C Plugin!
+        //Check for error
+        string error = aPlugin->getLastError();
+        stringstream  msg;
+        msg<<"Failure creating C plugin: "<<error;
+        throw(rr::Exception(msg.str()));
     }
-    catch(const Poco::NotFoundException& ex)
-    {
-        Log(lError)<<"Error in createCPlugin: " <<ex.message();
-        return NULL;
-    }
+    aPlugin->getCPropertyNames  =    (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getListOfCPluginPropertyNames");
+    aPlugin->getCProperty       =    (getAPropertyF)    libHandle->getSymbol(string(exp_fnc_prefix) + "getCPluginProperty");
+    return aPlugin;
+        
     return NULL;
 }
 
+bool PluginManager::hasLoadErrors()
+{
+    return mLoadPluginErrors.str().size() != 0 ? true : false;
+}
+
+string PluginManager::getLoadErrors()
+{
+    return mLoadPluginErrors.str();
+}
+
+void PluginManager::clearLoadErrors()
+{
+    mLoadPluginErrors.str("");
+}
 
 // Plugin cleanup function
 bool destroyRRPlugin(Plugin *plugin)

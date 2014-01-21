@@ -108,7 +108,7 @@
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_IncludePath>$(TLP_ROOT)\Wrappers\C;$(BCC_IncludePath)</BCC_IncludePath>
-        <Debugger_DebugSourcePath>R:\rrl\plugins\fit_one_parameter\;R:\rrl\plugins\test_plugin\;R:\rrl\plugins\add_noise\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>R:\rrl\plugins\fit_one_parameter\;R:\rrl\plugins\test_plugin\;R:\rrl\plugins\add_noise\;R:\tlp\wrappers\c\;R:\tlp\source\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\libplugins\source;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>

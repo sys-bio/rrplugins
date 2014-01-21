@@ -48,8 +48,22 @@ PropertyBase* CPlugin::getProperty(const string& prop)
 {
     PropertyBase* baseProp = (PropertyBase*) getCProperty(prop.c_str());
     return baseProp;
-
 }
+
+string CPlugin::getLastError()
+{
+
+    char* msg = getCLastError();
+    if(msg)
+    {
+        string msgStr(msg);
+        //free text...
+
+        return msgStr;
+    }
+    return "No error";
+}
+
 }
 
 

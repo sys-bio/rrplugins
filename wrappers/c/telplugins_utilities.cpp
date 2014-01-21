@@ -693,7 +693,7 @@ namespace tlpc
 //    start_try
 //    {
 //        RoadRunner *rr = castFrom(rrHandle);
-//        RoadRunnerData data;
+//        TelluriumData data;
 //        data = *rr->getSimulationResult();
 //
 //        data.writeTo(fileNameAndPath);
@@ -715,13 +715,13 @@ namespace tlpc
 //        RoadRunnerList *rrs = getRRList(rrHandles);
 //
 //        int rrCount = rrs->count();
-//        RoadRunnerData allData;
+//        TelluriumData allData;
 //        for(int i = rrCount -1 ; i >-1 ; i--) //"Backwards" because bad plotting program..
 //        {
 //            RoadRunner* rr = (*rrs)[i];
 //            if(rr)
 //            {
-//                RoadRunnerData data = *rr->getSimulationResult();
+//                TelluriumData data = *rr->getSimulationResult();
 //                allData.append(data);
 //            }
 //        }

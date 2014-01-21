@@ -45,7 +45,7 @@
 #include <sstream>
 #include "rr/rrException.h"
 #include "rr/rrLogger.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "telPropertyBase.h"
 #include "telProperties.h"
 #include "telStringUtils.h"
@@ -57,7 +57,7 @@
 namespace tlp
 {
 
-    using rr::RoadRunnerData;
+    using tlp::TelluriumData;
     using tlp::gNoneString;
     using std::string;
 /**
@@ -297,7 +297,7 @@ inline void Property< tlp::StringList >::setValueFromString(const string& val)
 
 //============= RoadRunner data ===========================
 template<>
-inline string Property<tlp::RoadRunnerData>::getValueAsString() const
+inline string Property<tlp::TelluriumData>::getValueAsString() const
 {
     std::stringstream rrData;
     rrData << (mValue);
@@ -309,7 +309,7 @@ inline string Property<tlp::RoadRunnerData>::getValueAsString() const
     \note This is not implemented.
 */
 template<>
-inline void Property<tlp::RoadRunnerData>::setValueFromString(const string& val)
+inline void Property<tlp::TelluriumData>::setValueFromString(const string& val)
 {
 }
 
@@ -317,7 +317,7 @@ inline void Property<tlp::RoadRunnerData>::setValueFromString(const string& val)
     Set a property value
 */
 template<>
-inline void Property<rr::RoadRunnerData>::setValue(const rr::RoadRunnerData& val)
+inline void Property<tlp::TelluriumData>::setValue(const tlp::TelluriumData& val)
 {
     mValue = val;
 }
@@ -326,7 +326,7 @@ inline void Property<rr::RoadRunnerData>::setValue(const rr::RoadRunnerData& val
     Set a property value
 */
 template<>
-inline void Property<rr::RoadRunnerData>::setValue(rr::RoadRunnerData* val)
+inline void Property<tlp::TelluriumData>::setValue(tlp::TelluriumData* val)
 {
     mValue = (*val);
 }
@@ -456,7 +456,7 @@ inline string getPropertyType<tlp::StringList>(const tlp::StringList& a)
     \brief Returns the type as a string.
 */
 template<>
-inline string getPropertyType<RoadRunnerData>(const RoadRunnerData& a)
+inline string getPropertyType<TelluriumData>(const TelluriumData& a)
 {
     return "roadRunnerData";
 }

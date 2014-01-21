@@ -2,7 +2,7 @@
 #include <sstream>
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "rrAutoPlugin.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ string AutoPlugin::getConstants()
     return mRRAuto.getConstantsAsString();
 }
 
-bool AutoPlugin::isWorking()
+bool AutoPlugin::isWorking() const
 {
     return mAutoWorker.isRunning();
 }

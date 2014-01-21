@@ -45,7 +45,7 @@
 #define telplugins_cpp_supportH
 #include <string>
 #include "telplugins_c_api.h"
-#include "rr/rrRoadRunnerData.h"
+#include "telTelluriumData.h"
 #include "telPluginManager.h"
 #include "telProperties.h"
 #include "telPlugin.h"
@@ -145,22 +145,22 @@ Property<string>*                   castToStringProperty(RRPropertyHandle handle
 Property<Properties>*              castToPropertiesProperty(RRPropertyHandle handle);
 
 /*!
- \brief Cast a handle to RoadRunnerData pointer, throws if it fails
+ \brief Cast a handle to TelluriumData pointer, throws if it fails
  \param[in] handle  A handle to a roadrunnerdata instance
- \return Pointer to a RoadRunnerData instance
+ \return Pointer to a TelluriumData instance
  \ingroup cpp_support
 */
-rr::RoadRunnerData*                 castPropertyToRoadRunnerData(RRPropertyHandle handle);
+tlp::TelluriumData*                 castPropertyToTelluriumData(RRPropertyHandle handle);
 
 /*!
- \brief Cast a handle to RoadRunner Property<RoadRunnerData> pointer, throws if it fails
+ \brief Cast a handle to RoadRunner Property<TelluriumData> pointer, throws if it fails
  \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<RoadRunnerData> instance
- \note To limit the amount of supported types, the underlying type can only be of RoadRunnerData, not pointer to
+ \return Pointer to a Property<TelluriumData> instance
+ \note To limit the amount of supported types, the underlying type can only be of TelluriumData, not pointer to
   data.
  \ingroup cpp_support
 */
-Property<rr::RoadRunnerData>*       castToRoadRunnerDataProperty(RRPropertyHandle handle);
+Property<tlp::TelluriumData>*       castToTelluriumDataProperty(RRPropertyHandle handle);
 
 
 /*!
@@ -172,21 +172,21 @@ Property<rr::RoadRunnerData>*       castToRoadRunnerDataProperty(RRPropertyHandl
 rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
 
 /*!
- \brief Cast a RRDataHandle to RoadRunnerData instance pointer, throws if it fails
+ \brief Cast a RRDataHandle to TelluriumData instance pointer, throws if it fails
  \param[in] handle  A handle to a roadrunner data instance
  \return Pointer to a roadrunner instance
  \ingroup cpp_support
 */
-rr::RoadRunnerData*                     castToRoadRunnerData(RRDataHandle rrHandle);
+tlp::TelluriumData*                     castToTelluriumData(RRDataHandle rrHandle);
 
 ////Result data
 ///*!
-// \brief Creates a RRData structure from rr::RoadRunnerData object
+// \brief Creates a RRData structure from tlp::TelluriumData object
 // \param[in] data  Input RoadRunner data
 // \return A handle to a RRData structure. Null if it fails
 // \ingroup cpp_support
 //*/
-//RRCDataPtr                          createRRCData(const rr::RoadRunnerData& result);
+//RRCDataPtr                          createRRCData(const tlp::TelluriumData& result);
 
 }
 
