@@ -456,9 +456,11 @@ def getDataSeries (numPyData):
 
 ##\mainpage Working with RoadRunner Plugins
 ##\section Introduction
-#
+## The plugin API allows users to easily access and roadrunner plugins. Only three concepts need be understood:
+## 1. Load a plugin
+## 2. Set of get plugin properties
+## 3. Execute the plugin
 #@code
-##    print "Starting Test"
 ##    input telplugins as *
 ##    p = Plugin ("tel_add_noise")
 ##    p.viewManual()
@@ -475,7 +477,7 @@ def getDataSeries (numPyData):
 ###
 ##    print "Test Finished"
 #@endcode
-
+#
 #@code
 ##import roadrunner
 ##import telPlugins as tel
