@@ -454,41 +454,30 @@ def getTelluriumData (rr):
 def getDataSeries (numPyData):    
     return DataSeries.fromNumPy(numPyData)
 
-##if __name__=='__main__':
-##    ## \brief Load a data series from a file
-    ##@code
-    ## print myPlugin.loadDataSeries("myDataSeries.txt")
-    ##@endcode         
-    def loadDataSeries (self, fileName):
-        handle = tpc.createTelluriumDataFromFile (fileName)
-        return DataSeries(handle)
-
-##    print "Starting Test"
-##
-##    p = Plugin ("tel_add_noise")
-##    p.viewManual()
-##    #pl = p.listOfProperties()
-##    #for item in pl:
-##    #    print item
-##
-##    p.Sigma = 0.00005
-##
-##    series = p.loadDataSeries ("..\\Examples\\testData.dat")
-##    p.plotDataSeries (series)
-##    p.InputData = series
-##    p.execute()
-##    p.plotDataSeries (p.InputData)
-##
-##    print "Test Finished"
-
-##\mainpage Python support code for working with RoadRUnner Plugins
+##\mainpage Working with RoadRunner Plugins
 ##\section Introduction
-#Wrapper around the Python Plugin C API to help avoid the use of handles.
-#The code fragment below shows briefly how to create a plugin object and access the plugin properties.
 #
 #@code
+##    print "Starting Test"
+##    input telplugins as *
+##    p = Plugin ("tel_add_noise")
+##    p.viewManual()
+##    pl = p.listOfProperties()
+##    for item in pl:
+##        print item
+###
+##    p.Sigma = 0.00005
+##    series = DataSeries.loadDataSeries ("..\\Examples\\testData.dat")
+##    series.plot()
+##    p.InputData = series
+##    p.execute()
+##    p.InputData.plot()
+###
+##    print "Test Finished"
+#@endcode
+
+#@code
 ##import roadrunner
-##from telPlugins_CAPI import *
 ##import telPlugins as tel
 ##
 ##noisePlugin = tel.Plugin ("tel_add_noise")
