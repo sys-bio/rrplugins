@@ -32,11 +32,12 @@ class DataSeries(object):
     @classmethod
     def fromNumPy(cls, numPyData):
         
-        # We have to check the following bwecause roadrunner issues tructured arrays
-        if numPyData.dtype.names != None:        
-            numPyData = numPyData.view((float, len (numPyData.dtype.names)))
-        if len (numPyData.shape) < 2:
-            raise ValueError ('fromNumPy only accepts two dimensional arrays')
+        # We have to check the following because roadrunner issues tructured arrays
+        # Taken out for now        
+        #if numPyData.dtype.names != None:        
+        #    numPyData = numPyData.view((float, len (numPyData.dtype.names)))
+        #if len (numPyData.shape) < 2:
+        #    raise ValueError ('fromNumPy only accepts two dimensional arrays')
             
         nrCols  = numPyData.shape[1]
         nrRows  = len(numPyData)   
