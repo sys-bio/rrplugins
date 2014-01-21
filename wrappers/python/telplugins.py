@@ -464,10 +464,73 @@ def getDataSeries (numPyData):
 
 ##\mainpage Working with RoadRunner Plugins
 ##\section Introduction
-## The plugin API allows users to easily access and roadrunner plugins. Only three concepts need be understood:
+## The plugin API allows users to easily access roadrunner plugins. Only three concepts need to be understood:
 ## 1. Load a plugin
-## 2. Set of get plugin properties
+## 2. Set or get plugin properties
 ## 3. Execute the plugin
+##
+## Before using the plugin system the plugin library must be imported using the line:
+#@code
+##import telplugins as tel
+#@endcode
+## To load a plugin called "tel_add_noise" use the Python command:
+#@code
+##p = tel.Plugin ("tel_add_noise")
+#@endcode
+## The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For 
+## example the add noise plugin has a property called Sigma. To this this to a value we would use:
+#@code
+## p.Sigma = 0.5
+#@endcode
+## Likewise, properties can be inspected:
+#@code
+## print p.Sigma
+#@endcode
+## To run a plugin so that it carries out its function, use the execute method:
+#@ p.execute()
+#@endcode
+## The results from an execute call will either be saved to a file or more likely via propoerties of the plugin. As a trivial example, 
+## consider a plugin, called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
+## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin is used from Python:
+#@code
+## import telplugins as tel
+## p = tel.Plugin ("add")
+## p.x = 1.2
+## p.y = 4.5
+## p.execute()
+## print p.z
+#@endcode
+##
+##\section DataSeries
+## The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of
+## data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional 
+## value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure 
+## of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call:
+#@code
+## import telplugins as tel
+## data = tel.DataSeries()
+#@endcode
+## Data can be entered into a data series either by loading the data from a specially formated file or from a Python NumPy array. For example:
+#@code
+## data.readDataSeries ("mydata.txt")
+#@endcode 
+## To read numpy arrays into a data series use the code:
+#@code
+## import numpy as py
+## values = py.array([[1,2],{2,5],[3,7]])
+## data = tel.DataSeries.fromNumPy (values)
+#@endcode
+## The number of rows and columns in a Data Series can be obtained using:
+#@code
+## print data.rows
+## print data.cols
+#@endcode
+## Currently individual values in a data series can be accessed using the set and get methods:
+#@code
+## p.setElement (1, 2, 4.567)
+## print p.getElement (1, 2)
+#@endcode
+
 #@code
 ##    input telplugins as *
 ##    p = Plugin ("tel_add_noise")
