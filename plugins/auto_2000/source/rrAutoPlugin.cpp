@@ -100,7 +100,7 @@ string AutoPlugin::getConstants()
     return mRRAuto.getConstantsAsString();
 }
 
-bool AutoPlugin::isWorking()
+bool AutoPlugin::isWorking() const
 {
     return mAutoWorker.isRunning();
 }

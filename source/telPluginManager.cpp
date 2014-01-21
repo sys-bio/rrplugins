@@ -160,13 +160,16 @@ Plugin* PluginManager::operator[](const int& i)
 
 int PluginManager::load(const string& pluginName)
 {
-    Log(lInfo) << "load: " << pluginName;
+    stringstream errors;
+    clearLoadErrors();
     int nrOfLoadedPlugins = 0;
 
     //Throw if plugin folder don't exist
     if(!folderExists(mPluginFolder))
     {
-        Log(lError)<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
+        errors<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
+        Log(lError)<<errors.str();
+        mLoadPluginErrors << errors.str();
         throw(rr::Exception("Plugin folder don't exist"));
     }
 
@@ -210,7 +213,9 @@ int PluginManager::load(const string& pluginName)
 
 bool PluginManager::loadPlugin(const string& _libName)
 {
-    stringstream msg;
+    //This is a private function that catches any throws occuring
+    //Catch and save the error message below, in the catch
+    stringstream info;
     try
     {
         //Make sure the plugin is prefixed with rrp, if not ignore
@@ -218,16 +223,16 @@ bool PluginManager::loadPlugin(const string& _libName)
         string prefix(mPluginPrefix + "tel_");
         if(_libName.substr(0, prefix.size()) != prefix)
         {
-            Log(lWarning)<<"The Plugin: "<<_libName<<" lack the tel_ prefix. Can't be loaded";
-            return false;
+            info<<"ERROR: The Plugin: "<<_libName<<" lack the tel_ prefix.";
+            throw(info.str());
         }
         string libName(_libName);
 
-        //Check if Plugin is already loaded first 
+        //Check if Plugin is already loaded first
         if(getPlugin(libName))
         {
-            Log(lWarning)<<"The Plugin: "<<libName<<" is already loaded";
-            return true;
+            info<<"The Plugin: "<<libName<<" is already loaded";
+            throw(info.str());
         }
 
         if(!hasFileExtension(libName))
@@ -240,19 +245,18 @@ bool PluginManager::loadPlugin(const string& _libName)
 
         if(!fileExists(fullName))
         {
-            Log(lWarning)<<"The Plugin: "<<fullName<<" could not be found";
-            return false;
+            info<<"The Plugin: "<<fullName<<" could not be found";
+            throw(info.str());
         }
+
         //This one throws if there is a problem..
         libHandle->load(fullName);
 
         //Validate the plugin
         if(!checkImplementationLanguage(libHandle))
         {
-            stringstream msg;
-            msg<<"The plugin: "<<_libName<<" has not implemented the function getImplementationLanguage properly. Plugin can not be loaded";
-
-            throw(msg.str());            
+            info<<"The plugin: "<<_libName<<" has not implemented the function getImplementationLanguage properly. Plugin can not be loaded";
+            throw(info.str());
         }
 
         //Check plugin language
@@ -265,15 +269,16 @@ bool PluginManager::loadPlugin(const string& _libName)
             Plugin* aPlugin = createCPlugin(libHandle);
             if(!aPlugin)
             {
-                return false;
+                info<<"Failed creating a C Plugin";
+                throw(info.str());
             }
-            aPlugin->setLibraryName(getFileNameNoExtension(libName));
 
+            aPlugin->setLibraryName(getFileNameNoExtension(libName));
             telPlugin storeMe(libHandle, aPlugin);
             mPlugins.push_back( storeMe );
             return true;
         }
-        else if(libHandle->hasSymbol(string(exp_fnc_prefix) +"createPlugin"))
+        else if(libHandle->hasSymbol(string(exp_fnc_prefix) + "createPlugin"))
         {
             createRRPluginFunc create = (createRRPluginFunc) libHandle->getSymbol(string(exp_fnc_prefix) + "createPlugin");
 
@@ -290,32 +295,35 @@ bool PluginManager::loadPlugin(const string& _libName)
         }
         else
         {
-            stringstream msg;
-            msg<<"The plugin library: "<<libName<<" do not have enough data in order to create a plugin. Can't load";
-            Log(lWarning)<<msg.str();
-            return false;
+            throw("This can't happen!");
         }
     }
+
     //We have to catch exceptions here. Failing to load a plugin should not throw, just return false.
     catch(const string& msg)
     {
+        mLoadPluginErrors<<"Plugin loading exception: "<<msg;
         Log(lError)<<"Plugin loading exception: "<<msg;
         return false;
     }
     catch(const rr::Exception& e)
     {
-        msg<<"RoadRunner exception: "<<e.what()<<endl;
-        Log(lError)<<msg.str();
+        info<<"RoadRunner exception: "<<e.what()<<endl;
+        mLoadPluginErrors<<"Plugin loading exception: "<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
     catch(const Poco::Exception& ex)
     {
-        msg<<"Poco exception: "<<ex.displayText()<<endl;
-        Log(lError)<<msg.str();
+        info<<"Shared Lib Exception (POCO) exception: "<<ex.displayText()<<endl;
+        mLoadPluginErrors<<info.str();
+        Log(lError)<<info.str();
         return false;
     }
     catch(...)
     {
+        mLoadPluginErrors<<"Unknown error occured attempting to load plugin: "<<_libName;
+        Log(lError)<<mLoadPluginErrors.str();
         return false;
     }
 }
@@ -553,6 +561,20 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
     return NULL;
 }
 
+bool PluginManager::hasLoadErrors()
+{
+    return mLoadPluginErrors.str().size() != 0 ? true : false;
+}
+
+string PluginManager::getLoadErrors()
+{
+    return mLoadPluginErrors.str();
+}
+
+void PluginManager::clearLoadErrors()
+{
+    mLoadPluginErrors.str("");
+}
 
 // Plugin cleanup function
 bool destroyRRPlugin(Plugin *plugin)

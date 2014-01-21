@@ -99,12 +99,21 @@ RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
     catch_ptr_macro
 }
 
-int tlp_cc loadPlugins(RRPluginManagerHandle handle)
+bool tlp_cc loadPlugins(RRPluginManagerHandle handle)
 {
     start_try
         PluginManager *pm = castToPluginManager(handle);
-        return pm->load();
+        pm->load();
+        return pm->hasLoadErrors() ? false : true;
     catch_bool_macro
+}
+
+char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle)
+{
+    start_try
+        PluginManager *pm = castToPluginManager(handle);
+        return createText(pm->getLoadErrors());
+    catch_ptr_macro
 }
 
 bool tlp_cc unLoadPlugins(RRPluginManagerHandle handle)

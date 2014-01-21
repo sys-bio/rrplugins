@@ -28,7 +28,7 @@ class AutoWorker : public Poco::Runnable
                                    ~AutoWorker();
         bool                        start(bool runInThread = false);
         void                        run();
-        bool                        isRunning();
+        bool                        isRunning() const;
 
     protected:
         Poco::Thread                mThread;

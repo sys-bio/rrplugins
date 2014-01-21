@@ -37,7 +37,7 @@ class AutoPlugin : public CPPPlugin
         bool                                    resetPlugin();
         bool                                    setInputData(void* data);
         string                                  getStatus();
-        bool                                    isWorking();
+        bool                                    isWorking() const;
         RRAuto&                                 getRRAuto();
 
     protected:

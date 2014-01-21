@@ -21,7 +21,7 @@ mRRAuto(mTheHost.getRRAuto())
 AutoWorker::~AutoWorker()
 {}
 
-bool AutoWorker::isRunning()
+bool AutoWorker::isRunning() const
 {
     return mThread.isRunning();
 }

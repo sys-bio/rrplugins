@@ -42,6 +42,7 @@
 #define telPluginManagerH
 #include <vector>
 #include <string>
+#include <sstream>
 #include <ostream>
 #include "telExporter.h"
 #include "telConstants.h"
@@ -53,6 +54,7 @@
 namespace tlp
 {
 
+using std::stringstream;
 using std::string;
 using std::vector;
 using std::pair;
@@ -88,54 +90,54 @@ class RRP_DECLSPEC PluginManager
          * @param pluginFolder Folder where the plugin manager is looking for plugins. If argument
             is not supplied, the manager will use the default folder, which is "plugins" located in RoadRunners install folder.
          */
-                                        PluginManager(const string& pluginFolder = gEmptyString);
+                                            PluginManager(const string& pluginFolder = gEmptyString);
         /**
          * The destructor of a Plugin manager will free any memory allocated and also unload any plugins that it loaded.
          */
-        virtual                        ~PluginManager();
+        virtual                            ~PluginManager();
 
         /**
             Get information about the current plugin manager object,
             such as number of plugins loaded, their names and where they are loaded from
             @return string String holding plugin manager information
         */
-        string                          getInfo();
+        string                              getInfo();
 
         /**
             Change the directory where the Manager loads plugins
             @param dir Folder to load plugins from
             @return Boolean indicating if folder is valid or not
         */
-        bool                            setPluginDir(const string& dir);
+        bool                                setPluginDir(const string& dir);
 
         /**
             Get folder where plugins are loaded from
             @return String containg current folder where plugins are loaded from
         */
-        string                          getPluginDir();
+        string                              getPluginDir();
 
         /**
             Load a specific plugin, or, if no argument supplied, loads ALL plugins in the current plugin folder.
             @return integer Returning number of succesfully loaded plugins
         */
-        int                             load(const string& pluginName = gEmptyString);
+        int                                 load(const string& pluginName = gEmptyString);
 
         /**
             Unload a specific plugin, or, if no argument supplied, unloads ALL plugins.
             @return Boolean indicating success
         */
-        bool                            unload(Plugin* plugin = NULL);
+        bool                                unload(Plugin* plugin = NULL);
 
         /**
             Get number of loaded plugins.
         */
-        int                             getNumberOfPlugins();
+        int                                 getNumberOfPlugins();
 
         /**
             Get number of plugin categories.
             \note Not implemented
         */
-        int                             getNumberOfCategories();
+        int                                 getNumberOfCategories();
 
         /**
             Retrieves the "first" plugin in the managers internal plugin container.
@@ -143,70 +145,76 @@ class RRP_DECLSPEC PluginManager
             \note This function resets the managers internal plugin iterator to point
             at the "first" plugin.
         */
-        Plugin*                         getFirstPlugin();
+        Plugin*                             getFirstPlugin();
 
         /**
             Retrieves the "next" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
             \note This function advances the managers internal plugin iterator one step forward.
         */
-        Plugin*                         getNextPlugin();
+        Plugin*                             getNextPlugin();
 
         /**
             Retrieves the "previous" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
             \note This function decerements the managers internal plugin iterator one step back.
         */
-        Plugin*                         getPreviousPlugin();
+        Plugin*                             getPreviousPlugin();
 
         /**
             Retrieves the "current" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
         */
-        Plugin*                         getCurrentPlugin();
+        Plugin*                             getCurrentPlugin();
 
         /**
             Retrieves a plugin with name as supplied in the argument.
             \arg name Name of the plugin.
             \return Pointer to a Plugin, or NULL.
         */
-        Plugin*                         getPlugin(const string& name);
+        Plugin*                             getPlugin(const string& name);
 
         /**
             Retrieves the names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the name of each loaded Plugin.
         */
-        tlp::StringList                  getPluginNames();
+        tlp::StringList                     getPluginNames();
 
         /**
             Retrieves the shared library names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the file name of each loaded Plugin.
         */
-        tlp::StringList                  getPluginLibraryNames();
+        tlp::StringList                     getPluginLibraryNames();
 
         /**
             Output plugin information to a std ostream
         */
         RRP_DECLSPEC
-        friend ostream&                 operator<<(ostream& os, PluginManager& pm);
+        friend ostream&                     operator<<(ostream& os, PluginManager& pm);
 
         /**
             Access a plugin using the [] operator.
         */
-        Plugin*                         operator[](const int& i);
-    private:
-        string                          mPluginFolder;
-        string                          mPluginExtension;   //Different on different OS's
-        string                          mPluginPrefix;      //Different on different OS's
-        vector< telPlugin >              mPlugins;
-        vector< telPlugin >::iterator    mPluginsIter;
+        Plugin*                             operator[](const int& i);
 
-        bool                            loadPlugin(const string& sharedLib);
-        bool                            checkImplementationLanguage(SharedLibrary* plugin);
-        const char*                     getImplementationLanguage(SharedLibrary* plugin);
-        Plugin*                         createCPlugin(SharedLibrary *libHandle);
-        Plugin*                         getPlugin(const int& i);
-        bool                            unloadAll();
+        bool                                hasLoadErrors();
+        string                              getLoadErrors();
+
+    private:
+        string                              mPluginFolder;
+        string                              mPluginExtension;       //Different on different OS's
+        string                              mPluginPrefix;          //Different on different OS's
+        stringstream                        mLoadPluginErrors;      //Accumulated load errors
+        vector< telPlugin >                 mPlugins;
+        vector< telPlugin >::iterator       mPluginsIter;
+
+        bool                                loadPlugin(const string& sharedLib);
+        bool                                checkImplementationLanguage(SharedLibrary* plugin);
+        const char*                         getImplementationLanguage(SharedLibrary* plugin);
+        Plugin*                             createCPlugin(SharedLibrary *libHandle);
+        Plugin*                             getPlugin(const int& i);
+        bool                                unloadAll();
+        void                                clearLoadErrors();
 };
 
 }
