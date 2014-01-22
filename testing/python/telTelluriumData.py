@@ -22,7 +22,6 @@ def printDataWeights(telData):
 
 #=============================================================
 try:
-    
     telDataH = c.createTelluriumData(4,2)    
     nrRows = c.getTelluriumDataNumRows(telDataH)
     nrCols = c.getTelluriumDataNumCols(telDataH)
@@ -58,8 +57,14 @@ try:
     c.setTelluriumDataColumnHeader(telDataH, 'A,B')
     print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
 
+    #This should fail
     c.setTelluriumDataColumnHeader(telDataH, 'A,B,C')
-    print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`                        
+    print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
+    
+    c.setTelluriumDataColumnHeaderByIndex(telDataH, 0, 'R')
+    print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
+    print 'ColumnHeader index 0 is:' + `c.getTelluriumDataColumnHeaderByIndex(telDataH, 0)`
+                            
 except Exception as e:
     print 'There was an exception: ' + `e`
         

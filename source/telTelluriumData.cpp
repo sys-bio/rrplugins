@@ -260,6 +260,12 @@ double TelluriumData::operator() (const unsigned& row, const unsigned& col) cons
     return mTheData(row,col);
 }
 
+bool TelluriumData::setColumnName(int index, const string& name)
+{
+    mColumnNames[index] = name;
+    return true;
+}
+
 bool TelluriumData::setColumnNames(const StringList& colNames)
 {
     if(colNames.size() != mTheData.CSize())

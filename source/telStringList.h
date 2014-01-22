@@ -11,10 +11,6 @@ using std::vector;
 using std::string;
 using std::ostream;
 
-/**
- * @internal
- * @deprecated
- */
 class RRP_DECLSPEC StringList
 {
     protected:

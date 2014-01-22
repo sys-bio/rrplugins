@@ -99,12 +99,29 @@ char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle rrData)
     catch_ptr_macro
 }
 
+char* tlp_cc getTelluriumDataColumnHeaderByIndex(RRDataHandle rrData, int index)
+{
+    start_try
+        TelluriumData* data = castToTelluriumData(rrData);
+        StringList cols = data->getColumnNames();        
+        return createText(cols[index]);
+    catch_ptr_macro
+}
+
 bool tlp_cc setTelluriumDataColumnHeader(RRDataHandle rrData, char* hdr)
 {
     start_try
         TelluriumData* data = castToTelluriumData(rrData);
         StringList hdrList(hdr, ", ");
         return data->setColumnNames(hdrList);
+    catch_bool_macro
+}
+
+bool tlp_cc setTelluriumDataColumnHeaderByIndex(RRDataHandle rrData, int index, char* hdr)
+{
+    start_try
+        TelluriumData* data = castToTelluriumData(rrData);        
+        return data->setColumnName(index, hdr);
     catch_bool_macro
 }
 

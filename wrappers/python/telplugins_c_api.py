@@ -1118,6 +1118,15 @@ def getTelluriumDataColumnHeader(telDataHandle):
     else:
         return None
 
+## \brief Get column header item by index
+## \param telDataHandle A handle to a tellurium data object
+## \param index Index of requested column name
+## \return Returns the column name on success, or None on failure
+## \ingroup utilities
+telLib.getTelluriumDataColumnHeaderByIndex.restype = c_char_p
+def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
+    return telLib.getTelluriumDataColumnHeaderByIndex(telDataHandle, index)
+
 ## \brief Set column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
 ## \param colHeader A string containing the column header as comma separated values (spaces allowed too)
@@ -1126,6 +1135,16 @@ def getTelluriumDataColumnHeader(telDataHandle):
 telLib.setTelluriumDataColumnHeader.restype = c_bool
 def setTelluriumDataColumnHeader(telDataHandle, hdr):
     return telLib.setTelluriumDataColumnHeader(telDataHandle, hdr)
+
+## \brief Set column header by index in tellurium data
+## \param telDataHandle A handle to a tellurium data object
+## \param index Index for column name to change
+## \param colName A string containing the column name
+## \return True or false indicating success
+## \ingroup utilities
+telLib.setTelluriumDataColumnHeaderByIndex.restype = c_bool
+def setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index):
+    return telLib.setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
 
 ## \brief Get RoadRunner data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
