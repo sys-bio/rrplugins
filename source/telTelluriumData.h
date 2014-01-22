@@ -160,6 +160,7 @@ public:
     std::string                             getColumnName(const int col) const;
     std::string                             getColumnNamesAsString() const;
     bool                                    setColumnNames(const StringList& colNames);
+    bool                                    setColumnName(int index, const string& colName);
     int                                     getColumnIndex(const std::string& colName) const;
     void                                    setTimeDataPrecision(const int& prec);
     void                                    setDataPrecision(const int& prec);

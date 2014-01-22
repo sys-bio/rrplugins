@@ -35,7 +35,7 @@ try:
     timeStart = 0
     timeEnd = 10
     numPoints = 500
-    rr.simulate(timeStart, timeEnd, numPoints)
+    data = rr.simulate(timeStart, timeEnd, numPoints)
     
     #Load the 'noise' plugin in order to add some noise to the data
     pluginHandle = loadPlugin(pm, "tel_add_noise")
@@ -66,6 +66,12 @@ try:
     
     #Assign data to the plugin
     pluginData = getPluginProperty(pluginHandle,"InputData")
+
+   # Get the dataseries from roadrunner
+   # d = tel.getDataSeries (data)
+    
+    #Pass data from roadrunner to the plugin
+    #TODO: Use the DataSeries class to create TelluriumData from RoadRunnerData 
     setProperty(pluginData, getTelluriumDataHandle(rr))
     
     #Execute the noise plugin which will add some noise to the (internal) data

@@ -155,6 +155,15 @@ TLP_C_DS bool tlp_cc setTelluriumDataWeight(RRDataHandle rrData, int r, int c, d
 TLP_C_DS char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle data);
 
 /*!
+ \brief Retrieves a RoadRunner data column name by index. 
+ \param data A handle to a RoadRunner data type variable
+ \param index Index of requested column name
+ \return Returns a string containing the col name as a string, NULL if unsuccesful
+ \ingroup roadrunnerdata
+*/
+TLP_C_DS char* tlp_cc getTelluriumDataColumnHeaderByIndex(RRDataHandle data, int index);
+
+/*!
  \brief Assign RoadRunner data column header from a string. 
  The header string is composed of comma delimited (with optional spaces) values. Each value is a header for correseponding data column.
 
@@ -166,6 +175,17 @@ TLP_C_DS char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle data);
  \ingroup roadrunnerdata
 */
 TLP_C_DS bool tlp_cc setTelluriumDataColumnHeader(RRDataHandle data, char* hdr);
+
+/*!
+ \brief Assign RoadRunner data column header from a string for specifiex index. 
+ \param data A handle to a RoadRunner data type variable
+ \param index Index for wanted colName to change
+ \param hdr A Cstring containing the column label
+  \return Returns a boolean indicating if assignement was succesful or not 
+ \ingroup roadrunnerdata
+*/
+TLP_C_DS bool tlp_cc setTelluriumDataColumnHeaderByIndex(RRDataHandle data, int index, char* hdr);
+
 
 /*!
  \brief Retrieves the number of rows in a RoadRunner data object.
