@@ -119,7 +119,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    timeStart = 0</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    timeEnd = 10</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    numPoints = 500</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    rr.simulate(timeStart, timeEnd, numPoints)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    data = rr.simulate(timeStart, timeEnd, numPoints)</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">#Load the &#39;noise&#39; plugin in order to add some noise to the data</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    pluginHandle = <a class="code" href="group__plugin__manager.html#gad2b8003b6e0a18d4bd28a7aafbd14931" title="Load a particular plugin. ">loadPlugin</a>(pm, <span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
@@ -150,26 +150,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">#Assign data to the plugin</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    pluginData = <a class="code" href="group__plugin__properties.html#ga5e9906f37875dc3d624ae6eebbc4dde4" title="Get a property handle to a property given the name of the property. ">getPluginProperty</a>(pluginHandle,<span class="stringliteral">&quot;InputData&quot;</span>)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="group__plugin__properties.html#ga8d3eb319573b46893ddf413614807647" title="Set the value of a property. ">setProperty</a>(pluginData, <a class="code" href="group__utilities.html#ga8e90dbd0ac30d9c8ea4d88bcc82fc95b" title="Retrieve a handle to RoadRunners internal data object. ">getTelluriumDataHandle</a>(rr))</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">#Execute the noise plugin which will add some noise to the (internal) data</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="group__plugins.html#gad6d3512c7d27f6dab98f60febe9a5146" title="The executePluginEx is similar to the executePlugin function, except it takes one extra argument...">executePluginEx</a>(pluginHandle)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">#Retrieve data from plugin</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    rrData = <a class="code" href="group__utilities.html#ga638267ac0241e6a5976a1c2cb9c8b482" title="Convert tellurium data to Numpy data. ">getNumpyData</a>(<a class="code" href="group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8" title="Get the value of a property. ">getProperty</a>(pluginData))</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    colNames = <a class="code" href="group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8" title="Get column header in tellurium data. ">getTelluriumDataColumnHeader</a>(<a class="code" href="group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8" title="Get the value of a property. ">getProperty</a>(pluginData))</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    plotTelluriumData(rrData, colNames)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="group__plugin__manager.html#ga5a1acf994e66cb9c19344e9b2824ad5c" title="Unload all plugins. ">unLoadPlugins</a>(pm)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="group__utilities.html#gaead0a90f80923a66153dbdf974d4cde7" title="Unload the plugins api shared library. ">unLoadAPI</a>()</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;done&quot;</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:    </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&#39;Exception: &#39;</span> + `e`    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   <span class="comment"># Get the dataseries from roadrunner</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   <span class="comment"># d = tel.getDataSeries (data)</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">#Pass data from roadrunner to the plugin</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">#TODO: Use the DataSeries class to create TelluriumData from RoadRunnerData </span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="group__plugin__properties.html#ga8d3eb319573b46893ddf413614807647" title="Set the value of a property. ">setProperty</a>(pluginData, <a class="code" href="group__utilities.html#ga8e90dbd0ac30d9c8ea4d88bcc82fc95b" title="Retrieve a handle to RoadRunners internal data object. ">getTelluriumDataHandle</a>(rr))</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">#Execute the noise plugin which will add some noise to the (internal) data</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="group__plugins.html#gad6d3512c7d27f6dab98f60febe9a5146" title="The executePluginEx is similar to the executePlugin function, except it takes one extra argument...">executePluginEx</a>(pluginHandle)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">#Retrieve data from plugin</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    rrData = <a class="code" href="group__utilities.html#ga638267ac0241e6a5976a1c2cb9c8b482" title="Convert tellurium data to Numpy data. ">getNumpyData</a>(<a class="code" href="group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8" title="Get the value of a property. ">getProperty</a>(pluginData))</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    colNames = <a class="code" href="group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8" title="Get column header in tellurium data. ">getTelluriumDataColumnHeader</a>(<a class="code" href="group__plugin__properties.html#gaee7df409d1aed3649ea362473b4059b8" title="Get the value of a property. ">getProperty</a>(pluginData))</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    plotTelluriumData(rrData, colNames)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="group__plugin__manager.html#ga5a1acf994e66cb9c19344e9b2824ad5c" title="Unload all plugins. ">unLoadPlugins</a>(pm)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="group__utilities.html#gaead0a90f80923a66153dbdf974d4cde7" title="Unload the plugins api shared library. ">unLoadAPI</a>()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&quot;done&quot;</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:    </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&#39;Exception: &#39;</span> + `e`    </div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 22 2014 10:45:18 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 22 2014 12:36:28 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

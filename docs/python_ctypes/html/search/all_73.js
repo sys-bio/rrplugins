@@ -11,6 +11,7 @@ var searchData=
   ['setpropertyhint',['setPropertyHint',['../group__plugin__properties.html#gaaf40d279324bff12793912e7beef3cb7',1,'python::telplugins_c_api']]],
   ['setstringproperty',['setStringProperty',['../group__plugin__properties.html#gabe10d486982f18de948ea5933d1209eb',1,'python::telplugins_c_api']]],
   ['settelluriumdatacolumnheader',['setTelluriumDataColumnHeader',['../group__utilities.html#ga441d17a03e84776171f5ec5d4a05d66d',1,'python::telplugins_c_api']]],
+  ['settelluriumdatacolumnheaderbyindex',['setTelluriumDataColumnHeaderByIndex',['../group__utilities.html#gafc9ef3b622f146024dd40699adb1cc9f',1,'python::telplugins_c_api']]],
   ['settelluriumdataelement',['setTelluriumDataElement',['../group__utilities.html#ga78017e8add631fa4887d5afe03962a7b',1,'python::telplugins_c_api']]],
   ['settelluriumdataproperty',['setTelluriumDataProperty',['../group__plugin__properties.html#ga5a5905f864cb1853ecb1226c2a417876',1,'python::telplugins_c_api']]],
   ['settelluriumdataweight',['setTelluriumDataWeight',['../group__utilities.html#ga1f18e55238b916acf09167b7c48d9828',1,'python::telplugins_c_api']]]

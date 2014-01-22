@@ -95,9 +95,15 @@ Functions</h2></td></tr>
 <tr class="memitem:gad07a899a9a6a780c9d471f67fa9143d8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8">getTelluriumDataColumnHeader</a></td></tr>
 <tr class="memdesc:gad07a899a9a6a780c9d471f67fa9143d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get column header in tellurium data.  <a href="#gad07a899a9a6a780c9d471f67fa9143d8">More...</a><br/></td></tr>
 <tr class="separator:gad07a899a9a6a780c9d471f67fa9143d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac526f0a748a44ec824270d695f3d340"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gaac526f0a748a44ec824270d695f3d340">getTelluriumDataColumnHeaderByIndex</a></td></tr>
+<tr class="memdesc:gaac526f0a748a44ec824270d695f3d340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get column header item by index.  <a href="#gaac526f0a748a44ec824270d695f3d340">More...</a><br/></td></tr>
+<tr class="separator:gaac526f0a748a44ec824270d695f3d340"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga441d17a03e84776171f5ec5d4a05d66d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga441d17a03e84776171f5ec5d4a05d66d">setTelluriumDataColumnHeader</a></td></tr>
 <tr class="memdesc:ga441d17a03e84776171f5ec5d4a05d66d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set column header in tellurium data.  <a href="#ga441d17a03e84776171f5ec5d4a05d66d">More...</a><br/></td></tr>
 <tr class="separator:ga441d17a03e84776171f5ec5d4a05d66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc9ef3b622f146024dd40699adb1cc9f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gafc9ef3b622f146024dd40699adb1cc9f">setTelluriumDataColumnHeaderByIndex</a></td></tr>
+<tr class="memdesc:gafc9ef3b622f146024dd40699adb1cc9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set column header by index in tellurium data.  <a href="#gafc9ef3b622f146024dd40699adb1cc9f">More...</a><br/></td></tr>
+<tr class="separator:gafc9ef3b622f146024dd40699adb1cc9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d750b1b8aa3490b32bb59f196379b4b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga0d750b1b8aa3490b32bb59f196379b4b">getTelluriumDataElement</a></td></tr>
 <tr class="memdesc:ga0d750b1b8aa3490b32bb59f196379b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get RoadRunner data element at row,col.  <a href="#ga0d750b1b8aa3490b32bb59f196379b4b">More...</a><br/></td></tr>
 <tr class="separator:ga0d750b1b8aa3490b32bb59f196379b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -424,6 +430,42 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 
 </div>
 </div>
+<a class="anchor" id="gaac526f0a748a44ec824270d695f3d340"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.getTelluriumDataColumnHeaderByIndex </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>telDataHandle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get column header item by index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">telDataHandle</td><td>A handle to a tellurium data object </td></tr>
+    <tr><td class="paramname">index</td><td>Index of requested column name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the column name on success, or None on failure </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga0d750b1b8aa3490b32bb59f196379b4b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -739,6 +781,49 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 
 </div>
 </div>
+<a class="anchor" id="gafc9ef3b622f146024dd40699adb1cc9f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.setTelluriumDataColumnHeaderByIndex </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>telDataHandle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>hdr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set column header by index in tellurium data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">telDataHandle</td><td>A handle to a tellurium data object </td></tr>
+    <tr><td class="paramname">index</td><td>Index for column name to change </td></tr>
+    <tr><td class="paramname">colName</td><td>A string containing the column name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True or false indicating success </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga78017e8add631fa4887d5afe03962a7b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -908,7 +993,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 22 2014 10:45:18 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 22 2014 12:36:28 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
