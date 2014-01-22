@@ -465,9 +465,9 @@ def getDataSeries (numPyData):
 ##\mainpage Working with RoadRunner Plugins
 ##\section Introduction
 ## The plugin API allows users to easily access roadrunner plugins. Only three concepts need to be understood:
-## 1. Load a plugin
-## 2. Set or get plugin properties
-## 3. Execute the plugin
+## 1. Loading a plugin
+## 2. Setting and Getting plugin properties
+## 3. Executing the plugin
 ##
 ## Before using the plugin system the plugin library must be imported using the line:
 #@code
@@ -478,7 +478,7 @@ def getDataSeries (numPyData):
 ##p = tel.Plugin ("tel_add_noise")
 #@endcode
 ## The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For 
-## example the add noise plugin has a property called Sigma. To this this to a value we would use:
+## example the add noise plugin has a property called Sigma. To set this to a particular value we would use:
 #@code
 ## p.Sigma = 0.5
 #@endcode
@@ -486,12 +486,24 @@ def getDataSeries (numPyData):
 #@code
 ## print p.Sigma
 #@endcode
-## To run a plugin so that it carries out its function, use the execute method:
-#@ p.execute()
+## To list all propreties in a plugin use the method listOfProperties. The following uses call together with pprint to make the output
+## more understandable:
+#@code
+## import pprint
+## pprint.pprint (p.listOfProperties())
+## [['NoiseType', 'Type of noise (Gaussian = 0, Psychological = 1).'],
+## ['Sigma', 'Standard deviation of applied noise'],
+## ['InputData', 'Data Series to apply the noise to'],
+## ['Progress', 'Indicate progress in (0-100%)']]
 #@endcode
-## The results from an execute call will either be saved to a file or more likely via propoerties of the plugin. As a trivial example, 
-## consider a plugin, called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
-## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin is used from Python:
+##
+## To run a plugin so that it carries out its function, use the execute method:
+#@code
+## p.execute()
+#@endcode
+## The results from an execute call will either be saved to a file or more likely via properties of the plugin. As a trivial example, 
+## consider a plugin called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
+## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin would be used from Python:
 #@code
 ## import telplugins as tel
 ## p = tel.Plugin ("add")
@@ -499,6 +511,48 @@ def getDataSeries (numPyData):
 ## p.y = 4.5
 ## p.execute()
 ## print p.z
+#@endcode
+##
+## The following script illustrates a more substantial example using the add_noise plugin
+##
+#@code
+## import roadrunner
+## import telPlugins as tel
+##
+## noisePlugin = tel.Plugin ("tel_add_noise")
+## print noisePlugin.name()
+## print noisePlugin.hint()
+## print noisePlugin.description()
+##
+## print noisePlugin.listOfProperties()
+## 
+## # Create a roadrunner instance
+## rr = roadrunner.RoadRunner()
+## rr.load("sbml_test_0001.xml")
+##
+## # Generate data
+## rr.simulate(0, 10, 511) # Want 512 points
+##
+## # The plugin will need a handle to the underlying roadrunner data
+## d = tel.getTelluriumData (rr)
+##
+## noisePlugin.InputData = d
+##
+## # Get parameter for the 'size' of the noise
+## noisePlugin.Sigma = 3.e-5
+##
+## noisePlugin.execute ()
+##
+## numpydata = noisePlugin.InputData.toNumpy;
+##
+## tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
+##
+## tel.show()
+##
+## d.writeDataSeries ("testData2.dat")
+##
+## d.readDataSeries ("testData2.dat")
+## print "done"
 #@endcode
 ##
 ##\section DataSeries
@@ -530,7 +584,12 @@ def getDataSeries (numPyData):
 ## p.setElement (1, 2, 4.567)
 ## print p.getElement (1, 2)
 #@endcode
-
+## Data series can be plotted using the plot method:
+#@code
+## data.plot()
+#@endcode
+The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
+## to all data except the data in teh first column.
 #@code
 ##    input telplugins as *
 ##    p = Plugin ("tel_add_noise")
@@ -548,47 +607,8 @@ def getDataSeries (numPyData):
 ###
 ##    print "Test Finished"
 #@endcode
-#
-#@code
-##import roadrunner
-##import telPlugins as tel
 ##
-##noisePlugin = tel.Plugin ("tel_add_noise")
-##print noisePlugin.name()
-##print noisePlugin.hint()
-##print noisePlugin.description()
 ##
-##print noisePlugin.listOfProperties()
-##
-### Create a roadrunner instance
-##rr = roadrunner.RoadRunner()
-##rr.load("sbml_test_0001.xml")
-##
-## Generate data
-##rr.simulate(0, 10, 511) # Want 512 points
-##
-## The plugin will need a handle to the underlying roadrunner data
-##d = tel.getTelluriumData (rr)
-##
-##noisePlugin.InputData = d
-##
-## Get parameter for the 'size' of the noise
-##noisePlugin.Sigma = 3.e-5
-##
-##noisePlugin.execute ()
-##
-##numpydata = noisePlugin.InputData.toNumpy;
-##
-##tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
-##
-##tel.show()
-##
-##d.writeDataSeries ("testData2.dat")
-##
-##d.readDataSeries ("testData2.dat")
-##print "done"
-#@endcode
-#
 ##\section Plugins
 # Plugin objects are instanciated using Plugin class. For example to instanciate a plugin called myplugin, we would
 # use the code:
