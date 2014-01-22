@@ -588,7 +588,7 @@ def getDataSeries (numPyData):
 #@code
 ## data.plot()
 #@endcode
-The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
+##The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
 ## to all data except the data in teh first column.
 #@code
 ##    input telplugins as *
