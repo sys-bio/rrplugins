@@ -175,7 +175,8 @@ bool tlp_cc writeTelluriumDataToFile(RRDataHandle rrData, char* fName)
 bool tlp_cc readTelluriumDataFromFile(RRDataHandle rrData, char* fName)
 {
     start_try
-        TelluriumData* data = castToTelluriumData(rrData);
+        TelluriumData* data = castToTelluriumData(rrData);        
+        //Check if file exists first        
         return data->readFrom(fName);
     catch_bool_macro
 

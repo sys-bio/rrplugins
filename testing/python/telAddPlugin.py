@@ -1,7 +1,7 @@
 import telplugins as tel
 
 try:     
-    p = tel.Plugin('tel_AddPlugins')
+    p = tel.Plugin('tel_AddPlugin')
     p.x = 1.2
     p.y = 3.6
     print p.execute()

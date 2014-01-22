@@ -358,8 +358,10 @@ bool TelluriumData::readFrom(const string& fileName)
     ifstream aFile(fileName.c_str());
     if(!aFile)
     {
-        Log(Logger::LOG_ERROR)<<"Failed opening file: "<<fileName;
-        return false;
+        stringstream s;
+        s<<"Failed opening file: "<<fileName;
+        Log(Logger::LOG_ERROR)<<s.str();
+        throw(rr::Exception(s.str()));        
     }
     
     aFile >> (*this); 

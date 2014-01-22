@@ -9,8 +9,11 @@ def printData(telData):
                 print colHdr                
             rowLine = rowLine +  `c.getTelluriumDataElement(telDataH, row, col)` + ' '
         print rowLine
+        
+    if c.hasWeights(telData):
+        printWeights(telData)        
     
-def printDataWeights(telData):
+def printWeights(telData):
     for row in range(nrRows):
         rowLine = ''        
         for col in range(nrCols):
@@ -43,14 +46,14 @@ try:
         c.allocateWeights(telDataH)
         
     print 'Weights======== '
-    printDataWeights(telDataH)
+    printWeights(telDataH)
                 
     #Change weights
     for row in range(nrRows):        
         for col in range(nrCols):           
             randomNr = random.random() 
             c.setTelluriumDataWeight(telDataH, row, col, randomNr)                        
-    printDataWeights(telDataH)        
+    printWeights(telDataH)        
     
     #===== Column header
     print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`    
@@ -61,9 +64,32 @@ try:
     c.setTelluriumDataColumnHeader(telDataH, 'A,B,C')
     print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
     
-    c.setTelluriumDataColumnHeaderByIndex(telDataH, 0, 'R')
+    index = 0
+    c.setTelluriumDataColumnHeaderByIndex(telDataH, index, 'Q')
     print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
-    print 'ColumnHeader index 0 is:' + `c.getTelluriumDataColumnHeaderByIndex(telDataH, 0)`
+    print 'ColumnHeader index `index` is:' + `c.getTelluriumDataColumnHeaderByIndex(telDataH, index)`
+                      
+    index = 1
+    c.setTelluriumDataColumnHeaderByIndex(telDataH, index, 'w')
+    print 'ColumnHeader is:' + `c.getTelluriumDataColumnHeader(telDataH)`
+    print 'ColumnHeader index `index` is:' + `c.getTelluriumDataColumnHeaderByIndex(telDataH, index)`
+
+    ##File saving and writing
+    fName = 'data.dat'
+    c.writeTelluriumData(telDataH, fName)                            
+
+    ##Read it into another data object
+    telData2 = c.createTelluriumData(40,2)   #Data will be reshaped when reading..
+    c.writeTelluriumData(telDataH,"data.dat")
+                                
+    c.readTelluriumData(telData2, fName)
+    printData(telData2)
+                     
+    #Read Non existing file
+    if c.readTelluriumData(telData2, "notFound.dat") == False:
+        print c.getLastError()
+    printData(telData2)
+                         
                             
 except Exception as e:
     print 'There was an exception: ' + `e`
