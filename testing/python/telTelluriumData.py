@@ -88,8 +88,22 @@ try:
     #Read Non existing file
     if c.readTelluriumData(telData2, "notFound.dat") == False:
         print c.getLastError()
-    printData(telData2)
+    else:
+        printData(telData2)
                          
+    #Check some exceptions                         
+    #Try to read a file with bad format
+    if c.readTelluriumData(telData2, "badDataFormat1.dat") == False:
+        print c.getLastError()
+    else:        
+        printData(telData2)
+
+    #Try to read a file with bad format
+    if c.readTelluriumData(telData2, "badDataFormat2.dat") == False:
+        print c.getLastError()
+    else:        
+        printData(telData2)
+     
                             
 except Exception as e:
     print 'There was an exception: ' + `e`
