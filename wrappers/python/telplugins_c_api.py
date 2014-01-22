@@ -1420,17 +1420,7 @@ def unLoadAPI():
 ## -# Getting the value of the property
 ## -# Setting the value of the property
 
-## \example telPluginDocumentation.py
-## This Example shows
-## -# Get a plugin's categories in the form of an XML string
-## -# Obtain and view a Plugin's documentation as a PDF (Needs a system PDF reader)
-
 ## \example telEvents.py
 ## This Example shows
 ## -# How to define Python event functions and passing them to a plugin
 
-## \example telCreateNoisyData1.py
-## This Example Demonstrate the use of the AddNoise plugin
-
-## \example telLMFit1.py
-## This Example Demonstrate the use of the Minimization Plugin, using the Levenberg-Marquardt algorithm.

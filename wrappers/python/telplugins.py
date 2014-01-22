@@ -636,3 +636,18 @@ The following script is an example of using the add_noise plugin. This plugin ta
 #p.execute()
 #print p.result
 #@endcode
+
+# \defgroup examples Python Example Scripts
+# \brief Scripts illuminating concepts regarding Tellurium Plugins
+
+## \example telPluginDocumentation.py
+## This Example shows
+## -# Get a plugin's categories in the form of an XML string
+## -# Obtain and view a Plugin's documentation as a PDF (Needs a system PDF reader)
+
+## \example telCreateNoisyData1.py
+## This Example Demonstrate the use of the AddNoise plugin
+
+## \example telLMFit2.py
+## This example demonstrate parameter minimization, using the Levenberg-Marquardt algorithm.
+
