@@ -130,7 +130,15 @@ class DataSeries(object):
     ## d.setElement (1,2, 3.1415)
     ##@endcode       
     def setElement (self, row, col, value):
-        raise Exception ("setElement not yet implemented")
+        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        if (row < 0) or (col < 0):
+            raise Exception("DataSeries indices must be positive")
+        if row >= rowCount:
+            raise Exception("Row index out of bounds in dataseries element access")
+        if col >= colCount:
+            raise Exception("Column index out of bounds in dataseries element access")
+        setTelluriumDataElement(self._data, row, col, value)    
 
     ## \brief Read a dataseries from a file
     ##@code
@@ -456,10 +464,132 @@ def getDataSeries (numPyData):
 
 ##\mainpage Working with RoadRunner Plugins
 ##\section Introduction
-## The plugin API allows users to easily access and roadrunner plugins. Only three concepts need be understood:
-## 1. Load a plugin
-## 2. Set of get plugin properties
-## 3. Execute the plugin
+## The plugin API allows users to easily access roadrunner plugins. Only three concepts need to be understood:
+## 1. Loading a plugin
+## 2. Setting and Getting plugin properties
+## 3. Executing the plugin
+##
+## Before using the plugin system the plugin library must be imported using the line:
+#@code
+##import telplugins as tel
+#@endcode
+## To load a plugin called "tel_add_noise" use the Python command:
+#@code
+##p = tel.Plugin ("tel_add_noise")
+#@endcode
+## The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For 
+## example the add noise plugin has a property called Sigma. To set this to a particular value we would use:
+#@code
+## p.Sigma = 0.5
+#@endcode
+## Likewise, properties can be inspected:
+#@code
+## print p.Sigma
+#@endcode
+## To list all propreties in a plugin use the method listOfProperties. The following uses call together with pprint to make the output
+## more understandable:
+#@code
+## import pprint
+## pprint.pprint (p.listOfProperties())
+## [['NoiseType', 'Type of noise (Gaussian = 0, Psychological = 1).'],
+## ['Sigma', 'Standard deviation of applied noise'],
+## ['InputData', 'Data Series to apply the noise to'],
+## ['Progress', 'Indicate progress in (0-100%)']]
+#@endcode
+##
+## To run a plugin so that it carries out its function, use the execute method:
+#@code
+## p.execute()
+#@endcode
+## The results from an execute call will either be saved to a file or more likely via properties of the plugin. As a trivial example, 
+## consider a plugin called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
+## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin would be used from Python:
+#@code
+## import telplugins as tel
+## p = tel.Plugin ("add")
+## p.x = 1.2
+## p.y = 4.5
+## p.execute()
+## print p.z
+#@endcode
+##
+## The following script illustrates a more substantial example using the add_noise plugin
+##
+#@code
+## import roadrunner
+## import telPlugins as tel
+##
+## noisePlugin = tel.Plugin ("tel_add_noise")
+## print noisePlugin.name()
+## print noisePlugin.hint()
+## print noisePlugin.description()
+##
+## print noisePlugin.listOfProperties()
+## 
+## # Create a roadrunner instance
+## rr = roadrunner.RoadRunner()
+## rr.load("sbml_test_0001.xml")
+##
+## # Generate data
+## rr.simulate(0, 10, 511) # Want 512 points
+##
+## # The plugin will need a handle to the underlying roadrunner data
+## d = tel.getTelluriumData (rr)
+##
+## noisePlugin.InputData = d
+##
+## # Get parameter for the 'size' of the noise
+## noisePlugin.Sigma = 3.e-5
+##
+## noisePlugin.execute ()
+##
+## numpydata = noisePlugin.InputData.toNumpy;
+##
+## tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
+##
+## tel.show()
+##
+## d.writeDataSeries ("testData2.dat")
+##
+## d.readDataSeries ("testData2.dat")
+## print "done"
+#@endcode
+##
+##\section DataSeries
+## The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of
+## data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional 
+## value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure 
+## of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call:
+#@code
+## import telplugins as tel
+## data = tel.DataSeries()
+#@endcode
+## Data can be entered into a data series either by loading the data from a specially formated file or from a Python NumPy array. For example:
+#@code
+## data.readDataSeries ("mydata.txt")
+#@endcode 
+## To read numpy arrays into a data series use the code:
+#@code
+## import numpy as py
+## values = py.array([[1,2],{2,5],[3,7]])
+## data = tel.DataSeries.fromNumPy (values)
+#@endcode
+## The number of rows and columns in a Data Series can be obtained using:
+#@code
+## print data.rows
+## print data.cols
+#@endcode
+## Currently individual values in a data series can be accessed using the set and get methods:
+#@code
+## p.setElement (1, 2, 4.567)
+## print p.getElement (1, 2)
+#@endcode
+## Data series can be plotted using the plot method:
+#@code
+## data.plot()
+#@endcode
+The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
+## to all data except the data in teh first column.
 #@code
 ##    input telplugins as *
 ##    p = Plugin ("tel_add_noise")
@@ -477,47 +607,8 @@ def getDataSeries (numPyData):
 ###
 ##    print "Test Finished"
 #@endcode
-#
-#@code
-##import roadrunner
-##import telPlugins as tel
 ##
-##noisePlugin = tel.Plugin ("tel_add_noise")
-##print noisePlugin.name()
-##print noisePlugin.hint()
-##print noisePlugin.description()
 ##
-##print noisePlugin.listOfProperties()
-##
-### Create a roadrunner instance
-##rr = roadrunner.RoadRunner()
-##rr.load("sbml_test_0001.xml")
-##
-## Generate data
-##rr.simulate(0, 10, 511) # Want 512 points
-##
-## The plugin will need a handle to the underlying roadrunner data
-##d = tel.getTelluriumData (rr)
-##
-##noisePlugin.InputData = d
-##
-## Get parameter for the 'size' of the noise
-##noisePlugin.Sigma = 3.e-5
-##
-##noisePlugin.execute ()
-##
-##numpydata = noisePlugin.InputData.toNumpy;
-##
-##tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
-##
-##tel.show()
-##
-##d.writeDataSeries ("testData2.dat")
-##
-##d.readDataSeries ("testData2.dat")
-##print "done"
-#@endcode
-#
 ##\section Plugins
 # Plugin objects are instanciated using Plugin class. For example to instanciate a plugin called myplugin, we would
 # use the code:
