@@ -93,6 +93,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ga7b5b231df505052b8736d4791ecc0bbe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga7b5b231df505052b8736d4791ecc0bbe">getPluginCategory</a></td></tr>
 <tr class="memdesc:ga7b5b231df505052b8736d4791ecc0bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Category of a Plugin.  <a href="#ga7b5b231df505052b8736d4791ecc0bbe">More...</a><br/></td></tr>
 <tr class="separator:ga7b5b231df505052b8736d4791ecc0bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e8c2db99e5d94657a7a65a961345baf"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga8e8c2db99e5d94657a7a65a961345baf">getPluginAuthor</a></td></tr>
+<tr class="memdesc:ga8e8c2db99e5d94657a7a65a961345baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the author of a Plugin.  <a href="#ga8e8c2db99e5d94657a7a65a961345baf">More...</a><br/></td></tr>
+<tr class="separator:ga8e8c2db99e5d94657a7a65a961345baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga53a4ab78fae8b51ea67e95b612193124"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga53a4ab78fae8b51ea67e95b612193124">getPluginCopyright</a></td></tr>
+<tr class="memdesc:ga53a4ab78fae8b51ea67e95b612193124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the plugin copyright.  <a href="#ga53a4ab78fae8b51ea67e95b612193124">More...</a><br/></td></tr>
+<tr class="separator:ga53a4ab78fae8b51ea67e95b612193124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga32d7e52b41cf99fcdc3f1de600dc0c6b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga32d7e52b41cf99fcdc3f1de600dc0c6b">getPluginVersion</a></td></tr>
+<tr class="memdesc:ga32d7e52b41cf99fcdc3f1de600dc0c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the plugin version.  <a href="#ga32d7e52b41cf99fcdc3f1de600dc0c6b">More...</a><br/></td></tr>
+<tr class="separator:ga32d7e52b41cf99fcdc3f1de600dc0c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga848654b1e49b52c48a4a61d7852e9a43"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga848654b1e49b52c48a4a61d7852e9a43">getPluginDescription</a></td></tr>
 <tr class="memdesc:ga848654b1e49b52c48a4a61d7852e9a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Description of a Plugin.  <a href="#ga848654b1e49b52c48a4a61d7852e9a43">More...</a><br/></td></tr>
 <tr class="separator:ga848654b1e49b52c48a4a61d7852e9a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -340,8 +349,8 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Assign a roadrunner instance handle for the plugin to use. </p>
-<pre class="fragment">A plugin may use an externally created roadrunner instance for its internal work.
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+<p>A plugin may use an externally created roadrunner instance for its internal work. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pluginHandle</td><td>Handle to a plugin </td></tr>
     <tr><td class="paramname">rrHandle</td><td>Handle to a roadrunner instance </td></tr>
@@ -442,6 +451,32 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga8e8c2db99e5d94657a7a65a961345baf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.getPluginAuthor </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>pluginHandle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the author of a Plugin. </p>
+<p>This is assigned by the pluging developer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pluginHandle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string if successful, None otherwise </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga7b5b231df505052b8736d4791ecc0bbe"></a>
 <div class="memitem">
 <div class="memproto">
@@ -468,6 +503,31 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;name = telPlugins.getPluginCategory(pluginHandle)</div>
 </div><!-- fragment -->  <br/>
   
+</div>
+</div>
+<a class="anchor" id="ga53a4ab78fae8b51ea67e95b612193124"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.getPluginCopyright </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>pluginHandle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the plugin copyright. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pluginHandle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string if successful, None otherwise </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="ga848654b1e49b52c48a4a61d7852e9a43"></a>
@@ -693,6 +753,31 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga32d7e52b41cf99fcdc3f1de600dc0c6b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.telplugins_c_api.getPluginVersion </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>pluginHandle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the plugin version. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pluginHandle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string if successful, None otherwise </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga4148c2d510b803e0b89195bc0c57b7df"></a>
 <div class="memitem">
 <div class="memproto">
@@ -883,7 +968,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 22 2014 19:37:17 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 23 2014 12:40:25 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
