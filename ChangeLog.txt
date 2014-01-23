@@ -1,3 +1,0 @@
-Jan 13 2014
-    * Initial commit of plugin and third party source from roadrunner repository at: https://github.com/AndySomogyi/roadrunner (TK)
-
