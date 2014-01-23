@@ -1,9 +1,9 @@
 #! /usr/bin/bash
 
 echo "Creating documentation for the plugin"
+mainDoc=mainDoc.tex
 pluginName=lmfit
 chapter=plugin_$pluginName
-mainDoc=$pluginName.tex
 pdflatex -jobname=$pluginName "\includeonly{$chapter}\input{$mainDoc}"
 
 ##Create the C file to link with the plugin

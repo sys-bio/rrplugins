@@ -1,63 +1,29 @@
-import matplotlib.pyplot as plot
 import roadrunner
-from telPlugins_CAPI import *
+import telplugins as tel
 
-#Create a plugin manager
-pm = createPluginManager()
+try:
+    # Create a roadrunner instance and create some data
+    rr = roadrunner.RoadRunner()
+    rr.load("sbml_test_0001.xml")    
+    data = rr.simulate(0, 10, 511) # Want 512 points
 
-#Create a roadrunner instance
-rr = roadrunner.RoadRunner()
+    #Add noise to the data
+    noisePlugin = tel.Plugin ("tel_add_noise")
 
-#Define callback functions
-def pluginStarted():
-    print 'The plugin was started'
+    # Get the dataseries from data returned by roadrunner
+    d = tel.getDataSeries (data)
 
-def pluginIsProgressing(progress):
-    nr = progress
-    print '\nPlugin progress:' + `nr` +' %'
+    # Assign the dataseries to the plugin inputdata
+    noisePlugin.InputData = d
 
-def pluginIsFinished():
-    print 'The plugin did finish'
+    # Set parameter for the 'size' of the noise
+    noisePlugin.Sigma = 3.e-6
 
-sbmlModel ="../../models/bistable.xml"
-if not rr.load(sbmlModel):
-    print 'Failed loading model'
-    exit()
+    # Add the noise
+    noisePlugin.execute()
 
-rr.simulate(0, 10, 500)
+    # Get the data to plot
+    noisePlugin.InputData.plot()
 
-#The plugin will need a handle to the underlying roadrunner data
-rrDataHandle = getTelluriumDataHandle(rr)
-
-#Load the 'noise' plugin in order to add some noise to roadrunner data
-noisePlugin = loadPlugin(pm, "tel_add_noise")
-
-#The noise plugin has one parameter named, InputData.
-#Assigning our data to it allow the plugin to do work on it
-dataPara = getPluginParameter(noisePlugin, "InputData")
-setParameter(dataPara, rrDataHandle)
-
-#get parameter for the 'size' of the noise
-#Set size of noise
-setPluginParameter(noisePlugin,"Sigma", 1e-2)
-
-cb_func1 =  NotifyEvent(pluginStarted)
-assignOnStartedEvent(noisePlugin,  cb_func1)
-
-cb_func2 =  NotifyIntEvent(pluginIsProgressing)
-assignOnProgressEvent(noisePlugin, cb_func2)
-
-cb_func3 =  NotifyEvent(pluginIsFinished)
-assignOnFinishedEvent(noisePlugin, cb_func3)
-
-#Execute the noise plugin which will add some noise to the (internal) data
-executePlugin(noisePlugin)  
-
-#Retrieve data from plugin
-rrData = getNumpyData(getParameter(dataPara))
-colNames = getTelluriumDataColumnHeader(rrDataHandle)
-
-plotTelluriumData(rrData, colNames)
-
-unLoadPlugins(pm)
-print "done"
+except Exception as e:
+    print 'Problem: ' + `e`

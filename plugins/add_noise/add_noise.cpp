@@ -4,7 +4,7 @@
 #include "rr/rrRoadRunner.h"
 #include "telTelluriumData.h"
 #include "noise.h"
-#include "add_noise_docs.h"
+#include "add_noise_doc.h"
 
 //---------------------------------------------------------------------------
 namespace addNoise
@@ -31,9 +31,12 @@ mAddNoiseWorker(*this)
 
     mHint ="Add Gaussian Noise to RoadRunner Data";
     mDescription="The AddNoise plugin adds Gaussian noise to synthetic data. The amount of noise is controlled \
-by its Sigma property. The Plugin take RoadRunner data as input, in the \"InputData\" property. Currently \
-only Gaussian noise is supported. \
-The progress of the application of noise can be read in teh Progress property. \nThe AddNoise plugin was developed at the University of Washington by Totte Karlsson, 2012-2013.";
+by the plugins Sigma property. Specifically, noise is generated for each single data value, with a probability corresponding to a Gaussian distribution centered around the value, and with a variance equal to (sigma^2). \
+The Plugin accepts Tellurium data as input, in the \"InputData\" property. \
+Currently only Gaussian noise is supported. \
+The progress of the application of noise can be read in the Progress property. \
+Noise will not be generated onto the first column of data, if its column label is equal to \"Time\", (not case sensitive). \
+The AddNoise plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.";
 }
 
 AddNoise::~AddNoise()

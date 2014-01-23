@@ -7,7 +7,7 @@ include_directories(
 set(sources
 add_noise
 add_noise_worker
-add_noise_docs
+add_noise_doc
 noise
 )
 
