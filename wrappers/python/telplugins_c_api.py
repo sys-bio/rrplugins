@@ -1426,20 +1426,20 @@ def unLoadAPI():
 # \brief Scripts illuminating concepts regarding RoadRunner Plugins
 
 ## \example telPluginTester.py
-## This Example shows
+## This example shows
 ## -# How to create a plugin manager
 ## -# Get Plugin Names
 ## -# Get a handle to a plugin
 ## -# Obtain some info from the plugin
 
 ## \example telPluginProperties.py
-## This Example shows
+## This example shows
 ## -# Get a handle to a property in a Plugin
 ## -# Obtain some info about the property
 ## -# Getting the value of the property
 ## -# Setting the value of the property
 
 ## \example telEvents.py
-## This Example shows
+## This example shows
 ## -# How to define Python event functions and passing them to a plugin
 
