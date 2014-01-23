@@ -2,12 +2,12 @@
 #include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
-#include "lmWorkerTemp.h"
+#include "lmWorker.h"
 #include "lm.h"
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an usse the CPP api directly
+#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an use the CPP api directly
 #include "rr/C/rrc_utilities.h"
 //---------------------------------------------------------------------------
 namespace lmfit

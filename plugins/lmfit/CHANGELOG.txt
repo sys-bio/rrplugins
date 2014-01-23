@@ -1,0 +1,6 @@
+This is the changelog file for the LMFIT Tellurium Plugin.
+
+Release 0.8.1 (2014-01-23)
+==========================
+- Added Changelog file 
+

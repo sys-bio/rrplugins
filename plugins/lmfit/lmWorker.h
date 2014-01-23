@@ -1,5 +1,5 @@
-#ifndef lmWorkerTempH
-#define lmWorkerTempH
+#ifndef lmWorkerH
+#define lmWorkerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
 #include "rr/rrRoadRunner.h"

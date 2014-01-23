@@ -136,8 +136,8 @@
             <DependentOn>lmUtils.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="LMWorker.cpp">
-            <DependentOn>LMWorker.h</DependentOn>
+        <CppCompile Include="lmWorker.cpp">
+            <DependentOn>lmWorker.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
