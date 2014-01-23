@@ -7,7 +7,7 @@ import numpy as np
 p = tel.Plugin ("tel_add_noise")
 
 value = 2.34    #This will be the mean
-n = 3000
+n = 80000
 inputData  = np.zeros (shape=(1,2))
 inputData[0] = [0, value]
 
