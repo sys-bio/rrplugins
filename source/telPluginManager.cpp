@@ -232,7 +232,9 @@ bool PluginManager::loadPlugin(const string& _libName)
         if(getPlugin(libName))
         {
             info<<"The Plugin: "<<libName<<" is already loaded";
-            throw(info.str());
+            Log(lWarning)<<info.str();
+            //throw(info.str());
+            return true; //Don't make this an error..
         }
 
         if(!hasFileExtension(libName))

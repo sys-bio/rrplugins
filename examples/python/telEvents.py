@@ -5,13 +5,14 @@ import numpy
 import ctypes
 from telplugins import *
 
+
 #Create a plugin manager
 pm = createPluginManager()
 
 def pluginStarted():
     print 'The plugin was started'
 
-def pluginIsProgressing(val):
+def pluginIsProgressing(val):    
     pluginHandle = cast(val, ctypes.py_object).value    
     prop = getPluginProperty(pluginHandle, "Progress")
     print '\nPlugin progress:' + `getPropertyValue(prop)` +' %'
@@ -38,16 +39,12 @@ try:
     data = rr.simulate(timeStart, timeEnd, numPoints)
     
     #Load the 'noise' plugin in order to add some noise to the data
-    pluginHandle = loadPlugin(pm, "tel_add_noise")
-    
-    print getPluginInfo(pluginHandle)
+    pluginHandle = loadPlugin(pm, "tel_add_noise")       
     
     #get parameter for noise 'size'
     sigmaHandle = getPluginProperty(pluginHandle, "Sigma")
-    
     aSigma = getPropertyValueAsString(sigmaHandle)
-    print 'Current sigma is ' + aSigma
-    
+      
     #set size of noise
     setProperty(sigmaHandle, 0.02)
     
@@ -64,21 +61,18 @@ try:
     cb_func3 =  NotifyEvent(pluginIsFinished)
     assignOnFinishedEvent(pluginHandle, cb_func3)
     
-    #Assign data to the plugin
-    pluginData = getPluginProperty(pluginHandle,"InputData")
-
-   # Get the dataseries from roadrunner
-   # d = tel.getDataSeries (data)
+    # Get the dataseries from roadrunner
+    #Something is funky in here. Data is created and then immediatley freed?
+    d = getDataSeries (data)
     
-    #Pass data from roadrunner to the plugin
-    #TODO: Use the DataSeries class to create TelluriumData from RoadRunnerData 
-    setProperty(pluginData, getTelluriumDataHandle(rr))
+    #Pass data from roadrunner to the plugin         
+    setPluginProperty(pluginHandle, "InputData", d._data) #Is _data OK here?
     
     #Execute the noise plugin which will add some noise to the (internal) data
     executePluginEx(pluginHandle)
     
-    #Retrieve data from plugin
-    
+    #Retrieve data from plugin    
+    pluginData = getPluginProperty(pluginHandle, "InputData")
     rrData = getNumpyData(getProperty(pluginData))
     colNames = getTelluriumDataColumnHeader(getProperty(pluginData))
     plotTelluriumData(rrData, colNames)
