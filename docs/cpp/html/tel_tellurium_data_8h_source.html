@@ -124,94 +124,95 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">bool</span> hasWeights() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">const</span> StringList&amp;                       getColumnNames() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    std::string                             getColumnName(<span class="keyword">const</span> <span class="keywordtype">int</span> col) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    std::string                             getColumnNamesAsString() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">bool</span>                                    setColumnNames(<span class="keyword">const</span> StringList&amp; colNames);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">bool</span>                                    setColumnName(<span class="keywordtype">int</span> index, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; colName);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">int</span>                                     getColumnIndex(<span class="keyword">const</span> std::string&amp; colName) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span>                                    setTimeDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordtype">void</span>                                    setDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">void</span>                                    reSize(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">int</span> rSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordtype">int</span> cSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordtype">void</span> setData(<span class="keyword">const</span> DoubleMatrix&amp; theData);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordtype">bool</span> loadSimpleFormat(<span class="keyword">const</span> std::string&amp; fileName);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">bool</span> writeTo(<span class="keyword">const</span> std::string&amp; fileName) <span class="keyword">const</span>;    </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordtype">bool</span> readFrom(<span class="keyword">const</span> std::string&amp; fileName);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">bool</span> check() <span class="keyword">const</span>;    </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a19f78409fe70698920cd597721e393d9">  237</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classtlp_1_1_tellurium_data.html#a19f78409fe70698920cd597721e393d9">structuredResult</a>;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    RRP_DECLSPEC</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; operator &lt;&lt;(std::ostream&amp; ss, <span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    RRP_DECLSPEC</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">friend</span> std::istream&amp; operator &gt;&gt;(std::istream&amp; ss, <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">double</span>&amp; operator()(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; row, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; col);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">double</span> operator()(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; row, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; col) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordtype">double</span> getDataElement(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordtype">void</span>   setDataElement(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col, <span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; rhs);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; operator=(<span class="keyword">const</span> rr::RoadRunnerData&amp; rhs);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordtype">double</span> getWeight(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordtype">void</span> setWeight(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col, <span class="keywordtype">double</span> val);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">void</span> setName(<span class="keyword">const</span> std::string&amp; name);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    std::string getName() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    std::pair&lt;int, int&gt; dimension() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keywordtype">bool</span> append(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordtype">double</span> getTimeStart() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">double</span> getTimeEnd() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">const</span> DoubleMatrix&amp; getData() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keyword">const</span> DoubleMatrix&amp; getWeights() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">bool</span>                                    isFirstColumnTime() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    std::string                             getColumnName(<span class="keyword">const</span> <span class="keywordtype">int</span> col) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    std::string                             getColumnNamesAsString() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">bool</span>                                    setColumnNames(<span class="keyword">const</span> StringList&amp; colNames);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordtype">bool</span>                                    setColumnName(<span class="keywordtype">int</span> index, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; colName);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">int</span>                                     getColumnIndex(<span class="keyword">const</span> std::string&amp; colName) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">void</span>                                    setTimeDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">void</span>                                    setDataPrecision(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; prec);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordtype">void</span>                                    reSize(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordtype">int</span> rSize() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">int</span> cSize() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordtype">void</span> setData(<span class="keyword">const</span> DoubleMatrix&amp; theData);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordtype">bool</span> loadSimpleFormat(<span class="keyword">const</span> std::string&amp; fileName);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordtype">bool</span> writeTo(<span class="keyword">const</span> std::string&amp; fileName) <span class="keyword">const</span>;    </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordtype">bool</span> readFrom(<span class="keyword">const</span> std::string&amp; fileName);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordtype">bool</span> check() <span class="keyword">const</span>;    </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    RRP_DECLSPEC</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; operator &lt;&lt;(std::ostream&amp; ss, <span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    RRP_DECLSPEC</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keyword">friend</span> std::istream&amp; operator &gt;&gt;(std::istream&amp; ss, <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">double</span>&amp; operator()(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; row, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; col);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">double</span> operator()(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; row, <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; col) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordtype">double</span> getDataElement(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordtype">void</span>   setDataElement(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; rhs);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; operator=(<span class="keyword">const</span> rr::RoadRunnerData&amp; rhs);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">double</span> getWeight(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordtype">void</span> setWeight(<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col, <span class="keywordtype">double</span> val);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">void</span> setName(<span class="keyword">const</span> std::string&amp; name);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    std::string getName() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    std::pair&lt;int, int&gt; dimension() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keywordtype">bool</span> append(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_tellurium_data.html" title="TelluriumData is a general purpose container for numerical data, e.g. simulation output. ">TelluriumData</a>&amp; data);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keywordtype">double</span> getTimeStart() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordtype">double</span> getTimeEnd() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keyword">const</span> DoubleMatrix&amp; getData() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keyword">const</span> DoubleMatrix&amp; getWeights() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;</div>
-<div class="line"><a name="l00390"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a">  390</a></span>&#160;    StringList <a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a" title="Container holding column names. ">mColumnNames</a>;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    </div>
-<div class="line"><a name="l00395"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109">  395</a></span>&#160;    DoubleMatrix <a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109" title="Container holding the actual data. ">mTheData</a>;</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    </div>
-<div class="line"><a name="l00400"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#aacf3e8c65edef65a5fa7ae4903c17d05">  400</a></span>&#160;    DoubleMatrix <a class="code" href="classtlp_1_1_tellurium_data.html#aacf3e8c65edef65a5fa7ae4903c17d05" title="Container holding the data weights. ">mWeights</a>;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;</div>
-<div class="line"><a name="l00405"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a9ff1fd421028d0ad9455c64809de7ebd">  405</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classtlp_1_1_tellurium_data.html#a9ff1fd421028d0ad9455c64809de7ebd" title="Integer setting the precision of &#39;time&#39; double numbers when writing to file. ">mTimePrecision</a>;           </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;</div>
-<div class="line"><a name="l00410"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a140a553f17b040f85f48b58ce35d9741">  410</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classtlp_1_1_tellurium_data.html#a140a553f17b040f85f48b58ce35d9741" title="Integer setting the precision of &#39;data&#39; double numbers when writing to file. ">mDataPrecision</a>;            <span class="comment">//The precision when saved to file</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
-<div class="line"><a name="l00416"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#ad779360c2b2205ba4cfaa8e87e7bffe5">  416</a></span>&#160;    std::string <a class="code" href="classtlp_1_1_tellurium_data.html#ad779360c2b2205ba4cfaa8e87e7bffe5" title="String holding the &#39;name&#39; of the object. ">mName</a>;             <span class="comment">//For debugging purposes mainly..</span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;};</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;}</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00387"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a">  387</a></span>&#160;    StringList <a class="code" href="classtlp_1_1_tellurium_data.html#a4c787721a683eb90b4b9ce5d4d692f6a" title="Container holding column names. ">mColumnNames</a>;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    </div>
+<div class="line"><a name="l00392"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109">  392</a></span>&#160;    DoubleMatrix <a class="code" href="classtlp_1_1_tellurium_data.html#a6792b0920491458b39fddf390cf9f109" title="Container holding the actual data. ">mTheData</a>;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    </div>
+<div class="line"><a name="l00397"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#aacf3e8c65edef65a5fa7ae4903c17d05">  397</a></span>&#160;    DoubleMatrix <a class="code" href="classtlp_1_1_tellurium_data.html#aacf3e8c65edef65a5fa7ae4903c17d05" title="Container holding the data weights. ">mWeights</a>;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;</div>
+<div class="line"><a name="l00402"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a9ff1fd421028d0ad9455c64809de7ebd">  402</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classtlp_1_1_tellurium_data.html#a9ff1fd421028d0ad9455c64809de7ebd" title="Integer setting the precision of &#39;time&#39; double numbers when writing to file. ">mTimePrecision</a>;           </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00407"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#a140a553f17b040f85f48b58ce35d9741">  407</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classtlp_1_1_tellurium_data.html#a140a553f17b040f85f48b58ce35d9741" title="Integer setting the precision of &#39;data&#39; double numbers when writing to file. ">mDataPrecision</a>;            <span class="comment">//The precision when saved to file</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;</div>
+<div class="line"><a name="l00413"></a><span class="lineno"><a class="code" href="classtlp_1_1_tellurium_data.html#ad779360c2b2205ba4cfaa8e87e7bffe5">  413</a></span>&#160;    std::string <a class="code" href="classtlp_1_1_tellurium_data.html#ad779360c2b2205ba4cfaa8e87e7bffe5" title="String holding the &#39;name&#39; of the object. ">mName</a>;             <span class="comment">//For debugging purposes mainly..</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;};</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;}</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 22 2014 12:36:26 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 22 2014 19:35:44 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
