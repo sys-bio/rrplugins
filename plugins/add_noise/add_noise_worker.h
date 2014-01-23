@@ -3,6 +3,7 @@
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
 #include "telExporter.h"
+#include "noise.h"
 //---------------------------------------------------------------------------
 
 namespace addNoise
@@ -13,6 +14,7 @@ class AddNoise;
 class AddNoiseWorker : public Poco::Runnable
 {
     protected:
+        Noise                   mNoise;
         Poco::Thread            mThread;
         AddNoise&               mTheHost;
 

@@ -286,41 +286,7 @@ Properties* Plugin::getProperties()
 PropertyBase* Plugin::getProperty(const string& propName)
 {
     return mProperties.getProperty(propName);
-//    //If capability string is empty, search all capabilites
-//    if(capability.size())
-//    {
-//        Capability* cap = mProperties.get(capability);
-//        return cap ? cap->getProperty(para) : NULL;
-//    }
-//    else    //Search all capabilities
-//    {
-//        for(int i = 0; i < mProperties.count(); i++)
-//        {
-//            if(mProperties[i]->getProperty(para))
-//            {
-//                return mProperties[i]->getProperty(para);
-//            }
-//        }
-//    }
-//    return NULL;
 }
-
-//PropertyBase* Plugin::getProperty(const string& para, Capability& capability)
-//{
-//    return capability.getProperty(para);
-//}
-
-//Capability* Plugin::getCapability(const string& name)
-//{
-//    for(int i = 0; i < mProperties.count(); i++)
-//    {
-//        if(mProperties[i]->getName() == name)
-//        {
-//            return (mProperties[i]);
-//        }
-//    }
-//    return NULL;
-//}
 
 string Plugin::getResult()
 {

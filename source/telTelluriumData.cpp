@@ -168,6 +168,16 @@ const StringList& TelluriumData::getColumnNames() const
     return mColumnNames;
 }
 
+bool TelluriumData::isFirstColumnTime() const
+{
+    if(mColumnNames.size() > 0)
+    {
+        return compareNoCase(mColumnNames[0], "Time") == 0;
+    }
+    return false;
+
+}
+
 string TelluriumData::getColumnName(const int col) const
 {
     if(col < mColumnNames.size())

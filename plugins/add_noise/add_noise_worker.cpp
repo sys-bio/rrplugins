@@ -3,7 +3,6 @@
 #include "rr/rrLogger.h"
 #include "add_noise_worker.h"
 #include "telUtils.h"
-#include "noise.h"
 #include "add_noise.h"
 //---------------------------------------------------------------------------
 
@@ -12,7 +11,8 @@ namespace addNoise
 
 AddNoiseWorker::AddNoiseWorker(AddNoise& host)
 :
-mTheHost(host)
+mTheHost(host),
+mNoise(0,0)
 {}
 
 bool AddNoiseWorker::start(bool runInThread)
@@ -48,25 +48,36 @@ void AddNoiseWorker::run()
     }
 
     TelluriumData& data = (mTheHost.mData.getValueReference());
-    Noise noise(0, mTheHost.mSigma.getValue());
-    noise.randomize();
 
+    double sigma = mTheHost.mSigma.getValue();
+       
+
+    //Don't add noise to a column that has name 'time'
+    bool ignoreFirstColumn = data.isFirstColumnTime();
     for(int row = 0; row < data.rSize(); row++)
     {
-        for(int col = 0; col < data.cSize() - 1; col++)
+        for(int col = 0; col < data.cSize(); col++)
         {
-            double yData = data(row, col + 1) + noise.getNoise();
-            data(row, col + 1) = yData;
-        }
+                if(col == 0)
+                {                
+                    if(!ignoreFirstColumn)
+                    {                        
+                        data(row, col) = mNoise.getNoise(data(row, col), sigma);
+                    }
+                }
+                else
+                {
+                    data(row, col) = mNoise.getNoise(data(row, col), sigma);                
+                }
+            }
 
-        if(mTheHost.mWorkProgressEvent)
-        {
-            int progress = (int) (row * 100.0) /(data.rSize() -1.0);
-            mTheHost.mProgress.setValue( progress );
-
-            //The progress is communicated to the client as an INTEGER
-            mTheHost.mWorkProgressEvent(mTheHost.mWorkProgressData1,  mTheHost.mWorkProgressData2);
-        }
+            if(mTheHost.mWorkProgressEvent)
+            {
+                int progress = (int) (row * 100.0) /(data.rSize() -1.0);
+                //The progress is communicated to the client trough the mProgress property
+                mTheHost.mProgress.setValue( progress );
+                mTheHost.mWorkProgressEvent(mTheHost.mWorkProgressData1,  mTheHost.mWorkProgressData2);
+            }
     }
 
     if(mTheHost.mWorkFinishedEvent)

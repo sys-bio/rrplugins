@@ -154,9 +154,12 @@ public:
     bool hasWeights() const;
 
     /**
-     * \brief Get the names of the variables stored in this data structure, as a vector<string>
+     * \brief Get the names of the variables stored in this data structure, as a StringList
      */
     const StringList&                       getColumnNames() const;
+    
+    bool                                    isFirstColumnTime() const;
+
     std::string                             getColumnName(const int col) const;
     std::string                             getColumnNamesAsString() const;
     bool                                    setColumnNames(const StringList& colNames);
@@ -231,12 +234,6 @@ public:
     bool check() const;    
 
     /**
-     * When this is converted to a numpy array, should this be converted to a structured
-     * array (with column names) (true) or converted to a regular array (false).
-     */
-    bool structuredResult;
-
-    /** 
     * \brief Stream friend function, allowing RoadRunner data to be streamed to a std::ostream.
     */
     RRP_DECLSPEC

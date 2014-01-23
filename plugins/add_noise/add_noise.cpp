@@ -16,7 +16,7 @@ AddNoise::AddNoise(rr::RoadRunner* aRR, PluginEvent fn1, PluginEvent fn2, Plugin
 CPPPlugin(  "AddNoise",                 "Signal Processing",    aRR,    NULL),  //Construct Base
 mNoiseType(         ntGaussian,         "NoiseType",   "Type of noise (Gaussian = 0, Psychological = 1)."),
 mSigma(             1,                  "Sigma",       "Size of applied noise"),
-mData(              TelluriumData(),   "InputData",    "Pointer to TelluriumData to apply noise to"),
+mData(              TelluriumData(),    "InputData",    "Pointer to TelluriumData to apply noise to"),
 mProgress(          0,                  "Progress",     "Indicate progress in (0-100%)"),
 mAddNoiseWorker(*this)
 {

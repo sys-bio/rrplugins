@@ -6,17 +6,22 @@
 //---------------------------------------------------------------------------
 namespace addNoise
 {
+
 double gaussNoise(double mean, double sigma);
 
 Noise::Noise(double m, double s)
 :
-mean(m),
-sigma(s)
-{}
-
-double Noise::getNoise()
+mMean(m),
+mSigma(s)
 {
-    return gaussNoise(mean, sigma);
+    randomize();
+}
+
+double Noise::getNoise(double mean, double sigma)
+{
+    mMean = mean;
+    mSigma = sigma;
+    return gaussNoise(mMean, mSigma);
 }
 
 void Noise::randomize()
