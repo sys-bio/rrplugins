@@ -203,7 +203,7 @@ TLP_C_DS long tlp_cc getPluginSharedLibHandle(RRPluginManagerHandle handle, RRPl
 TLP_C_DS char* tlp_cc getPluginName(RRPluginHandle handle);
 
 /*!
- \brief Return a plugins Category. A plugin developer may assign this information. 
+ \brief Return a plugins Category. A plugin developer may assign this information.
  \param handle Handle to a plugin
  \return Returns a string on success, NULL otherwise
 
@@ -212,7 +212,7 @@ TLP_C_DS char* tlp_cc getPluginName(RRPluginHandle handle);
 TLP_C_DS char* tlp_cc getPluginCategory(RRPluginHandle handle);
 
 /*!
- \brief Return a plugins description. This is assigned by the plugin developer. 
+ \brief Return a plugins description. This is assigned by the plugin developer.
  \param handle Handle to a plugin
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
@@ -228,15 +228,22 @@ TLP_C_DS char* tlp_cc getPluginDescription(RRPluginHandle handle);
 TLP_C_DS char* tlp_cc getPluginHint(RRPluginHandle handle);
 
 /*!
- \brief Return some information about a Plugin. 
+ \brief Return some information about a Plugin.
  \param handle Handle to a plugin
  \return Returns info, as a string, for the plugin, NULL otherwise
  \ingroup plugins
 */
 TLP_C_DS char* tlp_cc getPluginInfo(RRPluginHandle handle);
 
+TLP_C_DS char* tlp_cc getPluginAuthor(RRPluginHandle handle);
+TLP_C_DS char* tlp_cc getPluginCopyright(RRPluginHandle handle);
+TLP_C_DS char* tlp_cc getPluginVersion(RRPluginHandle handle);
+
+
+
+
 /*!
- \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string. 
+ \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string.
  Use the function getPluginManualNrOfBytes to get the exact length of this string.
  \param handle Handle to a plugin
  \return Returns the plugins manuals pdf file as a unsigned char*. If not available, returns NULL.

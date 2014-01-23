@@ -299,6 +299,39 @@ def getPluginCategory(pluginHandle):
     telLib.freeText(data)
     return res
 
+## \brief Get the author of a Plugin. This is assigned by the pluging developer
+## \param pluginHandle Handle to a plugin
+## \return Returns a string if successful, None otherwise
+## \ingroup plugins
+telLib.getPluginAuthor.restype = c_char_p
+def getPluginAuthor(pluginHandle):
+    data =  telLib.getPluginAuthor(pluginHandle)
+    res = data
+    telLib.freeText(data)
+    return res
+
+## \brief Get the plugin copyright. 
+## \param pluginHandle Handle to a plugin
+## \return Returns a string if successful, None otherwise
+## \ingroup plugins
+telLib.getPluginCopyright.restype = c_char_p
+def getPluginCopyright(pluginHandle):
+    data =  telLib.getPluginCopyright(pluginHandle)
+    res = data
+    telLib.freeText(data)
+    return res
+
+## \brief Get the plugin version. 
+## \param pluginHandle Handle to a plugin
+## \return Returns a string if successful, None otherwise
+## \ingroup plugins
+telLib.getPluginVersion.restype = c_char_p
+def getPluginVersion(pluginHandle):
+    data =  telLib.getPluginVersion(pluginHandle)
+    res = data
+    telLib.freeText(data)
+    return res
+
 ## \brief Get the Description of a Plugin. This is assigned by the pluging developer
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
@@ -339,7 +372,10 @@ def getPluginHint(pluginHandle):
 ## \ingroup plugins
 telLib.getPluginInfo.restype = c_char_p
 def getPluginInfo(pluginHandle):
-    return telLib.getPluginInfo(pluginHandle)
+    data =  telLib.getPluginInfo(pluginHandle)
+    res = data
+    telLib.freeText(data)
+    return res
 
 ## \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF.
 ## Use the function getPluginManualNrOfBytes to get the exact length of this string.
@@ -373,7 +409,6 @@ def getPluginManualAsPDF(pluginHandle):
 def getPluginManualNrOfBytes(pluginHandle):
     return telLib.getPluginManualNrOfBytes(pluginHandle)
 
-
 ## \brief If a plugin has a built-in PDF manual, display it.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns False if the plugin has no manual
@@ -399,7 +434,7 @@ def displayPluginManual(pluginHandle):
     os.system('start ' + outFName)
 
 ## \brief Assign a roadrunner instance handle for the plugin to use.
-##    A plugin may use an externally created roadrunner instance for its internal work.
+##   A plugin may use an externally created roadrunner instance for its internal work.
 ##  \param pluginHandle Handle to a plugin
 ##  \param rrHandle Handle to a roadrunner instance
 ##  \return Returns true or false indicating success/failure

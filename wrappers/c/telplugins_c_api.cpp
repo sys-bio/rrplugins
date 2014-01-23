@@ -208,9 +208,34 @@ char* tlp_cc getPluginDescription(RRPluginHandle handle)
 {
     start_try
         Plugin* aPlugin = castToPlugin(handle);
-    return createText(aPlugin->getDescription());
+        return createText(aPlugin->getDescription());
     catch_ptr_macro
 }
+
+TLP_C_DS char* tlp_cc getPluginAuthor(RRPluginHandle handle)
+{
+    start_try
+        Plugin* aPlugin = castToPlugin(handle);
+        return createText(aPlugin->getAuthor());
+    catch_ptr_macro
+}
+
+TLP_C_DS char* tlp_cc getPluginCopyright(RRPluginHandle handle)
+{
+    start_try
+        Plugin* aPlugin = castToPlugin(handle);
+        return createText(aPlugin->getCopyright());
+    catch_ptr_macro
+}
+
+TLP_C_DS char* tlp_cc getPluginVersion(RRPluginHandle handle)
+{
+    start_try
+        Plugin* aPlugin = castToPlugin(handle);
+        return createText(aPlugin->getVersion());
+    catch_ptr_macro
+}
+
 
 char* tlp_cc getPluginHint(RRPluginHandle handle)
 {
@@ -231,7 +256,7 @@ RRPropertiesHandle tlp_cc getPluginProperties(RRPluginHandle handle)
 char* tlp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
 {
     start_try
-        Plugin* aPlugin = castToPlugin(handle);        
+        Plugin* aPlugin = castToPlugin(handle);
         return createText(aPlugin->getPropertyNames().AsString());
     catch_ptr_macro
 }

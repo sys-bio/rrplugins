@@ -1,6 +1,7 @@
 
 Release 0.6.7 (2014-01-23)
 ==========================
+- Added getPlugin, getPluginVersion, getPluginCopyright API functions (C and Python)
 - Updated Noise plugin noise generation
 - Added set/get columndataheader by index in all API's
 

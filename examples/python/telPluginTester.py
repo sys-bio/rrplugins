@@ -16,10 +16,13 @@ try:
         if aPlugin == None:
             break            
         print '=========================================='
-        print 'PluginName: ' + `getPluginName(aPlugin)`
-        print 'Plugin Description: \n'
-        print getPluginDescription(aPlugin)
-        print '\nPluginParameters: ' + `getListOfPluginPropertyNames(aPlugin)`                    
+        print 'Name: ' + `getPluginName(aPlugin)`
+        print 'Author: ' + `getPluginAuthor(aPlugin)`
+        print 'Copyright: ' + `getPluginCopyright(aPlugin)`
+        print 'Version: ' + `getPluginVersion(aPlugin)`
+        print 'Category: ' + `getPluginCategory(aPlugin)`                        
+        print 'Description:' + `getPluginDescription(aPlugin)`
+        print 'Parameters: ' + `getListOfPluginPropertyNames(aPlugin)`                    
         
         #get next plugin
         aPlugin = getNextPlugin(pm)
