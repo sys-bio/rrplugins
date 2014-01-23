@@ -1,4 +1,5 @@
-\chapter{Add Noise Plugin}
+\chapter*{Add Noise Plugin}
+\setcounter{chapter}{1}
 \emph{Add some noise}
 \section{Introduction}
 The purpose of the \emph{AddNoise} plugin is to introduce random noise to \emph{Tellurium} data. 
@@ -57,25 +58,46 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \end{table}
 
 \section{The \texttt{execute(bool inThread)} function}
-The \verb|execute()| will apply noise to all rows and columns of the assigned data, with one exception. Data not affected are data in the first column, and if, and only if, its column header equals "time" (case insensitive). 
+The \verb|execute()| function will apply noise to all rows and columns of the assigned data, with one exception. Data not affected are data in the first column, and if, and only if, its column header equals "time" (case insensitive). 
 
 The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the AddNoise plugin.
 
 The inThread argument defaults to \textbf{false}.
 
-\section{Python example}
+\section{Python examples}
+
+\subsection{Add noise to data acquired from RoadRunner}
+The python script below shows how to acquire simulation data from RoadRunner and pass it to he noise plugin. The format of the data that is obtained from the \verb|simulate()| function (line 8), is not directly compatible with the Noise plugins InputData property. This incompatibility is handled by an intermediate data structure in Python, that is called DataSeries (line 14). 
+The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respectively. Line 23 denote the execution of the noise plugin, and after that has finished, data can be visualized by using the \verb|plot| function (line 26). The output is shown below the script. 
 
 \begin{singlespace}
-\lstinputlisting[label=plugin_addNoise_header,caption={Add noise example.},language=Python]{Examples/rrNoisePlugin.py}
+\lstinputlisting[label=plugin_addNoise_header,caption={Add noise example.},language=Python]{Examples/telNoisePluginEx1.py}
 \end{singlespace}
-
 
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90,width=120mm]{AddNoise.jpg}
-\caption{Output fot the AddNoise python example script discussed above}
-\label{fig:addNoiseFig}
+\caption{Output for the AddNoise python example script discussed above}
+\label{fig:addNoiseFig1}
 \end{figure}
+
+\subsection{Visualization of the noise distribution used in the AddNoise plugin}
+The Python script below demonstrate the actual distribution (Gaussian) of noise that is applied on data.
+
+\begin{singlespace}
+\lstinputlisting[label=plugin_addNoise_header,caption={Noise distribution example.},language=Python]{Examples/telNoisePluginEx2.py}
+\end{singlespace}
+
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90,width=120mm]{AddNoise2.jpg}
+\caption{Output for the AddNoise python example script discussed above}
+\label{fig:addNoiseFig2}
+\end{figure}
+
+ 
+
+
 
 
 

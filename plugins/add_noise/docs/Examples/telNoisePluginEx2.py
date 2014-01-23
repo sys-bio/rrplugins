@@ -1,29 +1,31 @@
-import roadrunner
+# Show that add noise plugin correctly computes Sigma (standard deviation)
+import matplotlib.pyplot as plt
+import scipy.stats as stats
 import telplugins as tel
+import numpy as np
 
-try:
-    # Create a roadrunner instance and create some data
-    rr = roadrunner.RoadRunner()
-    rr.load("sbml_test_0001.xml")    
-    data = rr.simulate(0, 10, 511) # Want 512 points
+p = tel.Plugin ("tel_add_noise")
 
-    #Add noise to the data
-    noisePlugin = tel.Plugin ("tel_add_noise")
+value = 2.34    #This will be the mean
+n = 80000
+inputData  = np.zeros (shape=(1,2))
+inputData[0] = [0, value]
 
-    # Get the dataseries from data returned by roadrunner
-    d = tel.getDataSeries (data)
+data = tel.DataSeries.fromNumPy (inputData)
+p.Sigma = 0.25
 
-    # Assign the dataseries to the plugin inputdata
-    noisePlugin.InputData = d
+outArray = []
+for i in range(n):
+    p.InputData = data       
+    p.execute()
+    outValues = p.InputData.toNumpy    
+    outArray.append(outValues[0][1]) 
+    
+plt.hist(outArray, 200, normed=True)
 
-    # Set parameter for the 'size' of the noise
-    noisePlugin.Sigma = 3.e-6
+# Overlay analytical solution
+aRange = np.arange(min(outArray), max(outArray), 0.001)
+plt.plot(aRange, stats.norm.pdf(aRange, value, p.Sigma), linestyle='--', linewidth='2', color='red')
 
-    # Add the noise
-    noisePlugin.execute()
+plt.show()
 
-    # Get the data to plot
-    noisePlugin.InputData.plot()
-
-except Exception as e:
-    print 'Problem: ' + `e`
