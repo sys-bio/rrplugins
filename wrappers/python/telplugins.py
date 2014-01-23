@@ -641,13 +641,13 @@ def getDataSeries (numPyData):
 # \brief Scripts illuminating concepts regarding Tellurium Plugins
 
 ## \example telPluginDocumentation.py
-## This Example shows
+## This example shows
 ## -# Get a plugin's categories in the form of an XML string
 ## -# Obtain and view a Plugin's documentation as a PDF (Needs a system PDF reader)
 
 ## \example telCreateNoisyData1.py
-## This Example Demonstrate the use of the AddNoise plugin
+## This example demonstrates the use of the AddNoise plugin
 
 ## \example telLMFit2.py
-## This example demonstrate parameter minimization, using the Levenberg-Marquardt algorithm.
+## This example demonstrates parameter minimization, using the Levenberg-Marquardt algorithm.
 
