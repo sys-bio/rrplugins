@@ -1,5 +1,5 @@
-#ifndef LMWorkerH
-#define LMWorkerH
+#ifndef lmWorkerTempH
+#define lmWorkerTempH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
 #include "rr/rrRoadRunner.h"
@@ -13,7 +13,7 @@ class LM;
 
 using tlp::TelluriumData;
 
-class LMWorker : public Poco::Runnable
+class lmWorker : public Poco::Runnable
 {
     friend LM;
 
@@ -31,7 +31,7 @@ class LMWorker : public Poco::Runnable
         void                        workerStarted();
         void                        workerFinished();
     public:
-                                    LMWorker(LM& host);
+                                    lmWorker(LM& host);
         void                        start(bool runInThread = true);
         void                        run();
         bool                        isRunning() const;

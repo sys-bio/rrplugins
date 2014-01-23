@@ -1,6 +1,5 @@
 #ifndef lmUtilsH
 #define lmUtilsH
-//#include "rr/C/rrc_types.h"
 #include "telplugins_types.h"
 #include "telPluginsManagerSettings.h"
 //---------------------------------------------------------------------------

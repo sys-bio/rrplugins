@@ -4,31 +4,29 @@
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "rr/rrRoadRunner.h"
-//#include "rr/c/rrc_types.h"
-#include "LMWorker.h"
+#include "lmWorker.h"
 #include "lib/lmmin.h"
 //---------------------------------------------------------------------------
 
 namespace lmfit
 {
-//using namespace rrc;
 using namespace tlp;
 using rr::RoadRunner;
 using std::string;
 
 class LM : public CPPPlugin
 {
-    friend class LMWorker;
+    friend class lmWorker;
 
     public:
         Property<string>                        mSBML;                          //This is the model
-        Property<TelluriumData>				mExperimentalData;
-        Property<TelluriumData>			    mModelData;
-        Property<TelluriumData>			    mResidualsData;
+        Property<TelluriumData>				    mExperimentalData;
+        Property<TelluriumData>			        mModelData;
+        Property<TelluriumData>			        mResidualsData;
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
-        Property<tlp::StringList>                mExperimentalDataSelectionList; //Species selection list for observed data
-        Property<tlp::StringList>                mModelDataSelectionList;        //Species selection list for observed data
+        Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
+        Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
         Property<double>                        mNorm;                          //Part of minimization result
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
@@ -39,7 +37,7 @@ class LM : public CPPPlugin
         Property<double>                        epsilon;                        /* step used to calculate the jacobian. */
         Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
         Property<int>                           patience;                       /* maximum number of iterations. */
-//        Property<int>                           scale_diag;                   /* UNDOCUMENTED, TESTWISE automatical diag rescaling? */
+        //Property<int>                           scale_diag;                   /* UNDOCUMENTED, TESTWISE automatical diag rescaling? */
 
 		//Utility functions for the thread
         string                                  getTempFolder();
@@ -48,9 +46,9 @@ class LM : public CPPPlugin
 		lmDataStructure							&mLMData;        //LevenbergMarq.. data structure
     protected:
         //The worker is doing the work
-        LMWorker                                mLMWorker;
-
+        lmWorker                                mWorker;
         lm_status_struct                        mLMStatus;      //Check afterwards.
+
     public:
                                                 LM();
                                                ~LM();
@@ -64,7 +62,7 @@ class LM : public CPPPlugin
 
         unsigned char*                          getManualAsPDF() const;
         unsigned int                            getPDFManualByteSize();
-        tlp::StringList                          getExperimentalDataSelectionList();
+        tlp::StringList                         getExperimentalDataSelectionList();
         void                                    assignPropertyDescriptions();
 };
 

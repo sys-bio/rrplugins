@@ -23,7 +23,6 @@
 namespace lmfit
 {
 using namespace std;
-//using namespace rrc;
 using tlp::StringList;
 
 LM::LM()
@@ -39,8 +38,8 @@ mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelecti
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
 mNorm(                          0,                      "Norm",                                 "Norm of fitting. An estimate of goodness of fit"),
 mNrOfIter(                      0,                      "NrOfIter",                             "Number of iterations"),
-mLMWorker(*this),
-mLMData(mLMWorker.mLMData),
+mWorker(*this),
+mLMData(mWorker.mLMData),
 
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
@@ -93,7 +92,7 @@ LM::~LM()
 
 bool LM::isWorking() const
 {
-    return mLMWorker.isRunning();
+    return mWorker.isRunning();
 }
 
 unsigned char* LM::getManualAsPDF() const
@@ -128,7 +127,7 @@ string LM::getImplementationLanguage()
 
 bool LM::resetPlugin()
 {
-    if(mLMWorker.isRunning())
+    if(mWorker.isRunning())
     {
         return false;
     }
@@ -182,7 +181,7 @@ bool LM::execute(bool inThread)
     try
     {
         Log(lInfo)<<"Executing the LM plugin";
-        mLMWorker.start(inThread);
+        mWorker.start(inThread);
         return true;
     }
     catch(const rr::Exception& ex)

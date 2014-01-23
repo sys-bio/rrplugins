@@ -2,7 +2,7 @@
 #include "telTelluriumData.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
-#include "LMWorker.h"
+#include "lmWorkerTemp.h"
 #include "lm.h"
 #include "lib/lmmin.h"
 #include "telUtils.h"
@@ -17,7 +17,7 @@ using namespace rrc;
 using namespace std;
 using namespace tlp;
 using namespace tlpc;
-LMWorker::LMWorker(LM& host)
+lmWorker::lmWorker(LM& host)
 :
 mTheHost(host),
 mRRI(NULL)
@@ -25,12 +25,12 @@ mRRI(NULL)
     memset(&mLMData, 0, sizeof(lmDataStructure));
 }
 
-bool LMWorker::isRunning() const
+bool lmWorker::isRunning() const
 {
     return mThread.isRunning();
 }
 
-void LMWorker::start(bool runInThread)
+void lmWorker::start(bool runInThread)
 {
     if(runInThread)
     {
@@ -48,7 +48,7 @@ void LMWorker::start(bool runInThread)
     }
 }
 
-void LMWorker::run()
+void lmWorker::run()
 {
     workerStarted();
 
@@ -131,7 +131,7 @@ void LMWorker::run()
     workerFinished();
 }
 
-void LMWorker::workerStarted()
+void lmWorker::workerStarted()
 {
     mTheHost.mIsWorking = true;
     if(mTheHost.mWorkStartedEvent)
@@ -140,7 +140,7 @@ void LMWorker::workerStarted()
     }
 }
 
-void LMWorker::workerFinished()
+void lmWorker::workerFinished()
 {
     mTheHost.mIsWorking = false;//Set this flag before event so client can query plugin about termination
     if(mTheHost.mWorkFinishedEvent)
@@ -149,7 +149,7 @@ void LMWorker::workerFinished()
     }
 }
 
-bool LMWorker::setup()
+bool lmWorker::setup()
 {
     StringList& species         = mTheHost.mExperimentalDataSelectionList.getValueReference();   //Model data selection..
     mLMData.nrOfSpecies         = species.Count();
@@ -238,7 +238,7 @@ bool LMWorker::setup()
     return true;
 }
 
-bool LMWorker::setupRoadRunner()
+bool lmWorker::setupRoadRunner()
 {
     if(mRRI)
     {
@@ -343,7 +343,7 @@ void evaluate(const double *par,       //Property vector
     }
 }
 
-void LMWorker::createModelData(TelluriumData* _data)
+void lmWorker::createModelData(TelluriumData* _data)
 {
     TelluriumData& data = *(_data);
     //We now have the parameters
@@ -372,7 +372,7 @@ void LMWorker::createModelData(TelluriumData* _data)
     }
 }
 
-void LMWorker::createResidualsData(TelluriumData* _data)
+void lmWorker::createResidualsData(TelluriumData* _data)
 {
     TelluriumData& resData = *(_data);        
     //We now have the parameters

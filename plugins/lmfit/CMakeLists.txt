@@ -16,7 +16,7 @@ ${CMAKE_INSTALL_PREFIX}/lib
 
 set(sources
 lm
-LMWorker
+lmWorker
 lmUtils
 lmfit_doc
 )
