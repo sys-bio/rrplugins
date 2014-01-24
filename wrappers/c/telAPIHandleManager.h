@@ -7,7 +7,6 @@
 using std::map;
 
 typedef void* TELHandle;
-//enum HandleType {htPropertiesHandle = 0, htPropertyHandle, htPluginHandle, htPluginManagerHandle, htDataHandle, htUnKnown};
 typedef map<TELHandle, const char*>   HandleMap;
 
 class APIHandleManager
@@ -15,9 +14,9 @@ class APIHandleManager
     public:
                                         APIHandleManager();
                                        ~APIHandleManager();
-        bool                            addHandle(TELHandle handle, const char* typeOf);
-        bool                            removeHandle(TELHandle handle, const char* typeOf);
-        TELHandle                       validate(TELHandle handle, const char* typeOf, const char* fnc);
+        bool                            addHandle(TELHandle handle,     const char* typeOf);
+        bool                            removeHandle(TELHandle handle,  const char* typeOf);
+        TELHandle                       validate(TELHandle handle,      const char* typeOf, const char* fnc);
 
     protected:
         HandleMap                       mHandles;

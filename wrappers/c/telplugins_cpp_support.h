@@ -86,7 +86,15 @@ TLP_C_DS void                        setError(const string& err);
  \return TELHandle
  \ingroup cpp_support
 */
-TELHandle  castHandle(TELHandle handle, const char* type, const char* fnc);
+template<typename  T>
+T* castHandle(TELHandle handle, const char* fnc, bool allowBase = false)
+{
+    T* ptr = static_cast<T*>(gHandleManager.validate(handle, typeid(T*).name(), fnc));
+    return ptr;
+}
+
+
+//TELHandle  castHandle(TELHandle handle, const char* type, const char* fnc);
 
 /*!
  \brief Cast a handle to RoadRunner Plugin pointer, throws if it fails
@@ -94,7 +102,7 @@ TELHandle  castHandle(TELHandle handle, const char* type, const char* fnc);
  \return Pointer to a Plugin object
  \ingroup cpp_support
 */
-Plugin*    castToPlugin(RRPluginHandle handle, const char* fnc);
+//Plugin*    castToPlugin(RRPluginHandle handle, const char* fnc);
 
 /*!
  \brief Cast a handle to RoadRunner Properties pointer, throws if it fails
@@ -102,7 +110,7 @@ Plugin*    castToPlugin(RRPluginHandle handle, const char* fnc);
  \return Pointer to a parameters instance
  \ingroup cpp_support
 */
-Properties*                         castToProperties(RRPropertiesHandle handle);
+//Properties*                         castToProperties(RRPropertiesHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner PropertyBase pointer, throws if it fails
@@ -110,7 +118,7 @@ Properties*                         castToProperties(RRPropertiesHandle handle);
  \return Pointer to a baseparameter instance
  \ingroup cpp_support
 */
-PropertyBase*                      castToProperty(RRPropertyHandle handle);
+//PropertyBase*                      castToProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<bool> pointer, throws if it fails
@@ -118,7 +126,7 @@ PropertyBase*                      castToProperty(RRPropertyHandle handle);
  \return Pointer to a Property<int>* instance
  \ingroup cpp_support
 */
-Property< bool >*                   castToBoolProperty(RRPropertyHandle handle);
+//Property< bool >*                   castToBoolProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<int> pointer, throws if it fails
@@ -126,7 +134,7 @@ Property< bool >*                   castToBoolProperty(RRPropertyHandle handle);
  \return Pointer to a Property<int>* instance
  \ingroup cpp_support
 */
-Property< int >*                   castToIntProperty(RRPropertyHandle handle);
+//Property< int >*                   castToIntProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<double> pointer, throws if it fails
@@ -134,7 +142,7 @@ Property< int >*                   castToIntProperty(RRPropertyHandle handle);
  \return Pointer to a Property<double>* instance
  \ingroup cpp_support
 */
-Property<double>*                  castToDoubleProperty(RRPropertyHandle handle);
+//Property<double>*                  castToDoubleProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<string> pointer, throws if it fails
@@ -142,7 +150,7 @@ Property<double>*                  castToDoubleProperty(RRPropertyHandle handle)
  \return Pointer to a Property<double>* instance
  \ingroup cpp_support
 */
-Property<string>*                   castToStringProperty(RRPropertyHandle handle);
+//Property<string>*                   castToStringProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<Properties> pointer, throws if it fails
@@ -150,7 +158,7 @@ Property<string>*                   castToStringProperty(RRPropertyHandle handle
  \return Pointer to a Property<Properties>* instance
  \ingroup cpp_support
 */
-Property<Properties>*              castToPropertiesProperty(RRPropertyHandle handle);
+//Property<Properties>*              castToPropertiesProperty(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to TelluriumData pointer, throws if it fails
@@ -158,7 +166,7 @@ Property<Properties>*              castToPropertiesProperty(RRPropertyHandle han
  \return Pointer to a TelluriumData instance
  \ingroup cpp_support
 */
-tlp::TelluriumData*                 castPropertyToTelluriumData(RRPropertyHandle handle);
+//tlp::TelluriumData*                 castPropertyToTelluriumData(RRPropertyHandle handle);
 
 /*!
  \brief Cast a handle to RoadRunner Property<TelluriumData> pointer, throws if it fails
@@ -168,7 +176,7 @@ tlp::TelluriumData*                 castPropertyToTelluriumData(RRPropertyHandle
   data.
  \ingroup cpp_support
 */
-Property<tlp::TelluriumData>*       castToTelluriumDataProperty(RRPropertyHandle handle);
+//Property<tlp::TelluriumData>*       castToTelluriumDataProperty(RRPropertyHandle handle);
 
 
 /*!
@@ -177,7 +185,7 @@ Property<tlp::TelluriumData>*       castToTelluriumDataProperty(RRPropertyHandle
  \return Pointer to a roadrunner instance
  \ingroup cpp_support
 */
-rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
+//rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
 
 /*!
  \brief Cast a RRDataHandle to TelluriumData instance pointer, throws if it fails
@@ -185,7 +193,7 @@ rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
  \return Pointer to a roadrunner instance
  \ingroup cpp_support
 */
-tlp::TelluriumData*                castToTelluriumData(RRDataHandle rrHandle);
+//tlp::TelluriumData*                castToTelluriumData(RRDataHandle rrHandle);
 
 
 }

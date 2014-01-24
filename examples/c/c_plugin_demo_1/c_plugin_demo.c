@@ -60,11 +60,20 @@ bool call_conv setupCPlugin(RRPluginHandle aPlugin)
         setError("Failed creating Property in c_plugin_demo");
         return false;
     }
-    setPropertyByString(gDemoProperty, "Intial Demo Property Value");
+
+    if(!setPropertyByString(gDemoProperty, "Intial Demo Property Value"))
+    {
+        setError("Failed setting Property in c_plugin_demo");
+        return false;
+    }
 
     //Add the property to the property container
     gProperties = createPropertyList();
-    addPropertyToList(gProperties, gDemoProperty);
+    if(!addPropertyToList(gProperties, gDemoProperty))
+    {
+        setError("Failed adding property to Property list in c_plugin_demo");
+        return false;
+    }
 
     return true;
 }

@@ -1,12 +1,14 @@
 #pragma hdrstop
 #include <sstream>
 #include <exception>
+#include "rr/rrLogger.h"
 #include "telAPIHandleManager.h"
 #include "telException.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
 using namespace tlp;
+using namespace rr;
 APIHandleManager::APIHandleManager()
 {}
 
@@ -19,21 +21,40 @@ APIHandleManager::~APIHandleManager()
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
 {
     HandleMap::iterator it = mHandles.find(handle);
+    stringstream msg;
+
     if(it !=  mHandles.end() && it->second == type)
     {
         return handle;
     }
     else
     {
-        stringstream msg;
-        msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
+        //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
+        //type A should be validated as OK.
 
-        if(it !=  mHandles.end())
+        msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
+
+        if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
         {
-            msg<<"Received handle of type: "<<it->second<<" Expected type: "<<type;
+            string allowed("Property");
+            if(strstr(it->second, allowed.c_str()) != NULL)
+            {
+                //For now don't check ParameterBase types. See todo above
+                msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                Log(lWarning)<<msg.str();
+                return handle;
+            }
+            else
+            {
+                msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                throw(BadHandleException(msg.str()));
+            }
         }
-
-        throw(BadHandleException(msg.str()));
+        else
+        {
+            msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
+            throw(BadHandleException(msg.str()));
+        }
     }
 }
 
