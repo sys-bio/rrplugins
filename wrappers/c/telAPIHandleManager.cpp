@@ -8,14 +8,12 @@
 using namespace std;
 using namespace tlp;
 APIHandleManager::APIHandleManager()
-{
-
-
-}
+{}
 
 APIHandleManager::~APIHandleManager()
 {
-    //Free any handles in here
+    //Report existence of any handles in here.. that would be a memory leak if so
+
 }
 
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
@@ -32,7 +30,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
 
         if(it !=  mHandles.end())
         {
-            msg<<"Got handle of type: "<<it->second<<" Expected type: "<<type;
+            msg<<"Received handle of type: "<<it->second<<" Expected type: "<<type;
         }
 
         throw(BadHandleException(msg.str()));
@@ -42,6 +40,12 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
 bool APIHandleManager::addHandle(TELHandle handle, const char* type)
 {
     mHandles[handle] = type;
+    return true;
+}
 
+bool APIHandleManager::removeHandle(TELHandle handle, const char* type)
+{
+    HandleMap::iterator it = mHandles.find(handle);
+    mHandles.erase ( it, mHandles.end() );
     return true;
 }

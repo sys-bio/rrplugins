@@ -15,12 +15,8 @@ class APIHandleManager
     public:
                                         APIHandleManager();
                                        ~APIHandleManager();
-
-                                       //Used in creation
-//        bool                            createHandle(TELHandle handle, HandleType type);
-//        bool                            freeHandle(TELHandle handle, HandleType type);
-
         bool                            addHandle(TELHandle handle, const char* typeOf);
+        bool                            removeHandle(TELHandle handle, const char* typeOf);
         TELHandle                       validate(TELHandle handle, const char* typeOf, const char* fnc);
 
     protected:
