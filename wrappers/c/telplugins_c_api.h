@@ -44,7 +44,7 @@
 #include "telplugins_types.h"
 #include "telplugins_utilities.h"
 #include "telplugins_properties_api.h"
-#include "telplugins_roadrunnerdata_api.h"
+#include "telplugins_telluriumdata_api.h"
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)

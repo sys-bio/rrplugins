@@ -16,10 +16,10 @@ ${THIRD_PARTY_INSTALL_FOLDER}/lib
 #The C-api is built as a shared library..
 add_library(${target} SHARED
 telplugins_c_api
-telplugins_cpp_support
 telplugins_properties_api
+telplugins_telluriumdata_api
+telplugins_cpp_support
 telplugins_utilities
-telplugins_roadrunnerdata_api
 telAPIHandleManager
 )
 

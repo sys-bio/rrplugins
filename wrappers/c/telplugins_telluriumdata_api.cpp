@@ -1,18 +1,20 @@
 #pragma hdrstop
+#include "rr/rrRoadRunner.h"
 #include "telOSSpecifics.h"
-#include "telplugins_roadrunnerdata_api.h"
+#include "telplugins_telluriumdata_api.h"
 #include "tel_macros.h"
 #include "telplugins_utilities.h"
 #include "telplugins_cpp_support.h"
 #include "telStringUtils.h"
-#include "rr/rrRoadRunner.h"
 #include "telTelluriumData.h"
 
 namespace tlpc
 {
+using rr::RoadRunner;
 using namespace std;
-using namespace tlp;
 using tlp::TelluriumData;
+using tlp::StringList;
+using tlpc::createText;
 
 RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle)
 {
@@ -96,7 +98,7 @@ char* tlp_cc getTelluriumDataColumnHeader(RRDataHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        return createText(data->getColumnNamesAsString());
+        return tlpc::createText(data->getColumnNamesAsString());
     catch_ptr_macro
 }
 
@@ -146,6 +148,7 @@ RRDataHandle tlp_cc createTelluriumData(int nRows, int nCols, char* colNames)
 {
     start_try
         TelluriumData* data = new TelluriumData(nRows, nCols);
+        gHM.registerHandle(data, typeid(data).name());
         if (colNames)
         {
             string cNames(colNames);

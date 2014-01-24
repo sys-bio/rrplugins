@@ -2,8 +2,8 @@
 #include <sstream>
 #include "rr-libstruct/lsMatrix.h"
 #include "rr/rrRoadRunner.h"
-#include "telTelluriumData.h"
 #include "rr/rrLogger.h"
+#include "telTelluriumData.h"
 #include "telUtils.h"
 #include "telPluginManager.h"
 #include "telPlugin.h"
@@ -16,9 +16,11 @@
 namespace tlpc
 {
 using namespace std;
+using rr::RoadRunner;
 using tlp::TelluriumData;
-using namespace tlp;
-
+using tlp::StringList;
+using tlpc::createText;
+//using namespace tlp;
 
 RRPluginManagerHandle tlp_cc createPluginManager(const char* _pluginDir)
 {
@@ -34,7 +36,7 @@ RRPluginManagerHandle tlp_cc createPluginManager(const char* _pluginDir)
         }
 
         PluginManager* pm = new PluginManager(pluginDir);
-        gHandleManager.addHandle(pm, typeid(pm).name());
+        gHM.registerHandle(pm, typeid(pm).name());
 
         return pm;
     catch_ptr_macro
@@ -92,8 +94,7 @@ RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
         {
             //Register plugins with Handle manager.
             Plugin* handle = pm->getPlugin(pluginName);
-            gHandleManager.addHandle(handle, typeid(Plugin*).name());
-            return handle;
+            return registerPlugin(handle);
         }
         else
         {
@@ -114,10 +115,12 @@ bool tlp_cc loadPlugins(RRPluginManagerHandle handle)
         pm->load();
 
         //Register plugins with Handle manager.
+        //We also need to register plugin attributes that may be
+        //accessed trough the API
         Plugin* pl = pm->getFirstPlugin();
         while(pl)
         {
-            gHandleManager.addHandle(pl, typeid(Plugin*).name());
+            registerPlugin(pl);
             pl = pm->getNextPlugin();
         };
 
@@ -434,7 +437,6 @@ char* tlp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
         return createText(aPlugin->getPluginPropertiesAsXML().c_str());
     catch_ptr_macro
 }
-
 
 
 }

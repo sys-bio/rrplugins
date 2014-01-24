@@ -180,7 +180,7 @@ TLP_C_DS bool tlp_cc setListProperty(RRPropertyHandle handle, void* value);
 TLP_C_DS bool tlp_cc getListProperty(RRPropertyHandle handle, void* value);
 
 /*!
- \brief Set a roadRunnerDataProperty property
+ \brief Set a telluriumDataProperty property
  \param handle to a Property instance
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
@@ -188,7 +188,7 @@ TLP_C_DS bool tlp_cc getListProperty(RRPropertyHandle handle, void* value);
 TLP_C_DS bool tlp_cc setTelluriumDataProperty(RRPropertyHandle handle, void* value);
 
 /*!
- \brief Get the value of a roadRunnerDataProperty property
+ \brief Get the value of a telluriumDataProperty property
  \param handle to a Property instance
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise

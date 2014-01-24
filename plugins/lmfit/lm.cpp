@@ -134,27 +134,10 @@ bool LM::resetPlugin()
 
     mTerminate = false;
 
-
-//    if(mExperimentalData.getValue())
-//    {
-//        mExperimentalData.getValueReference()->clear();
-//    }
-//
-//    if(mModelData.getValue())
-//    {
-//        mModelData.getValue()->clear();
-//    }
-//
-//    if(mResidualsData.getValue())
-//    {
-//        mResidualsData.getValueReference()->clear();
-//    }
-
     mInputParameterList.getValueReference().clear();
     mOutputParameterList.getValueReference().clear();
     mExperimentalDataSelectionList.getValueReference().clear();
     mModelDataSelectionList.getValueReference().clear();
-//    mNrOfIter = 0;
     return true;
 }
 

@@ -15,6 +15,6 @@ for i in range(100):
     rr.simulate(0, 10, i + 1) # Want 512 points
     
     ### Comment this out and the crash do not happen    
-    d = tel.getTelluriumData (rr)
+    #d = tel.getRoadRunnerDataHandle (rr)
         
     print i

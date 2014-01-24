@@ -1,12 +1,17 @@
 import roadrunner
-import telplugins as tel
+import telplugins
 
 try:    
     for i in range(1):
-        noisePlugin = tel.Plugin ("tel_add_noise")    
+        noisePlugin = telplugins.Plugin ("tel_add_noise")    
+        
+        #This is not great semantics
         print noisePlugin.listOfPlugins()
 
-    if tel.tpc.hasLoadPluginErrors(tel._pluginManager):
-        print tel.tpc.getPluginLoadErrors(tel._pluginManager)    
+    if telplugins.tpc.hasLoadPluginErrors(telplugins.telplugins._pluginManager):
+        print telplugins.tpc.getPluginLoadErrors(telplugins._pluginManager)
+    else:
+        print 'No Errors'        
+            
 except Exception as e:
     print 'Problem: ' + `e`

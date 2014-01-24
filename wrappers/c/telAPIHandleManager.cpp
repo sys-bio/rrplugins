@@ -15,7 +15,6 @@ APIHandleManager::APIHandleManager()
 APIHandleManager::~APIHandleManager()
 {
     //Report existence of any handles in here.. that would be a memory leak if so
-
 }
 
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
@@ -31,7 +30,6 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
     {
         //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
         //type A should be validated as OK.
-
         msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
 
         if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
@@ -58,15 +56,22 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
     }
 }
 
-bool APIHandleManager::addHandle(TELHandle handle, const char* type)
+TELHandle APIHandleManager::registerHandle(TELHandle handle, const char* type)
 {
-    mHandles[handle] = type;
-    return true;
+    //Could check for duplicates and signal if that happens
+    if(handle)
+    {
+        mHandles[handle] = type;
+    }
+
+    return handle;
 }
 
-bool APIHandleManager::removeHandle(TELHandle handle, const char* type)
+bool APIHandleManager::unregisterHandle(TELHandle handle, const char* type)
 {
     HandleMap::iterator it = mHandles.find(handle);
     mHandles.erase ( it, mHandles.end() );
     return true;
 }
+
+

@@ -121,7 +121,7 @@ def loadPlugins(pm):
 ## \ingroup plugin_manager
 def hasLoadPluginErrors(pm):
     aStr = telLib.getPluginLoadErrors(pm)
-    if len(aStr) > 0:
+    if aStr != None and len(aStr) > 0:
         return True
     else:
         return False
@@ -1089,13 +1089,14 @@ def getPropertyValue(propertyHandle):
     else:
        raise TypeError ('Property is not a string type')
 
-## \brief Retrieve a handle to RoadRunners internal data object
-## \param rrInstance A RoadRunner instance, as returned from roadrunner.RoadRunner()
-## \return Returns a handle to roadrunners internal data object
-## \ingroup utilities
-def getTelluriumDataHandle(rrInstance):
-    rrHandle = cast(int(rrInstance.this), c_void_p)
-    return telLib.getTelluriumDataHandle(rrHandle)
+
+#### \brief Retrieve a handle to RoadRunners internal data object
+#### \param rrInstance A RoadRunner instance, as returned from roadrunner.RoadRunner()
+#### \return Returns a handle to roadrunners internal data object
+#### \ingroup utilities
+##def getRoadRunnerDataHandle(rrInstance):
+##    rrHandle = cast(int(rrInstance.this), c_void_p)
+##    return telLib.getRoadRunnerDataHandle(rrHandle)
 
 ## \brief Convert tellurium data to Numpy data
 ## \param telDataHandle A handle to a tellurium data object
@@ -1122,8 +1123,8 @@ def plotTelluriumData(data, colHeaders):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
-    if len(colHeaders) < 1:
-        print "bad data"
+    if colHeaders == None or len(colHeaders) < 1:
+        print "Bad Data ColumnHeader"
         return
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1

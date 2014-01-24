@@ -23,8 +23,10 @@ class LM : public CPPPlugin
         Property<TelluriumData>				    mExperimentalData;
         Property<TelluriumData>			        mModelData;
         Property<TelluriumData>			        mResidualsData;
+
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
+
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
         Property<double>                        mNorm;                          //Part of minimization result

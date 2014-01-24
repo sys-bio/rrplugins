@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include <iostream>
 #include "telPluginManager.h"
-#include "rrException.h"
-#include "rrLogger.h"
+#include "rr/rrException.h"
+#include "rr/rrLogger.h"
 #include "telPlugin.h"
 #include "telUtils.h"
 #include "telProperty.h"
@@ -13,18 +13,18 @@
 using namespace tlp;
 using namespace autoplugin;
 using namespace std;
-
+using namespace rr;
 int main()
 {
     string tempFolder(".");
     string sbmlFile("../models/bistable.xml");
-	gLog.setLevel(lInfo);
+	gLog.setLevel(rr::lInfo);
     gLog.enableConsoleLogging();
     gLog.enableFileLogging(joinPath(tempFolder, "bistable.log"));
 
     try
     {
-        string pluginName("rrp_auto2000");
+        string pluginName("tel_auto2000");
 
         //A Plugin manager, using a roadrunner instance
         PluginManager pm("../plugins");
@@ -32,7 +32,7 @@ int main()
         //Load auto plugin
         if(!pm.load(pluginName))
         {
-            Log(lError)<<"Failed to load plugin: "<<pluginName;
+            Log(rr::lError)<<"Failed to load plugin: "<<pluginName;
             return 0;
         }
 
@@ -40,7 +40,7 @@ int main()
         AutoPlugin* autoPlugin = (AutoPlugin*) pm.getPlugin(pluginName);
         if(!autoPlugin)
         {
-            Log(lError)<<"Problem..";
+            Log(rr::lError)<<"Problem..";
             throw("AutoPlugin don't exist");
         }
 
@@ -68,11 +68,11 @@ int main()
 
         if(!autoPlugin->execute())
         {
-            Log(lError)<<"Problem executing the Auto plugin";
+            Log(rr::lError)<<"Problem executing the Auto plugin";
             return 0;
         }
 
-        Log(lInfo)<<"Auto plugin is done.";
+        Log(rr::lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
         cout<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
 
@@ -82,17 +82,17 @@ int main()
     }
     catch(rr::Exception& ex)
     {
-        Log(lError)<<ex.getMessage();
+        Log(rr::lError)<<ex.getMessage();
     }
     catch(Poco::Exception& ex)
     {
-        Log(lError)<<"Problem..."<<ex.message();
+        Log(rr::lError)<<"Problem..."<<ex.message();
     }
     catch(...)
     {
-        Log(lError)<<"Bad problem...!";
+        Log(rr::lError)<<"Bad problem...!";
     }
 
-    pause(true);
+     pause(true);
     return 0;
 }

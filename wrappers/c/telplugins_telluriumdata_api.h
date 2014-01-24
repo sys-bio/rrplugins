@@ -39,8 +39,8 @@
  * redistribute any piece of this software without proper attribution;
 */
 
-#ifndef telplugins_roadrunnerdata_apiH
-#define telplugins_roadrunnerdata_apiH
+#ifndef telplugins_telluriumdata_apiH
+#define telplugins_telluriumdata_apiH
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
 //---------------------------------------------------------------------------
@@ -54,7 +54,7 @@ namespace tlpc { extern "C" {
  \return Returns an handle to roadrunners internal data object
  \ingroup roadrunnerdata
 */
-TLP_C_DS RRDataHandle tlp_cc getTelluriumDataHandle(RRHandle handle);
+TLP_C_DS RRDataHandle tlp_cc getRoadRunnerDataHandle(RRHandle handle);
 
 /*!
  \brief Retrieves an element at a given row and column from a RoadRunner data type variable

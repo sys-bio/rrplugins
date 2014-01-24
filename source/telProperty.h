@@ -331,33 +331,6 @@ inline void Property<tlp::TelluriumData>::setValue(tlp::TelluriumData* val)
     mValue = (*val);
 }
 
-////============ RRStringArray
-///**
-//    Returns a RRStringArrays value as a string.
-//    \note This is not implemented.
-//*/
-//template<>
-//inline string Property<rrc::RRStringArray>::getValueAsString() const
-//{
-//    return string("");
-//}
-//
-///**
-//    Set the value of a RRStringArray, from a string. This function expects input string
-//    containing comma delimited values.
-//*/
-//template<>
-//inline void Property<rrc::RRStringArray>::setValueFromString(const string& val)
-//{
-//    //Todo.. clear current list first..
-//    tlp::StringList list = tlp::splitString(val, ",");
-//    mValue.Count = list.size();
-//    for(int i = 0; i < mValue.Count; i++)
-//    {
-//        mValue.String[i] = tlp::createText(list[i]);
-//    }
-//}
-
 //========== Properties container
 /**
     Returns a Properties value as a string.
@@ -458,14 +431,14 @@ inline string getPropertyType<tlp::StringList>(const tlp::StringList& a)
 template<>
 inline string getPropertyType<TelluriumData>(const TelluriumData& a)
 {
-    return "roadRunnerData";
+    return "telluriumData";
 }
 
 /**
     \brief Returns the type as a string.
 */
 template<>
-inline string getPropertyType(const Properties& value)
+inline string getPropertyType<Properties>(const Properties& value)
 {
     return "listOfProperties";
 }

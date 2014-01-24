@@ -38,7 +38,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
                 iniVal = (*val);
             }
             Property<bool>* para = new Property<bool>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -52,7 +52,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
                 iniVal = (*val);
             }
             Property<int> *para = new Property<int>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -67,7 +67,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
                 iniVal = (*dVal);
             }
             Property<double> *para = new Property<double>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -81,7 +81,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
                 iniVal = (*dVal);
             }
             Property<double> *para = new Property<double>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -108,7 +108,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
                 iniVal = (*val);
             }
             Property<string> *para = new Property<string>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -123,11 +123,11 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
             }
 
             Property<Properties> *para = new Property<Properties>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
-        if(string(type) == string("roadRunnerData"))
+        if(string(type) == string("telluriumData"))
         {
             TelluriumData iniVal;
             if(value != NULL)
@@ -138,7 +138,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
             }
 
             Property<TelluriumData> *para = new Property<TelluriumData>(iniVal, label, hint);
-            gHandleManager.addHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(para).name());
             return para;
         }
 
@@ -159,7 +159,7 @@ RRPropertiesHandle tlp_cc createPropertyList()
 {
     start_try
         Properties* props   = new Properties();
-        gHandleManager.addHandle(props, typeid(props).name());
+        gHM.registerHandle(props, typeid(props).name());
         if(!props)
         {
             throw("Failed to create a list of Properties");
@@ -452,4 +452,4 @@ char* tlp_cc getNamesFromPropertyList(RRPropertiesHandle handle)
 }
 
 
-}//namespace
+}

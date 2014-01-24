@@ -68,11 +68,10 @@ using tlp::Property;
 /*!
  \brief Global Handle Manager
 */
-extern APIHandleManager gHandleManager;
+extern APIHandleManager gHM;
 
 /*!
  \brief Set API error
-
  \param[in] error A string containg the error
  \ingroup cpp_support
 */
@@ -81,7 +80,7 @@ TLP_C_DS void                        setError(const string& err);
 /*!
  \brief Cast a handle. This function throws a InvalidHandle exception if it fails
  \param[in] handle  A TELHandle
- \param[in] type type to cast to, as obtained from type_id().name().
+ \param[in] type Type to cast to, as obtained from type_id().name().
  \param[in] fnc Function in where the cast is done. Obtained from __FUNC__ macro
  \return TELHandle
  \ingroup cpp_support
@@ -89,112 +88,14 @@ TLP_C_DS void                        setError(const string& err);
 template<typename  T>
 T* castHandle(TELHandle handle, const char* fnc, bool allowBase = false)
 {
-    T* ptr = static_cast<T*>(gHandleManager.validate(handle, typeid(T*).name(), fnc));
+    T* ptr = static_cast<T*>(gHM.validate(handle, typeid(T*).name(), fnc));
     return ptr;
 }
 
+Plugin* registerPlugin(Plugin* plugin);
 
-//TELHandle  castHandle(TELHandle handle, const char* type, const char* fnc);
-
-/*!
- \brief Cast a handle to RoadRunner Plugin pointer, throws if it fails
- \param[in] handle  A RRPluginHandle
- \return Pointer to a Plugin object
- \ingroup cpp_support
-*/
-//Plugin*    castToPlugin(RRPluginHandle handle, const char* fnc);
-
-/*!
- \brief Cast a handle to RoadRunner Properties pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameters instance
- \return Pointer to a parameters instance
- \ingroup cpp_support
-*/
-//Properties*                         castToProperties(RRPropertiesHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner PropertyBase pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a baseparameter instance
- \ingroup cpp_support
-*/
-//PropertyBase*                      castToProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<bool> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<int>* instance
- \ingroup cpp_support
-*/
-//Property< bool >*                   castToBoolProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<int> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<int>* instance
- \ingroup cpp_support
-*/
-//Property< int >*                   castToIntProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<double> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<double>* instance
- \ingroup cpp_support
-*/
-//Property<double>*                  castToDoubleProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<string> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<double>* instance
- \ingroup cpp_support
-*/
-//Property<string>*                   castToStringProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<Properties> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<Properties>* instance
- \ingroup cpp_support
-*/
-//Property<Properties>*              castToPropertiesProperty(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to TelluriumData pointer, throws if it fails
- \param[in] handle  A handle to a roadrunnerdata instance
- \return Pointer to a TelluriumData instance
- \ingroup cpp_support
-*/
-//tlp::TelluriumData*                 castPropertyToTelluriumData(RRPropertyHandle handle);
-
-/*!
- \brief Cast a handle to RoadRunner Property<TelluriumData> pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner parameter instance
- \return Pointer to a Property<TelluriumData> instance
- \note To limit the amount of supported types, the underlying type can only be of TelluriumData, not pointer to
-  data.
- \ingroup cpp_support
-*/
-//Property<tlp::TelluriumData>*       castToTelluriumDataProperty(RRPropertyHandle handle);
-
-
-/*!
- \brief Cast a handle to RoadRunner instance pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner instance
- \return Pointer to a roadrunner instance
- \ingroup cpp_support
-*/
-//rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
-
-/*!
- \brief Cast a RRDataHandle to TelluriumData instance pointer, throws if it fails
- \param[in] handle  A handle to a roadrunner data instance
- \return Pointer to a roadrunner instance
- \ingroup cpp_support
-*/
-//tlp::TelluriumData*                castToTelluriumData(RRDataHandle rrHandle);
-
+//Use internally
+char*  createText(const string& str);
 
 }
 
