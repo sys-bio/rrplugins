@@ -86,11 +86,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga8e90dbd0ac30d9c8ea4d88bcc82fc95b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga8e90dbd0ac30d9c8ea4d88bcc82fc95b">getTelluriumDataHandle</a></td></tr>
-<tr class="memdesc:ga8e90dbd0ac30d9c8ea4d88bcc82fc95b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a handle to RoadRunners internal data object.  <a href="#ga8e90dbd0ac30d9c8ea4d88bcc82fc95b">More...</a><br/></td></tr>
-<tr class="separator:ga8e90dbd0ac30d9c8ea4d88bcc82fc95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga638267ac0241e6a5976a1c2cb9c8b482"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga638267ac0241e6a5976a1c2cb9c8b482">getNumpyData</a></td></tr>
-<tr class="memdesc:ga638267ac0241e6a5976a1c2cb9c8b482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert tellurium data to Numpy data.  <a href="#ga638267ac0241e6a5976a1c2cb9c8b482">More...</a><br/></td></tr>
+<tr class="memdesc:ga638267ac0241e6a5976a1c2cb9c8b482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a handle to RoadRunners internal data object.  <a href="#ga638267ac0241e6a5976a1c2cb9c8b482">More...</a><br/></td></tr>
 <tr class="separator:ga638267ac0241e6a5976a1c2cb9c8b482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad07a899a9a6a780c9d471f67fa9143d8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8">getTelluriumDataColumnHeader</a></td></tr>
 <tr class="memdesc:gad07a899a9a6a780c9d471f67fa9143d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get column header in tellurium data.  <a href="#gad07a899a9a6a780c9d471f67fa9143d8">More...</a><br/></td></tr>
@@ -369,7 +366,15 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
       </table>
 </div><div class="memdoc">
 
-<p>Convert tellurium data to Numpy data. </p>
+<p>Retrieve a handle to RoadRunners internal data object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rrInstance</td><td>A RoadRunner instance, as returned from roadrunner.RoadRunner() </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a handle to roadrunners internal data object</dd></dl>
+<p>def getRoadRunnerDataHandle(rrInstance): rrHandle = cast(int(rrInstance.this), c_void_p) return telLib.getRoadRunnerDataHandle(rrHandle) Convert tellurium data to Numpy data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">telDataHandle</td><td>A handle to a tellurium data object </td></tr>
@@ -513,31 +518,6 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
       <table class="memname">
         <tr>
           <td class="memname">def python.telplugins_telluriumdata_api.getTelluriumDataHandle </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>rrInstance</em>)</td><td></td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve a handle to RoadRunners internal data object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rrInstance</td><td>A RoadRunner instance, as returned from roadrunner.RoadRunner() </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a handle to roadrunners internal data object </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga8e90dbd0ac30d9c8ea4d88bcc82fc95b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def python.telplugins_c_api.getTelluriumDataHandle </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>rrInstance</em>)</td><td></td>
@@ -993,7 +973,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 23 2014 12:40:26 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 24 2014 13:38:36 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

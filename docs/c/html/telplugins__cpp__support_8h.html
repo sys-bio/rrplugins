@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -97,6 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;telProperties.h&quot;</code><br/>
 <code>#include &quot;telPlugin.h&quot;</code><br/>
 <code>#include &quot;telProperty.h&quot;</code><br/>
+<code>#include &quot;telAPIHandleManager.h&quot;</code><br/>
 </div>
 <p><a href="telplugins__cpp__support_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -105,45 +107,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a2ecebc83b2b0a99363af49b845859eb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>setError</b> (const string &amp;err)</td></tr>
 <tr class="memdesc:a2ecebc83b2b0a99363af49b845859eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set API error.  <a href="#a2ecebc83b2b0a99363af49b845859eb9">More...</a><br/></td></tr>
 <tr class="separator:a2ecebc83b2b0a99363af49b845859eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb9e0c31317f1caeac2548aa190305b5"><td class="memItemLeft" align="right" valign="top">PluginManager *&#160;</td><td class="memItemRight" valign="bottom"><b>castToPluginManager</b> (<a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a> handle)</td></tr>
-<tr class="memdesc:aeb9e0c31317f1caeac2548aa190305b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner PluginManager pointer, throws if it fails.  <a href="#aeb9e0c31317f1caeac2548aa190305b5">More...</a><br/></td></tr>
-<tr class="separator:aeb9e0c31317f1caeac2548aa190305b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4a84054cc3e1c8d6525b27e264ba6a5"><td class="memItemLeft" align="right" valign="top">Plugin *&#160;</td><td class="memItemRight" valign="bottom"><b>castToPlugin</b> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ae4a84054cc3e1c8d6525b27e264ba6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Plugin pointer, throws if it fails.  <a href="#ae4a84054cc3e1c8d6525b27e264ba6a5">More...</a><br/></td></tr>
-<tr class="separator:ae4a84054cc3e1c8d6525b27e264ba6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e6155edb31f108f567bf1d857c1627f"><td class="memItemLeft" align="right" valign="top">Properties *&#160;</td><td class="memItemRight" valign="bottom"><b>castToProperties</b> (<a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a> handle)</td></tr>
-<tr class="memdesc:a4e6155edb31f108f567bf1d857c1627f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Properties pointer, throws if it fails.  <a href="#a4e6155edb31f108f567bf1d857c1627f">More...</a><br/></td></tr>
-<tr class="separator:a4e6155edb31f108f567bf1d857c1627f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9580622a8b64e7d60e0af451ac99905f"><td class="memItemLeft" align="right" valign="top">PropertyBase *&#160;</td><td class="memItemRight" valign="bottom"><b>castToProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:a9580622a8b64e7d60e0af451ac99905f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner PropertyBase pointer, throws if it fails.  <a href="#a9580622a8b64e7d60e0af451ac99905f">More...</a><br/></td></tr>
-<tr class="separator:a9580622a8b64e7d60e0af451ac99905f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31a21a8a92c2b8f68a187f69c91797c7"><td class="memItemLeft" align="right" valign="top">Property&lt; bool &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToBoolProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:a31a21a8a92c2b8f68a187f69c91797c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;bool&gt; pointer, throws if it fails.  <a href="#a31a21a8a92c2b8f68a187f69c91797c7">More...</a><br/></td></tr>
-<tr class="separator:a31a21a8a92c2b8f68a187f69c91797c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae160ada77efb9aa23251b022631f7d0c"><td class="memItemLeft" align="right" valign="top">Property&lt; int &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToIntProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:ae160ada77efb9aa23251b022631f7d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;int&gt; pointer, throws if it fails.  <a href="#ae160ada77efb9aa23251b022631f7d0c">More...</a><br/></td></tr>
-<tr class="separator:ae160ada77efb9aa23251b022631f7d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24e4b4e84474ef98bcbd07c51e68a69d"><td class="memItemLeft" align="right" valign="top">Property&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToDoubleProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:a24e4b4e84474ef98bcbd07c51e68a69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;double&gt; pointer, throws if it fails.  <a href="#a24e4b4e84474ef98bcbd07c51e68a69d">More...</a><br/></td></tr>
-<tr class="separator:a24e4b4e84474ef98bcbd07c51e68a69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6dc8e244d61b3246b67dd1594761631"><td class="memItemLeft" align="right" valign="top">Property&lt; string &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToStringProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:ad6dc8e244d61b3246b67dd1594761631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;string&gt; pointer, throws if it fails.  <a href="#ad6dc8e244d61b3246b67dd1594761631">More...</a><br/></td></tr>
-<tr class="separator:ad6dc8e244d61b3246b67dd1594761631"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84f9d34b32e05f7e1367ee6549c88ae2"><td class="memItemLeft" align="right" valign="top">Property&lt; Properties &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToPropertiesProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:a84f9d34b32e05f7e1367ee6549c88ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;Properties&gt; pointer, throws if it fails.  <a href="#a84f9d34b32e05f7e1367ee6549c88ae2">More...</a><br/></td></tr>
-<tr class="separator:a84f9d34b32e05f7e1367ee6549c88ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ba242ee5d08e559841964eae6d44c45"><td class="memItemLeft" align="right" valign="top">tlp::TelluriumData *&#160;</td><td class="memItemRight" valign="bottom"><b>castPropertyToTelluriumData</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:a1ba242ee5d08e559841964eae6d44c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to TelluriumData pointer, throws if it fails.  <a href="#a1ba242ee5d08e559841964eae6d44c45">More...</a><br/></td></tr>
-<tr class="separator:a1ba242ee5d08e559841964eae6d44c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5fd05a70e5dc8a7836aea9c9a0f9ed3"><td class="memItemLeft" align="right" valign="top">Property&lt; TelluriumData &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>castToTelluriumDataProperty</b> (<a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> handle)</td></tr>
-<tr class="memdesc:ad5fd05a70e5dc8a7836aea9c9a0f9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Property&lt;TelluriumData&gt; pointer, throws if it fails.  <a href="#ad5fd05a70e5dc8a7836aea9c9a0f9ed3">More...</a><br/></td></tr>
-<tr class="separator:ad5fd05a70e5dc8a7836aea9c9a0f9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445d55c697dec164583d9472d6a55f91"><td class="memItemLeft" align="right" valign="top">RoadRunner *&#160;</td><td class="memItemRight" valign="bottom"><b>castToRoadRunner</b> (<a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a> rrHandle)</td></tr>
-<tr class="memdesc:a445d55c697dec164583d9472d6a55f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner instance pointer, throws if it fails.  <a href="#a445d55c697dec164583d9472d6a55f91">More...</a><br/></td></tr>
-<tr class="separator:a445d55c697dec164583d9472d6a55f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1696010068f671464f99e2889d57eb18"><td class="memItemLeft" align="right" valign="top">TelluriumData *&#160;</td><td class="memItemRight" valign="bottom"><b>castToTelluriumData</b> (<a class="el" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9">RRDataHandle</a> rrHandle)</td></tr>
-<tr class="memdesc:a1696010068f671464f99e2889d57eb18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a RRDataHandle to TelluriumData instance pointer, throws if it fails.  <a href="#a1696010068f671464f99e2889d57eb18">More...</a><br/></td></tr>
-<tr class="separator:a1696010068f671464f99e2889d57eb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>castHandle</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *fnc, bool allowBase=false)</td></tr>
+<tr class="memdesc:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle. This function throws a InvalidHandle exception if it fails.  <a href="#aecbbb5dc8d7f422ac87bdc4f627d4fb1">More...</a><br/></td></tr>
+<tr class="separator:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eddf9dca1a14572f05bcb119bb1a4ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eddf9dca1a14572f05bcb119bb1a4ca"></a>
+Plugin *&#160;</td><td class="memItemRight" valign="bottom"><b>registerPlugin</b> (Plugin *plugin)</td></tr>
+<tr class="separator:a8eddf9dca1a14572f05bcb119bb1a4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d7bf78b5c0a0a85f6ac4e613dc4d27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5d7bf78b5c0a0a85f6ac4e613dc4d27"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>createText</b> (const string &amp;str)</td></tr>
+<tr class="separator:ac5d7bf78b5c0a0a85f6ac4e613dc4d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plugins API CPP Support Functions. </p>
@@ -164,7 +137,7 @@ Functions</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 23 2014 12:40:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 24 2014 13:38:32 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -71,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -128,9 +129,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc <a class="code" href="group__plugin__properties.html#gafe8692ba7fdc32ec4b9eb31cdc34d0fa" title="Get the value of a listOfProperties (Properties) property. ">getListProperty</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle, <span class="keywordtype">void</span>* value);</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc <a class="code" href="group__plugin__properties.html#gaf3d8eaa6476f09c76852ac5d7361fb6e" title="Set a roadRunnerDataProperty property. ">setTelluriumDataProperty</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle, <span class="keywordtype">void</span>* value);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc <a class="code" href="group__plugin__properties.html#gaf3d8eaa6476f09c76852ac5d7361fb6e" title="Set a telluriumDataProperty property. ">setTelluriumDataProperty</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle, <span class="keywordtype">void</span>* value);</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc <a class="code" href="group__plugin__properties.html#gaa1ff04936bb1e6ecb965ab02eb25a1cf" title="Get the value of a roadRunnerDataProperty property. ">getTelluriumDataProperty</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle, <span class="keywordtype">void</span>* value);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc <a class="code" href="group__plugin__properties.html#gaa1ff04936bb1e6ecb965ab02eb25a1cf" title="Get the value of a telluriumDataProperty property. ">getTelluriumDataProperty</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle, <span class="keywordtype">void</span>* value);</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;TLP_C_DS <span class="keywordtype">char</span>* tlp_cc <a class="code" href="group__plugin__properties.html#gae28a5338ec5f5d9b6cee2a53faed6966" title="Get a property&#39;s info. ">getPropertyInfo</a>(<a class="code" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649" title="Void pointer to a Property instance. ">RRPropertyHandle</a> handle);</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
@@ -173,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 23 2014 12:40:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 24 2014 13:38:32 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -293,112 +293,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    mValue = (*val);</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">//    Returns a RRStringArrays value as a string.</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">//    \note This is not implemented.</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">//*/</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">//template&lt;&gt;</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">//inline string Property&lt;rrc::RRStringArray&gt;::getValueAsString() const</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">//{</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">//    return string(&quot;&quot;);</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">//}</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment"></span><span class="comment">//    Set the value of a RRStringArray, from a string. This function expects input string</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">//    containing comma delimited values.</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">//*/</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">//template&lt;&gt;</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">//inline void Property&lt;rrc::RRStringArray&gt;::setValueFromString(const string&amp; val)</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">//{</span></div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">//    //Todo.. clear current list first..</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">//    tlp::StringList list = tlp::splitString(val, &quot;,&quot;);</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">//    mValue.Count = list.size();</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">//    for(int i = 0; i &lt; mValue.Count; i++)</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">//    {</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">//        mValue.String[i] = tlp::createText(list[i]);</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">//    }</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">//}</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">//========== Properties container</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00366"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ac42210e125da0c30b27c5d2856aeff85">  366</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classtlp_1_1_property.html#aa796f002ec554f2aba80bd564233c775">Property&lt;Properties&gt;::getValueAsString</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    tlp::StringList list = mValue.getNames();</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">return</span> list.AsString();</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00376"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a12974549882e1d1cefbf823354697e18">  376</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;Properties&gt;::setValue</a>(<a class="code" href="classtlp_1_1_properties.html">Properties</a>* val)</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;{</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    mValue = (*val);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;}</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00385"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ae77e723dc0168c0d781d2ba8d1c66360">  385</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;Properties&gt;::setValue</a>(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_properties.html">Properties</a>&amp; val)</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;{</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    mValue = val;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;}</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00395"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a0b85492b1349b915f1d498e9da7e8613">  395</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#ad8e7b6e7ceb3bfb558c20c69574c5d11">Property&lt;Properties&gt;::setValueFromString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; val)</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;{</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    Log(lError)&lt;&lt;<span class="stringliteral">&quot;Trying to set Properties container by a string. This is not implemented!&quot;</span>;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;}</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="comment">//===================== Function templates used to retrieve a property&#39;s type ===================</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; a)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">//========== Properties container</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ac42210e125da0c30b27c5d2856aeff85">  339</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code" href="classtlp_1_1_property.html#aa796f002ec554f2aba80bd564233c775">Property&lt;Properties&gt;::getValueAsString</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    tlp::StringList list = mValue.getNames();</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordflow">return</span> list.AsString();</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;}</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00349"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a12974549882e1d1cefbf823354697e18">  349</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;Properties&gt;::setValue</a>(<a class="code" href="classtlp_1_1_properties.html">Properties</a>* val)</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;{</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    mValue = (*val);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;}</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00358"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#ae77e723dc0168c0d781d2ba8d1c66360">  358</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#a9d1a5585725ecd914e2e7947da6257d4">Property&lt;Properties&gt;::setValue</a>(<span class="keyword">const</span> <a class="code" href="classtlp_1_1_properties.html">Properties</a>&amp; val)</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;{</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    mValue = val;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00368"></a><span class="lineno"><a class="code" href="classtlp_1_1_property.html#a0b85492b1349b915f1d498e9da7e8613">  368</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classtlp_1_1_property.html#ad8e7b6e7ceb3bfb558c20c69574c5d11">Property&lt;Properties&gt;::setValueFromString</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; val)</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;{</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    Log(lError)&lt;&lt;<span class="stringliteral">&quot;Trying to set Properties container by a string. This is not implemented!&quot;</span>;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="comment">//===================== Function templates used to retrieve a property&#39;s type ===================</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="comment"></span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; a)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;{</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;int&quot;</span>;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;}</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; a)</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;{</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;bool&quot;</span>;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;}</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a)</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;{</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;double&quot;</span>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;}</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;string&gt;(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; a)</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;{</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;int&quot;</span>;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;std::string&quot;</span>;</div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;}</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; a)</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt; vector&lt;string&gt; &gt;(<span class="keyword">const</span> vector&lt;string&gt; &amp;a)</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;{</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;bool&quot;</span>;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;vector&lt;string&gt;&quot;</span>;</div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;}</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;</div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a)</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;tlp::StringList&gt;(<span class="keyword">const</span> tlp::StringList&amp; a)</div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;{</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;double&quot;</span>;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;StringList&quot;</span>;</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;}</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;string&gt;(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; a)</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;TelluriumData&gt;(<span class="keyword">const</span> TelluriumData&amp; a)</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;{</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;std::string&quot;</span>;</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;telluriumData&quot;</span>;</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;}</div>
 <div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt; vector&lt;string&gt; &gt;(<span class="keyword">const</span> vector&lt;string&gt; &amp;a)</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;Properties&gt;(<span class="keyword">const</span> Properties&amp; value)</div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;{</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;vector&lt;string&gt;&quot;</span>;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;listOfProperties&quot;</span>;</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;}</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;tlp::StringList&gt;(<span class="keyword">const</span> tlp::StringList&amp; a)</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;{</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;StringList&quot;</span>;</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;}</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType&lt;TelluriumData&gt;(<span class="keyword">const</span> TelluriumData&amp; a)</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;{</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;roadRunnerData&quot;</span>;</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;}</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">string</span> getPropertyType(<span class="keyword">const</span> Properties&amp; value)</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;{</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot;listOfProperties&quot;</span>;</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;}</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;}</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;}</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 23 2014 12:40:24 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 24 2014 13:38:33 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
