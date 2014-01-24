@@ -29,6 +29,7 @@ telIniFile
 telIniKey
 telIniSection
 telTelluriumData
+telException
 )
 
 #SHARED VERSION ----------------

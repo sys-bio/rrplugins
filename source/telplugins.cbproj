@@ -129,6 +129,9 @@
             <DependentOn>telCPPPlugin.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telException.cpp">
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telFileName.cpp">
             <BuildOrder>20</BuildOrder>
         </CppCompile>

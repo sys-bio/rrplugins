@@ -4,7 +4,7 @@
  * @author Totte Karlsson & Herbert M Sauro
  *
  * <--------------------------------------------------------------
- * This file is part of cRoadRunner.
+ * This file is part of cTellurium.
  * See http://code.google.com/p/roadrunnerlib for more details.
  *
  * Copyright (C) 2012-2014
@@ -59,7 +59,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"RoadRunner exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
         setError(msg.str());                                \
         return false;                                       \
     }
@@ -73,7 +73,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"RoadRunner exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
         setError(msg.str());                                \
         return NULL;                                        \
     }
@@ -87,7 +87,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"RoadRunner exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
         setError(msg.str());                                \
         return -1;                                          \
     }
@@ -101,7 +101,7 @@
     catch(const exception& ex)                              \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"RoadRunner exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
         setError(msg.str());                                \
     }
 

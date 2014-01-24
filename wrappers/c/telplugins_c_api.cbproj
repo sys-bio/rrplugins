@@ -107,6 +107,10 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telAPIHandleManager.cpp">
+            <DependentOn>telAPIHandleManager.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telplugins_cpp_support.cpp">
             <DependentOn>telplugins_cpp_support.h</DependentOn>
             <BuildOrder>3</BuildOrder>

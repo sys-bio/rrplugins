@@ -1,6 +1,6 @@
 #ifndef telOSSpecificsH
 #define telOSSpecificsH
-#include "telExporter.h"
+
 
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996) // _CRT_SECURE_NO_WARNINGS

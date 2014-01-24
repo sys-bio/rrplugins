@@ -50,6 +50,7 @@
 #include "telProperties.h"
 #include "telPlugin.h"
 #include "telProperty.h"
+#include "telAPIHandleManager.h"
 namespace rr
 {
     class RoadRunner;
@@ -65,6 +66,11 @@ using tlp::Plugin;
 using tlp::Property;
 
 /*!
+ \brief Global Handle Manager
+*/
+extern APIHandleManager gHandleManager;
+
+/*!
  \brief Set API error
 
  \param[in] error A string containg the error
@@ -73,12 +79,14 @@ using tlp::Property;
 TLP_C_DS void                        setError(const string& err);
 
 /*!
- \brief Cast a handle to RoadRunner PluginManager pointer, throws if it fails
- \param[in] handle  A RRPluginManagerHandle
- \return Pointer to a PluginManager object
+ \brief Cast a handle. This function throws a InvalidHandle exception if it fails
+ \param[in] handle  A TELHandle
+ \param[in] type type to cast to, as obtained from type_id().name().
+ \param[in] fnc Function in where the cast is done. Obtained from __FUNC__ macro
+ \return TELHandle
  \ingroup cpp_support
 */
-PluginManager*                       castToPluginManager(RRPluginManagerHandle handle);
+TELHandle  castHandle(TELHandle handle, const char* type, const char* fnc);
 
 /*!
  \brief Cast a handle to RoadRunner Plugin pointer, throws if it fails
@@ -86,7 +94,7 @@ PluginManager*                       castToPluginManager(RRPluginManagerHandle h
  \return Pointer to a Plugin object
  \ingroup cpp_support
 */
-Plugin*                             castToPlugin(RRPluginHandle handle);
+Plugin*    castToPlugin(RRPluginHandle handle, const char* fnc);
 
 /*!
  \brief Cast a handle to RoadRunner Properties pointer, throws if it fails
@@ -177,16 +185,8 @@ rr::RoadRunner*                     castToRoadRunner(RRHandle rrHandle);
  \return Pointer to a roadrunner instance
  \ingroup cpp_support
 */
-tlp::TelluriumData*                     castToTelluriumData(RRDataHandle rrHandle);
+tlp::TelluriumData*                castToTelluriumData(RRDataHandle rrHandle);
 
-////Result data
-///*!
-// \brief Creates a RRData structure from tlp::TelluriumData object
-// \param[in] data  Input RoadRunner data
-// \return A handle to a RRData structure. Null if it fails
-// \ingroup cpp_support
-//*/
-//RRCDataPtr                          createRRCData(const tlp::TelluriumData& result);
 
 }
 

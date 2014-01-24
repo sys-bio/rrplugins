@@ -11,7 +11,10 @@ try:
         print 'LastError: ' + getLastError()
         exit()
     
-    print getPluginInfo(auto.plugin)
+    info = getPluginInfo(auto.plugin)
+    if info == None:
+        print getLastError()
+        
     print auto._propertyNames
     #Set Auto Propertys
     auto.setProperty("ScanDirection", "Negative")

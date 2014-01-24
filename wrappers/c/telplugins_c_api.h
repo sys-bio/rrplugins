@@ -40,7 +40,6 @@
 */
 #ifndef telplugins_c_apiH
 #define telplugins_c_apiH
-//#include "rr/c/rrc_types.h"
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
 #include "telplugins_utilities.h"
@@ -84,7 +83,6 @@ TLP_C_DS bool tlp_cc loadPlugins(RRPluginManagerHandle handle);
  \ingroup plugin_manager
 */
 TLP_C_DS char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle);
-
 
 /*!
  \brief Unload plugins

@@ -13,6 +13,11 @@ namespace tlpc
 {
 using tlp::TelluriumData;
 using rr::RoadRunner;
+
+//A global handle manager
+APIHandleManager gHandleManager;
+
+
 void setError(const string& err)
 {
     if(gLastError)
@@ -24,32 +29,15 @@ void setError(const string& err)
 }
 
 
-PluginManager* castToPluginManager(RRPluginManagerHandle handle)
+TELHandle castHandle(TELHandle  handle, const char* typeId, const char* fnc)
 {
-    PluginManager *pm = static_cast<PluginManager*>(handle);
-    if(pm)
-    {
-        return pm;
-    }
-    else
-    {
-        rr::Exception ex("Failed to cast to a valid PluginManager handle");
-        throw(ex);
-    }
+    //Validate will throw if an invalid handle is passed.
+    return gHandleManager.validate(handle, typeId, fnc);
 }
 
-Plugin* castToPlugin(RRPluginHandle handle)
+Plugin* castToPlugin(RRPluginHandle handle, const char* fnc)
 {
-    Plugin* plugin = (Plugin*) handle;
-    if(plugin) //Will only fail if handle is NULL...
-    {
-        return plugin;
-    }
-    else
-    {
-        rr::Exception ex("Failed to cast to a valid Plugin handle");
-        throw(ex);
-    }
+    return static_cast<Plugin*>(gHandleManager.validate(handle, typeid(Plugin*).name(), fnc));
 }
 
 Properties* castToProperties(RRPropertiesHandle handle)
@@ -191,11 +179,5 @@ Property<TelluriumData>* castToTelluriumDataProperty(RRPropertyHandle handle)
         throw(ex);
     }
 }
-
-//RRCDataPtr createRRCData(const TelluriumData& result)
-//{
-//    return rrc::createRRCData(result);
-//}
-
 
 }
