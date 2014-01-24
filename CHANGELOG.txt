@@ -1,6 +1,17 @@
-
-Release 0.6.7 (2014-01-23)
+Release 0.6.8 (2014-01-24)
 ==========================
+
+Release 0.6.7 (2014-01-24)
+==========================
+- Changed roadRunnerData -> telluriumData as the name of a TelluriumData Property
+- Added exception handling to handle bad handles in C API
+- Removed getRoadRunnerDataHandle(rrInstance) function in Python ctypes API
+- Removed obsolete casting code in telplugins_cpp_support.cpp
+- Created a handle manager for the C api, to keep track of handles created
+- There will be just one type of Handles, TELHandle
+- Added Tellurium exception class
+- Changed so trying to load a plugin twice is not an error.
+- Added extra example to noise plugin pdf docs
 - Added getPlugin, getPluginVersion, getPluginCopyright API functions (C and Python)
 - Updated Noise plugin noise generation
 - Added set/get columndataheader by index in all API's
