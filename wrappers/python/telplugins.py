@@ -275,7 +275,7 @@ class Plugin (object):
         if handle == 0:
             raise ValueError ("Property: " + name + " does not exist")
         value = tpc.getProperty (handle)
-        if (tpc.getPropertyType(handle) == "roadRunnerData"):
+        if (tpc.getPropertyType(handle) == "telluriumData"):
             return DataSeries (value)
         else:
            return value

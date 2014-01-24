@@ -61,8 +61,7 @@ try:
     cb_func3 =  NotifyEvent(pluginIsFinished)
     assignOnFinishedEvent(pluginHandle, cb_func3)
     
-    # Get the dataseries from roadrunner
-    #Something is funky in here. Data is created and then immediatley freed?
+    # Get the dataseries from roadrunner    
     d = getDataSeries (data)
     
     #Pass data from roadrunner to the plugin         
@@ -77,7 +76,7 @@ try:
     colNames = getTelluriumDataColumnHeader(getProperty(pluginData))
     plotTelluriumData(rrData, colNames)
     unLoadPlugins(pm)
-    #unLoadAPI()
+    
     print "done"
     
 except Exception as e:    

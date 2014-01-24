@@ -681,7 +681,7 @@ def setPluginProperty(pluginHandle, propertyName, propertyValue):
             return setStringProperty(propertyHandle, propertyValue)
         if paraType == 'listOfProperties':
             return setListProperty(propertyHandle, propertyValue)
-        if paraType == 'roadRunnerData': #The value of this is a handle
+        if paraType == 'telluriumData': #The value of this is a handle
             return setTelluriumDataProperty (propertyHandle, propertyValue)
         if paraType == 'StringList':
             return setPropertyByString(propertyHandle, propertyValue)
@@ -711,7 +711,7 @@ def setProperty(propertyHandle, paraValue):
             return setStringProperty(propertyHandle, paraValue)
         if paraType == 'listOfProperties':
             return setListProperty(propertyHandle, paraValue)
-        if paraType == 'roadRunnerData': #The value of this is a handle
+        if paraType == 'telluriumData': #The value of this is a handle
             return setTelluriumDataProperty(propertyHandle, paraValue)
         if paraType == 'StringList':
             return setPropertyByString(propertyHandle, paraValue)
@@ -1012,16 +1012,16 @@ def setListProperty(propertyHandle, value):
     handle = getPropertyValueHandle(value)
     return telLib.setListProperty(propertyHandle, c_void_p(handle))
 
-## \brief Get the value of a roadRunnerData property
+## \brief Get the value of a telluriumData property
 ## \param propertyHandle A Handle to a property
 ## \return Returns the value of the property if succesful, None otherwise
 ## \ingroup plugin_properties
 def getTelluriumDataProperty(propertyHandle):
         return getPropertyValue(propertyHandle)
 
-## \brief Set a roadRunnerData property
+## \brief Set a telluriumData property
 ## \param propertyHandle Handle to a Property instance
-## \param value Value to assign to the property (must be a handle to roadRunnerData.
+## \param value Value to assign to the property (must be a handle to telluriumData.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 telLib.setTelluriumDataProperty.restype = c_bool
@@ -1052,7 +1052,7 @@ def getProperty(propertyHandle):
         return getPropertyValueAsString(propertyHandle)
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
-    if paraType == 'roadRunnerData': #The value of this is a handle
+    if paraType == 'telluriumData': #The value of this is a handle
         ptr = getPropertyValueHandle(propertyHandle)
         return ptr
     else:
@@ -1083,7 +1083,7 @@ def getPropertyValue(propertyHandle):
         return getPropertyValueAsString(propertyHandle)
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
-    if paraType == 'roadRunnerData': #The value of this is a handle
+    if paraType == 'telluriumData': #The value of this is a handle
         ptr = getPropertyValueHandle(propertyHandle)
         return ptr
     else:
