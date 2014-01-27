@@ -139,14 +139,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad1975e4aef36af3941ab5d2a7ca408fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23d19da2d3640f36e36adfe6071e82d5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a23d19da2d3640f36e36adfe6071e82d5">getType</a> () const </td></tr>
 <tr class="separator:a23d19da2d3640f36e36adfe6071e82d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169e5e8726d6ce1dbb5fe585377e7cd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a169e5e8726d6ce1dbb5fe585377e7cd9">isReadOnly</a> () const </td></tr>
+<tr class="separator:a169e5e8726d6ce1dbb5fe585377e7cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51d3a5621c187c3102e077a21c7009e3"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a51d3a5621c187c3102e077a21c7009e3">getValueAsString</a> () const </td></tr>
 <tr class="separator:a51d3a5621c187c3102e077a21c7009e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c7aef2ee2972ded539578dee2085290"><td class="memItemLeft" align="right" valign="top">virtual void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a7c7aef2ee2972ded539578dee2085290">getValueHandle</a> ()</td></tr>
 <tr class="separator:a7c7aef2ee2972ded539578dee2085290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a338ab6735f80d5bd189a26dd45024180"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a338ab6735f80d5bd189a26dd45024180">setValueFromString</a> (const string &amp;value)=0</td></tr>
 <tr class="separator:a338ab6735f80d5bd189a26dd45024180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a169e5e8726d6ce1dbb5fe585377e7cd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#a169e5e8726d6ce1dbb5fe585377e7cd9">isReadOnly</a> () const </td></tr>
-<tr class="separator:a169e5e8726d6ce1dbb5fe585377e7cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ffc2c64abd7a16a69785fad19e14d0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtlp_1_1_property_base.html#ad2ffc2c64abd7a16a69785fad19e14d0">clearValue</a> ()=0</td></tr>
+<tr class="separator:ad2ffc2c64abd7a16a69785fad19e14d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -277,6 +279,32 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Return the property in a string representation </p>
+
+</div>
+</div>
+<a class="anchor" id="ad2ffc2c64abd7a16a69785fad19e14d0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool tlp::PropertyBase::clearValue </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>/brief Clear the property data. This function is implemented in descendants. </p>
+
+<p>Implemented in <a class="el" href="classtlp_1_1_property.html#a78524731d29b735b3dc43ed2e757f447">tlp::Property&lt; T &gt;</a>, <a class="el" href="classtlp_1_1_property.html#a95e672eed840f9301fd3e2b386e6d039">tlp::Property&lt; T &gt;</a>, <a class="el" href="classtlp_1_1_property.html#aa99aa125cee418be54ed2e140c695626">tlp::Property&lt; T &gt;</a>, <a class="el" href="classtlp_1_1_property.html#ae16e91faf4c3eb698b53d4dd34fd23c9">tlp::Property&lt; T &gt;</a>, and <a class="el" href="classtlp_1_1_property.html#af3690fa475ebe6adbb9054c2bd0701bb">tlp::Property&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -693,7 +721,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:31:44 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 27 2014 11:33:12 for Tellurium Plugin C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
