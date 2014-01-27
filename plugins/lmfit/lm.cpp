@@ -53,7 +53,8 @@ stepbound(                      100.,                    "stepbound"  ,         
 patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
 //scale_diag(                 1,                       "scale_diag" ,              " UNDOCUMENTED, TESTWISE automatical diag rescaling? ")
 mWorker(*this),
-mLMData(mWorker.mLMData)
+mLMData(mWorker.mLMData),
+rNormsData(mNorms.getValueReference())
 {
     mVersion = "0.8";
 
@@ -209,19 +210,19 @@ void LM::assignPropertyDescriptions()
     stringstream s;
 s << "The SBML property should be assigned the (XML) \
 text that defines the SBML model that is used to fit parameters.";
-mSBML.setDescription(s.str()); 
+mSBML.setDescription(s.str());
 s.str("");
 
 s << "Experimental data contains the data to be used for fitting input.";
-mExperimentalData.setDescription(s.str());          
+mExperimentalData.setDescription(s.str());
 s.str("");
 
 s << "Model data is calculated after the fitting algorithm finishes. It uses the obtained model parameters as input.";
-mModelData.setDescription(s.str());                  
+mModelData.setDescription(s.str());
 s.str("");
 
 s << "Residuals data contains the differencies between the Experimental data and the ModelData.";
-mResidualsData.setDescription(s.str());               
+mResidualsData.setDescription(s.str());
 s.str("");
 
 s << "The input parameter list holds the parameters, and their initial values that are to be fitted, e.g. k1, k2. \
@@ -247,7 +248,7 @@ s << "The norm is a readonly output variable indicating the goodness of fit. The
 mNorm.setDescription(s.str());
 s.str("");
 
-s << "The norm is calculated troughout a fitting session. Each Norm value is stored in the Norms (readonly) variable.";
+s << "The norm is calculated throughout a fitting session. Each Norm value is stored in the Norms (readonly) variable.";
 mNorms.setDescription(s.str());
 s.str("");
 

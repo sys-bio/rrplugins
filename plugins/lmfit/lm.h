@@ -43,6 +43,7 @@ class LM : public CPPPlugin
 
         Property<double>                        mNorm;                          //Part of minimization result
         Property<TelluriumData>                 mNorms;                         //Norm values from the fitting
+        TelluriumData&                          rNormsData;                     //Setup a reference to Norms Data
         Property<TelluriumData>			        mResidualsData;                 //Residuals from the fitting
 
 

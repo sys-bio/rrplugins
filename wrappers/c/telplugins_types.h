@@ -41,7 +41,6 @@
 
 #ifndef telplugins_typesH
 #define telplugins_typesH
-//#include "rr/c/rrc_types.h"
 #include "telplugins_settings.h"
 #if defined(__cplusplus)
 
@@ -63,8 +62,8 @@ typedef void* RRDataHandle;
 */
 typedef void (event_cc *PluginEvent)(void*, void*);
 
- /*!@brief Void pointer to a PluginManager instance */
- typedef void* RRPluginManagerHandle;
+/*!@brief Void pointer to a PluginManager instance */
+typedef void* RRPluginManagerHandle;
 
 /*!@brief Void pointer to a Plugin instance */
 typedef void* RRPluginHandle;

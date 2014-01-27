@@ -228,8 +228,7 @@ void* Property<T>::getValueHandle()
 template<class T>
 bool Property<T>::clearValue()
 {
-    mValue = 0;
-    return true;
+    return false;
 }
 //================= SPECIALIZATIONS ====================
 
@@ -251,6 +250,13 @@ template<>
 inline void Property<int>::setValueFromString(const string& val)
 {
     mValue = tlp::toInt(val);
+}
+
+template<>
+inline bool Property<int>::clearValue()
+{
+    mValue = 0;
+    return true;
 }
 
 //================= Double ===============================
@@ -280,7 +286,7 @@ inline void Property<string>::setValueFromString(const string& str)
 }
 
 template<>
-bool Property<string>::clearValue()
+inline bool Property<string>::clearValue()
 {
     mValue = gEmptyString;
     return true;
@@ -305,7 +311,7 @@ inline string Property<tlp::StringList>::getValueAsString() const
 }
 
 template<>
-bool Property<StringList>::clearValue()
+inline bool Property<StringList>::clearValue()
 {
     mValue = StringList();
     return true;
@@ -340,7 +346,7 @@ inline void Property<tlp::TelluriumData>::setValueFromString(const string& val)
 }
 
 template<>
-bool Property<tlp::TelluriumData>::clearValue()
+inline bool Property<tlp::TelluriumData>::clearValue()
 {
     mValue = tlp::TelluriumData();
     return true;
