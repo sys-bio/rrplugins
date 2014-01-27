@@ -1,5 +1,10 @@
-Release 0.6.8 (2014-01-24)
+Release 0.6.8 (2014-01-27)
 ==========================
+- Implemented capture of Norms values during a fitting session, captured by the Norms property.
+- Updated LMFit PDF with documentation on how to use the the Norms property.
+- Updated Noise PDF documentation with missing Progress property docs.
+- Update lmfit2 python example to print the norms property
+- Changed noise plugins progress property to be of type double 
 
 Release 0.6.7 (2014-01-24)
 ==========================
