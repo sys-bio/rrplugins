@@ -22,14 +22,14 @@ class LM : public CPPPlugin
         Property<string>                        mSBML;                          //This is the model
         Property<TelluriumData>				    mExperimentalData;
         Property<TelluriumData>			        mModelData;
-        Property<TelluriumData>			        mResidualsData;
+
 
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
 
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
-        Property<double>                        mNorm;                          //Part of minimization result
+
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
         //LMFIT Tuning parameters
@@ -40,6 +40,11 @@ class LM : public CPPPlugin
         Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
         Property<int>                           patience;                       /* maximum number of iterations. */
         //Property<int>                           scale_diag;                   /* UNDOCUMENTED, TESTWISE automatical diag rescaling? */
+
+        Property<double>                        mNorm;                          //Part of minimization result
+        Property<TelluriumData>                 mNorms;                         //Norm values from the fitting
+        Property<TelluriumData>			        mResidualsData;                 //Residuals from the fitting
+
 
 		//Utility functions for the thread
         string                                  getTempFolder();

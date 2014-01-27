@@ -88,6 +88,7 @@ class RRP_DECLSPEC PropertyBase
         */            
         PropertyBase&                       operator=(const PropertyBase& rhs);
 
+
         /**
          * Return the parameters name
          */
@@ -133,6 +134,12 @@ class RRP_DECLSPEC PropertyBase
          */
         string                              getType() const;
 
+        /**
+         * Is the property intended to be read only? OBSERVE: The read only property is a hint to a client
+            that the intention of the property is to be read only. A client can STILL change the property value.
+         */
+        bool                                isReadOnly() const;
+
         //Virtuals
         /**
          *  Get the value of the property, as a string.
@@ -150,10 +157,10 @@ class RRP_DECLSPEC PropertyBase
         virtual void                        setValueFromString(const string& value) = 0;
 
         /**
-         * Is the property intended to be read only? OBSERVE: The read only property is a hint to a client
-            that the intention of the property is to be read only. A client can STILL change the property value.
+         * /brief Clear the property data. This function is implemented in descendants.
          */
-        bool                                isReadOnly() const;
+        virtual bool                        clearValue() = 0;
+
 
 
     protected:
