@@ -31,11 +31,9 @@ class lmWorker : public Poco::Runnable
         bool                        setup();
         void                        createModelData(TelluriumData* data);
         void                        createResidualsData(TelluriumData* data);
-        vector<double>              getResidualsMeans(TelluriumData* residualsData);
-        vector<double>              getResidualsStandardDeviations(vector<double> means, TelluriumData* residualsData);
         void                        workerStarted();
         void                        workerFinished();
-
+        void                        postFittingWork();
     public:
                                     lmWorker(LM& host);
         void                        start(bool runInThread = true);

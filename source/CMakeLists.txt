@@ -22,7 +22,6 @@ telStringBuilder
 telStringList
 telStringListContainer
 telStringUtils
-#telUnresolvedSTDExternals
 telUtils
 telFileName
 telIniFile
@@ -30,6 +29,7 @@ telIniKey
 telIniSection
 telTelluriumData
 telException
+telMathUtils
 )
 
 #SHARED VERSION ----------------

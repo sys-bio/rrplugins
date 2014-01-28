@@ -144,6 +144,10 @@
         <CppCompile Include="telIniSection.cpp">
             <BuildOrder>19</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telMathUtils.cpp">
+            <DependentOn>telMathUtils.h</DependentOn>
+            <BuildOrder>22</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telPlugin.cpp">
             <DependentOn>telPlugin.h</DependentOn>
             <BuildOrder>16</BuildOrder>
