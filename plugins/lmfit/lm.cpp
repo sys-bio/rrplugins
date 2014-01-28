@@ -43,6 +43,14 @@ mNorm(                          0,                      "Norm",                 
 mNorms(                         TelluriumData(),        "Norms",                                "Norms from fitting session.", "", "", true),
 mNrOfIter(                      0,                      "NrOfIter",                             "Number of iterations"),
 
+mStandardizedResiduals(         TelluriumData(),        "StandardizedResiduals",                "Standarized residuals.", "", "", true),
+mNormalProbabilityOfResiduals(  TelluriumData(),        "NormalProbabilityOfResiduals",         "Normal Probability of Residuals.", "", "", true),
+mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square after fitting", "", "", true),
+mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
+
+
+
+
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
 ftol(                           LM_USERTOL,              "ftol"       ,                         "Relative error desired in the sum of squares. "),
@@ -70,6 +78,13 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mNorm);
     mProperties.add(&mNorms);
     mProperties.add(&mNrOfIter);
+    mProperties.add(&mStandardizedResiduals);
+    mProperties.add(&mNormalProbabilityOfResiduals);
+    mProperties.add(&mChiSquare);
+    mProperties.add(&mReducedChiSquare);
+    
+
+
 
     //Add the lmfit parameters
     mProperties.add(&ftol);

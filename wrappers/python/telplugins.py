@@ -55,6 +55,8 @@ class DataSeries(object):
            colHdr  = numPyData.dtype.names 
 
         columnStr = str(colHdr).strip('[]')
+        columnStr = columnStr.strip('()')
+        columnStr = columnStr.translate(None, '\' ')
         dataHandle = tpc.telLib.createTelluriumData(nrRows,nrCols, columnStr)        
                 
         #Copy the data

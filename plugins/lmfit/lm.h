@@ -44,8 +44,12 @@ class LM : public CPPPlugin
         Property<double>                        mNorm;                          //Part of minimization result
         Property<TelluriumData>                 mNorms;                         //Norm values from the fitting
         TelluriumData&                          rNormsData;                     //Setup a reference to Norms Data
-        Property<TelluriumData>			        mResidualsData;                 //Residuals from the fitting
 
+        Property<TelluriumData>			        mResidualsData;                 //Residuals from the fitting
+        Property<TelluriumData>			        mStandardizedResiduals;         //Standardized Residuals from the fitting
+        Property<TelluriumData>			        mNormalProbabilityOfResiduals;  //Normal probability of residuals
+        Property<double>			            mChiSquare;                     //Normal probability of residuals
+        Property<double>			            mReducedChiSquare;              //Normal probability of residuals
 
 		//Utility functions for the thread
         string                                  getTempFolder();

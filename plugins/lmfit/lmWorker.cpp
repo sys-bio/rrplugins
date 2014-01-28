@@ -1,14 +1,17 @@
 #pragma hdrstop
-#include "telTelluriumData.h"
+#include "lmWorker.h"
+
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
-#include "lmWorker.h"
+#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an use the CPP api directly
+#include "rr/C/rrc_utilities.h"
+#include "telException.h"
+#include "telTelluriumData.h"
 #include "lm.h"
 #include "lib/lmmin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an use the CPP api directly
-#include "rr/C/rrc_utilities.h"
+
 //---------------------------------------------------------------------------
 namespace lmfit
 {
@@ -102,7 +105,8 @@ void lmWorker::run()
         workerFinished();
         return;
     }
-    /* print results */
+
+    //Post fitting data calculations
     Log(lInfo)<<"==================== Fitting Result ================================";
     Log(lInfo)<<"Nr of function evaluations: "  <<  mTheHost.mLMStatus.nfev;
     Log(lInfo)<<"Status message: "              <<  lm_infmsg[mTheHost.mLMStatus.outcome];
@@ -123,7 +127,10 @@ void lmWorker::run()
         parsOut.add(new Property<double>(mLMData.parameters[i], mLMData.parameterLabels[i], ""), true);
     }
 
+    //Set the norm property
     mTheHost.mNorm.setValue(mTheHost.mLMStatus.fnorm);
+
+    //Create model and residuals data
     createModelData(mTheHost.mModelData.getValuePointer());
     createResidualsData(mTheHost.mResidualsData.getValuePointer());
 
@@ -136,6 +143,38 @@ void lmWorker::run()
         tempData(r,0) = mTheHost.rNormsData(r, 0);
     }
     mTheHost.rNormsData = tempData;
+
+    //Calculate standarized residuals
+    //Get mean of residuals
+    TelluriumData& residuals = *(TelluriumData*) mTheHost.mResidualsData.getValueHandle();
+    vector<double> meanOfResiduals  = getResidualsMeans( &residuals);
+    vector<double> stdDeviations    = getResidualsStandardDeviations(meanOfResiduals,  (TelluriumData*) mTheHost.mResidualsData.getValueHandle());
+
+    //Populate the standardized residuals
+    TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
+    stdRes.reSize(residuals.rSize(), residuals.cSize());
+    bool timeIsFirstCol = residuals.isFirstColumnTime();
+
+    for(int col =0; col <residuals.cSize(); col++)
+    {
+        int nonTimeDataIndex = col - (timeIsFirstCol == true) ? 1 : 0;
+        for(int dataPtn = 0; dataPtn < residuals.rSize(); dataPtn++)
+        {
+            if(timeIsFirstCol == true && col == 0)
+            {
+                stdRes(dataPtn, col) = residuals(dataPtn, col);
+            }
+            else
+            {
+
+//                stdRes(dataPtn, col) = ( residuals(dataPtn, col) - meanOfResiduals[nonTimeDataIndex] ) / stdDeviations[nonTimeDataIndex];
+                stdRes(dataPtn, col) =  residuals(dataPtn, col) / stdDeviations[nonTimeDataIndex];
+                Log(lInfo)<<"Standard deviation: "<<stdDeviations[nonTimeDataIndex];
+            }
+        }
+        Log(lInfo)<<"Standard deviation: "<<stdDeviations[nonTimeDataIndex];
+    }
+
     workerFinished();
 }
 
@@ -427,4 +466,58 @@ void lmWorker::createResidualsData(TelluriumData* _data)
     }
 }
 
+vector<double> lmWorker::getResidualsMeans(TelluriumData* _residuals)
+{
+    if(!_residuals)
+    {
+        throw(Exception("Bad pointer passed to function getResidualsMeans()"));
+    }
+    TelluriumData& residuals = *(_residuals);
+    //check for time column
+    bool timeIsFirstCol = residuals.isFirstColumnTime();
+
+    vector<double> means;
+
+    for(int col = (timeIsFirstCol == true) ? 1 : 0; col < residuals.cSize(); col++)
+    {
+        double mean  = 0;
+        for(int row = 0; row < residuals.rSize(); row++)
+        {
+            mean += residuals(row, col);
+
+        }
+        means.push_back(mean / residuals.rSize());
+    }
+    return means;
+}
+
+vector<double> lmWorker::getResidualsStandardDeviations(vector<double> means, TelluriumData* _residuals)
+{
+    if(!_residuals || means.size() + 1 != _residuals->cSize())
+    {
+        throw(Exception("Bad arguments passed to function getResidualsStandardDeviations()"));
+    }
+
+    TelluriumData& residuals = *(_residuals);
+
+    //check for time column
+    bool timeIsFirstCol = residuals.isFirstColumnTime();
+
+    vector<double> stds;
+    for(int col = (timeIsFirstCol == true) ? 1 : 0; col < residuals.cSize(); col++)
+    {
+        double sumOfSquaredDifferences  = 0;
+        for(int row = 0; row < residuals.rSize(); row++)
+        {
+            int meansIndex = col - (timeIsFirstCol == true) ? 1 : 0;
+            sumOfSquaredDifferences += pow( residuals(row, col) - means[meansIndex], 2);
+        }
+        double variance =  (1. /  (residuals.rSize() -1) ) * sumOfSquaredDifferences ;
+        double stdDev =  sqrt(variance) ;
+        Log(lInfo) << "Std Dev = " << stdDev;
+        stds.push_back(stdDev);
+    }
+
+    return stds;
+}
 }
