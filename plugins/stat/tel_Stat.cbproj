@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{7BCE5D6A-4F08-4F39-BFC2-DA6064EACECC}</ProjectGuid>
+        <ProjectGuid>{21B0E6A3-A3C9-4F74-B728-5524A13997E3}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -124,20 +124,20 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="lm.cpp">
-            <DependentOn>lm.h</DependentOn>
-            <BuildOrder>1</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="lmfit_doc.cpp">
-            <DependentOn>lmfit_doc.h</DependentOn>
+        <CppCompile Include="stat_doc.cpp">
+            <DependentOn>stat_doc.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="lmUtils.cpp">
-            <DependentOn>lmUtils.h</DependentOn>
+        <CppCompile Include="stStat.cpp">
+            <DependentOn>stStat.h</DependentOn>
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="stStatUtils.cpp">
+            <DependentOn>stStatUtils.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="lmWorker.cpp">
-            <DependentOn>lmWorker.h</DependentOn>
+        <CppCompile Include="stStatWorker.cpp">
+            <DependentOn>stStatWorker.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

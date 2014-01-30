@@ -152,8 +152,6 @@ void lmWorker::postFittingWork()
     TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
     stdRes = getStandardizedPopulations(residuals);
 
-
-
     //Create a probability plot for the residuals
     TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
     probPlot = getNormalProbabilityPlot(stdRes);
