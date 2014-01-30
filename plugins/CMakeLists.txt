@@ -11,6 +11,7 @@ include_directories(
 OPTION (TLP_BUILD_ADD_NOISE_PLUGIN		        "Build Add Noise Plugin"	                ON)
 OPTION (TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN	"Build Levenberg-Marquardt Plugin"	        ON)
 OPTION (TLP_BUILD_AUTO_2000_PLUGIN	            "Build Auto 2000 Plugin"	                ON)
+OPTION (TLP_BUILD_STAT_PLUGIN	                "Build STAT (statistics) Plugin"	        ON)
 
 if(${TLP_BUILD_ADD_NOISE_PLUGIN} STREQUAL ON)
     add_subdirectory(add_noise)
@@ -22,6 +23,10 @@ endif()
 
 if(${TLP_BUILD_AUTO_2000_PLUGIN} STREQUAL ON)
     add_subdirectory(auto_2000)
+endif()
+
+if(${TLP_BUILD_STAT_PLUGIN} STREQUAL ON)
+    add_subdirectory(stat)
 endif()
 
 

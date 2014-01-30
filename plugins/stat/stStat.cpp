@@ -23,9 +23,7 @@ mStandardizedResiduals(         TelluriumData(),        "StandardizedResiduals",
 mNormalProbabilityOfResiduals(  TelluriumData(),        "NormalProbabilityOfResiduals",         "Normal Probability of Residuals.", "", "", true),
 mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square after fitting", "", "", true),
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
-
 mWorker(*this)
-
 {
     mVersion = "0.8";
 

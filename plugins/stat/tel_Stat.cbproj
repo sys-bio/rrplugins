@@ -105,7 +105,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <IncludePath>$(TLP_ROOT)\wrappers\C;$(TLP_INSTALL)\include\c_api;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
         <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;$(Defines)</Defines>
         <Debugger_HostApplication>R:\cg_installs\DRT\bin\rrWinC.exe</Debugger_HostApplication>

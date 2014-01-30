@@ -36,7 +36,6 @@ try:
     noisePlugin.InputData.writeDataSeries (fName)    
     
     #===================================================================
-    
     lm = tel.Plugin ("tel_lm")
     experimentalData = tel.DataSeries.readDataSeries (fName)    
        
@@ -53,40 +52,28 @@ try:
     # Execute lmfit plugin
     res = lm.execute()
     
-    # Get the experimental data as a numpy array
-    experimentalData = experimentalData.toNumpy
+    #======== Use the stat plugin to calculate statistics
+    stat = tel.Plugin("tel_stat")    
+    stat.Residuals = lm.Residuals
+    stat.execute()
     
-    # Get the fitted and residual data
-    fittedData = lm.FittedData.toNumpy
-    residuals  = lm.Residuals.toNumpy
     
-##    tel.telplugins.plot (fittedData[:,[0,1]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1 Fitted")
-##    tel.telplugins.plot (fittedData[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S2 Fitted")
-##    tel.telplugins.plot (residuals[:,[0,1]], myColor="blue", myLinestyle="None", myMarker="x", myLabel="S1 Residual")
-##    tel.telplugins.plot (residuals[:,[0,2]], myColor="red", myLinestyle="None", myMarker="x", myLabel="S2 Residual")
-##    tel.telplugins.plot (experimentalData[:,[0,1]], myColor="red", myLinestyle="", myMarker="*", myLabel="S1 Data")
-##    tel.telplugins.plot (experimentalData[:,[0,2]], myColor="blue", myLinestyle="", myMarker="*", myLabel="S2 Data")
-##    tel.plt.show()
-##    
-##    
-##    # Get the fitted and residual data
-##    fittedData = lm.FittedData.toNumpy
-##    residuals  = lm.Residuals.toNumpy       
-##    residuals = residuals[:,[1,2]]
-##    
-##    #Plot as a histogram
-##    plt.hist(residuals, 50, normed=True)
-##    plt.show()
-##        
-    stdResiduals = lm.StandardizedResiduals.toNumpy
+    # Get the residuals    
+    residuals  = stat.Residuals.toNumpy
+    residuals = residuals[:,[1,2]]
+    #Plot as a histogram
+    plt.hist(residuals, 50, normed=True)
+    plt.show()
+        
+    stdResiduals = stat.StandardizedResiduals.toNumpy
     stdResiduals = stdResiduals[:,[1,2]]            
     plt.hist(stdResiduals, 50, normed=True)
     plt.show()
     
-    lm.StandardizedResiduals = tel.DataSeries.fromNumPy(stdResiduals)
+
     
     #Plot normal probability plots
-    probPlots = lm.NormalProbabilityOfResiduals.toNumpy
+    probPlots = stat.NormalProbabilityOfResiduals.toNumpy
     print probPlots
     
     x1 = probPlots[:,[0]]
