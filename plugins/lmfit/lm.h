@@ -22,14 +22,10 @@ class LM : public CPPPlugin
         Property<string>                        mSBML;                          //This is the model
         Property<TelluriumData>				    mExperimentalData;
         Property<TelluriumData>			        mModelData;
-
-
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
-
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
-
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
         //LMFIT Tuning parameters
@@ -47,15 +43,16 @@ class LM : public CPPPlugin
 
         Property<TelluriumData>			        mResidualsData;                 //Residuals from the fitting
         Property<TelluriumData>			        mStandardizedResiduals;         //Standardized Residuals from the fitting
-        Property<TelluriumData>			        mNormalProbabilityOfResiduals;  //Normal probability of residuals
-        Property<double>			            mChiSquare;                     //Normal probability of residuals
-        Property<double>			            mReducedChiSquare;              //Normal probability of residuals
+        Property<TelluriumData>			        mNormalProbabilityOfResiduals;  //Normal probability of residuals, Q-Q plot
+        Property<double>			            mChiSquare;                     //Chi square for the fitting
+        Property<double>			            mReducedChiSquare;              //Reduced Chi Square
 
 		//Utility functions for the thread
         string                                  getTempFolder();
         string                                  getSBML();
 
 		lmDataStructure							&mLMData;        //LevenbergMarq.. data structure
+
     protected:
         //The worker is doing the work
         lmWorker                                mWorker;

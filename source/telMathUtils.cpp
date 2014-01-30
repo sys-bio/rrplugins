@@ -1,15 +1,152 @@
 #pragma hdrstop
 #include <math.h>
+#include <algorithm>
 #include "telMathUtils.h"
 #include "rr/rrLogger.h"
 #include "telUtils.h"
 #include "telException.h"
+
 namespace tlp
 {
+using namespace std;
 
-TelluriumData getStandardizedPopulations(TelluriumData& population)
+double getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances)
+{
+    if (O.size() != E.size() || O.size() != variances.size())
+    {
+        throw(Exception("Non equally sized data passed to getChiSquare"));
+    }
+
+    double chiSquare = 0;
+
+    for(int i = 0; i < O.size(); i++)
+    {
+        if(variances[i] != 0)
+        {
+            chiSquare += (1./variances[i]) * pow(O[i] - E[i], 2);
+        }
+        else
+        {
+            Log(lError)<<"Tried to divide by zero in gtChiSquare()";
+        }
+    }
+    return chiSquare;
+}
+
+TelluriumData getNormalProbabilityPlot(const TelluriumData& stdPops)
+{
+    bool timeIsFirstCol = stdPops.isFirstColumnTime();
+    //Resulting data contain the probPlot for specie1 in col 1 and 2, specie2 in col 3,4 etc..
+    TelluriumData probPlots(stdPops.rSize(), 2*(stdPops.cSize() - ((timeIsFirstCol == true) ? 1 : 0)) );
+
+    for(int col = ((timeIsFirstCol == true) ? 1 : 0); col < stdPops.cSize(); col++)
+    {
+        vector<double> temp = getValuesInColumn(col, stdPops);
+        //Sort the values
+        sort(temp.begin(), temp.end());
+
+        //Get percentiles
+        vector<double> p(temp.size());
+        for(int i = 0; i < temp.size(); i++)
+        {
+             p[i] = ((i+1) - 0.5) / temp.size();
+        }
+
+        //Get theoretical z scores from percentiles ?
+        vector<double> z(temp.size());
+        for(int i = 0; i < temp.size(); i++)
+        {            
+            z[i] = invnormsdist(p[i]);
+        }
+
+        int correction = (timeIsFirstCol == true) ? 1 : 0;
+        int popStart = 2*(col - correction);
+        //Populate propbPlots with the sorted values and z's
+        for(int row = 0; row < temp.size(); row++)
+        {
+            //X and Y
+            probPlots(row, popStart)        = z[row];
+            probPlots(row, popStart + 1)    = temp[row];
+        }
+     }
+    return probPlots;
+}
+
+//The normsdist and innormsdist is from
+//http://mathforum.org/kb/message.jspa?messageID=1525629
+//---------------------------------------------------------------------------
+// NORMSDIST
+// Approximation of normal density function, solves for area under the
+// standard normal curve from -infinity to x.
+// Duplicates MS Excel NORMSDIST() function, and agrees to within 1e-10
+//---------------------------------------------------------------------------
+double normsdist(const double x)
+{
+    static const double invsqrt2pi = 0.3989422804014327, // 1/sqrt(2*pi)
+    b1 = 0.31938153,
+    b2 = -0.356563782,
+    b3 = 1.781477937,
+    b4 = -1.821255978,
+    b5 = 1.330274429,
+    p = 0.2316419;
+    double t1, t2, t3, t4, t5, area, xx = fabs(x);
+    t1 = 1.0 / (1.0 + p * xx);
+    t2 = t1 * t1;
+    t3 = t2 * t1;
+    t4 = t3 * t1;
+    t5 = t4 * t1;
+    area = invsqrt2pi * exp(-0.5 * xx*xx)
+    * (b1*t1 + b2*t2 + b3*t3 + b4*t4 +b5*t5);
+    if (x > 0.0)
+        area = 1.0 - area;
+    return area;
+}
+
+//---------------------------------------------------------------------------
+// INVNORMSDIST
+// Inverse normal density function, solves for number of standard deviations
+// x corresponding to area (probability) y. Duplicates MS Excel NORMSINV().
+//---------------------------------------------------------------------------
+double invnormsdist(const double y) // 0 < y < 1;
+{
+    double x, tst, incr;
+    if (y < 1.0e-20)
+        return -5.0;
+    if (y >= 1.0)
+        return 5.0;
+    x = 0.0;
+    incr = y - 0.5;
+    while (fabs(incr) > 0.0000001)
+    {
+        if (fabs(incr) < 0.0001 && (x <= -5.0 || x >= 5.0))
+            break;
+        x += incr;
+        tst = normsdist(x);
+
+    if ((tst > y && incr > 0.) || (tst < y && incr < 0.))
+        incr *= -0.5;
+    }
+    return x;
+}
+
+vector<double> getValuesInColumn(int col, const TelluriumData& data)
+{
+    vector<double> vals;
+    if(col < data.cSize())
+    {
+        vals.resize(data.rSize());
+        for(int row = 0; row < data.rSize(); row++)
+        {
+            vals[row] = data(row, col);
+        }
+    }
+    return vals;
+}
+
+TelluriumData getStandardizedPopulations(const TelluriumData& population)
 {
     TelluriumData stdPop(population.rSize(), population.cSize());
+    stdPop.setColumnNames(population.getColumnNames());
     vector<double> stdDeviations = getStandardDeviations(population);
 
     bool timeIsFirstCol = population.isFirstColumnTime();
@@ -31,10 +168,11 @@ TelluriumData getStandardizedPopulations(TelluriumData& population)
         }
         Log(lDebug)<<"Standard deviation: "<<stdDeviations[nonTimeDataIndex];
     }
+
     return stdPop;
 }
 
-vector<double>  getStandardDeviations(TelluriumData& population)
+vector<double> getStandardDeviations(const TelluriumData& population)
 {
     vector<double> means = getMeans(population);
 
@@ -58,7 +196,40 @@ vector<double>  getStandardDeviations(TelluriumData& population)
     return stds;
 }
 
-vector<double>  getMeans(TelluriumData& population)
+double getStandardDeviation(const vector<double>& population)
+{
+    double mean = getMean(population);
+
+    vector<double> stds;
+    double sumOfSquaredDifferences  = 0;
+    for(int row = 0; row < population.size(); row++)
+    {
+        sumOfSquaredDifferences += pow( population[row] - mean, 2);
+    }
+    double variance =  (1. /  (population.size() -1) ) * sumOfSquaredDifferences;
+    double stdDev =  sqrt(variance) ;
+    Log(lInfo) << "Std Dev = " << stdDev;
+
+    return stdDev;
+}
+
+double getMean(const vector<double>& population)
+{
+    if(population.size() < 1)
+    {
+        throw(Exception("Bad population passed to function getMean()"));
+    }
+
+    double mean  = 0;
+    for(int row = 0; row < population.size(); row++)
+    {
+        mean += population[row];
+
+    }
+    return mean;
+}
+
+vector<double> getMeans(const TelluriumData& population)
 {
     if(population.rSize() < 1)
     {
@@ -81,6 +252,43 @@ vector<double>  getMeans(TelluriumData& population)
     }
     return means;
 }
+
+double erf(double x)
+{
+    double pi = 3.1415927;
+    double a = (8.*(pi - 3.))/(3.*pi*(4. - pi));
+    double x2 = x * x;
+
+    double ax2 = a * x2;
+    double num = (4./pi) + ax2;
+    double denom = 1.0 + ax2;
+
+    double inner = (-1. * x2)* num/ denom;
+    double erf2 = 1.0 - exp(inner);
+    double val = sqrt(erf2);
+    if(x >= 0)
+    {
+        return  val;
+    }
+    else
+    {
+        return -1.0 * val;
+    }
+}
+
+double cdf(double n)
+{
+    if(n < 0)
+    {
+            return (1. - erf(n / sqrt(2.)))/2.;
+    }
+    else
+    {
+            return (1. + erf(n / sqrt(2.)))/2.;
+    }
+}
+
+
 
 }
 

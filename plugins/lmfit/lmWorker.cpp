@@ -1,9 +1,8 @@
 #pragma hdrstop
 #include "lmWorker.h"
-
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert an use the CPP api directly
+#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert and use the CPP api directly
 #include "rr/C/rrc_utilities.h"
 #include "telException.h"
 #include "telTelluriumData.h"
@@ -117,10 +116,7 @@ void lmWorker::run()
     }
 
     Log(lInfo)<<"Norm:  "<<mTheHost.mLMStatus.fnorm;
-
-
     postFittingWork();
-
     workerFinished();
 }
 
@@ -142,8 +138,6 @@ void lmWorker::postFittingWork()
     createResidualsData(mTheHost.mResidualsData.getValuePointer());
 
     //Truncate Norms property to actual number of iterations
-    //The code below is inefficient
-    //mTheHost.rNormsData.reSize(mTheHost.mLMStatus.nfev, 1); //Resize will clear any data.. :(
     TelluriumData tempData(mTheHost.mLMStatus.nfev, 1);
     for(int r = 0; r < tempData.rSize(); r++)
     {
@@ -151,13 +145,46 @@ void lmWorker::postFittingWork()
     }
     mTheHost.rNormsData = tempData;
 
-    //Calculate standarized residuals
-    //Get mean of residuals
+    //Calculate standardized residuals
     TelluriumData& residuals = *(TelluriumData*) mTheHost.mResidualsData.getValueHandle();
 
     //Populate the standardized residuals
     TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
     stdRes = getStandardizedPopulations(residuals);
+
+
+
+    //Create a probability plot for the residuals
+    TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
+    probPlot = getNormalProbabilityPlot(stdRes);
+
+    //Calculate ChiSquare(s)
+    TelluriumData& modelData = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
+    TelluriumData& obsData = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
+
+    double chiSquare = 0;
+    //Get ChiSquare specie by specie and average them together
+
+    for(int n = obsData.isFirstColumnTime() ? 1 : 0; n < obsData.cSize(); n++)
+    {
+        vector<double> obsDataN     = getValuesInColumn(n, obsData);
+        vector<double> modelDataN   = getValuesInColumn(n, modelData);
+
+        double stdDevOfResiduals = getStandardDeviation(getValuesInColumn(n, residuals));
+
+        vector<double> variances(modelDataN.size(), pow(stdDevOfResiduals,2));
+
+        chiSquare += getChiSquare(obsDataN, modelDataN, variances);
+    }
+    //Divide chiSquare with number of species
+    int test = obsData.isFirstColumnTime() ? 1 : 0;
+    int nrOfSpecies = obsData.cSize() -  test;
+
+    int degreeOfFreedom = obsData.rSize() * nrOfSpecies - mLMData.nrOfParameters;
+    mTheHost.mChiSquare.setValue(chiSquare);
+    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
+
+    Log(lInfo)<<"Chi Square = "<<chiSquare;
 }
 
 

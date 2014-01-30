@@ -49,8 +49,6 @@ mChiSquare(                     0,                      "ChiSquare",            
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
 
 
-
-
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
 ftol(                           LM_USERTOL,              "ftol"       ,                         "Relative error desired in the sum of squares. "),
@@ -59,7 +57,6 @@ gtol(                           LM_USERTOL,              "gtol"       ,         
 epsilon(                        LM_USERTOL,              "epsilon"    ,                         "Step used to calculate the jacobian. "),
 stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
 patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
-//scale_diag(                 1,                       "scale_diag" ,              " UNDOCUMENTED, TESTWISE automatical diag rescaling? ")
 mWorker(*this),
 mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
@@ -82,9 +79,6 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mNormalProbabilityOfResiduals);
     mProperties.add(&mChiSquare);
     mProperties.add(&mReducedChiSquare);
-    
-
-
 
     //Add the lmfit parameters
     mProperties.add(&ftol);
@@ -93,7 +87,6 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&epsilon);
     mProperties.add(&stepbound);
     mProperties.add(&patience);
-    //mProperties.addProperty(&scale_diag);
 
     //Allocate model and Residuals data
     mResidualsData.setValue(new TelluriumData());
@@ -184,7 +177,9 @@ string LM::getResult()
     {
         msg<<pars[i]->getName()<<" = "<< pars[i]->getValueAsString()<<"\n";
     }
-    msg<<"Norm: "<<mNorm.getValue();
+    msg<<"Norm: "<<mNorm.getValue()<<endl;
+    msg<<"Chi Square: "<<mChiSquare.getValue()<<endl;
+    msg<<"Reduced Chi Square: "<<mReducedChiSquare.getValue()<<endl;
     return msg.str();
 }
 
@@ -306,11 +301,7 @@ s << "Maximum number of iterations.";
     patience.setDescription(s.str());
 s.str("");
 
-//s << "UNDOCUMENTED, TESTWISE automatical diag rescaling? ";
-//    scale_diag.setDescription(s.str());
-//s.str("");
-
-
 }
+
 }
 

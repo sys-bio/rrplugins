@@ -31,7 +31,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="plugins\lmfit\tel_lm.cbproj">
-            <Dependencies/>
+            <Dependencies>source\telplugins.cbproj</Dependencies>
         </Projects>
         <Projects Include="plugins\add_noise\tel_add_noise.cbproj">
             <Dependencies/>
@@ -149,13 +149,13 @@
     <Target Name="rrAutoInterface-static:Make">
         <MSBuild Projects="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="tel_lm">
+    <Target Name="tel_lm" DependsOnTargets="telplugins">
         <MSBuild Projects="plugins\lmfit\tel_lm.cbproj"/>
     </Target>
-    <Target Name="tel_lm:Clean">
+    <Target Name="tel_lm:Clean" DependsOnTargets="telplugins:Clean">
         <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="tel_lm:Make">
+    <Target Name="tel_lm:Make" DependsOnTargets="telplugins:Make">
         <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_add_noise">
