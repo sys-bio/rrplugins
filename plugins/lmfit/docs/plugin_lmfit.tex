@@ -26,14 +26,19 @@ Parameter Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts t
 %heading
 \hline % inserts single horizontal line
 SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
-ExperimentalData   				&	roadRunnerData 		& N/A    &   Input data.  \\
-FittedData      				& 	roadRunnerData    	& N/A    &   Output data. \\
-Residuals     					& 	roadRunnerData    	& N/A    &   Residuals data.  \\
+ExperimentalData   				&	telluriumData 		& N/A    &   Input data.  \\
+FittedData      				& 	telluriumData    	& N/A    &   Output data. \\
+Residuals     					& 	telluriumData    	& N/A    &   Residuals data.  \\
 InputParameterList 				&	listOfParameters    & N/A    &   Parameters to fit. \\
 OutputParameterList 			&   listOfParameters 	& N/A    &   List of fitted parameters. \\
 Experimental\-DataSelectionList & 	stringList			& N/A    &   Species selection list for experimental data. \\
 FittedDataSelectionList     	& 	stringList			& N/A    &   Selection list for model data. \\
 Norm							&	double				& N/A    &   Norm of fitting. An estimate of goodness of fit. \\
+
+Norms							&	telluriumData		& N/A    &   
+The norm is calculated throughout a fitting session. Each Norm value is stored in the \verb|Norms| (read-only) property.
+\\
+
 NrOfIter                        &   int                 & N/A    &   Number of iterations. \\[12pt]
 \\[2pt]                                                               
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are preset with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
@@ -44,7 +49,7 @@ xtol                            &   double              & machine dep.          
 gtol                            &   double              & machine dep.          &   Orthogonality desired between fvec and its derivs. \\
 epsilon                         &   double              & machine dep.          &   Step used to calculate the jacobian. \\
 stepbound                       &   double              & 100.0                 &   Initial bound to steps in the outer loop. \\
-patience                        &   double              & 100                   &   Maximum number of iterations, calculated as \verb|patience*(nr_of_parameters +1)|. \\
+patience                        &   double              & 100                   &   Used for setting maximum number of iterations, calculated as \verb|patience*(nr_of_parameters +1)|. \\
                                                         
 \hline %inserts single line                             
 \caption{LM fit plugin parameters} 

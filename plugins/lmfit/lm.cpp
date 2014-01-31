@@ -2,16 +2,14 @@
 #include <sstream>
 #include "rr/rrLogger.h"
 #include "rr/rrException.h"
-//#include "rr/C/rrc_api.h"
-//#include "rr/C/rrc_utilities.h"
-
-#include "lm.h"
 #include "rr/rrRoadRunner.h"
+#include "lmfit_doc.h"
+#include "lm.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
-#include "lmfit_doc.h"
 //---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 //Below defines are from the LMFIT lib.. convert to constants later on
 /* machine-dependent constants from float.h */
 #define LM_MACHEP     DBL_EPSILON   /* resolution of arithmetic */
@@ -19,27 +17,31 @@
 #define LM_SQRT_DWARF sqrt(DBL_MIN) /* square should not underflow */
 #define LM_SQRT_GIANT sqrt(DBL_MAX) /* square should not overflow */
 #define LM_USERTOL    30*LM_MACHEP  /* users are recommended to require this */
+//---------------------------------------------------------------------------
 
 namespace lmfit
 {
 using namespace std;
 using tlp::StringList;
 
+
+
 LM::LM()
 :
 CPPPlugin(                      "Levenberg-Marquardt", "Fitting",       NULL, NULL),
+
+//Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
-mExperimentalData(              TelluriumData(),       "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
-mModelData(                     TelluriumData(),       "FittedData",                           "Data object holding model data: Handed to client"),
-mResidualsData(                 TelluriumData(),       "Residuals",                            "Data object holding residuals: Handed to client"),
+mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
+mModelData(                     TelluriumData(),        "FittedData",                           "Data object holding model data: Handed to client"),
+mResidualsData(                 TelluriumData(),        "Residuals",                            "Data object holding residuals: Handed to client", "", "", true),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
 mOutputParameterList(           Properties(),           "OutputParameterList",                  "List of parameters that was fittedt"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
 mNorm(                          0,                      "Norm",                                 "Norm of fitting. An estimate of goodness of fit"),
+mNorms(                         TelluriumData(),        "Norms",                                "Norms from fitting session.", "", "", true),
 mNrOfIter(                      0,                      "NrOfIter",                             "Number of iterations"),
-mWorker(*this),
-mLMData(mWorker.mLMData),
 
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
@@ -48,10 +50,14 @@ xtol(                           LM_USERTOL,              "xtol"       ,         
 gtol(                           LM_USERTOL,              "gtol"       ,                         "Orthogonality desired between fvec and its derivs. "),
 epsilon(                        LM_USERTOL,              "epsilon"    ,                         "Step used to calculate the jacobian. "),
 stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
-patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). ")
+patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
 //scale_diag(                 1,                       "scale_diag" ,              " UNDOCUMENTED, TESTWISE automatical diag rescaling? ")
+mWorker(*this),
+mLMData(mWorker.mLMData),
+rNormsData(mNorms.getValueReference())
 {
     mVersion = "0.8";
+
     //Add plugin properties to property container
     mProperties.add(&mSBML);
     mProperties.add(&mExperimentalData);
@@ -62,6 +68,7 @@ patience(                       100,                     "patience"    ,        
     mProperties.add(&mExperimentalDataSelectionList);
     mProperties.add(&mModelDataSelectionList);
     mProperties.add(&mNorm);
+    mProperties.add(&mNorms);
     mProperties.add(&mNrOfIter);
 
     //Add the lmfit parameters
@@ -71,7 +78,7 @@ patience(                       100,                     "patience"    ,        
     mProperties.add(&epsilon);
     mProperties.add(&stepbound);
     mProperties.add(&patience);
-//    mProperties.addProperty(&scale_diag);
+    //mProperties.addProperty(&scale_diag);
 
     //Allocate model and Residuals data
     mResidualsData.setValue(new TelluriumData());
@@ -133,11 +140,18 @@ bool LM::resetPlugin()
     }
 
     mTerminate = false;
-
     mInputParameterList.getValueReference().clear();
     mOutputParameterList.getValueReference().clear();
     mExperimentalDataSelectionList.getValueReference().clear();
     mModelDataSelectionList.getValueReference().clear();
+
+    //Clear data
+    mExperimentalData.clearValue();
+    mModelData.clearValue();
+    mNrOfIter.clearValue();
+    mNorms.clearValue();
+    mResidualsData.clearValue();
+
     return true;
 }
 
@@ -196,33 +210,33 @@ void LM::assignPropertyDescriptions()
     stringstream s;
 s << "The SBML property should be assigned the (XML) \
 text that defines the SBML model that is used to fit parameters.";
-mSBML.setDescription(s.str()); 
+mSBML.setDescription(s.str());
 s.str("");
 
 s << "Experimental data contains the data to be used for fitting input.";
-mExperimentalData.setDescription(s.str());          
+mExperimentalData.setDescription(s.str());
 s.str("");
 
 s << "Model data is calculated after the fitting algorithm finishes. It uses the obtained model parameters as input.";
-mModelData.setDescription(s.str());                  
+mModelData.setDescription(s.str());
 s.str("");
 
 s << "Residuals data contains the differencies between the Experimental data and the ModelData.";
-mResidualsData.setDescription(s.str());               
+mResidualsData.setDescription(s.str());
 s.str("");
 
 s << "The input parameter list holds the parameters, and their initial values that are to be fitted, e.g. k1, k2. \
 The input parameters are properties of the input SBML model";
-mInputParameterList.setDescription(s.str());           
+mInputParameterList.setDescription(s.str());
 s.str("");
 
 s << "The output parameter list holds the resulting fitted parameter(s)";
-mOutputParameterList.setDescription(s.str());           
+mOutputParameterList.setDescription(s.str());
 s.str("");
 
 s << "The data input may contain multiple columns of data. The Experimental data selection list \
 should contain the columns in the input data that is intended to be used in the fitting.";
-mExperimentalDataSelectionList.setDescription(s.str());  
+mExperimentalDataSelectionList.setDescription(s.str());
 s.str("");
 
 s << "The model data selection list contains the selections for which model data will be genereated.  \
@@ -230,12 +244,16 @@ Model data can only be generated for selections present in the experimental data
 mModelDataSelectionList.setDescription(s.str());
 s.str("");
 
-s << "The norm is an output variable indicating the goodness of fit. The smaller value, the better fit.";
-mNorm.setDescription(s.str());    
+s << "The norm is a readonly output variable indicating the goodness of fit. The smaller value, the better fit.";
+mNorm.setDescription(s.str());
+s.str("");
+
+s << "The norm is calculated throughout a fitting session. Each Norm value is stored in the Norms (readonly) variable.";
+mNorms.setDescription(s.str());
 s.str("");
 
 s << "The number of iterations wil hold the number of iterations of the internal fitting routine.";
-mNrOfIter.setDescription(s.str()); 
+mNrOfIter.setDescription(s.str());
 s.str("");
 
     //Add the lmfit parameters
@@ -243,14 +261,14 @@ s << "ftol is a nonnegative input variable. Termination occurs when \
 both the actual and predicted relative reductions in the sum \
 of squares are at most ftol. Therefore, ftol measures the \
 relative error desired in the sum of squares.";
-    ftol.setDescription(s.str()); 
+    ftol.setDescription(s.str());
 s.str("");
 
 s << "xtol is a nonnegative input variable. Termination occurs when \
 the relative error between two consecutive iterates is at \
 most xtol. Therefore, xtol measures the relative error desired \
 in the approximate solution.";
-xtol.setDescription(s.str());      
+xtol.setDescription(s.str());
 s.str("");
 
 s << "gtol is a nonnegative input variable. Termination occurs when \
@@ -258,11 +276,11 @@ the cosine of the angle between fvec and any column of the \
 jacobian is at most gtol in absolute value. Therefore, gtol \
 measures the orthogonality desired between the function vector \
 and the columns of the jacobian.";
-    gtol.setDescription(s.str());   
+    gtol.setDescription(s.str());
 s.str("");
 
 s << "Step used to calculate the Jacobian.";
-    epsilon.setDescription(s.str()); 
+    epsilon.setDescription(s.str());
 s.str("");
 
 s << "Initial bound to steps in the outer loop.";

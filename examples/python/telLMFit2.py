@@ -36,6 +36,12 @@ tel.telplugins.plot (residuals[:,[0,2]], myColor="red", myLinestyle="None", myMa
 tel.telplugins.plot (experimentalData[:,[0,1]], myColor="red", myLinestyle="", myMarker="*", myLabel="S1 Data")
 tel.telplugins.plot (experimentalData[:,[0,2]], myColor="blue", myLinestyle="", myMarker="*", myLabel="S2 Data")
 
+
 tel.plt.show()
+
+# Get the norms data
+norms = lm.Norms.toNumpy
+
+print norms
 
 

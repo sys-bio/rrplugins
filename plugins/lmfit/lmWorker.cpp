@@ -51,7 +51,6 @@ void lmWorker::start(bool runInThread)
 void lmWorker::run()
 {
     workerStarted();
-
     setupRoadRunner();
 
     StringList& species = mTheHost.mExperimentalDataSelectionList.getValueReference();//mMinData.getExperimentalDataSelectionList();
@@ -126,8 +125,17 @@ void lmWorker::run()
 
     mTheHost.mNorm.setValue(mTheHost.mLMStatus.fnorm);
     createModelData(mTheHost.mModelData.getValuePointer());
-
     createResidualsData(mTheHost.mResidualsData.getValuePointer());
+
+    //Truncate Norms property to actual number of iterations
+    //The code below is inefficient
+    //mTheHost.rNormsData.reSize(mTheHost.mLMStatus.nfev, 1); //Resize will clear any data.. :(
+    TelluriumData tempData(mTheHost.mLMStatus.nfev, 1);
+    for(int r = 0; r < tempData.rSize(); r++)
+    {
+        tempData(r,0) = mTheHost.rNormsData(r, 0);
+    }
+    mTheHost.rNormsData = tempData;
     workerFinished();
 }
 
@@ -157,7 +165,8 @@ bool lmWorker::setup()
     mLMData.nrOfParameters      = parameters.count();
     mLMData.parameters          = new double[mLMData.nrOfParameters];
     mLMData.mLMPlugin           = static_cast<RRPluginHandle> (&mTheHost);
-    //Set initial parameter values
+
+    //Setup initial parameter values
     for(int i = 0; i < mLMData.nrOfParameters; i++)
     {
         Property<double> *par = (Property<double>*) parameters[i];
@@ -170,6 +179,9 @@ bool lmWorker::setup()
             throw("Bad stuff..");
         }
     }
+
+    //Patience is max number of iterations
+    mTheHost.rNormsData.reSize(mTheHost.patience.getValue() * (mLMData.nrOfParameters + 1), 1);
 
     TelluriumData& obsData             = (mTheHost.mExperimentalData.getValueReference());
     mLMData.nrOfTimePoints              = obsData.rSize();
@@ -219,7 +231,7 @@ bool lmWorker::setup()
         {
             for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
             {
-                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);                
+                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
             }
         }
     }
@@ -235,6 +247,7 @@ bool lmWorker::setup()
 
     mLMData.mProgressEvent               = mTheHost.mWorkProgressEvent;
     mLMData.mProgressEventContextData    = mTheHost.mWorkProgressData1;
+
     return true;
 }
 
@@ -292,7 +305,7 @@ void evaluate(const double *par,       //Property vector
         return;
     }
 
-//    RRCDataPtr rrcData = createRRCData( *((TelluriumData*) rrData));
+    //Don't create RRC data, use rrData directly here
     RRCDataPtr rrcData = createRRCData(rrData);
     //calculate fvec for each specie
     int count = 0;
@@ -334,8 +347,11 @@ void evaluate(const double *par,       //Property vector
     {
         //Assign data relevant to the progress
         double norm = lm_enorm(m_dat, fvec);
-		plugin->mNorm.setValue(norm);
         plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
+        plugin->mNorm.setValue(norm);
+
+        //Add norm to Norms property
+        plugin->rNormsData(plugin->mNrOfIter.getValue() -1, 0) = plugin->mNorm.getValue();
 
         //Pass trough event data
         pair<void*, void*> passTroughData = plugin->getWorkProgressData();

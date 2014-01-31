@@ -19,8 +19,8 @@ class AddNoise : public CPPPlugin
     private:
         Property<int>               mNoiseType;
         Property<double>            mSigma;
-        Property<TelluriumData>    mData;
-        Property<int>               mProgress;
+        Property<TelluriumData>     mData;
+        Property<double>            mProgress;
         AddNoiseWorker              mAddNoiseWorker;
 
     public:

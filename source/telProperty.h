@@ -147,6 +147,12 @@ class Property : public PropertyBase
                                             Get a string representation of a properties value.
                                         */
         string                          getValueAsString() const;
+
+                                        /**
+                                            Clear a property's value
+                                        */
+        bool                            clearValue();
+
 };
 
 template<class T>
@@ -219,6 +225,11 @@ void* Property<T>::getValueHandle()
     return (void*) &mValue;
 }
 
+template<class T>
+bool Property<T>::clearValue()
+{
+    return false;
+}
 //================= SPECIALIZATIONS ====================
 
 //================= BOOL ===============================
@@ -239,6 +250,13 @@ template<>
 inline void Property<int>::setValueFromString(const string& val)
 {
     mValue = tlp::toInt(val);
+}
+
+template<>
+inline bool Property<int>::clearValue()
+{
+    mValue = 0;
+    return true;
 }
 
 //================= Double ===============================
@@ -267,6 +285,13 @@ inline void Property<string>::setValueFromString(const string& str)
     mValue = str;
 }
 
+template<>
+inline bool Property<string>::clearValue()
+{
+    mValue = gEmptyString;
+    return true;
+}
+
 //================= vector<string> ===============================
 /**
     Set a vector<string> properties value, from a string. This function expects input string
@@ -285,6 +310,13 @@ inline string Property<tlp::StringList>::getValueAsString() const
     return mValue.AsString();
 }
 
+template<>
+inline bool Property<StringList>::clearValue()
+{
+    mValue = StringList();
+    return true;
+}
+
 /**
     Set a StringList properties value, from a string. This function expects input string
     containing comma delimited values.
@@ -295,7 +327,7 @@ inline void Property< tlp::StringList >::setValueFromString(const string& val)
     mValue = tlp::splitString(val,", ");
 }
 
-//============= RoadRunner data ===========================
+//============= Tellurium data ===========================
 template<>
 inline string Property<tlp::TelluriumData>::getValueAsString() const
 {
@@ -311,6 +343,13 @@ inline string Property<tlp::TelluriumData>::getValueAsString() const
 template<>
 inline void Property<tlp::TelluriumData>::setValueFromString(const string& val)
 {
+}
+
+template<>
+inline bool Property<tlp::TelluriumData>::clearValue()
+{
+    mValue = tlp::TelluriumData();
+    return true;
 }
 
 /**
