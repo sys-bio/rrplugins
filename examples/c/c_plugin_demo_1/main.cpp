@@ -90,7 +90,7 @@ int main()
             cout << "Before execute: "<<prop->getValueAsString()<<endl;
         }
 
-        if(!executePlugin(plugin))
+        if(!plugin->execute())
         {
             throw("There was a problem executing the plugin...");
         }
