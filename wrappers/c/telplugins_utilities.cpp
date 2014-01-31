@@ -44,7 +44,7 @@ namespace tlpc
 //    catch_ptr_macro
 //}
 //
-//bool rrcCallConv compileSource(RRHandle handle, const char* sourceFileName)
+//bool rrcCallConv compileSource(TELHandle handle, const char* sourceFileName)
 //{
 //    return true;
 //}
@@ -72,7 +72,7 @@ namespace tlpc
 //    return iList->Count;
 //}
 //
-//RRHandle rrcCallConv getRRHandle(RRInstanceListPtr iList, int index)
+//TELHandle rrcCallConv getTELHandle(RRInstanceListPtr iList, int index)
 //{
 //    return iList->Handle[index];
 //}
@@ -688,7 +688,7 @@ namespace tlpc
 //}
 //
 ////====================== DATA WRITING ROUTINES ======================
-//bool rrcCallConv writeRRData(RRHandle rrHandle, const char* fileNameAndPath)
+//bool rrcCallConv writeRRData(TELHandle rrHandle, const char* fileNameAndPath)
 //{
 //    start_try
 //    {

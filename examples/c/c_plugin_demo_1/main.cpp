@@ -43,7 +43,7 @@
 #include "telPlugin.h"
 #include "telStringList.h"
 #include "telplugins_c_api.h"
-
+#include "telplugins_types.h"
 using namespace tlp;
 using namespace tlpc;
 using namespace std;

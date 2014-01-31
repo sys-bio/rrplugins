@@ -23,9 +23,9 @@ typedef struct
     double**                experimentalDataWeights;        //experimental weights..
     double                  timeStart;
     double                  timeEnd;
-    RRHandle                rrHandle;
+    TELHandle               rrHandle;
     double*                 time;
-    RRPluginHandle          mLMPlugin;
+    TELHandle               mLMPlugin;
     PluginEvent             mProgressEvent;
     void*                   mProgressEventContextData;
     char*                   mProgressEventMessage;

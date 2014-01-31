@@ -18,7 +18,7 @@ using namespace std;
 using tlp::TelluriumData;
 
 
-RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
+TELHandle tlp_cc createProperty(const char* label, const char* type, const char* _hint, void* value)
 {
     start_try
         char* hint = (char*) _hint;
@@ -146,7 +146,7 @@ RRPropertyHandle tlp_cc createProperty(const char* label, const char* type, cons
     catch_ptr_macro
 }
 
-bool tlp_cc freeProperty(RRPropertyHandle paraHandle)
+bool tlp_cc freeProperty(TELHandle paraHandle)
 {
     start_try
         PropertyBase* para   = castHandle<PropertyBase>(paraHandle, __FUNC__);
@@ -155,7 +155,7 @@ bool tlp_cc freeProperty(RRPropertyHandle paraHandle)
     catch_bool_macro
 }
 
-RRPropertiesHandle tlp_cc createPropertyList()
+TELHandle tlp_cc createPropertyList()
 {
     start_try
         Properties* props   = new Properties();
@@ -171,7 +171,7 @@ RRPropertiesHandle tlp_cc createPropertyList()
     catch_ptr_macro
 }
 
-bool tlp_cc freeProperties(RRPropertiesHandle handle)
+bool tlp_cc freeProperties(TELHandle handle)
 {
     start_try
         Properties* props   = castHandle<Properties>(handle, __FUNC__);
@@ -180,7 +180,7 @@ bool tlp_cc freeProperties(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc addPropertyToList(RRPropertiesHandle handle, RRPropertyHandle para)
+bool tlp_cc addPropertyToList(TELHandle handle, TELHandle para)
 {
     start_try
         Properties* paras   = castHandle<Properties>(handle, __FUNC__);
@@ -190,7 +190,7 @@ bool tlp_cc addPropertyToList(RRPropertiesHandle handle, RRPropertyHandle para)
     catch_bool_macro
 }
 
-char* tlp_cc getPropertyInfo(RRPropertyHandle handle)
+char* tlp_cc getPropertyInfo(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -200,7 +200,7 @@ char* tlp_cc getPropertyInfo(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc setPropertyDescription(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyDescription(TELHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -209,7 +209,7 @@ bool tlp_cc setPropertyDescription(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-char* tlp_cc getPropertyDescription(RRPropertyHandle handle)
+char* tlp_cc getPropertyDescription(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -217,7 +217,7 @@ char* tlp_cc getPropertyDescription(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc setPropertyHint(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyHint(TELHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -226,7 +226,7 @@ bool tlp_cc setPropertyHint(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-bool tlp_cc setPropertyByString(RRPropertyHandle handle, const char* value)
+bool tlp_cc setPropertyByString(TELHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -235,7 +235,7 @@ bool tlp_cc setPropertyByString(RRPropertyHandle handle, const char* value)
     catch_bool_macro
 }
 
-bool tlp_cc setBoolProperty(RRPropertyHandle handle, bool value)
+bool tlp_cc setBoolProperty(TELHandle handle, bool value)
 {
     start_try
         Property<bool>* para = castHandle< Property<bool> >(handle, __FUNC__);
@@ -244,7 +244,7 @@ bool tlp_cc setBoolProperty(RRPropertyHandle handle, bool value)
     catch_bool_macro
 }
 
-bool tlp_cc getBoolProperty(RRPropertyHandle handle, bool* value)
+bool tlp_cc getBoolProperty(TELHandle handle, bool* value)
 {
     start_try
         Property<bool>* para = castHandle< Property<bool> >(handle, __FUNC__);
@@ -254,7 +254,7 @@ bool tlp_cc getBoolProperty(RRPropertyHandle handle, bool* value)
 }
 
 
-bool tlp_cc setIntProperty(RRPropertyHandle handle, int value)
+bool tlp_cc setIntProperty(TELHandle handle, int value)
 {
     start_try
         Property<int>* para = castHandle< Property<int> >(handle,__FUNC__);
@@ -263,7 +263,7 @@ bool tlp_cc setIntProperty(RRPropertyHandle handle, int value)
     catch_bool_macro
 }
 
-bool tlp_cc getIntProperty(RRPropertyHandle handle, int *value)
+bool tlp_cc getIntProperty(TELHandle handle, int *value)
 {
     start_try
         Property<int>* para = castHandle< Property<int> >(handle, __FUNC__);
@@ -272,7 +272,7 @@ bool tlp_cc getIntProperty(RRPropertyHandle handle, int *value)
     catch_bool_macro
 }
 
-bool tlp_cc setDoubleProperty(RRPropertyHandle handle, double value)
+bool tlp_cc setDoubleProperty(TELHandle handle, double value)
 {
     start_try
         Property<double>* para = castHandle< Property<double> >(handle, __FUNC__);
@@ -281,7 +281,7 @@ bool tlp_cc setDoubleProperty(RRPropertyHandle handle, double value)
     catch_bool_macro
 }
 
-bool tlp_cc getDoubleProperty(RRPropertyHandle handle, double *value)
+bool tlp_cc getDoubleProperty(TELHandle handle, double *value)
 {
     start_try
         Property<double>* para = castHandle< Property<double> >(handle, __FUNC__);
@@ -290,7 +290,7 @@ bool tlp_cc getDoubleProperty(RRPropertyHandle handle, double *value)
     catch_bool_macro
 }
 
-bool tlp_cc setStringProperty(RRPropertyHandle handle, char* value)
+bool tlp_cc setStringProperty(TELHandle handle, char* value)
 {
     start_try
         Property<string>* para = castHandle< Property<string> >(handle, __FUNC__);
@@ -299,7 +299,7 @@ bool tlp_cc setStringProperty(RRPropertyHandle handle, char* value)
     catch_bool_macro
 }
 
-bool tlp_cc getStringProperty(RRPropertyHandle handle, const char* (*value))
+bool tlp_cc getStringProperty(TELHandle handle, const char* (*value))
 {
     start_try
         Property<string>* para = castHandle< Property<string> >(handle, __FUNC__);
@@ -309,7 +309,7 @@ bool tlp_cc getStringProperty(RRPropertyHandle handle, const char* (*value))
     catch_bool_macro
 }
 
-bool tlp_cc setListProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc setListProperty(TELHandle handle, void* value)
 {
     start_try
         Property<Properties>* para = castHandle< Property<Properties> >(handle, __FUNC__);
@@ -318,7 +318,7 @@ bool tlp_cc setListProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-bool tlp_cc getListProperty(RRPropertyHandle handle, void* (value))
+bool tlp_cc getListProperty(TELHandle handle, void* (value))
 {
     start_try
         Property<Properties>* para = castHandle< Property<Properties> >(handle, __FUNC__);
@@ -329,7 +329,7 @@ bool tlp_cc getListProperty(RRPropertyHandle handle, void* (value))
     catch_bool_macro
 }
 
-bool tlp_cc setTelluriumDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc setTelluriumDataProperty(TELHandle handle, void* value)
 {
     start_try
         Property<TelluriumData>* para = castHandle< Property<TelluriumData> >(handle, __FUNC__);
@@ -338,7 +338,7 @@ bool tlp_cc setTelluriumDataProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-bool tlp_cc getTelluriumDataProperty(RRPropertyHandle handle, void* value)
+bool tlp_cc getTelluriumDataProperty(TELHandle handle, void* value)
 {
     start_try
         Property<TelluriumData>* para = castHandle< Property<TelluriumData> >(handle, __FUNC__);
@@ -348,7 +348,7 @@ bool tlp_cc getTelluriumDataProperty(RRPropertyHandle handle, void* value)
     catch_bool_macro
 }
 
-char* tlp_cc getPropertyValueAsString(RRPropertyHandle handle)
+char* tlp_cc getPropertyValueAsString(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -357,7 +357,7 @@ char* tlp_cc getPropertyValueAsString(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-void* tlp_cc getPropertyValueHandle(RRPropertyHandle handle)
+void* tlp_cc getPropertyValueHandle(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -365,7 +365,7 @@ void* tlp_cc getPropertyValueHandle(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPropertyName(RRPropertyHandle handle)
+char* tlp_cc getPropertyName(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -373,7 +373,7 @@ char* tlp_cc getPropertyName(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPropertyHint(RRPropertyHandle handle)
+char* tlp_cc getPropertyHint(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -381,7 +381,7 @@ char* tlp_cc getPropertyHint(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPropertyType(RRPropertyHandle handle)
+char* tlp_cc getPropertyType(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
@@ -389,7 +389,7 @@ char* tlp_cc getPropertyType(RRPropertyHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle tlp_cc getFirstProperty(RRPropertiesHandle handle)
+TELHandle tlp_cc getFirstProperty(TELHandle handle)
 {
     start_try
         Properties *paras = castHandle<Properties>(handle, __FUNC__);
@@ -397,7 +397,7 @@ RRPropertyHandle tlp_cc getFirstProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle tlp_cc getNextProperty(RRPropertiesHandle handle)
+TELHandle tlp_cc getNextProperty(TELHandle handle)
 {
     start_try
         Properties *paras = castHandle<Properties>(handle, __FUNC__);
@@ -405,7 +405,7 @@ RRPropertyHandle tlp_cc getNextProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle tlp_cc getPreviousProperty(RRPropertiesHandle handle)
+TELHandle tlp_cc getPreviousProperty(TELHandle handle)
 {
     start_try
         Properties *paras = castHandle<Properties>(handle, __FUNC__);
@@ -413,7 +413,7 @@ RRPropertyHandle tlp_cc getPreviousProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle tlp_cc getCurrentProperty(RRPropertiesHandle handle)
+TELHandle tlp_cc getCurrentProperty(TELHandle handle)
 {
     start_try
         Properties *paras = castHandle<Properties>(handle, __FUNC__);
@@ -421,7 +421,7 @@ RRPropertyHandle tlp_cc getCurrentProperty(RRPropertiesHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc clearPropertyList(RRPropertiesHandle handle)
+bool tlp_cc clearPropertyList(TELHandle handle)
 {
     start_try
         Properties* paras = castHandle<Properties>(handle, __FUNC__);
@@ -429,7 +429,7 @@ bool tlp_cc clearPropertyList(RRPropertiesHandle handle)
     catch_bool_macro
 }
 
-RRPropertyHandle tlp_cc getProperty(RRPropertiesHandle handle, const char* name)
+TELHandle tlp_cc getProperty(TELHandle handle, const char* name)
 {
     start_try
         Properties* props = castHandle<Properties>(handle, __FUNC__);
@@ -437,7 +437,7 @@ RRPropertyHandle tlp_cc getProperty(RRPropertiesHandle handle, const char* name)
     catch_ptr_macro
 }
 
-char* tlp_cc getNamesFromPropertyList(RRPropertiesHandle handle)
+char* tlp_cc getNamesFromPropertyList(TELHandle handle)
 {
     start_try
         Properties* paras = castHandle<Properties>(handle, __FUNC__);

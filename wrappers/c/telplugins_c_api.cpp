@@ -20,20 +20,11 @@ using rr::RoadRunner;
 using tlp::TelluriumData;
 using tlp::StringList;
 using tlpc::createText;
-//using namespace tlp;
 
-RRPluginManagerHandle tlp_cc createPluginManager(const char* _pluginDir)
+TELHandle tlp_cc createPluginManager(const char* _pluginDir)
 {
     start_try
-        string pluginDir;
-        if(!_pluginDir)
-        {
-            pluginDir = ".";
-        }
-        else
-        {
-            pluginDir = _pluginDir;
-        }
+        string pluginDir = (_pluginDir != NULL) ? string(_pluginDir) : string(".");
 
         PluginManager* pm = new PluginManager(pluginDir);
         gHM.registerHandle(pm, typeid(pm).name());
@@ -45,7 +36,7 @@ RRPluginManagerHandle tlp_cc createPluginManager(const char* _pluginDir)
 /**
  * free the plugin manager
  */
-bool tlp_cc freePluginManager(RRPluginManagerHandle handle)
+bool tlp_cc freePluginManager(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -54,7 +45,7 @@ bool tlp_cc freePluginManager(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-RRPluginHandle tlp_cc getFirstPlugin(RRPluginManagerHandle handle)
+TELHandle tlp_cc getFirstPlugin(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -62,7 +53,7 @@ RRPluginHandle tlp_cc getFirstPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle tlp_cc getNextPlugin(RRPluginManagerHandle handle)
+TELHandle tlp_cc getNextPlugin(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -70,7 +61,7 @@ RRPluginHandle tlp_cc getNextPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle tlp_cc getPreviousPlugin(RRPluginManagerHandle handle)
+TELHandle tlp_cc getPreviousPlugin(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -78,7 +69,7 @@ RRPluginHandle tlp_cc getPreviousPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle tlp_cc getCurrentPlugin(RRPluginManagerHandle handle)
+TELHandle tlp_cc getCurrentPlugin(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -86,7 +77,7 @@ RRPluginHandle tlp_cc getCurrentPlugin(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* pluginName)
+TELHandle tlp_cc loadPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -108,7 +99,7 @@ RRPluginHandle tlp_cc loadPlugin(RRPluginManagerHandle handle, const char* plugi
     catch_ptr_macro
 }
 
-bool tlp_cc loadPlugins(RRPluginManagerHandle handle)
+bool tlp_cc loadPlugins(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -128,7 +119,7 @@ bool tlp_cc loadPlugins(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle)
+char* tlp_cc getPluginLoadErrors(TELHandle handle)
 {
 
     start_try
@@ -137,7 +128,7 @@ char* tlp_cc getPluginLoadErrors(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc unLoadPlugins(RRPluginManagerHandle handle)
+bool tlp_cc unLoadPlugins(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -145,7 +136,7 @@ bool tlp_cc unLoadPlugins(RRPluginManagerHandle handle)
     catch_bool_macro
 }
 
-bool tlp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin)
+bool tlp_cc unLoadPlugin(TELHandle handle, TELHandle plugin)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -162,7 +153,7 @@ bool tlp_cc unLoadPlugin(RRPluginManagerHandle handle, RRPluginHandle plugin)
     catch_bool_macro
 }
 
-int tlp_cc getNumberOfPlugins(RRPluginManagerHandle handle)
+int tlp_cc getNumberOfPlugins(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -170,7 +161,7 @@ int tlp_cc getNumberOfPlugins(RRPluginManagerHandle handle)
     catch_int_macro
 }
 
-RRPluginHandle tlp_cc getPlugin(RRPluginManagerHandle handle, const char* pluginName)
+TELHandle tlp_cc getPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -179,7 +170,7 @@ RRPluginHandle tlp_cc getPlugin(RRPluginManagerHandle handle, const char* plugin
     catch_ptr_macro
 }
 
-RRHandle tlp_cc getRRHandleFromPlugin(RRPluginHandle handle)
+TELHandle tlp_cc getTELHandleFromPlugin(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -187,7 +178,7 @@ RRHandle tlp_cc getRRHandleFromPlugin(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginNames(RRPluginManagerHandle handle)
+char* tlp_cc getPluginNames(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -196,7 +187,7 @@ char* tlp_cc getPluginNames(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginLibraryNames(RRPluginManagerHandle handle)
+char* tlp_cc getPluginLibraryNames(TELHandle handle)
 {
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
@@ -205,7 +196,7 @@ char* tlp_cc getPluginLibraryNames(RRPluginManagerHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginName(RRPluginHandle handle)
+char* tlp_cc getPluginName(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -213,7 +204,7 @@ char* tlp_cc getPluginName(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginCategory(RRPluginHandle handle)
+char* tlp_cc getPluginCategory(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -221,7 +212,7 @@ char* tlp_cc getPluginCategory(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginDescription(RRPluginHandle handle)
+char* tlp_cc getPluginDescription(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -229,7 +220,7 @@ char* tlp_cc getPluginDescription(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-TLP_C_DS char* tlp_cc getPluginAuthor(RRPluginHandle handle)
+TLP_C_DS char* tlp_cc getPluginAuthor(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -237,7 +228,7 @@ TLP_C_DS char* tlp_cc getPluginAuthor(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-TLP_C_DS char* tlp_cc getPluginCopyright(RRPluginHandle handle)
+TLP_C_DS char* tlp_cc getPluginCopyright(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -245,7 +236,7 @@ TLP_C_DS char* tlp_cc getPluginCopyright(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-TLP_C_DS char* tlp_cc getPluginVersion(RRPluginHandle handle)
+TLP_C_DS char* tlp_cc getPluginVersion(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -254,7 +245,7 @@ TLP_C_DS char* tlp_cc getPluginVersion(RRPluginHandle handle)
 }
 
 
-char* tlp_cc getPluginHint(RRPluginHandle handle)
+char* tlp_cc getPluginHint(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -262,7 +253,7 @@ char* tlp_cc getPluginHint(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-RRPropertiesHandle tlp_cc getPluginProperties(RRPluginHandle handle)
+TELHandle tlp_cc getPluginProperties(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -270,7 +261,7 @@ RRPropertiesHandle tlp_cc getPluginProperties(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
+char* tlp_cc getListOfPluginPropertyNames(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -278,7 +269,7 @@ char* tlp_cc getListOfPluginPropertyNames(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-RRPropertyHandle tlp_cc getPluginProperty(RRPluginHandle handle, const char* parameterName)
+TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* parameterName)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -286,7 +277,7 @@ RRPropertyHandle tlp_cc getPluginProperty(RRPluginHandle handle, const char* par
     catch_ptr_macro
 }
 
-bool tlp_cc setPluginProperty(RRPluginHandle handle, const char* parameterName, const char* value)
+bool tlp_cc setPluginProperty(TELHandle handle, const char* parameterName, const char* value)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -295,7 +286,7 @@ bool tlp_cc setPluginProperty(RRPluginHandle handle, const char* parameterName, 
     catch_bool_macro
 }
 
-char* tlp_cc getPluginInfo(RRPluginHandle handle)
+char* tlp_cc getPluginInfo(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -303,7 +294,7 @@ char* tlp_cc getPluginInfo(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-unsigned int tlp_cc getPluginManualNrOfBytes(RRPluginHandle handle)
+unsigned int tlp_cc getPluginManualNrOfBytes(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -311,7 +302,7 @@ unsigned int tlp_cc getPluginManualNrOfBytes(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-unsigned char* tlp_cc getPluginManualAsPDF(RRPluginHandle handle)
+unsigned char* tlp_cc getPluginManualAsPDF(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -319,7 +310,7 @@ unsigned char* tlp_cc getPluginManualAsPDF(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-char* tlp_cc getPluginStatus(RRPluginHandle handle)
+char* tlp_cc getPluginStatus(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -327,7 +318,7 @@ char* tlp_cc getPluginStatus(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc assignRoadRunnerInstance(RRPluginHandle handle, RRHandle rrHandle)
+bool tlp_cc assignRoadRunnerInstance(TELHandle handle, TELHandle rrHandle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -335,12 +326,12 @@ bool tlp_cc assignRoadRunnerInstance(RRPluginHandle handle, RRHandle rrHandle)
     catch_bool_macro
 }
 
-bool tlp_cc executePlugin(RRPluginHandle handle)
+bool tlp_cc executePlugin(TELHandle handle)
 {
     return executePluginEx(handle, false);
 }
 
-bool tlp_cc executePluginEx(RRPluginHandle handle, bool inAThread)
+bool tlp_cc executePluginEx(TELHandle handle, bool inAThread)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -348,7 +339,7 @@ bool tlp_cc executePluginEx(RRPluginHandle handle, bool inAThread)
     catch_bool_macro
 }
 
-bool tlp_cc assignOnStartedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnStartedEvent(TELHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -356,7 +347,7 @@ bool tlp_cc assignOnStartedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB,
     catch_bool_macro
 }
 
-bool tlp_cc assignOnProgressEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnProgressEvent(TELHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -364,7 +355,7 @@ bool tlp_cc assignOnProgressEvent(RRPluginHandle handle, tlpc::PluginEvent theCB
     catch_bool_macro
 }
 
-bool tlp_cc assignOnFinishedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
+bool tlp_cc assignOnFinishedEvent(TELHandle handle, tlpc::PluginEvent theCB, void* userData1, void* userData2)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -372,7 +363,7 @@ bool tlp_cc assignOnFinishedEvent(RRPluginHandle handle, tlpc::PluginEvent theCB
     catch_bool_macro
 }
 
-char* tlp_cc getPluginResult(RRPluginHandle handle)
+char* tlp_cc getPluginResult(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -380,7 +371,7 @@ char* tlp_cc getPluginResult(RRPluginHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc resetPlugin(RRPluginHandle handle)
+bool tlp_cc resetPlugin(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -388,7 +379,7 @@ bool tlp_cc resetPlugin(RRPluginHandle handle)
     catch_bool_macro
 }
 
-bool tlp_cc isBeingTerminated(RRPluginHandle handle)
+bool tlp_cc isBeingTerminated(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -396,7 +387,7 @@ bool tlp_cc isBeingTerminated(RRPluginHandle handle)
     catch_bool_macro
 }
 
-void tlp_cc terminateWork(RRPluginHandle handle)
+void tlp_cc terminateWork(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -404,7 +395,7 @@ void tlp_cc terminateWork(RRPluginHandle handle)
     catch_void_macro
 }
 
-bool tlp_cc wasTerminated(RRPluginHandle handle)
+bool tlp_cc wasTerminated(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -412,7 +403,7 @@ bool tlp_cc wasTerminated(RRPluginHandle handle)
     catch_bool_macro
 }
 
-bool tlp_cc isPluginWorking(RRPluginHandle handle)
+bool tlp_cc isPluginWorking(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -430,7 +421,7 @@ bool tlp_cc freeText(char* text)
     return tlp::freeText(text);
 }
 
-char* tlp_cc getPluginPropertiesAsXML(RRPluginHandle handle)
+char* tlp_cc getPluginPropertiesAsXML(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);

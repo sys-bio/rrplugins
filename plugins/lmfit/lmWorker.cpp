@@ -211,7 +211,7 @@ bool lmWorker::setup()
     Properties parameters       = mTheHost.mInputParameterList.getValue();
     mLMData.nrOfParameters      = parameters.count();
     mLMData.parameters          = new double[mLMData.nrOfParameters];
-    mLMData.mLMPlugin           = static_cast<RRPluginHandle> (&mTheHost);
+    mLMData.mLMPlugin           = static_cast<TELHandle> (&mTheHost);
 
     //Setup initial parameter values
     for(int i = 0; i < mLMData.nrOfParameters; i++)

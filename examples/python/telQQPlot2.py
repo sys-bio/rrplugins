@@ -2,7 +2,7 @@ import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-import telplugins as tel
+from telplugins import *
 import ctypes as ct
 
 try:
@@ -19,16 +19,16 @@ try:
     print data
     
     #Add noise to the data
-    noisePlugin = tel.Plugin ("tel_add_noise")
+    noisePlugin = Plugin ("tel_add_noise")
 
     # Get the dataseries from data returned by roadrunner
-    d = tel.getDataSeries (data)
+    d = getDataSeries (data)
 
     # Assign the dataseries to the plugin inputdata
     noisePlugin.InputData = d
 
     # Set parameter for the 'size' of the noise
-    noisePlugin.Sigma = 3.e-6
+    noisePlugin.Sigma = 3.e-1
 
     # Add the noise
     noisePlugin.execute()
@@ -36,8 +36,8 @@ try:
     noisePlugin.InputData.writeDataSeries (fName)    
     
     #===================================================================
-    lm = tel.Plugin ("tel_lm")
-    experimentalData = tel.DataSeries.readDataSeries (fName)    
+    lm = Plugin ("tel_lm")
+    experimentalData = DataSeries.readDataSeries (fName)    
        
     lm.ExperimentalData = experimentalData;
     lm.SBML = lm.readAllText(sbmlModel)
@@ -53,14 +53,23 @@ try:
     res = lm.execute()
     
     #======== Use the stat plugin to calculate statistics
-    stat = tel.Plugin("tel_stat")    
-    stat.Residuals = lm.Residuals
+    stat = Plugin("tel_stat")
+    
+    #Add an offset to residuals to test QQ plot behaviour
+    res = DataSeries(lm.Residuals)
+    
+    print lm.Residuals.cols
+    for col in range(res.cols):
+        for row in range(res.rows):
+            res.setElement(row,col, res.getElement(row, col) + 1)
+            
+    stat.Residuals = lm.Residuals 
     stat.execute()
-    
-    
+        
     # Get the residuals    
     residuals  = stat.Residuals.toNumpy
     residuals = residuals[:,[1,2]]
+    
     #Plot as a histogram
     plt.hist(residuals, 50, normed=True)
     plt.show()
@@ -69,9 +78,7 @@ try:
     stdResiduals = stdResiduals[:,[1,2]]            
     plt.hist(stdResiduals, 50, normed=True)
     plt.show()
-    
-
-    
+        
     #Plot normal probability plots
     probPlots = stat.NormalProbabilityOfResiduals.toNumpy
     print probPlots

@@ -13,7 +13,7 @@ const char* call_conv getImplementationLanguage()
     return "C";
 }
 
-bool call_conv destroyPlugin(RRPluginHandle plugin)
+bool call_conv destroyPlugin(TELHandle plugin)
 {
     //Free any data that the plugin generated..
     freeProperty(gDemoProperty);
@@ -31,7 +31,7 @@ const char* call_conv getCategory()
     return "Demos";
 }
 
-char* call_conv getListOfCPluginPropertyNames(RRPluginHandle plugin)
+char* call_conv getListOfCPluginPropertyNames(TELHandle plugin)
 {
     char* names = getNamesFromPropertyList(gProperties);
     return names;
@@ -49,7 +49,7 @@ void*  call_conv getCPluginProperty(const char* name)
     }
 }
 
-bool call_conv setupCPlugin(RRPluginHandle aPlugin)
+bool call_conv setupCPlugin(TELHandle aPlugin)
 {
     gPlugin = aPlugin;
     gDemoProperty   = createProperty("DemoProperty", "string", "Demo Hint", 0);
@@ -80,7 +80,7 @@ bool call_conv setupCPlugin(RRPluginHandle aPlugin)
 bool call_conv execute(bool inThread)
 {
     char *text1, *text2;
-    RRHandle rrHandle;
+    TELHandle rrHandle;
     text1       = (char*) malloc(4096 * sizeof(char));
     rrHandle    = createRRInstance();
 

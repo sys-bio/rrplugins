@@ -20,7 +20,6 @@ APIHandleManager::~APIHandleManager()
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
 {
     HandleMap::iterator it = mHandles.find(handle);
-    stringstream msg;
 
     if(it !=  mHandles.end() && it->second == type)
     {
@@ -30,6 +29,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
     {
         //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
         //type A should be validated as OK.
+        stringstream msg;
         msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
 
         if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.

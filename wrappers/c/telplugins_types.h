@@ -42,19 +42,13 @@
 #ifndef telplugins_typesH
 #define telplugins_typesH
 #include "telplugins_settings.h"
-#if defined(__cplusplus)
 
+#if defined(__cplusplus)
 namespace tlpc { extern "C"  {
 #endif
 
 /*!@brief Void pointer to a RoadRunner instance */
 typedef void* TELHandle; /*! Void pointer to a Tellurium object*/
-
-/*!@brief Void pointer to a RoadRunner instance */
-typedef void* RRHandle; /*! Void pointer to a RoadRunner instance */
-
-/*!@brief Void pointer to a RoadRunner data instance */
-typedef void* RRDataHandle;
 
 /*!
  \brief Typedef for plugin event function
@@ -62,17 +56,6 @@ typedef void* RRDataHandle;
 */
 typedef void (event_cc *PluginEvent)(void*, void*);
 
-/*!@brief Void pointer to a PluginManager instance */
-typedef void* RRPluginManagerHandle;
-
-/*!@brief Void pointer to a Plugin instance */
-typedef void* RRPluginHandle;
-
-/*!@brief Void pointer to a Property instance */
-typedef void* RRPropertyHandle;
-
-/*!@brief Void pointer to a RRProperties instance (Container for properties) */
-typedef void* RRPropertiesHandle;
 
 #if defined( __cplusplus)
 } }//Namespace
