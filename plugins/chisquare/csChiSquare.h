@@ -3,7 +3,7 @@
 #include <vector>
 #include "telProperty.h"
 #include "telCPPPlugin.h"
-#include "chiWorker.h"
+#include "csChiWorker.h"
 //---------------------------------------------------------------------------
 
 using namespace tlp;
@@ -11,7 +11,7 @@ using std::string;
 
 class ChiSquare : public CPPPlugin
 {
-    friend class stchiSquareWorker;
+    friend class ChiWorker;
 
     public:
         //Input
@@ -23,19 +23,16 @@ class ChiSquare : public CPPPlugin
         Property<double>			            mChiSquare;                     //Chi square
         Property<double>			            mReducedChiSquare;              //Reduced Chi Square
 
-
     protected:
         ChiWorker                               mWorker;
+
     public:
                                                 ChiSquare();
                                                ~ChiSquare();
-
         bool                                    execute(bool inThread = false);
-
         bool                                    resetPlugin();
         string                                  getImplementationLanguage();
         bool                                    isWorking() const;
-
         unsigned char*                          getManualAsPDF() const;
         unsigned int                            getPDFManualByteSize();
         void                                    assignPropertyDescriptions();

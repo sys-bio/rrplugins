@@ -44,28 +44,19 @@ void ChiWorker::run()
     workerStarted();
 
     //The user may have aborted the minization... check here..
-    if(mTheHost.mTerminate)
+    if(mTheHost.isBeingTerminated())
     {
-        //user did set the terminate flag to true.. discard any minimization data and get out of the
+        //user did set the terminate flag to true.. discard any data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The stat worker was terminated.. aborting";
+        Log(lInfo)<<"The ChiWorker was terminated.. aborting";
         workerFinished();
         return;
     }
-    //Calculate standardized residuals
-    TelluriumData& residuals = *(TelluriumData*) mTheHost.mResidualsData.getValueHandle();
 
-    //Populate the standardized residuals
-    TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
-    stdRes = getStandardizedPopulations(residuals);
+    //Calculate ChiSquare
+    TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
+    TelluriumData& modelData    = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
 
-    //Create a probability plot for the residuals
-    TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
-    probPlot = getNormalProbabilityPlot(stdRes);
-
-    //Calculate ChiSquare(s)
-    TelluriumData& modelData = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
-    TelluriumData& obsData = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
 
     double chiSquare = 0;
     //Get ChiSquare specie by specie and average them together
@@ -75,11 +66,8 @@ void ChiWorker::run()
         vector<double> obsDataN     = getValuesInColumn(n, obsData);
         vector<double> modelDataN   = getValuesInColumn(n, modelData);
 
-        double stdDevOfResiduals = getStandardDeviation(getValuesInColumn(n, residuals));
 
-        vector<double> variances(modelDataN.size(), pow(stdDevOfResiduals,2));
-
-        chiSquare += getChiSquare(obsDataN, modelDataN, variances);
+//        chiSquare += getChiSquare(obsDataN, modelDataN, variances);
     }
     //Divide chiSquare with number of species
     int test = obsData.isFirstColumnTime() ? 1 : 0;
@@ -112,10 +100,4 @@ void ChiWorker::workerFinished()
         mTheHost.mWorkFinishedEvent(mTheHost.mWorkFinishedData1, mTheHost.mWorkFinishedData2);
     }
 }
-
-bool ChiWorker::setup()
-{
-    return true;
-}
-
 

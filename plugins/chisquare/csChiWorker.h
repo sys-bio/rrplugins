@@ -16,11 +16,7 @@ class ChiWorker : public Poco::Runnable
     protected:
         Poco::Thread                mThread;
 
-        ChiSquare&                       mTheHost;
-        bool                        setupRoadRunner();
-        bool                        setup();
-        void                        createModelData(TelluriumData* data);
-        void                        createResidualsData(TelluriumData* data);
+        ChiSquare&                  mTheHost;
 
         void                        workerStarted();
         void                        workerFinished();

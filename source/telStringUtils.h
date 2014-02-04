@@ -41,7 +41,7 @@ RRP_DECLSPEC string             getFileExtension(const string& fileN);
 
 RRP_DECLSPEC string             changeFileExtensionTo(const string& theFileName, const string& newExtension);
 
-RRP_DECLSPEC int 				compareNoCase(const string& str1, const string& str2);
+RRP_DECLSPEC bool 				compareNoCase(const string& str1, const string& str2);
 RRP_DECLSPEC string             trim(const string& str, const char& toTrim = ' ');
 RRP_DECLSPEC bool               startsWith(const string& src, const string& sub);
 RRP_DECLSPEC bool               endsWith(const string& src, const string& sub);

@@ -3,10 +3,10 @@
 #include "rr/rrException.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerData.h"
+#include "Poco/TemporaryFile.h"
 #include "telUtils.h"
 #include "telStringUtils.h"
 #include "telIniFile.h"
-#include "Poco/TemporaryFile.h"
 #include "telTelluriumData.h"
 
 //---------------------------------------------------------------------------
@@ -172,7 +172,7 @@ bool TelluriumData::isFirstColumnTime() const
 {
     if(mColumnNames.size() > 0)
     {
-        return compareNoCase(mColumnNames[0], "Time") == 0;
+        return compareNoCase(mColumnNames[0], "Time");
     }
     return false;
 
@@ -288,6 +288,15 @@ bool TelluriumData::setColumnNames(const StringList& colNames)
     }    
 }
 
+string TelluriumData::getComments() const
+{
+    return mComments;
+}
+
+void   TelluriumData::setComments(const string& coms)
+{
+    mComments = coms;
+}
 
 void TelluriumData::reSize(int rows, int cols)
 {
@@ -311,7 +320,7 @@ bool TelluriumData::check() const
     return true;
 }
 
-bool TelluriumData::loadSimpleFormat(const string& fName)
+bool TelluriumData::readCSV(const string& fName)
 {
     if(!fileExists(fName))
     {
@@ -342,7 +351,7 @@ bool TelluriumData::loadSimpleFormat(const string& fName)
     return true;
 }
 
-bool TelluriumData::writeTo(const string& fileName) const
+bool TelluriumData::write(const string& fileName) const
 {
     ofstream aFile(fileName.c_str());
     if(!aFile)
@@ -350,16 +359,16 @@ bool TelluriumData::writeTo(const string& fileName) const
         stringstream s;
         s<<"Failed opening file: "<<fileName;
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));        
+        throw(rr::Exception(s.str()));
     }
- 
+
     if(!check())
     {
 
         stringstream s;
         s<<"Can't write data.. the dimension of the header don't agree with nr of cols of data";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));                        
+        throw(rr::Exception(s.str()));
     }
 
     aFile<<(*this);
@@ -367,7 +376,7 @@ bool TelluriumData::writeTo(const string& fileName) const
     return true;
 }
 
-bool TelluriumData::readFrom(const string& fileName)
+bool TelluriumData::read(const string& fileName)
 {
     ifstream aFile(fileName.c_str());
     if(!aFile)
@@ -375,10 +384,10 @@ bool TelluriumData::readFrom(const string& fileName)
         stringstream s;
         s<<"Failed opening file: "<<fileName;
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));        
+        throw(rr::Exception(s.str()));
     }
-    
-    aFile >> (*this); 
+
+    aFile >> (*this);
     aFile.close();
     return true;
 }
@@ -398,6 +407,7 @@ ostream& operator << (ostream& ss, const TelluriumData& data)
     ss<<"NUMBER_OF_COLS="            <<data.cSize()<<endl;
     ss<<"NUMBER_OF_ROWS="            <<data.rSize()<<endl;
     ss<<"COLUMN_HEADERS="            <<data.getColumnNamesAsString()<<endl;
+    ss<<"COMMENTS="              <<data.getComments()<<endl;
 
     ss<<endl;
     ss<<"[DATA]"<<endl;
@@ -482,7 +492,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing section: [INFO]. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));        
+        throw(rr::Exception(s.str()));
     }
 
     //Setup header
@@ -493,11 +503,23 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing ini key: COLUMN_HEADERS. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));                
+        throw(rr::Exception(s.str()));
     }
 
     StringList colNames(splitString(colNamesK->mValue, ",{}"));
-    
+
+    //Comments
+    IniKey* commentsK = infoSection->GetKey("COMMENTS");
+
+    if(!commentsK)
+    {
+        stringstream s;
+        s<<"RoadRunnder data file is missing ini key: COMMENTS..";
+        Log(Logger::LOG_WARNING)<<s.str();
+    }
+
+    string comments(commentsK->mValue);
+    data.setComments(comments);
 
     //Read number of cols and rows and setup data
     IniKey* aKey1 = infoSection->GetKey("NUMBER_OF_COLS");
@@ -505,24 +527,23 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!aKey1 || !aKey2)
     {
        stringstream s;
-       s<<"RoadRunnder data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";       
+       s<<"RoadRunnder data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";
        Log(Logger::LOG_ERROR)<<s.str();
-       throw(rr::Exception(s.str()));                
+       throw(rr::Exception(s.str()));
     }
 
     int rDim = aKey2->AsInt();
     int cDim = aKey1->AsInt();
-    
+
     //Check that number of col names correspond to cDim
     if(colNames.size() != aKey1->AsInt())
     {
        stringstream s;
-       s<<"Tellurium data format error: NUMBER_OF_COLS ("<<cDim<<") don't correspond to number of column headers ("<<colNames.size()<<").";       
+       s<<"Tellurium data format error: NUMBER_OF_COLS ("<<cDim<<") don't correspond to number of column headers ("<<colNames.size()<<").";
        Log(Logger::LOG_ERROR)<<s.str();
-       throw(rr::Exception(s.str()));                 
+       throw(rr::Exception(s.str()));
     }
-    
-    
+
     data.reSize(rDim, cDim);
     data.setColumnNames(colNames);
     //get data section
@@ -532,7 +553,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing ini section: DATA. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));                
+        throw(rr::Exception(s.str()));
     }
 
     vector<string> lines = splitString(dataSection->GetNonKeysAsString(), "\n");

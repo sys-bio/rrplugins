@@ -172,7 +172,7 @@ bool tlp_cc writeTelluriumDataToFile(TELHandle handle, char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        return data->writeTo(fName);
+        return data->write(fName);
     catch_bool_macro
 }
 
@@ -180,8 +180,8 @@ bool tlp_cc readTelluriumDataFromFile(TELHandle handle, char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        //Check if file exists first        
-        return data->readFrom(fName);
+        //Check if file exists first
+        return data->read(fName);
     catch_bool_macro
 
 }

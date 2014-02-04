@@ -15,28 +15,24 @@ ChiSquare::ChiSquare()
 CPPPlugin(                      "ChiSquare", "Misc",       NULL, NULL),
 
 //Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
-mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
-mModelData(                     TelluriumData(),        "FittedData",                           "Data object holding model data: Handed to client"),
-
-mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square after fitting", "", "", true),
-mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
+mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data (input)"),
+mModelData(                     TelluriumData(),        "ModelData",                            "Data object holding model data (input)"),
+mNrOfModelParameters(           0,                      "NrOfModelParameters",                  "Number of model parameters (input)", "", "", true),
+mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square (output)", "", "", true),
+mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square (output)", "", "", true),
 mWorker(*this)
 {
     mVersion = "0.8";
 
     //Add plugin properties to property container
-
     mProperties.add(&mExperimentalData);
     mProperties.add(&mModelData);
+    mProperties.add(&mNrOfModelParameters);
 
     mProperties.add(&mChiSquare);
     mProperties.add(&mReducedChiSquare);
 
-
-    //Allocate model and Residuals data
-    mModelData.setValue(new TelluriumData());
-
-    mHint ="Create various statistics from experimental and modeled data input";
+    mHint ="Calculate Chisquare and Reduced Chisquare.";
     mDescription="";
     //The function below assigns property descriptions
     assignPropertyDescriptions();
@@ -76,7 +72,6 @@ bool ChiSquare::resetPlugin()
     return true;
 }
 
-
 bool ChiSquare::execute(bool inThread)
 {
     try
@@ -87,13 +82,13 @@ bool ChiSquare::execute(bool inThread)
     }
     catch(const rr::Exception& ex)
     {
-        Log(lError) << "There was a problem in the execute of the ChiSquare plugin: " << ex.getMessage();
+        Log(lError) << "There was a problem in the execute function of the ChiSquare plugin: " << ex.getMessage();
         throw(ex);
     }
     catch(...)
     {
-        Log(lError) << "There was an unknown problem in the execute of the ChiSquareFIT plugin.";
-        throw("There was an unknown problem in the execute of the ChiSquareFIT plugin.");
+        Log(lError) << "There was an unknown problem in the execute of the ChiSquare plugin.";
+        throw("There was an unknown problem in the execute of the ChiSquare plugin.");
     }
 }
 
@@ -113,14 +108,25 @@ void ChiSquare::assignPropertyDescriptions()
 {
     stringstream s;
 
-s << "Experimental data contains the data to be used for fitting input.";
+s << "Experimental data is used for input.";
 mExperimentalData.setDescription(s.str());
 s.str("");
 
-s << "Model data is calculated after the fitting algorithm finishes. It uses the obtained model parameters as input.";
+s << "Model data is used for input.";
 mModelData.setDescription(s.str());
 s.str("");
 
+s << "Number of model parameters is used for input.";
+mNrOfModelParameters.setDescription(s.str());
+s.str("");
+
+s << "The Chisquare is the output.";
+mChiSquare.setDescription(s.str());
+s.str("");
+
+s << "The Reduced Chisquare is part of the output.";
+mReducedChiSquare.setDescription(s.str());
+s.str("");
 
 }
 

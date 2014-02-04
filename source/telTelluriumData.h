@@ -42,6 +42,7 @@ using std::stringstream;
         NUMBER_OF_COLS=3
         NUMBER_OF_ROWS=5
         COLUMN_HEADERS=time,[S1],[S2]
+        COMMENT="Model xxx was used to generate this data"
 
         [DATA]
         0,0.0001593016905797244,-7.559109749054044e-006
@@ -157,9 +158,8 @@ public:
      * \brief Get the names of the variables stored in this data structure, as a StringList
      */
     const StringList&                       getColumnNames() const;
-    
-    bool                                    isFirstColumnTime() const;
 
+    bool                                    isFirstColumnTime() const;
     std::string                             getColumnName(const int col) const;
     std::string                             getColumnNamesAsString() const;
     bool                                    setColumnNames(const StringList& colNames);
@@ -168,6 +168,9 @@ public:
     void                                    setTimeDataPrecision(const int& prec);
     void                                    setDataPrecision(const int& prec);
     void                                    reSize(int rows, int cols);
+
+    string                                  getComments() const;
+    void                                    setComments(const string& coms);
 
     /**
      * Clear all data allocated
@@ -206,25 +209,25 @@ public:
            0.2,0.0001228096129616973,2.719038703830272e-005
            0.3,0.0001111227331022577,3.887726689774233e-005
            .......
-       \endcode            
-     * 
-     * \todo Rename this function to readCSV() 
+       \endcode
+     *
+     *
      */
-    bool loadSimpleFormat(const std::string& fileName);
+    bool readCSV(const std::string& fileName);
 
     /**
         \brief Write data to file. See required format in the TelluriumData general description.
         \param fileName Name, including path, for the output file.
         \todo Rename to writeToFile
     */
-    bool writeTo(const std::string& fileName) const;    
+    bool write(const std::string& fileName) const;
 
     /**
         \brief Read data from file. See required format in the TelluriumData general description.
         \param fileName Name, including path, for the output file.
         \todo Rename to readFromFile
     */
-    bool readFrom(const std::string& fileName);
+    bool read(const std::string& fileName);
 
     /**
      * \brief Validate data format. Basically checks if the objects column names container size
@@ -330,19 +333,19 @@ public:
     */
     void setName(const std::string& name);
 
-    /** 
+    /**
     * \brief Get data object name.
-    * \deprecated Left over function from debugging session ?? 
+    * \deprecated Left over function from debugging session ??
     */
     std::string getName() const;
 
-    /** 
+    /**
     * \brief Return the dimension of underlying data.
     */
     std::pair<int, int> dimension() const;
 
-    /** 
-    * \brief Append data columns. In certain circumstances the client 
+    /**
+    * \brief Append data columns. In certain circumstances the client
     * modify some initial data, say S1, S2 etc. and obtain a new set of data, S1', S2' etc.
     * The append function creates a new data set, containing the data columns in the argument
     * data as appended columns, e.g. if the original data contain
@@ -355,25 +358,25 @@ public:
     */
     bool append(const TelluriumData& data);
 
-    /** 
+    /**
     * \brief If the data has a column named 'time', the function will return the first time element.
     * If no time column exists, then a DoubleNaN is returned
     */
     double getTimeStart() const;
 
-    /** 
+    /**
     * \brief If the data has a column named 'time', the function will return the last time element.
     * If no time column exists, then a DoubleNaN is returned
-    */    
+    */
     double getTimeEnd() const;
 
-    /** 
+    /**
     * \brief Return a const reference to the underlying data matrix.
     *
-    */    
+    */
     const DoubleMatrix& getData() const;
-    
-    /** 
+
+    /**
     * \brief Return a const reference to the underlying data matrix hodling Weights.
     */
     const DoubleMatrix& getWeights() const;
@@ -381,32 +384,37 @@ public:
 
 protected:
 
-    /** 
+    /**
     * \brief Container holding column names.
     */
     StringList mColumnNames;
-    
-    /** 
+
+    /**
+    * \brief String containing comments about the data.
+    */
+    string mComments;
+
+    /**
     * \brief Container holding the actual data.
     */
     DoubleMatrix mTheData;
-    
-    /** 
+
+    /**
     * \brief Container holding the data weights.
     */
     DoubleMatrix mWeights;
 
-    /** 
+    /**
     * \brief Integer setting the precision of 'time' double numbers when writing to file
     */
-    int mTimePrecision;           
+    int mTimePrecision;
 
-    /** 
+    /**
     * \brief Integer setting the precision of 'data' double numbers when writing to file
     */
     int mDataPrecision;            //The precision when saved to file
 
-    /** 
+    /**
     * \brief String holding the 'name' of the object.
     * \todo Remove
     */

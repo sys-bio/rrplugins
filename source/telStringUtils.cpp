@@ -53,7 +53,6 @@ string substituteCharInString(const string& text, char chToReplace, char withCha
 bool freeText(char* str)
 {
 	delete [] str;
-    return true;
 }
 
 string replaceWord(const string& str1, const string& str2, const string& theString)
@@ -894,14 +893,14 @@ string toString(const vector<string>& vec, const string& sep)
     return text.str();
 }
 
-int compareNoCase(const string& str1, const string& str2)
+bool compareNoCase(const string& str1, const string& str2)
 {
 #if defined(_WIN32)
     int res = stricmp(str1.c_str(), str2.c_str());
 #else
     int res = strcasecmp(str1.c_str(), str2.c_str());
 #endif
-    return res;
+    return res == 0 ? true : false;
 }
 
 string append(const string& str)
