@@ -32,7 +32,7 @@ mWorker(*this)
     mProperties.add(&mChiSquare);
     mProperties.add(&mReducedChiSquare);
 
-    mHint ="Calculate Chisquare and Reduced Chisquare.";
+    mHint = "Calculate Chisquare and Reduced Chisquare.";
     mDescription="";
     //The function below assigns property descriptions
     assignPropertyDescriptions();

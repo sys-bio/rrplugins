@@ -232,7 +232,7 @@ TLP_C_DS bool tlp_cc freeTelluriumData(TELHandle handle);
  \return Returns a boolean indicating success.
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc writeTelluriumDataToFile(TELHandle rrData, char* fName);
+TLP_C_DS bool tlp_cc writeTelluriumDataToFile(TELHandle rrData, const char* fName);
 
 /*!
  \brief Read roadrunner data from a file, into a RoadRunner data object.
@@ -241,7 +241,7 @@ TLP_C_DS bool tlp_cc writeTelluriumDataToFile(TELHandle rrData, char* fName);
  \return Returns a boolean indicating success.
  \ingroup roadrunnerdata
 */
-TLP_C_DS bool tlp_cc readTelluriumDataFromFile(TELHandle rrData, char* fName);
+TLP_C_DS bool tlp_cc readTelluriumDataFromFile(TELHandle rrData, const char* fName);
 
 
 #if defined(__cplusplus)

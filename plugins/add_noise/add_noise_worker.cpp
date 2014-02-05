@@ -50,7 +50,6 @@ void AddNoiseWorker::run()
     TelluriumData& data = (mTheHost.mData.getValueReference());
 
     double sigma = mTheHost.mSigma.getValue();
-       
 
     //Don't add noise to a column that has name 'time'
     bool ignoreFirstColumn = data.isFirstColumnTime();

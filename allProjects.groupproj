@@ -45,6 +45,9 @@
         <Projects Include="plugins\stat\tel_Stat.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="plugins\chisquare\tel_chisquare.cbproj">
+            <Dependencies>source\telplugins.cbproj</Dependencies>
+        </Projects>
         <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
@@ -57,14 +60,11 @@
         <Projects Include="R:\rre\wrappers\C\rrextended_c.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="plugins\auto_2000\examples\bistable\bistable.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\chisquare\tel_chisquare.cbproj">
-            <Dependencies>source\telplugins.cbproj</Dependencies>
+        <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -200,6 +200,15 @@
     <Target Name="tel_Stat:Make">
         <MSBuild Projects="plugins\stat\tel_Stat.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="tel_chisquare" DependsOnTargets="telplugins">
+        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj"/>
+    </Target>
+    <Target Name="tel_chisquare:Clean" DependsOnTargets="telplugins:Clean">
+        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_chisquare:Make" DependsOnTargets="telplugins:Make">
+        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="c_plugin_demo">
         <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj"/>
     </Target>
@@ -236,15 +245,6 @@
     <Target Name="rrextended_c:Make">
         <MSBuild Projects="R:\rre\wrappers\C\rrextended_c.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrWinC">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
-    </Target>
-    <Target Name="rrWinC:Clean">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="rrWinC:Make">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="bistable">
         <MSBuild Projects="plugins\auto_2000\examples\bistable\bistable.cbproj"/>
     </Target>
@@ -254,23 +254,23 @@
     <Target Name="bistable:Make">
         <MSBuild Projects="plugins\auto_2000\examples\bistable\bistable.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="tel_chisquare" DependsOnTargets="telplugins">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj"/>
+    <Target Name="rrWinC">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
     </Target>
-    <Target Name="tel_chisquare:Clean" DependsOnTargets="telplugins:Clean">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Clean"/>
+    <Target Name="rrWinC:Clean">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="tel_chisquare:Make" DependsOnTargets="telplugins:Make">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Make"/>
+    <Target Name="rrWinC:Make">
+        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;plugin_info;handle_manager;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;tel_Stat;c_plugin_demo;property_meta_data;rrextended;rrextended_c;rrWinC;bistable;tel_chisquare"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;plugin_info;handle_manager;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;tel_Stat;tel_chisquare;c_plugin_demo;property_meta_data;rrextended;rrextended_c;bistable;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;handle_manager:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;tel_Stat:Clean;c_plugin_demo:Clean;property_meta_data:Clean;rrextended:Clean;rrextended_c:Clean;rrWinC:Clean;bistable:Clean;tel_chisquare:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;plugin_info:Clean;handle_manager:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;tel_Stat:Clean;tel_chisquare:Clean;c_plugin_demo:Clean;property_meta_data:Clean;rrextended:Clean;rrextended_c:Clean;bistable:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;plugin_info:Make;handle_manager:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;tel_Stat:Make;c_plugin_demo:Make;property_meta_data:Make;rrextended:Make;rrextended_c:Make;rrWinC:Make;bistable:Make;tel_chisquare:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;plugin_info:Make;handle_manager:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;tel_Stat:Make;tel_chisquare:Make;c_plugin_demo:Make;property_meta_data:Make;rrextended:Make;rrextended_c:Make;bistable:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

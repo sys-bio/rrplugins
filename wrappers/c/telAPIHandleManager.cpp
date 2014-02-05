@@ -39,7 +39,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
             {
                 //For now don't check ParameterBase types. See todo above
                 msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                Log(lWarning)<<msg.str();
+                Log(lDebug)<<msg.str();
                 return handle;
             }
             else

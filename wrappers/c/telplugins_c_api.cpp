@@ -13,6 +13,7 @@
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
 #include "telOSSpecifics.h"
+#include "telException.h"
 namespace tlpc
 {
 using namespace std;
@@ -282,6 +283,12 @@ bool tlp_cc setPluginProperty(TELHandle handle, const char* parameterName, const
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
         PropertyBase* aProperty = (PropertyBase*) getPluginProperty(aPlugin, parameterName);
+        if(!aProperty)
+        {
+            stringstream msg;
+            msg <<"Failed locating property: "<<parameterName<<" in plugin: "<<aPlugin->getName()<<" and function: "<<__FUNC__;
+            throw(tlp::Exception(msg.str()));
+        }
         return setPropertyByString(aProperty, value);
     catch_bool_macro
 }
@@ -412,8 +419,13 @@ bool tlp_cc isPluginWorking(TELHandle handle)
 }
 
 char* tlp_cc getLastError()
-{   
-    return gLastError; 
+{
+    return gLastError;
+}
+
+char* tlp_cc getLastPluginAPIError()
+{
+    return gLastError;
 }
 
 bool tlp_cc freeText(char* text)

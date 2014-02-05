@@ -168,7 +168,7 @@ bool tlp_cc freeTelluriumData(TELHandle handle)
     catch_bool_macro
 }
 
-bool tlp_cc writeTelluriumDataToFile(TELHandle handle, char* fName)
+bool tlp_cc writeTelluriumDataToFile(TELHandle handle, const char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -176,7 +176,7 @@ bool tlp_cc writeTelluriumDataToFile(TELHandle handle, char* fName)
     catch_bool_macro
 }
 
-bool tlp_cc readTelluriumDataFromFile(TELHandle handle, char* fName)
+bool tlp_cc readTelluriumDataFromFile(TELHandle handle, const char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);

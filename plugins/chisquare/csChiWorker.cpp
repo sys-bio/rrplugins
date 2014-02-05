@@ -57,25 +57,23 @@ void ChiWorker::run()
     TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
     TelluriumData& modelData    = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
 
-
     double chiSquare = 0;
-    //Get ChiSquare specie by specie and average them together
 
+    //Get ChiSquare specie by specie and average them together
     for(int n = obsData.isFirstColumnTime() ? 1 : 0; n < obsData.cSize(); n++)
     {
         vector<double> obsDataN     = getValuesInColumn(n, obsData);
+        vector<double> variancesN   = getWeightValuesInColumn(n, obsData);
         vector<double> modelDataN   = getValuesInColumn(n, modelData);
-
-
-//        chiSquare += getChiSquare(obsDataN, modelDataN, variances);
+        chiSquare += getChiSquare(obsDataN, modelDataN, variancesN);
     }
     //Divide chiSquare with number of species
     int test = obsData.isFirstColumnTime() ? 1 : 0;
     int nrOfSpecies = obsData.cSize() -  test;
 
-//    int degreeOfFreedom = obsData.rSize() * nrOfSpecies - mChiSquareData.nrOfParameters;
-//    mTheHost.mChiSquare.setValue(chiSquare);
-//    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
+    int degreeOfFreedom = obsData.rSize() * nrOfSpecies - mTheHost.mNrOfModelParameters.getValue();
+    mTheHost.mChiSquare.setValue(chiSquare);
+    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
 
     Log(lInfo)<<"Chi Square = "<<chiSquare;
 

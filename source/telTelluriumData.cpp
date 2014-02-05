@@ -511,15 +511,18 @@ istream& operator >> (istream& ss, TelluriumData& data)
     //Comments
     IniKey* commentsK = infoSection->GetKey("COMMENTS");
 
+    string comments;
     if(!commentsK)
     {
         stringstream s;
         s<<"RoadRunnder data file is missing ini key: COMMENTS..";
         Log(Logger::LOG_WARNING)<<s.str();
     }
-
-    string comments(commentsK->mValue);
-    data.setComments(comments);
+    else
+    {
+        comments = commentsK->mValue;
+        data.setComments(comments);
+    }
 
     //Read number of cols and rows and setup data
     IniKey* aKey1 = infoSection->GetKey("NUMBER_OF_COLS");
@@ -532,8 +535,9 @@ istream& operator >> (istream& ss, TelluriumData& data)
        throw(rr::Exception(s.str()));
     }
 
-    int rDim = aKey2->AsInt();
     int cDim = aKey1->AsInt();
+    int rDim = aKey2->AsInt();
+
 
     //Check that number of col names correspond to cDim
     if(colNames.size() != aKey1->AsInt())

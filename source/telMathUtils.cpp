@@ -143,6 +143,32 @@ vector<double> getValuesInColumn(int col, const TelluriumData& data)
     return vals;
 }
 
+vector<double> getWeightValuesInColumn(int col, const TelluriumData& data)
+{
+    vector<double> vals;
+    if(!data.hasWeights()) //Return weights of '1'
+    {
+        Log(lWarning) <<"Trying to read non-existent weight values from data";
+    }
+
+    if(col < data.cSize())
+    {
+        vals.resize(data.rSize());
+        for(int row = 0; row < data.rSize(); row++)
+        {
+            if(data.hasWeights())
+            {
+                vals[row] = data.getWeight(row, col);
+            }
+            else
+            {
+                vals[row] = 1;
+            }
+        }
+    }
+    return vals;
+}
+
 TelluriumData getStandardizedPopulations(const TelluriumData& population)
 {
     TelluriumData stdPop(population.rSize(), population.cSize());

@@ -49,7 +49,7 @@ IniKey*    IniSection::GetKey(const string& keyName, bool create)
        KeyItor k_pos;
     for (k_pos = mKeys.begin(); k_pos != mKeys.end(); k_pos++)
     {
-        if ( compareNoCase( (*k_pos)->mKey, keyName ) == 0 )
+        if ( compareNoCase( (*k_pos)->mKey, keyName ) == true )
             return *k_pos;
     }
 

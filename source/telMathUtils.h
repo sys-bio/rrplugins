@@ -14,6 +14,7 @@ RRP_DECLSPEC TelluriumData      getStandardizedPopulations(const TelluriumData& 
 RRP_DECLSPEC vector<double>     getStandardDeviations(const TelluriumData& population);
 RRP_DECLSPEC vector<double>     getMeans(const TelluriumData& residualsData);
 RRP_DECLSPEC vector<double>     getValuesInColumn(int col, const TelluriumData& data);
+RRP_DECLSPEC vector<double>     getWeightValuesInColumn(int col, const TelluriumData& data);
 RRP_DECLSPEC double             normsdist(const double x);
 RRP_DECLSPEC double             invnormsdist(const double y); // 0 < y < 1;
 
