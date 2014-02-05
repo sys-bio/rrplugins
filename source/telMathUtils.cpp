@@ -314,7 +314,5 @@ double cdf(double n)
     }
 }
 
-
-
 }
 

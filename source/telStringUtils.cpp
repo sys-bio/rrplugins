@@ -53,6 +53,7 @@ string substituteCharInString(const string& text, char chToReplace, char withCha
 bool freeText(char* str)
 {
 	delete [] str;
+    return true;
 }
 
 string replaceWord(const string& str1, const string& str2, const string& theString)
