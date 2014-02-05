@@ -1,28 +1,28 @@
-#ifndef csChiWorkerH
-#define csChiWorkerH
+#ifndef psParameterScanWorkerH
+#define psParameterScanWorkerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
 #include "telTelluriumData.h"
 //---------------------------------------------------------------------------
 
-class ChiSquare;
+class ParameterScan;
 
 using tlp::TelluriumData;
 
-class ChiWorker : public Poco::Runnable
+class ParameterScanWorker : public Poco::Runnable
 {
-    friend ChiSquare;
+    friend ParameterScan;
 
     protected:
         Poco::Thread                mThread;
 
-        ChiSquare&                  mTheHost;
+        ParameterScan&                  mTheHost;
 
         void                        workerStarted();
         void                        workerFinished();
 
     public:
-                                    ChiWorker(ChiSquare& host);
+                                    ParameterScanWorker(ParameterScan& host);
         void                        start(bool runInThread = true);
         void                        run();
         bool                        isRunning() const;

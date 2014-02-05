@@ -52,7 +52,6 @@
 #include "telUtils.h"
 #include "telStringList.h"
 #include "telConstants.h"
-//#include "../wrappers/C/rrc_types.h"
 //---------------------------------------------------------------------------
 namespace tlp
 {

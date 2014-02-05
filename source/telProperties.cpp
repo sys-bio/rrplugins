@@ -6,13 +6,10 @@
 
 namespace tlp
 {
-
-
 Properties::Properties(bool canClientClear)
     :mCanClientClearList(canClientClear)
 {}
 
-                                        
 Properties::~Properties()
 {
     clear();
