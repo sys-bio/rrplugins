@@ -16,14 +16,13 @@ CPPPlugin(                      "ParameterScan", "Misc",       NULL, NULL),
 
 //Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
 mOutputData(                    TelluriumData(),        "OutputData",                           "Data object holding Experimental data (input)"),
-mParameters(                    ArrayedParameter() ,                      "Parameters",                           "Chi-Square (output)", "", "", true),
+mParameters(                    ArrayedParameter() ,    "Parameter",                            "One Parameter (input)", "", "", true),
 mWorker(*this)
 {
     mVersion = "0.8";
 
     //Add plugin properties to property container
     mProperties.add(&mOutputData);
-
     mProperties.add(&mParameters);
 
     mHint = "Calculate data by incrementing one or more parameters.";
