@@ -11,9 +11,7 @@ IniSection::IniSection()
 mIsDirty(true),
 mName(""),
 mComment("")
-{
-
-}
+{}
 
 IniSection::IniSection(const string& nameValueString, const char& sep)
 :
@@ -42,8 +40,24 @@ IniSection::~IniSection()
     mKeys.clear();
 }
 
+size_t IniSection::KeyCount()
+{
+    return mKeys.size();
+}
+
+size_t IniSection::NonKeyCount()
+{
+    return mNonKeys.size();
+}
+
+void IniSection::Clear()
+{
+    mKeys.clear();
+    mNonKeys.clear();
+}
+
 //IniKey function
-IniKey*    IniSection::GetKey(const string& keyName, bool create)
+IniKey* IniSection::GetKey(const string& keyName, bool create)
 {
     //Go trough the key list and return key with key name
        KeyItor k_pos;
@@ -63,7 +77,7 @@ IniKey*    IniSection::GetKey(const string& keyName, bool create)
 }
 
 //IniKey function
-IniKey*    IniSection::GetKey(const int& keyNr)
+IniKey* IniSection::GetKey(const int& keyNr)
 {
     //Go trough the key list and return key with key name
 

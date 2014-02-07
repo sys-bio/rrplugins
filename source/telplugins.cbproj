@@ -113,6 +113,9 @@
         <CppCompile Include="libMain.cpp">
             <BuildOrder>2</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telArrayedParameter.cpp">
+            <BuildOrder>23</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telArrayList.cpp">
             <DependentOn>telArrayList.h</DependentOn>
             <BuildOrder>15</BuildOrder>

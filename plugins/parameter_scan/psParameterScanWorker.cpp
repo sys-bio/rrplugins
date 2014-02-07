@@ -1,6 +1,8 @@
 #pragma hdrstop
 #include "psParameterScanWorker.h"
 #include "rr/rrLogger.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrRoadRunnerData.h"
 #include "telException.h"
 #include "telTelluriumData.h"
 #include "psParameterScan.h"
@@ -10,10 +12,10 @@
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace tlp;
-
+using rr::RoadRunnerData;
 ParameterScanWorker::ParameterScanWorker(ParameterScan& host)
 :
-mTheHost(host)
+mHost(host)
 {}
 
 bool ParameterScanWorker::isRunning() const
@@ -44,7 +46,7 @@ void ParameterScanWorker::run()
     workerStarted();
 
     //The user may have aborted the minization... check here..
-    if(mTheHost.isBeingTerminated())
+    if(mHost.isBeingTerminated())
     {
         //user did set the terminate flag to true.. discard any data and get out of the
         //plugin execute code..
@@ -53,24 +55,55 @@ void ParameterScanWorker::run()
         return;
     }
 
+    //Create arrayed data
+    ArrayedParameter para(mHost.mParameter.getValueReference());
+
+    StringList selList(mHost.mSelectionList.getValue());
+
+    RoadRunner rr;
+    rr.load(mHost.mSBML.getValue());
+
+    //Make sure time is the first column in the selectin list
+    if(selList.size() && compareNoCase(selList[0], "time") != true)
+    {
+        selList.InsertAt(0,"time");
+    }
+    rr.setSelections(selList);
+
+    TelluriumData& data =     mHost.mOutputData.getValueReference();
+    data.clear();
+    for(int i = 0; i < para.getNumberOfIncrements() + 1; i++)
+    {
+        rr::SimulateOptions options;
+        options.flags |= rr::SimulateOptions::RESET_MODEL;
+
+        //Set parameter
+        rr.setValue(para.getName(), para.getCurrentValue());
+        const RoadRunnerData *rrData = rr.simulate(&options);
+        TelluriumData *temp = new TelluriumData(*rrData);
+        data.append(*temp);
+        delete temp;
+        para.increment();
+    }
+
     workerFinished();
 }
 
 void ParameterScanWorker::workerStarted()
 {
-    mTheHost.mIsWorking = true;
-    if(mTheHost.mWorkStartedEvent)
+    mHost.mIsWorking = true;
+    if(mHost.mWorkStartedEvent)
     {
-        mTheHost.mWorkStartedEvent(mTheHost.mWorkStartedData1, mTheHost.mWorkStartedData2);
+        mHost.mWorkStartedEvent(mHost.mWorkStartedData1, mHost.mWorkStartedData2);
     }
 }
 
 void ParameterScanWorker::workerFinished()
 {
-    mTheHost.mIsWorking = false;//Set this flag before event so client can query plugin about termination
-    if(mTheHost.mWorkFinishedEvent)
+    mHost.mIsWorking = false;//Set this flag before event so client can query plugin about termination
+    if(mHost.mWorkFinishedEvent)
     {
-        mTheHost.mWorkFinishedEvent(mTheHost.mWorkFinishedData1, mTheHost.mWorkFinishedData2);
+        mHost.mWorkFinishedEvent(mHost.mWorkFinishedData1, mHost.mWorkFinishedData2);
     }
 }
 

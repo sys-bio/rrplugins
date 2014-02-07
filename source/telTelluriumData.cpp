@@ -36,6 +36,11 @@ TelluriumData::TelluriumData(const StringList& colNames, const DoubleMatrix& the
     mTheData(theData)
 {}
 
+TelluriumData::TelluriumData(const rr::RoadRunnerData& data)
+{
+    (*this) = data;
+}
+
 TelluriumData::~TelluriumData()
 {}
 
@@ -117,29 +122,43 @@ void TelluriumData::allocateWeights()
     }
 }
 
-bool TelluriumData::append(const TelluriumData& data)
+
+bool TelluriumData::append(const TelluriumData& dataToAppend)
 {
     //When appending data, the number of rows have to match with current data
     if(mTheData.RSize() > 0)
     {
-        if(data.rSize() != rSize())
+        if(dataToAppend.rSize() != rSize())
         {
             return false;
         }
     }
     else
     {
-        (*this) = data;
+        //Starting with an empty data object. Simple assignment
+        (*this) = dataToAppend;
         return true;
     }
 
-    int currColSize = cSize();
+    int originalColSize = cSize();
 
-    TelluriumData temp(mColumnNames, mTheData);
+    //Copy our data to temp data object
+    TelluriumData temp;
+    temp = (*this);
 
-    int newCSize = cSize() + data.cSize();
-    mTheData.resize(data.rSize(), newCSize );
+    int newCSize = originalColSize + dataToAppend.cSize();
 
+    //Check if first column is 'time'.. if so, ignore
+    bool isFirstColTime = dataToAppend.isFirstColumnTime();
+
+    if(isFirstColTime)
+    {
+        newCSize -= 1;
+    }
+
+    mTheData.resize(dataToAppend.rSize(), newCSize);
+
+    //First, copy back 'original' data
     for(int row = 0; row < temp.rSize(); row++)
     {
         for( int col = 0; col < temp.cSize(); col++)
@@ -148,17 +167,20 @@ bool TelluriumData::append(const TelluriumData& data)
         }
     }
 
-    for(int row = 0; row < mTheData.RSize(); row++)
+    //Append the data
+    for(int col = isFirstColTime ? 1 : 0, colNr = 0; col < dataToAppend.cSize(); col++, colNr++)
     {
-        for(int col = 0; col < data.cSize(); col++)
+        for(int row = 0; row < mTheData.RSize(); row++)
         {
-            mTheData(row, col + currColSize) = data(row, col);
+            int destCol = originalColSize  + colNr;
+            mTheData(row, destCol) = dataToAppend(row, col);
         }
     }
 
-    for(int col = 0; col < data.cSize(); col++)
+    //Add column names
+    for(int col = isFirstColTime ? 1 : 0; col < dataToAppend.cSize(); col++)
     {
-        mColumnNames.add(data.getColumnName(col));
+        mColumnNames.add(dataToAppend.getColumnName(col));
     }
     return true;
 }

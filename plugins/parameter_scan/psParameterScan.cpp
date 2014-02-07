@@ -13,17 +13,20 @@ using tlp::StringList;
 ParameterScan::ParameterScan()
 :
 CPPPlugin(                      "ParameterScan", "Misc",       NULL, NULL),
-
-//Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
+//Properties.                   value,                  name,                                   hint,                                                           description, alias, readonly);
+mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in parameter scan."),
+mSelectionList(                 "<none>",               "SelectionList",                        "Seection List as a string."),
 mOutputData(                    TelluriumData(),        "OutputData",                           "Data object holding Experimental data (input)"),
-mParameters(                    ArrayedParameter() ,    "Parameter",                            "One Parameter (input)", "", "", true),
+mParameter(                     ArrayedParameter() ,    "Parameter",                            "One Parameter (input)", "", "", true),
 mWorker(*this)
 {
     mVersion = "0.8";
 
     //Add plugin properties to property container
+    mProperties.add(&mSBML);
     mProperties.add(&mOutputData);
-    mProperties.add(&mParameters);
+    mProperties.add(&mParameter);
+    mProperties.add(&mSelectionList);
 
     mHint = "Calculate data by incrementing one or more parameters.";
     mDescription="";
@@ -106,7 +109,7 @@ mOutputData.setDescription(s.str());
 s.str("");
 
 s << "Property holding parameters to scan.";
-mParameters.setDescription(s.str());
+mParameter.setDescription(s.str());
 s.str("");
 
 }

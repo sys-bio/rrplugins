@@ -130,10 +130,6 @@
             <DependentOn>parameter_scan_doc.h</DependentOn>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="psArrayedParameter.cpp">
-            <DependentOn>psArrayedParameter.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
         <CppCompile Include="psParameterScan.cpp">
             <DependentOn>psParameterScan.h</DependentOn>
             <BuildOrder>2</BuildOrder>
@@ -141,6 +137,10 @@
         <CppCompile Include="psParameterScanWorker.cpp">
             <DependentOn>psParameterScanWorker.h</DependentOn>
             <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\telArrayedParameter.cpp">
+            <DependentOn>..\..\source\telArrayedParameter.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

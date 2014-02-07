@@ -9,10 +9,10 @@ namespace tlp
 {
 
 class IniKey;
-typedef std::vector<IniKey*>             KeyList;
-typedef KeyList::iterator                 KeyItor;
+typedef std::vector<IniKey*>            KeyList;
+typedef KeyList::iterator               KeyItor;
 typedef std::vector<string>             NonKeyList;
-typedef NonKeyList::iterator             NonKeyItor;
+typedef NonKeyList::iterator            NonKeyItor;
 
 
 /**
@@ -23,25 +23,25 @@ typedef NonKeyList::iterator             NonKeyItor;
 class RRP_DECLSPEC IniSection
 {
     private:
-        bool            mIsDirty;
+        bool                mIsDirty;
 
     public:
-        string            mName;
-        string            mComment;
-        KeyList            mKeys;            //vector of pointers to keys
-        NonKeyList         mNonKeys;         //vector of pointers to non_keys
+        string              mName;
+        string              mComment;
+        KeyList             mKeys;            //vector of pointers to keys
+        NonKeyList          mNonKeys;         //vector of pointers to non_keys
 
-                        IniSection();
-                        IniSection(const std::string& nameValueString, const char& sep);
-                       ~IniSection();
-        IniKey*          CreateKey(const string& _keyName, const string& Value = "", const string& Comment = "");
-        IniKey*            GetKey(const int& i);
-        IniKey*            GetKey(const string& keyName, bool create = false);
-        size_t             KeyCount(){return mKeys.size();}
-        size_t             NonKeyCount(){return mNonKeys.size();}
-        void            Clear(){mKeys.clear(); mNonKeys.clear();}
-           string            GetNonKeysAsString();
-        string            AsString();
+                            IniSection();
+                            IniSection(const std::string& nameValueString, const char& sep);
+                           ~IniSection();
+        IniKey*             CreateKey(const string& _keyName, const string& Value = "", const string& Comment = "");
+        IniKey*             GetKey(const int& i);
+        IniKey*             GetKey(const string& keyName, bool create = false);
+        size_t              KeyCount();
+        size_t              NonKeyCount();
+        void                Clear();
+        string              GetNonKeysAsString();
+        string              AsString();
 };
 }
 #endif

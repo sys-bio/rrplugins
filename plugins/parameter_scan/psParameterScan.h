@@ -4,7 +4,7 @@
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "psParameterScanWorker.h"
-#include "psArrayedParameter.h"
+#include "telArrayedParameter.h"
 //---------------------------------------------------------------------------
 
 using namespace tlp;
@@ -18,10 +18,11 @@ class ParameterScan : public CPPPlugin
     public:
         //Input
         Property<string>                        mSBML;
-        Property<TelluriumData>				    mOutputData;
+        Property<string>                        mSelectionList;
+        Property< ArrayedParameter >            mParameter; //Parameter to scan
 
         //Output
-        Property< ArrayedParameter >            mParameters;                        //Parameters to scan
+        Property<TelluriumData>				    mOutputData;
 
     protected:
         ParameterScanWorker                     mWorker;

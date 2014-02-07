@@ -5,9 +5,8 @@
 #include "telTelluriumData.h"
 //---------------------------------------------------------------------------
 
-class ParameterScan;
-
 using tlp::TelluriumData;
+class ParameterScan;
 
 class ParameterScanWorker : public Poco::Runnable
 {
@@ -15,9 +14,7 @@ class ParameterScanWorker : public Poco::Runnable
 
     protected:
         Poco::Thread                mThread;
-
-        ParameterScan&                  mTheHost;
-
+        ParameterScan&              mHost;
         void                        workerStarted();
         void                        workerFinished();
 

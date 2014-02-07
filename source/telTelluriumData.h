@@ -115,7 +115,7 @@ class RRP_DECLSPEC TelluriumData
 {
     public:
         /**
-         * \brief Constructor Create a RoadRunner data object with dimension rSize x cSize.
+         * \brief Constructor Create a Tellurium data object with dimension rSize x cSize.
          *
          * \param rSize: number of rows
          * \param cSize: number of columns.
@@ -130,6 +130,13 @@ class RRP_DECLSPEC TelluriumData
          * \param data Source data matrix.
          */
         TelluriumData(const StringList& colNames, const DoubleMatrix& data);
+
+        /**
+         * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
+         *
+         * \param rrData: RoadRunner data object
+         */
+        TelluriumData(const rr::RoadRunnerData& data);
 
         /**
          *   \brief Destructor. De allocate any memory allocated in the class.
@@ -233,13 +240,13 @@ class RRP_DECLSPEC TelluriumData
         bool check() const;
 
         /**
-        * \brief Stream friend function, allowing RoadRunner data to be streamed to a std::ostream.
+        * \brief Stream friend function, allowing Tellurium data to be streamed to a std::ostream.
         */
         RRP_DECLSPEC
         friend std::ostream& operator <<(std::ostream& ss, const TelluriumData& data);
 
         /**
-        * \brief Stream friend function, allowing RoadRunner data to be streamed from a std::istream.
+        * \brief Stream friend function, allowing Tellurium data to be streamed from a std::istream.
         */
         RRP_DECLSPEC
         friend std::istream& operator >>(std::istream& ss, TelluriumData& data);
@@ -349,8 +356,6 @@ class RRP_DECLSPEC TelluriumData
         set will have S1, S2, S1', S2' as the columns.
 
         *This function require the row size of the two data sets to be equal.
-
-        \Todo Rename this function to appendDataColumns
         */
         bool append(const TelluriumData& data);
 

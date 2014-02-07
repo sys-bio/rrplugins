@@ -229,8 +229,13 @@ bool tlp_cc setPropertyByString(TELHandle handle, const char* value)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
-        para->setValueFromString(string(value));
-        return true;
+        if(value)
+        {
+            string val(value);
+            para->setValueFromString(val);
+            return true;
+        }
+        return false;
     catch_bool_macro
 }
 
