@@ -45,7 +45,7 @@
 #include <sstream>
 #include "rr/rrException.h"
 #include "rr/rrLogger.h"
-#include "telTelluriumData.h"
+//#include "telTelluriumData.h"
 #include "telPropertyBase.h"
 #include "telProperties.h"
 #include "telStringUtils.h"
@@ -55,8 +55,7 @@
 //---------------------------------------------------------------------------
 namespace tlp
 {
-
-    using tlp::TelluriumData;
+//    using tlp::TelluriumData;
     using tlp::gNoneString;
     using std::string;
 /**
@@ -155,10 +154,9 @@ class Property : public PropertyBase
 };
 
 template<class T>
-Property<T>::Property(
-    const T& value,         const string& name,
-    const string& hint,     const string& descr,
-    const string& alias,    bool readonly
+Property<T>::Property(  const T& value,         const string& name,
+                        const string& hint,     const string& descr,
+                        const string& alias,    bool readonly
 )
 :
 PropertyBase(getPropertyType(value), name, hint, descr, alias, readonly),
@@ -326,48 +324,6 @@ inline void Property< tlp::StringList >::setValueFromString(const string& val)
     mValue = tlp::splitString(val,", ");
 }
 
-//============= Tellurium data ===========================
-template<>
-inline string Property<tlp::TelluriumData>::getValueAsString() const
-{
-    std::stringstream rrData;
-    rrData << (mValue);
-    return rrData.str();
-}
-
-/**
-    Set a RoadRunner data properties value, from a string.
-    \note This is not implemented.
-*/
-template<>
-inline void Property<tlp::TelluriumData>::setValueFromString(const string& val)
-{
-}
-
-template<>
-inline bool Property<tlp::TelluriumData>::clearValue()
-{
-    mValue = tlp::TelluriumData();
-    return true;
-}
-
-/**
-    Set a property value
-*/
-template<>
-inline void Property<tlp::TelluriumData>::setValue(const tlp::TelluriumData& val)
-{
-    mValue = val;
-}
-
-/**
-    Set a property value
-*/
-template<>
-inline void Property<tlp::TelluriumData>::setValue(tlp::TelluriumData* val)
-{
-    mValue = (*val);
-}
 
 //========== Properties container
 /**
@@ -461,15 +417,6 @@ template<>
 inline string getPropertyType<tlp::StringList>(const tlp::StringList& a)
 {
     return "StringList";
-}
-
-/**
-    \brief Returns the type as a string.
-*/
-template<>
-inline string getPropertyType<TelluriumData>(const TelluriumData& a)
-{
-    return "telluriumData";
 }
 
 /**

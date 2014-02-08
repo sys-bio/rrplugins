@@ -1,9 +1,10 @@
 #pragma hdrstop
-#include <sstream>
 #include "telArrayedParameter.h"
+#include <sstream>
 
 namespace tlp
 {
+
 using namespace std;
 ArrayedParameter::ArrayedParameter(const string& lbl, double initialVal, double incr, int nrOfIncrements)
 :

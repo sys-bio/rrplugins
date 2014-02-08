@@ -1,27 +1,28 @@
 #ifndef telTelluriumDataH
 #define telTelluriumDataH
-#include "telStringList.h"
-#include "telExporter.h"
-#include "rr-libstruct/lsMatrix.h"
 #include <string>
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "telStringList.h"
+#include "telExporter.h"
+#include "telArrayedParameter.h"
+#include "rr-libstruct/lsMatrix.h"
 
 namespace rr
 {
     class RoadRunnerData;
 }
+
 namespace tlp
 {
-
 using namespace ls;
 using std::ofstream;
 using std::stringstream;
 
 /**
  * \brief TelluriumData is a general purpose container for numerical data, e.g. simulation output.
- \section rrData TelluriumData
+ \section telData TelluriumData
  * The class provide the ability to read and write data from file (see Format specification below).
  * For certain problems, weights can be specified as a property of the object as well. Weights are not allocated automatically, but can
  * be allocated using the allocateWeights() member function.
@@ -111,6 +112,7 @@ using std::stringstream;
  * and an exception will be thrown.
  *
  */
+
 class RRP_DECLSPEC TelluriumData
 {
     public:
@@ -382,9 +384,13 @@ class RRP_DECLSPEC TelluriumData
         */
         const DoubleMatrix& getWeights() const;
 
+        /**
+            \brief The concept of arrayed parameters are under investigation..
+        */
+        ArrayedParameter    getArrayedParameter() const;
+        void                setArrayedParameter(const ArrayedParameter& para);
 
     protected:
-
         /**
         * \brief Container holding column names.
         */
@@ -416,11 +422,64 @@ class RRP_DECLSPEC TelluriumData
         int mDataPrecision;            //The precision when saved to file
 
         /**
-        * \brief String holding the 'name' of the object.
-        * \todo Remove
+        * \brief Currently only one arrayed parameter is supported
         */
-        std::string mName;             //For debugging purposes mainly..
+        ArrayedParameter    mArrayedParameter;
+
 };
+
+//When using tellurium data as a property the following template functions are needed
+//============= Tellurium data ===========================
+template<>
+inline string Property<tlp::TelluriumData>::getValueAsString() const
+{
+    std::stringstream rrData;
+    rrData << (mValue);
+    return rrData.str();
+}
+
+/**
+    Set a RoadRunner data properties value, from a string.
+    \note This is not implemented.
+*/
+template<>
+inline void Property<tlp::TelluriumData>::setValueFromString(const string& val)
+{
+}
+
+template<>
+inline bool Property<tlp::TelluriumData>::clearValue()
+{
+    mValue = tlp::TelluriumData();
+    return true;
+}
+
+/**
+    Set a property value
+*/
+template<>
+inline void Property<tlp::TelluriumData>::setValue(const tlp::TelluriumData& val)
+{
+    mValue = val;
+}
+
+/**
+    Set a property value
+*/
+template<>
+inline void Property<tlp::TelluriumData>::setValue(tlp::TelluriumData* val)
+{
+    mValue = (*val);
+}
+
+/**
+    \brief Returns the type as a string.
+*/
+template<>
+inline string getPropertyType<TelluriumData>(const TelluriumData& a)
+{
+    return "telluriumData";
+}
 
 }
 

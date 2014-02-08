@@ -18,8 +18,8 @@ CPPPlugin(                      "ChiSquare", "Misc",       NULL, NULL),
 mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data (input)"),
 mModelData(                     TelluriumData(),        "ModelData",                            "Data object holding model data (input)"),
 mNrOfModelParameters(           0,                      "NrOfModelParameters",                  "Number of model parameters (input)", "", "", true),
-mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square (output)", "", "", true),
-mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square (output)", "", "", true),
+mChiSquare(                     TelluriumData(),        "ChiSquare",                            "Chi-Square (output)", "", "", true),
+mReducedChiSquare(              TelluriumData(),        "ReducedChiSquare",                     "Reduced Chi-Square (output)", "", "", true),
 mWorker(*this)
 {
     mVersion = "0.8";

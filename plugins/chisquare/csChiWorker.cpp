@@ -54,28 +54,47 @@ void ChiWorker::run()
     }
 
     //Calculate ChiSquare
-    TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
-    TelluriumData& modelData    = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
+    TelluriumData& expData      = mTheHost.mExperimentalData.getValueReference();
+    TelluriumData& modelData    = mTheHost.mModelData.getValueReference();
 
-    double chiSquare = 0;
+    TelluriumData& chiSquare = mTheHost.mChiSquare.getValueReference();
+    TelluriumData& redChiSquare = mTheHost.mReducedChiSquare.getValueReference();
 
-    //Get ChiSquare specie by specie and average them together
-    for(int n = obsData.isFirstColumnTime() ? 1 : 0; n < obsData.cSize(); n++)
+    //If model data is an arrayed experiment, get chisquare experiment by experiment
+    ArrayedParameter arrayedPara = modelData.getArrayedParameter();
+    chiSquare.allocate(arrayedPara.getNumberOfIncrements() + 1, 2);     //Only supports one parameter at the moment
+    redChiSquare.allocate(arrayedPara.getNumberOfIncrements() + 1, 2);  //Only supports one parameter at the moment
+
+    chiSquare.setColumnNames(StringList("ExpNr, ChiSquare"));
+    redChiSquare.setColumnNames(StringList("ExpNr, ReducedChiSquare"));
+    for(int expNr = 1; expNr < arrayedPara.getNumberOfIncrements() + 2; expNr++)
     {
-        vector<double> obsDataN     = getValuesInColumn(n, obsData);
-        vector<double> variancesN   = getWeightValuesInColumn(n, obsData);
-        vector<double> modelDataN   = getValuesInColumn(n, modelData);
-        chiSquare += getChiSquare(obsDataN, modelDataN, variancesN);
+        TelluriumData mdlData = getDataSet(expNr, modelData);
+        double chi = 0;
+
+        //Get ChiSquare column by column and average them together
+        int startCol = expData.isFirstColumnTime() ? 1 : 0;
+        for(int n = startCol; n < expData.cSize(); n++)
+        {
+            vector<double> expDataN     = getValuesInColumn(n, expData);
+            vector<double> variancesN   = getWeightValuesInColumn(n, expData);
+            vector<double> modelDataN   = getValuesInColumn(n, mdlData);
+            chi += getChiSquare(expDataN, modelDataN, variancesN);
+        }
+
+        int test = expData.isFirstColumnTime() ? 1 : 0;
+        int nrOfCols = expData.cSize() -  test;
+        int degreeOfFreedom = expData.rSize() * nrOfCols - mTheHost.mNrOfModelParameters.getValue();
+
+        chiSquare(expNr -1, 0) = expNr;
+        chiSquare(expNr -1, 1) = chi;
+
+        redChiSquare(expNr -1, 0) = expNr;
+        redChiSquare(expNr -1, 1) = chi/degreeOfFreedom;
     }
-    //Divide chiSquare with number of species
-    int test = obsData.isFirstColumnTime() ? 1 : 0;
-    int nrOfSpecies = obsData.cSize() -  test;
 
-    int degreeOfFreedom = obsData.rSize() * nrOfSpecies - mTheHost.mNrOfModelParameters.getValue();
-    mTheHost.mChiSquare.setValue(chiSquare);
-    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
-
-    Log(lInfo)<<"Chi Square = "<<chiSquare;
+    Log(lInfo)<<"Chi Square = "<<chiSquare(0,1);
+    Log(lInfo)<<"Reduced Chi Square = "<<redChiSquare(0,1);
 
     //Post fitting data calculations
     workerFinished();

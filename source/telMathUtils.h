@@ -11,9 +11,13 @@ namespace tlp
 using std::vector;
 RRP_DECLSPEC TelluriumData      getNormalProbabilityPlot(const TelluriumData& stdPops);
 RRP_DECLSPEC TelluriumData      getStandardizedPopulations(const TelluriumData& population);
+
+RRP_DECLSPEC TelluriumData      getDataSet(int expNr, const TelluriumData& data);
+
 RRP_DECLSPEC vector<double>     getStandardDeviations(const TelluriumData& population);
 RRP_DECLSPEC vector<double>     getMeans(const TelluriumData& residualsData);
 RRP_DECLSPEC vector<double>     getValuesInColumn(int col, const TelluriumData& data);
+
 RRP_DECLSPEC vector<double>     getWeightValuesInColumn(int col, const TelluriumData& data);
 RRP_DECLSPEC double             normsdist(const double x);
 RRP_DECLSPEC double             invnormsdist(const double y); // 0 < y < 1;

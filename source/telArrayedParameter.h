@@ -51,13 +51,13 @@ class RRP_DECLSPEC ArrayedParameter
 };
 
 template<>
-inline string tlp::Property< ArrayedParameter >::getValueAsString() const
+inline string Property< ArrayedParameter >::getValueAsString() const
 {
     return mValue.asString();
 }
 
 template<>
-inline void tlp::Property< ArrayedParameter>::setValueFromString(const string& val)
+inline void Property< ArrayedParameter>::setValueFromString(const string& val)
 {
     stringstream msg;
     IniSection section(val,'\n');
@@ -118,7 +118,7 @@ inline void tlp::Property< ArrayedParameter>::setValueFromString(const string& v
 }
 
 template<>
-inline string tlp::getPropertyType< ArrayedParameter >(const ArrayedParameter& value)
+inline string getPropertyType< ArrayedParameter >(const ArrayedParameter& value)
 {
     return "arrayedParameter";
 }

@@ -20,8 +20,8 @@ class ChiSquare : public CPPPlugin
         Property<TelluriumData>			        mModelData;
 
         //Output
-        Property<double>			            mChiSquare;                     //Chi square
-        Property<double>			            mReducedChiSquare;              //Reduced Chi Square
+        Property<TelluriumData>		             mChiSquare;                     //Chi square
+        Property<TelluriumData>		             mReducedChiSquare;              //Reduced Chi Square
 
     protected:
         ChiWorker                               mWorker;

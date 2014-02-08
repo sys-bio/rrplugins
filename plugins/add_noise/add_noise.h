@@ -2,6 +2,7 @@
 #define add_noiseH
 #include "telProperty.h"
 #include "telCPPPlugin.h"
+#include "telTelluriumData.h"
 #include "add_noise_worker.h"
 
 //---------------------------------------------------------------------------

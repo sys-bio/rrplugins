@@ -10,11 +10,66 @@ namespace tlp
 {
 using namespace std;
 
+TelluriumData  getDataSet(int expNr, const TelluriumData& data)
+{
+    ArrayedParameter para = data.getArrayedParameter();
+
+    if(para.getNumberOfIncrements() < 1)
+    {
+        return data;
+    }
+
+    int nrOfSets = para.getNumberOfIncrements() + 1;
+    bool isFirstColTime = data.isFirstColumnTime();
+    int nrCols = data.cSize();
+
+    int expSize = (nrCols - (isFirstColTime ? 1 : 0) )/ nrOfSets;
+    int startCol = expNr * expSize - (isFirstColTime ? 1 : 0);
+
+    //If a data set contain several experiments, extract a single one
+    TelluriumData dataSet(data.rSize(), expSize + (isFirstColTime ? 1 : 0) );
+    StringList colHeaders;
+
+    if(isFirstColTime)
+    {
+        colHeaders.add("Time");
+    }
+
+    for(int col = (isFirstColTime ? 1 : 0); col < expSize + 1; col++)
+    {
+        for(int row = 0; row < data.rSize(); row++)
+        {
+            dataSet(row, col) = data(row, startCol);
+        }
+        colHeaders.add(data.getColumnName(startCol));
+        startCol++;
+    }
+
+    //And time, if any
+    if(isFirstColTime)
+    {
+        for(int row = 0; row < data.rSize(); row++)
+        {
+            dataSet(row, 0) = data(row, 0);
+        }
+    }
+
+    //Column header
+    dataSet.setColumnNames(colHeaders);
+    return dataSet;
+}
+
+
 double getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances)
 {
+    stringstream msg;
     if (O.size() != E.size() || O.size() != variances.size())
     {
-        throw(Exception("Non equally sized data passed to getChiSquare"));
+        msg<< "Non equally sized data passed to getChiSquare\n";
+        msg<<"Experimental data size is: "<<O.size()<<endl;
+        msg<<"Model data size is: "<<E.size()<<endl;
+        msg<<"Variances data size is: "<<variances.size()<<endl;
+        throw(Exception(msg.str()));
     }
 
     double chiSquare = 0;

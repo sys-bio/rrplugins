@@ -18,9 +18,9 @@ namespace tlp
 {
 
 TelluriumData::TelluriumData(const int& rSize, const int& cSize ) 
-    :        
-    mTimePrecision(6),
-    mDataPrecision(16)
+:
+mTimePrecision(6),
+mDataPrecision(16)
 {
     if(cSize && rSize)
     {
@@ -28,12 +28,12 @@ TelluriumData::TelluriumData(const int& rSize, const int& cSize )
     }
 }
 
-TelluriumData::TelluriumData(const StringList& colNames, const DoubleMatrix& theData) 
-    :        
-    mTimePrecision(6),
-    mDataPrecision(16),
-    mColumnNames(colNames),
-    mTheData(theData)
+TelluriumData::TelluriumData(const StringList& colNames, const DoubleMatrix& theData)
+:
+mTimePrecision(6),
+mDataPrecision(16),
+mColumnNames(colNames),
+mTheData(theData)
 {}
 
 TelluriumData::TelluriumData(const rr::RoadRunnerData& data)
@@ -49,6 +49,7 @@ void TelluriumData::clear()
     mColumnNames.clear();
     mTheData.resize(0,0);
     mWeights.resize(0,0);
+    mArrayedParameter = ArrayedParameter();
 }
 
 int TelluriumData::cSize() const
@@ -83,9 +84,14 @@ double TelluriumData::getTimeEnd() const
     return gDoubleNaN;
 }
 
-void TelluriumData::setName(const string& name)
+ArrayedParameter TelluriumData::getArrayedParameter() const
 {
-    mName = name;
+    return mArrayedParameter;
+}
+
+void TelluriumData::setArrayedParameter(const ArrayedParameter& para)
+{
+    mArrayedParameter = para;
 }
 
 TelluriumData& TelluriumData::operator= (const TelluriumData& rhs)
@@ -98,6 +104,7 @@ TelluriumData& TelluriumData::operator= (const TelluriumData& rhs)
     mTheData = rhs.mTheData;
     mWeights = rhs.mWeights;
     mColumnNames = rhs.mColumnNames;
+    mArrayedParameter = rhs.getArrayedParameter();
     return *this;
 }
 
@@ -121,7 +128,6 @@ void TelluriumData::allocateWeights()
         }
     }
 }
-
 
 bool TelluriumData::append(const TelluriumData& dataToAppend)
 {
@@ -197,7 +203,6 @@ bool TelluriumData::isFirstColumnTime() const
         return compareNoCase(mColumnNames[0], "Time");
     }
     return false;
-
 }
 
 string TelluriumData::getColumnName(const int col) const
@@ -218,11 +223,6 @@ int TelluriumData::getColumnIndex(const string& colName) const
 pair<int,int> TelluriumData::dimension() const
 {
     return pair<int,int>(mTheData.RSize(), mTheData.CSize());
-}
-
-string TelluriumData::getName() const
-{
-    return mName;
 }
 
 void TelluriumData::setTimeDataPrecision(const int& prec)
@@ -249,9 +249,9 @@ string TelluriumData::getColumnNamesAsString() const
     return lbls;
 }
 
-void TelluriumData::allocate(const int& cSize, const int& rSize)
+void TelluriumData::allocate(const int& rSize, const int& cSize)
 {
-    mTheData.Allocate(cSize, rSize);
+    mTheData.Allocate(rSize, cSize);
 }
 
 //=========== OPERATORS
@@ -268,7 +268,7 @@ bool TelluriumData::hasWeights() const
 
 double TelluriumData::getDataElement(int row, int col)
 {
-    return mTheData(row,col);    
+    return mTheData(row,col);
 }
 
 void   TelluriumData::setDataElement(int row, int col, double value)
@@ -307,7 +307,7 @@ bool TelluriumData::setColumnNames(const StringList& colNames)
     {
         mColumnNames = colNames;
         return true;
-    }    
+    }
 }
 
 string TelluriumData::getComments() const
@@ -430,8 +430,16 @@ ostream& operator << (ostream& ss, const TelluriumData& data)
     ss<<"NUMBER_OF_ROWS="            <<data.rSize()<<endl;
     ss<<"COLUMN_HEADERS="            <<data.getColumnNamesAsString()<<endl;
     ss<<"COMMENTS="              <<data.getComments()<<endl;
-
     ss<<endl;
+
+    ArrayedParameter para(data.getArrayedParameter());
+    if(para.getNumberOfIncrements() > 0)
+    {
+        //Communicate that this data is composed of output from an 'arrayed' experiment
+        ss<<"[ARRAYED_PARAMETER]"<<endl;
+        ss<<para;
+        ss<<endl;
+    }
     ss<<"[DATA]"<<endl;
     //Then the data
     for(u_int row = 0; row < data.mTheData.RSize(); row++)
@@ -545,6 +553,15 @@ istream& operator >> (istream& ss, TelluriumData& data)
         comments = commentsK->mValue;
         data.setComments(comments);
     }
+
+    IniSection* arraySection = ini.GetSection("ARRAYED_PARAMETER");
+    if(!arraySection)
+    {
+        stringstream s;
+        s<<"RoadRunnder data file is missing section: [ARRAYED_PARAMETER].";
+        Log(Logger::LOG_DEBUG)<<s.str();
+    }
+    //Todo: implement reading of an arrayed parameter..
 
     //Read number of cols and rows and setup data
     IniKey* aKey1 = infoSection->GetKey("NUMBER_OF_COLS");

@@ -86,6 +86,8 @@ void ParameterScanWorker::run()
         para.increment();
     }
 
+    //The Arrayed parameter need to be added to the data.
+    data.setArrayedParameter(para);
     workerFinished();
 }
 
