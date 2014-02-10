@@ -58,7 +58,7 @@ try:
     #Add an offset to residuals to test QQ plot behaviour
     res = DataSeries(lm.Residuals)
     
-    print lm.Residuals.cols
+    print res.cols
     for col in range(res.cols):
         for row in range(res.rows):
             res.setElement(row,col, res.getElement(row, col) + 1)

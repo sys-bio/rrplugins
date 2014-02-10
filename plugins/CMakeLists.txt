@@ -12,6 +12,7 @@ OPTION (TLP_BUILD_ADD_NOISE_PLUGIN		        "Build Add Noise Plugin"	           
 OPTION (TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN	"Build Levenberg-Marquardt Plugin"	        ON)
 OPTION (TLP_BUILD_AUTO_2000_PLUGIN	            "Build Auto 2000 Plugin"	                ON)
 OPTION (TLP_BUILD_STAT_PLUGIN	                "Build STAT (statistics) Plugin"	        ON)
+OPTION (TLP_BUILD_CHISQUARE_PLUGIN	            "Build ChiSquare Plugin"	                ON)
 
 if(${TLP_BUILD_ADD_NOISE_PLUGIN} STREQUAL ON)
     add_subdirectory(add_noise)
@@ -29,6 +30,9 @@ if(${TLP_BUILD_STAT_PLUGIN} STREQUAL ON)
     add_subdirectory(stat)
 endif()
 
+if(${TLP_BUILD_CHISQUARE_PLUGIN} STREQUAL ON)
+    add_subdirectory(chisquare)
+endif()
 
 install(
     FILES README.txt

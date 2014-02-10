@@ -13,8 +13,12 @@ using tlp::StringList;
 ParameterScan::ParameterScan()
 :
 CPPPlugin(                      "ParameterScan", "Misc",       NULL, NULL),
+
 //Properties.                   value,                  name,                                   hint,                                                           description, alias, readonly);
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in parameter scan."),
+mStartTime(                     0,                      "StartTime",                            "StartTime for the simulation."),
+mEndTime(                       10,                     "EndTime",                              "EndTime for the simulation."),
+mNumberOfPointsPerSimulation(   51,                     "NumberOfPointsPerSimulation",          "Number Of Points Per Simulation."),
 mSelectionList(                 "<none>",               "SelectionList",                        "Seection List as a string."),
 mOutputData(                    TelluriumData(),        "OutputData",                           "Data object holding Experimental data (input)"),
 mParameter(                     ArrayedParameter() ,    "Parameter",                            "One Parameter (input)", "", "", true),
@@ -28,7 +32,11 @@ mWorker(*this)
     mProperties.add(&mParameter);
     mProperties.add(&mSelectionList);
 
-    mHint = "Calculate data by incrementing one or more parameters.";
+    mProperties.add(&mStartTime);
+    mProperties.add(&mEndTime);
+    mProperties.add(&mNumberOfPointsPerSimulation);
+
+    mHint = "Generate multiple data sets by incrementing one model parameters.";
     mDescription="";
     //The function below assigns property descriptions
     assignPropertyDescriptions();

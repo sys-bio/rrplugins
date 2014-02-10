@@ -60,7 +60,6 @@ extern char* gLastError;
 */
 extern char* gInstallFolder;
 
-//Error/Warning Messages
 /*!
  \brief Global parameter holding message for an un-allocated API
 */

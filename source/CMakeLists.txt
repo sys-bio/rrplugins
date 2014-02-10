@@ -11,6 +11,7 @@ include_directories(
 
 set(sources
 telArrayList
+telArrayedParameter
 telConstants
 telCPlugin
 telCPPPlugin

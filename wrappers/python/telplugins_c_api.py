@@ -561,23 +561,6 @@ telLib.assignOnFinishedEvent.args =[c_void_p, NotifyEvent, c_void_p]
 def assignOnFinishedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
     return telLib.assignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
-#### \brief Hand external data to a plugin: THIS METHOD IS UNDER REVIEW
-#### \param pluginHandle Handle to a plugin
-#### \param userData void* pointer to user data. Plugin dependent, see the specific documentation on the plugin for details.
-#### \return Returns true or false indicating success/failure
-#### \ingroup plugins
-##telLib.assignPluginInput.restype = c_bool
-##def assignPluginInput(pluginHandle, userData):
-##    return telLib.assignPluginInput(pluginHandle, c_void_p(userData))
-
-## \brief Get the roadrunner instance handle from plugin assuming the plugin has one
-## \param pluginHandle Handle to a Plugin instance
-## \return Returns a handle to a rrInstance if available, returns None otherwise
-## \ingroup plugins
-telLib.getRRHandleFromPlugin.restype = c_void_p
-def getRRHandleFromPlugin(pluginHandle):
-    return telLib.getRRHandleFromPlugin(pluginHandle)
-
 #================ Plugin Property functionality ======================
 ## \brief Get a handle to the list of properties for a plugin
 ## \param pluginHandle Handle to a plugin

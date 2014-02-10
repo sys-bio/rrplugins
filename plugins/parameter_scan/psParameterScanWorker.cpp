@@ -76,6 +76,9 @@ void ParameterScanWorker::run()
     {
         rr::SimulateOptions options;
         options.flags |= rr::SimulateOptions::RESET_MODEL;
+        options.start = mHost.mStartTime.getValue();
+        options.duration =  mHost.mEndTime.getValue() - mHost.mStartTime.getValue();
+        options.steps = mHost.mNumberOfPointsPerSimulation.getValue() - 1;
 
         //Set parameter
         rr.setValue(para.getName(), para.getCurrentValue());

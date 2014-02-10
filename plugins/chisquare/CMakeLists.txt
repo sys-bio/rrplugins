@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_stat)
+set(target tel_chisquare)
 
 include_directories(
 ../source
@@ -13,10 +13,9 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-stStat
-stStatWorker
-stStatUtils
-stat_doc
+chisquare_doc
+csChiSquare
+csChiWorker
 )
 
 add_definitions(

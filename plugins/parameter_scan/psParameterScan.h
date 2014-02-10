@@ -21,6 +21,10 @@ class ParameterScan : public CPPPlugin
         Property<string>                        mSelectionList;
         Property< ArrayedParameter >            mParameter; //Parameter to scan
 
+        Property<double>                        mStartTime;
+        Property<double>                        mEndTime;
+        Property<int>                           mNumberOfPointsPerSimulation;
+
         //Output
         Property<TelluriumData>				    mOutputData;
 

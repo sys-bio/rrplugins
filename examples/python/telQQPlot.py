@@ -57,9 +57,13 @@ try:
     tel.telplugins.plot (experimentalData[:,[0,2]], myColor="blue", myLinestyle="", myMarker="*", myLabel="S2 Data")
     tel.plt.show()
 
+    #Plot a histogram
+    bins = 100
     stdResiduals = lm.StandardizedResiduals.toNumpy
     stdResiduals = stdResiduals[:,[1,2]]
-    plt.hist(stdResiduals, 50, normed=True)
+    stdResiduals = np.reshape(stdResiduals, 2*len(stdResiduals[:,[1]]))
+    
+    plt.hist(stdResiduals, bins, normed=True)
     plt.show()
 
     #Plot normal probability plots
