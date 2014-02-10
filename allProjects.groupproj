@@ -72,6 +72,9 @@
         <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="plugins\example_data\tel_example_data.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -287,14 +290,23 @@
     <Target Name="rrWinC:Make">
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="tel_example_data">
+        <MSBuild Projects="plugins\example_data\tel_example_data.cbproj"/>
+    </Target>
+    <Target Name="tel_example_data:Clean">
+        <MSBuild Projects="plugins\example_data\tel_example_data.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_example_data:Make">
+        <MSBuild Projects="plugins\example_data\tel_example_data.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;tel_Stat;tel_parameter_scan;tel_chisquare;rrextended;rrextended_c;property_meta_data;plugin_info;c_plugin_demo;handle_manager;bistable;rrWinC"/>
+        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;telplugins;telplugins_c_api;lmfit-static;libAuto-static;rrAutoInterface-static;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;tel_Stat;tel_parameter_scan;tel_chisquare;rrextended;rrextended_c;property_meta_data;plugin_info;c_plugin_demo;handle_manager;bistable;rrWinC;tel_example_data"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;tel_Stat:Clean;tel_parameter_scan:Clean;tel_chisquare:Clean;rrextended:Clean;rrextended_c:Clean;property_meta_data:Clean;plugin_info:Clean;c_plugin_demo:Clean;handle_manager:Clean;bistable:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;telplugins:Clean;telplugins_c_api:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;tel_Stat:Clean;tel_parameter_scan:Clean;tel_chisquare:Clean;rrextended:Clean;rrextended_c:Clean;property_meta_data:Clean;plugin_info:Clean;c_plugin_demo:Clean;handle_manager:Clean;bistable:Clean;rrWinC:Clean;tel_example_data:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;tel_Stat:Make;tel_parameter_scan:Make;tel_chisquare:Make;rrextended:Make;rrextended_c:Make;property_meta_data:Make;plugin_info:Make;c_plugin_demo:Make;handle_manager:Make;bistable:Make;rrWinC:Make"/>
+        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;telplugins:Make;telplugins_c_api:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;tel_Stat:Make;tel_parameter_scan:Make;tel_chisquare:Make;rrextended:Make;rrextended_c:Make;property_meta_data:Make;plugin_info:Make;c_plugin_demo:Make;handle_manager:Make;bistable:Make;rrWinC:Make;tel_example_data:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

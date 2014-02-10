@@ -40,5 +40,5 @@ try:
         shutil.copy(file, repoFolder)
         
 except Exception as e:
-    print 'There was a problem installing Tellurium plugins: ' + `e`
+    print 'There was a problem copying changed python files: ' + `e`
 

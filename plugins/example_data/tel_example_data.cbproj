@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{0E22E507-BF58-4A3B-A3EE-1FA1C8131870}</ProjectGuid>
+        <ProjectGuid>{012349B8-0A2C-4706-A433-D4B318E88283}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -107,19 +107,19 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="add_noise.cpp">
-            <BuildOrder>1</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="add_noise_doc.cpp">
-            <DependentOn>add_noise_doc.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="add_noise_worker.cpp">
-            <DependentOn>add_noise_worker.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ExampleData.cpp">
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ExampleDataWorker.cpp">
+            <DependentOn>ExampleDataWorker.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="example_data_doc.cpp">
+            <DependentOn>example_data_doc.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
         </CppCompile>
         <CppCompile Include="noise.cpp">
             <DependentOn>noise.h</DependentOn>
