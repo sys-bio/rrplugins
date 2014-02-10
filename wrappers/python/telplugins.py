@@ -142,6 +142,52 @@ class DataSeries(object):
             raise Exception("Column index out of bounds in dataseries element access")
         setTelluriumDataElement(self._data, row, col, value)    
 
+    ## \brief Get the weight for a specific data element
+    ##@code
+    ## print d.getWeight (1,2)
+    ##@endcode       
+    def getWeight (self, row, col):
+        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        if (row < 0) or (col < 0):
+            raise Exception("DataSeries indices must be positive")
+        if row >= rowCount:
+            raise Exception("Row index out of bounds in dataseries element access")
+        if col >= colCount:
+            raise Exception("Column index out of bounds in dataseries element access")
+
+        if not tpc.telLib.hasWeights(self._data):
+            raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
+        
+        val = ctypes.c_double()
+        if tpc.telLib.getTelluriumDataWeight(self._data, row, col, ctypes.byref(val)) == True:
+           return val.value
+        else:                               
+           # Is there a getLastError for this?
+           # TK: When an API function fails, the reason for the failure should always be recorded in a message in getLastError()
+           msg = tpc.telLib.getLastError()
+           raise Exception("Unable to retrieve element. The problem was: " + `msg`)
+
+    ## \brief Set a specific element
+    ##@code
+    ## d.setElement (1,2, 3.1415)
+    ##@endcode       
+    def setWeight (self, row, col, value):
+        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        if (row < 0) or (col < 0):
+            raise Exception("DataSeries indices must be positive")
+        if row >= rowCount:
+            raise Exception("Row index out of bounds in dataseries element access")
+        if col >= colCount:
+            raise Exception("Column index out of bounds in dataseries element access")
+        
+        if not tpc.telLib.hasWeights(self._data):
+            raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
+
+        tpc.setTelluriumDataWeight(self._data, row, col, value)
+            
+
     ## \brief Read a dataseries from a file
     ##@code
     ## d.readDataSeries ("myDataSeries.txt")
