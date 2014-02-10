@@ -31,13 +31,13 @@ The ExampleModel plugin was developed at the University of Washington by Totte K
             //Get plugin folder
             string pluginFldr = mPM->getPluginDir();
             string cwd = getCWD();
-
-            if(!fileExists(joinPath(pluginFldr,mModelFileName)))
+            string fullPath = joinPath(pluginFldr,mModelFileName); 
+            if(!fileExists(fullPath))
             {
                 throw(Exception("ModelFile do not exists!"));
             }
 
-            string model = getFileContent(mModelFileName);
+            string model = getFileContent(fullPath);
             mModel.setValue(model);
         }
     }
