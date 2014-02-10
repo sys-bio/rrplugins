@@ -101,7 +101,7 @@ class RRP_DECLSPEC PluginManager
             such as number of plugins loaded, their names and where they are loaded from
             @return string String holding plugin manager information
         */
-        string                              getInfo();
+        string                              getInfo() const;
 
         /**
             Change the directory where the Manager loads plugins
@@ -114,7 +114,7 @@ class RRP_DECLSPEC PluginManager
             Get folder where plugins are loaded from
             @return String containg current folder where plugins are loaded from
         */
-        string                              getPluginDir();
+        string                              getPluginDir() const;
 
         /**
             Load a specific plugin, or, if no argument supplied, loads ALL plugins in the current plugin folder.
@@ -131,13 +131,13 @@ class RRP_DECLSPEC PluginManager
         /**
             Get number of loaded plugins.
         */
-        int                                 getNumberOfPlugins();
+        int                                 getNumberOfPlugins() const;
 
         /**
             Get number of plugin categories.
             \note Not implemented
         */
-        int                                 getNumberOfCategories();
+        int                                 getNumberOfCategories() const;
 
         /**
             Retrieves the "first" plugin in the managers internal plugin container.
@@ -145,46 +145,46 @@ class RRP_DECLSPEC PluginManager
             \note This function resets the managers internal plugin iterator to point
             at the "first" plugin.
         */
-        Plugin*                             getFirstPlugin();
+        Plugin*                             getFirstPlugin() const;
 
         /**
             Retrieves the "next" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
             \note This function advances the managers internal plugin iterator one step forward.
         */
-        Plugin*                             getNextPlugin();
+        Plugin*                             getNextPlugin() const;
 
         /**
             Retrieves the "previous" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
             \note This function decerements the managers internal plugin iterator one step back.
         */
-        Plugin*                             getPreviousPlugin();
+        Plugin*                             getPreviousPlugin() const;
 
         /**
             Retrieves the "current" plugin in the managers internal plugin container.
             \return Pointer to a Plugin, or NULL.
         */
-        Plugin*                             getCurrentPlugin();
+        Plugin*                             getCurrentPlugin() const;
 
         /**
             Retrieves a plugin with name as supplied in the argument.
             \arg name Name of the plugin.
             \return Pointer to a Plugin, or NULL.
         */
-        Plugin*                             getPlugin(const string& name);
+        Plugin*                             getPlugin(const string& name) const;
 
         /**
             Retrieves the names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the name of each loaded Plugin.
         */
-        tlp::StringList                     getPluginNames();
+        tlp::StringList                     getPluginNames() const;
 
         /**
             Retrieves the shared library names of all loaded plugins as a list of strings.
             \return StringList A Stringlist containing the file name of each loaded Plugin.
         */
-        tlp::StringList                     getPluginLibraryNames();
+        tlp::StringList                     getPluginLibraryNames() const;
 
         /**
             Output plugin information to a std ostream
@@ -197,16 +197,16 @@ class RRP_DECLSPEC PluginManager
         */
         Plugin*                             operator[](const int& i);
 
-        bool                                hasLoadErrors();
-        string                              getLoadErrors();
+        bool                                hasLoadErrors() const;
+        string                              getLoadErrors() const;
 
     private:
         string                              mPluginFolder;
         string                              mPluginExtension;       //Different on different OS's
         string                              mPluginPrefix;          //Different on different OS's
         stringstream                        mLoadPluginErrors;      //Accumulated load errors
-        vector< telPlugin >                 mPlugins;
-        vector< telPlugin >::iterator       mPluginsIter;
+        mutable vector< telPlugin >                 mPlugins;
+        mutable vector< telPlugin >::iterator       mPluginsIter;
 
         bool                                loadPlugin(const string& sharedLib);
         bool                                checkImplementationLanguage(SharedLibrary* plugin);

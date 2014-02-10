@@ -59,12 +59,12 @@ bool PluginManager::setPluginDir(const string& dir)
     return folderExists(mPluginFolder);
 }
 
-string PluginManager::getPluginDir()
+string PluginManager::getPluginDir() const
 {
     return mPluginFolder;
 }
 
-string PluginManager::getInfo()
+string PluginManager::getInfo() const
 {
     stringstream info;
     info<<setw(30)<<left<<"Plugin Folder: "            <<mPluginFolder<<"\n";
@@ -95,7 +95,7 @@ ostream& operator << (ostream& st, PluginManager& pm)
     return st;
 }
 
-Plugin* PluginManager::getFirstPlugin()
+Plugin* PluginManager::getFirstPlugin() const
 {
     mPluginsIter = mPlugins.begin();
     if(mPluginsIter != mPlugins.end())
@@ -105,7 +105,7 @@ Plugin* PluginManager::getFirstPlugin()
     return NULL;
 }
 
-Plugin* PluginManager::getCurrentPlugin()
+Plugin* PluginManager::getCurrentPlugin() const
 {
     if(mPluginsIter != mPlugins.end())
     {
@@ -114,7 +114,7 @@ Plugin* PluginManager::getCurrentPlugin()
     return NULL;
 }
 
-Plugin* PluginManager::getNextPlugin()
+Plugin* PluginManager::getNextPlugin() const
 {
     if(mPluginsIter != mPlugins.end())
     {
@@ -127,7 +127,7 @@ Plugin* PluginManager::getNextPlugin()
     return NULL;
 }
 
-Plugin* PluginManager::getPreviousPlugin()
+Plugin* PluginManager::getPreviousPlugin() const
 {
     if(mPluginsIter != mPlugins.end())
     {
@@ -297,7 +297,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         }
         else
         {
-            throw("This can't happen!");
+            throw("The current Plugin lack the createPlugin(void*) function!");
         }
     }
 
@@ -448,7 +448,7 @@ const char* PluginManager::getImplementationLanguage(Poco::SharedLibrary* plugin
     }
 }
 
-StringList PluginManager::getPluginNames()
+StringList PluginManager::getPluginNames() const
 {
     StringList names;
     int nrPlugins = getNumberOfPlugins();
@@ -467,7 +467,7 @@ StringList PluginManager::getPluginNames()
     return names;
 }
 
-StringList PluginManager::getPluginLibraryNames()
+StringList PluginManager::getPluginLibraryNames() const
 {
     StringList names;
     int nrPlugins = getNumberOfPlugins();
@@ -486,17 +486,17 @@ StringList PluginManager::getPluginLibraryNames()
     return names;
 }
 
-int PluginManager::getNumberOfPlugins()
+int PluginManager::getNumberOfPlugins() const
 {
     return mPlugins.size();
 }
 
-int PluginManager::getNumberOfCategories()
+int PluginManager::getNumberOfCategories() const
 {
     return -1;
 }
 
-Plugin* PluginManager::getPlugin(const string& _name)
+Plugin* PluginManager::getPlugin(const string& _name) const
 {
     //Strip the extension
     string name = getFileNameNoExtension(_name);
@@ -552,12 +552,12 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
     return NULL;
 }
 
-bool PluginManager::hasLoadErrors()
+bool PluginManager::hasLoadErrors() const
 {
     return mLoadPluginErrors.str().size() != 0 ? true : false;
 }
 
-string PluginManager::getLoadErrors()
+string PluginManager::getLoadErrors() const
 {
     return mLoadPluginErrors.str();
 }

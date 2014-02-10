@@ -42,7 +42,6 @@
 #define telCPPPluginH
 #include "telPlugin.h"
 //---------------------------------------------------------------------------
-
 namespace tlp
 {
 /**

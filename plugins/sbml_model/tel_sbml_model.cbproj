@@ -95,7 +95,7 @@
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>
-        <Debugger_HostApplication>R:\installs\cgd-static\bin\rrWinC.exe</Debugger_HostApplication>
+        <Debugger_HostApplication>R:\cg_installs\DRT\bin\rrWinC.exe</Debugger_HostApplication>
         <Defines>POCO_STATIC;EXPORT_RR_PLUGIN;$(Defines)</Defines>
         <IncludePath>..\..\Source;$(TLP_INSTALL)\include;..\..\Wrappers\C;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>

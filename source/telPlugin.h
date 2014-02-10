@@ -57,7 +57,6 @@ namespace tlp
     using tlp::gEmptyString;
     using tlp::gNoneString;
     using std::string;
-
     class PluginManager;
 
 /**
@@ -88,10 +87,8 @@ typedef void    (event_cc *PluginEvent)(void* data1, void* data2);
   -# A plugin have access to other plugins through the PluginManager. Thus, a plugin may depend on other plugins.
 
   -# A plugin may embed documentation in various forms, e.g. PDF (getPDFManual(), or simple text getExtendedInfo().
-
-
-
  */
+
 class RRP_DECLSPEC Plugin
 {
     friend PluginManager;
