@@ -95,7 +95,6 @@
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>
-        <BCC_PCHInject>add_noise_pch.h</BCC_PCHInject>
         <Debugger_HostApplication>R:\installs\cgd-static\bin\rrWinC.exe</Debugger_HostApplication>
         <Defines>POCO_STATIC;EXPORT_RR_PLUGIN;$(Defines)</Defines>
         <IncludePath>..\..\Source;$(TLP_INSTALL)\include;..\..\Wrappers\C;$(IncludePath)</IncludePath>
@@ -110,20 +109,12 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="ExampleData.cpp">
+        <CppCompile Include="SBMLModel.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="ExampleDataWorker.cpp">
-            <DependentOn>ExampleDataWorker.h</DependentOn>
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="example_data_doc.cpp">
-            <DependentOn>example_data_doc.h</DependentOn>
+        <CppCompile Include="sbml_model_doc.cpp">
+            <DependentOn>sbml_model_doc.h</DependentOn>
             <BuildOrder>4</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="noise.cpp">
-            <DependentOn>noise.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

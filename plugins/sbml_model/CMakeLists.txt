@@ -1,14 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_add_noise)
-
-include_directories(
-)
+set(target tel_sbml_model)
 
 set(sources
-add_noise
-add_noise_worker
-add_noise_doc
-noise
+SBMLModel
+sbml_model_doc
 )
 
 add_library(${target} MODULE ${sources})
@@ -24,9 +19,6 @@ roadrunner
 telplugins
 )
 else() #UNIX
-    # OSX flags:
-    #"${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-    # OSX seems to link fine without this flag
     if(APPLE)
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     else()
@@ -35,23 +27,9 @@ else() #UNIX
 
     set_property(TARGET ${target}
         PROPERTY  COMPILE_DEFINITIONS
-        LIBSBML_STATIC
-        LIBLAX_STATIC
-        STATIC_PUGI
-        STATIC_LIBSTRUCT
         )
 
     target_link_libraries ( ${target}
-        roadrunner-static
-        rr-libstruct-static
-        nleq-static
-        sbml-static
-        lapack
-        blas
-        f2c
-        pthread
-        #roadrunner_c_api
-        telplugins_api-static
         )
 endif()
 
@@ -64,9 +42,9 @@ DESTINATION plugins
 COMPONENT plugins
 )
 
-#install(FILES
-#docs/Examples/rrNoisePluginDemo.py
-#DESTINATION plugins/Examples
-#)
+install(FILES
+sbml_test_0001.xml
+DESTINATION plugins
+)
 
 
