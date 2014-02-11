@@ -80,7 +80,7 @@ bool ChiSquare::execute(bool inThread)
         mWorker.start(inThread);
         return true;
     }
-    catch(const rr::Exception& ex)
+    catch(const tlp::Exception& ex)
     {
         Log(lError) << "There was a problem in the execute function of the ChiSquare plugin: " << ex.getMessage();
         throw(ex);

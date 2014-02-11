@@ -5,7 +5,7 @@ try:
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
     rr.load("sbml_test_0001.xml")    
-    data = rr.simulate(0, 4.5, 49)
+    data = rr.simulate(0, 4.5, 200)
 
     #Add some noise to the data
     noisePlugin = Plugin ("tel_add_noise")
