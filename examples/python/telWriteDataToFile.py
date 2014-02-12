@@ -4,8 +4,14 @@ from telplugins import *
 try:
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load("sbml_test_0001.xml")    
-    data = rr.simulate(0, 4.5, 200)
+    rr.load("sbml_test_0001.xml") 
+    
+    rr.setValue("k1", .57)   
+    rr.reset()   
+    timeStart = 0
+    timeEnd = 10
+    nrPoints  = 15
+    data = rr.simulate(0, timeEnd, nrPoints  - 1)
 
     #Add some noise to the data
     noisePlugin = Plugin ("tel_add_noise")
@@ -17,7 +23,7 @@ try:
     noisePlugin.InputData = d
 
     # Set parameter for the 'size' of the noise
-    sigma = 1e-6
+    sigma = 1.34e-6
     noisePlugin.Sigma = sigma
         
     # Add the noise
@@ -41,7 +47,7 @@ try:
                 weight = theData.getWeight(r,c)
                 theData.setWeight(r,c, sigma * sigma)                
     
-    noisePlugin.InputData.writeDataSeries("myExperimentalData.dat")
+    noisePlugin.InputData.writeDataSeries(".\\parameter_minimization\\ExperimentalData.dat")
     print "done"
 
 except Exception as e:

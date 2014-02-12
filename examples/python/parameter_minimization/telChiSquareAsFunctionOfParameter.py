@@ -19,17 +19,23 @@ try:
     
     #Simulate using the same numbers as in the 'Experimental data
     x = np.array([])
-    y = np.array([])     
-    for k in np.arange(0.8, 1.3, .01):      
+    y = np.array([])
+         
+    kStart = 0.1
+    kEnd = 2.5
+    kStep = .01
+    for k in np.arange(kStart, kEnd, kStep):      
           
         rr.setValue("k1", k)   
-        rr.reset() 
-        data = rr.simulate(0, 4.5, 200) # Want 512 points
+        rr.reset()
+        timeStart = 0
+        timeEnd = 10
+        nrPoints = 15         
+        data = rr.simulate(timeStart, timeEnd, nrPoints - 1) # Want 512 points
         #roadrunner.plot(data)
     
-        #Get chi square
-        chiSquare =  tel.Plugin("tel_chisquare")
-    
+        #Get chi square plugin and set it up
+        chiSquare =  tel.Plugin("tel_chisquare")    
         chiSquare.ExperimentalData = expData
         chiSquare.ModelData = tel.getDataSeries(data)
         chiSquare.NrOfModelParameters = 1
