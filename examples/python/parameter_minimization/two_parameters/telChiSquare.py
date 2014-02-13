@@ -11,15 +11,13 @@ try:
     
     #This does not look right..
     expData = expData.readDataSeries('ExperimentalData.dat')   
-        
-    modelPlugin = Plugin("tel_sbml_model")   
-    sbml_model  = modelPlugin.Model
-    
+               
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
-    rr.setValue('k1', 0.57)
-    data = rr.simulate(0, 10, 14) 
+    rr.load('two_parameters.xml')
+    rr.setValue('k1', 1.3)
+    rr.setValue('k2', 2.5)
+    data = rr.simulate(0, 1.5, 14) 
 
     #Calculate Chi squares
     chiPlugin =  Plugin("tel_chisquare")
@@ -46,7 +44,7 @@ try:
     Chi = round(chiPlugin.ChiSquare.getElement(0,1),4)
     redChi = round(chiPlugin.ReducedChiSquare.getElement(0,1),4)
       
-    plt.text(6,0.00008, r"\begin{eqnarray*}\chi^2 &=" + `Chi` + r"\\ \chi^2_{reduced} &= " + `redChi` + r"\end{eqnarray*}", fontsize=21, color='red')            
+    plt.text(1.0,0.12, r"\begin{eqnarray*}\chi^2 &=" + `Chi` + r"\\ \chi^2_{reduced} &=  " + `redChi` + r"\end{eqnarray*}", fontsize=21, color='red')            
     plt.show()                       
     print "done"
 

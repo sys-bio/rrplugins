@@ -6,10 +6,6 @@ import telplugins as tel
 def firstDerivative(p2, p1, h):
     return (p2 - p1) / (2.0*h)
 
-def secondDerivative(p2, p1, h):    
-    middle = (p1+p2)
-    return (p2 + p1 - 2.0*(middle)) / (h*h)
-
 try:
     #Read some 'experimental' data   
     expData = tel.DataSeries()
@@ -17,9 +13,8 @@ try:
     #This does not look right.. but it works..
     expData = expData.readDataSeries('ExperimentalData.dat')   
         
-    #Get a model        
-    modelPlugin = tel.Plugin("tel_sbml_model")   
-    sbml_model  = modelPlugin.Model
+    #Get a model               
+    sbml_model = 'two_parameters.xml'
     
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
@@ -42,7 +37,7 @@ try:
         rr.setValue("k1", k)   
         rr.reset()
         timeStart = 0
-        timeEnd = 10
+        timeEnd = 1.5
         nrPoints = 15         
          
         data = rr.simulate(timeStart, timeEnd, nrPoints - 1)
@@ -88,9 +83,8 @@ try:
     plt.ylabel("ChiSquare'")
     plt.hlines(0, kStart, kEnd)
     plt.vlines(0.57, -150, 150)        
-    
-    
-    #Calculate the second derivative
+        
+    #Calculate the second derivative as the first derivative on first derivative
     i = 1
     imax = len(xPrime) -1
     yPPrime = np.array([])
@@ -105,8 +99,7 @@ try:
         i = i + 1
         if i >= imax:
             print 'breaking'
-            break
-            
+            break           
     
     plt.subplot(1,3,3)
     plt.plot(xPPrime,yPPrime, '-o', label="Reduced ChiSquare Second Derivative")
