@@ -56,13 +56,12 @@ try:
     
     H = np.matrix('0.0 0.0; 0.0 0.0')
     #Diagonal elements
-    H[0, 0] = getHessElement(1, 1, k1, k2, eta)
+    H[0,0] = getHessElement(1, 1, k1, k2, eta)
     H[0,1] = getHessElement(1, 2, k1, k2, eta)    
     H[1,0] = getHessElement(2, 1, k1, k2, eta)
     H[1,1] = getHessElement(2, 2, k1, k2, eta)                                                                                         
     
-    print H
-    
+    print H    
     print H.I
                                                     
     print "done"

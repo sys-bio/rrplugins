@@ -34,8 +34,8 @@ try:
     chiSquare.NrOfModelParameters = 2
     
     #Simulate using the same numbers as in the 'Experimental data             
-    k1Start = 0.4 ;  k1End = 2.5    
-    k2Start = 0.4 ;  k2End = 5
+    k1Start = 1 ;  k1End = 1.8    
+    k2Start = 1 ;  k2End = 4.5
     timeStart = 0;  timeEnd = 1.5 ;  nrPoints = 15
              
     X = np.linspace(k1Start, k1End, 125)
@@ -47,7 +47,7 @@ try:
     for row in range(nrX):    
         for col in range(nrY):
             print 'row,col = ' + `row` + ", " + `col`
-            Z[row,col] = chiFun(X[row], Y[col])                                                     
+            Z[col,row] = chiFun(X[row], Y[col])                                                     
                                 
     X, Y = np.meshgrid(X, Y)        
         
