@@ -1,9 +1,10 @@
 #pragma hdrstop
+#include "telPropertyBase.h"
 #include <iostream>
 #include <iomanip>
 #include "rr/rrException.h"
 #include "telStringUtils.h"
-#include "telPropertyBase.h"
+
 //---------------------------------------------------------------------------
 
 namespace tlp

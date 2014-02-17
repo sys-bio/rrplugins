@@ -6,6 +6,7 @@
 #include <time.h>
 #include <sstream>
 #include <cstring>
+#include "rr-libstruct/lsMatrix.h"
 #include "telStringUtils.h"
 //---------------------------------------------------------------------------
 
@@ -892,6 +893,16 @@ string toString(const vector<string>& vec, const string& sep)
     }
     text<<"}";
     return text.str();
+}
+
+string toString(const ls::DoubleMatrix& mat)
+{
+
+}
+
+string toString(const Matrix& mat)
+{
+
 }
 
 bool compareNoCase(const string& str1, const string& str2)

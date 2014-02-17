@@ -77,6 +77,8 @@ RRP_DECLSPEC string             toString(const unsigned char n);
 RRP_DECLSPEC string             toString(const string& s);
 RRP_DECLSPEC string             toString(const char* str);
 RRP_DECLSPEC string             toString(const vector<string>& vec, const string& sep = ", ");
+RRP_DECLSPEC string             toString(const ls::DoubleMatrix& mat);
+RRP_DECLSPEC string             toString(const Matrix& mat);
 
 RRP_DECLSPEC string             format(const string& src, const int& arg);
 RRP_DECLSPEC string             format(const string& str, const int& arg1);

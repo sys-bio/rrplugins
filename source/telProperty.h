@@ -45,13 +45,13 @@
 #include <sstream>
 #include "rr/rrException.h"
 #include "rr/rrLogger.h"
-//#include "telTelluriumData.h"
+#include "telStringUtils.h"
 #include "telPropertyBase.h"
 #include "telProperties.h"
-#include "telStringUtils.h"
 #include "telUtils.h"
 #include "telStringList.h"
 #include "telConstants.h"
+
 //---------------------------------------------------------------------------
 namespace tlp
 {

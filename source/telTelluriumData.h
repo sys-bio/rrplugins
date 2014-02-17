@@ -7,7 +7,7 @@
 #include "telStringList.h"
 #include "telExporter.h"
 #include "telArrayedParameter.h"
-#include "rr-libstruct/lsMatrix.h"
+#include "telMatrix.h"
 
 namespace rr
 {
@@ -131,7 +131,7 @@ class RRP_DECLSPEC TelluriumData
          * \param colNames List of column names
          * \param data Source data matrix.
          */
-        TelluriumData(const StringList& colNames, const DoubleMatrix& data);
+        TelluriumData(const StringList& colNames, const tlp::DoubleMatrix& data);
 
         /**
          * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object

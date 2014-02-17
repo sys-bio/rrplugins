@@ -40,10 +40,10 @@
 */
 #ifndef telPropertyBaseH
 #define telPropertyBaseH
-#include "telConstants.h"
-#include "telExporter.h"
 #include <string>
 #include <ostream>
+#include "telConstants.h"
+#include "telExporter.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
