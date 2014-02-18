@@ -2,6 +2,8 @@
 #include "lmWorker.h"
 #include "rr/rrLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
+#include "rr-libstruct/lsLA.h"
+
 #include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert and use the CPP api directly
 #include "rr/C/rrc_utilities.h"
 #include "telException.h"
@@ -11,6 +13,7 @@
 #include "telUtils.h"
 #include "telMathUtils.h"
 #include "telProperty.h"
+#include "telPluginManager.h"
 
 //---------------------------------------------------------------------------
 namespace lmfit
@@ -130,6 +133,7 @@ void lmWorker::postFittingWork()
         parsOut.add(new Property<double>(mLMData.parameters[i], mLMData.parameterLabels[i], ""), true);
     }
 
+    Log(lError) <<"Parameters out.."<<parsOut;
     //Set the norm property
     mTheHost.mNorm.setValue(mTheHost.mLMStatus.fnorm);
 
@@ -156,35 +160,189 @@ void lmWorker::postFittingWork()
     TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
     probPlot = getNormalProbabilityPlot(stdRes);
 
-    //Calculate ChiSquare(s)
-    TelluriumData& modelData = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
-    TelluriumData& obsData = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
-
-    double chiSquare = 0;
-    //Get ChiSquare specie by specie and average them together
-
-    for(int n = obsData.isFirstColumnTime() ? 1 : 0; n < obsData.cSize(); n++)
-    {
-        vector<double> obsDataN     = getValuesInColumn(n, obsData);
-        vector<double> modelDataN   = getValuesInColumn(n, modelData);
-
-        double stdDevOfResiduals = getStandardDeviation(getValuesInColumn(n, residuals));
-
-        vector<double> variances(modelDataN.size(), pow(stdDevOfResiduals,2));
-
-        chiSquare += getChiSquare(obsDataN, modelDataN, variances);
-    }
-    //Divide chiSquare with number of species
-    int test = obsData.isFirstColumnTime() ? 1 : 0;
-    int nrOfSpecies = obsData.cSize() -  test;
-
-    int degreeOfFreedom = obsData.rSize() * nrOfSpecies - mLMData.nrOfParameters;
-    mTheHost.mChiSquare.setValue(chiSquare);
-    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
-
-    Log(lInfo)<<"Chi Square = "<<chiSquare;
+    calculateChiSquare();
+    calculateHessian();
+    calculateCovariance();
+    calculateConfidenceLimits();
 }
 
+void lmWorker::calculateChiSquare()
+{
+    //Calculate ChiSquare(s)
+    TelluriumData& modelData    = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
+    TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
+    Plugin* chi = mTheHost.mPM->getPlugin("tel_chisquare");
+
+    Property<TelluriumData>* para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ExperimentalData"));
+    para->setValue(obsData);
+
+    para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ModelData"));
+    para->setValue(modelData);
+
+    Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
+    intPara->setValue(mLMData.nrOfParameters);
+
+    //Calculate Chi square
+    chi->execute();
+
+    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
+    Property<double>* rChiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ReducedChiSquare"));
+
+    mTheHost.mChiSquare.setValue(chiSquare->getValue());
+    mTheHost.mReducedChiSquare.setValue(rChiSquare->getValue());
+
+    Log(lInfo)<<"Chi Square = "<<chiSquare->getValue();
+    Log(lInfo)<<"Reduced Chi Square = "<<rChiSquare->getValue();
+}
+
+double lmWorker::getChi(const Properties& parameters)
+{
+    Log(lDebug)<<"Getting chisquare using parameters: "<<parameters;
+    //Reset RoadRunner
+    reset(mRRI);
+
+    for(int i = 0; i < parameters.count(); i++)
+    {
+        Property<double> *para = (Property<double>*) (parameters[i]);
+        mRRI->setValue(para->getName(), para->getValue());
+    }
+
+    rr::SimulateOptions options;
+    options.start = mLMData.timeStart;
+    options.duration = mLMData.timeEnd - mLMData.timeStart;
+    options.steps = mLMData.nrOfTimePoints - 1;
+    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+
+    rr::RoadRunnerData *modelData = NULL;
+    if(mRRI->simulate(&options))
+    {
+        modelData = mRRI->getSimulationResult();
+    }
+
+
+    TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
+    Plugin* chi                 = mTheHost.mPM->getPlugin("tel_chisquare");
+
+    Property<TelluriumData>* para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ExperimentalData"));
+    para->setValue(obsData);
+
+    para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ModelData"));
+    para->setValue(TelluriumData(*(modelData)));
+
+    Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
+    intPara->setValue(mLMData.nrOfParameters);
+
+    //Calculate Chi square
+    chi->execute();
+    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
+    return chiSquare->getValue();
+}
+
+void lmWorker::calculateHessian()
+{
+    double eta = 6.06e-6;
+    int nrOfParameters = mTheHost.mOutputParameterList.getValueReference().count();
+
+    Properties& ref = mTheHost.mOutputParameterList.getValueReference();
+
+    Properties copy; //Gotta add a copy/assignemnt opertor to Properties..
+    for(int i = 0; i < ref.count(); i++)
+    {
+        copy.add(ref[i]);
+    }
+
+    //We need to calculate ChiSquares for various perturbatin around a parameter value, in order to get the Hessian
+    DoubleMatrix mat(nrOfParameters, nrOfParameters);
+
+    for(int i = 0; i < nrOfParameters; i++)
+    {
+        for(int j = 0; j < nrOfParameters; j++)
+        {
+            if(i == j)//Diagonal elements
+            {
+                Property<double>* p = (Property<double>*) copy[i];
+                double origValue = p->getValue();
+                double hi = eta * fabs(origValue);
+
+                p->setValue(origValue + hi);
+                double t1 = getChi(copy);
+
+                p->setValue(origValue - hi);
+                double t2 = getChi(copy);
+
+                p->setValue(origValue);
+                double t3 = getChi(copy);
+                mat(i,j) = (t1 + t2 - 2.0 * t3) / (hi*hi);
+            }
+            else //Off diagonal elements
+            {
+                Property<double>* pi = (Property<double>*) copy[i];
+                double origValueI = pi->getValue();
+
+                Property<double>* pj = (Property<double>*) copy[j];
+                double origValueJ = pj->getValue();
+                double hi = eta * fabs(origValueI);
+                double hj = eta * fabs(origValueJ);
+
+                //Term1
+                pi->setValue(origValueI + hi);
+                pj->setValue(origValueJ + hj);
+                double t1 = getChi(copy);
+
+                //Term2
+                pj->setValue(origValueJ);
+                double t2 = getChi(copy);
+
+                //Term3
+                pi->setValue(origValueI);
+                pj->setValue(origValueJ + hj);
+                double t3 = getChi(copy);
+
+                //Term4
+                pi->setValue(origValueI);
+                pj->setValue(origValueJ);
+                double t4 = getChi(copy);
+                mat(i,j) = (t1 - t2 -t3 + t4 )/(hi*hj);
+
+            }
+            //Reset parameter values
+
+        }
+    }
+    mTheHost.mHessian.setValue(mat);
+}
+
+
+void lmWorker::calculateCovariance()
+{
+    //Check if Hessain is invertible
+    DoubleMatrix mat = mTheHost.mHessian.getValue();
+
+    ls::ComplexMatrix temp(mat); //Get a complex matrix from a double one. Imag part is zero
+
+    ls::ComplexMatrix Inv = GetInverse(temp);
+
+    DoubleMatrix temp2(mat.RSize(), mat.CSize());
+    temp2 = Inv;
+
+    mTheHost.mCovarianceMatrix.setValue(temp2);
+}
+
+void lmWorker::calculateConfidenceLimits()
+{
+    Properties& parameters = mTheHost.mOutputParameterList.getValueReference();
+
+    Properties& conf = mTheHost.mConfidenceLimits.getValueReference();
+    conf.clear();
+
+    DoubleMatrix mat = mTheHost.mCovarianceMatrix.getValue();
+    double chiReduced = mTheHost.mReducedChiSquare.getValue();
+    for (int i = 0; i < mLMData.nrOfParameters; ++i)
+    {
+        double delta = 1.96*sqrt(mat(i,i) * chiReduced);
+        conf.add(new Property<double>(delta, mLMData.parameterLabels[i] + string("_confidence"), ""), true);
+    }
+}
 
 void lmWorker::workerStarted()
 {

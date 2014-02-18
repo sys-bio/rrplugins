@@ -897,13 +897,15 @@ string toString(const vector<string>& vec, const string& sep)
 
 string toString(const ls::DoubleMatrix& mat)
 {
-
+    stringstream ss;
+    ss << mat;
+    return ss.str();
 }
 
-string toString(const Matrix& mat)
-{
-
-}
+//string toString(const Matrix& mat)
+//{
+//
+//}
 
 bool compareNoCase(const string& str1, const string& str2)
 {

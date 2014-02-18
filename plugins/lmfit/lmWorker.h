@@ -6,6 +6,7 @@
 #include "rr/rrRoadRunner.h"
 #include "lmUtils.h"
 #include "telTelluriumData.h"
+#include "telProperties.h"
 //---------------------------------------------------------------------------
 
 namespace lmfit
@@ -13,8 +14,8 @@ namespace lmfit
 
 using std::vector;
 class LM;
-
 using tlp::TelluriumData;
+using tlp::Properties;
 
 class lmWorker : public Poco::Runnable
 {
@@ -34,6 +35,12 @@ class lmWorker : public Poco::Runnable
         void                        workerStarted();
         void                        workerFinished();
         void                        postFittingWork();
+        void                        calculateChiSquare();
+        void                        calculateHessian();
+        void                        calculateCovariance();
+        void                        calculateConfidenceLimits();
+        double                      getChi(const Properties& parameters);
+
     public:
                                     lmWorker(LM& host);
         void                        start(bool runInThread = true);

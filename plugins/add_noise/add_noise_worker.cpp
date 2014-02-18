@@ -60,7 +60,7 @@ void AddNoiseWorker::run()
                 if(col == 0)
                 {                
                     if(!ignoreFirstColumn)
-                    {                        
+                    {
                         data(row, col) = mNoise.getNoise(data(row, col), sigma);
                     }
                 }

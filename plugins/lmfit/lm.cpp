@@ -9,7 +9,7 @@
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------
+
 //Below defines are from the LMFIT lib.. convert to constants later on
 /* machine-dependent constants from float.h */
 #define LM_MACHEP     DBL_EPSILON   /* resolution of arithmetic */
@@ -17,18 +17,15 @@
 #define LM_SQRT_DWARF sqrt(DBL_MIN) /* square should not underflow */
 #define LM_SQRT_GIANT sqrt(DBL_MAX) /* square should not overflow */
 #define LM_USERTOL    30*LM_MACHEP  /* users are recommended to require this */
-//---------------------------------------------------------------------------
 
 namespace lmfit
 {
 using namespace std;
 using tlp::StringList;
 
-
-
-LM::LM()
+LM::LM(PluginManager* manager)
 :
-CPPPlugin(                      "Levenberg-Marquardt", "Fitting",       NULL, NULL),
+CPPPlugin(                      "Levenberg-Marquardt", "Fitting",       NULL, manager),
 
 //Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
@@ -36,7 +33,8 @@ mExperimentalData(              TelluriumData(),        "ExperimentalData",     
 mModelData(                     TelluriumData(),        "FittedData",                           "Data object holding model data: Handed to client"),
 mResidualsData(                 TelluriumData(),        "Residuals",                            "Data object holding residuals: Handed to client", "", "", true),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
-mOutputParameterList(           Properties(),           "OutputParameterList",                  "List of parameters that was fittedt"),
+mOutputParameterList(           Properties(),           "OutputParameterList",                  "List of parameters that was fitted"),
+mConfidenceLimits(              Properties(),           "ConfidenceLimits",                     "Confidence limits for each parameter"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
 mNorm(                          0,                      "Norm",                                 "Norm of fitting. An estimate of goodness of fit"),
@@ -70,6 +68,7 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mResidualsData);
     mProperties.add(&mInputParameterList);
     mProperties.add(&mOutputParameterList);
+    mProperties.add(&mConfidenceLimits);
     mProperties.add(&mExperimentalDataSelectionList);
     mProperties.add(&mModelDataSelectionList);
     mProperties.add(&mNorm);
@@ -172,11 +171,15 @@ string LM::getResult()
 {
     stringstream msg;
     Properties& pars = mOutputParameterList.getValueReference();
+    Properties& conf = mConfidenceLimits.getValueReference();
 
     for(int i = 0; i < pars.count(); i++)
     {
-        msg<<pars[i]->getName()<<" = "<< pars[i]->getValueAsString()<<"\n";
+        Property<double>* prop = dynamic_cast< Property<double>* > (pars[i]);
+        Property<double>* confProp = dynamic_cast<Property<double>* > (conf[i]);
+        msg<<prop->getName()<<" = "<< prop->getValue() <<" +/- "<<confProp->getValue()<<"\n";
     }
+
     msg<<"Norm: "<<mNorm.getValue()<<endl;
     msg<<"Chi Square: "<<mChiSquare.getValue()<<endl;
     msg<<"Reduced Chi Square: "<<mReducedChiSquare.getValue()<<endl;
@@ -204,10 +207,10 @@ bool LM::execute(bool inThread)
 }
 
 // Plugin factory function
-LM* plugins_cc createPlugin()
+LM* plugins_cc createPlugin(void* manager)
 {
     //allocate a new object and return it
-    return new LM();
+    return new LM((PluginManager*) manager);
 }
 
 const char* plugins_cc getImplementationLanguage()
@@ -242,6 +245,10 @@ s.str("");
 
 s << "The output parameter list holds the resulting fitted parameter(s)";
 mOutputParameterList.setDescription(s.str());
+s.str("");
+
+s << "The confidence limits parameter list holds resulting confidence limits, as calculated from the Hessian";
+mConfidenceLimits.setDescription(s.str());
 s.str("");
 
 s << "The data input may contain multiple columns of data. The Experimental data selection list \

@@ -18,8 +18,8 @@ try:
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
     rr.load(sbml_model)
-    rr.setValue('k1', 0.57)
-    data = rr.simulate(0, 10, 14) 
+    rr.setValue('k1', 0.3) #57)
+    data = rr.simulate(0, 10, 49) 
 
     #Calculate Chi squares
     chiPlugin =  Plugin("tel_chisquare")
@@ -28,7 +28,7 @@ try:
     chiPlugin.ModelData           = getDataSeries(data)
         
     if not chiPlugin.execute():
-        raise Exception( tel.getLastError() )
+        raise Exception( getLastError() )
     
     print 'Chi Square = ' + `chiPlugin.ChiSquare.getElement(0,1)`
     print 'Reduced Chi Square = ' + `chiPlugin.ReducedChiSquare.getElement(0,1)`        

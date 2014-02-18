@@ -55,7 +55,6 @@
 //---------------------------------------------------------------------------
 namespace tlp
 {
-//    using tlp::TelluriumData;
     using tlp::gNoneString;
     using std::string;
 /**
@@ -66,7 +65,7 @@ template <class T>
 string getPropertyType(const T& val);
 
 /**
-    \brief Template class implementing a PluginProperty. 
+    \brief Template class implementing a PluginProperty.
 
     The characteristics of a Plugin Property is its type and its value. Various functions assist in setting/getting
     the properties value. Its base class, PropertyBase, encapsulate the properties name, hint and description.
@@ -78,8 +77,8 @@ template<class T>
 class Property : public PropertyBase
 {
     protected:
-                                        /** 
-                                            \brief The value of the property. 
+                                        /**
+                                            \brief The value of the property.
                                         */
         T                               mValue;
 
@@ -426,6 +425,25 @@ template<>
 inline string getPropertyType<Properties>(const Properties& value)
 {
     return "listOfProperties";
+}
+
+
+//Temporary instantiations here ================
+
+/**
+    Set the value of a Properties container value, from a string.
+    \note This is not implemented.
+*/
+template<>
+inline void Property< ls::Matrix<double> >::setValueFromString(const string& val)
+{
+    Log(lError)<<"Trying to set Properties container by a string. This is not implemented!";
+}
+
+template<>
+inline string getPropertyType< ls::Matrix<double> >(const ls::Matrix<double>& a)
+{
+    return "Matrix";
 }
 
 }

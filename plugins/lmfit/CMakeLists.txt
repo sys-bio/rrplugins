@@ -28,6 +28,8 @@ add_definitions(
 -DPOCO_STATIC
 -DLIBSBML_STATIC
 -DEXPORT_RR_PLUGIN
+-DSTATIC_LIBSTRUCT
+
 )
 
 add_library(${target} MODULE ${sources})
@@ -38,7 +40,11 @@ roadrunner
 lmfit-static
 telplugins
 telplugins_c_api                 
-roadrunner_c_api                 
+roadrunner_c_api
+blas
+lapack
+rr-libstruct-static
+
 )
 
 else() 

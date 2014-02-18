@@ -31,7 +31,7 @@ try:
     chiSquare.NrOfModelParameters = 1
     
     ptn = 0        
-    kStart = 0.3
+    kStart = 0.1
     kEnd = 1.5
     kStep = .01
     for k in np.arange(kStart, kEnd, kStep):                
@@ -39,7 +39,7 @@ try:
         rr.reset()
         timeStart = 0
         timeEnd = 10
-        nrPoints = 15         
+        nrPoints = 50         
          
         data = rr.simulate(timeStart, timeEnd, nrPoints - 1)
         chiSquare.ModelData = tel.getDataSeries(data)

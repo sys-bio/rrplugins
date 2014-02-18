@@ -16,9 +16,15 @@
     #pragma comment(lib, "telplugins.lib")
     #pragma comment(lib, "roadrunner_c_api.lib")
     #pragma comment(lib, "lmfit-static.lib")
+    #pragma comment(lib, "rr-libstruct-static.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")
+
+#pragma comment(lib, "blas.lib")
+#pragma comment(lib, "lapack.lib")
+#pragma comment(lib, "libf2c.lib")
+
 
 
 

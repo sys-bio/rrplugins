@@ -3,7 +3,7 @@
 #include <vector>
 #include "telProperty.h"
 #include "telCPPPlugin.h"
-#include "rr/rrRoadRunner.h"
+#include "rr-libstruct/lsMatrix.h"
 #include "lmWorker.h"
 #include "lib/lmmin.h"
 //---------------------------------------------------------------------------
@@ -22,8 +22,11 @@ class LM : public CPPPlugin
         Property<string>                        mSBML;                          //This is the model
         Property<TelluriumData>				    mExperimentalData;
         Property<TelluriumData>			        mModelData;
+
         Property<Properties>                    mInputParameterList;            //Parameters to fit
         Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
+        Property<Properties>                    mConfidenceLimits;              //Confidence limits for each parameter
+
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
         Property<int>                           mNrOfIter;                      //Part of minimization result
@@ -35,7 +38,6 @@ class LM : public CPPPlugin
         Property<double>                        epsilon;                        /* step used to calculate the jacobian. */
         Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
         Property<int>                           patience;                       /* maximum number of iterations. */
-        //Property<int>                           scale_diag;                   /* UNDOCUMENTED, TESTWISE automatical diag rescaling? */
 
         Property<double>                        mNorm;                          //Part of minimization result
         Property<TelluriumData>                 mNorms;                         //Norm values from the fitting
@@ -46,6 +48,9 @@ class LM : public CPPPlugin
         Property<TelluriumData>			        mNormalProbabilityOfResiduals;  //Normal probability of residuals, Q-Q plot
         Property<double>			            mChiSquare;                     //Chi square for the fitting
         Property<double>			            mReducedChiSquare;              //Reduced Chi Square
+
+        Property< ls::Matrix<double> >          mHessian;                       //Hessian
+        Property< ls::Matrix<double> >          mCovarianceMatrix;              //Covariance Matrix
 
 		//Utility functions for the thread
         string                                  getTempFolder();
@@ -59,7 +64,7 @@ class LM : public CPPPlugin
         lm_status_struct                        mLMStatus;      //Check afterwards.
 
     public:
-                                                LM();
+                                                LM(PluginManager* manager);
                                                ~LM();
 
         bool                                    execute(bool inThread = false);
@@ -77,8 +82,22 @@ class LM : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC LM*         plugins_cc       createPlugin();
+RR_PLUGIN_DECLSPEC LM*         plugins_cc       createPlugin(void* manager);
 RR_PLUGIN_DECLSPEC const char* plugins_cc       getImplementationLanguage();
 }
+
+}
+
+namespace tlp
+{
+
+//template<>
+//inline string Property< ls::Matrix<double> >::getValueAsString() const
+//{
+//    stringstream ss;
+//    ss << mValue;
+//    return ss.str();
+//}
+
 }
 #endif

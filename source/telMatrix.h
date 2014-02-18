@@ -542,9 +542,12 @@ telMatrix<T>    multDiag(telMatrix< T >& mat, T& val)
 
 //When a Matrix is a property =====================
 template<>
-inline string Property< telMatrix<double> >::getValueAsString() const
+inline string Property< ls::Matrix<double> >::getValueAsString() const
 {
-    return mValue.asString();
+    stringstream ss;
+    ss << mValue;
+
+    return ss.str();
 }
 //
 //template<>

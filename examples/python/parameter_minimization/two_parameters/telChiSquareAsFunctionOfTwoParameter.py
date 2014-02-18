@@ -38,8 +38,8 @@ try:
     k2Start = 1 ;  k2End = 4.5
     timeStart = 0;  timeEnd = 1.5 ;  nrPoints = 15
              
-    X = np.linspace(k1Start, k1End, 125)
-    Y = np.linspace(k2Start, k2End, 125)
+    X = np.linspace(k1Start, k1End, 525)
+    Y = np.linspace(k2Start, k2End, 525)
     nrX = len(X) ; nrY = len(Y)
     print 'nrPoints = ' + `nrX * nrY`
     
@@ -51,7 +51,7 @@ try:
                                 
     X, Y = np.meshgrid(X, Y)        
         
-    CS = plt.contour(X, Y, Z, 200)
+    CS = plt.contour(X, Y, Z, 400)
     plt.clabel(CS, inline=1, fontsize=10)        
     plt.title('Reduced ChiSquare for SBML model with two parameters')
 

@@ -57,44 +57,33 @@ void ChiWorker::run()
     TelluriumData& expData      = mTheHost.mExperimentalData.getValueReference();
     TelluriumData& modelData    = mTheHost.mModelData.getValueReference();
 
-    TelluriumData& chiSquare = mTheHost.mChiSquare.getValueReference();
-    TelluriumData& redChiSquare = mTheHost.mReducedChiSquare.getValueReference();
+    double& chiSquare           = mTheHost.mChiSquare.getValueReference();
+    double& redChiSquare        = mTheHost.mReducedChiSquare.getValueReference();
 
-    //If model data is an arrayed experiment, get chisquare experiment by experiment
-    ArrayedParameter arrayedPara = modelData.getArrayedParameter();
-    chiSquare.allocate(arrayedPara.getNumberOfIncrements() + 1, 2);     //Only supports one parameter at the moment
-    redChiSquare.allocate(arrayedPara.getNumberOfIncrements() + 1, 2);  //Only supports one parameter at the moment
+    TelluriumData mdlData = getDataSet(1, modelData);
+    double chi = 0;
 
-    chiSquare.setColumnNames(StringList("ExpNr, ChiSquare"));
-    redChiSquare.setColumnNames(StringList("ExpNr, ReducedChiSquare"));
-    for(int expNr = 1; expNr < arrayedPara.getNumberOfIncrements() + 2; expNr++)
+    //Get ChiSquare column by column and average them together
+    int startCol = expData.isFirstColumnTime() ? 1 : 0;
+    for(int n = startCol; n < expData.cSize(); n++)
     {
-        TelluriumData mdlData = getDataSet(expNr, modelData);
-        double chi = 0;
-
-        //Get ChiSquare column by column and average them together
-        int startCol = expData.isFirstColumnTime() ? 1 : 0;
-        for(int n = startCol; n < expData.cSize(); n++)
-        {
-            vector<double> expDataN     = getValuesInColumn(n, expData);
-            vector<double> variancesN   = getWeightValuesInColumn(n, expData);
-            vector<double> modelDataN   = getValuesInColumn(n, mdlData);
-            chi += getChiSquare(expDataN, modelDataN, variancesN);
-        }
-
-        int test = expData.isFirstColumnTime() ? 1 : 0;
-        int nrOfCols = expData.cSize() -  test;
-        int degreeOfFreedom = expData.rSize() * nrOfCols - mTheHost.mNrOfModelParameters.getValue();
-
-        chiSquare(expNr -1, 0) = expNr;
-        chiSquare(expNr -1, 1) = chi;
-
-        redChiSquare(expNr -1, 0) = expNr;
-        redChiSquare(expNr -1, 1) = chi/degreeOfFreedom;
+        vector<double> expDataN     = getValuesInColumn(n, expData);
+        vector<double> variancesN   = getWeightValuesInColumn(n, expData);
+        vector<double> modelDataN   = getValuesInColumn(n, mdlData);
+        chi += getChiSquare(expDataN, modelDataN, variancesN);
     }
 
-    Log(lInfo)<<"Chi Square = "<<chiSquare(0,1);
-    Log(lInfo)<<"Reduced Chi Square = "<<redChiSquare(0,1);
+    int test = expData.isFirstColumnTime() ? 1 : 0;
+    int nrOfCols = expData.cSize() -  test;
+    int degreeOfFreedom = expData.rSize() * nrOfCols - mTheHost.mNrOfModelParameters.getValue();
+
+
+    chiSquare =  chi;
+    redChiSquare = chi/degreeOfFreedom;
+
+
+    Log(lInfo)<<"Chi Square = "<<chiSquare;
+    Log(lInfo)<<"Reduced Chi Square = "<<redChiSquare;
 
     //Post fitting data calculations
     workerFinished();
