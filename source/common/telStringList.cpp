@@ -5,7 +5,7 @@
 #include "telStringUtils.h"
 #include "telStringList.h"
 #include "telUtils.h"
-#include "rr/rrException.h"
+#include "telException.h"
 
 using namespace std;
 
@@ -77,7 +77,7 @@ string& StringList::operator[](const int& index)
         stringstream msg;
         msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
 
-        throw(rr::CoreException(msg.str()));
+        throw(Exception(msg.str()));
     }
     return mStrings[index];
 }
@@ -89,7 +89,7 @@ const string& StringList::operator[](const int& index) const
         stringstream msg;
         msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
 
-        throw(rr::CoreException(msg.str()));
+        throw(Exception(msg.str()));
     }
 
     return mStrings[index];

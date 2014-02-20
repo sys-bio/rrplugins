@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "libxml/tree.h"
 #include "libxml/xpath.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telProperties.h"
 
 namespace tlp
@@ -178,7 +178,7 @@ string Properties::asXML()
     int buffersize;
     xmlDocDumpFormatMemory(doc, &xmlbuff, &buffersize, 1);
 
-    Log(rr::lDebug)<<(char*) xmlbuff;
+    Log(lDebug)<<(char*) xmlbuff;
 
     string xml = xmlbuff != NULL ? string((char*) xmlbuff) : string("");
     xmlFreeDoc(doc);

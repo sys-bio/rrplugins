@@ -5,9 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include "telStringList.h"
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telArrayedParameter.h"
-#include "telMatrix.h"
+//#include "telMatrix.h"
 
 namespace rr
 {
@@ -113,7 +113,7 @@ using std::stringstream;
  *
  */
 
-class RRP_DECLSPEC TelluriumData
+class COMMON_DECLSPEC TelluriumData
 {
     public:
         /**
@@ -244,13 +244,13 @@ class RRP_DECLSPEC TelluriumData
         /**
         * \brief Stream friend function, allowing Tellurium data to be streamed to a std::ostream.
         */
-        RRP_DECLSPEC
+        COMMON_DECLSPEC
         friend std::ostream& operator <<(std::ostream& ss, const TelluriumData& data);
 
         /**
         * \brief Stream friend function, allowing Tellurium data to be streamed from a std::istream.
         */
-        RRP_DECLSPEC
+        COMMON_DECLSPEC
         friend std::istream& operator >>(std::istream& ss, TelluriumData& data);
 
         /**

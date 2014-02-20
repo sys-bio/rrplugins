@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "telTelluriumData.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "add_noise_worker.h"
 #include "telUtils.h"
 #include "add_noise.h"

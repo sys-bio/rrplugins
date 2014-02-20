@@ -1,9 +1,9 @@
 #include <iostream>
 
 #include "rr/rrRoadRunner.h"
-#include "rr/rrException.h"
+#include "telException.h"
 #include "rr/rrUtils.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rr/C/rrc_api.h"
 #include "telplugins_c_api.h"
 using namespace rr;

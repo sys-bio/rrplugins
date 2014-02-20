@@ -3,7 +3,7 @@
 #include "rrRRAuto.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telStringList.h"
 #include "telUtils.h"
 

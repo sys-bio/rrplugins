@@ -5,9 +5,9 @@
 #include <iostream>
 #include "Poco/Glob.h"
 #include "Poco/SharedLibrary.h"
-#include "rr/rrException.h"
-#include "rr/rrLogger.h"
 #include "rr/rrRoadRunner.h"
+#include "telException.h"
+#include "telLogger.h"
 #include "telPluginManager.h"
 #include "telPlugin.h"
 #include "telCPlugin.h"
@@ -170,7 +170,7 @@ int PluginManager::load(const string& pluginName)
         errors<<"Plugin folder: "<<mPluginFolder<<" do not exist..";
         Log(lError)<<errors.str();
         mLoadPluginErrors << errors.str();
-        throw(rr::Exception("Plugin folder don't exist"));
+        throw(Exception("Plugin folder don't exist"));
     }
 
     set<string> files;
@@ -310,7 +310,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         Log(lError)<<info.str();
         return false;
     }
-    catch(const rr::Exception& e)
+    catch(const Exception& e)
     {
         info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
         info<<"Exception: "<<e.what()<<endl;
@@ -543,7 +543,7 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
         string error = aPlugin->getLastError();
         stringstream  msg;
         msg<<"Failure creating C plugin: "<<error;
-        throw(rr::Exception(msg.str()));
+        throw(Exception(msg.str()));
     }
     aPlugin->getCPropertyNames  =    (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getListOfCPluginPropertyNames");
     aPlugin->getCProperty       =    (getAPropertyF)    libHandle->getSymbol(string(exp_fnc_prefix) + "getCPluginProperty");

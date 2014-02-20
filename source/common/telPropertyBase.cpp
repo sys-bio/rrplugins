@@ -2,7 +2,7 @@
 #include "telPropertyBase.h"
 #include <iostream>
 #include <iomanip>
-#include "rr/rrException.h"
+#include "telException.h"
 #include "telStringUtils.h"
 
 //---------------------------------------------------------------------------
@@ -25,13 +25,13 @@ mReadOnly(readOnly)
     //Chech name
     if(indexOf(mName, ' ') != -1 )
     {
-        throw(rr::CoreException("Zero size or space character found in a property's Name attribute"));
+        throw(tlp::Exception("Zero size or space character found in a property's Name attribute"));
     }
 
     //Chek Alias
     if( mAlias.size() > 0  && indexOf(mAlias, ' ') != -1)
     {
-        throw(rr::CoreException("Space character found in a property's Alias attribute"));
+        throw(tlp::Exception("Space character found in a property's Alias attribute"));
     }
 }
 

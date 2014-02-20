@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 #include <complex>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telStringUtils.h"
 #include "telIniSection.h"
 
@@ -17,7 +17,7 @@ namespace tlp
  * that is associated with a value. It may or may not have a comment.  All comments
  * must PRECEDE the key on the line in the config file.
  */
-class RRP_DECLSPEC IniKey
+class COMMON_DECLSPEC IniKey
 {
 protected:
     void SetupKey(const std::string& key);
@@ -35,7 +35,7 @@ public:
     int                       AsInt() const;
     double                       AsFloat() const;
     std::complex<double>         AsComplex() const;
-    RRP_DECLSPEC
+    COMMON_DECLSPEC
     friend std::ostream&         operator<<(std::ostream& stream, const IniKey& aKey);
 };
 }

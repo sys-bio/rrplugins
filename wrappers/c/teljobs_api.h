@@ -1,23 +1,21 @@
-#ifndef rre_jobs_apiH
-#define rre_jobs_apiH
-#include "rre_exporter.h"
-#include "rre_types.h"
-#include "rre_macros.h"
+#ifndef teljobs_apiH
+#define teljobs_apiH
+#include "telplugins_exporter.h"
+#include "telplugins_types.h"
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
-namespace rre
+namespace tlpc
 {
-using namespace rrc;
-extern "C"
-{
+
+extern "C" {
 #endif
 
 /*!
  \brief Typedef for callback function, taking a void* parameter
  \ingroup multithreading
 */
-typedef void (rre_cc *callBackFunc)(void*);
+typedef void (tlp_cc *callBackFunc)(void*);
 
 /*!
  \brief Run a roadrunner simulation in a thread
@@ -25,7 +23,7 @@ typedef void (rre_cc *callBackFunc)(void*);
  \return Returns a handle to the Job if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobHandle rre_cc simulateJob(RRHandle handle);
+TLP_C_DS TELHandle tlp_cc simulateJob(TELHandle handle);
 
 /*!
  \brief Run a roadrunner simulation in a thread
@@ -36,7 +34,7 @@ RRE_DECLSPEC RRJobHandle rre_cc simulateJob(RRHandle handle);
  \return Returns a handle to the Job if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobHandle rre_cc simulateJobEx(RRHandle handle, double timeStart,
+TLP_C_DS TELHandle tlp_cc simulateJobEx(TELHandle handle, double timeStart,
                                                         double timeEnd,    int numberOfPoints,
                                                         callBackFunc fn1, callBackFunc fn2, void* userData);
 
@@ -47,7 +45,7 @@ RRE_DECLSPEC RRJobHandle rre_cc simulateJobEx(RRHandle handle, double timeStart,
  \return Returns a handle to a list of jobs if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobsHandle rre_cc simulateJobs(RRInstanceListPtr handles, int nrOfThreads);
+TLP_C_DS TELHandle tlp_cc simulateJobs(TELHandle handles, int nrOfThreads);
 
 
 /*!
@@ -59,7 +57,7 @@ RRE_DECLSPEC RRJobsHandle rre_cc simulateJobs(RRInstanceListPtr handles, int nrO
  \param userData User supplied data that can be used in the supplied callback functions
  \return Returns a handle to a list of jobs if succesful, otherwise returns NULL
  \ingroup multiThreading
-*/RRE_DECLSPEC RRJobsHandle rre_cc simulateJobsEx(RRInstanceListPtr handles, int nrOfThreads,
+*/TLP_C_DS TELHandle tlp_cc simulateJobsEx(TELHandle handles, int nrOfThreads,
                                                         double timeStart, double timeEnd, int numberOfPoints,
                                                         callBackFunc fn1, callBackFunc fn2, void* userData);
 
@@ -71,7 +69,7 @@ RRE_DECLSPEC RRJobsHandle rre_cc simulateJobs(RRInstanceListPtr handles, int nrO
  \ingroup multiThreading
 */
 
-RRE_DECLSPEC RRJobHandle rre_cc loadSBMLFromFileJob(RRHandle handle, const char* fileName);
+TLP_C_DS TELHandle tlp_cc loadSBMLFromFileJob(TELHandle handle, const char* fileName);
 
 /*!
  \brief Load a model from a SBML file into a RoadRunner instances, using a Job
@@ -82,7 +80,7 @@ RRE_DECLSPEC RRJobHandle rre_cc loadSBMLFromFileJob(RRHandle handle, const char*
  \ingroup multiThreading
 */
 
-RRE_DECLSPEC RRJobHandle rre_cc loadSBMLFromFileJobEx(RRHandle handle, const char* fileName, bool reCompile);
+TLP_C_DS TELHandle tlp_cc loadSBMLFromFileJobEx(TELHandle handle, const char* fileName, bool reCompile);
 
 /*!
  \brief Load a model from a SBML file into a set of RoadRunner instances
@@ -92,7 +90,7 @@ RRE_DECLSPEC RRJobHandle rre_cc loadSBMLFromFileJobEx(RRHandle handle, const cha
  \return Returns a handle to the Jobs if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLFromFileJobs(RRInstanceListPtr handles, const char* fileName, int nrOfThreads);
+TLP_C_DS TELHandle tlp_cc loadSBMLFromFileJobs(TELHandle handles, const char* fileName, int nrOfThreads);
 
 /*!
  \brief Load a model from a SBML text string into a RoadRunner instances, using a Job
@@ -101,7 +99,7 @@ RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLFromFileJobs(RRInstanceListPtr handles,
  \return Returns a handle to the Job if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobHandle rre_cc loadSBMLJob(RRHandle handle, const char* sbml);
+TLP_C_DS TELHandle tlp_cc loadSBMLJob(TELHandle handle, const char* sbml);
 
 /*!
  \brief Load a model from a SBML text string into a RoadRunner instances, using a Job
@@ -111,7 +109,7 @@ RRE_DECLSPEC RRJobHandle rre_cc loadSBMLJob(RRHandle handle, const char* sbml);
  \return Returns a handle to the Job if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobHandle rre_cc loadSBMLJobEx(RRHandle handle, const char* sbml, bool reCompile);
+TLP_C_DS TELHandle tlp_cc loadSBMLJobEx(TELHandle handle, const char* sbml, bool reCompile);
 
 /*!
  \brief Load a model from a SBML tesxt string into a set of RoadRunner instances
@@ -121,7 +119,7 @@ RRE_DECLSPEC RRJobHandle rre_cc loadSBMLJobEx(RRHandle handle, const char* sbml,
  \return Returns a handle to the Jobs if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLJobs(RRInstanceListPtr handles, const char* sbml, int nrOfThreads);
+TLP_C_DS TELHandle tlp_cc loadSBMLJobs(TELHandle handles, const char* sbml, int nrOfThreads);
 
 /*!
  \brief Load a model from a SBML file into a set of RoadRunner instances
@@ -132,7 +130,7 @@ RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLJobs(RRInstanceListPtr handles, const c
  \return Returns a handle to the Jobs if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLJobsEx(RRInstanceListPtr handles, const char* sbml, int nrOfThreads, bool force_recompile);
+TLP_C_DS TELHandle tlp_cc loadSBMLJobsEx(TELHandle handles, const char* sbml, int nrOfThreads, bool force_recompile);
 
 /*!
  \brief Wait for jobs in thread to finish
@@ -140,7 +138,7 @@ RRE_DECLSPEC RRJobsHandle rre_cc loadSBMLJobsEx(RRInstanceListPtr handles, const
  \return Returns true if thread finsihed up properly, otherwise returns false
  \ingroup multiThreading
 */
-RRE_DECLSPEC bool rre_cc waitForJob(RRJobHandle handle);
+TLP_C_DS bool tlp_cc waitForJob(TELHandle handle);
 
 /*!
  \brief Wait for jobs in thread pool to finish
@@ -148,7 +146,7 @@ RRE_DECLSPEC bool rre_cc waitForJob(RRJobHandle handle);
  \return Returns true if threadpool finished up properly, otherwise returns false
  \ingroup multiThreading
 */
-RRE_DECLSPEC bool rre_cc waitForJobs(RRJobsHandle handle);
+TLP_C_DS bool tlp_cc waitForJobs(TELHandle handle);
 
 /*!
  \brief Check if there are work being done on a job
@@ -156,7 +154,7 @@ RRE_DECLSPEC bool rre_cc waitForJobs(RRJobsHandle handle);
  \return Returns true if there are running threads, otherwise returns false
  \ingroup multiThreading
 */
-RRE_DECLSPEC bool rre_cc isJobFinished(RRJobHandle handle);
+TLP_C_DS bool tlp_cc isJobFinished(TELHandle handle);
 
 /*!
  \brief Check if there are work being done on jobs
@@ -164,7 +162,7 @@ RRE_DECLSPEC bool rre_cc isJobFinished(RRJobHandle handle);
  \return Returns true if there are running threads, otherwise returns false
  \ingroup multiThreading
 */
-RRE_DECLSPEC bool rre_cc areJobsFinished(RRJobsHandle handle);
+TLP_C_DS bool tlp_cc areJobsFinished(TELHandle handle);
 
 /*!
  \brief Get number of remaining jobs in a job list
@@ -172,8 +170,7 @@ RRE_DECLSPEC bool rre_cc areJobsFinished(RRJobsHandle handle);
  \return Returns number of remaining, unfinished jobs. Returns -1 on failure
  \ingroup multiThreading
 */
-RRE_DECLSPEC int rre_cc getNumberOfRemainingJobs(RRJobsHandle handle);
-
+TLP_C_DS int tlp_cc getNumberOfRemainingJobs(TELHandle handle);
 
 /*!
  \brief Free a job handle
@@ -181,7 +178,7 @@ RRE_DECLSPEC int rre_cc getNumberOfRemainingJobs(RRJobsHandle handle);
  \return Returns true or false indicating if the function was succesful
  \ingroup multiThreading
 */
-RRE_DECLSPEC bool rre_cc freeJob(RRJobHandle handle, RRJobType jt);
+TLP_C_DS bool tlp_cc freeJob(TELHandle handle, RRJobType jt);
 
 /*!
  \brief Free a jobs handle
@@ -189,12 +186,10 @@ RRE_DECLSPEC bool rre_cc freeJob(RRJobHandle handle, RRJobType jt);
  \return Returns true or false indicating if the function was succesful
  \ingroup multiThreading
 */
-
-RRE_DECLSPEC bool rre_cc freeJobs(RRJobsHandle handle);
+TLP_C_DS bool tlp_cc freeJobs(TELHandle handle);
 
 #if defined(__cplusplus)
-}    //Extern "C"
-}    //namespace
+}}    //Extern "C" //namespace
 #endif
 
 #endif

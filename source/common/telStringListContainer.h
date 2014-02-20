@@ -2,7 +2,7 @@
 #define telStringListContainerH
 #include <vector>
 #include <string>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telStringList.h"
 using std::vector;
 using std::string;
@@ -10,7 +10,7 @@ using std::string;
 namespace tlp
 {
 
-class RRP_DECLSPEC StringListContainer
+class COMMON_DECLSPEC StringListContainer
 {
     protected:
         vector<StringList>              mContainer;

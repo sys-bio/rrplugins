@@ -1,13 +1,13 @@
 #pragma hdrstop
 #include "telLoadModelThread.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rr/rrRoadRunner.h"
 #include "telUtils.h"
 #include "Poco/Mutex.h"
 #include "Poco/ScopedLock.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 
 using namespace tlp;

@@ -2,7 +2,7 @@
 #define telIniSectionH
 #include <vector>
 #include <string>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telIniKey.h"
 
 namespace tlp
@@ -20,7 +20,7 @@ typedef NonKeyList::iterator            NonKeyItor;
  * This class stores the definition of a section. A section contains any number
  * of keys (see IniKeys), and may or may not have a comment.
  */
-class RRP_DECLSPEC IniSection
+class COMMON_DECLSPEC IniSection
 {
     private:
         bool                mIsDirty;

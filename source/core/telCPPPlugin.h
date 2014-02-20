@@ -47,7 +47,7 @@ namespace tlp
 /**
  * Plugins written in C++ should inherit from this class.
  */
-class RRP_DECLSPEC CPPPlugin : public Plugin
+class CORE_DECLSPEC CPPPlugin : public Plugin
 {
     protected:
 

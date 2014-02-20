@@ -1,32 +1,31 @@
 #pragma hdrstop
+#include "teljobs_api.h"
 #include <string>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include "rr/rrRoadRunner.h"
-#include "rr/rrException.h"
-#include "rreLoadModel.h"
-#include "rreLoadModelFromFile.h"
-#include "rreSimulate.h"
-#include "rreLoadModelThread.h"
-#include "rreSimulateThread.h"
+#include "telException.h"
+#include "telLoadModel.h"
+#include "telLoadModelFromFile.h"
+#include "telSimulate.h"
+#include "telLoadModelThread.h"
+#include "telSimulateThread.h"
 #include "telUtils.h"
-#include "rr/rrLogger.h"
-#include "telUtils.h"                   // Need to include this before the support header..
+//#include "telLogger.h"
+#include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"     // Need to include this before the support header..
-#include "rre_jobs_api.h"
-#include "rre_cpp_support.h"
-#include "telplugins_cpp_support.h"
-#include "rre_macros.h"
+#include "tel_macros.h"
+#include "telRoadRunnerList.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlpc
 {
 using namespace std;
 using namespace tlp;
-using namespace tlpc;
 
-RRJobHandle rre_cc loadSBMLFromFileJob(tlpc::TELHandle rrHandle, const char* fileName)
+
+TELHandle tlp_cc loadSBMLFromFileJob(tlpc::TELHandle handle, const char* fileName)
 {
     start_try
         //Check if file exists first
@@ -34,16 +33,17 @@ RRJobHandle rre_cc loadSBMLFromFileJob(tlpc::TELHandle rrHandle, const char* fil
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            rre::setError(msg.str());
+            setError(msg.str());
             return NULL;
         }
 
-        RoadRunner* rr = rre::castToRoadRunner(rrHandle);
+        //RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread(fileName);
 
         if(!loadThread)
         {
-            rre::setError("Failed to create a LoadModel Thread");
+            tlpc::setError("Failed to create a LoadModel Thread");
         }
         loadThread->addJob(rr);
         loadThread->start();
@@ -51,16 +51,17 @@ RRJobHandle rre_cc loadSBMLFromFileJob(tlpc::TELHandle rrHandle, const char* fil
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc loadSBMLJob(tlpc::TELHandle rrHandle, const char* sbml)
+TELHandle tlp_cc loadSBMLJob(tlpc::TELHandle handle, const char* sbml)
 {
     start_try
-        RoadRunner* rr = rre::castToRoadRunner(rrHandle);
+//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread();
         loadThread->setSBML(sbml);
 
         if(!loadThread)
         {
-            rre::setError("Failed to create a LoadModel Thread");
+            tlpc::setError("Failed to create a LoadModel Thread");
         }
         loadThread->addJob(rr);
         loadThread->start();
@@ -68,7 +69,7 @@ RRJobHandle rre_cc loadSBMLJob(tlpc::TELHandle rrHandle, const char* sbml)
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc loadSBMLFromFileJobEx(tlpc::TELHandle rrHandle, const char* fileName, bool recompile)
+TELHandle tlp_cc loadSBMLFromFileJobEx(tlpc::TELHandle handle, const char* fileName, bool recompile)
 {
     start_try
         //Check if file exists first
@@ -76,16 +77,17 @@ RRJobHandle rre_cc loadSBMLFromFileJobEx(tlpc::TELHandle rrHandle, const char* f
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            rre::setError(msg.str());
+            tlpc::setError(msg.str());
             return NULL;
         }
 
-        RoadRunner* rr = rre::castToRoadRunner(rrHandle);
+//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread(fileName, recompile);
 
         if(!loadThread)
         {
-            rre::setError("Failed to create a LoadModel Thread");
+            tlpc::setError("Failed to create a LoadModel Thread");
         }
 
         loadThread->addJob(rr);
@@ -94,17 +96,18 @@ RRJobHandle rre_cc loadSBMLFromFileJobEx(tlpc::TELHandle rrHandle, const char* f
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc loadSBMLJobEx(tlpc::TELHandle rrHandle, const char* sbml, bool recompile)
+TELHandle tlp_cc loadSBMLJobEx(tlpc::TELHandle handle, const char* sbml, bool recompile)
 {
     start_try
 
-        RoadRunner* rr = rre::castToRoadRunner(rrHandle);
+//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread("", recompile);
         loadThread->setSBML(sbml);
 
         if(!loadThread)
         {
-            rre::setError("Failed to create a LoadModel Thread");
+            tlpc::setError("Failed to create a LoadModel Thread");
         }
 
         loadThread->addJob(rr);
@@ -113,7 +116,7 @@ RRJobHandle rre_cc loadSBMLJobEx(tlpc::TELHandle rrHandle, const char* sbml, boo
     catch_ptr_macro
 }
 
-RRJobsHandle rre_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char* fileName, int nrOfThreads)
+TELHandle tlp_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char* fileName, int nrOfThreads)
 {
     start_try
         //Check if file exists first
@@ -121,7 +124,7 @@ RRJobsHandle rre_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char*
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            rre::setError(msg.str());
+            tlpc::setError(msg.str());
             return NULL;
         }
 
@@ -130,13 +133,13 @@ RRJobsHandle rre_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char*
 
         if(!tp)
         {
-            rre::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::setError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
 }
 
-RRJobsHandle rre_cc loadSBMLJobs(RRInstanceListPtr _handles, const char* sbml, int nrOfThreads)
+TELHandle tlp_cc loadSBMLJobs(RRInstanceListPtr _handles, const char* sbml, int nrOfThreads)
 {
     start_try
         RoadRunnerList *rrs = getRRList(_handles);
@@ -145,13 +148,13 @@ RRJobsHandle rre_cc loadSBMLJobs(RRInstanceListPtr _handles, const char* sbml, i
 
         if(!tp)
         {
-            rre::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::setError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
 }
 
-RRJobsHandle rre_cc loadSBMLJobsEx(RRInstanceListPtr _handles, const char* sbml, int nrOfThreads, bool reCompile)
+TELHandle tlp_cc loadSBMLJobsEx(RRInstanceListPtr _handles, const char* sbml, int nrOfThreads, bool reCompile)
 {
     start_try
         RoadRunnerList *rrs = getRRList(_handles);
@@ -160,13 +163,13 @@ RRJobsHandle rre_cc loadSBMLJobsEx(RRInstanceListPtr _handles, const char* sbml,
 
         if(!tp)
         {
-            rre::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::setError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
 }
 
-bool rre_cc waitForJob(RRJobHandle handle)
+bool tlp_cc waitForJob(TELHandle handle)
 {
     start_try
         RoadRunnerThread* aThread = (RoadRunnerThread*) handle;
@@ -179,7 +182,7 @@ bool rre_cc waitForJob(RRJobHandle handle)
     catch_bool_macro
 }
 
-bool rre_cc waitForJobs(RRJobsHandle handle)
+bool tlp_cc waitForJobs(TELHandle handle)
 {
     start_try
         ThreadPool* aTP = (ThreadPool*) handle;
@@ -192,7 +195,7 @@ bool rre_cc waitForJobs(RRJobsHandle handle)
     catch_bool_macro
 }
 
-bool rre_cc isJobFinished(RRJobHandle handle)
+bool tlp_cc isJobFinished(TELHandle handle)
 {
     start_try
         RoadRunnerThread* aT = (RoadRunnerThread*) handle;
@@ -204,7 +207,7 @@ bool rre_cc isJobFinished(RRJobHandle handle)
     catch_bool_macro
 }
 
-bool rre_cc areJobsFinished(RRJobsHandle handle)
+bool tlp_cc areJobsFinished(TELHandle handle)
 {
     start_try
         ThreadPool* aTP = (ThreadPool*) handle;
@@ -216,7 +219,7 @@ bool rre_cc areJobsFinished(RRJobsHandle handle)
     catch_bool_macro
 }
 
-int rre_cc getNumberOfRemainingJobs(RRJobHandle handle)
+int tlp_cc getNumberOfRemainingJobs(TELHandle handle)
 {
     start_try
         ThreadPool* aTP = (ThreadPool*) handle;
@@ -228,23 +231,24 @@ int rre_cc getNumberOfRemainingJobs(RRJobHandle handle)
     catch_int_macro
 }
 
-RRJobHandle rre_cc simulateJob(tlpc::TELHandle rrHandle)
+TELHandle tlp_cc simulateJob(tlpc::TELHandle rrHandle)
 {
     start_try
-        RoadRunner *rr = rre::castToRoadRunner(rrHandle);
+        //RoadRunner *rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner *aRR = castHandle<RoadRunner>(rrHandle, __FUNC__);
         SimulateThread *t = new SimulateThread(NULL, false);
 
         if(!t)
         {
-            rre::setError("Failed to create a Simulate Thread Pool");
+            tlpc::setError("Failed to create a Simulate Thread Pool");
         }
-        t->addJob(rr);
+        t->addJob(aRR);
         t->start();
         return t;
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc simulateJobEx(    tlpc::TELHandle rrHandle,
+TELHandle tlp_cc simulateJobEx(    tlpc::TELHandle rrHandle,
                                         double timeStart,
                                         double timeEnd,
                                         int numberOfPoints,
@@ -253,20 +257,21 @@ RRJobHandle rre_cc simulateJobEx(    tlpc::TELHandle rrHandle,
                                         void* userData)
 {
     start_try
-        RoadRunner *rr = rre::castToRoadRunner(rrHandle);
+//        RoadRunner *rr = tlp::castToRoadRunner(rrHandle);
+        RoadRunner *aRR = castHandle<RoadRunner>(rrHandle, __FUNC__);
         SimulateThread *t = new SimulateThread(NULL, timeStart, timeEnd, numberOfPoints, f1, f2, userData, false);
 
         if(!t)
         {
-            rre::setError("Failed to create a Simulate Thread Pool");
+            tlpc::setError("Failed to create a Simulate Thread Pool");
         }
-        t->addJob(rr);
+        t->addJob(aRR);
         t->start();
         return t;
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc simulateJobs(RRInstanceListPtr _handles, int nrOfThreads)
+TELHandle tlp_cc simulateJobs(RRInstanceListPtr _handles, int nrOfThreads)
 {
     start_try
         RoadRunnerList *rrs = getRRList(_handles);
@@ -274,13 +279,13 @@ RRJobHandle rre_cc simulateJobs(RRInstanceListPtr _handles, int nrOfThreads)
 
         if(!tp)
         {
-            rre::setError("Failed to create a Simulate Thread Pool");
+            tlpc::setError("Failed to create a Simulate Thread Pool");
         }
         return tp;
     catch_ptr_macro
 }
 
-RRJobHandle rre_cc simulateJobsEx(    RRInstanceListPtr _handles,
+TELHandle tlp_cc simulateJobsEx(    RRInstanceListPtr _handles,
                                         int nrOfThreads,
                                         double timeStart,
                                         double timeEnd,
@@ -303,14 +308,14 @@ RRJobHandle rre_cc simulateJobsEx(    RRInstanceListPtr _handles,
 
         if(!tp)
         {
-            rre::setError("Failed to create a Simulate Thread Pool");
+            tlpc::setError("Failed to create a Simulate Thread Pool");
         }
         return tp;
     catch_ptr_macro
 }
 
 
-bool rre_cc freeJob(RRJobHandle aJob, RRJobType jt)
+bool tlp_cc freeJob(TELHandle aJob, RRJobType jt)
 {
     start_try
         switch(jt)
@@ -332,7 +337,7 @@ bool rre_cc freeJob(RRJobHandle aJob, RRJobType jt)
     catch_bool_macro
 }
 
-bool rre_cc freeJobs(RRJobsHandle handle)
+bool tlp_cc freeJobs(TELHandle handle)
 {
     start_try
         ThreadPool* jobs = (ThreadPool*) handle;

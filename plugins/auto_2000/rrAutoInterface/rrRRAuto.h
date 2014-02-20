@@ -2,7 +2,7 @@
 #define rrRRAutoH
 #include "telProperty.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rrRRAutoSetupControl.h"
 #include "rrRRAutoExporter.h"
 //---------------------------------------------------------------------------

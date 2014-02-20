@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include <sstream>
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rr/rrRoadRunner.h"
 #include "telTelluriumData.h"
 #include "rrAutoPlugin.h"

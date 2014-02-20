@@ -13,7 +13,9 @@
     #pragma comment(lib, "libxml2_xe.lib")
 #else
     #pragma comment(lib, "roadrunner.lib")
-    #pragma comment(lib, "telplugins.lib")
+    #pragma comment(lib, "telplugins_core.lib")
+    #pragma comment(lib, "telplugins_common.lib")
+    #pragma comment(lib, "telplugins_math.lib")
     #pragma comment(lib, "roadrunner_c_api.lib")
     #pragma comment(lib, "lmfit-static.lib")
 #endif

@@ -1,12 +1,11 @@
 #pragma hdrstop
 #include "telRoadRunnerThread.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telUtils.h"
 
-namespace rre
+namespace tlp
 {
 using namespace Poco;
-using namespace rr;
 RoadRunnerThread::RoadRunnerThread() :
 mIsTimeToDie(false),
 mWasStarted(false),

@@ -2,7 +2,7 @@
 #include "Poco/Path.h"
 #include "Poco/File.h"
 #include "telTelluriumData.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rrAutoWorker.h"
 #include "rrAutoPlugin.h"
 #include "telStringUtils.h"

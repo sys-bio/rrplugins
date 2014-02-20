@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "csChiWorker.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telException.h"
 #include "telTelluriumData.h"
 #include "csChiSquare.h"

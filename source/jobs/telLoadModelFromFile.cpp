@@ -2,11 +2,11 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "rreLoadModelThread.h"
+#include "telLoadModelThread.h"
 #include "telLoadModelFromFile.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 
 LoadModelFromFile::LoadModelFromFile(RoadRunnerList& rrs, const string& modelFName, const int& nrThreads)

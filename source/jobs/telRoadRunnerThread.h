@@ -3,7 +3,7 @@
 #include <string>
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "rreExporter.h"
+#include "telJobsExporter.h"
 //---------------------------------------------------------------------------
 
 namespace rr
@@ -11,13 +11,13 @@ namespace rr
 class RoadRunner;
 }
 
-namespace rre
+namespace tlp
 {
 using std::string;
 using rr::RoadRunner;
 
 
-class RRE_DECLSPEC RoadRunnerThread : public Poco::Runnable
+class JOBS_DECLSPEC RoadRunnerThread : public Poco::Runnable
 {
     protected:
         Poco::Thread                        mThread;

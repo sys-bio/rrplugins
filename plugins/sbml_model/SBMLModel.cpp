@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "SBMLModel.h"
 #include "telException.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telUtils.h"
 #include "telPluginManager.h"
 #include "example_data_doc.h"

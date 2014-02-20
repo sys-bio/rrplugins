@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "lmWorker.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
 #include "rr-libstruct/lsLA.h"
 

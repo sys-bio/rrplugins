@@ -1,17 +1,17 @@
 #ifndef telLoadModelH
 #define telLoadModelH
 #include <string>
-#include "rreThreadPool.h"
-#include "rrRoadRunnerList.h"
-#include "rreExporter.h"
+#include "telThreadPool.h"
+#include "telRoadRunnerList.h"
+#include "telJobsExporter.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 using std::string;
-using namespace rr;
+//using namespace rr;
 
-class RRE_DECLSPEC LoadModel : public ThreadPool
+class JOBS_DECLSPEC LoadModel : public ThreadPool
 {
     public:
                     LoadModel(RoadRunnerList& rrs, const string& sbml, const int& nrThreads = 16, bool reCompile = true);

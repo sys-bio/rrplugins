@@ -1,14 +1,13 @@
 #pragma hdrstop
 #include <sstream>
 #include <exception>
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telAPIHandleManager.h"
 #include "telException.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
 using namespace tlp;
-using namespace rr;
 APIHandleManager::APIHandleManager()
 {}
 

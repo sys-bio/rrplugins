@@ -36,7 +36,8 @@
 #include "telStringUtils.h"
 #include "telUtils.h"
 #include "rr/rrSelectionRecord.h"
-#include "rr/rrException.h"
+#include "telException.h"
+#include "telLogger.h"
 
 // Most Unix systems have a getch in libcurses, but this introduces
 // an un-needed depencency, as we can write our own getch easily.
@@ -55,7 +56,7 @@
 namespace tlp
 {
 using namespace std;
-using rr::Logger;
+
 StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
 {
     StringList sels;
@@ -154,7 +155,7 @@ string getUsersTempDataFolder()
     DWORD dwRetVal = GetTempPathA(MAX_PATH, lpTempPathBuffer); // buffer for path
     if (dwRetVal > MAX_PATH || (dwRetVal == 0))
     {
-        Log(Logger::LOG_ERROR)<<"GetTempPath failed";
+        Log(lError)<<"GetTempPath failed";
     }
     else
     {

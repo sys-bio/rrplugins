@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include <iostream>
 #include "telPluginManager.h"
-#include "rr/rrException.h"
-#include "rr/rrLogger.h"
+#include "telException.h"
+#include "telLogger.h"
 #include "telPlugin.h"
 #include "telUtils.h"
 #include "telProperty.h"

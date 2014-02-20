@@ -6,7 +6,7 @@
 #include "telIniSection.h"
 #include "telIniKey.h"
 #include "telProperty.h"
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telException.h"
 //---------------------------------------------------------------------------
 namespace tlp
@@ -16,7 +16,7 @@ using std::string;
 using std::ostream;
 using std::stringstream;
 
-class RRP_DECLSPEC ArrayedParameter
+class COMMON_DECLSPEC ArrayedParameter
 {
 
     public:

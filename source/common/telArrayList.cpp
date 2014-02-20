@@ -3,7 +3,7 @@
 #include <ostream>
 #include "telStringList.h"
 #include "telArrayList.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 //---------------------------------------------------------------------------
 
 using namespace std;

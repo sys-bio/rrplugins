@@ -1,8 +1,8 @@
 #pragma hdrstop
 #include <string>
 #include "rr/rrRoadRunner.h"
-#include "rr/rrException.h"
-#include "rr/rrLogger.h"
+#include "telException.h"
+#include "telLogger.h"
 #include "telOSSpecifics.h"
 #include "telTelluriumData.h"
 #include "telplugins_properties_api.h"

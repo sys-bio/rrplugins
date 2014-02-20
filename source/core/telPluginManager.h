@@ -44,10 +44,11 @@
 #include <string>
 #include <sstream>
 #include <ostream>
-#include "telExporter.h"
+#include "telCoreExporter.h"
 #include "telConstants.h"
 #include "telStringList.h"
 #include "Poco/SharedLibrary.h"
+
 //---------------------------------------------------------------------------
 /* A minimalistic Plugin manager. */
 
@@ -81,7 +82,7 @@ typedef pair< Poco::SharedLibrary*, Plugin* > telPlugin;
  *
  * Plugins are by default placed in a Plugins folder, found in RoadRunners install folder.
  */
-class RRP_DECLSPEC PluginManager
+class CORE_DECLSPEC PluginManager
 {
     public:
         /**
@@ -189,7 +190,7 @@ class RRP_DECLSPEC PluginManager
         /**
             Output plugin information to a std ostream
         */
-        RRP_DECLSPEC
+        CORE_DECLSPEC
         friend ostream&                     operator<<(ostream& os, PluginManager& pm);
 
         /**

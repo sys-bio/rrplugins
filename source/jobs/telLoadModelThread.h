@@ -1,18 +1,18 @@
 #ifndef telLoadModelThreadH
 #define telLoadModelThreadH
 #include <list>
-#include "rreExporter.h"
-#include "rreRoadRunnerThread.h"
+#include "telJobsExporter.h"
+#include "telRoadRunnerThread.h"
 #include "Poco/Condition.h"
 #include "telConstants.h"
 #include "rr/rrRoadRunnerOptions.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 using std::list;
 
-class RRE_DECLSPEC LoadModelThread : public RoadRunnerThread
+class JOBS_DECLSPEC LoadModelThread : public RoadRunnerThread
 {
     protected:
         static list<RoadRunner*>        mJobs;

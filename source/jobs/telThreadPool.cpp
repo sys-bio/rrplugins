@@ -1,9 +1,9 @@
 #pragma hdrstop
-#include "rrLogger.h"
+#include "telLogger.h"
 #include "telThreadPool.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 using namespace rr;
 ThreadPool::ThreadPool()

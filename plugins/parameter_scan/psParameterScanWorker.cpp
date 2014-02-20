@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "psParameterScanWorker.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrRoadRunnerData.h"
 #include "telException.h"

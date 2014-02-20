@@ -43,6 +43,7 @@
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
 #include "telplugins_utilities.h"
+#include "teljobs_api.h"
 #include "telplugins_properties_api.h"
 #include "telplugins_telluriumdata_api.h"
 //---------------------------------------------------------------------------

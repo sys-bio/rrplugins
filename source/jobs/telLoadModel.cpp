@@ -1,9 +1,9 @@
 #pragma hdrstop
-#include "rreLoadModelThread.h"
+#include "telLoadModelThread.h"
 #include "telLoadModel.h"
 
 //---------------------------------------------------------------------------
-namespace rre
+namespace tlp
 {
 
 LoadModel::LoadModel(RoadRunnerList& rrs, const string& sbml, const int& nrThreads, bool reCompile)

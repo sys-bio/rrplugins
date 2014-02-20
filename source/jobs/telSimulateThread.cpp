@@ -1,11 +1,11 @@
 #pragma hdrstop
 #include "telSimulateThread.h"
-#include "rrLogger.h"
-#include "rrRoadRunner.h"
-#include "rrRoadRunnerOptions.h"
+#include "telLogger.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrRoadRunnerOptions.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 using namespace rr;
 

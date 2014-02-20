@@ -2,7 +2,7 @@
 #define telExceptionH
 #include <exception>
 #include <string>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 
 using std::string;
 using std::exception;
@@ -10,7 +10,7 @@ using std::exception;
 namespace tlp
 {
 
-class RRP_DECLSPEC Exception : public std::exception
+class COMMON_DECLSPEC Exception : public std::exception
 {
     protected:
         string mMessage;   //Exception message
@@ -24,7 +24,7 @@ class RRP_DECLSPEC Exception : public std::exception
         string                  getMessage() const;
 };
 
-class RRP_DECLSPEC BadHandleException : public Exception
+class COMMON_DECLSPEC BadHandleException : public Exception
 {
     public:
         BadHandleException(const string& msg);

@@ -2,14 +2,14 @@
 #define telThreadPoolH
 #include <list>
 #include <vector>
-#include "rreRoadRunnerThread.h"
+#include "telRoadRunnerThread.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 using namespace std;
 
-class RRE_DECLSPEC ThreadPool
+class JOBS_DECLSPEC ThreadPool
 {
     protected:
         list<RoadRunnerThread*>         mThreads;

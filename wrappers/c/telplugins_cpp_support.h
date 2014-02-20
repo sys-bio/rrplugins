@@ -56,6 +56,10 @@ namespace rr
     class RoadRunner;
 }
 
+namespace tlp
+{
+class RoadRunnerList;
+}
 namespace tlpc
 {
 using std::string;
@@ -96,6 +100,14 @@ Plugin* registerPlugin(Plugin* plugin);
 
 //Use internally
 char*  createText(const string& str);
+
+/*!
+ \brief Cast a handle to RoadRunner Instance list to a RoadRunnerList pointer, throws if it fails
+ \param[in] handle  A handle to a RRInstanceList handle
+ \return Pointer to a RoadRunnerList instance
+ \ingroup cpp_support
+*/
+TLP_C_DS tlp::RoadRunnerList*           getRRList(TELHandle handle);
 
 }
 

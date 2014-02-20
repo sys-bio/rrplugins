@@ -39,11 +39,11 @@
  * redistribute any piece of this software without proper attribution;
 */
 
-#ifndef rrp_exporterH
-#define rrp_exporterH
+#ifndef telplugins_exporterH
+#define telplugins_exporterH
 
 //Export/Import API functions
-#if defined(_WIN32) || defined(__WIN32__)
+#if defined(_WIN32)
     #if defined(STATIC_TLP_C)
         #define TLP_C_DS
     #else

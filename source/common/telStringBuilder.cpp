@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "telStringBuilder.h"
 #include "telStringUtils.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 //---------------------------------------------------------------------------
 
 using namespace std;

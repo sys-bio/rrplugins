@@ -2,14 +2,14 @@
 #define telFileNameH
 #include <string>
 #include <ostream>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 using std::string;
 using std::ostream;
 
 namespace tlp
 {
 
-class RRP_DECLSPEC FileName
+class COMMON_DECLSPEC FileName
 {
     private:
         mutable string              mPathAndName;
@@ -40,7 +40,7 @@ class RRP_DECLSPEC FileName
         unsigned int                size();
 };
 
-RRP_DECLSPEC std::ostream& operator         <<(std::ostream &os, FileName &obj);
+COMMON_DECLSPEC std::ostream& operator         <<(std::ostream &os, FileName &obj);
 
 }
 #endif

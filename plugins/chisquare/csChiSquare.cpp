@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include <sstream>
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telException.h"
 #include "chisquare_doc.h"
 #include "csChiSquare.h"

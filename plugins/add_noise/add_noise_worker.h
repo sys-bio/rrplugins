@@ -2,7 +2,6 @@
 #define add_noise_workerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "telExporter.h"
 #include "noise.h"
 //---------------------------------------------------------------------------
 

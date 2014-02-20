@@ -43,8 +43,8 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "rr/rrException.h"
-#include "rr/rrLogger.h"
+#include "telException.h"
+#include "telLogger.h"
 #include "telStringUtils.h"
 #include "telPropertyBase.h"
 #include "telProperties.h"
@@ -284,7 +284,7 @@ inline void Property<string>::setValueFromString(const string& str)
 template<>
 inline bool Property<string>::clearValue()
 {
-    mValue = gEmptyString;
+    mValue = tlp::gEmptyString;
     return true;
 }
 

@@ -98,7 +98,7 @@
         <BCC_PCHInject>add_noise_pch.h</BCC_PCHInject>
         <Debugger_HostApplication>R:\cg_installs\DRT\bin\rrWinC.exe</Debugger_HostApplication>
         <Defines>POCO_STATIC;EXPORT_RR_PLUGIN;$(Defines)</Defines>
-        <IncludePath>..\..\Source;$(TLP_INSTALL)\include;..\..\Wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\common;$(TLP_INSTALL)\include;..\..\Wrappers\C;..\..\source\core;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>
     </PropertyGroup>

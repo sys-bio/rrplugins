@@ -1,5 +1,5 @@
 #include <iostream>
-#include "rr/rrException.h"
+#include "telException.h"
 #include "telUtils.h"
 #include "telProperty.h"
 #pragma hdrstop

@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include <sstream>
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telException.h"
 #include "parameter_scan_doc.h"
 #include "psParameterScan.h"
@@ -84,7 +84,7 @@ bool ParameterScan::execute(bool inThread)
         mWorker.start(inThread);
         return true;
     }
-    catch(const rr::Exception& ex)
+    catch(const Exception& ex)
     {
         Log(lError) << "There was a problem in the execute function of the ParameterScan plugin: " << ex.getMessage();
         throw(ex);

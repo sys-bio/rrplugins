@@ -5,11 +5,11 @@
 #include <stdio.h>
 #include "telUtils.h"
 #include "telOSSpecifics.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telIniFile.h"
 
 #undef CreateFile
-using rr::Logger;
+
 namespace tlp
 {
 //const bool IniFile::mAutoCreateSections = true;

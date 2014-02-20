@@ -2,7 +2,7 @@
 #include <sstream>
 #include "rr-libstruct/lsMatrix.h"
 #include "rr/rrRoadRunner.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
 #include "telPluginManager.h"
@@ -14,6 +14,7 @@
 #include "telplugins_cpp_support.h"
 #include "telOSSpecifics.h"
 #include "telException.h"
+
 namespace tlpc
 {
 using namespace std;

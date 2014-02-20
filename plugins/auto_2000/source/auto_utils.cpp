@@ -1,5 +1,5 @@
 #pragma hdrstop
-//#include "rr/rrLogger.h"
+//#include "telLogger.h"
 //#include "auto_utils.h"
 
 //---------------------------------------------------------------------------

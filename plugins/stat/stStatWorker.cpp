@@ -1,6 +1,6 @@
 #pragma hdrstop
 #include "stStatWorker.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telException.h"
 #include "telTelluriumData.h"
 #include "stStat.h"

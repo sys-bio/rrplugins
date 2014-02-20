@@ -43,7 +43,7 @@
 #include <string>
 #include <ostream>
 #include "telConstants.h"
-#include "telExporter.h"
+#include "telCommonExporter.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
@@ -56,14 +56,14 @@ using std::ostream;
  * \brief The PluginProperty class is an interface for derived Properties, that can be of any type.
  * A property has a name, description and a hint, encapsulating the the purpose of the actual property.
  */
-class RRP_DECLSPEC PropertyBase
+class COMMON_DECLSPEC PropertyBase
 {
     public:
     //Friends first
         /**
          * Ouput the property to an output stream.
          */
-        RRP_DECLSPEC
+        COMMON_DECLSPEC
         friend ostream&                     operator<<(ostream& stream, const PropertyBase& outMe);
 
     public:

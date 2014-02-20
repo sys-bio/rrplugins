@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include <iomanip>
-#include "rr/rrException.h"
-#include "rr/rrLogger.h"
+#include "telException.h"
+#include "telLogger.h"
 #include "rr/rrRoadRunnerData.h"
 #include "Poco/TemporaryFile.h"
 #include "telUtils.h"
@@ -12,8 +12,6 @@
 //---------------------------------------------------------------------------
 using namespace std;
 
-using rr::Logger;
-using rr::CoreException;
 namespace tlp
 {
 
@@ -381,7 +379,7 @@ bool TelluriumData::write(const string& fileName) const
         stringstream s;
         s<<"Failed opening file: "<<fileName;
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     if(!check())
@@ -390,7 +388,7 @@ bool TelluriumData::write(const string& fileName) const
         stringstream s;
         s<<"Can't write data.. the dimension of the header don't agree with nr of cols of data";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     aFile<<(*this);
@@ -406,7 +404,7 @@ bool TelluriumData::read(const string& fileName)
         stringstream s;
         s<<"Failed opening file: "<<fileName;
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     aFile >> (*this);
@@ -522,7 +520,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing section: [INFO]. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     //Setup header
@@ -533,7 +531,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing ini key: COLUMN_HEADERS. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     StringList colNames(splitString(colNamesK->mValue, ",{}"));
@@ -571,7 +569,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
        stringstream s;
        s<<"RoadRunnder data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";
        Log(Logger::LOG_ERROR)<<s.str();
-       throw(rr::Exception(s.str()));
+       throw(Exception(s.str()));
     }
 
     int cDim = aKey1->AsInt();
@@ -584,7 +582,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
        stringstream s;
        s<<"Tellurium data format error: NUMBER_OF_COLS ("<<cDim<<") don't correspond to number of column headers ("<<colNames.size()<<").";
        Log(Logger::LOG_ERROR)<<s.str();
-       throw(rr::Exception(s.str()));
+       throw(Exception(s.str()));
     }
 
     data.reSize(rDim, cDim);
@@ -596,7 +594,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         stringstream s;
         s<<"RoadRunnder data file is missing ini section: DATA. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
-        throw(rr::Exception(s.str()));
+        throw(Exception(s.str()));
     }
 
     vector<string> lines = splitString(dataSection->GetNonKeysAsString(), "\n");
@@ -606,7 +604,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         vector<string> aLine = splitString(oneLine, ',');
         if(aLine.size() != cDim)
         {
-            throw(CoreException("Bad Tellurium data in [DATA] section"));
+            throw(Exception("Bad Tellurium data in [DATA] section"));
         }
 
         for(int col = 0; col < cDim; col++)
@@ -634,7 +632,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         vector<string> aLine  = splitString(oneLine, ',');
         if(aLine.size() != cDim)
         {
-            throw(CoreException("Bad Tellurium data in [WEIGHTS] section."));
+            throw(Exception("Bad Tellurium data in [WEIGHTS] section."));
         }
 
         for(int col = 0; col < cDim; col++)

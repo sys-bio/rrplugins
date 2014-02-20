@@ -94,7 +94,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <BCC_PCHInject>telplugins_pch.h</BCC_PCHInject>
         <BPILibOutputDir>$(TLP_INSTALL)\lib</BPILibOutputDir>
-        <IncludePath>$(TLP_ROOT)\source;$(RR_ROOT)\Wrappers\C;$(TLP_INSTALL)\include;$(TLP_ROOT)\utils;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(RR_ROOT)\Wrappers\C;$(TLP_INSTALL)\include;$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source\jobs;$(IncludePath)</IncludePath>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -110,6 +110,10 @@
         <CppCompile Include="telAPIHandleManager.cpp">
             <DependentOn>telAPIHandleManager.h</DependentOn>
             <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="teljobs_api.cpp">
+            <DependentOn>teljobs_api.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="telplugins_cpp_support.cpp">
             <DependentOn>telplugins_cpp_support.h</DependentOn>

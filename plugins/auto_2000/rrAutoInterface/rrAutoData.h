@@ -2,7 +2,7 @@
 #define rrAutoDataH
 #include <ostream>
 #include "telTelluriumData.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 
 #include "rrRRAutoExporter.h"
 #include "telStringList.h"

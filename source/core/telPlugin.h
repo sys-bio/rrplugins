@@ -36,13 +36,13 @@
  *
  * YOU CANNOT:
  *
- * redyistribute any piece of this software without proper attribution;
+ * redistribute any piece of this software without proper attribution;
 */
 #ifndef telPluginH
 #define telPluginH
 #include <sstream>
 #include <string>
-#include "telExporter.h"
+#include "telCoreExporter.h"
 #include "telPluginsManagerSettings.h"
 #include "telProperties.h"
 
@@ -88,8 +88,8 @@ typedef void    (event_cc *PluginEvent)(void* data1, void* data2);
 
   -# A plugin may embed documentation in various forms, e.g. PDF (getPDFManual(), or simple text getExtendedInfo().
  */
-
-class RRP_DECLSPEC Plugin
+//      CORE_DECLSPEC
+class CORE_DECLSPEC Plugin
 {
     friend PluginManager;
     public:

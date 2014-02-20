@@ -1,16 +1,16 @@
 #ifndef telSimulateH
 #define telSimulateH
 //---------------------------------------------------------------------------
-#include "rrRoadRunnerList.h"
-#include "rreThreadPool.h"
+#include "telRoadRunnerList.h"
+#include "telThreadPool.h"
 
-namespace rre
+namespace tlp
 {
-using namespace rr;
-class RRE_DECLSPEC Simulate : public ThreadPool
+
+class JOBS_DECLSPEC Simulate : public ThreadPool
 {
     public:
-                        Simulate(rre::RoadRunnerList& rrs, const int& nrThreads = 16);
+                        Simulate(RoadRunnerList& rrs, const int& nrThreads = 16);
                        ~Simulate();
 
 };

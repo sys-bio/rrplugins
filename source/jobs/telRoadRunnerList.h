@@ -2,18 +2,18 @@
 #define telRoadRunnerListH
 #include <vector>
 #include <string>
-#include "rreExporter.h"
+#include "telJobsExporter.h"
 #include "telConstants.h"
 //#include "rrObject.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
-using namespace rr;
+//using namespace rr;
 using std::vector;
 class RoadRunner;
 
-class RRE_DECLSPEC RoadRunnerList //: public rrObject
+class JOBS_DECLSPEC RoadRunnerList //: public rrObject
 {
     private:
 

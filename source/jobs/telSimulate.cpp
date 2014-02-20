@@ -1,9 +1,9 @@
 #pragma hdrstop
-#include "rreSimulateThread.h"
+#include "telSimulateThread.h"
 #include "telSimulate.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 
 Simulate::Simulate(RoadRunnerList& rrs, const int& nrThreads)

@@ -44,7 +44,7 @@
 #include <list>
 #include <vector>
 #include <utility>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "telPropertyBase.h"
 #include "telStringList.h"
 //---------------------------------------------------------------------------
@@ -59,7 +59,7 @@ using std::string;
 /**
     Container for Plugin parameters.
 */
-class RRP_DECLSPEC Properties
+class COMMON_DECLSPEC Properties
 {
     public:
         /**
@@ -154,7 +154,7 @@ class RRP_DECLSPEC Properties
         /**
            Output the container to a output stream (ostream)
         */
-        RRP_DECLSPEC
+        COMMON_DECLSPEC
         friend ostream&                     operator <<(ostream& os, const Properties& pars);
 
     protected:

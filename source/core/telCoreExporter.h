@@ -1,18 +1,18 @@
-#ifndef telExporterH
-#define telExporterH
+#ifndef telCoreExporterH
+#define telCoreExporterH
 
 #if defined(_WIN32)
     #if defined(STATIC_PLUGIN_API)
-        #define RRP_DECLSPEC
+        #define CORE_DECLSPEC
     #else
-        #if defined(EXPORT_PLUGIN_API)
-            #define RRP_DECLSPEC __declspec(dllexport)
+        #if defined(EXPORT_CORE_API)
+            #define CORE_DECLSPEC __declspec(dllexport)
         #else
-            #define RRP_DECLSPEC __declspec(dllimport)
+            #define CORE_DECLSPEC __declspec(dllimport)
         #endif
     #endif
 #else
-    #define RRP_DECLSPEC
+    #define CORE_DECLSPEC
 #endif
 
 //Helper macros for plugins
@@ -34,6 +34,7 @@
 #else
     #define call_conv
 #endif
+
 
 #endif
 

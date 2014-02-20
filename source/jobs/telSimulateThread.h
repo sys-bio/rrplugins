@@ -2,21 +2,21 @@
 #define telSimulateThreadH
 #include <list>
 #include "Poco/Condition.h"
-#include "rreRoadRunnerThread.h"
-#include "rreSettings.h"
+#include "telRoadRunnerThread.h"
+//#include "telSettings.h"
 //---------------------------------------------------------------------------
 
-namespace rre
+namespace tlp
 {
 
-typedef void    (rreCallbackCC *JobStartedCB)(void*);
-typedef void    (rreCallbackCC *JobFinishedCB)(void*);
+typedef void    (*JobStartedCB)(void*);
+typedef void    (*JobFinishedCB)(void*);
 
 using std::list;
 using Poco::Mutex;
 using Poco::Condition;
 
-class RRE_DECLSPEC SimulateThread : public RoadRunnerThread
+class JOBS_DECLSPEC SimulateThread : public RoadRunnerThread
 {
 
     protected:

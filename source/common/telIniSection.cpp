@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include "telUtils.h"
 #include "telStringUtils.h"
-#include "rr/rrLogger.h"
+#include "telLogger.h"
 #include "telIniSection.h"
 
 namespace tlp

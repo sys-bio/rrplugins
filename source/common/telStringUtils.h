@@ -6,116 +6,116 @@
 #include <complex>
 #include "telConstants.h"
 #include "telUtils.h"
-#include "telExporter.h"
+#include "telCommonExporter.h"
 #include "rr-libstruct/lsMatrix.h"
+
 namespace tlp
 {
-
 using std::string;
 using std::list;
 using std::vector;
 using std::complex;
 
-RRP_DECLSPEC char*   	        createText(const string& str);
-RRP_DECLSPEC char*   			createText(const int& count);
-RRP_DECLSPEC bool   			freeText(char* str);
+COMMON_DECLSPEC char*   	        createText(const string& str);
+COMMON_DECLSPEC char*   			createText(const int& count);
+COMMON_DECLSPEC bool   			    freeText(char* str);
 
-RRP_DECLSPEC string             substituteCharInString(const string& text, char chToReplace, char withChar);
-RRP_DECLSPEC unsigned int       indexOf(const string& text, char checkFor);
-RRP_DECLSPEC string             replaceWord(const string& str1, const string& str2, const string& theString);
-RRP_DECLSPEC bool               convertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression);
-RRP_DECLSPEC string             removeChars(const string& str, const string& chars);
-RRP_DECLSPEC bool               isUnwantedChar(char ch); //Predicate for find_if algorithms..
-RRP_DECLSPEC size_t             findMatchingRightParenthesis(const string& expression, const size_t startFrom);
-RRP_DECLSPEC int                getNumberOfFunctionArguments(const string& expression);
-RRP_DECLSPEC string             tabs(const int& nr);
-RRP_DECLSPEC string             NL();
+COMMON_DECLSPEC string              substituteCharInString(const string& text, char chToReplace, char withChar);
+COMMON_DECLSPEC unsigned int        indexOf(const string& text, char checkFor);
+COMMON_DECLSPEC string              replaceWord(const string& str1, const string& str2, const string& theString);
+COMMON_DECLSPEC bool                convertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression);
+COMMON_DECLSPEC string              removeChars(const string& str, const string& chars);
+COMMON_DECLSPEC bool                isUnwantedChar(char ch); //Predicate for find_if algorithms..
+COMMON_DECLSPEC size_t              findMatchingRightParenthesis(const string& expression, const size_t startFrom);
+COMMON_DECLSPEC int                 getNumberOfFunctionArguments(const string& expression);
+COMMON_DECLSPEC string              tabs(const int& nr);
+COMMON_DECLSPEC string              NL();
 
-RRP_DECLSPEC string				toUpperOrLowerCase(const string& inStr, int (*func)(int));
-RRP_DECLSPEC string 			toUpper(const string& str);
-RRP_DECLSPEC string 			toLower(const string& str);
+COMMON_DECLSPEC string				toUpperOrLowerCase(const string& inStr, int (*func)(int));
+COMMON_DECLSPEC string 			    toUpper(const string& str);
+COMMON_DECLSPEC string 			    toLower(const string& str);
 
-RRP_DECLSPEC string             getFilePath(const string& fileN);
-RRP_DECLSPEC string             getFileName(const string& fileN);
-RRP_DECLSPEC string             getFileNameNoExtension(const string& fileN);
-RRP_DECLSPEC string             getFileExtension(const string& fileN);
+COMMON_DECLSPEC string              getFilePath(const string& fileN);
+COMMON_DECLSPEC string              getFileName(const string& fileN);
+COMMON_DECLSPEC string              getFileNameNoExtension(const string& fileN);
+COMMON_DECLSPEC string              getFileExtension(const string& fileN);
 
-RRP_DECLSPEC string             changeFileExtensionTo(const string& theFileName, const string& newExtension);
+COMMON_DECLSPEC string              changeFileExtensionTo(const string& theFileName, const string& newExtension);
 
-RRP_DECLSPEC bool 				compareNoCase(const string& str1, const string& str2);
-RRP_DECLSPEC string             trim(const string& str, const char& toTrim = ' ');
-RRP_DECLSPEC bool               startsWith(const string& src, const string& sub);
-RRP_DECLSPEC bool               endsWith(const string& src, const string& sub);
+COMMON_DECLSPEC bool 		        compareNoCase(const string& str1, const string& str2);
+COMMON_DECLSPEC string              trim(const string& str, const char& toTrim = ' ');
+COMMON_DECLSPEC bool                startsWith(const string& src, const string& sub);
+COMMON_DECLSPEC bool                endsWith(const string& src, const string& sub);
 
 //Can't use va_arg for non pod data.. :(
-RRP_DECLSPEC string             joinPath(const string& p1, const string& p2, const char pathSeparator = gPathSeparator);
-RRP_DECLSPEC string             joinPath(const string& p1, const string& p2, const string& p3, const char pathSeparator = gPathSeparator);
-RRP_DECLSPEC string             joinPath(const string& p1, const string& p2, const string& p3, const string& p4, const char pathSeparator = gPathSeparator);
-RRP_DECLSPEC string             joinPath(const string& p1, const string& p2, const string& p3, const string& p4, const string& p5, const char pathSeparator = gPathSeparator);
+COMMON_DECLSPEC string              joinPath(const string& p1, const string& p2, const char pathSeparator = gPathSeparator);
+COMMON_DECLSPEC string              joinPath(const string& p1, const string& p2, const string& p3, const char pathSeparator = gPathSeparator);
+COMMON_DECLSPEC string              joinPath(const string& p1, const string& p2, const string& p3, const string& p4, const char pathSeparator = gPathSeparator);
+COMMON_DECLSPEC string              joinPath(const string& p1, const string& p2, const string& p3, const string& p4, const string& p5, const char pathSeparator = gPathSeparator);
 
 //conversions
-RRP_DECLSPEC string             intToStr(const int& nt);
-RRP_DECLSPEC int                strToInt(const string& nt);
-RRP_DECLSPEC string             dblToStr(const double& nt);
-RRP_DECLSPEC double             strToDbl(const string& nt);
-RRP_DECLSPEC vector<string>     splitString(const string &text, const string &separators);
-RRP_DECLSPEC vector<string>     splitString(const string& input, const char& delimiters);
-RRP_DECLSPEC int                toInt(const string& str);
-RRP_DECLSPEC bool               toBool(const string& str);
-RRP_DECLSPEC double             toDouble(const string& str);
-RRP_DECLSPEC complex<double>    toComplex(const string& str);
+COMMON_DECLSPEC string              intToStr(const int& nt);
+COMMON_DECLSPEC int                 strToInt(const string& nt);
+COMMON_DECLSPEC string              dblToStr(const double& nt);
+COMMON_DECLSPEC double              strToDbl(const string& nt);
+COMMON_DECLSPEC vector<string>      splitString(const string &text, const string &separators);
+COMMON_DECLSPEC vector<string>      splitString(const string& input, const char& delimiters);
+COMMON_DECLSPEC int                 toInt(const string& str);
+COMMON_DECLSPEC bool                toBool(const string& str);
+COMMON_DECLSPEC double              toDouble(const string& str);
+COMMON_DECLSPEC complex<double>     toComplex(const string& str);
 
-RRP_DECLSPEC string             toString(const bool& b);
-RRP_DECLSPEC string             toString(const double& d, const string& format = gDoubleFormat);
-RRP_DECLSPEC string             toString(const unsigned int& n, const string& format = gIntFormat, const int nBase=10);
-RRP_DECLSPEC string             toString(const int& n, const string& format = gIntFormat, const int nBase=10);
-RRP_DECLSPEC string             toString(const long n, const int nBase=10);
-RRP_DECLSPEC string             toString(const unsigned long n, const int nBase=10);
-RRP_DECLSPEC string             toString(const unsigned short n, const int nBase=10);
-RRP_DECLSPEC string             toString(const short n, const int nBase=10);
-RRP_DECLSPEC string             toString(const char n);
-RRP_DECLSPEC string             toString(const unsigned char n);
-RRP_DECLSPEC string             toString(const string& s);
-RRP_DECLSPEC string             toString(const char* str);
-RRP_DECLSPEC string             toString(const vector<string>& vec, const string& sep = ", ");
-//RRP_DECLSPEC string             toString(const ls::Matrix<double> mat);
-RRP_DECLSPEC string             toString(const ls::Matrix<double>& mat);
+COMMON_DECLSPEC string              toString(const bool& b);
+COMMON_DECLSPEC string              toString(const double& d, const string& format = gDoubleFormat);
+COMMON_DECLSPEC string              toString(const unsigned int& n, const string& format = gIntFormat, const int nBase=10);
+COMMON_DECLSPEC string              toString(const int& n, const string& format = gIntFormat, const int nBase=10);
+COMMON_DECLSPEC string              toString(const long n, const int nBase=10);
+COMMON_DECLSPEC string              toString(const unsigned long n, const int nBase=10);
+COMMON_DECLSPEC string              toString(const unsigned short n, const int nBase=10);
+COMMON_DECLSPEC string              toString(const short n, const int nBase=10);
+COMMON_DECLSPEC string              toString(const char n);
+COMMON_DECLSPEC string              toString(const unsigned char n);
+COMMON_DECLSPEC string              toString(const string& s);
+COMMON_DECLSPEC string              toString(const char* str);
+COMMON_DECLSPEC string              toString(const vector<string>& vec, const string& sep = ", ");
+//COMMON_DECLSPEC string              toString(const ls::Matrix<double> mat);
+COMMON_DECLSPEC string              toString(const ls::Matrix<double>& mat);
 
-RRP_DECLSPEC string             format(const string& src, const int& arg);
-RRP_DECLSPEC string             format(const string& str, const int& arg1);
-RRP_DECLSPEC string             format(const string& str1, const int& arg1, const double& arg2);
+COMMON_DECLSPEC string              format(const string& src, const int& arg);
+COMMON_DECLSPEC string              format(const string& str, const int& arg1);
+COMMON_DECLSPEC string              format(const string& str1, const int& arg1, const double& arg2);
 
-RRP_DECLSPEC string             format(const string& src, const string& arg);
-RRP_DECLSPEC string             format(const string& src, const string& arg1, const string& arg2, const string& arg3);
-RRP_DECLSPEC string             format(const string& src, const string& arg1, const string& arg2);
-RRP_DECLSPEC string             format(const string& src, const string& arg1, const int& arg2);
-RRP_DECLSPEC string             format(const string& src, const string& arg1, const int& arg2, const string& arg3);
-RRP_DECLSPEC string             format(const string& str1, const string& str2);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const string& arg2);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const int& arg2);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const int& arg2, const string& arg3);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const string& arg2, const string& arg3);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4);
-RRP_DECLSPEC string             format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5);
-RRP_DECLSPEC string             format(const string& str1, const unsigned int& arg1, const string& arg2);
-RRP_DECLSPEC string             format(const string& str1, const unsigned int& arg1, const string& arg2, const string& arg3);
-RRP_DECLSPEC string             format(const string& str1, const unsigned int& arg1, const unsigned int& arg2, const string& arg3, const string& arg4);
+COMMON_DECLSPEC string              format(const string& src, const string& arg);
+COMMON_DECLSPEC string              format(const string& src, const string& arg1, const string& arg2, const string& arg3);
+COMMON_DECLSPEC string              format(const string& src, const string& arg1, const string& arg2);
+COMMON_DECLSPEC string              format(const string& src, const string& arg1, const int& arg2);
+COMMON_DECLSPEC string              format(const string& src, const string& arg1, const int& arg2, const string& arg3);
+COMMON_DECLSPEC string              format(const string& str1, const string& str2);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const string& arg2);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const int& arg2);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const int& arg2, const string& arg3);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const string& arg2, const string& arg3);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4);
+COMMON_DECLSPEC string              format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5);
+COMMON_DECLSPEC string              format(const string& str1, const unsigned int& arg1, const string& arg2);
+COMMON_DECLSPEC string              format(const string& str1, const unsigned int& arg1, const string& arg2, const string& arg3);
+COMMON_DECLSPEC string              format(const string& str1, const unsigned int& arg1, const unsigned int& arg2, const string& arg3, const string& arg4);
 
-RRP_DECLSPEC string             append(const string& str);
-RRP_DECLSPEC string             append(const int& str);
-RRP_DECLSPEC string             append(const unsigned int& str);
-RRP_DECLSPEC string             append(const string& s1, const string& s2);
-RRP_DECLSPEC string             append(const string& s1, const string& s2, const string& s3);
-RRP_DECLSPEC string             append(const string& s1, const unsigned int& s2, const string& s3);
-RRP_DECLSPEC string             append(const string& s1, const unsigned int& s2, const string& s3, const string& s4);
+COMMON_DECLSPEC string              append(const string& str);
+COMMON_DECLSPEC string              append(const int& str);
+COMMON_DECLSPEC string              append(const unsigned int& str);
+COMMON_DECLSPEC string              append(const string& s1, const string& s2);
+COMMON_DECLSPEC string              append(const string& s1, const string& s2, const string& s3);
+COMMON_DECLSPEC string              append(const string& s1, const unsigned int& s2, const string& s3);
+COMMON_DECLSPEC string              append(const string& s1, const unsigned int& s2, const string& s3, const string& s4);
 
-RRP_DECLSPEC string             substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
-RRP_DECLSPEC string             substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);
-RRP_DECLSPEC string             removeNewLines(const string& str, const int& howMany = -1);
+COMMON_DECLSPEC string              substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
+COMMON_DECLSPEC string              substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);
+COMMON_DECLSPEC string              removeNewLines(const string& str, const int& howMany = -1);
 
 
 /**
-    \brief Template format function. A "{0}" occurence in the src string is substituted with the 
+    \brief Template format function. A "{0}" occurence in the src string is substituted with the
     value in arg1. The new string with the substition is returned.
 */
 template <class T>
@@ -128,7 +128,7 @@ string formatN(const string& src, const T& arg1)
 }
 
 /**
-    \brief Template format function. A "{i}" occurence in the src string, where i = 0 or 1, is substituted with the 
+    \brief Template format function. A "{i}" occurence in the src string, where i = 0 or 1, is substituted with the
     values in arg1 and arg2, respectively. The new string with the substitions is returned.
 */
 template <class A, class B>
@@ -143,7 +143,7 @@ string formatN(const string& src, const A& arg1, const B& arg2)
 }
 
 /**
-    \brief Template format function. A "{i}" occurence in the src string, where i = 0, 1 or 2, is substituted with the 
+    \brief Template format function. A "{i}" occurence in the src string, where i = 0, 1 or 2, is substituted with the
     values in arg1, arg2 and arg3, respectively. The new string with the substitions is returned.
 */
 template <class A, class B, class C>

@@ -1,7 +1,7 @@
 #pragma hdrstop
 #include <sstream>
-#include "rr/rrLogger.h"
-#include "rr/rrException.h"
+#include "telLogger.h"
+#include "telException.h"
 #include "rr/rrRoadRunner.h"
 #include "lmfit_doc.h"
 #include "lm.h"
@@ -194,7 +194,7 @@ bool LM::execute(bool inThread)
         mWorker.start(inThread);
         return true;
     }
-    catch(const rr::Exception& ex)
+    catch(const Exception& ex)
     {
         Log(lError) << "There was a problem in the execute of the LMFIT plugin: " << ex.getMessage();
         throw(ex);

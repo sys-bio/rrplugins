@@ -4,7 +4,7 @@
 #include <string>
 #include <list>
 #include <ostream>
-#include "telExporter.h"
+#include "telCommonExporter.h"
 namespace tlp
 {
 
@@ -13,13 +13,13 @@ using tlp::StringList;
 using std::vector;
 using std::string;
 
-class RRP_DECLSPEC ArrayListItemBase
+class COMMON_DECLSPEC ArrayListItemBase
 {
     public:
         virtual ~ArrayListItemBase();
 };
 
-class RRP_DECLSPEC ArrayList
+class COMMON_DECLSPEC ArrayList
 {
     protected:
     public:
@@ -52,7 +52,7 @@ class RRP_DECLSPEC ArrayList
 };
 
 
-RRP_DECLSPEC std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
+COMMON_DECLSPEC std::ostream& operator<<(std::ostream& stream, const ArrayList& list);
 
 
 
