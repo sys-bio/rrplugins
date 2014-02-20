@@ -1,5 +1,5 @@
-#ifndef rreLoadModelThreadH
-#define rreLoadModelThreadH
+#ifndef telLoadModelThreadH
+#define telLoadModelThreadH
 #include <list>
 #include "rreExporter.h"
 #include "rreRoadRunnerThread.h"

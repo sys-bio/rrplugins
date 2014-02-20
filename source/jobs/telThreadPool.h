@@ -1,5 +1,5 @@
-#ifndef rreThreadPoolH
-#define rreThreadPoolH
+#ifndef telThreadPoolH
+#define telThreadPoolH
 #include <list>
 #include <vector>
 #include "rreRoadRunnerThread.h"

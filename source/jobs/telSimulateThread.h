@@ -1,5 +1,5 @@
-#ifndef rreSimulateThreadH
-#define rreSimulateThreadH
+#ifndef telSimulateThreadH
+#define telSimulateThreadH
 #include <list>
 #include "Poco/Condition.h"
 #include "rreRoadRunnerThread.h"

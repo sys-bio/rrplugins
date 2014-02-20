@@ -3,7 +3,7 @@
 #endif
 #pragma hdrstop
 #include "rreLoadModelThread.h"
-#include "rreLoadModelFromFile.h"
+#include "telLoadModelFromFile.h"
 //---------------------------------------------------------------------------
 
 namespace rre

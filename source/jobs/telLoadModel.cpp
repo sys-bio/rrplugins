@@ -1,23 +1,24 @@
 #pragma hdrstop
-#include "rreSimulateThread.h"
-#include "rreSimulate.h"
-//---------------------------------------------------------------------------
+#include "rreLoadModelThread.h"
+#include "telLoadModel.h"
 
+//---------------------------------------------------------------------------
 namespace rre
 {
 
-Simulate::Simulate(RoadRunnerList& rrs, const int& nrThreads)
+LoadModel::LoadModel(RoadRunnerList& rrs, const string& sbml, const int& nrThreads, bool reCompile)
 :
 ThreadPool()
 {
     //create nrThreads that can load SBML models
     for(int i = 0; i < nrThreads; i++)
     {
-        SimulateThread* sThread = new SimulateThread(NULL, false);
-        mThreads.push_back(sThread);
+        LoadModelThread* lmThread = new LoadModelThread("", reCompile);
+        lmThread->setSBML(sbml);
+        mThreads.push_back(lmThread);
     }
 
-    //The following will add jobs and get them done too..
+    //The following will add jobs
     for(int i = 0; i < rrs.count(); i++)
     {
         addJob(rrs[i]);
@@ -30,7 +31,7 @@ ThreadPool()
     }
 }
 
-Simulate::~Simulate()
+LoadModel::~LoadModel()
 {
     list<RoadRunnerThread*>::iterator    iter;
     for(iter = mThreads.begin(); iter != mThreads.end(); iter++)

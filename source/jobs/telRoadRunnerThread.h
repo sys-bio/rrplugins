@@ -1,5 +1,5 @@
-#ifndef rreRoadRunnerThreadH
-#define rreRoadRunnerThreadH
+#ifndef telRoadRunnerThreadH
+#define telRoadRunnerThreadH
 #include <string>
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
