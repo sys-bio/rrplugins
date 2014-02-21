@@ -71,11 +71,11 @@ Poco::Logger& getLogger()
 
     if (pocoLogger == 0)
     {
-        pocoLogger = &Poco::Logger::get("RoadRunner");
+        pocoLogger = &Poco::Logger::get("Tellurium");
 
         // first time this is called, channels better be null
-        assert(consoleChannel == 0 && "consoleChannel is not null at init time");
-        assert(simpleFileChannel == 0 && "simpleFileChannel is not null at init time");
+        assert(consoleChannel       == 0 && "consoleChannel is not null at init time");
+        assert(simpleFileChannel    == 0 && "simpleFileChannel is not null at init time");
 
         // split the messages into console and file
         AutoPtr<SplitterChannel> splitter(new SplitterChannel());

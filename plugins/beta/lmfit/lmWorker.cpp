@@ -219,7 +219,6 @@ double lmWorker::getChi(const Properties& parameters)
         modelData = mRRI->getSimulationResult();
     }
 
-
     TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
     Plugin* chi                 = mTheHost.mPM->getPlugin("tel_chisquare");
 
