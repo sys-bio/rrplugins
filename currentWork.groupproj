@@ -27,19 +27,19 @@
         <Projects Include="wrappers\C\telplugins_c_api.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\lmfit\lib\lmfit-static.cbproj">
+        <Projects Include="plugins\beta\lmfit\tel_lm.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\monte_carlo_bs\tel_monte_carlo_bs.cbproj">
-            <Dependencies>source\jobs\telplugins_jobs.cbproj</Dependencies>
-        </Projects>
-        <Projects Include="plugins\add_noise\tel_add_noise.cbproj">
+        <Projects Include="plugins\beta\add_noise\tel_add_noise.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\stat\tel_statistics.cbproj">
+        <Projects Include="plugins\beta\chisquare\tel_chisquare.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\chisquare\tel_chisquare.cbproj">
+        <Projects Include="plugins\beta\statistics\tel_statistics.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
@@ -125,50 +125,50 @@
     <Target Name="telplugins_c_api:Make">
         <MSBuild Projects="wrappers\C\telplugins_c_api.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="lmfit-static">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj"/>
+    <Target Name="tel_lm">
+        <MSBuild Projects="plugins\beta\lmfit\tel_lm.cbproj"/>
     </Target>
-    <Target Name="lmfit-static:Clean">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj" Targets="Clean"/>
+    <Target Name="tel_lm:Clean">
+        <MSBuild Projects="plugins\beta\lmfit\tel_lm.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="lmfit-static:Make">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_monte_carlo_bs" DependsOnTargets="telplugins_jobs">
-        <MSBuild Projects="plugins\monte_carlo_bs\tel_monte_carlo_bs.cbproj"/>
-    </Target>
-    <Target Name="tel_monte_carlo_bs:Clean" DependsOnTargets="telplugins_jobs:Clean">
-        <MSBuild Projects="plugins\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_monte_carlo_bs:Make" DependsOnTargets="telplugins_jobs:Make">
-        <MSBuild Projects="plugins\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Make"/>
+    <Target Name="tel_lm:Make">
+        <MSBuild Projects="plugins\beta\lmfit\tel_lm.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_add_noise">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj"/>
+        <MSBuild Projects="plugins\beta\add_noise\tel_add_noise.cbproj"/>
     </Target>
     <Target Name="tel_add_noise:Clean">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\beta\add_noise\tel_add_noise.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="tel_add_noise:Make">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_statistics">
-        <MSBuild Projects="plugins\stat\tel_statistics.cbproj"/>
-    </Target>
-    <Target Name="tel_statistics:Clean">
-        <MSBuild Projects="plugins\stat\tel_statistics.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_statistics:Make">
-        <MSBuild Projects="plugins\stat\tel_statistics.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\beta\add_noise\tel_add_noise.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_chisquare">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj"/>
+        <MSBuild Projects="plugins\beta\chisquare\tel_chisquare.cbproj"/>
     </Target>
     <Target Name="tel_chisquare:Clean">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\beta\chisquare\tel_chisquare.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="tel_chisquare:Make">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\beta\chisquare\tel_chisquare.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_statistics">
+        <MSBuild Projects="plugins\beta\statistics\tel_statistics.cbproj"/>
+    </Target>
+    <Target Name="tel_statistics:Clean">
+        <MSBuild Projects="plugins\beta\statistics\tel_statistics.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_statistics:Make">
+        <MSBuild Projects="plugins\beta\statistics\tel_statistics.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs">
+        <MSBuild Projects="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs:Clean">
+        <MSBuild Projects="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs:Make">
+        <MSBuild Projects="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Make"/>
     </Target>
     <Target Name="rrWinC" DependsOnTargets="telplugins_c_api">
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
@@ -180,13 +180,13 @@
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;lmfit-static;tel_monte_carlo_bs;tel_add_noise;tel_statistics;tel_chisquare;rrWinC"/>
+        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;tel_lm;tel_add_noise;tel_chisquare;tel_statistics;tel_monte_carlo_bs;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;lmfit-static:Clean;tel_monte_carlo_bs:Clean;tel_add_noise:Clean;tel_statistics:Clean;tel_chisquare:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_chisquare:Clean;tel_statistics:Clean;tel_monte_carlo_bs:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;lmfit-static:Make;tel_monte_carlo_bs:Make;tel_add_noise:Make;tel_statistics:Make;tel_chisquare:Make;rrWinC:Make"/>
+        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;tel_lm:Make;tel_add_noise:Make;tel_chisquare:Make;tel_statistics:Make;tel_monte_carlo_bs:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

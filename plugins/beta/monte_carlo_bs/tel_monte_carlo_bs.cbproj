@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{7BCE5D6A-4F08-4F39-BFC2-DA6064EACECC}</ProjectGuid>
+        <ProjectGuid>{F3AD86B4-C5D4-4C04-BCC2-29DEBF1E380D}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -50,7 +50,6 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <IncludePath>..\lmfit\;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>..\lmfit\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
         <Defines>LIBSBML_USE_CPP_NAMESPACE;CG_UI;$(Defines)</Defines>
@@ -107,6 +106,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <BCC_PCHInject>monte_carlo_bs_pch.h</BCC_PCHInject>
         <IncludePath>$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
         <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;$(Defines)</Defines>
@@ -123,24 +123,24 @@
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\lmfit\auto_link.cpp">
-            <BuildOrder>3</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\lmfit\lm.cpp">
-            <DependentOn>..\lmfit\lm.h</DependentOn>
+        <CppCompile Include="auto_link.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\lmfit\lmfit_doc.cpp">
-            <DependentOn>..\lmfit\lmfit_doc.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
+        <CppCompile Include="bsMonteCarloBS.cpp">
+            <DependentOn>bsMonteCarloBS.h</DependentOn>
+            <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\lmfit\lmUtils.cpp">
-            <DependentOn>..\lmfit\lmUtils.h</DependentOn>
+        <CppCompile Include="bsUtils.cpp">
+            <DependentOn>bsUtils.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\lmfit\lmWorker.cpp">
-            <DependentOn>..\lmfit\lmWorker.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
+        <CppCompile Include="bsWorker.cpp">
+            <DependentOn>bsWorker.h</DependentOn>
+            <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="monte_carlo_bs_doc.cpp">
+            <DependentOn>monte_carlo_bs_doc.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
