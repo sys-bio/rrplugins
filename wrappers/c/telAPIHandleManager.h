@@ -14,7 +14,7 @@ class APIHandleManager
                                         APIHandleManager();
                                        ~APIHandleManager();
         TELHandle                       registerHandle(TELHandle handle,    const char* typeOf);
-        bool                            unregisterHandle(TELHandle handle,  const char* typeOf);
+        bool                            unRegisterHandle(TELHandle handle);
         TELHandle                       validate(TELHandle handle,          const char* typeOf, const char* fnc);
 
     protected:

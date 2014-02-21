@@ -2,9 +2,10 @@
 #include "telException.h"
 #include "telUtils.h"
 #include "telProperty.h"
+#include "telException.h"
 #pragma hdrstop
 
-using rr::Exception;
+
 using namespace std;
 using namespace tlp;
 
@@ -38,7 +39,7 @@ int main()
 
         cout<<"Is read only: "<<toString(aProp->isReadOnly());
     }
-    catch(const rr::Exception& ex)
+    catch(const Exception& ex)
     {
         cout<<ex.what();
     }

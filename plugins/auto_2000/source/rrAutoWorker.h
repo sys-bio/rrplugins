@@ -4,7 +4,7 @@
 #include "Poco/Runnable.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/rrOSSpecifics.h"
-#include "telExporter.h"
+//#include "telExporter.h"
 #include "auto_utils.h"
 //---------------------------------------------------------------------------
 

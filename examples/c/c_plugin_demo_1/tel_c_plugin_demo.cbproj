@@ -110,7 +110,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <IncludePath>$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\wrappers\C;$(TLP_ROOT)\source\core;$(IncludePath)</IncludePath>
         <Debugger_HostApplication>R:\installs\cgd-static\bin\plugin_demo.exe</Debugger_HostApplication>
         <Defines>EXPORT_PLUGIN;$(Defines)</Defines>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>

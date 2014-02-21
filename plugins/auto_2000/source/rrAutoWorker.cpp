@@ -100,7 +100,7 @@ void AutoWorker::run()
     string fName = joinPath(tempFolder, "fort.7");
     if(!fileExists(fName))
     {
-        throw(rr::Exception("No Auto output data exists!"));
+        throw(Exception("No Auto output data exists!"));
     }
 
     string f7(getFileContent(fName));

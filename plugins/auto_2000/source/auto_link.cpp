@@ -14,7 +14,8 @@
 //    #pragma comment(lib, "libxml2_xe.lib")
 //#else
     #pragma comment(lib, "roadrunner.lib")
-    #pragma comment(lib, "telplugins.lib")
+    #pragma comment(lib, "telplugins_common.lib")
+    #pragma comment(lib, "telplugins_core.lib")
     #pragma comment(lib, "libAuto-static.lib")
     #pragma comment(lib, "rrAutoInterface-static.lib")
 //#endif

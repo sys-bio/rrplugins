@@ -143,7 +143,7 @@ string AutoPlugin::getResult()
 
 bool AutoPlugin::execute(bool inThread)
 {
-    Log(rr::lInfo)<<"Executing the AutoPlugin plugin";
+    Log(lInfo)<<"Executing the AutoPlugin plugin";
     //go away and carry out the work
     mAutoWorker.start(inThread);
     return true;

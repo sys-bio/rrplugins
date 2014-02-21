@@ -111,7 +111,7 @@
         <Debugger_DebugSourcePath>R:\rrl\plugins\fit_one_parameter\;R:\rrl\plugins\test_plugin\;R:\rrl\plugins\add_noise\;R:\tlp\wrappers\c\;R:\tlp\source\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
-        <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\libplugins\source;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\source\common;$(TLP_ROOT)\wrappers\C;$(TLP_ROOT)\source\core;$(IncludePath)</IncludePath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

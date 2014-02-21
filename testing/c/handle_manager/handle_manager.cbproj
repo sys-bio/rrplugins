@@ -86,7 +86,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <Debugger_DebugSourcePath>R:\tlp\wrappers\c\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <IncludePath>$(TLP_ROOT)\source;$(TLP_ROOT)\wrappers\c;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(TLP_ROOT)\wrappers\c;$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;$(IncludePath)</IncludePath>
         <DynamicRTL>true</DynamicRTL>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>

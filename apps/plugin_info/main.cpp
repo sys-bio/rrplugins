@@ -42,7 +42,7 @@ int main()
         return 0;
 
     }
-    catch(const rr::Exception& ex)
+    catch(const Exception& ex)
     {
         cout<<ex.what();
     }

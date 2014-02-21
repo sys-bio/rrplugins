@@ -227,15 +227,35 @@ TLP_C_DS char* tlp_cc getPluginDescription(TELHandle handle);
 TLP_C_DS char* tlp_cc getPluginHint(TELHandle handle);
 
 /*!
- \brief Return some information about a Plugin.
+ \brief Return information about a Plugin.
  \param handle Handle to a plugin
  \return Returns info, as a string, for the plugin, NULL otherwise
  \ingroup plugins
 */
 TLP_C_DS char* tlp_cc getPluginInfo(TELHandle handle);
 
+/*!
+ \brief Return plugin author information
+ \param handle Handle to a plugin
+ \return Returns a string on success, NULL otherwise
+ \ingroup plugins
+*/
 TLP_C_DS char* tlp_cc getPluginAuthor(TELHandle handle);
+
+/*!
+ \brief Return plugin copyright information
+ \param handle Handle to a plugin
+ \return Returns a string on success, NULL otherwise
+ \ingroup plugins
+*/
 TLP_C_DS char* tlp_cc getPluginCopyright(TELHandle handle);
+
+/*!
+ \brief Return plugin version information
+ \param handle Handle to a plugin
+ \return Returns a string on success, NULL otherwise
+ \ingroup plugins
+*/
 TLP_C_DS char* tlp_cc getPluginVersion(TELHandle handle);
 
 /*!
@@ -377,11 +397,11 @@ TLP_C_DS bool tlp_cc assignOnFinishedEvent(TELHandle handle, PluginEvent cb, voi
 
 /*!
  \brief Get roadrunner instance handle from plugin
- \param handle Handle to a Plugin instance
- \return Returns a handle to a rrInstance if available, returns NULL otherwise
+ \param handle Handle to a RoadRunner instance
+ \return Returns a handle if available, returns NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getTELHandleFromPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc getRoadRunnerHandleFromPlugin(TELHandle handle);
 
 /*!
  \brief Get a Plugins Propertiese as an xml document. The string returned from this function is formated as xml.
@@ -446,6 +466,20 @@ TLP_C_DS char* tlp_cc getLastPluginAPIError();
 */
 TLP_C_DS bool tlp_cc freeText(char* text);
 
+
+/*!
+ \brief Register a handle to be used with the API
+ \return Returns true/false indicating success
+ \ingroup utilities
+*/
+TLP_C_DS bool tlp_cc registerHandle(TELHandle handle, char* name);
+
+/*!
+ \brief UnRegister a handle
+ \return Returns true/false indicating success
+ \ingroup utilities
+*/
+TLP_C_DS bool tlp_cc unRegisterHandle(TELHandle handle);
 
 #if defined(__cplusplus)
 } }    //rrp namespace and extern "C"
@@ -573,7 +607,6 @@ int main()
  *
  * redistribute any piece of this software without proper attribution;
 
-
  \defgroup plugin_manager Plugin Manager
  \brief Plugin Manager Library Functions
 
@@ -588,7 +621,6 @@ int main()
 
  \defgroup utilities Utility Functions
  \brief Functions to help and assist in the use of the Plugins framework
-
 
 */
 

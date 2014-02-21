@@ -172,7 +172,7 @@ TELHandle tlp_cc getPlugin(TELHandle handle, const char* pluginName)
     catch_ptr_macro
 }
 
-TELHandle tlp_cc getTELHandleFromPlugin(TELHandle handle)
+TELHandle tlp_cc getRoadRunnerHandleFromPlugin(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
@@ -442,5 +442,14 @@ char* tlp_cc getPluginPropertiesAsXML(TELHandle handle)
     catch_ptr_macro
 }
 
+bool tlp_cc registerHandle(TELHandle handle, char* name)
+{
+    return gHM.registerHandle(handle, name);
+}
+
+bool tlp_cc unRegisterHandle(TELHandle handle)
+{
+    return gHM.unRegisterHandle(handle);
+}
 
 }

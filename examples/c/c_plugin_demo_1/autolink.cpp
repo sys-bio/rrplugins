@@ -6,7 +6,8 @@
     #pragma comment(lib, "telplugins_c_api-static.lib")
     #pragma comment(lib, "roadrunner_c_api-static.lib")
 #else
-    #pragma comment(lib, "telplugins.lib")
+    #pragma comment(lib, "telplugins_core.lib")
+    #pragma comment(lib, "telplugins_common.lib")
     #pragma comment(lib, "telplugins_c_api.lib")
     #pragma comment(lib, "roadrunner_c_api.lib")
 #endif

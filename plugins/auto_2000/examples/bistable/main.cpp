@@ -18,7 +18,7 @@ int main()
 {
     string tempFolder(".");
     string sbmlFile("../models/bistable.xml");
-	gLog.setLevel(rr::lInfo);
+	gLog.setLevel(lInfo);
     gLog.enableConsoleLogging();
     gLog.enableFileLogging(joinPath(tempFolder, "bistable.log"));
 
@@ -32,7 +32,7 @@ int main()
         //Load auto plugin
         if(!pm.load(pluginName))
         {
-            Log(rr::lError)<<"Failed to load plugin: "<<pluginName;
+            Log(lError)<<"Failed to load plugin: "<<pluginName;
             return 0;
         }
 
@@ -40,7 +40,7 @@ int main()
         AutoPlugin* autoPlugin = (AutoPlugin*) pm.getPlugin(pluginName);
         if(!autoPlugin)
         {
-            Log(rr::lError)<<"Problem..";
+            Log(lError)<<"Problem..";
             throw("AutoPlugin don't exist");
         }
 
@@ -68,11 +68,11 @@ int main()
 
         if(!autoPlugin->execute())
         {
-            Log(rr::lError)<<"Problem executing the Auto plugin";
+            Log(lError)<<"Problem executing the Auto plugin";
             return 0;
         }
 
-        Log(rr::lInfo)<<"Auto plugin is done.";
+        Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
         cout<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
 
@@ -80,17 +80,17 @@ int main()
         //Check plugin data..
         pm.unload(autoPlugin);
     }
-    catch(rr::Exception& ex)
+    catch(Exception& ex)
     {
-        Log(rr::lError)<<ex.getMessage();
+        Log(lError)<<ex.getMessage();
     }
     catch(Poco::Exception& ex)
     {
-        Log(rr::lError)<<"Problem..."<<ex.message();
+        Log(lError)<<"Problem..."<<ex.message();
     }
     catch(...)
     {
-        Log(rr::lError)<<"Bad problem...!";
+        Log(lError)<<"Bad problem...!";
     }
 
      pause(true);

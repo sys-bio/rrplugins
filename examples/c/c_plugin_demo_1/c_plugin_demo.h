@@ -1,6 +1,6 @@
 #ifndef c_plugin_demoH
 #define c_plugin_demoH
-#include "telExporter.h"
+#include "telCoreExporter.h"
 #include "telplugins_types.h"
 //-----------------------------------------------------------
 /*!

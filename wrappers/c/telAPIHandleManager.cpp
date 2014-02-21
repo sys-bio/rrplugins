@@ -13,46 +13,51 @@ APIHandleManager::APIHandleManager()
 
 APIHandleManager::~APIHandleManager()
 {
-    //Report existence of any handles in here.. that would be a memory leak if so
+    //Report existence of any handles in here.. that could be a memory leak if so
 }
 
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
 {
     HandleMap::iterator it = mHandles.find(handle);
-
-    if(it !=  mHandles.end() && it->second == type)
+    stringstream msg;
+    if(it !=  mHandles.end()) //There is something like this registered
     {
-        return handle;
-    }
-    else
-    {
-        //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
-        //type A should be validated as OK.
-        stringstream msg;
-        msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
-
-        if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
+        if(string(it->second) == string(type))
         {
-            string allowed("Property");
-            if(strstr(it->second, allowed.c_str()) != NULL)
-            {
-                //For now don't check ParameterBase types. See todo above
-                msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                Log(lDebug)<<msg.str();
-                return handle;
-            }
-            else
-            {
-                msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                throw(BadHandleException(msg.str()));
-            }
+            return handle;
         }
         else
         {
-            msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
-            throw(BadHandleException(msg.str()));
+            //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
+            //type A should be validated as OK.
+
+            msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
+
+            if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
+            {
+                string allowed("Property");
+                if(strstr(it->second, allowed.c_str()) != NULL)
+                {
+                    //For now don't check ParameterBase types. See todo above
+                    msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                    Log(lDebug)<<msg.str();
+                    return handle;
+                }
+                else
+                {
+                    msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                    throw(BadHandleException(msg.str()));
+                }
+            }
         }
     }
+    else
+    {
+        msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
+        msg<<"No such handle is registered. "<<endl;
+        throw(BadHandleException(msg.str()));
+    }
+
 }
 
 TELHandle APIHandleManager::registerHandle(TELHandle handle, const char* type)
@@ -66,7 +71,7 @@ TELHandle APIHandleManager::registerHandle(TELHandle handle, const char* type)
     return handle;
 }
 
-bool APIHandleManager::unregisterHandle(TELHandle handle, const char* type)
+bool APIHandleManager::unRegisterHandle(TELHandle handle)
 {
     HandleMap::iterator it = mHandles.find(handle);
     mHandles.erase ( it, mHandles.end() );

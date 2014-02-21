@@ -35,14 +35,14 @@ class RRA_DECLSPEC AutoData
 template<>
 inline string Property< AutoData >::getValueAsString() const
 {
-    Log(rr::lDebug2)<<"Getting AutoData value as a string is not implemented";
+    Log(lDebug2)<<"Getting AutoData value as a string is not implemented";
     return "";
 }
 
 template<>
 inline void Property< AutoData >::setValueFromString(const string& val)
 {
-    Log(rr::lDebug2)<<"Setting AutoData value from string is not implemented";
+    Log(lDebug2)<<"Setting AutoData value from string is not implemented";
     return;
 }
 

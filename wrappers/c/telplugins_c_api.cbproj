@@ -111,10 +111,6 @@
             <DependentOn>telAPIHandleManager.h</DependentOn>
             <BuildOrder>6</BuildOrder>
         </CppCompile>
-        <CppCompile Include="teljobs_api.cpp">
-            <DependentOn>teljobs_api.h</DependentOn>
-            <BuildOrder>7</BuildOrder>
-        </CppCompile>
         <CppCompile Include="telplugins_cpp_support.cpp">
             <DependentOn>telplugins_cpp_support.h</DependentOn>
             <BuildOrder>3</BuildOrder>
@@ -122,6 +118,10 @@
         <CppCompile Include="telplugins_c_api.cpp">
             <DependentOn>telplugins_c_api.h</DependentOn>
             <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="telplugins_jobs_api.cpp">
+            <DependentOn>telplugins_jobs_api.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="telplugins_properties_api.cpp">
             <BuildOrder>4</BuildOrder>
