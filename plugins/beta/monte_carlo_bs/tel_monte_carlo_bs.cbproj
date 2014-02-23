@@ -126,8 +126,8 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="bsMonteCarloBS.cpp">
-            <DependentOn>bsMonteCarloBS.h</DependentOn>
+        <CppCompile Include="bsMonteCarlo.cpp">
+            <DependentOn>bsMonteCarlo.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
         <CppCompile Include="bsUtils.cpp">

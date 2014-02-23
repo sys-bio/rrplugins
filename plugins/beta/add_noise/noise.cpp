@@ -3,16 +3,18 @@
 #include <math.h>
 #include "noise.h"
 #include "telUtils.h"
+#include "telRandom.h"
 //---------------------------------------------------------------------------
 namespace addNoise
 {
 
-double gaussNoise(double mean, double sigma);
+double gaussNoise(double mean, double sigma, tlp::Random& random);
 
 Noise::Noise(double m, double s)
 :
 mMean(m),
-mSigma(s)
+mSigma(s),
+mRandom( time( NULL ) )
 {
     randomize();
 }
@@ -21,12 +23,7 @@ double Noise::getNoise(double mean, double sigma)
 {
     mMean = mean;
     mSigma = sigma;
-    return gaussNoise(mMean, mSigma);
-}
-
-void Noise::randomize()
-{
-    srand( time( NULL ) );
+    return gaussNoise(mMean, mSigma, mRandom);
 }
 
 /* This uses the fact that a Rayleigh-distributed random variable R, with
@@ -37,13 +34,12 @@ D = R * sin(theta), where theta is a uniformly distributed variable
 in the interval (0, 2*pi()). From Contemporary Communication Systems
 USING MATLAB(R), by John G. Proakis and Masoud Salehi, published by
 PWS Publishing Company, 1998, pp 49-50. This is a pretty good book. */
-
-double gaussNoise(double mean, double sigma)
+double gaussNoise(double mean, double sigma, tlp::Random& random)
 {
     double u, r;            /* uniform and Rayleigh random variables */
 
     /* generate a uniformly distributed random number u between 0 and 1 - 1E-6*/
-    u = (double) rand() / RAND_MAX;
+    u = random.next(); //(double) rand() / RAND_MAX;
     if (u == 1.0)
     {
         u = 0.999999999;
@@ -53,7 +49,7 @@ double gaussNoise(double mean, double sigma)
     r = sigma * sqrt( 2.0 * log( 1.0 / (1.0 - u) ) );
 
     /* generate another uniformly-distributed random number u as before*/
-    u = (double) rand() / RAND_MAX;
+    u = random.next(); //(double) rand() / RAND_MAX;
     if (u == 1.0)
     {
         u = 0.999999999;

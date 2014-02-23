@@ -1,5 +1,5 @@
-#ifndef rrRandomH
-#define rrRandomH
+#ifndef telRandomH
+#define telRandomH
 #include "third_party/mtrand.h"
 #include "telMathExporter.h"
 //---------------------------------------------------------------------------
@@ -10,8 +10,8 @@ namespace tlp
 class MATH_DECLSPEC Random
 {
     public:
-                        Random();
-        double          NextDouble() const;
+                        Random(unsigned long seed);
+        double          next() const;
 
     private:
         MTRand          mRand;        //Get a double in [0, 1)

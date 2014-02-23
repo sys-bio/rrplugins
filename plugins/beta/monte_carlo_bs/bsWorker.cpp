@@ -4,23 +4,22 @@
 #include "rr/rrRoadRunnerOptions.h"
 #include "telException.h"
 #include "telTelluriumData.h"
-#include "bsMonteCarloBS.h"
+#include "bsMonteCarlo.h"
 #include "telUtils.h"
 #include "telMathUtils.h"
 #include "telProperty.h"
 #include "telPluginManager.h"
-
 //---------------------------------------------------------------------------
+
 using namespace std;
 using namespace tlp;
-using namespace tlpc;
 
-bsWorker::bsWorker(MonteCarloBS& host)
+bsWorker::bsWorker(MonteCarlo& host)
 :
 mTheHost(host),
 mRRI(NULL)
 {
-    memset(&mLMData, 0, sizeof(lmDataStructure));
+
 }
 
 bool bsWorker::isRunning() const

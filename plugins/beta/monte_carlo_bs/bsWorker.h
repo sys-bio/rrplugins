@@ -9,25 +9,21 @@
 #include "telProperties.h"
 //---------------------------------------------------------------------------
 
-namespace lmfit
-{
-
 using std::vector;
-class MonteCarloBS;
+class MonteCarlo;
 using tlp::TelluriumData;
 using tlp::Properties;
 
 class bsWorker : public Poco::Runnable
 {
-    friend MonteCarloBS;
+    friend MonteCarlo;
 
     protected:
         rr::RoadRunner             *mRRI;
 
-        lmDataStructure             mLMData;        //LevenbergMarq.. data structure
         Poco::Thread                mThread;
 
-        MonteCarloBS&                         mTheHost;
+        MonteCarlo&                 mTheHost;
         bool                        setupRoadRunner();
         bool                        setup();
         void                        createModelData(TelluriumData* data);
@@ -42,11 +38,11 @@ class bsWorker : public Poco::Runnable
         double                      getChi(const Properties& parameters);
 
     public:
-                                    bsWorker(MonteCarloBS& host);
+                                    bsWorker(MonteCarlo& host);
         void                        start(bool runInThread = true);
         void                        run();
         bool                        isRunning() const;
 };
 
-}
+
 #endif

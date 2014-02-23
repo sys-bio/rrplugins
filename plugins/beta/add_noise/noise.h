@@ -1,5 +1,6 @@
 #ifndef noiseH
 #define noiseH
+#include "telRandom.h"
 //---------------------------------------------------------------------------
 
 namespace addNoise
@@ -8,13 +9,13 @@ namespace addNoise
 class Noise
 {
     private:
-        double         mMean;
-        double         mSigma;
+        double          mMean;
+        double          mSigma;
+        tlp::Random     mRandom;
 
     public:
-                    Noise(double m = 0, double s = 1);
-        double      getNoise(double mean, double sigma);
-        void        randomize();
+                        Noise(double m = 0, double s = 1);
+        double          getNoise(double mean, double sigma);
 };
 
 }

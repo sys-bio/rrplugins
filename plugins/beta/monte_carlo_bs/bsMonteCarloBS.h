@@ -52,8 +52,6 @@ class MonteCarloBS : public CPPPlugin
         string                                  getTempFolder();
         string                                  getSBML();
 
-		lmDataStructure							&mLMData;        //LevenbergMarq.. data structure
-
     protected:
         //The worker is doing the work
         bsWorker                                mWorker;

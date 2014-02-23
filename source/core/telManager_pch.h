@@ -1,7 +1,7 @@
 //#include <windows.h>
 //
 //
-////STD includes
+//STD includes
 #include <algorithm>
 #include <cctype>
 #include <deque>

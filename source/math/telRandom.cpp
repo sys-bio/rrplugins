@@ -1,14 +1,16 @@
 #pragma hdrstop
-#include "rrRandom.h"
+#include "telRandom.h"
 #include "third_party/mtrand.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
 {
 
-Random::Random() {}
+Random::Random(unsigned long seed)
+:
+mRand(seed) {}
 
-double Random::NextDouble() const
+double Random::next() const
 {
     return mRand();
 }
