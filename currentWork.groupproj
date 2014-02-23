@@ -39,11 +39,17 @@
         <Projects Include="plugins\beta\statistics\tel_statistics.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="plugins\beta\parameter_scan\tel_parameter_scan.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
-            <Dependencies>wrappers\C\telplugins_c_api.cbproj</Dependencies>
+        <Projects Include="R:\rre\SBMLStudio\SBMLStudio-static.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="R:\rre\SBMLStudio\SBMLStudio.cbproj">
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -161,6 +167,15 @@
     <Target Name="tel_statistics:Make">
         <MSBuild Projects="plugins\beta\statistics\tel_statistics.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="tel_parameter_scan">
+        <MSBuild Projects="plugins\beta\parameter_scan\tel_parameter_scan.cbproj"/>
+    </Target>
+    <Target Name="tel_parameter_scan:Clean">
+        <MSBuild Projects="plugins\beta\parameter_scan\tel_parameter_scan.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_parameter_scan:Make">
+        <MSBuild Projects="plugins\beta\parameter_scan\tel_parameter_scan.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="tel_monte_carlo_bs">
         <MSBuild Projects="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj"/>
     </Target>
@@ -170,23 +185,32 @@
     <Target Name="tel_monte_carlo_bs:Make">
         <MSBuild Projects="plugins\beta\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="rrWinC" DependsOnTargets="telplugins_c_api">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
+    <Target Name="SBMLStudio-static">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio-static.cbproj"/>
     </Target>
-    <Target Name="rrWinC:Clean" DependsOnTargets="telplugins_c_api:Clean">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Clean"/>
+    <Target Name="SBMLStudio-static:Clean">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio-static.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="rrWinC:Make" DependsOnTargets="telplugins_c_api:Make">
-        <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
+    <Target Name="SBMLStudio-static:Make">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="SBMLStudio">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio.cbproj"/>
+    </Target>
+    <Target Name="SBMLStudio:Clean">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SBMLStudio:Make">
+        <MSBuild Projects="R:\rre\SBMLStudio\SBMLStudio.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;lmfit-static;tel_lm;tel_add_noise;tel_chisquare;tel_statistics;tel_monte_carlo_bs;rrWinC"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;lmfit-static;tel_lm;tel_add_noise;tel_chisquare;tel_statistics;tel_parameter_scan;tel_monte_carlo_bs;SBMLStudio-static;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;lmfit-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_chisquare:Clean;tel_statistics:Clean;tel_monte_carlo_bs:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;lmfit-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_chisquare:Clean;tel_statistics:Clean;tel_parameter_scan:Clean;tel_monte_carlo_bs:Clean;SBMLStudio-static:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;lmfit-static:Make;tel_lm:Make;tel_add_noise:Make;tel_chisquare:Make;tel_statistics:Make;tel_monte_carlo_bs:Make;rrWinC:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;lmfit-static:Make;tel_lm:Make;tel_add_noise:Make;tel_chisquare:Make;tel_statistics:Make;tel_parameter_scan:Make;tel_monte_carlo_bs:Make;SBMLStudio-static:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
