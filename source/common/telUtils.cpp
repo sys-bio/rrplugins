@@ -35,7 +35,7 @@
 #include "Poco/File.h"
 #include "telStringUtils.h"
 #include "telUtils.h"
-#include "rr/rrSelectionRecord.h"
+//#include "rr/rrSelectionRecord.h"
 #include "telException.h"
 #include "telLogger.h"
 
@@ -57,15 +57,15 @@ namespace tlp
 {
 using namespace std;
 
-StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
-{
-    StringList sels;
-    for(int i = 0; i < _sels.size(); i++)
-    {
-        sels.add(_sels[i].to_string());
-    }
-    return sels;
-}
+//StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
+//{
+//    StringList sels;
+//    for(int i = 0; i < _sels.size(); i++)
+//    {
+//        sels.add(_sels[i].to_string());
+//    }
+//    return sels;
+//}
 
 bool cleanFolder(const string& folder, const string& baseName, const std::vector<std::string>& extensions)
 {

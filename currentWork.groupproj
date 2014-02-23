@@ -3,13 +3,10 @@
         <ProjectGuid>{9D2F6A51-22D8-4937-81DE-48830B3456CF}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="P:\Raven\Source\Common\mtkCommon.cbproj">
+        <Projects Include="misc\cg_ide\roadrunner.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="R:\rrl\source\roadrunner.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="R:\rrl\wrappers\C\roadrunner_c_api.cbproj">
+        <Projects Include="misc\cg_ide\roadrunner_c_api.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\common\telplugins_common.cbproj">
@@ -25,6 +22,9 @@
             <Dependencies/>
         </Projects>
         <Projects Include="wrappers\C\telplugins_c_api.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\beta\lmfit\lib\lmfit-static.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="plugins\beta\lmfit\tel_lm.cbproj">
@@ -53,32 +53,23 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="mtkCommon">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj"/>
-    </Target>
-    <Target Name="mtkCommon:Clean">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="mtkCommon:Make">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="roadrunner">
-        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner.cbproj"/>
     </Target>
     <Target Name="roadrunner:Clean">
-        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj" Targets="Clean"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="roadrunner:Make">
-        <MSBuild Projects="R:\rrl\source\roadrunner.cbproj" Targets="Make"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner.cbproj" Targets="Make"/>
     </Target>
     <Target Name="roadrunner_c_api">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj"/>
     </Target>
     <Target Name="roadrunner_c_api:Clean">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Clean"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="roadrunner_c_api:Make">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Make"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj" Targets="Make"/>
     </Target>
     <Target Name="telplugins_common">
         <MSBuild Projects="source\common\telplugins_common.cbproj"/>
@@ -124,6 +115,15 @@
     </Target>
     <Target Name="telplugins_c_api:Make">
         <MSBuild Projects="wrappers\C\telplugins_c_api.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="lmfit-static">
+        <MSBuild Projects="plugins\beta\lmfit\lib\lmfit-static.cbproj"/>
+    </Target>
+    <Target Name="lmfit-static:Clean">
+        <MSBuild Projects="plugins\beta\lmfit\lib\lmfit-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="lmfit-static:Make">
+        <MSBuild Projects="plugins\beta\lmfit\lib\lmfit-static.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_lm">
         <MSBuild Projects="plugins\beta\lmfit\tel_lm.cbproj"/>
@@ -180,13 +180,13 @@
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;tel_lm;tel_add_noise;tel_chisquare;tel_statistics;tel_monte_carlo_bs;rrWinC"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins_common;telplugins_math;telplugins_core;telplugins_jobs;telplugins_c_api;lmfit-static;tel_lm;tel_add_noise;tel_chisquare;tel_statistics;tel_monte_carlo_bs;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_chisquare:Clean;tel_statistics:Clean;tel_monte_carlo_bs:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_math:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;lmfit-static:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_chisquare:Clean;tel_statistics:Clean;tel_monte_carlo_bs:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;tel_lm:Make;tel_add_noise:Make;tel_chisquare:Make;tel_statistics:Make;tel_monte_carlo_bs:Make;rrWinC:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_math:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;lmfit-static:Make;tel_lm:Make;tel_add_noise:Make;tel_chisquare:Make;tel_statistics:Make;tel_monte_carlo_bs:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

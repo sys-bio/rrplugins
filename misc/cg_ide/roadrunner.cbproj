@@ -1,0 +1,415 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CA92B986-ACA0-406D-854C-EE84B820C29B}</ProjectGuid>
+        <ProjectVersion>14.4</ProjectVersion>
+        <FrameworkType>None</FrameworkType>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Library</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DynamicRTL>true</DynamicRTL>
+        <Manifest_File>None</Manifest_File>
+        <AllPackageLibs>rtl.lib</AllPackageLibs>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Defines>EXPORT_RR;LIBSBML_STATIC;LIBLAX_STATIC;STATIC_LIBSTRUCT;STATIC_NLEQ;LIBSBML_USE_CPP_NAMESPACE;POCO_STATIC;PCRE_STATIC;POCO_NO_AUTOMATIC_LIBS;$(Defines)</Defines>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <ILINK_LibraryPath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\libplugins\source\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\libplugins\source\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(RR_INSTALL)\include;$(RR_INSTALL)\include\libxml2;$(IncludePath)</IncludePath>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
+        <_TCHARMapping>char</_TCHARMapping>
+        <Multithreaded>true</Multithreaded>
+        <ProjectType>CppDynamicLibrary</ProjectType>
+        <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+        <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+        <BCC_wpar>false</BCC_wpar>
+        <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+        <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
+        <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <PackageImports>VCLCommon;bindcompfmx;DBXSqliteDriver;vcldbx;fmx;rtl;dbrtl;DbxClientDriver;TeeDB;IndySystem;bindcomp;inetdb;vclib;inetdbbde;DBXInterBaseDriver;Tee;DataSnapCommon;xmlrtl;ibxpress;DbxCommonDriver;vclimg;IndyProtocols;DBXMySQLDriver;dbxcds;MetropolisUILiveTile;soaprtl;bindcompdbx;bindengine;vclactnband;vcldb;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;bcbsmp;websnap;CustomIPTransport;dsnap;IndyIPServer;fmxase;vcl;IndyCore;CloudService;IndyIPCommon;dsnapcon;FmxTeeUI;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;bdertl;DuneComponents;adortl;dbexpress;bcbie;IndyIPClient;$(PackageImports)</PackageImports>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <PackageImports>bindcompfmx;DBXSqliteDriver;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;bindcomp;inetdb;DBXInterBaseDriver;DataSnapCommon;xmlrtl;DbxCommonDriver;vclimg;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindcompdbx;bindengine;vclactnband;vcldb;vcldsnap;bindcompvcl;vclie;vcltouch;websnap;CustomIPTransport;dsnap;IndyIPServer;fmxase;vcl;IndyCore;IndyIPCommon;dsnapcon;inet;fmxobj;vclx;inetdbxpress;webdsnap;fmxdae;dbexpress;IndyIPClient;$(PackageImports)</PackageImports>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+        <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <Defines>_DEBUG;$(Defines)</Defines>
+        <BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+        <BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+        <DCC_Define>DEBUG</DCC_Define>
+        <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+        <TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+        <BCC_StackFrames>true</BCC_StackFrames>
+        <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+        <TASM_Debugging>Full</TASM_Debugging>
+        <BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+        <BCC_EnableCPPExceptions>true</BCC_EnableCPPExceptions>
+        <BCC_DisableFramePtrElimOpt>true</BCC_DisableFramePtrElimOpt>
+        <BCC_DisableSpellChecking>true</BCC_DisableSpellChecking>
+        <CLANG_UnwindTables>true</CLANG_UnwindTables>
+        <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Defines>CG_IDE;$(Defines)</Defines>
+        <BCC_CPPCompileAlways>true</BCC_CPPCompileAlways>
+        <BCC_PCHInject>rr_pch.h</BCC_PCHInject>
+        <LinkPackageStatics>rtl.lib</LinkPackageStatics>
+        <ILINK_LibraryPath>$(RR_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
+        <BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Defines>NDEBUG;$(Defines)</Defines>
+        <TASM_Debugging>None</TASM_Debugging>
+    </PropertyGroup>
+    <ItemGroup>
+        <CppCompile Include="R:\rrl\source\Configurable.cpp">
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\mtrand.cpp">
+            <BuildOrder>67</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCCompiler.cpp">
+            <BuildOrder>65</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCModelDataUtil.cpp">
+            <BuildOrder>64</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCModelGenerator.cpp">
+            <BuildOrder>63</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCodeBuilder.cpp">
+            <DependentOn>R:\rrl\source\c\rrCodeBuilder.h</DependentOn>
+            <BuildOrder>62</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCompiledExecutableModel.cpp">
+            <BuildOrder>61</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCompiledModelGenerator.cpp">
+            <BuildOrder>60</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrCompiledModelState.cpp">
+            <BuildOrder>59</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrEvent.cpp">
+            <DependentOn>R:\rrl\source\c\rrEvent.h</DependentOn>
+            <BuildOrder>57</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrHashTable.cpp">
+            <DependentOn>R:\rrl\source\c\rrHashTable.h</DependentOn>
+            <BuildOrder>56</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrModelSharedLibrary.cpp">
+            <DependentOn>R:\rrl\source\c\rrModelSharedLibrary.h</DependentOn>
+            <BuildOrder>55</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrModelSymbols.cpp">
+            <BuildOrder>54</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrNOMSupport.cpp">
+            <DependentOn>R:\rrl\source\c\rrNOMSupport.h</DependentOn>
+            <BuildOrder>53</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrPendingAssignment.cpp">
+            <DependentOn>R:\rrl\source\c\rrPendingAssignment.h</DependentOn>
+            <BuildOrder>52</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrRandom.cpp">
+            <BuildOrder>66</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrRule.cpp">
+            <DependentOn>R:\rrl\source\c\rrRule.h</DependentOn>
+            <BuildOrder>51</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrSBMLSymbol.cpp">
+            <DependentOn>R:\rrl\source\c\rrSBMLSymbol.h</DependentOn>
+            <BuildOrder>50</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrSBMLSymbolDependencies.cpp">
+            <DependentOn>R:\rrl\source\c\rrSBMLSymbolDependencies.h</DependentOn>
+            <BuildOrder>49</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrScanner.cpp">
+            <DependentOn>R:\rrl\source\c\rrScanner.h</DependentOn>
+            <BuildOrder>48</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrStringBuilder.cpp">
+            <DependentOn>R:\rrl\source\c\rrStringBuilder.h</DependentOn>
+            <BuildOrder>47</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrStringListContainer.cpp">
+            <DependentOn>R:\rrl\source\c\rrStringListContainer.h</DependentOn>
+            <BuildOrder>46</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrSymbol.cpp">
+            <DependentOn>R:\rrl\source\c\rrSymbol.h</DependentOn>
+            <BuildOrder>45</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrSymbolList.cpp">
+            <DependentOn>R:\rrl\source\c\rrSymbolList.h</DependentOn>
+            <BuildOrder>44</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\c\rrToken.cpp">
+            <DependentOn>R:\rrl\source\c\rrToken.h</DependentOn>
+            <BuildOrder>43</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrAutoLink.cpp">
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrConstants.cpp">
+            <DependentOn>R:\rrl\source\rrConstants.h</DependentOn>
+            <BuildOrder>25</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrCVODEInterface.cpp">
+            <DependentOn>R:\rrl\source\rrCVODEInterface.h</DependentOn>
+            <BuildOrder>28</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrData.cpp">
+            <DependentOn>R:\rrl\source\rrData.h</DependentOn>
+            <BuildOrder>29</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrException.cpp">
+            <DependentOn>R:\rrl\source\rrException.h</DependentOn>
+            <BuildOrder>30</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrExecutableModel.cpp">
+            <DependentOn>R:\rrl\source\rrExecutableModel.h</DependentOn>
+            <BuildOrder>31</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrFileName.cpp">
+            <DependentOn>R:\rrl\source\rrFileName.h</DependentOn>
+            <BuildOrder>32</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrGetOptions.cpp">
+            <DependentOn>R:\rrl\source\rrGetOptions.h</DependentOn>
+            <BuildOrder>33</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrIniFile.cpp">
+            <BuildOrder>34</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrIniKey.cpp">
+            <DependentOn>R:\rrl\source\rrIniKey.h</DependentOn>
+            <BuildOrder>35</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrIniSection.cpp">
+            <DependentOn>R:\rrl\source\rrIniSection.h</DependentOn>
+            <BuildOrder>36</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrLogger.cpp">
+            <DependentOn>R:\rrl\source\rrLogger.h</DependentOn>
+            <BuildOrder>37</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrModelGeneratorFactory.cpp">
+            <BuildOrder>40</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrNLEQInterface.cpp">
+            <DependentOn>R:\rrl\source\rrNLEQInterface.h</DependentOn>
+            <BuildOrder>41</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrRoadRunner.cpp">
+            <DependentOn>R:\rrl\source\rrRoadRunner.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrRoadRunnerData.cpp">
+            <DependentOn>R:\rrl\source\rrRoadRunnerData.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrRoadRunnerOptions.cpp">
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrSBMLModelSimulation.cpp">
+            <DependentOn>R:\rrl\source\rrSBMLModelSimulation.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrSBMLReader.cpp">
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrSelectionRecord.cpp">
+            <DependentOn>R:\rrl\source\rrSelectionRecord.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrSparse.cpp">
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrSteadyStateSolver.cpp">
+            <DependentOn>R:\rrl\source\rrSteadyStateSolver.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrStringList.cpp">
+            <DependentOn>R:\rrl\source\rrStringList.h</DependentOn>
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrStringUtils.cpp">
+            <DependentOn>R:\rrl\source\rrStringUtils.h</DependentOn>
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrTestSuiteModelSimulation.cpp">
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrUnresolvedSTDExternals.cpp">
+            <BuildOrder>53</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrUtils.cpp">
+            <DependentOn>R:\rrl\source\rrUtils.h</DependentOn>
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\source\rrVersionInfo.cpp">
+            <DependentOn>R:\rrl\source\rrVersionInfo.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_chartables.c">
+            <BuildOrder>54</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_compile.c">
+            <BuildOrder>55</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_exec.c">
+            <BuildOrder>56</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_fullinfo.c">
+            <BuildOrder>57</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_globals.c">
+            <BuildOrder>58</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_maketables.c">
+            <BuildOrder>59</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_newline.c">
+            <BuildOrder>60</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_ord2utf8.c">
+            <BuildOrder>61</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_study.c">
+            <BuildOrder>62</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_tables.c">
+            <BuildOrder>63</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_try_flipped.c">
+            <BuildOrder>64</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_ucd.c">
+            <BuildOrder>65</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_valid_utf8.c">
+            <BuildOrder>66</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_xclass.c">
+            <BuildOrder>67</BuildOrder>
+        </CppCompile>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+        <Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>
+        <BorlandProject>
+            <CPlusPlusBuilder.Personality>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                </VersionInfoKeys>
+                <ProjectProperties>
+                    <ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+                    <ProjectProperties Name="ManagePaths">True</ProjectProperties>
+                    <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+                </ProjectProperties>
+                <Excluded_Packages/>
+            </CPlusPlusBuilder.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

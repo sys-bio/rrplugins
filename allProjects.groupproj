@@ -3,22 +3,10 @@
         <ProjectGuid>{9D2F6A51-22D8-4937-81DE-48830B3456CF}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="P:\Raven\Source\Common\mtkCommon.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="R:\rrl\source\roadrunner.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="R:\rrl\wrappers\C\roadrunner_c_api.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\lmfit\lib\lmfit-static.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\auto_2000\libAuto\libAuto-static.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\common\telplugins_common.cbproj">
@@ -36,28 +24,7 @@
         <Projects Include="wrappers\c\telplugins_c_api.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\lmfit\tel_lm.cbproj">
-            <Dependencies>source\core\telplugins_core.cbproj</Dependencies>
-        </Projects>
-        <Projects Include="plugins\add_noise\tel_add_noise.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\auto_2000\source\tel_auto2000.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\stat\tel_Stat.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\parameter_scan\tel_parameter_scan.cbproj">
-            <Dependencies>source\core\telplugins_core.cbproj</Dependencies>
-        </Projects>
-        <Projects Include="plugins\chisquare\tel_chisquare.cbproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="plugins\sbml_model\tel_sbml_model.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
@@ -72,9 +39,6 @@
         <Projects Include="testing\c\handle_manager\handle_manager.cbproj">
             <Dependencies>wrappers\c\telplugins_c_api.cbproj</Dependencies>
         </Projects>
-        <Projects Include="plugins\auto_2000\examples\bistable\bistable.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="R:\rre\rr_ui\rrWinC.cbproj">
             <Dependencies/>
         </Projects>
@@ -86,15 +50,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="mtkCommon">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj"/>
-    </Target>
-    <Target Name="mtkCommon:Clean">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="mtkCommon:Make">
-        <MSBuild Projects="P:\Raven\Source\Common\mtkCommon.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="roadrunner">
         <MSBuild Projects="R:\rrl\source\roadrunner.cbproj"/>
     </Target>
@@ -112,33 +67,6 @@
     </Target>
     <Target Name="roadrunner_c_api:Make">
         <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="lmfit-static">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj"/>
-    </Target>
-    <Target Name="lmfit-static:Clean">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="lmfit-static:Make">
-        <MSBuild Projects="plugins\lmfit\lib\lmfit-static.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="libAuto-static">
-        <MSBuild Projects="plugins\auto_2000\libAuto\libAuto-static.cbproj"/>
-    </Target>
-    <Target Name="libAuto-static:Clean">
-        <MSBuild Projects="plugins\auto_2000\libAuto\libAuto-static.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="libAuto-static:Make">
-        <MSBuild Projects="plugins\auto_2000\libAuto\libAuto-static.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="rrAutoInterface-static">
-        <MSBuild Projects="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj"/>
-    </Target>
-    <Target Name="rrAutoInterface-static:Clean">
-        <MSBuild Projects="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="rrAutoInterface-static:Make">
-        <MSBuild Projects="plugins\auto_2000\rrAutoInterface\rrAutoInterface-static.cbproj" Targets="Make"/>
     </Target>
     <Target Name="telplugins_common">
         <MSBuild Projects="source\common\telplugins_common.cbproj"/>
@@ -185,33 +113,6 @@
     <Target Name="telplugins_c_api:Make">
         <MSBuild Projects="wrappers\c\telplugins_c_api.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="tel_lm" DependsOnTargets="telplugins_core">
-        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj"/>
-    </Target>
-    <Target Name="tel_lm:Clean" DependsOnTargets="telplugins_core:Clean">
-        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_lm:Make" DependsOnTargets="telplugins_core:Make">
-        <MSBuild Projects="plugins\lmfit\tel_lm.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_add_noise">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj"/>
-    </Target>
-    <Target Name="tel_add_noise:Clean">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_add_noise:Make">
-        <MSBuild Projects="plugins\add_noise\tel_add_noise.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_auto2000">
-        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj"/>
-    </Target>
-    <Target Name="tel_auto2000:Clean">
-        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_auto2000:Make">
-        <MSBuild Projects="plugins\auto_2000\source\tel_auto2000.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="tel_c_plugin_demo">
         <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj"/>
     </Target>
@@ -220,42 +121,6 @@
     </Target>
     <Target Name="tel_c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_Stat">
-        <MSBuild Projects="plugins\stat\tel_Stat.cbproj"/>
-    </Target>
-    <Target Name="tel_Stat:Clean">
-        <MSBuild Projects="plugins\stat\tel_Stat.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_Stat:Make">
-        <MSBuild Projects="plugins\stat\tel_Stat.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_parameter_scan" DependsOnTargets="telplugins_core">
-        <MSBuild Projects="plugins\parameter_scan\tel_parameter_scan.cbproj"/>
-    </Target>
-    <Target Name="tel_parameter_scan:Clean" DependsOnTargets="telplugins_core:Clean">
-        <MSBuild Projects="plugins\parameter_scan\tel_parameter_scan.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_parameter_scan:Make" DependsOnTargets="telplugins_core:Make">
-        <MSBuild Projects="plugins\parameter_scan\tel_parameter_scan.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_chisquare">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj"/>
-    </Target>
-    <Target Name="tel_chisquare:Clean">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_chisquare:Make">
-        <MSBuild Projects="plugins\chisquare\tel_chisquare.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="tel_sbml_model">
-        <MSBuild Projects="plugins\sbml_model\tel_sbml_model.cbproj"/>
-    </Target>
-    <Target Name="tel_sbml_model:Clean">
-        <MSBuild Projects="plugins\sbml_model\tel_sbml_model.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_sbml_model:Make">
-        <MSBuild Projects="plugins\sbml_model\tel_sbml_model.cbproj" Targets="Make"/>
     </Target>
     <Target Name="property_meta_data">
         <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
@@ -293,15 +158,6 @@
     <Target Name="handle_manager:Make" DependsOnTargets="telplugins_c_api:Make">
         <MSBuild Projects="testing\c\handle_manager\handle_manager.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="bistable">
-        <MSBuild Projects="plugins\auto_2000\examples\bistable\bistable.cbproj"/>
-    </Target>
-    <Target Name="bistable:Clean">
-        <MSBuild Projects="plugins\auto_2000\examples\bistable\bistable.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="bistable:Make">
-        <MSBuild Projects="plugins\auto_2000\examples\bistable\bistable.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="rrWinC">
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj"/>
     </Target>
@@ -312,13 +168,13 @@
         <MSBuild Projects="R:\rre\rr_ui\rrWinC.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="mtkCommon;roadrunner;roadrunner_c_api;lmfit-static;libAuto-static;rrAutoInterface-static;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_lm;tel_add_noise;tel_auto2000;tel_c_plugin_demo;tel_Stat;tel_parameter_scan;tel_chisquare;tel_sbml_model;property_meta_data;plugin_info;c_plugin_demo;handle_manager;bistable;rrWinC"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;property_meta_data;plugin_info;c_plugin_demo;handle_manager;rrWinC"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="mtkCommon:Clean;roadrunner:Clean;roadrunner_c_api:Clean;lmfit-static:Clean;libAuto-static:Clean;rrAutoInterface-static:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_lm:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_c_plugin_demo:Clean;tel_Stat:Clean;tel_parameter_scan:Clean;tel_chisquare:Clean;tel_sbml_model:Clean;property_meta_data:Clean;plugin_info:Clean;c_plugin_demo:Clean;handle_manager:Clean;bistable:Clean;rrWinC:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;property_meta_data:Clean;plugin_info:Clean;c_plugin_demo:Clean;handle_manager:Clean;rrWinC:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="mtkCommon:Make;roadrunner:Make;roadrunner_c_api:Make;lmfit-static:Make;libAuto-static:Make;rrAutoInterface-static:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_lm:Make;tel_add_noise:Make;tel_auto2000:Make;tel_c_plugin_demo:Make;tel_Stat:Make;tel_parameter_scan:Make;tel_chisquare:Make;tel_sbml_model:Make;property_meta_data:Make;plugin_info:Make;c_plugin_demo:Make;handle_manager:Make;bistable:Make;rrWinC:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;property_meta_data:Make;plugin_info:Make;c_plugin_demo:Make;handle_manager:Make;rrWinC:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

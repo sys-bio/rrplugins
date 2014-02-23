@@ -12,7 +12,6 @@
 #include "telLoadModelThread.h"
 #include "telSimulateThread.h"
 #include "telUtils.h"
-//#include "telLogger.h"
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"     // Need to include this before the support header..
 #include "tel_macros.h"
