@@ -16,6 +16,7 @@
     #pragma comment(lib, "telplugins_core.lib")
     #pragma comment(lib, "telplugins_common.lib")
     #pragma comment(lib, "telplugins_math.lib")
+    #pragma comment(lib, "telplugins_c_api.lib")
     #pragma comment(lib, "roadrunner_c_api.lib")
     #pragma comment(lib, "lmfit-static.lib")
     #pragma comment(lib, "rr-libstruct-static.lib")

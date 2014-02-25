@@ -37,6 +37,11 @@ mIsWorking(false)
 Plugin::~Plugin()
 {}
 
+const PluginManager* Plugin::getPluginManager()
+{
+    return mPM;
+}
+
 void Plugin::terminate()
 {
     if(!mIsWorking)

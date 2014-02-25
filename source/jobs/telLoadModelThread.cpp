@@ -129,10 +129,9 @@ void LoadModelThread::worker()
         }
     }
 
-
     Log(lDebug)<<"Exiting Load Model thread: "<<mThread.id();
-      mIsWorking  = false;
-       Mutex::ScopedLock lock2(mNrOfWorkersMutex);
+    mIsWorking  = false;
+    Mutex::ScopedLock lock2(mNrOfWorkersMutex);
     mNrOfWorkers--;
 
 }

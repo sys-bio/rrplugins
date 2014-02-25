@@ -279,6 +279,22 @@ TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* parameterName)
     catch_ptr_macro
 }
 
+TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const char* parameterName)
+{
+    start_try
+        Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
+        PropertyBase* prop = aPlugin->getProperty(parameterName);
+        if(prop)
+        {
+            return prop->getValueHandle();
+        }
+        else
+        {
+            return NULL;
+        }
+    catch_ptr_macro
+}
+
 bool tlp_cc setPluginProperty(TELHandle handle, const char* parameterName, const char* value)
 {
     start_try

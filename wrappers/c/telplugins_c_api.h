@@ -46,6 +46,7 @@
 #include "teljobs_api.h"
 #include "telplugins_properties_api.h"
 #include "telplugins_telluriumdata_api.h"
+#include "telplugins_logging_api.h"
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
@@ -435,6 +436,15 @@ TLP_C_DS char* tlp_cc getListOfPluginPropertyNames(TELHandle handle);
  \ingroup plugins
 */
 TLP_C_DS TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* propertyName);
+
+/*!
+ \brief Get a handle to a property value.
+ \param handle Handle to a plugin
+ \param propertyName Name of the property
+ \return Returns a handle to the value of a property. Returns NULL if unsuccesful
+ \ingroup plugins
+*/
+TLP_C_DS TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const char* propertyName);
 
 /*!
  \brief Set the value of a PluginProperty by a string.

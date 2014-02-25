@@ -2,7 +2,6 @@
 #include <sstream>
 #include "telLogger.h"
 #include "telException.h"
-#include "rr/rrRoadRunner.h"
 #include "monte_carlo_bs_doc.h"
 #include "bsMonteCarlo.h"
 #include "telTelluriumData.h"

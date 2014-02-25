@@ -79,7 +79,6 @@ TLP_C_DS TELHandle tlp_cc loadSBMLFromFileJob(TELHandle handle, const char* file
  \return Returns a handle to the Job if succesful, otherwise returns NULL
  \ingroup multiThreading
 */
-
 TLP_C_DS TELHandle tlp_cc loadSBMLFromFileJobEx(TELHandle handle, const char* fileName, bool reCompile);
 
 /*!

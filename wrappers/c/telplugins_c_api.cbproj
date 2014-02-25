@@ -123,6 +123,9 @@
             <DependentOn>telplugins_jobs_api.h</DependentOn>
             <BuildOrder>7</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telplugins_logging_api.cpp">
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telplugins_properties_api.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>

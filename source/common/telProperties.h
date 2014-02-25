@@ -86,7 +86,7 @@ class COMMON_DECLSPEC Properties
         /**
            Return parameters in the container as a list of strings.
         */
-        tlp::StringList                      getNames() const;
+        tlp::StringList                     getNames() const;
 
         /**
            Return number of parameters in the container.

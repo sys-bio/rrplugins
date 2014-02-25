@@ -303,6 +303,12 @@ class CORE_DECLSPEC Plugin
         */
         virtual bool                    execute(bool inAThread = false) = 0;
 
+        /**
+            Get a pointer to the plugins manager
+        */
+        const PluginManager*            getPluginManager();
+
+
     protected:                          //! Name of Plugin
         string                          mName;
 

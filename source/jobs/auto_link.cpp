@@ -8,8 +8,6 @@
 #endif
 
 #pragma comment(lib, "telplugins_common.lib")
-#pragma comment(lib, "telplugins_math.lib")
-
 
 #pragma comment(lib, "sundials_cvode.lib")
 #pragma comment(lib, "sundials_nvecserial.lib")

@@ -53,7 +53,6 @@ TELHandle tlp_cc loadSBMLFromFileJob(tlpc::TELHandle handle, const char* fileNam
 TELHandle tlp_cc loadSBMLJob(tlpc::TELHandle handle, const char* sbml)
 {
     start_try
-//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
         RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread();
         loadThread->setSBML(sbml);
@@ -80,7 +79,6 @@ TELHandle tlp_cc loadSBMLFromFileJobEx(tlpc::TELHandle handle, const char* fileN
             return NULL;
         }
 
-//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
         RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread(fileName, recompile);
 
@@ -98,8 +96,6 @@ TELHandle tlp_cc loadSBMLFromFileJobEx(tlpc::TELHandle handle, const char* fileN
 TELHandle tlp_cc loadSBMLJobEx(tlpc::TELHandle handle, const char* sbml, bool recompile)
 {
     start_try
-
-//        RoadRunner* rr = tlp::castToRoadRunner(rrHandle);
         RoadRunner* rr = castHandle<RoadRunner>(handle, __FUNC__);
         LoadModelThread* loadThread = new LoadModelThread("", recompile);
         loadThread->setSBML(sbml);
