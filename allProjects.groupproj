@@ -6,7 +6,7 @@
         <Projects Include="R:\rrl\source\roadrunner.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="R:\rrl\wrappers\C\roadrunner_c_api.cbproj">
+        <Projects Include="misc\cg_ide\roadrunner_c_api.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="source\common\telplugins_common.cbproj">
@@ -60,13 +60,13 @@
         <MSBuild Projects="R:\rrl\source\roadrunner.cbproj" Targets="Make"/>
     </Target>
     <Target Name="roadrunner_c_api">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj"/>
     </Target>
     <Target Name="roadrunner_c_api:Clean">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Clean"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="roadrunner_c_api:Make">
-        <MSBuild Projects="R:\rrl\wrappers\C\roadrunner_c_api.cbproj" Targets="Make"/>
+        <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj" Targets="Make"/>
     </Target>
     <Target Name="telplugins_common">
         <MSBuild Projects="source\common\telplugins_common.cbproj"/>
