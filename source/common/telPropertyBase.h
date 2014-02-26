@@ -88,6 +88,7 @@ class COMMON_DECLSPEC PropertyBase
         */            
         PropertyBase&                       operator=(const PropertyBase& rhs);
 
+        virtual PropertyBase*               getCopy() const = 0;
 
         /**
          * Return the parameters name

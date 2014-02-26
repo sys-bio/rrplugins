@@ -17,9 +17,42 @@ Properties::~Properties()
 
 Properties::Properties(const Properties& cpyMe)
 {
+    //Copy each property
+    for(int i = 0; i < cpyMe.count(); i++)
+    {
+        const PropertyBase* prop = cpyMe[i];
+
+        //The getCopy will return a new, fully constructed property, even though we are using a baseclass pointer
+        PropertyBase* newProp = prop->getCopy();
+
+        pair<PropertyBase*, bool> item(newProp, true);
+        mProperties.push_back(item);
+    }
+
     this->mCanClientClearList = true;
-    this->mProperties = cpyMe.mProperties;
     this->mPropertiesIter = this->mProperties.begin();
+}
+
+Properties& Properties::operator=(const Properties& rhs)
+{
+    if(this == &rhs)
+    {
+        return *this;
+    }
+
+    //Copy each property
+    for(int i = 0; i < rhs.count(); i++)
+    {
+        const PropertyBase* prop = rhs[i];
+
+        //The getCopy will return a new, fully constructed property, even though we are using a baseclass pointer
+        PropertyBase* newProp = prop->getCopy();
+
+        pair<PropertyBase*, bool> item(newProp, true);
+        mProperties.push_back(item);
+    }
+
+    return *this;
 }
 
 bool Properties::clear()

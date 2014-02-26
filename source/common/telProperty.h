@@ -156,6 +156,8 @@ class Property : public PropertyBase
                                         */
         bool                            clearValue();
 
+        PropertyBase*                   getCopy() const;
+
      protected:
                                         /**
                                             \brief The value of the property.
@@ -175,6 +177,10 @@ mValue(value)
 {}
 
 template<class T>
+Property<T>::~Property()
+{}
+
+template<class T>
 Property<T>::Property(const Property<T>& para)
 :
 PropertyBase(para)
@@ -182,16 +188,19 @@ PropertyBase(para)
     mValue = para.mValue;
 }
 
-template<class T>
-Property<T>::~Property()
-{}
 
 template<class T>
 Property<T>& Property<T>::operator=(const Property<T>& rhs)
 {
-    PropertyBase::operator= (rhs);
+    PropertyBase::operator = (rhs);
     mValue = rhs.mValue;
     return (*this);
+}
+
+template<class T>
+inline PropertyBase* Property<T>::getCopy() const
+{
+    return new Property<T>(*this);
 }
 
 /**

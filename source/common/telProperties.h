@@ -76,6 +76,11 @@ class COMMON_DECLSPEC Properties
         */
                                             Properties(const Properties& cpyMe);
         /**
+           Assignment
+        */
+        Properties&                         operator=(const Properties& rhs);
+
+        /**
            Add a parameter. By default, the container do not owe memory allocated by the parameter.
            If the ownMemory flag is set to true, the container will de allocate memory for the parameter as well
            \param para A pointer to a Plugin parameter
@@ -159,7 +164,7 @@ class COMMON_DECLSPEC Properties
 
     protected:
         /**
-            The parameter container may owe the parameter, default is false. In certain ciscumstances, the container need to owe
+            The parameter container may owe the parameter, default is false. In certain circumstances, the container need to owe
             the memory of the parameter and will de-allocate it on clear, or in the destruction of the container.
         */
         vector< pair<PropertyBase*, bool> >                  mProperties;

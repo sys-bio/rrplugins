@@ -130,6 +130,16 @@ void bsWorker::run()
         mMCParameters.push_back(parameters);
     }
 
+    //Log all parameters
+    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    {
+        Log(lInfo) << "MC Run: "<<i;
+        Properties& paras = mMCParameters[i];
+        for(int para = 0; para < paras.count(); para++)
+        {
+            Log(lInfo)<<paras[para]->getName()<<" = " << paras[para]->getValueAsString();
+        }
+    }
     workerFinished();
 }
 
@@ -199,7 +209,6 @@ Properties bsWorker::getParameters(TelluriumData* data)
     Log(lDebug) << "Properties: " <<  (*newProps);
     return Properties(*newProps);
 }
-
 
 bool bsWorker::createInitialResiduals()
 {
