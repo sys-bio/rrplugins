@@ -1,6 +1,3 @@
-#ifdef USE_PCH
-#include "rr_pch.h"
-#endif
 #pragma hdrstop
 
 // test program mttest.cpp, see mtreadme.txt for information

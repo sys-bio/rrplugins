@@ -17,7 +17,7 @@ using std::fstream;
 using std::ios;
 using std::ios_base;
 
-const int MAX_LINE_BUFFER_SIZE = 2048;
+const int MAX_LINE_BUFFER_SIZE = 65000;
 class IniKey;
 class IniSection;
 

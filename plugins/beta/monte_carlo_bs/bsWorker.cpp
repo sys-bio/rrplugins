@@ -18,7 +18,8 @@ using namespace tlpc;
 bsWorker::bsWorker(MonteCarlo& host)
 :
 mHostPlugin(host),
-mPM(mHostPlugin.getPluginManager())
+mPM(mHostPlugin.getPluginManager()),
+mRandom(time( NULL ))
 {
     if(!mPM)
     {
@@ -34,9 +35,24 @@ bool bsWorker::setup()
     {
         throw(Exception("Monte Carlo plugin need the lmfit plugin"));
     }
-
-
+    reset();
     return true;
+}
+
+void bsWorker::reset()
+{
+    mResiduals.clear();
+    for(int i = 0; i < mMCDataSets.size(); i++)
+    {
+        delete mMCDataSets[i];
+    }
+    mMCDataSets.clear();
+
+    for(int i = 0; i < mMCParameters.size(); i++)
+    {
+        mMCParameters[i].clear();
+    }
+    mMCParameters.clear();
 }
 
 void bsWorker::start(bool runInThread)
@@ -87,8 +103,34 @@ void bsWorker::run()
         Log(lError)<<"Failed creating initial residuals in Monte Carlo plugin..";
         return;
     }
+    else
+    {
+        Log(lDebug)<<"Monte Carlo initial residuals created.";
+    }
 
+
+    if(!createMonteCarloDataSets())
+    {
+        Log(lError)<<"Failed creating Monte Carlo Data sets.";
+        return;
+    }
+    else
+    {
+        Log(lDebug)<<"Monte Carlo Data sets was created.";
+    }
+
+    //Now fit each data set and collect parameters
     workerFinished();
+}
+
+double bsWorker::getRandomResidual()
+{
+    int maxIndex = mResiduals.size() -1;
+    double rnd = mRandom.next() * maxIndex ;
+
+    rnd  = rnd  + 0.5;
+    int indx =   (int) rnd ;
+    return mResiduals[indx];
 }
 
 bool bsWorker::createInitialResiduals()
@@ -121,8 +163,8 @@ bool bsWorker::createInitialResiduals()
     }
 
     //Set input data to fit to
-    TelluriumData* data = (TelluriumData*) mHostPlugin.mExperimentalData.getValueHandle();
-    TELHandle experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
+    TelluriumData*  data = (TelluriumData*) mHostPlugin.mExperimentalData.getValueHandle();
+    TELHandle       experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
     setTelluriumDataProperty(experimentalData, data);
 
     //Add species to minimization data structure.. The species are defined in the input data
@@ -150,17 +192,61 @@ bool bsWorker::createInitialResiduals()
         return false;
     }
 
-//    assignOnStartedEvent(mLMPlugin,        fittingStartedCB,  this, NULL);
-//    assignOnProgressEvent(mLMPlugin,       fittingProgressCB, this, NULL);
-//    assignOnFinishedEvent(mLMPlugin,       fittingFinishedCB, this, NULL);
+    //    assignOnStartedEvent(mLMPlugin,        fittingStartedCB,  this, NULL);
+    //    assignOnProgressEvent(mLMPlugin,       fittingProgressCB, this, NULL);
+    //    assignOnFinishedEvent(mLMPlugin,       fittingFinishedCB, this, NULL);
 
     executePluginEx(mLMPlugin, false);
+
+    //Check on success of fitting. If failing, bail the monte carlo..
 
     //We should now have residuals
     TelluriumData* residuals =   (TelluriumData*) getPluginPropertyValueHandle(mLMPlugin, "Residuals");
 
-    Log(lDebug) <<"Logging residuals";
+    Log(lDebug) <<"Logging residuals: ";
     Log(lDebug) << *(residuals);
+
+    //Add residuals to double vectgor
+    for(int col = residuals->isFirstColumnTime() ? 1 : 0; col < residuals->cSize(); col++)
+    {
+        for(int row = 0; row < residuals->rSize(); row++)
+        {
+            mResiduals.push_back(residuals->getDataElement(row, col));
+        }
+    }
+
+    return true;
+}
+
+bool bsWorker::createMonteCarloDataSets()
+{
+    TelluriumData& expData      = mHostPlugin.mExperimentalData;
+    TelluriumData* initialFit   = (TelluriumData*) getPluginPropertyValueHandle(mLMPlugin, "FittedData");
+
+    //Create data sets, use fitted data as the "base", to add residuals to later on
+    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    {
+        mMCDataSets.push_back(new TelluriumData((*initialFit)));
+    }
+
+    TelluriumData all;
+    //Create MC data by randomly adding residuals from the residuals vector to each point in each data set
+    for(int i = 0; i < mMCDataSets.size(); i++)
+    {
+        TelluriumData& data = *(mMCDataSets[i]);
+        int startCol = data.isFirstColumnTime() ? 1 : 0;
+        for(int col = startCol; col < data.cSize(); col++)
+        {
+            for(int row = 0; row < data.rSize(); row++)
+            {
+                data(row, col) = data(row, col) + getRandomResidual();
+            }
+        }
+        all.append(data);
+    }
+
+    all.write("tempData.dat");
+
     return true;
 }
 

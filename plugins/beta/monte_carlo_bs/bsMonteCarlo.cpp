@@ -24,8 +24,7 @@ mOutputParameterList(           Properties(),           "OutputParameterList",  
 mConfidenceLimits(              Properties(),           "ConfidenceLimits",                     "Confidence limits for each parameter"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
-mNrOfMCRuns(                    0,                      "NrOfMCRuns",                           "Number of iterations"),
-
+mNrOfMCRuns(                    10,                     "NrOfMCRuns",                           "Number of Monte Carlo Data Sets"),
 mWorker(*this)
 {
     mVersion = "0.8";
@@ -89,7 +88,7 @@ bool MonteCarlo::resetPlugin()
     {
         return false;
     }
-
+    mWorker.reset();
     mTerminate = false;
     mInputParameterList.getValueReference().clear();
     mOutputParameterList.getValueReference().clear();
@@ -99,7 +98,7 @@ bool MonteCarlo::resetPlugin()
     //Clear data
     mExperimentalData.clearValue();
     mModelData.clearValue();
-    mNrOfMCRuns.clearValue();
+
     return true;
 }
 

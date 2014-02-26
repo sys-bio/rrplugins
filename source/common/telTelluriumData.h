@@ -481,6 +481,18 @@ inline string getPropertyType<TelluriumData>(const TelluriumData& a)
     return "telluriumData";
 }
 
+template<>
+inline Property<TelluriumData>::operator TelluriumData () const
+{
+    return mValue;
+}
+
+template<>
+inline Property<TelluriumData>::operator TelluriumData & ()
+{
+    return mValue;
+}
+
 }
 
 #endif

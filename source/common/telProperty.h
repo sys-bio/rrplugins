@@ -76,12 +76,6 @@ string getPropertyType(const T& val);
 template<class T>
 class Property : public PropertyBase
 {
-    protected:
-                                        /**
-                                            \brief The value of the property.
-                                        */
-        T                               mValue;
-
     public:
                                         /**
                                             Property constructor. Creates a property, assigning a value, name and optionally a hint.
@@ -99,7 +93,7 @@ class Property : public PropertyBase
                                             Property destructor. Deallocate any memory allocated by the property.
                                         */
                                        ~Property();
-                                        
+
                                         /**
                                             Property assignment operator. Deep copy of the property on the right side of the assignment.
                                         */
@@ -109,6 +103,18 @@ class Property : public PropertyBase
                                             Set a property value from another properties (as pointer) value.
                                         */
         void                            setValue(T* val);
+
+
+                                        /**
+                                            A conversion operator.
+                                        */
+                                        operator T() const;
+
+                                        /**
+                                            A conversion operator.
+                                        */
+                                        operator T&();
+
 
                                         /**
                                             Set a property value from another properties (as reference) value.
@@ -124,7 +130,7 @@ class Property : public PropertyBase
                                             Return the value of a property.
                                         */
         T                               getValue() const;
-                                        
+
                                         /**
                                             Get a reference to a properties value.
                                         */
@@ -149,6 +155,12 @@ class Property : public PropertyBase
                                             Clear a property's value
                                         */
         bool                            clearValue();
+
+     protected:
+                                        /**
+                                            \brief The value of the property.
+                                        */
+        T                               mValue;
 
 };
 
@@ -238,6 +250,11 @@ inline void Property<bool>::setValueFromString(const string& val)
     mValue = tlp::toBool(val);
 }
 
+template<>
+inline Property<bool>::operator bool () const
+{
+    return mValue;
+}
 //================= Int ===============================
 /**
     Set an int properties value, from a string.
@@ -253,6 +270,18 @@ inline bool Property<int>::clearValue()
 {
     mValue = 0;
     return true;
+}
+
+template<>
+inline Property<int>::operator int () const
+{
+    return mValue;
+}
+
+template<>
+inline Property<int>::operator int & ()
+{
+    return mValue;
 }
 
 //================= Double ===============================
