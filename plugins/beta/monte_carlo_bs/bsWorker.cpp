@@ -15,6 +15,8 @@
 using namespace std;
 using namespace tlpc;
 
+double getRandomElement(const vector<double>& vec);
+
 bsWorker::bsWorker(MonteCarlo& host)
 :
 mHostPlugin(host),
@@ -119,25 +121,90 @@ void bsWorker::run()
         Log(lDebug)<<"Monte Carlo Data sets was created.";
     }
 
-    //Now fit each data set and collect parameters
+    //Now fit each data set and collect parameter statistics
+    //Each fit should be carried out in a thread..
+    //Skip the threading for now
+    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    {
+        Properties parameters = getParameters(mMCDataSets[i]);
+        mMCParameters.push_back(parameters);
+    }
+
     workerFinished();
 }
 
-double bsWorker::getRandomResidual()
+Properties bsWorker::getParameters(TelluriumData* data)
 {
-    int maxIndex = mResiduals.size() -1;
-    double rnd = mRandom.next() * maxIndex ;
+    resetPlugin(mLMPlugin);
 
-    rnd  = rnd  + 0.5;
-    int indx =   (int) rnd ;
-    return mResiduals[indx];
+    TELHandle parasHandle = getPluginPropertyValueHandle(mLMPlugin, "InputParameterList");
+    if(!parasHandle)
+    {
+        throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
+    }
+
+    //Add input parameters, only the checked ones
+    Properties* inputParameters = (Properties*) mHostPlugin.mInputParameterList.getValueHandle();
+    int cnt = inputParameters->count();
+    for(int i = 0; i < cnt ; i++)
+    {
+        PropertyBase* base = (*inputParameters)[i];
+        Property<double>* para = (Property<double>*) (base); //->Items->Objects[i];
+
+        //Do the creation of parameters earlier instead...
+        TELHandle newPara = createProperty(para->getName().c_str(), "double", "", para->getValueHandle());
+        addPropertyToList(parasHandle, newPara);
+    }
+
+    //Set input data to fit to
+    TELHandle       experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
+    setTelluriumDataProperty(experimentalData, data);
+
+    //Add species to minimization data structure.. The species are defined in the input data
+    StringList modelDataSelectionList = mHostPlugin.mModelDataSelectionList.getValue();
+    TELHandle paraHandle = getPluginProperty(mLMPlugin, "FittedDataSelectionList");
+    setPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
+
+    TELHandle obsList = getPluginProperty(mLMPlugin, "ExperimentalDataSelectionList");
+    StringList ExpDataSelectionList = mHostPlugin.mExperimentalDataSelectionList.getValue();
+
+    setPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
+
+    //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
+    if(ExpDataSelectionList.Count() > modelDataSelectionList.Count())
+    {
+        Log(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
+        Log(lError)<<"Exiting Monte Carlo.";
+        return false;
+    }
+
+    string strVal = mHostPlugin.mSBML.getValue();
+    if(!setPluginProperty(mLMPlugin, "SBML", strVal.c_str()))
+    {
+        Log(lError)<<"Failed setting sbml";
+        return false;
+    }
+
+    executePluginEx(mLMPlugin, false);
+
+    //Check on success of fitting. If failing, bail
+    //Extract the parameters
+    parasHandle = getPluginPropertyValueHandle(mLMPlugin, "OutputParameterList");
+    if(!parasHandle)
+    {
+        throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
+    }
+
+    Properties *newProps = (Properties*) parasHandle;
+    Log(lDebug) << "Properties: " <<  (*newProps);
+    return Properties(*newProps);
 }
+
 
 bool bsWorker::createInitialResiduals()
 {
     //Use the current minimization plugin to run one minimization and then use
     //the result to create residuals
-
     //Reset on each run
     resetPlugin(mLMPlugin);
     TELHandle paraHandle = getPluginProperty(mLMPlugin, "InputParameterList");
@@ -192,10 +259,6 @@ bool bsWorker::createInitialResiduals()
         return false;
     }
 
-    //    assignOnStartedEvent(mLMPlugin,        fittingStartedCB,  this, NULL);
-    //    assignOnProgressEvent(mLMPlugin,       fittingProgressCB, this, NULL);
-    //    assignOnFinishedEvent(mLMPlugin,       fittingFinishedCB, this, NULL);
-
     executePluginEx(mLMPlugin, false);
 
     //Check on success of fitting. If failing, bail the monte carlo..
@@ -239,14 +302,13 @@ bool bsWorker::createMonteCarloDataSets()
         {
             for(int row = 0; row < data.rSize(); row++)
             {
-                data(row, col) = data(row, col) + getRandomResidual();
+                data(row, col) = data(row, col) + getRandomElement(mResiduals, mRandom);
             }
         }
         all.append(data);
     }
 
-    all.write("tempData.dat");
-
+    all.write("MCDataSets.dat");
     return true;
 }
 

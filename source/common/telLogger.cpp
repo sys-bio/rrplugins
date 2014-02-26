@@ -1,7 +1,5 @@
 #pragma hdrstop
 #include "telLogger.h"
-//#include "rrOSSpecifics.h"
-
 #include <Poco/Logger.h>
 #include <Poco/AsyncChannel.h>
 #include <Poco/ConsoleChannel.h>

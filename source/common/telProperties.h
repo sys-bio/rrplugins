@@ -160,8 +160,7 @@ class COMMON_DECLSPEC Properties
     protected:
         /**
             The parameter container may owe the parameter, default is false. In certain ciscumstances, the container need to owe
-            the memory of the parameter and will de allocate it on clear, or in the destruction of the container.
-            \todo Change the container to a std::list.
+            the memory of the parameter and will de-allocate it on clear, or in the destruction of the container.
         */
         vector< pair<PropertyBase*, bool> >                  mProperties;
 

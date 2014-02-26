@@ -616,7 +616,6 @@ istream& operator >> (istream& ss, TelluriumData& data)
     }
 
     //Weights ??
-
     IniSection* weightsSection = ini.GetSection("WEIGHTS");
     if(!weightsSection)    //Optional
     {

@@ -59,7 +59,6 @@ TelluriumData  getDataSet(int expNr, const TelluriumData& data)
     return dataSet;
 }
 
-
 double getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances)
 {
     stringstream msg;
@@ -197,6 +196,15 @@ vector<double> getValuesInColumn(int col, const TelluriumData& data)
     }
     return vals;
 }
+
+double getRandomElement(const vector<double>& vec, Random& random)
+{
+    int maxIndex = vec.size() -1;
+    double rnd = random.next() * maxIndex;
+    rnd  = rnd  + 0.5;
+    return vec[(int) rnd ];
+}
+
 
 vector<double> getWeightValuesInColumn(int col, const TelluriumData& data)
 {

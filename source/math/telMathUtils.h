@@ -3,6 +3,7 @@
 #include <vector>
 #include "telMathExporter.h"
 #include "telTelluriumData.h"
+#include "telRandom.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
@@ -29,5 +30,7 @@ MATH_DECLSPEC double             getMean(const vector<double>& population);
 MATH_DECLSPEC double             erf(double x);
 MATH_DECLSPEC double             cdf(double n);
 
+//Random stuff
+MATH_DECLSPEC double            getRandomElement(const vector<double>& vec, Random& random);
 }
 #endif

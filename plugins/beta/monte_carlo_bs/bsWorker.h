@@ -34,7 +34,7 @@ class bsWorker : public Poco::Runnable
         void                            workerStarted();
         void                            workerProgress();
         void                            workerFinished();
-        double                          getRandomResidual();
+
 
     private:
         const tlp::PluginManager*       mPM;
@@ -49,6 +49,7 @@ class bsWorker : public Poco::Runnable
 
         bool                            createInitialResiduals();
         bool                            createMonteCarloDataSets();
+        Properties                      getParameters(TelluriumData* data);
 
 };
 
