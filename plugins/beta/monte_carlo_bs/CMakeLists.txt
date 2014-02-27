@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_lm)
+set(target tel_monte_carlo_bs)
 
 include_directories(
 ../source
@@ -15,14 +15,12 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-lm
-lmWorker
-lmUtils
-lmfit_doc
+bsMonteCarlo
+bsWorker
+monte_carlo_bs_doc
 )
 
 #This is where the Levenberg C lib is built
-add_subdirectory(lib)
 
 add_definitions(
 -DPOCO_STATIC
@@ -37,10 +35,12 @@ add_library(${target} MODULE ${sources})
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-lmfit-static
-telplugins
-telplugins_c_api                 
 roadrunner_c_api
+telplugins_core
+telplugins_common
+telplugins_math
+telplugins_c_api                 
+lmfit-static
 blas
 lapack
 rr-libstruct-static

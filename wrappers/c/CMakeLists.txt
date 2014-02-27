@@ -5,7 +5,8 @@ set(target telplugins_c_api)
 include_directories(${RR_GENERATED_HEADER_PATH}) #we have to do this to get the generated header
 
 include_directories(
-${TLP_ROOT}/source
+${TLP_ROOT}/source/core
+${TLP_ROOT}/source/common
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 link_directories(
@@ -41,7 +42,9 @@ if(WIN32)
     target_link_libraries ( ${target}
         #roadrunner_c_api
         roadrunner
-        telplugins
+        telplugins_core
+        telplugins_common
+        telplugins_math
         )
 
 else() 

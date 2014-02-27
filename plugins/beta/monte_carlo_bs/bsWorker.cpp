@@ -1,5 +1,6 @@
 #pragma hdrstop
 #include "bsWorker.h"
+#include <time.h>
 #include "telLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
 #include "telException.h"
@@ -21,7 +22,7 @@ bsWorker::bsWorker(MonteCarlo& host)
 :
 mHostPlugin(host),
 mPM(mHostPlugin.getPluginManager()),
-mRandom(time( NULL ))
+mRandom( (unsigned long) time( NULL ))
 {
     if(!mPM)
     {
@@ -99,7 +100,6 @@ void bsWorker::run()
     workerProgress();
     //Create MC data sets
     //First get initial residuals
-
     if(!createInitialResiduals())
     {
         Log(lError)<<"Failed creating initial residuals in Monte Carlo plugin..";
@@ -109,7 +109,6 @@ void bsWorker::run()
     {
         Log(lDebug)<<"Monte Carlo initial residuals created.";
     }
-
 
     if(!createMonteCarloDataSets())
     {
@@ -122,8 +121,7 @@ void bsWorker::run()
     }
 
     //Now fit each data set and collect parameter statistics
-    //Each fit should be carried out in a thread..
-    //Skip the threading for now
+    //Each fit should be carried out in a thread.. Skip the threading for now
     for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
     {
         Properties parameters = getParameters(mMCDataSets[i]);
@@ -140,10 +138,35 @@ void bsWorker::run()
             Log(lInfo)<<paras[para]->getName()<<" = " << paras[para]->getValueAsString();
         }
     }
+
+    //Calculate confidence limits
+    Properties& inpParaList = mHostPlugin.mInputParameterList.getValueReference();
+    Properties& confidenceLimits = mHostPlugin.mConfidenceLimits.getValueReference();
+    confidenceLimits.clear();
+
+    for(int para = 0; para < inpParaList.count(); para++)
+    {
+        vector<double> values;
+        for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+        {
+            Properties& paras = mMCParameters[i];
+            double val = *((double*) paras[para]->getValueHandle());
+            values.push_back(val);
+        }
+        //Do the statistics for each parameter
+        double mean;
+        double sigma = getStandardDeviation(values, &mean);
+        double limit = 1.96*sigma/( sqrt((double) mHostPlugin.mNrOfMCRuns));
+
+        Property<double>* prop = new Property<double>(limit, inpParaList[para]->getName());
+        confidenceLimits.add(prop);
+        Log(lInfo) <<"Parameter means: "<<mean;
+    }
+
     workerFinished();
 }
 
-Properties bsWorker::getParameters(TelluriumData* data)
+Properties bsWorker::getParameters(TelluriumData* mcData)
 {
     resetPlugin(mLMPlugin);
 
@@ -168,7 +191,7 @@ Properties bsWorker::getParameters(TelluriumData* data)
 
     //Set input data to fit to
     TELHandle       experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
-    setTelluriumDataProperty(experimentalData, data);
+    setTelluriumDataProperty(experimentalData, mcData);
 
     //Add species to minimization data structure.. The species are defined in the input data
     StringList modelDataSelectionList = mHostPlugin.mModelDataSelectionList.getValue();

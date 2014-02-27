@@ -29,7 +29,9 @@ add_library(${target} MODULE ${sources})
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-telplugins
+telplugins_core
+telplugins_common
+telplugins_math
 )
 
 else() 

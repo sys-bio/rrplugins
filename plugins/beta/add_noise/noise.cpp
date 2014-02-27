@@ -14,10 +14,8 @@ Noise::Noise(double m, double s)
 :
 mMean(m),
 mSigma(s),
-mRandom( time( NULL ) )
-{
-    randomize();
-}
+mRandom( (unsigned long) time( NULL ) )
+{}
 
 double Noise::getNoise(double mean, double sigma)
 {

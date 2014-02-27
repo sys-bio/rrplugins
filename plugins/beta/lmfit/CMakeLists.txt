@@ -37,8 +37,9 @@ add_library(${target} MODULE ${sources})
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
+telplugins_common
+telplugins_core
 lmfit-static
-telplugins
 telplugins_c_api                 
 roadrunner_c_api
 blas

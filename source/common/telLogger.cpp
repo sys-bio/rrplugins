@@ -344,7 +344,7 @@ std::string Logger::getFileName()
 
 void LoggingBufferCtor()
 {
-    cout << __FUNC__ << endl;
+    //cout << __FUNC__ << endl;
 }
 
 LoggingBuffer::LoggingBuffer(int level, const char* file, int line) :

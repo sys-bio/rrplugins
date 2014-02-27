@@ -5,16 +5,13 @@ add_executable(${target}
 main.cpp 
 )
 
-add_definitions(
-)
-
 if(WIN32)
 add_definitions(
 -DWIN32
 )
 
 target_link_libraries (${target} 
-telplugins
+telplugins_core
 )
 endif()
 

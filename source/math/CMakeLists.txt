@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 project(telplugins)
 
-set(target telplugins_core)
+set(target telplugins_math)
 
 include_directories(
     ${TLP_ROOT}/source
@@ -10,18 +10,18 @@ include_directories(
     )
 
 set(sources
-telCPlugin
-telCPPPlugin
-telPlugin
-telPluginManager
+telRandom
+#telMatrix
+telMathUtils
+third_party/mtrand
 )
 
 #SHARED VERSION ----------------
 add_library(${target} SHARED ${sources})
 
 set_property(TARGET ${target}
-    PROPERTY  COMPILE_DEFINITIONS
-EXPORT_CORE_API
+PROPERTY  COMPILE_DEFINITIONS
+EXPORT_MATH_API
 LIBSBML_USE_CPP_NAMESPACE
 LIBSBML_STATIC
 LIBLAX_STATIC
@@ -39,17 +39,17 @@ else()
 endif(UNIX)
 
 target_link_libraries (${target}
-roadrunner
-telplugins_common
-sundials_cvode
-sundials_nvecserial
-blas
-lapack
-nleq-static
-rr-libstruct-static
-poco_foundation-static
-libxml2
-)
+    roadrunner
+    telplugins_common
+    sundials_cvode
+    sundials_nvecserial
+    blas
+    lapack
+    nleq-static
+    rr-libstruct-static
+    poco_foundation-static
+    libxml2
+    )
 
 if(${MSVC})
     target_link_libraries (${target}

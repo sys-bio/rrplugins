@@ -18,7 +18,7 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-telplugins
+telplugins_core
 )
 else()
     if(APPLE)

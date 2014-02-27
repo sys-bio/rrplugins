@@ -3,7 +3,8 @@ PROJECT(Apps)
 
 # rr Includes
 include_directories(
-${TLP_ROOT}/source
+${TLP_ROOT}/source/core
+${TLP_ROOT}/source/common
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include/rr
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml

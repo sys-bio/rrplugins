@@ -285,11 +285,14 @@ vector<double> getStandardDeviations(const TelluriumData& population)
     return stds;
 }
 
-double getStandardDeviation(const vector<double>& population)
+double getStandardDeviation(const vector<double>& population, double* theMean)
 {
     double mean = getMean(population);
+    if(theMean)
+    {
+        (*theMean) = mean;
+    }
 
-    vector<double> stds;
     double sumOfSquaredDifferences  = 0;
     for(int row = 0; row < population.size(); row++)
     {
@@ -315,7 +318,7 @@ double getMean(const vector<double>& population)
         mean += population[row];
 
     }
-    return mean;
+    return mean/population.size();
 }
 
 vector<double> getMeans(const TelluriumData& population)

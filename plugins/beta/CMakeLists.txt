@@ -14,6 +14,7 @@ OPTION (TLP_BUILD_AUTO_2000_PLUGIN	            "Build the Auto 2000 Plugin"	    
 OPTION (TLP_BUILD_STAT_PLUGIN	                "Build the STAT (statistics) Plugin"	        ON)
 OPTION (TLP_BUILD_CHISQUARE_PLUGIN	            "Build the ChiSquare Plugin"	                ON)
 OPTION (TLP_BUILD_SBMLMODEL_PLUGIN	            "Build the SBMLModel Plugin"	                ON)
+OPTION (TLP_BUILD_MONTE_CARLO_BS_PLUGIN	        "Build the Monte Carlo BS (bootstrap) Plugin"   ON)
 
 if(${TLP_BUILD_ADD_NOISE_PLUGIN} STREQUAL ON)
     add_subdirectory(add_noise)
@@ -28,7 +29,7 @@ if(${TLP_BUILD_AUTO_2000_PLUGIN} STREQUAL ON)
 endif()
 
 if(${TLP_BUILD_STAT_PLUGIN} STREQUAL ON)
-    add_subdirectory(stat)
+    add_subdirectory(statistics)
 endif()
 
 if(${TLP_BUILD_CHISQUARE_PLUGIN} STREQUAL ON)
@@ -39,7 +40,7 @@ if(${TLP_BUILD_SBMLMODEL_PLUGIN} STREQUAL ON)
     add_subdirectory(sbml_model)
 endif()
 
-install(
-    FILES README.txt
-    DESTINATION plugins
-)
+if(${TLP_BUILD_MONTE_CARLO_BS_PLUGIN} STREQUAL ON)
+    add_subdirectory(monte_carlo_bs)
+endif()
+

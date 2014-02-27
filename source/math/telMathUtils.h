@@ -25,7 +25,7 @@ MATH_DECLSPEC double             invnormsdist(const double y); // 0 < y < 1;
 
 //Vector double arguments
 MATH_DECLSPEC double             getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances);
-MATH_DECLSPEC double             getStandardDeviation(const vector<double>& population);
+MATH_DECLSPEC double             getStandardDeviation(const vector<double>& population, double* theMean = NULL);
 MATH_DECLSPEC double             getMean(const vector<double>& population);
 MATH_DECLSPEC double             erf(double x);
 MATH_DECLSPEC double             cdf(double n);

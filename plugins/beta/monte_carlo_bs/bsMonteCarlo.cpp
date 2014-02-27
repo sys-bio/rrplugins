@@ -18,13 +18,11 @@ CPPPlugin(                      "MonteCarlo-Bootstrap", "Fitting",       NULL, m
 //Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
 mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
-mModelData(                     TelluriumData(),        "FittedData",                           "Data object holding model data: Handed to client"),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
-mOutputParameterList(           Properties(),           "OutputParameterList",                  "List of parameters that was fitted"),
 mConfidenceLimits(              Properties(),           "ConfidenceLimits",                     "Confidence limits for each parameter"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
-mNrOfMCRuns(                    10,                     "NrOfMCRuns",                           "Number of Monte Carlo Data Sets"),
+mNrOfMCRuns(                    5,                      "NrOfMCRuns",                           "Number of Monte Carlo Data Sets"),
 mWorker(*this)
 {
     mVersion = "0.8";
@@ -32,9 +30,7 @@ mWorker(*this)
     //Add plugin properties to property container
     mProperties.add(&mSBML);
     mProperties.add(&mExperimentalData);
-    mProperties.add(&mModelData);
     mProperties.add(&mInputParameterList);
-    mProperties.add(&mOutputParameterList);
     mProperties.add(&mConfidenceLimits);
     mProperties.add(&mExperimentalDataSelectionList);
     mProperties.add(&mModelDataSelectionList);
@@ -91,14 +87,12 @@ bool MonteCarlo::resetPlugin()
     mWorker.reset();
     mTerminate = false;
     mInputParameterList.getValueReference().clear();
-    mOutputParameterList.getValueReference().clear();
+
     mExperimentalDataSelectionList.getValueReference().clear();
     mModelDataSelectionList.getValueReference().clear();
 
     //Clear data
     mExperimentalData.clearValue();
-    mModelData.clearValue();
-
     return true;
 }
 
@@ -110,14 +104,20 @@ string MonteCarlo::getSBML()
 string MonteCarlo::getResult()
 {
     stringstream msg;
-    Properties& pars = mOutputParameterList.getValueReference();
-    Properties& conf = mConfidenceLimits.getValueReference();
-
-    for(int i = 0; i < pars.count(); i++)
+    Properties& conf = mConfidenceLimits; //.getValueReference();
+    if(conf.count())
     {
-        Property<double>* prop = dynamic_cast< Property<double>* > (pars[i]);
+        msg<<"Parameter confidence limits ========\n";
+    }
+    else
+    {
+        msg<<"No confidence limits to report ========";
+    }
+
+    for(int i = 0; i < conf.count(); i++)
+    {
         Property<double>* confProp = dynamic_cast<Property<double>* > (conf[i]);
-        msg<<prop->getName()<<" = "<< prop->getValue() <<" +/- "<<confProp->getValue()<<"\n";
+        msg<<confProp->getName()<<" => +/- "<<confProp->getValue()<<"\n";
     }
     return msg.str();
 }
@@ -169,10 +169,6 @@ s.str("");
 s << "The input parameter list holds the parameters, and their initial values that are to be fitted, e.g. k1, k2. \
 The input parameters are properties of the input SBML model";
 mInputParameterList.setDescription(s.str());
-s.str("");
-
-s << "The output parameter list holds the resulting fitted parameter(s)";
-mOutputParameterList.setDescription(s.str());
 s.str("");
 
 s << "The confidence limits parameter list holds resulting confidence limits, as calculated from the Hessian";

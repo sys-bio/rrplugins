@@ -1,8 +1,8 @@
 #ifndef cpp_plugin_demoH
 #define cpp_plugin_demoH
-#include "../source/telCPPPlugin.h"
-#include "../source/telProperty.h"
-//---------------------------------------------------------------------------
+#include "telCPPPlugin.h"
+#include "telProperty.h"
+//-------------------------------------------------------------------------
 
 class TestPlugin : public tlp::CPPPlugin
 {

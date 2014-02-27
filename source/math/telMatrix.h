@@ -13,7 +13,7 @@
 #include <sstream>
 #include <complex>
 #include "telProperty.h"
-#include "telExporter.h"
+#include "telMathExporter.h"
 
 namespace tlp
 {

@@ -21,7 +21,9 @@ add_definitions(
 if(WIN32)
 target_link_libraries (${target}
 roadrunner
-telplugins
+telplugins_common
+telplugins_core
+telplugins_math
 )
 else() #UNIX
     # OSX flags:

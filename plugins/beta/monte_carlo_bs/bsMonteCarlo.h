@@ -17,10 +17,8 @@ class MonteCarlo : public CPPPlugin
     protected:
         Property<string>                        mSBML;                          //This is the model
         Property<TelluriumData>				    mExperimentalData;
-        Property<TelluriumData>			        mModelData;
 
         Property<Properties>                    mInputParameterList;            //Parameters to fit
-        Property<Properties>                    mOutputParameterList;           //Parameters that was fitted
         Property<Properties>                    mConfidenceLimits;              //Confidence limits for each parameter
 
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data

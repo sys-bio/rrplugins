@@ -401,6 +401,12 @@ inline void Property<Properties>::setValueFromString(const string& val)
     Log(lError)<<"Trying to set Properties container by a string. This is not implemented!";
 }
 
+template<>
+inline Property<Properties>::operator Properties & ()
+{
+    return mValue;
+}
+
 //===================== Function templates used to retrieve a property's type ===================
 /**
     \brief Returns the type as a string.
