@@ -1,28 +1,104 @@
+Release 0.6.9 (2014-02-27)
+* installer scripts added (MG)
+* Fixed bug when copying property container (TK)
+* Got Monte Carlo parameter generation working (TK)
+* Added code that runs minimization on each Monte Carlo data set (TK)
+* Adding example on copying a property container, i.e. Properties (TK)
+* Fixed reading roadrunner data with more columns than 100 (TK)
+* Added conversion operators to properties (TK)
+* Implemented creation of Monte Carlo Data sets (TK)
+* Added reset function to Monte Carlo worker (TK)
+* Added logging API to telplugins (TK)
+* Got initial creation of residuals in Monte Carlo implemented (TK)
+* Added C API function getPluginPropertyValueHandle (TK)
+* Added build of roadrunner projects (TK)
+* Removed some obsolete roadrunner functions (TK)
+* Added Mersien-Twister random number generator yo use with the monte carlo bs plugin (TK)
+* Initial commit of Monte Carlo BootStrap plugin (TK)
+* Moved all plugins to beta folder (TK)
+* Fixed compiling all plugins using new modules (TK)
+* Added register and unregister handle functions to plugins C API (TK)
+* Many changes regarding restructuring into submodules and adding jobs API to the plugins (TK)
+* RE-organizing plugins source folder (TK)
+* Added jobs C API (TK)
+* Renamed jobs api files to have tel as prefix (TK)
+* Added jobs api to TelluriumPlugins (TK)
+* Implemented calculation of Hessian in lmfit (TK)
+* Implemented calculation of Covariance matrix, from the Hessian in lmfit (TK)
+* Implemented calculation of confidence intervals for parameters in lmfit (TK)
+* Added confidence limit, Hessian and Covariance matrix property to lmfit (TK)
+* Added libstruct matrix to Tellurium (TK)
+* Added two parameters model (TK)
+* Added example scripts for two parameter estimation (TK)
+* Added script to calculate the Hessian (TK)
+* Cleaning up somewhat. (TK)
+* Added script to calculate derivatives (TK)
+* Added more test files fr parameter estimation (TK)
+* Updated python script to look at chi square as a function of a parameter (TK)
+* Added Python script that calculates chi square as a function of a model parameter (TK)
+* Added/fixed python calculation of a chi square (TK)
+* Added demo script on how to write tellurium data from python, including weights (TK)
+* Added get and setweight functions to python DataSeries object (TK)
+* Added python example for calculating a chi square (TK)
+* Added folder for python parameter_minimization examples (TK)
+* Added example loading/simulating a model using the model plugin (telModelPluginDemo.py) (TK)
+* Added some const correctness to plugin manager (TK)
+* Added passing of the plugin manager handle to SBMLModel plugin (TK)
+* Added/fixed new plugin holding one sbml model, named sbml_model (TK)
+* Added new plugin to hold example data, such as a model and test experimental data (TK)
+* Removed obsolete python functions, getRRHandleFromPlugin and assignPluginInput (TK)
+* Removed obsolete commented out code in telplugin_utilities.cpp (TK)
+* Added telArrayedParameter to CMake system (TK)
+* Added start,endtime and number of points to parameterScan plugin (TK)
+* Added ChiSqquare plugin to CMake (TK)
+* Implemented chi-square as a function of a model parameter (TK)
+* Fixed bug in appending data to TelluriumData (TK)
+* Added Arrayed parameter class to plugins library (TK)
+* Added an arrayedParameter class (TK)
+* Got the chi square plugin to work and behave properly (TK)
+* Updated chisquare plugin (TK)
+* Added comments field to TelluriumData (TK)
+* changed compareNOCase function to return boolean instead of int (TK)
+* Added pluigin to calculate chi square (TK)
+* Changed name of all RRHandle stuff to TELHandle (TK)
+* Added python script to plot data from the stat plugin (TK)
+* Added new statistics plugin (TK)
+* Added python example to create a Normal Probability plot (TK)
+* Added functions to standardize a population (TK)
+* Added function to calculate a Normal Probability plot (Q-Q plot) (TK)
+* Added functions normsdist and invnormsdist to mimick excels NORMS.INV.DIST functions (to obtain Q-Q plot) (TK)
+* Added functions to calculate chi square (TK)
+* Added telMathUtils unit to core library, holding math related functions (TK)
+* Added property and calculations for StandardizedResiduals (TK)
+* Added properties for NormalProbabilityOfResiduals, ChiSquare and ReducedChiSquare (TK)
+* Added example telLMFit3.py to visualize fitting statistics (TK)
+* Fixed a bug in telplugins.py, related to strip whitespace and ' character from data column header (TK)
+
 Release 0.6.8 (2014-01-27)
 ==========================
-- Implemented capture of Norms values during a fitting session, captured by the Norms property.
-- Updated LMFit PDF with documentation on how to use the the Norms property.
-- Updated Noise PDF documentation with missing Progress property docs.
-- Update lmfit2 python example to print the norms property
-- Changed noise plugins progress property to be of type double 
+* Implemented capture of Norms values during a fitting session, captured by the Norms property. (TK)
+* Updated LMFit PDF with documentation on how to use the the Norms property. (TK)
+* Updated Noise PDF documentation with missing Progress property docs. (TK)
+* Update lmfit2 python example to print the norms property (TK)
+* Changed noise plugins progress property to be of type double  (TK)
 
 Release 0.6.7 (2014-01-24)
 ==========================
-- Changed roadRunnerData -> telluriumData as the name of a TelluriumData Property
-- Added exception handling to handle bad handles in C API
-- Removed getRoadRunnerDataHandle(rrInstance) function in Python ctypes API
-- Removed obsolete casting code in telplugins_cpp_support.cpp
-- Created a handle manager for the C api, to keep track of handles created
-- There will be just one type of Handles, TELHandle
-- Added Tellurium exception class
-- Changed so trying to load a plugin twice is not an error.
-- Added extra example to noise plugin pdf docs
-- Added getPluginName, getPluginVersion, getPluginCopyright API functions (C and Python)
-- Updated Noise plugin noise generation
-- Added set/get columndataheader by index in all API's
+* Changed roadRunnerData -> telluriumData as the name of a TelluriumData Property (TK)
+* Added exception handling to handle bad handles in C API (TK)
+* Removed getRoadRunnerDataHandle(rrInstance) function in Python ctypes API (TK)
+* Removed obsolete casting code in telplugins_cpp_support.cpp (TK)
+* Created a handle manager for the C api, to keep track of handles created (TK)
+* There will be just one type of Handles, TELHandle (TK)
+* Added Tellurium exception class (TK)
+* Changed so trying to load a plugin twice is not an error. (TK)
+* Added extra example to noise plugin pdf docs (TK)
+* Added getPluginName, getPluginVersion, getPluginCopyright API functions (C and Python) (TK)
+* Updated Noise plugin noise generation (TK)
+* Added set/get columndataheader by index in all API's (TK)
 
 Release 0.6.6 (2014-01-12)
 ==========================
-- Initial commit of plugin and third party source from roadrunner repository at: https://github.com/AndySomogyi/roadrunner (TK)
+* Initial commit of plugin and third party source from roadrunner repository at: https://github.com/AndySomogyi/roadrunner (TK)
 
 
