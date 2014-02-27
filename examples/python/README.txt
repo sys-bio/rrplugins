@@ -1,22 +1,17 @@
-Example scripts on how to use plugins.
+Folder containing example/demo scripts on how to use plugins.
 
-telPluginTester.py
-    Simple script that loads plugins and prints the names of loaded plugins
+The following folders are currently part of the Tellurium plugin distribution
+basic
+    *Contain various scripts deomonstrating basic interaction with the plugin system
 
-telEvents.py
-    Script demonstrating how to define and use events with plugins
+parameter_minimization
+    *Scripts and examples using minimization plugins
 
-telPluginDocumentationDemo.py
-    Script demonstrating how to load a plugin and extract its documentation as a PDF.
- 
-tePluginProperties.py
-    Script demonstrating functionality and features related to PluginProperties
-
-There may be other example scripts in this folder, not mentioned here,
-included as examples for individual plugins.
+statistics    
+    *Scripts showing how to use various statistic features of plugins
 
 ==============================================================================================
 OBSERVE: Make sure you have properly installed Tellurium plugins in your python environment 
-before running any of these scripts. A good test is to execute import telplugins at your python 
+before running any of these scripts. A good test is to execute 'import telplugins', with no quotes, at your python 
 prompt. It should come back with no message.
 ==============================================================================================
