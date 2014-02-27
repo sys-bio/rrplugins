@@ -29,7 +29,7 @@ def chiFun(k1,k2):
     if not chiSquare.execute():
         raise Exception( tel.getLastError() )
            
-    return chiSquare.ReducedChiSquare.getElement(0,1)                   
+    return chiSquare.ReducedChiSquare                   
             
 try:
     #Read some 'experimental' data   
@@ -61,8 +61,8 @@ try:
     H[1,0] = getHessElement(2, 1, k1, k2, eta)
     H[1,1] = getHessElement(2, 2, k1, k2, eta)                                                                                         
     
-    print H    
-    print H.I
+    print 'The Hessian: \n' + `H`    
+    print '\nInverse Hessian \nH.' + `H.I`
                                                     
     print "done"
 

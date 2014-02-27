@@ -23,15 +23,13 @@ def pluginIsFinished():
 try:
     #Create a roadrunner instance
     rr = roadrunner.RoadRunner()
+
+    #Retrieve a SBML model from plugin        
+    modelPlugin = Plugin("tel_sbml_model")        
+    sbmlModel= modelPlugin.Model   
     
     #Check if model file exists
-    sbmlModel ="bistable.xml"
-    if os.path.exists(sbmlModel):
-        model = open(sbmlModel, 'r').read()
-        rr.load(model)
-    else:
-        print "The sbml model file: " + sbmlModel +" can't be found"
-        exit()
+    rr.load(sbmlModel)
     
     timeStart = 0
     timeEnd = 10
@@ -46,7 +44,7 @@ try:
     aSigma = getPropertyValueAsString(sigmaHandle)
       
     #set size of noise
-    setProperty(sigmaHandle, 0.02)
+    setProperty(sigmaHandle, 1.e-5)
     
     cb_func1 =  NotifyEvent(pluginStarted)
     assignOnStartedEvent(pluginHandle,  cb_func1)

@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from telplugins import *
 
-try:
-   
+try:   
     timeStart = 0
     timeEnd = 4.5
     nrPoints = 15         
@@ -57,7 +56,7 @@ try:
     if not chiSquare.execute():
         raise Exception( tel.getLastError() )
            
-    redChi = chiSquare.ReducedChiSquare.getElement(0,1)               
+    redChi = chiSquare.ReducedChiSquare               
     print  'Reduced chisquare = ' + `redChi` 
     
 

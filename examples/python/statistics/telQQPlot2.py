@@ -10,6 +10,7 @@ try:
         lmObject = ct.cast(lm, ct.py_object).value
         print 'Iteration, Norm = ' + `lmObject.getProperty("NrOfIter")` + ',' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
         
+    chiPlugin   = Plugin("tel_chisquare")
     #Retrieve a SBML model from plugin        
     modelPlugin= Plugin("tel_sbml_model")        
     sbmlModel= modelPlugin.Model   
@@ -61,10 +62,10 @@ try:
     #Add an offset to residuals to test QQ plot behaviour
     res = DataSeries(lm.Residuals)
     
-    print res.cols
-    for col in range(res.cols):
-        for row in range(res.rows):
-            res.setElement(row,col, res.getElement(row, col) + 1)
+    #print res.cols
+    #for col in range(res.cols):
+    #    for row in range(res.rows):
+    #        res.setElement(row,col, res.getElement(row, col) + 1)
             
     stat.Residuals = lm.Residuals 
     stat.execute()

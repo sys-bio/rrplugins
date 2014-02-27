@@ -45,7 +45,7 @@ try:
         if not chiSquare.execute():
             raise Exception( tel.getLastError() )
                
-        redChi = chiSquare.ReducedChiSquare.getElement(0,1)               
+        redChi = chiSquare.ReducedChiSquare               
         print  'ptn, k, chisquare = ' + `ptn` + ', '+ `k` +', '+  `redChi` 
         x = np.append(x, k) 
         y = np.append(y, redChi)

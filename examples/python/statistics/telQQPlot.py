@@ -6,6 +6,8 @@ import telplugins as tel
 import ctypes as ct
 
 try:
+    chiPlugin   = tel.Plugin("tel_chisquare")
+
     #Retrieve a SBML model from plugin        
     modelPlugin= tel.Plugin("tel_sbml_model")        
     sbmlModel= modelPlugin.Model   

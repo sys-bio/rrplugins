@@ -409,7 +409,10 @@ class Plugin (object):
     ## print myPlugin.execute()
     ##@endcode         
     def execute (self):
-        return tpc.executePlugin (self.plugin)
+        if tpc.executePlugin (self.plugin) == True:
+            return True
+        else:
+            raise Exception(tpc.getLastError())
 
     def executeEx (self, inThread):
         return tpc.executePluginEx (self.plugin, inThread)

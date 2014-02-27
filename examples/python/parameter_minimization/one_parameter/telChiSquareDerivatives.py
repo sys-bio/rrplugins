@@ -43,10 +43,10 @@ try:
          
         data = rr.simulate(timeStart, timeEnd, nrPoints - 1)
         chiSquare.ModelData = tel.getDataSeries(data)
-        if not chiSquare.execute():
-            raise Exception( tel.getLastError() )
+        
+        chiSquare.execute()            
                
-        redChi = chiSquare.ReducedChiSquare.getElement(0,1)               
+        redChi = chiSquare.ReducedChiSquare               
         print  'ptn, k, chisquare = ' + `ptn` + ', '+ `k` +', '+  `redChi` 
         x = np.append(x, k) 
         y = np.append(y, redChi)

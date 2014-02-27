@@ -30,7 +30,7 @@ try:
         rr.reset()
         timeStart = 0
         timeEnd = 10
-        nrPoints = 15         
+        nrPoints = 50         
         data = rr.simulate(timeStart, timeEnd, nrPoints - 1) # Want 512 points
         #roadrunner.plot(data)
     
@@ -40,10 +40,10 @@ try:
         chiSquare.ModelData = tel.getDataSeries(data)
         chiSquare.NrOfModelParameters = 1
     
-        if not chiSquare.execute():
-            raise Exception( tel.getLastError() )
+        #Calculate the Chi Square
+        chiSquare.execute()        
                
-        redChi = chiSquare.ReducedChiSquare.getElement(0,1)               
+        redChi = chiSquare.ReducedChiSquare               
         print  'k, chisquare = ' + `k` +', '+  `redChi` 
         x = np.append(x, k) 
         y = np.append(y, redChi)         

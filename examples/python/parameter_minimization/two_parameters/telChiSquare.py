@@ -28,8 +28,8 @@ try:
     if not chiPlugin.execute():
         raise Exception( tel.getLastError() )
     
-    print 'Chi Square = ' + `chiPlugin.ChiSquare.getElement(0,1)`
-    print 'Reduced Chi Square = ' + `chiPlugin.ReducedChiSquare.getElement(0,1)`        
+    print 'Chi Square = ' + `chiPlugin.ChiSquare`
+    print 'Reduced Chi Square = ' + `chiPlugin.ReducedChiSquare`        
 
     #Plot data sets
     exNP = chiPlugin.ExperimentalData.toNumpy
@@ -41,8 +41,8 @@ try:
     x1 = model[:,[0]];    y1 = model[:,[1]];   y2 = model[:,[2]]    
     plt.plot(x1,y1, '-b', x1, y2, '-g')
     
-    Chi = round(chiPlugin.ChiSquare.getElement(0,1),4)
-    redChi = round(chiPlugin.ReducedChiSquare.getElement(0,1),4)
+    Chi = round(chiPlugin.ChiSquare,4)
+    redChi = round(chiPlugin.ReducedChiSquare,4)
       
     plt.text(1.0,0.12, r"\begin{eqnarray*}\chi^2 &=" + `Chi` + r"\\ \chi^2_{reduced} &=  " + `redChi` + r"\end{eqnarray*}", fontsize=21, color='red')            
     plt.show()                       

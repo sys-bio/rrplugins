@@ -13,7 +13,7 @@ def chiFun(k1,k2):
     if not chiSquare.execute():
         raise Exception( tel.getLastError() )
            
-    return chiSquare.ReducedChiSquare.getElement(0,1)                   
+    return chiSquare.ReducedChiSquare                   
             
 try:
     #Read some 'experimental' data   
@@ -38,8 +38,8 @@ try:
     k2Start = 1 ;  k2End = 4.5
     timeStart = 0;  timeEnd = 1.5 ;  nrPoints = 15
              
-    X = np.linspace(k1Start, k1End, 525)
-    Y = np.linspace(k2Start, k2End, 525)
+    X = np.linspace(k1Start, k1End, 55)
+    Y = np.linspace(k2Start, k2End, 55)
     nrX = len(X) ; nrY = len(Y)
     print 'nrPoints = ' + `nrX * nrY`
     

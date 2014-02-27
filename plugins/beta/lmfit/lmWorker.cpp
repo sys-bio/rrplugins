@@ -171,7 +171,13 @@ void lmWorker::calculateChiSquare()
     //Calculate ChiSquare(s)
     TelluriumData& modelData    = *(TelluriumData*) mTheHost.mModelData.getValuePointer();
     TelluriumData& obsData      = *(TelluriumData*) mTheHost.mExperimentalData.getValuePointer();
+    
     Plugin* chi = mTheHost.mPM->getPlugin("tel_chisquare");
+
+    if(!chi)
+    {
+        throw(Exception("Failed to get chisquare plugin in lmfit plugin"));
+    }
 
     Property<TelluriumData>* para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ExperimentalData"));
     para->setValue(obsData);
