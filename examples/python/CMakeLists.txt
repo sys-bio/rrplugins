@@ -18,14 +18,14 @@ COMPONENT plugins_api
 
 FILE (GLOB minimization parameter_minimization/*.py)
 install(    
-FILES ${basic_examples} 
+FILES ${minimization} 
 DESTINATION python_examples/parameter_minimization
 COMPONENT plugins_api
 )
 
 FILE (GLOB stat statistics/*.py)
 install(    
-FILES ${basic_examples} 
+FILES ${stat} 
 DESTINATION python_examples/statistics
 COMPONENT plugins_api
 )
