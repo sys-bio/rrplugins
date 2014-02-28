@@ -23,6 +23,20 @@ DESTINATION python_examples/parameter_minimization
 COMPONENT plugins_api
 )
 
+FILE (GLOB minimization_1 parameter_minimization/one_parameter/*.py)
+install(    
+FILES ${minimization_1} 
+DESTINATION python_examples/parameter_minimization/one_parameter
+COMPONENT plugins_api
+)
+
+FILE (GLOB minimization_2 parameter_minimization/two_parameters/*.py)
+install(    
+FILES ${minimization_2} 
+DESTINATION python_examples/parameter_minimization/two_parameters
+COMPONENT plugins_api
+)
+
 FILE (GLOB stat statistics/*.py)
 install(    
 FILES ${stat} 

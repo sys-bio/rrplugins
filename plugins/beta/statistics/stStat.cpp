@@ -38,7 +38,6 @@ mWorker(*this)
     mProperties.add(&mChiSquare);
     mProperties.add(&mReducedChiSquare);
 
-
     //Allocate model and Residuals data
     mResidualsData.setValue(new TelluriumData());
     mModelData.setValue(new TelluriumData());
