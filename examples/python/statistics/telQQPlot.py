@@ -15,7 +15,7 @@ try:
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
     rr.load(sbmlModel)
-    data = rr.simulate(0, 10, 5000) # Want 512 points
+    data = rr.simulate(0, 10, 15)
 
     #Add noise to the data
     noisePlugin = tel.Plugin ("tel_add_noise")
@@ -27,7 +27,7 @@ try:
     noisePlugin.InputData = d
 
     # Set parameter for the 'size' of the noise
-    noisePlugin.Sigma = 3.e-6
+    noisePlugin.Sigma = 8.e-6
 
     # Add the noise
     noisePlugin.execute()

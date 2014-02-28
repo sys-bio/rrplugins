@@ -18,7 +18,7 @@ try:
     noisePlugin = Plugin ("tel_add_noise")    
     d = getDataSeries (data)    
     noisePlugin.InputData = d    
-    noisePlugin.Sigma = 1.34e-6    
+    noisePlugin.Sigma = 7.34e-6    
     noisePlugin.execute()
 
     # Need to add weight stuff to DataSeries class?
