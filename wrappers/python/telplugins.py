@@ -566,45 +566,7 @@ def getDataSeries (numPyData):
 ##
 ## The following script illustrates a more substantial example using the add_noise plugin
 ##
-#@code
-## import roadrunner
-## import telPlugins as tel
-##
-## noisePlugin = tel.Plugin ("tel_add_noise")
-## print noisePlugin.name()
-## print noisePlugin.hint()
-## print noisePlugin.description()
-##
-## print noisePlugin.listOfProperties()
-## 
-## # Create a roadrunner instance
-## rr = roadrunner.RoadRunner()
-## rr.load("sbml_test_0001.xml")
-##
-## # Generate data
-## rr.simulate(0, 10, 511) # Want 512 points
-##
-## # The plugin will need a handle to the underlying roadrunner data
-## d = tel.getTelluriumData (rr)
-##
-## noisePlugin.InputData = d
-##
-## # Get parameter for the 'size' of the noise
-## noisePlugin.Sigma = 3.e-5
-##
-## noisePlugin.execute ()
-##
-## numpydata = noisePlugin.InputData.toNumpy;
-##
-## tel.plot (numpydata[:,[0,2]], myColor="blue", myLinestyle="-", myMarker="", myLabel="S1")
-##
-## tel.show()
-##
-## d.writeDataSeries ("testData2.dat")
-##
-## d.readDataSeries ("testData2.dat")
-## print "done"
-#@endcode
+##\include telCreateNoisyDataDoxyPage.py
 ##
 ##\section DataSeries
 ## The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of
@@ -640,7 +602,7 @@ def getDataSeries (numPyData):
 ## data.plot()
 #@endcode
 ##The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
-## to all data except the data in teh first column.
+## to all data except the data in the first column.
 #@code
 ##    input telplugins as *
 ##    p = Plugin ("tel_add_noise")
@@ -675,7 +637,7 @@ def getDataSeries (numPyData):
 #@code
 #p.execute()
 #@endcode
-#Once a plugin has been executed, any output from the plugin can be retrieved via propoerties. Let's 
+#Once a plugin has been executed, any output from the plugin can be retrieved via properties. Let's 
 #suppose for example there is a plugin all add, which has three properties called, x, y and result. When executed
 #the plugin will take the values in x and y, compute the sum and assign it to result. The plugin can therefore
 #be used as follows:
