@@ -659,7 +659,6 @@ def getDataSeries (numPyData):
 ##    print "Test Finished"
 #@endcode
 ##
-##
 ##\section Plugins
 # Plugin objects are instanciated using Plugin class. For example to instanciate a plugin called myplugin, we would
 # use the code:
@@ -687,18 +686,19 @@ def getDataSeries (numPyData):
 #p.execute()
 #print p.result
 #@endcode
-
+##
+##
 # \defgroup examples Python Example Scripts
 # \brief Scripts illuminating concepts regarding Tellurium Plugins
-
-## \example telPluginDocumentation.py
-## This example shows
-## -# Get a plugin's categories in the form of an XML string
-## -# Obtain and view a Plugin's documentation as a PDF (Needs a system PDF reader)
-
-## \example telCreateNoisyData1.py
+#
+## \example telCreateNoisyData.py
 ## This example demonstrates the use of the AddNoise plugin
-
-## \example telLMFit2.py
+## \image html createNoisyData_output.jpg "Image output using the example below."
+##
+## \example telLevenbergMarquardt.py
 ## This example demonstrates parameter minimization, using the Levenberg-Marquardt algorithm.
+## Output is shown in the image.
+## To run the example, make sure you have some 'Experimental' data available.
+##
+## \image html lmFit1_output.jpg "Image output using the example below."
 

@@ -57,5 +57,4 @@ try:
     tel.telplugins.plt.show()
     
 except Exception as e:
-    print 'Problem.. ' + `e`  
-      
+    print 'Problem.. ' + `e`          

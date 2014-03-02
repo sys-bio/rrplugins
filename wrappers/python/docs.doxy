@@ -661,9 +661,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = . \
-                         Examples/telPluginTester.py \
-                         ./Examples
+INPUT                  = .
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -761,11 +759,12 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = Examples \
-                         ../../add_noise/docs/Examples \
-                         ../../lmfit/Examples \
-                         ../../../BUILD/telPlugins/examples/python \
-                         ../../examples/python
+EXAMPLE_PATH           = ../../examples/python/basic \
+                         ../../examples/python/parameter_minimization/one_parameter \
+                         ../../examples/python/parameter_minimization/two_parameters \
+                         ../../examples/python/parameter_minimization/monte_carlo \
+                         ../../examples/python/statistics \
+                         ../../examples/python/parameter_minimization
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -785,7 +784,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see 
 # the \image command).
 
-IMAGE_PATH             = 
+IMAGE_PATH             = ../../examples/python/images
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should 
 # invoke to filter for each input file. Doxygen will invoke the filter program 
