@@ -125,6 +125,7 @@ void bsWorker::run()
     for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
     {
         Properties parameters = getParameters(mMCDataSets[i]);
+        mHostPlugin.mSingleMCParameters = parameters;
         mMCParameters.push_back(parameters);
     }
 
@@ -140,8 +141,8 @@ void bsWorker::run()
     }
 
     //Calculate confidence limits
-    Properties& inpParaList = mHostPlugin.mInputParameterList.getValueReference();
-    Properties& confidenceLimits = mHostPlugin.mConfidenceLimits.getValueReference();
+    Properties& inpParaList         = mHostPlugin.mInputParameterList.getValueReference();
+    Properties& confidenceLimits    = mHostPlugin.mConfidenceLimits.getValueReference();
     confidenceLimits.clear();
 
     for(int para = 0; para < inpParaList.count(); para++)
@@ -190,7 +191,7 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     }
 
     //Set input data to fit to
-    TELHandle       experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
+    TELHandle experimentalData = getPluginProperty(mLMPlugin, "ExperimentalData");
     setTelluriumDataProperty(experimentalData, mcData);
 
     //Add species to minimization data structure.. The species are defined in the input data

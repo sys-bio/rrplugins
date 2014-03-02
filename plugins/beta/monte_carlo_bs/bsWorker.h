@@ -14,6 +14,7 @@
 class MonteCarlo;
 using tlp::TelluriumData;
 using tlp::Properties;
+using tlpc::TELHandle;
 
 class bsWorker : public Poco::Runnable
 {
@@ -40,7 +41,7 @@ class bsWorker : public Poco::Runnable
         const tlp::PluginManager*       mPM;
         tlp::Random                     mRandom;
 
-        tlpc::TELHandle                 mLMPlugin;
+        TELHandle                       mLMPlugin;
         std::vector<double>             mResiduals;
         std::vector<TelluriumData*>     mMCDataSets;
         std::vector<Properties>         mMCParameters;

@@ -19,11 +19,15 @@ class MonteCarlo : public CPPPlugin
         Property<TelluriumData>				    mExperimentalData;
 
         Property<Properties>                    mInputParameterList;            //Parameters to fit
-        Property<Properties>                    mConfidenceLimits;              //Confidence limits for each parameter
 
-        Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
-        Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
-        Property<int>                           mNrOfMCRuns;                    //Part of minimization result
+        Property<Properties>                    mSingleMCParameters;            //This property can be checked in OnProgress
+        Property<TelluriumData>                 mMCParameters;                  //Obtained parameter values from each MC run
+
+        Property<Properties>                    mConfidenceLimits;              //Final Confidence limits for each parameter
+
+        Property<StringList>                    mExperimentalDataSelectionList;
+        Property<StringList>                    mModelDataSelectionList;
+        Property<int>                           mNrOfMCRuns;
 
 		//Utility functions for the thread
         string                                  getTempFolder();

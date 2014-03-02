@@ -44,6 +44,7 @@ void AddNoiseWorker::run()
 {
     if(mTheHost.mWorkStartedEvent)
     {
+        mTheHost.mProgress.setValue((double) 0);
         mTheHost.mWorkStartedEvent(mTheHost.mWorkStartedData1, mTheHost.mWorkStartedData2);
     }
 
