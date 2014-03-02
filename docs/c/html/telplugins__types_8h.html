@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -83,7 +83,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">telplugins_types.h File Reference</div>  </div>
 </div><!--header-->
@@ -95,38 +97,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <p><a href="telplugins__types_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_instance_list.html">RRInstanceList</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for a set of RoadRunner handles.  <a href="struct_r_r_instance_list.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_c_code.html">RRCCode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient structure for storing the header and main body source for the generate simulation C code.  <a href="struct_r_r_c_code.html#details">More...</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a8e6f1754d6b5968e4ccbef3f97fe327e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e6f1754d6b5968e4ccbef3f97fe327e"></a>
 typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a></td></tr>
 <tr class="memdesc:a8e6f1754d6b5968e4ccbef3f97fe327e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a RoadRunner instance. <br/></td></tr>
 <tr class="separator:a8e6f1754d6b5968e4ccbef3f97fe327e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d68f0592372208fa5a5f2799ea4b3ae"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a></td></tr>
-<tr class="memdesc:a1d68f0592372208fa5a5f2799ea4b3ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a RoadRunner instance.  <a href="#a1d68f0592372208fa5a5f2799ea4b3ae">More...</a><br/></td></tr>
-<tr class="separator:a1d68f0592372208fa5a5f2799ea4b3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0beb6fbdd576789fab9cead01d8b9e9"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9">RRDataHandle</a></td></tr>
-<tr class="memdesc:ad0beb6fbdd576789fab9cead01d8b9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a RoadRunner data instance.  <a href="#ad0beb6fbdd576789fab9cead01d8b9e9">More...</a><br/></td></tr>
-<tr class="separator:ad0beb6fbdd576789fab9cead01d8b9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a901080dfb6fad8fb7c8091b9268a6e4e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a901080dfb6fad8fb7c8091b9268a6e4e"></a>
-typedef void(event_cc *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> )(void *, void *)</td></tr>
-<tr class="memdesc:a901080dfb6fad8fb7c8091b9268a6e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for plugin event function. <br/></td></tr>
+<tr class="memitem:a901080dfb6fad8fb7c8091b9268a6e4e"><td class="memItemLeft" align="right" valign="top">typedef void(event_cc *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> )(void *, void *)</td></tr>
+<tr class="memdesc:a901080dfb6fad8fb7c8091b9268a6e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for plugin event function.  <a href="#a901080dfb6fad8fb7c8091b9268a6e4e">More...</a><br/></td></tr>
 <tr class="separator:a901080dfb6fad8fb7c8091b9268a6e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add4e2fee231fbcdfb9086e38f8ea0f3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add4e2fee231fbcdfb9086e38f8ea0f3d"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#add4e2fee231fbcdfb9086e38f8ea0f3d">RRPluginManagerHandle</a></td></tr>
-<tr class="memdesc:add4e2fee231fbcdfb9086e38f8ea0f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a PluginManager instance. <br/></td></tr>
-<tr class="separator:add4e2fee231fbcdfb9086e38f8ea0f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c8490e1c0e5e608a161fd8e73f441e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c8490e1c0e5e608a161fd8e73f441e7"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a></td></tr>
-<tr class="memdesc:a1c8490e1c0e5e608a161fd8e73f441e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a Plugin instance. <br/></td></tr>
-<tr class="separator:a1c8490e1c0e5e608a161fd8e73f441e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac59804b20b96f804d1bc83e31e799649"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac59804b20b96f804d1bc83e31e799649"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a></td></tr>
-<tr class="memdesc:ac59804b20b96f804d1bc83e31e799649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a Property instance. <br/></td></tr>
-<tr class="separator:ac59804b20b96f804d1bc83e31e799649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeff88c391651894e830dafb6801b1204"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeff88c391651894e830dafb6801b1204"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a></td></tr>
-<tr class="memdesc:aeff88c391651894e830dafb6801b1204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void pointer to a RRProperties instance (Container for properties) <br/></td></tr>
-<tr class="separator:aeff88c391651894e830dafb6801b1204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa3c1f921940aa36028bdc8ede3b2c4"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_r_r_instance_list.html">RRInstanceList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a9aa3c1f921940aa36028bdc8ede3b2c4">RRInstanceListPtr</a></td></tr>
+<tr class="memdesc:a9aa3c1f921940aa36028bdc8ede3b2c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure for a set of RoadRunner handles.  <a href="#a9aa3c1f921940aa36028bdc8ede3b2c4">More...</a><br/></td></tr>
+<tr class="separator:a9aa3c1f921940aa36028bdc8ede3b2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a8e0861f50444405b0d94e094f1c68d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_r_r_c_code.html">RRCCode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a2a8e0861f50444405b0d94e094f1c68d">RRCCodePtr</a></td></tr>
+<tr class="memdesc:a2a8e0861f50444405b0d94e094f1c68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient structure for storing the header and main body source for the generate simulation C code.  <a href="#a2a8e0861f50444405b0d94e094f1c68d">More...</a><br/></td></tr>
+<tr class="separator:a2a8e0861f50444405b0d94e094f1c68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a8cf1a2901b162bd9b5f85ba4573b8548"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telplugins__types_8h.html#a8cf1a2901b162bd9b5f85ba4573b8548">RRJobType</a> { <b>jtLoadModel</b>, 
+<b>jtSimulate</b>
+ }</td></tr>
+<tr class="memdesc:a8cf1a2901b162bd9b5f85ba4573b8548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum distinguishing job types. <br/></td></tr>
+<tr class="separator:a8cf1a2901b162bd9b5f85ba4573b8548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plugins API Types Header. </p>
@@ -144,40 +146,55 @@ typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <p>YOU CANNOT:</p>
 <p>redistribute any piece of this software without proper attribution; </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="ad0beb6fbdd576789fab9cead01d8b9e9"></a>
+<a class="anchor" id="a901080dfb6fad8fb7c8091b9268a6e4e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void* <a class="el" href="telplugins__types_8h.html#ad0beb6fbdd576789fab9cead01d8b9e9">RRDataHandle</a></td>
+          <td class="memname">typedef void(event_cc * PluginEvent)(void *, void *)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Void pointer to a RoadRunner data instance. </p>
-<p>Void pointer to a RoadRunner instance </p>
-
-</div>
-</div>
-<a class="anchor" id="a1d68f0592372208fa5a5f2799ea4b3ae"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void* <a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Void pointer to a RoadRunner instance. </p>
+<p>Typedef for plugin event function. </p>
 <p>Void pointer to a Tellurium object </p>
+
+</div>
+</div>
+<a class="anchor" id="a2a8e0861f50444405b0d94e094f1c68d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_r_r_c_code.html">RRCCode</a> * <a class="el" href="telplugins__types_8h.html#a2a8e0861f50444405b0d94e094f1c68d">RRCCodePtr</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenient structure for storing the header and main body source for the generate simulation C code. </p>
+<p>Pointer to RRCCodePtr struct </p>
+
+</div>
+</div>
+<a class="anchor" id="a9aa3c1f921940aa36028bdc8ede3b2c4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_r_r_instance_list.html">RRInstanceList</a> * <a class="el" href="telplugins__types_8h.html#a9aa3c1f921940aa36028bdc8ede3b2c4">RRInstanceListPtr</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Structure for a set of RoadRunner handles. </p>
+<p>Pointer to <a class="el" href="struct_r_r_instance_list.html" title="Structure for a set of RoadRunner handles. ">RRInstanceList</a> </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:10 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

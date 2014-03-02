@@ -66,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,105 +88,117 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga4ebfeb102f822ed163b6ca320b15789d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga4ebfeb102f822ed163b6ca320b15789d">getPluginName</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga4ebfeb102f822ed163b6ca320b15789d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of a Plugin.  <a href="#ga4ebfeb102f822ed163b6ca320b15789d">More...</a><br/></td></tr>
-<tr class="separator:ga4ebfeb102f822ed163b6ca320b15789d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga643f370690630194909ba08e4648204c"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga643f370690630194909ba08e4648204c">getPluginCategory</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga643f370690630194909ba08e4648204c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins Category. A plugin developer may assign this information.  <a href="#ga643f370690630194909ba08e4648204c">More...</a><br/></td></tr>
-<tr class="separator:ga643f370690630194909ba08e4648204c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad613c53a049c2b5610895c9221e2bfa7"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gad613c53a049c2b5610895c9221e2bfa7">getPluginDescription</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gad613c53a049c2b5610895c9221e2bfa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins description. This is assigned by the plugin developer.  <a href="#gad613c53a049c2b5610895c9221e2bfa7">More...</a><br/></td></tr>
-<tr class="separator:gad613c53a049c2b5610895c9221e2bfa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga905d959cec230905a3b9cfe5ca77044d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga905d959cec230905a3b9cfe5ca77044d">getPluginHint</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga905d959cec230905a3b9cfe5ca77044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins Hint. This information is assigned by the plugin developer.  <a href="#ga905d959cec230905a3b9cfe5ca77044d">More...</a><br/></td></tr>
-<tr class="separator:ga905d959cec230905a3b9cfe5ca77044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafef8128c4c535087bdfd28078227237a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gafef8128c4c535087bdfd28078227237a">getPluginInfo</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gafef8128c4c535087bdfd28078227237a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return some information about a Plugin.  <a href="#gafef8128c4c535087bdfd28078227237a">More...</a><br/></td></tr>
-<tr class="separator:gafef8128c4c535087bdfd28078227237a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1c3ae2a8462c535283fbcbc4cf0e7f83"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga1c3ae2a8462c535283fbcbc4cf0e7f83">getPluginManualAsPDF</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga1c3ae2a8462c535283fbcbc4cf0e7f83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string. Use the function getPluginManualNrOfBytes to get the exact length of this string.  <a href="#ga1c3ae2a8462c535283fbcbc4cf0e7f83">More...</a><br/></td></tr>
-<tr class="separator:ga1c3ae2a8462c535283fbcbc4cf0e7f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa284630d727b64bf8203e7adc3981918"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gaa284630d727b64bf8203e7adc3981918">getPluginManualNrOfBytes</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gaa284630d727b64bf8203e7adc3981918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the byte size for the PDF manual.  <a href="#gaa284630d727b64bf8203e7adc3981918">More...</a><br/></td></tr>
-<tr class="separator:gaa284630d727b64bf8203e7adc3981918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac8062d4a8d20d5272d0d1807e83df43c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gac8062d4a8d20d5272d0d1807e83df43c">assignRoadRunnerInstance</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> pHandle, <a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a> rrHandle)</td></tr>
-<tr class="memdesc:gac8062d4a8d20d5272d0d1807e83df43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a roadrunner instance handle for the plugin to use. A plugin may use an externally created roadrunner instance for its internal work.  <a href="#gac8062d4a8d20d5272d0d1807e83df43c">More...</a><br/></td></tr>
-<tr class="separator:gac8062d4a8d20d5272d0d1807e83df43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga588a7bf7facbb2637b2ecfab4a84b08f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga588a7bf7facbb2637b2ecfab4a84b08f">executePlugin</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga588a7bf7facbb2637b2ecfab4a84b08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The executePlugin function is the function designated to fire of a Plugins "worker". What is done when this function is entered is plugin dependent.  <a href="#ga588a7bf7facbb2637b2ecfab4a84b08f">More...</a><br/></td></tr>
-<tr class="separator:ga588a7bf7facbb2637b2ecfab4a84b08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7d1b6890ed023e5822117207f4bd0dd8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga7d1b6890ed023e5822117207f4bd0dd8">executePluginEx</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, bool inAThread)</td></tr>
-<tr class="memdesc:ga7d1b6890ed023e5822117207f4bd0dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The executePluginEx is similar to the executePlugin function, except it takes two extra arguments.  <a href="#ga7d1b6890ed023e5822117207f4bd0dd8">More...</a><br/></td></tr>
-<tr class="separator:ga7d1b6890ed023e5822117207f4bd0dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4c0fccbaa08fde4340650b1b58447cef"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga4c0fccbaa08fde4340650b1b58447cef">getPluginStatus</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga4c0fccbaa08fde4340650b1b58447cef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get some status of a plugin. See the plugins documentation on what to expect.  <a href="#ga4c0fccbaa08fde4340650b1b58447cef">More...</a><br/></td></tr>
-<tr class="separator:ga4c0fccbaa08fde4340650b1b58447cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0b93e8ea7762df704640cf1dd4c67b4d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga0b93e8ea7762df704640cf1dd4c67b4d">getPluginResult</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga0b93e8ea7762df704640cf1dd4c67b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a plugins result, as a string. See the plugins documentation on what to expect.  <a href="#ga0b93e8ea7762df704640cf1dd4c67b4d">More...</a><br/></td></tr>
-<tr class="separator:ga0b93e8ea7762df704640cf1dd4c67b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga92ac26d23bfe6d26e67feeaeecf2a224"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga92ac26d23bfe6d26e67feeaeecf2a224">resetPlugin</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga92ac26d23bfe6d26e67feeaeecf2a224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state.  <a href="#ga92ac26d23bfe6d26e67feeaeecf2a224">More...</a><br/></td></tr>
-<tr class="separator:ga92ac26d23bfe6d26e67feeaeecf2a224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga111e8e21b2869b5d4b2a51040b957fb4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga111e8e21b2869b5d4b2a51040b957fb4">isPluginWorking</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga111e8e21b2869b5d4b2a51040b957fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if plugin is actively working  <a href="#ga111e8e21b2869b5d4b2a51040b957fb4">More...</a><br/></td></tr>
-<tr class="separator:ga111e8e21b2869b5d4b2a51040b957fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga17e460cd7801b18ab67d0f1e41c9e1cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga17e460cd7801b18ab67d0f1e41c9e1cd">terminateWork</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga17e460cd7801b18ab67d0f1e41c9e1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function will signal the internals of the plugin to terminate.  <a href="#ga17e460cd7801b18ab67d0f1e41c9e1cd">More...</a><br/></td></tr>
-<tr class="separator:ga17e460cd7801b18ab67d0f1e41c9e1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa2a6a48712bc7152f5e1e8a59bc37e24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gaa2a6a48712bc7152f5e1e8a59bc37e24">isBeingTerminated</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gaa2a6a48712bc7152f5e1e8a59bc37e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the work of a plugin is currently being terminated.  <a href="#gaa2a6a48712bc7152f5e1e8a59bc37e24">More...</a><br/></td></tr>
-<tr class="separator:gaa2a6a48712bc7152f5e1e8a59bc37e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga096538e253fbeba2928272f17c70fe74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga096538e253fbeba2928272f17c70fe74">wasTerminated</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga096538e253fbeba2928272f17c70fe74"><td class="mdescLeft">&#160;</td><td class="mdescRight">wasTerminated. query a plugin if work was terminated before completion  <a href="#ga096538e253fbeba2928272f17c70fe74">More...</a><br/></td></tr>
-<tr class="separator:ga096538e253fbeba2928272f17c70fe74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaabdb256484b47e5e94152da5c35d11a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gaabdb256484b47e5e94152da5c35d11a8">assignOnStartedEvent</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
-<tr class="memdesc:gaabdb256484b47e5e94152da5c35d11a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired when a plugin starts its work.  <a href="#gaabdb256484b47e5e94152da5c35d11a8">More...</a><br/></td></tr>
-<tr class="separator:gaabdb256484b47e5e94152da5c35d11a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9573d3bb1164e45617ab2bb7d214169c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga9573d3bb1164e45617ab2bb7d214169c">assignOnProgressEvent</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
-<tr class="memdesc:ga9573d3bb1164e45617ab2bb7d214169c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired as a plugin progresses.  <a href="#ga9573d3bb1164e45617ab2bb7d214169c">More...</a><br/></td></tr>
-<tr class="separator:ga9573d3bb1164e45617ab2bb7d214169c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga234bd24d3381ddd0d2b6cb3939355d72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga234bd24d3381ddd0d2b6cb3939355d72">assignOnFinishedEvent</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
-<tr class="memdesc:ga234bd24d3381ddd0d2b6cb3939355d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired when a plugin finishes its work.  <a href="#ga234bd24d3381ddd0d2b6cb3939355d72">More...</a><br/></td></tr>
-<tr class="separator:ga234bd24d3381ddd0d2b6cb3939355d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacec5d960901b04722c75e7f120fcee95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gacec5d960901b04722c75e7f120fcee95">getRRHandleFromPlugin</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gacec5d960901b04722c75e7f120fcee95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get roadrunner instance handle from plugin.  <a href="#gacec5d960901b04722c75e7f120fcee95">More...</a><br/></td></tr>
-<tr class="separator:gacec5d960901b04722c75e7f120fcee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab9c5e798d31c162f206820c135f37b02"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gab9c5e798d31c162f206820c135f37b02">getPluginPropertiesAsXML</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:gab9c5e798d31c162f206820c135f37b02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Plugins Propertiese as an xml document. The string returned from this function is formated as xml.  <a href="#gab9c5e798d31c162f206820c135f37b02">More...</a><br/></td></tr>
-<tr class="separator:gab9c5e798d31c162f206820c135f37b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga40d7a2e08f6c034d26d4454c367e97de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga40d7a2e08f6c034d26d4454c367e97de">getPluginProperties</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga40d7a2e08f6c034d26d4454c367e97de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a plugins properties.  <a href="#ga40d7a2e08f6c034d26d4454c367e97de">More...</a><br/></td></tr>
-<tr class="separator:ga40d7a2e08f6c034d26d4454c367e97de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5b0a05d266a13370675bece50a962de2"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga5b0a05d266a13370675bece50a962de2">getListOfPluginPropertyNames</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle)</td></tr>
-<tr class="memdesc:ga5b0a05d266a13370675bece50a962de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of a plugins property names, as a string. Space being the delimiter.  <a href="#ga5b0a05d266a13370675bece50a962de2">More...</a><br/></td></tr>
-<tr class="separator:ga5b0a05d266a13370675bece50a962de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad95b6af7c5c294879d7524be79f50ec5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gad95b6af7c5c294879d7524be79f50ec5">getPluginProperty</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, const char *propertyName)</td></tr>
-<tr class="memdesc:gad95b6af7c5c294879d7524be79f50ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a property.  <a href="#gad95b6af7c5c294879d7524be79f50ec5">More...</a><br/></td></tr>
-<tr class="separator:gad95b6af7c5c294879d7524be79f50ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0aba41054cf893ac2a40b447bcc02102"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga0aba41054cf893ac2a40b447bcc02102">setPluginProperty</a> (<a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a> handle, const char *propertyName, const char *value)</td></tr>
-<tr class="memdesc:ga0aba41054cf893ac2a40b447bcc02102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of a PluginProperty by a string.  <a href="#ga0aba41054cf893ac2a40b447bcc02102">More...</a><br/></td></tr>
-<tr class="separator:ga0aba41054cf893ac2a40b447bcc02102"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga61cedd911d9ede6c4397c79a7b0a6ca1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga61cedd911d9ede6c4397c79a7b0a6ca1">getNamesFromPropertyList</a> (<a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a> handle)</td></tr>
-<tr class="memdesc:ga61cedd911d9ede6c4397c79a7b0a6ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of names for a plugins property's.  <a href="#ga61cedd911d9ede6c4397c79a7b0a6ca1">More...</a><br/></td></tr>
-<tr class="separator:ga61cedd911d9ede6c4397c79a7b0a6ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3cef6d525fbba72f5d6fa78551c53795"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga3cef6d525fbba72f5d6fa78551c53795">getProperty</a> (<a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a> handle, const char *name)</td></tr>
-<tr class="memdesc:ga3cef6d525fbba72f5d6fa78551c53795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a particular property.  <a href="#ga3cef6d525fbba72f5d6fa78551c53795">More...</a><br/></td></tr>
-<tr class="separator:ga3cef6d525fbba72f5d6fa78551c53795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadf9ea4e759d05ef7d30c33b83436b4a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gadf9ea4e759d05ef7d30c33b83436b4a8">clearPropertyList</a> (<a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a> handle)</td></tr>
-<tr class="memdesc:gadf9ea4e759d05ef7d30c33b83436b4a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a list of properties.  <a href="#gadf9ea4e759d05ef7d30c33b83436b4a8">More...</a><br/></td></tr>
-<tr class="separator:gadf9ea4e759d05ef7d30c33b83436b4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26e48d82660457e5ee988a95c14d20ac"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga26e48d82660457e5ee988a95c14d20ac">getPluginName</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga26e48d82660457e5ee988a95c14d20ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of a Plugin.  <a href="#ga26e48d82660457e5ee988a95c14d20ac">More...</a><br/></td></tr>
+<tr class="separator:ga26e48d82660457e5ee988a95c14d20ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ca9d190114230ade0741f179e838a7c"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga3ca9d190114230ade0741f179e838a7c">getPluginCategory</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga3ca9d190114230ade0741f179e838a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins Category. A plugin developer may assign this information.  <a href="#ga3ca9d190114230ade0741f179e838a7c">More...</a><br/></td></tr>
+<tr class="separator:ga3ca9d190114230ade0741f179e838a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2a910ab7ed0111de491eaa382dc35d7f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga2a910ab7ed0111de491eaa382dc35d7f">getPluginDescription</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga2a910ab7ed0111de491eaa382dc35d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins description. This is assigned by the plugin developer.  <a href="#ga2a910ab7ed0111de491eaa382dc35d7f">More...</a><br/></td></tr>
+<tr class="separator:ga2a910ab7ed0111de491eaa382dc35d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga329db52307b1c61e5eadfa988a79fda4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga329db52307b1c61e5eadfa988a79fda4">getPluginHint</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga329db52307b1c61e5eadfa988a79fda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugins Hint. This information is assigned by the plugin developer.  <a href="#ga329db52307b1c61e5eadfa988a79fda4">More...</a><br/></td></tr>
+<tr class="separator:ga329db52307b1c61e5eadfa988a79fda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3323b53a53207edc1ff52925455a32e1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga3323b53a53207edc1ff52925455a32e1">getPluginInfo</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga3323b53a53207edc1ff52925455a32e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return information about a Plugin.  <a href="#ga3323b53a53207edc1ff52925455a32e1">More...</a><br/></td></tr>
+<tr class="separator:ga3323b53a53207edc1ff52925455a32e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabeb9e9afb2c4666e0ca49284dd7bbea4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gabeb9e9afb2c4666e0ca49284dd7bbea4">getPluginAuthor</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:gabeb9e9afb2c4666e0ca49284dd7bbea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return plugin author information.  <a href="#gabeb9e9afb2c4666e0ca49284dd7bbea4">More...</a><br/></td></tr>
+<tr class="separator:gabeb9e9afb2c4666e0ca49284dd7bbea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb283b638dd8e46b1e902d3eeacee8f7"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gabb283b638dd8e46b1e902d3eeacee8f7">getPluginCopyright</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:gabb283b638dd8e46b1e902d3eeacee8f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return plugin copyright information.  <a href="#gabb283b638dd8e46b1e902d3eeacee8f7">More...</a><br/></td></tr>
+<tr class="separator:gabb283b638dd8e46b1e902d3eeacee8f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8f129ba8cdd18d4486923ca580da0f38"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga8f129ba8cdd18d4486923ca580da0f38">getPluginVersion</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga8f129ba8cdd18d4486923ca580da0f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return plugin version information.  <a href="#ga8f129ba8cdd18d4486923ca580da0f38">More...</a><br/></td></tr>
+<tr class="separator:ga8f129ba8cdd18d4486923ca580da0f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga873d6015c2f2c1932b8887b18482e769"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga873d6015c2f2c1932b8887b18482e769">getPluginManualAsPDF</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga873d6015c2f2c1932b8887b18482e769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string. Use the function getPluginManualNrOfBytes to get the exact length of this string.  <a href="#ga873d6015c2f2c1932b8887b18482e769">More...</a><br/></td></tr>
+<tr class="separator:ga873d6015c2f2c1932b8887b18482e769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9ed523ca5f39f2b723c74a14d5d622a5"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga9ed523ca5f39f2b723c74a14d5d622a5">getPluginManualNrOfBytes</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga9ed523ca5f39f2b723c74a14d5d622a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the byte size for the PDF manual.  <a href="#ga9ed523ca5f39f2b723c74a14d5d622a5">More...</a><br/></td></tr>
+<tr class="separator:ga9ed523ca5f39f2b723c74a14d5d622a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga118ab4d2f5243283591293deefeaddd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga118ab4d2f5243283591293deefeaddd3">assignRoadRunnerInstance</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> pHandle, <a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> rrHandle)</td></tr>
+<tr class="memdesc:ga118ab4d2f5243283591293deefeaddd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign a roadrunner instance handle for the plugin to use. A plugin may use an externally created roadrunner instance for its internal work.  <a href="#ga118ab4d2f5243283591293deefeaddd3">More...</a><br/></td></tr>
+<tr class="separator:ga118ab4d2f5243283591293deefeaddd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5cd15fec113ceca47d8ab0845256e47d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga5cd15fec113ceca47d8ab0845256e47d">executePlugin</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga5cd15fec113ceca47d8ab0845256e47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The executePlugin function is the function designated to fire of a Plugins "worker". What is done when this function is entered is plugin dependent.  <a href="#ga5cd15fec113ceca47d8ab0845256e47d">More...</a><br/></td></tr>
+<tr class="separator:ga5cd15fec113ceca47d8ab0845256e47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac549fc1b5d4f4ecc296350a690f672bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gac549fc1b5d4f4ecc296350a690f672bd">executePluginEx</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, bool inAThread)</td></tr>
+<tr class="memdesc:gac549fc1b5d4f4ecc296350a690f672bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The executePluginEx is similar to the executePlugin function, except it takes two extra arguments.  <a href="#gac549fc1b5d4f4ecc296350a690f672bd">More...</a><br/></td></tr>
+<tr class="separator:gac549fc1b5d4f4ecc296350a690f672bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad90e8704a030bde6e81d85ec84d32ef3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gad90e8704a030bde6e81d85ec84d32ef3">getPluginStatus</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:gad90e8704a030bde6e81d85ec84d32ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get some status of a plugin. See the plugins documentation on what to expect.  <a href="#gad90e8704a030bde6e81d85ec84d32ef3">More...</a><br/></td></tr>
+<tr class="separator:gad90e8704a030bde6e81d85ec84d32ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1bccfe3f470e31e2e9305b42be43f5e5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga1bccfe3f470e31e2e9305b42be43f5e5">getPluginResult</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga1bccfe3f470e31e2e9305b42be43f5e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a plugins result, as a string. See the plugins documentation on what to expect.  <a href="#ga1bccfe3f470e31e2e9305b42be43f5e5">More...</a><br/></td></tr>
+<tr class="separator:ga1bccfe3f470e31e2e9305b42be43f5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8be6d1364ac6a352bbc46d5e1d99dc6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga8be6d1364ac6a352bbc46d5e1d99dc6b">resetPlugin</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga8be6d1364ac6a352bbc46d5e1d99dc6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state.  <a href="#ga8be6d1364ac6a352bbc46d5e1d99dc6b">More...</a><br/></td></tr>
+<tr class="separator:ga8be6d1364ac6a352bbc46d5e1d99dc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga561afc2b27f6bdd7b66be9836d6f8f16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga561afc2b27f6bdd7b66be9836d6f8f16">isPluginWorking</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga561afc2b27f6bdd7b66be9836d6f8f16"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if plugin is actively working  <a href="#ga561afc2b27f6bdd7b66be9836d6f8f16">More...</a><br/></td></tr>
+<tr class="separator:ga561afc2b27f6bdd7b66be9836d6f8f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad0b05f4e24ed427fcb84509b97defdf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gad0b05f4e24ed427fcb84509b97defdf2">terminateWork</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:gad0b05f4e24ed427fcb84509b97defdf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function will signal the internals of the plugin to terminate.  <a href="#gad0b05f4e24ed427fcb84509b97defdf2">More...</a><br/></td></tr>
+<tr class="separator:gad0b05f4e24ed427fcb84509b97defdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga342ee6177128aac9de1a42cd9bcfdbbd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga342ee6177128aac9de1a42cd9bcfdbbd">isBeingTerminated</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga342ee6177128aac9de1a42cd9bcfdbbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the work of a plugin is currently being terminated.  <a href="#ga342ee6177128aac9de1a42cd9bcfdbbd">More...</a><br/></td></tr>
+<tr class="separator:ga342ee6177128aac9de1a42cd9bcfdbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2835544b77ecc31a45b4e9ac92edacd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga2835544b77ecc31a45b4e9ac92edacd6">wasTerminated</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga2835544b77ecc31a45b4e9ac92edacd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">wasTerminated. query a plugin if work was terminated before completion  <a href="#ga2835544b77ecc31a45b4e9ac92edacd6">More...</a><br/></td></tr>
+<tr class="separator:ga2835544b77ecc31a45b4e9ac92edacd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0396336d9de10891f92e129dfad6e728"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga0396336d9de10891f92e129dfad6e728">assignOnStartedEvent</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
+<tr class="memdesc:ga0396336d9de10891f92e129dfad6e728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired when a plugin starts its work.  <a href="#ga0396336d9de10891f92e129dfad6e728">More...</a><br/></td></tr>
+<tr class="separator:ga0396336d9de10891f92e129dfad6e728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga97fdeef2fe8b5b7064c95182674d6ed7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga97fdeef2fe8b5b7064c95182674d6ed7">assignOnProgressEvent</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
+<tr class="memdesc:ga97fdeef2fe8b5b7064c95182674d6ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired as a plugin progresses.  <a href="#ga97fdeef2fe8b5b7064c95182674d6ed7">More...</a><br/></td></tr>
+<tr class="separator:ga97fdeef2fe8b5b7064c95182674d6ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga49ea9adb2c422c6307cf5d5859208e8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga49ea9adb2c422c6307cf5d5859208e8b">assignOnFinishedEvent</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, <a class="el" href="telplugins__types_8h.html#a901080dfb6fad8fb7c8091b9268a6e4e">PluginEvent</a> cb, void *userData1, void *userData2)</td></tr>
+<tr class="memdesc:ga49ea9adb2c422c6307cf5d5859208e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign event function fired when a plugin finishes its work.  <a href="#ga49ea9adb2c422c6307cf5d5859208e8b">More...</a><br/></td></tr>
+<tr class="separator:ga49ea9adb2c422c6307cf5d5859208e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0179580412f61a52c09e54cc9d74e8f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga0179580412f61a52c09e54cc9d74e8f3">getRoadRunnerHandleFromPlugin</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga0179580412f61a52c09e54cc9d74e8f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get roadrunner instance handle from plugin.  <a href="#ga0179580412f61a52c09e54cc9d74e8f3">More...</a><br/></td></tr>
+<tr class="separator:ga0179580412f61a52c09e54cc9d74e8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70def9ba7b7c938b2c018c4eb5e9b6e4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga70def9ba7b7c938b2c018c4eb5e9b6e4">getPluginPropertiesAsXML</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga70def9ba7b7c938b2c018c4eb5e9b6e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Plugins Propertiese as an xml document. The string returned from this function is formated as xml.  <a href="#ga70def9ba7b7c938b2c018c4eb5e9b6e4">More...</a><br/></td></tr>
+<tr class="separator:ga70def9ba7b7c938b2c018c4eb5e9b6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9ee4d3cf37747b926847537bcd6fff86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga9ee4d3cf37747b926847537bcd6fff86">getPluginProperties</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga9ee4d3cf37747b926847537bcd6fff86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a plugins properties.  <a href="#ga9ee4d3cf37747b926847537bcd6fff86">More...</a><br/></td></tr>
+<tr class="separator:ga9ee4d3cf37747b926847537bcd6fff86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5310fa0c94bad4876bbfbfb37107dbf8"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga5310fa0c94bad4876bbfbfb37107dbf8">getListOfPluginPropertyNames</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga5310fa0c94bad4876bbfbfb37107dbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of a plugins property names, as a string. Space being the delimiter.  <a href="#ga5310fa0c94bad4876bbfbfb37107dbf8">More...</a><br/></td></tr>
+<tr class="separator:ga5310fa0c94bad4876bbfbfb37107dbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac37eb45097afe99dc0bf360f6c27499d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gac37eb45097afe99dc0bf360f6c27499d">getPluginProperty</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName)</td></tr>
+<tr class="memdesc:gac37eb45097afe99dc0bf360f6c27499d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a property.  <a href="#gac37eb45097afe99dc0bf360f6c27499d">More...</a><br/></td></tr>
+<tr class="separator:gac37eb45097afe99dc0bf360f6c27499d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga012bd8ec60c8b38db2e86b15ff561b4f">getPluginPropertyValueHandle</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName)</td></tr>
+<tr class="memdesc:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a property value.  <a href="#ga012bd8ec60c8b38db2e86b15ff561b4f">More...</a><br/></td></tr>
+<tr class="separator:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabfda45fb199d7c64a94e9911b0468175"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gabfda45fb199d7c64a94e9911b0468175">setPluginProperty</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName, const char *value)</td></tr>
+<tr class="memdesc:gabfda45fb199d7c64a94e9911b0468175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of a PluginProperty by a string.  <a href="#gabfda45fb199d7c64a94e9911b0468175">More...</a><br/></td></tr>
+<tr class="separator:gabfda45fb199d7c64a94e9911b0468175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3ede3fa0929855277203bad5dbd79afe"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga3ede3fa0929855277203bad5dbd79afe">getNamesFromPropertyList</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga3ede3fa0929855277203bad5dbd79afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of names for a plugins property's.  <a href="#ga3ede3fa0929855277203bad5dbd79afe">More...</a><br/></td></tr>
+<tr class="separator:ga3ede3fa0929855277203bad5dbd79afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39df2125a97a4b01bba62871645a2dcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga39df2125a97a4b01bba62871645a2dcc">getProperty</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *name)</td></tr>
+<tr class="memdesc:ga39df2125a97a4b01bba62871645a2dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a particular property.  <a href="#ga39df2125a97a4b01bba62871645a2dcc">More...</a><br/></td></tr>
+<tr class="separator:ga39df2125a97a4b01bba62871645a2dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2a7495b13fea9066d1bdcc77ebc104a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga2a7495b13fea9066d1bdcc77ebc104a4">clearPropertyList</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga2a7495b13fea9066d1bdcc77ebc104a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a list of properties.  <a href="#ga2a7495b13fea9066d1bdcc77ebc104a4">More...</a><br/></td></tr>
+<tr class="separator:ga2a7495b13fea9066d1bdcc77ebc104a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Functions operating on Plugin Handles. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ga234bd24d3381ddd0d2b6cb3939355d72"></a>
+<a class="anchor" id="ga49ea9adb2c422c6307cf5d5859208e8b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool assignOnFinishedEvent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -229,14 +241,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga9573d3bb1164e45617ab2bb7d214169c"></a>
+<a class="anchor" id="ga97fdeef2fe8b5b7064c95182674d6ed7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool assignOnProgressEvent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -279,14 +291,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaabdb256484b47e5e94152da5c35d11a8"></a>
+<a class="anchor" id="ga0396336d9de10891f92e129dfad6e728"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool assignOnStartedEvent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -329,20 +341,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gac8062d4a8d20d5272d0d1807e83df43c"></a>
+<a class="anchor" id="ga118ab4d2f5243283591293deefeaddd3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool assignRoadRunnerInstance </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>pHandle</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>rrHandle</em>&#160;</td>
         </tr>
         <tr>
@@ -365,14 +377,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gadf9ea4e759d05ef7d30c33b83436b4a8"></a>
+<a class="anchor" id="ga2a7495b13fea9066d1bdcc77ebc104a4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool clearPropertyList </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -390,14 +402,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga588a7bf7facbb2637b2ecfab4a84b08f"></a>
+<a class="anchor" id="ga5cd15fec113ceca47d8ab0845256e47d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool executePlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -416,14 +428,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga7d1b6890ed023e5822117207f4bd0dd8"></a>
+<a class="anchor" id="gac549fc1b5d4f4ecc296350a690f672bd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool executePluginEx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -452,14 +464,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga5b0a05d266a13370675bece50a962de2"></a>
+<a class="anchor" id="ga5310fa0c94bad4876bbfbfb37107dbf8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getListOfPluginPropertyNames </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -477,14 +489,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga61cedd911d9ede6c4397c79a7b0a6ca1"></a>
+<a class="anchor" id="ga3ede3fa0929855277203bad5dbd79afe"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getNamesFromPropertyList </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -502,14 +514,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga643f370690630194909ba08e4648204c"></a>
+<a class="anchor" id="gabeb9e9afb2c4666e0ca49284dd7bbea4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getPluginAuthor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return plugin author information. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string on success, NULL otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga3ca9d190114230ade0741f179e838a7c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginCategory </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -527,14 +564,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gad613c53a049c2b5610895c9221e2bfa7"></a>
+<a class="anchor" id="gabb283b638dd8e46b1e902d3eeacee8f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getPluginCopyright </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return plugin copyright information. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string on success, NULL otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga2a910ab7ed0111de491eaa382dc35d7f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginDescription </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -552,14 +614,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga905d959cec230905a3b9cfe5ca77044d"></a>
+<a class="anchor" id="ga329db52307b1c61e5eadfa988a79fda4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginHint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -577,21 +639,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gafef8128c4c535087bdfd28078227237a"></a>
+<a class="anchor" id="ga3323b53a53207edc1ff52925455a32e1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginInfo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return some information about a Plugin. </p>
+<p>Return information about a Plugin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
@@ -602,14 +664,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga1c3ae2a8462c535283fbcbc4cf0e7f83"></a>
+<a class="anchor" id="ga873d6015c2f2c1932b8887b18482e769"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned char* getPluginManualAsPDF </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -627,14 +689,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gaa284630d727b64bf8203e7adc3981918"></a>
+<a class="anchor" id="ga9ed523ca5f39f2b723c74a14d5d622a5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned int getPluginManualNrOfBytes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -652,14 +714,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga4ebfeb102f822ed163b6ca320b15789d"></a>
+<a class="anchor" id="ga26e48d82660457e5ee988a95c14d20ac"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginName </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -677,14 +739,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga40d7a2e08f6c034d26d4454c367e97de"></a>
+<a class="anchor" id="ga9ee4d3cf37747b926847537bcd6fff86"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a> getPluginProperties </td>
+          <td class="memname"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> getPluginProperties </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -702,14 +764,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gab9c5e798d31c162f206820c135f37b02"></a>
+<a class="anchor" id="ga70def9ba7b7c938b2c018c4eb5e9b6e4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginPropertiesAsXML </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -727,14 +789,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gad95b6af7c5c294879d7524be79f50ec5"></a>
+<a class="anchor" id="gac37eb45097afe99dc0bf360f6c27499d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> getPluginProperty </td>
+          <td class="memname"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> getPluginProperty </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -763,14 +825,50 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga0b93e8ea7762df704640cf1dd4c67b4d"></a>
+<a class="anchor" id="ga012bd8ec60c8b38db2e86b15ff561b4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> getPluginPropertyValueHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>propertyName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a handle to a property value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
+    <tr><td class="paramname">propertyName</td><td>Name of the property </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a handle to the value of a property. Returns NULL if unsuccesful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga1bccfe3f470e31e2e9305b42be43f5e5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginResult </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -788,14 +886,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga4c0fccbaa08fde4340650b1b58447cef"></a>
+<a class="anchor" id="gad90e8704a030bde6e81d85ec84d32ef3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">char* getPluginStatus </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -813,14 +911,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga3cef6d525fbba72f5d6fa78551c53795"></a>
+<a class="anchor" id="ga8f129ba8cdd18d4486923ca580da0f38"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="telplugins__types_8h.html#ac59804b20b96f804d1bc83e31e799649">RRPropertyHandle</a> getProperty </td>
+          <td class="memname">char* getPluginVersion </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#aeff88c391651894e830dafb6801b1204">RRPropertiesHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return plugin version information. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string on success, NULL otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga39df2125a97a4b01bba62871645a2dcc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> getProperty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -849,14 +972,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gacec5d960901b04722c75e7f120fcee95"></a>
+<a class="anchor" id="ga0179580412f61a52c09e54cc9d74e8f3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="telplugins__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a> getRRHandleFromPlugin </td>
+          <td class="memname"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> getRoadRunnerHandleFromPlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -864,27 +987,24 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get roadrunner instance handle from plugin. </p>
-<ul>
-<li></li>
-</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">handle</td><td>Handle to a Plugin instance </td></tr>
+    <tr><td class="paramname">handle</td><td>Handle to a RoadRunner instance </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a handle to a rrInstance if available, returns NULL otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a handle if available, returns NULL otherwise </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="gaa2a6a48712bc7152f5e1e8a59bc37e24"></a>
+<a class="anchor" id="ga342ee6177128aac9de1a42cd9bcfdbbd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool isBeingTerminated </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -902,14 +1022,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga111e8e21b2869b5d4b2a51040b957fb4"></a>
+<a class="anchor" id="ga561afc2b27f6bdd7b66be9836d6f8f16"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool isPluginWorking </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -927,14 +1047,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga92ac26d23bfe6d26e67feeaeecf2a224"></a>
+<a class="anchor" id="ga8be6d1364ac6a352bbc46d5e1d99dc6b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool resetPlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -952,14 +1072,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga0aba41054cf893ac2a40b447bcc02102"></a>
+<a class="anchor" id="gabfda45fb199d7c64a94e9911b0468175"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool setPluginProperty </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
         </tr>
         <tr>
@@ -995,14 +1115,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga17e460cd7801b18ab67d0f1e41c9e1cd"></a>
+<a class="anchor" id="gad0b05f4e24ed427fcb84509b97defdf2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void terminateWork </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -1020,14 +1140,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga096538e253fbeba2928272f17c70fe74"></a>
+<a class="anchor" id="ga2835544b77ecc31a45b4e9ac92edacd6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool wasTerminated </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a1c8490e1c0e5e608a161fd8e73f441e7">RRPluginHandle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em>)</td><td></td>
           <td></td>
         </tr>
@@ -1048,7 +1168,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:10 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

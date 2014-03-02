@@ -85,43 +85,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Get a handle to a plugin</li>
 <li>Obtain some info from the plugin</li>
 </ol>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">from</span> telplugins <span class="keyword">import</span> *</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keywordflow">try</span>:    </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="comment"># Create a plugin manager</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    pm = <a class="code" href="group__plugin__manager.html#ga20d1fd0f6e3a77a1b80a2d32911cf2a5" title="Create a new instance of a plugin manager. ">createPluginManager</a>()</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="comment"># Load plugins from the plugin folder</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    result = <a class="code" href="group__plugin__manager.html#gabd76ede2c1cd54e82c18be206a60de2e" title="Load plugins. ">loadPlugins</a>(pm)</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&#39;Number of Plugins: &#39;</span> + `<a class="code" href="group__plugin__manager.html#ga606b9fd03c3289cfdaa0ef899568c777" title="Get number of loaded plugins. ">getNumberOfPlugins</a>(pm)`</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&#39;Plugin Names: &#39;</span> + `<a class="code" href="group__plugin__manager.html#ga6cda597795199112440fa43ba870d56c" title="Function to retrieve the names of all currently loaded plugins. ">getPluginNames</a>(pm)`</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">#Go trough all plugins and print information</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    aPlugin = <a class="code" href="group__plugin__manager.html#ga9f19ce1f85059e9770efb792fae46d68" title="getFirstPlugin retrieves the &quot;first&quot; plugin in the plugin managers internal list of plugins...">getFirstPlugin</a>(pm)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">while</span> <span class="keyword">True</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">if</span> aPlugin == <span class="keywordtype">None</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keywordflow">break</span>            </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;==========================================&#39;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Name: &#39;</span> + `<a class="code" href="group__plugins.html#ga530acb5427e828f9e7207722c63f050d" title="Get the name of a Plugin. ">getPluginName</a>(aPlugin)`</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Author: &#39;</span> + `<a class="code" href="group__plugins.html#ga8e8c2db99e5d94657a7a65a961345baf" title="Get the author of a Plugin. ">getPluginAuthor</a>(aPlugin)`</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Copyright: &#39;</span> + `<a class="code" href="group__plugins.html#ga53a4ab78fae8b51ea67e95b612193124" title="Get the plugin copyright. ">getPluginCopyright</a>(aPlugin)`</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Version: &#39;</span> + `<a class="code" href="group__plugins.html#ga32d7e52b41cf99fcdc3f1de600dc0c6b" title="Get the plugin version. ">getPluginVersion</a>(aPlugin)`</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Category: &#39;</span> + `<a class="code" href="group__plugins.html#ga7b5b231df505052b8736d4791ecc0bbe" title="Get the Category of a Plugin. ">getPluginCategory</a>(aPlugin)`                        </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Description:&#39;</span> + `<a class="code" href="group__plugins.html#ga848654b1e49b52c48a4a61d7852e9a43" title="Get the Description of a Plugin. ">getPluginDescription</a>(aPlugin)`</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">print</span> <span class="stringliteral">&#39;Parameters: &#39;</span> + `<a class="code" href="group__plugin__properties.html#ga1640824ba8809fc440d648936eec17c6" title="Get a list of property names in a plugin. ">getListOfPluginPropertyNames</a>(aPlugin)`                    </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">#get next plugin</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        aPlugin = <a class="code" href="group__plugin__manager.html#ga66223ee14260ae683f77095b1d494ffc" title="getNextPlugin retrieves the &quot;next&quot; plugin in the plugin managers internal list of plugins...">getNextPlugin</a>(pm)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="group__plugin__manager.html#ga5a1acf994e66cb9c19344e9b2824ad5c" title="Unload all plugins. ">unLoadPlugins</a>(pm)    </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">print</span> <span class="stringliteral">&#39;There was a problerm: &#39;</span> + `e`    </div>
-</div><!-- fragment --> </div><!-- contents -->
+<div class="fragment"></div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:13 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:24 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

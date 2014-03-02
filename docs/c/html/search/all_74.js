@@ -10,5 +10,5 @@ var searchData=
   ['telplugins_5fproperties_5fapi_2eh',['telplugins_properties_api.h',['../telplugins__properties__api_8h.html',1,'']]],
   ['telplugins_5ftypes_2eh',['telplugins_types.h',['../telplugins__types_8h.html',1,'']]],
   ['telplugins_5futilities_2eh',['telplugins_utilities.h',['../telplugins__utilities_8h.html',1,'']]],
-  ['terminatework',['terminateWork',['../group__plugins.html#ga17e460cd7801b18ab67d0f1e41c9e1cd',1,'tlpc::terminateWork()'],['../group__plugins.html#ga17e460cd7801b18ab67d0f1e41c9e1cd',1,'terminateWork():&#160;telplugins_c_api.cpp']]]
+  ['terminatework',['terminateWork',['../group__plugins.html#gad0b05f4e24ed427fcb84509b97defdf2',1,'tlpc::terminateWork()'],['../group__plugins.html#gad0b05f4e24ed427fcb84509b97defdf2',1,'terminateWork():&#160;telplugins_c_api.cpp']]]
 ];

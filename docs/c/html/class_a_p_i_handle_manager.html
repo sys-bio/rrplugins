@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -71,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,9 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8d5f564fe66b03219fcb4d1f9547eed4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d5f564fe66b03219fcb4d1f9547eed4"></a>
 <a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>registerHandle</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *typeOf)</td></tr>
 <tr class="separator:a8d5f564fe66b03219fcb4d1f9547eed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bef6d09c3daf24231d7369e111e2954"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8bef6d09c3daf24231d7369e111e2954"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>unregisterHandle</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *typeOf)</td></tr>
-<tr class="separator:a8bef6d09c3daf24231d7369e111e2954"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b84a729395274fdec07304e81d8f0cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b84a729395274fdec07304e81d8f0cf"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>unRegisterHandle</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="separator:a9b84a729395274fdec07304e81d8f0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4693b60bd57f9ac891bbd2b645c1ddc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4693b60bd57f9ac891bbd2b645c1ddc0"></a>
 <a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *typeOf, const char *fnc)</td></tr>
 <tr class="separator:a4693b60bd57f9ac891bbd2b645c1ddc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,7 +116,7 @@ HandleMap&#160;</td><td class="memItemRight" valign="bottom"><b>mHandles</b></td
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:10 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

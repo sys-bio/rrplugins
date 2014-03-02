@@ -125,6 +125,12 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>__del__</b></td></tr>
 <tr class="memitem:a67ad729c0db62aac2c3045c83cd26778"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython_1_1telplugins_1_1_data_series.html#a67ad729c0db62aac2c3045c83cd26778">setElement</a></td></tr>
 <tr class="memdesc:a67ad729c0db62aac2c3045c83cd26778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific element.  <a href="#a67ad729c0db62aac2c3045c83cd26778">More...</a><br/></td></tr>
 <tr class="separator:a67ad729c0db62aac2c3045c83cd26778"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbdaa386af6e104adb100621218008c5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython_1_1telplugins_1_1_data_series.html#afbdaa386af6e104adb100621218008c5">getWeight</a></td></tr>
+<tr class="memdesc:afbdaa386af6e104adb100621218008c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the weight for a specific data element.  <a href="#afbdaa386af6e104adb100621218008c5">More...</a><br/></td></tr>
+<tr class="separator:afbdaa386af6e104adb100621218008c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaeda2d14ce30e25b28ef5c3d8f1d1ae"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython_1_1telplugins_1_1_data_series.html#aaaeda2d14ce30e25b28ef5c3d8f1d1ae">setWeight</a></td></tr>
+<tr class="memdesc:aaaeda2d14ce30e25b28ef5c3d8f1d1ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a specific element.  <a href="#aaaeda2d14ce30e25b28ef5c3d8f1d1ae">More...</a><br/></td></tr>
+<tr class="separator:aaaeda2d14ce30e25b28ef5c3d8f1d1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53ffecea5ea4e97e96283a0afbf6cab5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython_1_1telplugins_1_1_data_series.html#a53ffecea5ea4e97e96283a0afbf6cab5">readDataSeries</a></td></tr>
 <tr class="memdesc:a53ffecea5ea4e97e96283a0afbf6cab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a dataseries from a file.  <a href="#a53ffecea5ea4e97e96283a0afbf6cab5">More...</a><br/></td></tr>
 <tr class="separator:a53ffecea5ea4e97e96283a0afbf6cab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,6 +250,41 @@ Properties</h2></td></tr>
 </div><!-- fragment --> 
 </div>
 </div>
+<a class="anchor" id="afbdaa386af6e104adb100621218008c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def getWeight </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the weight for a specific data element. </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keywordflow">print</span> d.getWeight (1,2)</div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a class="anchor" id="ab0394ec3bced7aafedc829f80d3d95f5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -298,6 +339,47 @@ Properties</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">def setElement </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set a specific element. </p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;d.setElement (1,2, 3.1415)</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a class="anchor" id="aaaeda2d14ce30e25b28ef5c3d8f1d1ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def setWeight </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -438,7 +520,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:13 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:23 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

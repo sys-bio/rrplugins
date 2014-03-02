@@ -159,9 +159,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5b36525c4e4aa07a487743962188d52a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga5b36525c4e4aa07a487743962188d52a">assignOnFinishedEvent</a></td></tr>
 <tr class="memdesc:ga5b36525c4e4aa07a487743962188d52a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a plugins OnFinishedEvent function.  <a href="#ga5b36525c4e4aa07a487743962188d52a">More...</a><br/></td></tr>
 <tr class="separator:ga5b36525c4e4aa07a487743962188d52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4148c2d510b803e0b89195bc0c57b7df"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga4148c2d510b803e0b89195bc0c57b7df">getRRHandleFromPlugin</a></td></tr>
-<tr class="memdesc:ga4148c2d510b803e0b89195bc0c57b7df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hand external data to a plugin: THIS METHOD IS UNDER REVIEW.  <a href="#ga4148c2d510b803e0b89195bc0c57b7df">More...</a><br/></td></tr>
-<tr class="separator:ga4148c2d510b803e0b89195bc0c57b7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -778,40 +775,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga4148c2d510b803e0b89195bc0c57b7df"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def python.telplugins_c_api.getRRHandleFromPlugin </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>pluginHandle</em>)</td><td></td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Hand external data to a plugin: THIS METHOD IS UNDER REVIEW. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pluginHandle</td><td>Handle to a plugin </td></tr>
-    <tr><td class="paramname">userData</td><td>void* pointer to user data. Plugin dependent, see the specific documentation on the plugin for details. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns true or false indicating success/failure</dd></dl>
-<p>telLib.assignPluginInput.restype = c_bool def assignPluginInput(pluginHandle, userData): return telLib.assignPluginInput(pluginHandle, c_void_p(userData)) Get the roadrunner instance handle from plugin assuming the plugin has one </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pluginHandle</td><td>Handle to a Plugin instance </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a handle to a rrInstance if available, returns None otherwise </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ga150f1be5ee4e3684370bc891ec77c5db"></a>
 <div class="memitem">
 <div class="memproto">
@@ -968,7 +931,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:13 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:24 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

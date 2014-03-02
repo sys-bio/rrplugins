@@ -66,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Groups</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,8 +89,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gafbaa0c39d895c553940ae952da8201d5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gafbaa0c39d895c553940ae952da8201d5">getLastError</a> ()</td></tr>
-<tr class="memdesc:gafbaa0c39d895c553940ae952da8201d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a RoadRunner C data structure (RRCDataPtr) from RoadRunner data.  <a href="#gafbaa0c39d895c553940ae952da8201d5">More...</a><br/></td></tr>
+<tr class="memdesc:gafbaa0c39d895c553940ae952da8201d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return last API error.  <a href="#gafbaa0c39d895c553940ae952da8201d5">More...</a><br/></td></tr>
 <tr class="separator:gafbaa0c39d895c553940ae952da8201d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1a3781c47e83e859011552501f237508"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga1a3781c47e83e859011552501f237508">getLastPluginAPIError</a> ()</td></tr>
+<tr class="memdesc:ga1a3781c47e83e859011552501f237508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return last API error.  <a href="#ga1a3781c47e83e859011552501f237508">More...</a><br/></td></tr>
+<tr class="separator:ga1a3781c47e83e859011552501f237508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa76e747d9409a674f71747495e876058"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#gaa76e747d9409a674f71747495e876058">registerHandle</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, char *name)</td></tr>
+<tr class="memdesc:gaa76e747d9409a674f71747495e876058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a handle to be used with the API.  <a href="#gaa76e747d9409a674f71747495e876058">More...</a><br/></td></tr>
+<tr class="separator:gaa76e747d9409a674f71747495e876058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9b84a729395274fdec07304e81d8f0cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utilities.html#ga9b84a729395274fdec07304e81d8f0cf">unRegisterHandle</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
+<tr class="memdesc:ga9b84a729395274fdec07304e81d8f0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">UnRegister a handle.  <a href="#ga9b84a729395274fdec07304e81d8f0cf">More...</a><br/></td></tr>
+<tr class="separator:ga9b84a729395274fdec07304e81d8f0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Functions to help and assist in the use of the Plugins framework. </p>
@@ -108,61 +117,81 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a RoadRunner C data structure (RRCDataPtr) from RoadRunner data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rrDataHandle</td><td>A pointer to a RoadRunner numerical data type variable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns NULL if fails, otherwise returns a RRCData handle</dd></dl>
-<p>Retrieve the number of rows in the given RoadRunner C numberical data (returned from simulate(RRHandle handle))</p>
-<p>Example:</p>
-<div class="fragment"><div class="line">nRows = getRRDataNumRows (result); </div>
-</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rrData</td><td>A pointer to a RoadRunner numerical data type variable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns -1 if fails, otherwise returns the number of rows</dd></dl>
-<p>Retrieve the number of columns in the given rrCData data (returned form simulat(RRHandle handle))</p>
-<p>Example:</p>
-<div class="fragment"><div class="line">nRows = getResultNumCols (rrData); </div>
-</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rrData</td><td>A pointer to a rrData type variable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns -1 if fails, otherwise returns the number of columns</dd></dl>
-<p>Retrieves an element at a given row and column from a RRCData struct type variable</p>
-<p>RoadRunner numerical data are indexed from zero</p>
-<p>Example:</p>
-<div class="fragment"><div class="line">status = getRRCDataElement (rrData, 2, 4, *value); </div>
-</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">rrcData</td><td>A pointer to a rrCData type variable </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">r</td><td>-The row index to the rrData data </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">c</td><td>- The column index to the rrData data </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>- The retrieved value from the rrData data </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns true if succesful </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The F indicate this is a forwarde fucntion from RoadRUnners C API.</dd></dl>
-<p>Returns a string list in string form. </p>
-<dl class="section return"><dt>Returns</dt><dd>Returns string list as a character string</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Forwarded from roadruners C API</dd></dl>
-<p>Return last API error </p>
+<p>Return last API error. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns a string with the error </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga1a3781c47e83e859011552501f237508"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getLastPluginAPIError </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return last API error. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string with the error </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa76e747d9409a674f71747495e876058"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool registerHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register a handle to be used with the API. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns true/false indicating success </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga9b84a729395274fdec07304e81d8f0cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool unRegisterHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>UnRegister a handle. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns true/false indicating success </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 27 2014 11:33:10 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 12:21:22 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
