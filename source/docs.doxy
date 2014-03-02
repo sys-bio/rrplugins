@@ -52,7 +52,7 @@ PROJECT_LOGO           =
 # If a relative path is entered, it will be relative to the location 
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = ../../../docs/Plugins/CPP
+OUTPUT_DIRECTORY       = ../../ghPages/docs/cpp
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 
 # 4096 sub-directories (in 2 levels) under the output directory of each output 
@@ -661,7 +661,8 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = ../source
+INPUT                  = . \
+                         core
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -727,7 +728,13 @@ RECURSIVE              = NO
 EXCLUDE                = rrPluginsAPIPCH.h \
                          rrPluginsAPISettings.h \
                          rrPluginsAPIExporter.h \
-                         rrpExporter.h
+                         rrpExporter.h \
+                         rrPluginsAPIExporter.h \
+                         core/telCoreExporter.h \
+                         rrPluginsAPIPCH.h \
+                         core/telManager_pch.h \
+                         rrPluginsAPIPCH.h \
+                         core/telPluginsManagerSettings.h
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or 
 # directories that are symbolic links (a Unix file system feature) are excluded 
@@ -755,7 +762,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = 
+EXAMPLE_PATH           = ../examples
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -769,7 +776,7 @@ EXAMPLE_PATTERNS       = *
 # commands irrespective of the value of the RECURSIVE tag. 
 # Possible values are YES and NO. If left blank NO is used.
 
-EXAMPLE_RECURSIVE      = NO
+EXAMPLE_RECURSIVE      = YES
 
 # The IMAGE_PATH tag can be used to specify one or more files or 
 # directories that contain image that are included in the documentation (see 

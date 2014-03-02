@@ -1337,28 +1337,46 @@ def unLoadAPI():
 #external plugins. 
 #The code fragment below shows briefly how to load plugins, check for plugins, and use an individual plugin.
 #
-#\include telPluginTester.py
+#\include telGetPluginInformation.py
 #
-# The above code produces the following output:
+# The above code produces something like the following output (depends on installed plugins):
 #@code
-##*** Python 2.7.3 (default, Apr 10 2012, 23:31:26) [MSC v.1500 32 bit (Intel)] on win32. ***
-##>>>
-##*** Remote Interpreter Reinitialized  ***
-##>>>
-##The plugin manager will look for plugins in the following folder: R:\installs\vs_debug\plugins
-##Number of Plugins: 2
-##Plugin Names: ['AddNoise', 'Levenberg-Marquardt']
-##PluginName: 'AddNoise'
-##Name..........................AddNoise
-##Author........................Totte Karlsson
-##Category......................Signal Processing
-##Version.......................1.0
-##Copyright.....................Totte Karlsson, Herbert Sauro, Systems Biology, UW 2012
-##
-##PluginProperties: ['NoiseType', 'Sigma', 'InputData']
-##True
-##done
-##>>>
+##>>> 
+##Number of Plugins: 3
+##Plugin Names: ['AddNoise', 'ChiSquare', 'Levenberg-Marquardt', 'SBMLModel']
+##==========================================
+##Name: 'AddNoise'
+##Author: 'Totte Karlsson'
+##Copyright: 'Totte Karlsson, Herbert Sauro, Systems Biology, UW 2012-2014'
+##Version: '1.0'
+##Category: 'Signal Processing'
+##Description:'The AddNoise plugin adds Gaussian noise to synthetic data. The amount of noise is controlled by the plugins Sigma property. Specifically, noise is generated for each single data value, with a probability corresponding to a Gaussian distribution centered around the value, and with a variance equal to (sigma^2). The Plugin accepts Tellurium data as input, in the "InputData" property. Currently only Gaussian noise is supported. The progress of the application of noise can be read in the Progress property. Noise will not be generated onto the first column of data, if its column label is equal to "Time", (not case sensitive). The AddNoise plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.'
+##Parameters: ['NoiseType', 'Sigma', 'InputData', 'Progress']
+##==========================================
+##Name: 'ChiSquare'
+##Author: 'Totte Karlsson'
+##Copyright: 'Totte Karlsson, Herbert Sauro, Systems Biology, UW 2012-2014'
+##Version: '0.8'
+##Category: 'Misc'
+##Description:None
+##Parameters: ['ExperimentalData', 'ModelData', 'NrOfModelParameters', 'ChiSquare', 'ReducedChiSquare']
+##==========================================
+##Name: 'Levenberg-Marquardt'
+##Author: 'Totte Karlsson'
+##Copyright: 'Totte Karlsson, Herbert Sauro, Systems Biology, UW 2012-2014'
+##Version: '0.8'
+##Category: 'Fitting'
+##Description:'The Levenberg-Marquardt plugin is used to fit a proposed SBML models parameters to experimental data. The current implementation is based on the lmfit C library by Joachim Wuttke. The Plugin has numerous parameters for fine tuning the algorithm. See the embedded PDF for more information. '
+##Parameters: ['SBML', 'ExperimentalData', 'FittedData', 'Residuals', 'InputParameterList', 'OutputParameterList', 'ConfidenceLimits', 'ExperimentalDataSelectionList', 'FittedDataSelectionList', 'Norm', 'Norms', 'NrOfIter', 'StandardizedResiduals', 'NormalProbabilityOfResiduals', 'ChiSquare', 'ReducedChiSquare', 'ftol', 'xtol', 'gtol', 'epsilon', 'stepbound', 'patience']
+##==========================================
+##Name: 'SBMLModel'
+##Author: 'Totte Karlsson'
+##Copyright: 'Totte Karlsson, Herbert Sauro, Systems Biology, UW 2012-2014'
+##Version: '1.0'
+##Category: 'Examples'
+##Description:'The SBMLModel plugin exposes one property containing data, as a string, for an ExampleModel. The ExampleModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.'
+##Parameters: ['Model']
+##>>> 
 #@endcode
 #    \section plugins_overview Overview
 #    The libRoadRunner Plugin API is centered around three important concepts:
@@ -1444,7 +1462,7 @@ def unLoadAPI():
 # \defgroup examples Python Example Scripts
 # \brief Scripts illuminating concepts regarding RoadRunner Plugins
 
-## \example telPluginTester.py
+## \example telGetPluginInformation.py
 ## This example shows
 ## -# How to create a plugin manager
 ## -# Get Plugin Names
@@ -1462,3 +1480,6 @@ def unLoadAPI():
 ## This example shows
 ## -# How to define Python event functions and passing them to a plugin
 
+## \example telPluginDocumentation.py
+## This example shows
+## -# How to extract a plugins embedded PDF documentation
