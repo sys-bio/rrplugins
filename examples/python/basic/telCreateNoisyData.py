@@ -26,10 +26,8 @@ try:
     noisePlugin.execute()
 
     # Get the data to plot
-    noisePlugin.InputData.plot()
-    
-    noisePlugin.InputData.writeDataSeries("testData.dat")    
-    
+    noisePlugin.InputData.plot()    
+    noisePlugin.InputData.writeDataSeries("testData.dat")        
 
 except Exception as e:
     print 'Problem: ' + `e`

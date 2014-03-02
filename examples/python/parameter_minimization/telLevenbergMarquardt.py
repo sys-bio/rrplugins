@@ -13,8 +13,7 @@ def pluginIsProgressing(lmP):
     print 'Iterations = ' + `lmObject.getProperty("NrOfIter")` \
         + '\tNorm = ' + `lmObject.getProperty("Norm")`
 
-try:
-    
+try:   
     progressEvent =  tel.NotifyEventEx(pluginIsProgressing)
     
     #The ID of the plugin is passed as the last argument in the assignOnProgressEvent. 
@@ -58,4 +57,5 @@ try:
     tel.telplugins.plt.show()
     
 except Exception as e:
-    print 'Problem.. ' + `e`    
+    print 'Problem.. ' + `e`  
+      
