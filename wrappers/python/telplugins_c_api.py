@@ -598,11 +598,11 @@ def clearPropertyList(propertyListHandle):
 ## \return Returns names for all properties in the list
 ## \ingroup plugin_properties
 telLib.getNamesFromPropertyList.restype = c_char_p
-def getNamesFromPropertyList(propertyMeterHandle):
-    paraType = getPropertyType(propertyMeterHandle)
+def getNamesFromPropertyList(propertyHandle):
+    paraType = getPropertyType(propertyHandle)
     if paraType != 'listOfProperties':
         raise 'That is not a valid list property'
-    listHandle = getPropertyValueHandle(propertyMeterHandle)
+    listHandle = getPropertyValueHandle(propertyHandle)
     paras = telLib.getNamesFromPropertyList(listHandle)
     if not paras:
         return list()

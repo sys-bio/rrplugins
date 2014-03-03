@@ -23,7 +23,7 @@ try:
     #Setup Monte Carlo properties.
     mcP.ExperimentalData                 = DataSeries.readDataSeries ("testData.dat")    
     mcP.SBML                             = modelP.Model             
-    mcP.NrOfMCRuns                       = 100
+    mcP.NrOfMCRuns                       = 10000
     mcP.InputParameterList               = ["k1", 1.3]
     mcP.FittedDataSelectionList          = "[S1] [S2]"
     mcP.ExperimentalDataSelectionList    = "[S1] [S2]"
