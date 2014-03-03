@@ -57,6 +57,7 @@ namespace tlp
 {
     using tlp::gNoneString;
     using std::string;
+    using std::stringstream;
 /**
     Template function that returns the name of a particular type, e.g. a value of type int, returns a string "int".
     Each type need to be specialized.
@@ -369,8 +370,9 @@ inline void Property< tlp::StringList >::setValueFromString(const string& val)
 template<>
 inline string Property<Properties>::getValueAsString() const
 {
-    tlp::StringList list = mValue.getNames();
-    return list.AsString();
+    stringstream ss;
+    ss << mValue;
+    return ss.str();
 }
 
 /**

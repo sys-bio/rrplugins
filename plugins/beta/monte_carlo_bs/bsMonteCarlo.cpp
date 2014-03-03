@@ -19,6 +19,8 @@ CPPPlugin(                      "MonteCarlo-Bootstrap", "Fitting",       NULL, m
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
 mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
+mMonteCarloParameters(          TelluriumData(),        "MonteCarloParameters",                 "Parameters obtained from a Monte Carlo session."),
+mCurrentParameters(             Properties(),           "CurrentParameters",                    "List of parameters"),
 mConfidenceLimits(              Properties(),           "ConfidenceLimits",                     "Confidence limits for each parameter"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
@@ -31,6 +33,8 @@ mWorker(*this)
     mProperties.add(&mSBML);
     mProperties.add(&mExperimentalData);
     mProperties.add(&mInputParameterList);
+    mProperties.add(&mMonteCarloParameters);
+    mProperties.add(&mCurrentParameters);
     mProperties.add(&mConfidenceLimits);
     mProperties.add(&mExperimentalDataSelectionList);
     mProperties.add(&mModelDataSelectionList);
@@ -104,7 +108,7 @@ string MonteCarlo::getSBML()
 string MonteCarlo::getResult()
 {
     stringstream msg;
-    Properties& conf = mConfidenceLimits; //.getValueReference();
+    Properties& conf = mConfidenceLimits;
     if(conf.count())
     {
         msg<<"Parameter confidence limits ========\n";
@@ -171,7 +175,7 @@ The input parameters are properties of the input SBML model";
 mInputParameterList.setDescription(s.str());
 s.str("");
 
-s << "The confidence limits parameter list holds resulting confidence limits, as calculated from the Hessian";
+s << "The confidence limits parameter list holds resulting confidence limits, as calculated using obtained Monte Carlo Parameters";
 mConfidenceLimits.setDescription(s.str());
 s.str("");
 

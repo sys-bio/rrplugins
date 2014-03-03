@@ -39,11 +39,11 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <ILINK_LibraryPath>..\..\..\apps\plugin_info\;R:\rrl\libplugins\apps\getPluginInfo\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\..\apps\plugin_info\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppConsoleApplication</ProjectType>
-        <IncludePath>..\..\..\apps\plugin_info\;R:\rrl\libplugins\apps\getPluginInfo\;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\..\apps\plugin_info\;$(IncludePath)</IncludePath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -95,7 +95,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <Manifest_File>None</Manifest_File>
-        <BCC_IncludePath>$(RR_ROOT)\libplugins\source;$(RR_ROOT)\source;$(TLP_INSTALL)\include;$(BCC_IncludePath)</BCC_IncludePath>
+        <BCC_IncludePath>$(RR_ROOT)\source;$(TLP_INSTALL)\include;$(BCC_IncludePath)</BCC_IncludePath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>

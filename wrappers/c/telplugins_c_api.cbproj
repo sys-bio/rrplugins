@@ -46,10 +46,10 @@
         <DynamicRTL>true</DynamicRTL>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Defines>EXPORT_RRP;POCO_STATIC;$(Defines)</Defines>
-        <ILINK_LibraryPath>..\..\source\;R:\rrl\libplugins\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\source\;;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ProjectType>CppDynamicLibrary</ProjectType>
-        <IncludePath>..\..\source\;R:\rrl\libplugins\source\;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\;;$(IncludePath)</IncludePath>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>

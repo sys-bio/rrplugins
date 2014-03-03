@@ -40,8 +40,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <_TCHARMapping>char</_TCHARMapping>
-        <ILINK_LibraryPath>R:\rrl\libplugins\examples\property_meta_data\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>R:\rrl\libplugins\examples\property_meta_data\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>$(IncludePath)</IncludePath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <ProjectType>CppConsoleApplication</ProjectType>
         <Multithreaded>true</Multithreaded>

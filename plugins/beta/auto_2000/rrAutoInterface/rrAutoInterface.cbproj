@@ -93,7 +93,7 @@
         <DynamicRTL>true</DynamicRTL>
         <BPILibOutputDir>$(TLP_INSTALL)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <Defines>EXPORT_RR_AUTO;POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>

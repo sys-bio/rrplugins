@@ -20,8 +20,8 @@ class MonteCarlo : public CPPPlugin
 
         Property<Properties>                    mInputParameterList;            //Parameters to fit
 
-        Property<Properties>                    mSingleMCParameters;            //This property can be checked in OnProgress
-        Property<TelluriumData>                 mMCParameters;                  //Obtained parameter values from each MC run
+        Property<Properties>                    mCurrentParameters;            //This property can be checked in OnProgress event
+        Property<TelluriumData>                 mMonteCarloParameters;         //Obtained parameter values from each MC run
 
         Property<Properties>                    mConfidenceLimits;              //Final Confidence limits for each parameter
 

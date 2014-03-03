@@ -19,6 +19,7 @@ class APIHandleManager
 
     protected:
         HandleMap                       mHandles;
+        TELHandle                       searchFor(TELHandle handle);
 
 };
 #endif

@@ -9,7 +9,6 @@
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 
-
 //Below defines are from the LMFIT lib.. convert to constants later on
 /* machine-dependent constants from float.h */
 #define LM_MACHEP     DBL_EPSILON   /* resolution of arithmetic */

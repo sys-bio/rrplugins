@@ -4,6 +4,8 @@
 #include "telLogger.h"
 #include "telAPIHandleManager.h"
 #include "telException.h"
+#include "telProperties.h"
+#include "telProperty.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -53,6 +55,12 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
     }
     else
     {
+        //Before throwing, check property containers for handles that are dynamically created. If found, return
+        TELHandle oneMoreTry =   searchFor(handle);
+        if(oneMoreTry)
+        {
+            return handle;
+        }
         msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
         msg<<"No such handle is registered. "<<endl;
         throw(BadHandleException(msg.str()));
@@ -78,4 +86,26 @@ bool APIHandleManager::unRegisterHandle(TELHandle handle)
     return true;
 }
 
+TELHandle APIHandleManager::searchFor(TELHandle handle)
+{
+    HandleMap::iterator it = mHandles.begin();
+    while(it != mHandles.end())
+    {
+        string allowed("Properties");
+        if(strstr(it->second, allowed.c_str()) != NULL)
+        {
+            Properties* propContainer = static_cast<Properties*>(it->first);
+            for(int i = 0; i < propContainer->count(); i++)
+            {
+                PropertyBase* aProperty = (*propContainer)[i];
+                if(aProperty == handle)
+                {
+                    return handle;
+                }
+            }
+        }
+            it++;
+    }
+    return NULL;
+}
 

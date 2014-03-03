@@ -45,7 +45,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <_TCHARMapping>char</_TCHARMapping>
         <ProjectType>CppConsoleApplication</ProjectType>
-        <IncludePath>R:\rrl\third_party\poco\Foundation\src\;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <IncludePath>R:\rrl\third_party\poco\Foundation\src\;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>R:\rrl\third_party\poco\Foundation\src\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>

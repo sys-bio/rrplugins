@@ -17,6 +17,7 @@ Properties::~Properties()
 
 Properties::Properties(const Properties& cpyMe)
 {
+
     //Copy each property
     for(int i = 0; i < cpyMe.count(); i++)
     {
@@ -39,6 +40,7 @@ Properties& Properties::operator=(const Properties& rhs)
     {
         return *this;
     }
+    mProperties.clear();
 
     //Copy each property
     for(int i = 0; i < rhs.count(); i++)

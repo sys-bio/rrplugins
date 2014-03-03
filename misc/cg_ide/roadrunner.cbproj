@@ -46,8 +46,8 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Defines>EXPORT_RR;LIBSBML_STATIC;LIBLAX_STATIC;STATIC_LIBSTRUCT;STATIC_NLEQ;LIBSBML_USE_CPP_NAMESPACE;POCO_STATIC;PCRE_STATIC;POCO_NO_AUTOMATIC_LIBS;$(Defines)</Defines>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_LibraryPath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\libplugins\source\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\libplugins\source\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(RR_INSTALL)\include;$(RR_INSTALL)\include\libxml2;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>R:\rrl\source\c\;R:\rrl\third_party\poco\Foundation\src\;..\\source\;..\third_party\poco\Foundation\src\;mtrand\;c\;R:\rrl\source\;$(RR_INSTALL)\include;$(RR_INSTALL)\include\libxml2;$(IncludePath)</IncludePath>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>

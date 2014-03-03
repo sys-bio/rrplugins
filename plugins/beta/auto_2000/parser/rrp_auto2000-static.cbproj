@@ -58,8 +58,8 @@
         <ProjectType>CppDynamicLibrary</ProjectType>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_LibraryPath>..\;R:\rrl\third_party\poco\Foundation\src\;R:\rrl\libplugins\source\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;lmfit-3.5\lib\;..\full_space_minimization\;..\test_plugin\;R:\rrl\plugins\TestPlugin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\;R:\rrl\third_party\poco\Foundation\src\;R:\rrl\libplugins\source\;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;$(TLP_ROOT)\Wrappers\C;$(TLP_ROOT)\libplugins\source;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\;R:\rrl\third_party\poco\Foundation\src\;;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;lmfit-3.5\lib\;..\full_space_minimization\;..\test_plugin\;R:\rrl\plugins\TestPlugin\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\;R:\rrl\third_party\poco\Foundation\src\;;rrAutoInterface\;lib\lib\;..\add_noise\;..\..\vcl_source\;$(TLP_ROOT)\Wrappers\C;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -145,7 +145,7 @@
         <DefFile Include="rrp_auto2000.def">
             <BuildOrder>19</BuildOrder>
         </DefFile>
-        <CppCompile Include="R:\rrl\libplugins\source\rrUnresolvedSTDExternals.cpp">
+        <CppCompile Include="rrUnresolvedSTDExternals.cpp">
             <BuildOrder>3</BuildOrder>
         </CppCompile>
         <CppCompile Include="R:\rrl\third_party\poco\Foundation\src\pcre_chartables.c">

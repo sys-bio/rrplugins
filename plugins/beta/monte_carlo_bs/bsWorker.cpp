@@ -125,18 +125,37 @@ void bsWorker::run()
     for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
     {
         Properties parameters = getParameters(mMCDataSets[i]);
-        mHostPlugin.mSingleMCParameters = parameters;
+        mHostPlugin.mCurrentParameters.setValue(parameters);
         mMCParameters.push_back(parameters);
+        workerProgress();
     }
 
-    //Log all parameters
+    TelluriumData& parasData = mHostPlugin.mMonteCarloParameters.getValueReference();
+    Properties& fitParas = mHostPlugin.mInputParameterList.getValueReference();
+    parasData.reSize(mHostPlugin.mNrOfMCRuns, mHostPlugin.mInputParameterList.getValue().count());
+
+
+    //Setup column header
+    StringList hdr;
+    for(int col = 0; col < fitParas.count(); col++)
+    {
+        hdr.add(fitParas[col]->getName());
+    }
+
+    parasData.setColumnNames(hdr);
+
+    //Copy parameters to parameters container
     for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
     {
         Log(lInfo) << "MC Run: "<<i;
-        Properties& paras = mMCParameters[i];
-        for(int para = 0; para < paras.count(); para++)
+        Properties& vecParas = mMCParameters[i];
+
+
+        for(int para = 0; para < vecParas.count(); para++)
         {
-            Log(lInfo)<<paras[para]->getName()<<" = " << paras[para]->getValueAsString();
+            double value = *((double*) vecParas[para]->getValueHandle());
+            Log(lInfo)<<vecParas[para]->getName()<<" = " << value;
+            parasData(i, para) = value;
         }
     }
 
