@@ -27,12 +27,12 @@ try:
                      
     #Communicating event
     myEvent =  NotifyEventEx(myEventFunction)
-    assignOnFinishedEvent(lmP.plugin, myEvent, None)                    
+#    assignOnFinishedEvent(lmP.plugin, myEvent, None)                    
         
     #Setup Monte Carlo properties.
     mcP.ExperimentalData                 = DataSeries.readDataSeries ("testData.dat")    
     mcP.SBML                             = modelP.Model             
-    mcP.NrOfMCRuns                       = 10
+    mcP.NrOfMCRuns                       = 1000
     mcP.InputParameterList               = ["k1", 1.3]
     mcP.FittedDataSelectionList          = "[S1] [S2]"
     mcP.ExperimentalDataSelectionList    = "[S1] [S2]"
@@ -40,8 +40,16 @@ try:
     # Start Monte Carlo
     mcP.execute()
     
-    print 'Monte Carlo Finished. \n==== Result ====' 
-    print getPluginResult(mcP.plugin)    
+    print 'Monte Carlo Finished. \n==== Result ===='
+    print mcP.MonteCarloParameters.getColumnHeaders()  
+    print mcP.MonteCarloParameters.toNumpy
+    
+    PropertyOfTypeListHandle = getPluginProperty(mcP.plugin, "ConfidenceLimits")           
+    print `getNamesFromPropertyList(PropertyOfTypeListHandle)`            
+    aProperty = getFirstProperty(PropertyOfTypeListHandle)
+    if aProperty:
+        print getPropertyValueAsString(aProperty)
+                
     
 except Exception as e:
     print 'Problem.. ' + `e`    

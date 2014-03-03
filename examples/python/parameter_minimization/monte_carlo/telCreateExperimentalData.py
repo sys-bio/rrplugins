@@ -8,7 +8,7 @@ try:
     rr = roadrunner.RoadRunner()
     rr.load(modelPlugin.Model) 
     
-    rr.setValue("k1", 0.57)   
+    rr.setValue("k1", 1.57)   
     rr.reset()   
     timeStart = 0
     timeEnd = 10
