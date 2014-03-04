@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include <sstream>
 #include "telLogger.h"
+#include "rr/rrException.h"
 #include "telException.h"
 #include "rr/rrRoadRunner.h"
 #include "lmfit_doc.h"
@@ -44,6 +45,7 @@ mStandardizedResiduals(         TelluriumData(),        "StandardizedResiduals",
 mNormalProbabilityOfResiduals(  TelluriumData(),        "NormalProbabilityOfResiduals",         "Normal Probability of Residuals.", "", "", true),
 mChiSquare(                     0,                      "ChiSquare",                            "Chi-Square after fitting", "", "", true),
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
+mStatusMessage(                 "<none>",               "StatusMessage",                        "Status message from fitting engine", "", "", true),
 
 
 //The following Properties are the members of lmfits control_structure.
@@ -85,6 +87,8 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&epsilon);
     mProperties.add(&stepbound);
     mProperties.add(&patience);
+
+    mProperties.add(&mStatusMessage);
 
     //Allocate model and Residuals data
     mResidualsData.setValue(new TelluriumData());
@@ -182,26 +186,32 @@ string LM::getResult()
     msg<<"Norm: "<<mNorm.getValue()<<endl;
     msg<<"Chi Square: "<<mChiSquare.getValue()<<endl;
     msg<<"Reduced Chi Square: "<<mReducedChiSquare.getValue()<<endl;
+    msg<<"Fit Engine Status: "<<mStatusMessage.getValue()<<endl;
     return msg.str();
 }
 
 bool LM::execute(bool inThread)
 {
+    stringstream msg;
     try
     {
-        Log(lInfo)<<"Executing the LM plugin";
+        Log(lInfo)<<"Executing the Levenberg-Marquardt plugin";
         mWorker.start(inThread);
         return true;
     }
     catch(const Exception& ex)
     {
-        Log(lError) << "There was a problem in the execute of the LMFIT plugin: " << ex.getMessage();
-        throw(ex);
+        msg << "There was a problem in the execute of the LMFIT plugin: " << ex.getMessage();
+        throw(Exception(msg.str()));
+    }
+    catch(rr::Exception& ex)
+    {    
+        msg << "There was a roadrunner problem in the execute of the LMFIT plugin: " << ex.getMessage();
+        throw(Exception(msg.str()));
     }
     catch(...)
-    {
-        Log(lError) << "There was an unknown problem in the execute of the LMFIT plugin.";
-        throw("There was an unknown problem in the execute of the LMFIT plugin.");
+    {        
+        throw(Exception("There was an unknown problem in the execute method of the LMFIT plugin."));
     }
 }
 
@@ -248,6 +258,23 @@ s.str("");
 
 s << "The confidence limits parameter list holds resulting confidence limits, as calculated from the Hessian";
 mConfidenceLimits.setDescription(s.str());
+s.str("");
+
+s << "The Status Message should be checked after fitting. It can be one of the following: \
+found zero (sum of squares below underflow limit), \n \
+converged  (the relative error in the sum of squares is at most tol),\n \
+converged  (the relative error of the parameter vector is at most tol), \n \
+converged  (both errors are at most tol), \n \
+trapped    (by degeneracy; increasing epsilon might help), \n \
+exhausted  (number of function calls exceeding preset patience), \n \
+failed     (ftol<tol: cannot reduce sum of squares any further), \n \
+failed     (xtol<tol: cannot improve approximate solution any further), \n \
+failed     (gtol<tol: cannot improve approximate solution any further), \n \
+crashed    (not enough memory), \n \
+exploded   (fatal coding error: improper input parameters), \n \
+stopped    (break requested within function evaluation)";
+
+mStatusMessage.setDescription(s.str());
 s.str("");
 
 s << "The data input may contain multiple columns of data. The Experimental data selection list \

@@ -59,7 +59,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what();            \
         setError(msg.str());                                \
         return false;                                       \
     }
@@ -73,7 +73,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what();            \
         setError(msg.str());                                \
         return NULL;                                        \
     }
@@ -87,7 +87,7 @@
     catch(exception& ex)                                    \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what();            \
         setError(msg.str());                                \
         return -1;                                          \
     }
@@ -101,7 +101,7 @@
     catch(const exception& ex)                              \
     {                                                       \
         stringstream msg;                                   \
-        msg<<"Tellurium exception: "<<ex.what()<<endl;     \
+        msg<<"Tellurium exception: "<<ex.what();            \
         setError(msg.str());                                \
     }
 

@@ -295,6 +295,22 @@ TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const char* para
     catch_ptr_macro
 }
 
+char* tlp_cc getPluginPropertyValueAsString(TELHandle handle, const char* parameterName)
+{
+    start_try
+        Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
+        PropertyBase* prop = aPlugin->getProperty(parameterName);
+        if(prop)
+        {
+            return createText(prop->getValueAsString());
+        }
+        else
+        {
+            return NULL;
+        }
+    catch_ptr_macro
+}
+
 bool tlp_cc setPluginProperty(TELHandle handle, const char* parameterName, const char* value)
 {
     start_try
@@ -458,7 +474,7 @@ char* tlp_cc getPluginPropertiesAsXML(TELHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc registerHandle(TELHandle handle, char* name)
+TELHandle tlp_cc registerHandle(TELHandle handle, char* name)
 {
     return gHM.registerHandle(handle, name);
 }

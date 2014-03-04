@@ -39,6 +39,8 @@ class LM : public CPPPlugin
         Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
         Property<int>                           patience;                       /* maximum number of iterations. */
 
+        //Output data
+        Property<string>                        mStatusMessage;                 //Message regarding the status of the fit
         Property<double>                        mNorm;                          //Part of minimization result
         Property<TelluriumData>                 mNorms;                         //Norm values from the fitting
         TelluriumData&                          rNormsData;                     //Setup a reference to Norms Data

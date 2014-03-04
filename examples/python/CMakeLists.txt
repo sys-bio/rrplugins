@@ -37,6 +37,13 @@ DESTINATION python_examples/parameter_minimization/two_parameters
 COMPONENT plugins_api
 )
 
+FILE (GLOB minimization_3 parameter_minimization/monte_carlo/*.py)
+install(    
+FILES ${minimization_3} 
+DESTINATION python_examples/parameter_minimization/monte_carlo
+COMPONENT plugins_api
+)
+
 FILE (GLOB stat statistics/*.py)
 install(    
 FILES ${stat} 

@@ -447,6 +447,15 @@ TLP_C_DS TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* proper
 TLP_C_DS TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const char* propertyName);
 
 /*!
+ \brief Get a property value as string.
+ \param handle Handle to a plugin
+ \param propertyName Name of the property
+ \return Returns a string (char*) if succesful, returns NULL otherwise.
+ \ingroup plugins
+*/
+TLP_C_DS char* tlp_cc getPluginPropertyValueAsString(TELHandle handle, const char* propertyName);
+
+/*!
  \brief Set the value of a PluginProperty by a string.
  \param handle Handle to a plugin
  \param propertyName Name of property
@@ -479,10 +488,10 @@ TLP_C_DS bool tlp_cc freeText(char* text);
 
 /*!
  \brief Register a handle to be used with the API
- \return Returns true/false indicating success
+ \return Returns NULL if unsuccefull, otherwise return the registered handle
  \ingroup utilities
 */
-TLP_C_DS bool tlp_cc registerHandle(TELHandle handle, char* name);
+TLP_C_DS TELHandle tlp_cc registerHandle(TELHandle handle, char* name);
 
 /*!
  \brief UnRegister a handle

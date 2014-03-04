@@ -113,6 +113,8 @@ void lmWorker::run()
     Log(lInfo)<<"Status message: "              <<  lm_infmsg[mTheHost.mLMStatus.outcome];
     Log(lInfo)<<"Minimized parameter values: ";
 
+    mTheHost.mStatusMessage.setValueFromString(lm_infmsg[mTheHost.mLMStatus.outcome]);
+
     for (int i = 0; i < mLMData.nrOfParameters; ++i)
     {
         Log(lInfo)<<"Parameter "<<mLMData.parameterLabels[i]<<" = "<< mLMData.parameters[i];
@@ -152,18 +154,30 @@ void lmWorker::postFittingWork()
     //Calculate standardized residuals
     TelluriumData& residuals = *(TelluriumData*) mTheHost.mResidualsData.getValueHandle();
 
+
+    //When there is a bad fit, residuals get really large and so
+    //several of the statistics below overflow
+
     //Populate the standardized residuals
-    TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
-    stdRes = getStandardizedPopulations(residuals);
+    try
+    {
+        TelluriumData& stdRes = *(TelluriumData*) mTheHost.mStandardizedResiduals.getValueHandle();
+        stdRes = getStandardizedPopulations(residuals);
 
-    //Create a probability plot for the residuals
-    TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
-    probPlot = getNormalProbabilityPlot(stdRes);
+        //Create a probability plot for the residuals
+        TelluriumData& probPlot = *(TelluriumData*) mTheHost.mNormalProbabilityOfResiduals.getValueHandle();
+        probPlot = getNormalProbabilityPlot(stdRes);
 
-    calculateChiSquare();
-    calculateHessian();
-    calculateCovariance();
-    calculateConfidenceLimits();
+        calculateChiSquare();
+        calculateHessian();
+        calculateCovariance();
+        calculateConfidenceLimits();
+    }
+    catch(...)
+    {
+        Log(lError) << "There was problems calculating fit statistics";
+    }
+
 }
 
 void lmWorker::calculateChiSquare()
@@ -502,15 +516,23 @@ void evaluate(const double *par,       //Property vector
         Log(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
     }
 
-    rrc::RRDataHandle rrData = simulateEx(   myData->rrHandle,
-                                        myData->timeStart,
-                                        myData->timeEnd,
-                                        myData->nrOfTimePoints);
-
+    rrc::RRDataHandle rrData = NULL;
+    rrData = simulateEx(   myData->rrHandle,
+                                myData->timeStart,
+                                myData->timeEnd,
+                                myData->nrOfTimePoints);
     if(!rrData)
     {
+        stringstream msg;
+        msg << "NULL data returned from RoadRunner simulateEx() function.";
         char* lastError = getLastError();
-        Log(lError)<<"Error in simulateEx: "<<lastError;
+
+        if(lastError)
+        {
+            msg << "\nLast error was: "<<lastError;
+        }
+
+        Log(lError)<<msg.str();
         rrc::freeText(lastError);
         return;
     }
