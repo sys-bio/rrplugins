@@ -1,11 +1,11 @@
 #pragma hdrstop
-#include <sstream>
-#include "telLogger.h"
-#include "rr/rrException.h"
-#include "telException.h"
-#include "rr/rrRoadRunner.h"
-#include "nelder_mead_doc.h"
 #include "nmNelderMead.h"
+#include <sstream>
+#include "rr/rrRoadRunner.h"
+#include "rr/rrException.h"
+#include "telLogger.h"
+#include "telException.h"
+#include "nelder_mead_doc.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
@@ -13,9 +13,9 @@
 using namespace std;
 using tlp::StringList;
 
-LM::LM(PluginManager* manager)
+NelderMead::NelderMead(PluginManager* manager)
 :
-CPPPlugin(                      "Levenberg-Marquardt", "Fitting",       NULL, manager),
+CPPPlugin(                      "Nelder-Mead",          "Fitting",       NULL, manager),
 
 //Properties.                   //value,                name,                                   hint,                                                           description, alias, readonly);
 mSBML(                          "<none>",               "SBML",                                 "SBML document as a string. Model to be used in the fitting"),
@@ -47,10 +47,10 @@ mStatusMessage(                 "<none>",               "StatusMessage",        
 //stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
 //patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
 mWorker(*this),
-mLMData(mWorker.mLMData),
+//mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
 {
-    mVersion = "0.8";
+    mVersion = "0.5";
 
     //Add plugin properties to property container
     mProperties.add(&mSBML);
@@ -71,12 +71,12 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mReducedChiSquare);
 
     //Add the lmfit parameters
-    mProperties.add(&ftol);
-    mProperties.add(&xtol);
-    mProperties.add(&gtol);
-    mProperties.add(&epsilon);
-    mProperties.add(&stepbound);
-    mProperties.add(&patience);
+//    mProperties.add(&ftol);
+//    mProperties.add(&xtol);
+//    mProperties.add(&gtol);
+//    mProperties.add(&epsilon);
+//    mProperties.add(&stepbound);
+//    mProperties.add(&patience);
 
     mProperties.add(&mStatusMessage);
 
@@ -84,55 +84,54 @@ rNormsData(mNorms.getValueReference())
     mResidualsData.setValue(new TelluriumData());
     mModelData.setValue(new TelluriumData());
 
-    mHint ="Parameter fitting using the Levenberg-Marquardt algorithm";
-    mDescription="The Levenberg-Marquardt plugin is used to fit a proposed \
+    mHint       ="Parameter fitting using the Nelder-Mead algorithm";
+    mDescription="The Nelder-Mead plugin is used to fit a proposed \
 SBML models parameters to experimental data. \
-The current implementation is based on the lmfit C library by Joachim Wuttke. \
-The Plugin has numerous parameters for fine tuning the algorithm. See the embedded PDF for more information. \
+The current implementation is based on the Nelder-Mead C library by Mike Hutt (see http://www.mikehutt.com/neldermead.html). \
+The Plugin has only a few parameters for fine tuning the algorithm. See the embedded PDF for more information. \
 ";
     //The function below assigns property descriptions
     assignPropertyDescriptions();
 }
 
-LM::~LM()
+NelderMead::~NelderMead()
 {}
 
-bool LM::isWorking() const
+bool NelderMead::isWorking() const
 {
     return mWorker.isRunning();
 }
 
-unsigned char* LM::getManualAsPDF() const
+unsigned char* NelderMead::getManualAsPDF() const
 {
     return pdf_doc;
 }
 
-unsigned int LM::getPDFManualByteSize()
+unsigned int NelderMead::getPDFManualByteSize()
 {
     return sizeofPDF;
 }
 
-StringList LM::getExperimentalDataSelectionList()
+StringList NelderMead::getExperimentalDataSelectionList()
 {
     return mExperimentalDataSelectionList.getValue();
 }
 
-string LM::getStatus()
+string NelderMead::getStatus()
 {
     stringstream msg;
-    msg<<Plugin::getStatus();    
-    
+    msg<<Plugin::getStatus();
     msg<<"\nFitting parameters: "<<mInputParameterList;
-    msg <<getResult();    
+    msg <<getResult();
     return msg.str();
 }
 
-string LM::getImplementationLanguage()
+string NelderMead::getImplementationLanguage()
 {
     return ::getImplementationLanguage();
 }
 
-bool LM::resetPlugin()
+bool NelderMead::resetPlugin()
 {
     if(mWorker.isRunning())
     {
@@ -151,16 +150,15 @@ bool LM::resetPlugin()
     mNrOfIter.clearValue();
     mNorms.clearValue();
     mResidualsData.clearValue();
-
     return true;
 }
 
-string LM::getSBML()
+string NelderMead::getSBML()
 {
     return mSBML.getValue();
 }
 
-string LM::getResult()
+string NelderMead::getResult()
 {
     stringstream msg;
     Properties& pars = mOutputParameterList.getValueReference();
@@ -180,36 +178,36 @@ string LM::getResult()
     return msg.str();
 }
 
-bool LM::execute(bool inThread)
+bool NelderMead::execute(bool inThread)
 {
     stringstream msg;
     try
     {
-        Log(lInfo)<<"Executing the Levenberg-Marquardt plugin";
+        Log(lInfo)<<"Executing the Nelder-Mead plugin";
         mWorker.start(inThread);
         return true;
     }
     catch(const Exception& ex)
     {
-        msg << "There was a problem in the execute of the LMFIT plugin: " << ex.getMessage();
+        msg << "There was a problem in the execute of the Nelder-Mead plugin: " << ex.getMessage();
         throw(Exception(msg.str()));
     }
     catch(rr::Exception& ex)
-    {    
-        msg << "There was a roadrunner problem in the execute of the LMFIT plugin: " << ex.getMessage();
+    {
+        msg << "There was a roadrunner problem in the execute of the Nelder-Mead plugin: " << ex.getMessage();
         throw(Exception(msg.str()));
     }
     catch(...)
-    {        
-        throw(Exception("There was an unknown problem in the execute method of the LMFIT plugin."));
+    {
+        throw(Exception("There was an unknown problem in the execute method of the Nelder-Mead plugin."));
     }
 }
 
 // Plugin factory function
-LM* plugins_cc createPlugin(void* manager)
+NelderMead* plugins_cc createPlugin(void* manager)
 {
     //allocate a new object and return it
-    return new LM((PluginManager*) manager);
+    return new NelderMead((PluginManager*) manager);
 }
 
 const char* plugins_cc getImplementationLanguage()
@@ -217,7 +215,7 @@ const char* plugins_cc getImplementationLanguage()
     return "CPP";
 }
 
-void LM::assignPropertyDescriptions()
+void NelderMead::assignPropertyDescriptions()
 {
     stringstream s;
 s << "The SBML property should be assigned the (XML) \
@@ -250,20 +248,7 @@ s << "The confidence limits parameter list holds resulting confidence limits, as
 mConfidenceLimits.setDescription(s.str());
 s.str("");
 
-s << "The Status Message should be checked after fitting. It can be one of the following: \
-found zero (sum of squares below underflow limit), \n \
-converged  (the relative error in the sum of squares is at most tol),\n \
-converged  (the relative error of the parameter vector is at most tol), \n \
-converged  (both errors are at most tol), \n \
-trapped    (by degeneracy; increasing epsilon might help), \n \
-exhausted  (number of function calls exceeding preset patience), \n \
-failed     (ftol<tol: cannot reduce sum of squares any further), \n \
-failed     (xtol<tol: cannot improve approximate solution any further), \n \
-failed     (gtol<tol: cannot improve approximate solution any further), \n \
-crashed    (not enough memory), \n \
-exploded   (fatal coding error: improper input parameters), \n \
-stopped    (break requested within function evaluation)";
-
+s << "The Status Message should be checked after fitting.";
 mStatusMessage.setDescription(s.str());
 s.str("");
 
@@ -287,41 +272,6 @@ s.str("");
 
 s << "The number of iterations wil hold the number of iterations of the internal fitting routine.";
 mNrOfIter.setDescription(s.str());
-s.str("");
-
-    //Add the lmfit parameters
-s << "ftol is a nonnegative input variable. Termination occurs when \
-both the actual and predicted relative reductions in the sum \
-of squares are at most ftol. Therefore, ftol measures the \
-relative error desired in the sum of squares.";
-    ftol.setDescription(s.str());
-s.str("");
-
-s << "xtol is a nonnegative input variable. Termination occurs when \
-the relative error between two consecutive iterates is at \
-most xtol. Therefore, xtol measures the relative error desired \
-in the approximate solution.";
-xtol.setDescription(s.str());
-s.str("");
-
-s << "gtol is a nonnegative input variable. Termination occurs when \
-the cosine of the angle between fvec and any column of the \
-jacobian is at most gtol in absolute value. Therefore, gtol \
-measures the orthogonality desired between the function vector \
-and the columns of the jacobian.";
-    gtol.setDescription(s.str());
-s.str("");
-
-s << "Step used to calculate the Jacobian.";
-    epsilon.setDescription(s.str());
-s.str("");
-
-s << "Initial bound to steps in the outer loop.";
-    stepbound.setDescription(s.str());
-s.str("");
-
-s << "Maximum number of iterations.";
-    patience.setDescription(s.str());
 s.str("");
 
 }

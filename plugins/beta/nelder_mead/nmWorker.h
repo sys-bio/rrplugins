@@ -10,27 +10,34 @@
 //---------------------------------------------------------------------------
 
 using std::vector;
-class LM;
 using tlp::TelluriumData;
 using tlp::Properties;
 
-class lmWorker : public Poco::Runnable
+class NelderMead;
+
+class nmWorker : public Poco::Runnable
 {
-    friend LM;
+    friend NelderMead;
+
+    public:
+                                    nmWorker(NelderMead& host);
+        void                        start(bool runInThread = true);
+        void                        run();
+        bool                        isRunning() const;
 
     protected:
         rr::RoadRunner             *mRRI;
-
-        nmDataStructure             mLMData;        //LevenbergMarq.. data structure
         Poco::Thread                mThread;
 
-        LM&                         mTheHost;
+        NelderMead&                 mHost;
+
         bool                        setupRoadRunner();
         bool                        setup();
         void                        createModelData(TelluriumData* data);
         void                        createResidualsData(TelluriumData* data);
         void                        workerStarted();
         void                        workerFinished();
+
         void                        postFittingWork();
         void                        calculateChiSquare();
         void                        calculateHessian();
@@ -38,12 +45,6 @@ class lmWorker : public Poco::Runnable
         void                        calculateConfidenceLimits();
         double                      getChi(const Properties& parameters);
 
-    public:
-                                    lmWorker(LM& host);
-        void                        start(bool runInThread = true);
-        void                        run();
-        bool                        isRunning() const;
 };
-
 
 #endif

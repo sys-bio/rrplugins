@@ -1,20 +1,20 @@
 #ifndef nmNelderMeadH
 #define nmNelderMeadH
 #include <vector>
+#include "rr-libstruct/lsMatrix.h"
+#include "lib/nmsimplex.h"
 #include "telProperty.h"
 #include "telCPPPlugin.h"
-#include "rr-libstruct/lsMatrix.h"
 #include "nmWorker.h"
-#include "lib/nmsimplex.h"
 //---------------------------------------------------------------------------
 
 using rr::RoadRunner;
 using std::string;
 using namespace tlp;
 
-class LM : public CPPPlugin
+class NelderMead : public CPPPlugin
 {
-    friend class lmWorker;
+    friend class nmWorker;
 
     public:
         Property<string>                        mSBML;                          //This is the model
@@ -30,12 +30,12 @@ class LM : public CPPPlugin
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
         //LMFIT Tuning parameters
-        Property<double>                        ftol;                           /* relative error desired in the sum of squares. */
-        Property<double>                        xtol;                           /* relative error between last two approximations. */
-        Property<double>                        gtol;                           /* orthogonality desired between fvec and its derivs. */
-        Property<double>                        epsilon;                        /* step used to calculate the jacobian. */
-        Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
-        Property<int>                           patience;                       /* maximum number of iterations. */
+//        Property<double>                        ftol;                           /* relative error desired in the sum of squares. */
+//        Property<double>                        xtol;                           /* relative error between last two approximations. */
+//        Property<double>                        gtol;                           /* orthogonality desired between fvec and its derivs. */
+//        Property<double>                        epsilon;                        /* step used to calculate the jacobian. */
+//        Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
+//        Property<int>                           patience;                       /* maximum number of iterations. */
 
         //Output data
         Property<string>                        mStatusMessage;                 //Message regarding the status of the fit
@@ -56,15 +56,15 @@ class LM : public CPPPlugin
         string                                  getTempFolder();
         string                                  getSBML();
 
-		nmDataStructure							&mLMData;        //LevenbergMarq.. data structure
+//		nmDataStructure							&mLMData;        //LevenbergMarq.. data structure
 
     protected:
         //The worker is doing the work
-        lmWorker                                mWorker;
+        nmWorker                                mWorker;
 
     public:
-                                                LM(PluginManager* manager);
-                                               ~LM();
+                                                NelderMead(PluginManager* manager);
+                                               ~NelderMead();
 
         bool                                    execute(bool inThread = false);
         string                                  getResult();
@@ -81,20 +81,8 @@ class LM : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC LM*         plugins_cc       createPlugin(void* manager);
+RR_PLUGIN_DECLSPEC NelderMead* plugins_cc       createPlugin(void* manager);
 RR_PLUGIN_DECLSPEC const char* plugins_cc       getImplementationLanguage();
 }
 
-namespace tlp
-{
-
-//template<>
-//inline string Property< ls::Matrix<double> >::getValueAsString() const
-//{
-//    stringstream ss;
-//    ss << mValue;
-//    return ss.str();
-//}
-
-}
 #endif
