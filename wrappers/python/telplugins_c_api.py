@@ -8,7 +8,7 @@ import tempfile
 import time
 from ctypes import *
 import matplotlib.pyplot as plot
-from telpluginutils import *
+#from telpluginutils import *
 
 """
 CTypes Python Bindings to the Tellurium Plugin API.
