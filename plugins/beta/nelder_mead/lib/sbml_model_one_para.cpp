@@ -2,11 +2,13 @@
 #include <math.h>
 #include "nmsimplex.h"
 #include "rr/rrRoadRunner.h"
+#include "telTelluriumData.h"
+#include "telPluginManager.h"
 
-
-double objfun(double parameters[])
+using namespace tlp;
+double objfun(double parameters[], const void* myData)
 {
-    /* find the power for this value of RL */
+    double someData = * (double*) myData;
     double Req;
     double VL;
     double PL;
@@ -17,7 +19,7 @@ double objfun(double parameters[])
     VL = Vs*Req/(1000+Req);
     PL = VL*VL/RL;
     printf("RL:%f P:%f\n",RL,PL);
-    return -PL; /* nm finds the minimum, so to find the max we return the negative value */
+    return -PL;
 }
 
 void my_constraints(double x[], int n)
@@ -33,6 +35,7 @@ void my_constraints(double x[], int n)
     }
 }
 
+
 int main()
 {
     double start[] = {0.1};
@@ -42,7 +45,9 @@ int main()
     double eps = 1.0e-8;
     double scale = 1.0;
 
-    min = simplex(objfun, start, dim, eps, scale, my_constraints);
+    double myData = 2;
+    TelluriumData expData;
+    min = simplex2(objfun, &myData, start, dim, eps, scale, my_constraints);
 
     for (i=0; i < dim; i++)
     {

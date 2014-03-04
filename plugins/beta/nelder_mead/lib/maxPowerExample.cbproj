@@ -98,7 +98,7 @@
         <CppCompile Include="maxPowerExample.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="nmsimplex.cpp">
+        <CppCompile Include="nmsimplex2.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

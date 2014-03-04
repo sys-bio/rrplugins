@@ -48,6 +48,17 @@
 
 void my_constraints(double x[], int n);
 
+
 double simplex(double (*objfunc)(double[]), double start[],int n, double EPSILON, double scale, void (*constrain)(double[],int n));
 
+double simplex2(
+    double (*evaluate)(double[], const void* userData),
+    const void* userData,
+    double start[],
+    int n,
+    double EPSILON,
+    double scale,
+    void (*constrain)(double[],
+    int n)
+);
 #endif

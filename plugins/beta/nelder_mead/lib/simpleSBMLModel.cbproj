@@ -85,7 +85,8 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <IncludePath>$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
+        <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
+        <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source;$(TLP_ROOT)\source\common;$(IncludePath)</IncludePath>
         <DynamicRTL>true</DynamicRTL>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>

@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{D6985448-3267-4FAF-A600-4B283005B473}</ProjectGuid>
+        <ProjectGuid>{1018D1E8-4F17-4BD4-B86B-9211D1CD6671}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -94,6 +94,9 @@
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="nmsimplex.cpp">
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="nmsimplex2.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

@@ -3,6 +3,9 @@
         <ProjectGuid>{9938F6D6-4B1C-46F5-9E7A-52C64A6BBA5C}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="..\..\lmfit\lib\lmfit-static.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="nelder_mead-static.cbproj">
             <Dependencies/>
         </Projects>
@@ -10,7 +13,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="simpleSBMLModel.cbproj">
-            <Dependencies>nelder_mead-static.cbproj</Dependencies>
+            <Dependencies>..\..\lmfit\lib\lmfit-static.cbproj</Dependencies>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -20,6 +23,15 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="lmfit-static">
+        <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj"/>
+    </Target>
+    <Target Name="lmfit-static:Clean">
+        <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="lmfit-static:Make">
+        <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="nelder_mead-static">
         <MSBuild Projects="nelder_mead-static.cbproj"/>
     </Target>
@@ -38,23 +50,23 @@
     <Target Name="maxPowerExample:Make">
         <MSBuild Projects="maxPowerExample.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="simpleSBMLModel" DependsOnTargets="nelder_mead-static">
+    <Target Name="simpleSBMLModel" DependsOnTargets="lmfit-static">
         <MSBuild Projects="simpleSBMLModel.cbproj"/>
     </Target>
-    <Target Name="simpleSBMLModel:Clean" DependsOnTargets="nelder_mead-static:Clean">
+    <Target Name="simpleSBMLModel:Clean" DependsOnTargets="lmfit-static:Clean">
         <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="simpleSBMLModel:Make" DependsOnTargets="nelder_mead-static:Make">
+    <Target Name="simpleSBMLModel:Make" DependsOnTargets="lmfit-static:Make">
         <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="nelder_mead-static;maxPowerExample;simpleSBMLModel"/>
+        <CallTarget Targets="lmfit-static;nelder_mead-static;maxPowerExample;simpleSBMLModel"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean"/>
+        <CallTarget Targets="lmfit-static:Clean;nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make"/>
+        <CallTarget Targets="lmfit-static:Make;nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
