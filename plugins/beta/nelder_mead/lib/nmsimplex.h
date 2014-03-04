@@ -47,6 +47,7 @@
 #define GAMMA       2.0       /* expansion coefficient */
 
 void my_constraints(double x[], int n);
+
 double simplex(double (*objfunc)(double[]), double start[],int n, double EPSILON, double scale, void (*constrain)(double[],int n));
 
 #endif

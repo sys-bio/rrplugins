@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9938F6D6-4B1C-46F5-9E7A-52C64A6BBA5C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="nelder_mead-static.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="maxPowerExample.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="simpleSBMLModel.cbproj">
+            <Dependencies>nelder_mead-static.cbproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="nelder_mead-static">
+        <MSBuild Projects="nelder_mead-static.cbproj"/>
+    </Target>
+    <Target Name="nelder_mead-static:Clean">
+        <MSBuild Projects="nelder_mead-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nelder_mead-static:Make">
+        <MSBuild Projects="nelder_mead-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="maxPowerExample">
+        <MSBuild Projects="maxPowerExample.cbproj"/>
+    </Target>
+    <Target Name="maxPowerExample:Clean">
+        <MSBuild Projects="maxPowerExample.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="maxPowerExample:Make">
+        <MSBuild Projects="maxPowerExample.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="simpleSBMLModel" DependsOnTargets="nelder_mead-static">
+        <MSBuild Projects="simpleSBMLModel.cbproj"/>
+    </Target>
+    <Target Name="simpleSBMLModel:Clean" DependsOnTargets="nelder_mead-static:Clean">
+        <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="simpleSBMLModel:Make" DependsOnTargets="nelder_mead-static:Make">
+        <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="nelder_mead-static;maxPowerExample;simpleSBMLModel"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
