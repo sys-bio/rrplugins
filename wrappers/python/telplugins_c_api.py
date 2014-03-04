@@ -11,19 +11,17 @@ import matplotlib.pyplot as plot
 from telpluginutils import *
 
 """
-CTypes Python Bindings to the RoadRunner Plugin API.
+CTypes Python Bindings to the Tellurium Plugin API.
 
 Currently this is a fairly raw implementation with few Pythonic refinements
 """
 
 __version__ = "1.0.0"
 
-# Get folder of where telplugins_CAPI shared library is installed and construct an absolute path to
-# the plugins from that.
-
 sharedLib='telplugins_c_api'
 
 originalWorkingDirectory = os.getcwd()
+
 #telLib will be our handle returned by ctypes
 telLib=None
 try:
@@ -31,11 +29,11 @@ try:
         sharedLib = sharedLib + '.dll'
                 
         telplugins_path = os.path.dirname(os.path.realpath(__file__))
-                                                 
+
         #temporary change into this path so we can load our shared libs
         os.chdir(telplugins_path)                 
         telLib=CDLL(sharedLib)                         
-    
+
     #elif sys.platform.startswith('Linux'):
     #    sharedLib = sharedLib + '.a'
     #    telLib = cdll.LoadLibrary(sharedLib)
@@ -47,7 +45,7 @@ finally:
        #Change back to our original working directory
        os.chdir(originalWorkingDirectory)
 
-gDefaultPluginsPath   = telplugins_path # + '\\plugins' 
+gDefaultPluginsPath   = telplugins_path 
 if not os.path.exists(gDefaultPluginsPath):
     print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
     gDefaultPluginsPath = ''
@@ -73,6 +71,26 @@ if not os.path.exists(gDefaultPluginsPath):
 NotifyEvent  = CFUNCTYPE(None)
 NotifyEventEx  = CFUNCTYPE(None, c_void_p)
 
+## \brief Get Tellurium Plugins copyright. 
+## \return Returns a string if successful, None otherwise
+## \ingroup utilities
+telLib.tpGetCopyright.restype = c_char_p
+def getCopyright():
+    data =  telLib.tpGetCopyright()
+    res = data
+    telLib.freeText(data)
+    return res
+
+## \brief Get Tellurium plugin API version. 
+## \return Returns a string if successful, None otherwise
+## \ingroup utilities
+telLib.tpGetVersion.restype = c_char_p
+def getVersion():
+    data =  telLib.tpGetVersion()
+    res = data
+    telLib.freeText(data)
+    return res
+
 ## \brief Create a new instance of a plugin manager.
 ## \brief A PluginManager manages a collection of plugins, loaded and unloaded by
 ##  the load and unload API functions respectively.
@@ -85,7 +103,6 @@ NotifyEventEx  = CFUNCTYPE(None, c_void_p)
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-
 telLib.createPluginManager.restype = c_void_p
 def createPluginManager(pluginDir = None):
     if pluginDir == None:
@@ -100,7 +117,6 @@ def createPluginManager(pluginDir = None):
 telLib.freePluginManager.restype = c_bool
 def freePluginManager(pm):
     return telLib.freePluginManager(pm)
-
 
 ## \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
 ## \param pm Handle to a PluginManager instance
@@ -144,7 +160,6 @@ telLib.unLoadPlugins.restype = c_bool
 def unLoadPlugins(pm):
     return telLib.unLoadPlugins(pm)
 
-##
 ## \brief Load a particular plugin
 ## \param pm Handle to a PluginManager instance
 ## \param pluginName Name of the plugin to load. The plugin name is the plugin's shared library name, without path and extension.
@@ -161,7 +176,6 @@ def unLoadPlugins(pm):
 def loadPlugin(pm, pluginName):
     return telLib.loadPlugin(pm, pluginName)
 
-##
 ## \brief Unload a particular plugin
 ## \param pm Handle to a PluginManager instance
 ## \param pHandle Handle to a Plugin instance
@@ -255,7 +269,6 @@ telLib.getCurrentPlugin.restype = c_void_p
 def getCurrentPlugin(pm):
     return telLib.getCurrentPlugin(pm)
 
-
 ## \brief Get the plugin handle for the named plugin
 ## \param pm Handle to a PluginManager instance
 ## \param pluginName A string that holds the name of the plugin
@@ -265,7 +278,6 @@ def getCurrentPlugin(pm):
 telLib.getPlugin.restype = c_void_p
 def getPlugin(pm, pluginName):
     return telLib.getPlugin(pm, c_char_p(pluginName))
-
 
 #---------- PLUGIN HANDLING FUNCTIONS ============================================
 ## \brief Get the name of a Plugin
@@ -723,7 +735,7 @@ def getPropertyDescription(propertyHandle):
     descr = telLib.getPropertyDescription(propertyHandle)
     if descr is None:
         return None
-    
+
     val = descr
     telLib.freeText(descr)
     return val
@@ -785,7 +797,6 @@ def createProperty(name, the_type, hint="", value=None):
 telLib.freeProperty.restype = c_bool
 def freeProperty(propertyHandle):
     return telLib.freeProperty(propertyHandle)
-
 
 ## \brief Add a Property to a list of Property.
 ## Some plugins may have Property that
@@ -924,7 +935,6 @@ def getIntProperty (propertyHandle):
 telLib.setIntProperty.restype = c_bool
 def setIntProperty(propertyHandle, value):
     return telLib.setIntProperty(propertyHandle, c_int(value))
-
 
 ## \brief Get the double value for a property
 ## \param propertyHandle to a property instance
@@ -1072,15 +1082,6 @@ def getPropertyValue(propertyHandle):
     else:
        raise TypeError ('Property is not a string type')
 
-
-#### \brief Retrieve a handle to RoadRunners internal data object
-#### \param rrInstance A RoadRunner instance, as returned from roadrunner.RoadRunner()
-#### \return Returns a handle to roadrunners internal data object
-#### \ingroup utilities
-##def getRoadRunnerDataHandle(rrInstance):
-##    rrHandle = cast(int(rrInstance.this), c_void_p)
-##    return telLib.getRoadRunnerDataHandle(rrHandle)
-
 ## \brief Convert tellurium data to Numpy data
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
@@ -1121,7 +1122,7 @@ def plotTelluriumData(data, colHeaders):
     plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plot.xlabel(xlbl)
     plot.show()
-    
+
 ## \brief Get column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
@@ -1165,7 +1166,7 @@ telLib.setTelluriumDataColumnHeaderByIndex.restype = c_bool
 def setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index):
     return telLib.setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
 
-## \brief Get RoadRunner data element at row,col
+## \brief Get Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
@@ -1177,7 +1178,7 @@ def getTelluriumDataElement(telDataHandle, row, col):
     else:
         throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
 
-## \brief Set RoadRunner data element at row,col
+## \brief Set Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
@@ -1185,7 +1186,7 @@ telLib.setTelluriumDataElement.restype = c_bool
 def setTelluriumDataElement(telDataHandle, row, col, number):    
     return telLib.setTelluriumDataElement(telDataHandle, row, col, c_double(number))
 
-## \brief Get RoadRunner data element at row,col
+## \brief Get Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
@@ -1197,7 +1198,7 @@ def getTelluriumDataWeight(telDataHandle, row, col):
     else:
         throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
 
-## \brief Set RoadRunner data element at row,col
+## \brief Set Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
@@ -1205,14 +1206,12 @@ telLib.setTelluriumDataWeight.restype = c_bool
 def setTelluriumDataWeight(telDataHandle, row, col, number):    
     return telLib.setTelluriumDataWeight(telDataHandle, row, col, c_double(number))
 
-    
 ## \brief Get number of rows in a tellurium data object
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of rows in the data object
 ## \ingroup utilities
 def getTelluriumDataNumRows(telDataHandle):
     return telLib.getTelluriumDataNumRows(telDataHandle)
-    
 
 ## \brief Get number of columns in a tellurium data object
 ## \param telDataHandle A handle to a tellurium data object
@@ -1231,7 +1230,6 @@ telLib.writeTelluriumDataToFile.restype = c_bool
 def writeTelluriumData(telDataHandle, fName):
     return telLib.writeTelluriumDataToFile(telDataHandle, fName)
 
-
 ## \brief Read TelluriumData from a file
 ## \param telDataHandle A handle to roadunnerdata
 ## \param fName Name of input file, including path. If no path is given, the file is read
@@ -1245,12 +1243,12 @@ def readTelluriumData(telDataHandle, fName):
 ## \brief Create a TelluriumData object
 ## \param rows Number of rows in the data to be created
 ## \param cols Number of columns in the data to be created
-## \return Returns a handle to RoadRunner data if successful, None otherwise
+## \return Returns a handle to Tellurium data if successful, None otherwise
 ## \note Use the freeTelluriumData to free memory allocated 
 ## \ingroup utilities
 telLib.createTelluriumData.restype = c_void_p
 def createTelluriumData(rows, cols):
-    #Create a RoadRunner data object
+    #Create a Tellurium data object
     #Create a column header
     nrs = range(cols)
     col_hdr = str(nrs).strip('[]')     
@@ -1259,12 +1257,12 @@ def createTelluriumData(rows, cols):
 ## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
 ## in current working directory
-## \return Returns a handle to RoadRunner data if successful, None otherwise
+## \return Returns a handle to Tellurium data if successful, None otherwise
 ## \note Use the freeTelluriumData to free memory allocated by the returned data
 ## \ingroup utilities
 telLib.createTelluriumData.restype = c_void_p
 def createTelluriumDataFromFile(fName):
-    #Create a RoadRunner data object
+    #Create a Tellurium data object
     telDataHandle = telLib.createTelluriumData(0,0, None)
     if telLib.readTelluriumDataFromFile(telDataHandle, fName) == False:
         print 'Failed to read data'
@@ -1281,8 +1279,7 @@ def hasWeights(dataHandle):
         throw(getLastError())
     else:
         return hasIt.value                
-        
-       
+
 ## \brief Allocate weights for tellurium data object
 ## \param dataHandle Handle to a tellurium data object
 ## \return Returns true or false indicating if allocating weights were successful or not
@@ -1294,7 +1291,7 @@ def allocateWeights(dataHandle):
         throw(getLastError())
     else:
         return success.value        
-    
+
 def getText(fName):
     file = open(fName, 'r')
     return file.read()
@@ -1303,7 +1300,6 @@ def getText(fName):
 ##@code
 ## str = readAllText ("mytextfile.txt")
 ##@endcode
-
 def readAllText(fName):
     file = open(fName, 'r')
     str = file.read()
@@ -1330,8 +1326,7 @@ def getLastError():
 def unLoadAPI():
     windll.kernel32.FreeLibrary(telLib._handle)
 
-
-##\mainpage Plugins for RoadRunner
+##\mainpage Plugins for Tellurium
 #\section Introduction
 #The Tellurium plugin library exposes a simple framework for adding functionality to the RoadRunner core, by means of
 #external plugins. 
@@ -1379,7 +1374,7 @@ def unLoadAPI():
 ##>>> 
 #@endcode
 #    \section plugins_overview Overview
-#    The libRoadRunner Plugin API is centered around three important concepts:
+#    The Tellurium Plugin API is centered around three important concepts:
 #    - A Plugin Manager
 #    - Plugins
 #    - Plugin Properties
@@ -1406,7 +1401,7 @@ def unLoadAPI():
 #
 # Each event function support up to two opaque data properties. The plugin documentation needs to provide the exact type of these arguments.
 # In it simplest form, a plugin may choose to define an event function taking no arguments at all.
-# Below are listed a few properties, characteristics of events in the RoadRunner Plugin framework.
+# Below are listed a few properties, characteristics of events in the Tellurium Plugin framework.
 #   -# A plugin event is a regular function defined by the client of the plugin.
 #   -# A plugin event function do not return any value.
 #   -# The type and number of arguments needed in the plugin event is defined by the plugin (see plugin docs).
@@ -1460,7 +1455,7 @@ def unLoadAPI():
 # \brief Functions to help and assist in the use of the Plugins framework
 
 # \defgroup examples Python Example Scripts
-# \brief Scripts illuminating concepts regarding RoadRunner Plugins
+# \brief Scripts illuminating concepts regarding Tellurium Plugins
 
 ## \example telGetPluginInformation.py
 ## This example shows

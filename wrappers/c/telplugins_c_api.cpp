@@ -14,6 +14,7 @@
 #include "telplugins_cpp_support.h"
 #include "telOSSpecifics.h"
 #include "telException.h"
+#include "telVersionInfo.h"
 
 namespace tlpc
 {
@@ -466,6 +467,11 @@ bool tlp_cc freeText(char* text)
     return tlp::freeText(text);
 }
 
+bool tlp_cc tpFreeText(char* text)
+{
+    return tlp::freeText(text);
+}
+
 char* tlp_cc getPluginPropertiesAsXML(TELHandle handle)
 {
     start_try
@@ -476,12 +482,30 @@ char* tlp_cc getPluginPropertiesAsXML(TELHandle handle)
 
 TELHandle tlp_cc registerHandle(TELHandle handle, char* name)
 {
-    return gHM.registerHandle(handle, name);
+    start_try
+        return gHM.registerHandle(handle, name);
+    catch_ptr_macro
 }
 
 bool tlp_cc unRegisterHandle(TELHandle handle)
 {
-    return gHM.unRegisterHandle(handle);
+    start_try
+        return gHM.unRegisterHandle(handle);
+    catch_ptr_macro
+}
+
+TLP_C_DS char* tlp_cc tpGetVersion()
+{
+    start_try
+        return createText(tlp::getVersion());
+    catch_ptr_macro
+}
+
+TLP_C_DS char* tlp_cc tpGetCopyright()
+{
+    start_try
+        return createText(tlp::getCopyright());
+    catch_ptr_macro
 }
 
 }

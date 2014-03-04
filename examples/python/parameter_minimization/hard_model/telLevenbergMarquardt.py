@@ -31,7 +31,9 @@ try:
     
     # Add the parameters that we're going to fit and their initial 'start' value
     paraValues = [6.77, 1.01, 1.26, 5.11]
-    #paraValues = [1.77, 1.01, 1.26, 30.11]    
+    
+    # 'bad' parameter values
+    #paraValues = [1.77, 1.01, 1.26, 30.11]        
     
     lm.setProperty("InputParameterList", ["p0", paraValues[0]])
     lm.setProperty("InputParameterList", ["p1", paraValues[1]])

@@ -14,6 +14,7 @@ telCPlugin
 telCPPPlugin
 telPlugin
 telPluginManager
+telVersionInfo
 )
 
 #SHARED VERSION ----------------
