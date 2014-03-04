@@ -4,22 +4,12 @@
 #include "rr/rrException.h"
 #include "telException.h"
 #include "rr/rrRoadRunner.h"
-#include "lmfit_doc.h"
+#include "nelder_mead_doc.h"
 #include "nmNelderMead.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 
-//Below defines are from the LMFIT lib.. convert to constants later on
-/* machine-dependent constants from float.h */
-#define LM_MACHEP     DBL_EPSILON   /* resolution of arithmetic */
-#define LM_DWARF      DBL_MIN       /* smallest nonzero number */
-#define LM_SQRT_DWARF sqrt(DBL_MIN) /* square should not underflow */
-#define LM_SQRT_GIANT sqrt(DBL_MAX) /* square should not overflow */
-#define LM_USERTOL    30*LM_MACHEP  /* users are recommended to require this */
-
-namespace lmfit
-{
 using namespace std;
 using tlp::StringList;
 
@@ -50,12 +40,12 @@ mStatusMessage(                 "<none>",               "StatusMessage",        
 
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
-ftol(                           LM_USERTOL,              "ftol"       ,                         "Relative error desired in the sum of squares. "),
-xtol(                           LM_USERTOL,              "xtol"       ,                         "Relative error between last two approximations. "),
-gtol(                           LM_USERTOL,              "gtol"       ,                         "Orthogonality desired between fvec and its derivs. "),
-epsilon(                        LM_USERTOL,              "epsilon"    ,                         "Step used to calculate the jacobian. "),
-stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
-patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
+//ftol(                           LM_USERTOL,              "ftol"       ,                         "Relative error desired in the sum of squares. "),
+//xtol(                           LM_USERTOL,              "xtol"       ,                         "Relative error between last two approximations. "),
+//gtol(                           LM_USERTOL,              "gtol"       ,                         "Orthogonality desired between fvec and its derivs. "),
+//epsilon(                        LM_USERTOL,              "epsilon"    ,                         "Step used to calculate the jacobian. "),
+//stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
+//patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
 mWorker(*this),
 mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
@@ -139,7 +129,7 @@ string LM::getStatus()
 
 string LM::getImplementationLanguage()
 {
-    return lmfit::getImplementationLanguage();
+    return ::getImplementationLanguage();
 }
 
 bool LM::resetPlugin()
@@ -336,5 +326,5 @@ s.str("");
 
 }
 
-}
+
 

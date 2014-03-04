@@ -4,13 +4,10 @@
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
 #include "rr/rrRoadRunner.h"
-#include "lmUtils.h"
+#include "nmUtils.h"
 #include "telTelluriumData.h"
 #include "telProperties.h"
 //---------------------------------------------------------------------------
-
-namespace lmfit
-{
 
 using std::vector;
 class LM;
@@ -24,7 +21,7 @@ class lmWorker : public Poco::Runnable
     protected:
         rr::RoadRunner             *mRRI;
 
-        lmDataStructure             mLMData;        //LevenbergMarq.. data structure
+        nmDataStructure             mLMData;        //LevenbergMarq.. data structure
         Poco::Thread                mThread;
 
         LM&                         mTheHost;
@@ -48,5 +45,5 @@ class lmWorker : public Poco::Runnable
         bool                        isRunning() const;
 };
 
-}
+
 #endif

@@ -1,4 +1,3 @@
-
 Release 0.6.7 (2014-01-23)
 ==========================
 - Updated Noise plugin noise generation

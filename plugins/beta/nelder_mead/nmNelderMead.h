@@ -4,15 +4,13 @@
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "rr-libstruct/lsMatrix.h"
-#include "lmWorker.h"
-#include "lib/lmmin.h"
+#include "nmWorker.h"
+#include "lib/nmsimplex.h"
 //---------------------------------------------------------------------------
 
-namespace lmfit
-{
-using namespace tlp;
 using rr::RoadRunner;
 using std::string;
+using namespace tlp;
 
 class LM : public CPPPlugin
 {
@@ -58,12 +56,11 @@ class LM : public CPPPlugin
         string                                  getTempFolder();
         string                                  getSBML();
 
-		lmDataStructure							&mLMData;        //LevenbergMarq.. data structure
+		nmDataStructure							&mLMData;        //LevenbergMarq.. data structure
 
     protected:
         //The worker is doing the work
         lmWorker                                mWorker;
-        lm_status_struct                        mLMStatus;      //Check afterwards.
 
     public:
                                                 LM(PluginManager* manager);
@@ -86,8 +83,6 @@ extern "C"
 {
 RR_PLUGIN_DECLSPEC LM*         plugins_cc       createPlugin(void* manager);
 RR_PLUGIN_DECLSPEC const char* plugins_cc       getImplementationLanguage();
-}
-
 }
 
 namespace tlp
