@@ -18,6 +18,7 @@ class SBMLModel : public CPPPlugin
     private:
         const string                mModelFileName;
         Property<string>            mModel;
+        Property<string>            mModelData;
 };
 
 extern "C"

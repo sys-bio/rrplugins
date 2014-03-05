@@ -193,10 +193,24 @@ class CORE_DECLSPEC Plugin
         virtual PropertyBase*           getProperty(const string& param);
 
         /**
+            Return a property value as a string
+        */
+        string                          getPropertyValueAsString(const string& param);
+
+        /**
+            Return a handle to a properties value
+        */
+        void*                           getPropertyValueHandle(const string& param);
+
+        /**
             Sets the value of specified Property with value as specified
         */
         bool                            setProperty(const string& nameOf, const char* value);
 
+        /**
+            Sets the value of specified Property with value as specified
+        */
+        bool                            setPropertyValue(const string& nameOf, const void* value);
         /**
             If the work of the plugin is carried out in a separate thread, terminate() will
             signal termination of such work.

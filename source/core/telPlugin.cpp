@@ -4,6 +4,7 @@
 #include "telUtils.h"
 #include "telPlugin.h"
 #include "telProperty.h"
+#include "telTelluriumData.h"
 //---------------------------------------------------------------------------
 
 namespace tlp
@@ -195,6 +196,66 @@ bool Plugin::setProperty(const string& nameOf, const char* value)
     return mProperties.setProperty(nameOf, val);
 }
 
+bool Plugin::setPropertyValue(const string& nameOf, const void* value)
+{
+    if(!mProperties.count())
+    {
+        return false;
+    }
+
+    PropertyBase* property = mProperties.getProperty(nameOf);
+    if(property)
+    {
+        string type = property->getType();
+        if(type == "bool")
+        {
+            Property<bool>* prop = dynamic_cast< Property<bool>* >(property);
+            const bool* theData = (bool*) value;
+            prop->setValue(*theData);
+            return true;
+        }
+
+        if(type == "int")
+        {
+            Property<int>* prop = dynamic_cast< Property<int>* >(property);
+            const int* theData = (int*) value;
+            prop->setValue(*theData);
+            return true;
+        }
+
+        if(type == "double")
+        {
+            Property<double>* prop = dynamic_cast< Property<double>* >(property);
+            const double* theData = (double*) value;
+            prop->setValue(*theData);
+            return true;
+        }
+
+        if(type == "string")
+        {
+            Property<string>* prop = dynamic_cast< Property<string>* >(property);
+            const string* theData = (string*) value;
+            prop->setValue(*theData);
+            return true;
+        }
+
+        if(type == "telluriumData")
+        {
+            Property<TelluriumData>* prop = dynamic_cast< Property<TelluriumData>* >(property);
+            const TelluriumData* theData = (TelluriumData*) value;
+            prop->setValue(*theData);
+            return true;
+        }
+        stringstream msg;
+        msg<<"Conversion of property of type: \""<<type<<" is not implemented";
+        throw(Exception(msg.str()));
+    }
+
+    stringstream msg;
+    msg<<"No property with name: "<<nameOf;
+    throw(Exception(msg.str()));
+}
+
 string Plugin::getName()
 {
     return mName;
@@ -291,6 +352,36 @@ Properties* Plugin::getProperties()
 PropertyBase* Plugin::getProperty(const string& propName)
 {
     return mProperties.getProperty(propName);
+}
+
+string Plugin::getPropertyValueAsString(const string& propName)
+{
+    PropertyBase* prop =  mProperties.getProperty(propName);
+    if(prop)
+    {
+        return prop->getValueAsString();
+    }
+    else
+    {
+        stringstream str;
+        str<<"No property with name: "<<propName;
+        throw(Exception(str.str()));
+    }
+}
+
+void* Plugin::getPropertyValueHandle(const string& propName)
+{
+    PropertyBase* prop =  mProperties.getProperty(propName);
+    if(prop)
+    {
+        return prop->getValueHandle();
+    }
+    else
+    {
+        stringstream str;
+        str<<"No property with name: "<<propName;
+        throw(Exception(str.str()));
+    }
 }
 
 string Plugin::getResult()

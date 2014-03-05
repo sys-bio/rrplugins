@@ -39,6 +39,14 @@ TelluriumData::TelluriumData(const rr::RoadRunnerData& data)
     (*this) = data;
 }
 
+TelluriumData::TelluriumData(const rr::RoadRunnerData* data)
+{
+    if(data)
+    {
+        (*this) = *data;
+    }
+}
+
 TelluriumData::~TelluriumData()
 {}
 

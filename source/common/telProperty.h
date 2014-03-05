@@ -327,6 +327,12 @@ inline bool Property<string>::clearValue()
     return true;
 }
 
+template<>
+inline Property<string>::operator string () const
+{
+    return mValue;
+}
+
 //================= vector<string> ===============================
 /**
     Set a vector<string> properties value, from a string. This function expects input string

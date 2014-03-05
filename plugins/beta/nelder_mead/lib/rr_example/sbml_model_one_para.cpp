@@ -1,27 +1,46 @@
 #include <stdio.h>
 #include <math.h>
 #include "rr/rrException.h"
-#include "nmsimplex.h"
+#include "rr/rrRoadRunnerData.h"
+#include "rr/rrRoadRunnerOptions.h"
 #include "rr/rrRoadRunner.h"
+#include "nmsimplex.h"
 #include "telTelluriumData.h"
 #include "telPluginManager.h"
 #include "telLogger.h"
 #include "telPlugin.h"
 using namespace tlp;
 using rr::RoadRunner;
-typedef struct
+class MinimizationData
 {
-    TelluriumData mExperimentalData;
-    rr::RoadRunner mRRI;
+    public:
 
-} nmDataStructure;
+        double              mEpsilon;
+        double              mScale;
+
+        TelluriumData       mExperimentalData;
+        rr::RoadRunner      mRRI;
+        TelluriumData       mChiSquares;
+        Properties          mParameters;        //Parameters to be minimized
+        Plugin*             mChiSquarePlugin;
+
+    public:
+                            MinimizationData();
+};
+
+MinimizationData::MinimizationData()
+:
+mEpsilon(1.e-8),
+mScale(1)
+{}
 
 double objfun(double par[], const void* userData)
 {
     double chiSquare = -1;
-    nmDataStructure* myData =  (nmDataStructure*) userData;
-    RoadRunner& rr = myData->mRRI;
-
+    MinimizationData&   myData  = *((MinimizationData*) userData);
+    TelluriumData&      expData = myData.mExperimentalData;
+    RoadRunner&         rr      = myData.mRRI;
+    Plugin&             chi     =*(myData.mChiSquarePlugin);
     double k1 = par[0];
 
     rr.reset();
@@ -30,28 +49,28 @@ double objfun(double par[], const void* userData)
     {
         throw(Exception("Failed setting value of parameter"));
     }
-    return chiSquare;
-}
 
-void my_constraints(double x[], int n)
-{
-    // rate contstants must be positive
-    int i;
-    for (i=0; i<n; i++)
-    {
-        if (x[i] < 0)
-        {
-            x[i] = fabs(x[i]);
-        }
-    }
+    int    nrOfTimePoints              = expData.rSize();
+    double timeStart                   = expData.getTimeStart();
+    double timeEnd                     = expData.getTimeEnd();
+
+    rr::SimulateOptions opt;
+    opt.start       = timeStart;
+    opt.duration    = timeEnd - timeStart;
+    opt.steps       = nrOfTimePoints -1;
+    TelluriumData simData(rr.simulate(&opt));
+
+    //Calculate Chi Square
+    chi.setPropertyValue("ModelData", &(simData));
+    int nrOfParas = myData.mParameters.count();
+    chi.setPropertyValue("NrOfModelParameters", &(nrOfParas));
+    chi.execute(false);
+    chiSquare = * (double*) chi.getPropertyValueHandle("ChiSquare");
+    return chiSquare;
 }
 
 int main()
 {
-    double start[] = {0.1};
-    double min;
-    int i;
-    int dim = 1;
     double eps = 1.0e-8;
     double scale = 1.0;
     Logger::setLevel(lDebug);
@@ -59,6 +78,8 @@ int main()
 
     try
     {
+        MinimizationData myData;
+
         PluginManager PM("..\\plugins");
         PM.load();
 
@@ -71,21 +92,33 @@ int main()
             throw(Exception("Model plugin is NULL!"));
         }
 
-        nmDataStructure myData;
+        Plugin* chiSquare = PM.getPlugin("ChiSquare");
+        if(!chiSquare)
+        {
+            throw(Exception("ChiSquare plugin is NULL!"));
+        }
 
-        TelluriumData expData;
+
+        //Setup data structure
         myData.mRRI.load(model->getPropertyValueAsString("Model"));
+        myData.mExperimentalData.read("ExperimentalData.dat");
+        myData.mRRI.setSelections(StringList("Time, S1, S2"));
+        myData.mParameters.add(new Property<double>(2.3, "k1"));
+        myData.mChiSquarePlugin = chiSquare;
 
-        myData.mRRI.setSelections(StringList("k1"));
 
-        min = simplex2(objfun, &myData, start, dim, eps, scale, my_constraints);
-    //
-    //    for (i=0; i < dim; i++)
-    //    {
-    //        printf("%f\n", start[i]);
-    //    }
-    //    delete myData.mRRI;
+        chiSquare->setPropertyValue("ExperimentalData", &(myData.mExperimentalData));
 
+
+        double start[] = {2.3};
+
+        //Execute minimizer
+        double min = simplex2(objfun, &myData,
+        start,
+        myData.mParameters.count(),
+        myData.mEpsilon,
+        scale,
+        NULL);//my_constraints);
     }
     catch(const rr::Exception& e)
     {
@@ -100,6 +133,19 @@ int main()
     return 0;
 }
 
+
+//void my_constraints(double x[], int n)
+//{
+//    // rate contstants must be positive
+//    int i;
+//    for (i=0; i<n; i++)
+//    {
+//        if (x[i] < 0)
+//        {
+//            x[i] = fabs(x[i]);
+//        }
+//    }
+//}
 
 
 

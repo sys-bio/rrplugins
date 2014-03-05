@@ -6,11 +6,11 @@
 #include "telPluginManager.h"
 #include "example_data_doc.h"
 
+extern string theModel;
 //---------------------------------------------------------------------------
 SBMLModel::SBMLModel(PluginManager* manager)
 :
 CPPPlugin(  "SBMLModel",                 "Examples",    NULL,    manager),  //Construct Base
-
 //Properties
 mModel(              "",       "Model",       "A SBML model"),
 mModelFileName("sbml_test_0001.xml")
@@ -26,20 +26,7 @@ The ExampleModel plugin was developed at the University of Washington by Totte K
     //Load the model from file here..
     try
     {
-        if(mPM)
-        {
-            //Get plugin folder
-            string pluginFldr = mPM->getPluginDir();
-            string cwd = getCWD();
-            string fullPath = joinPath(pluginFldr,mModelFileName); 
-            if(!fileExists(fullPath))
-            {
-                throw(Exception("ModelFile do not exists!"));
-            }
-
-            string model = getFileContent(fullPath);
-            mModel.setValue(model);
-        }
+        mModel.setValue(theModel);
     }
     catch(const exception& ex)
     {
@@ -78,7 +65,42 @@ const char* plugins_cc getImplementationLanguage()
     return "CPP";
 }
 
-
-
-
+string  theModel =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>                                                                                     \
+<sbml xmlns=\"http://www.sbml.org/sbml/level2/version4\" level=\"2\" version=\"4\">                                             \
+  <model metaid=\"_case00001\" id=\"case00001\" name=\"case00001\">                                                             \
+    <listOfCompartments>                                                                                                        \
+      <compartment id=\"compartment\" name=\"compartment\" size=\"1\" units=\"volume\"/>                                        \
+    </listOfCompartments>                                                                                                       \
+    <listOfSpecies>                                                                                                             \
+      <species id=\"S1\" name=\"S1\" compartment=\"compartment\" initialAmount=\"0.00015\" substanceUnits=\"substance\"/>       \
+      <species id=\"S2\" name=\"S2\" compartment=\"compartment\" initialAmount=\"0\" substanceUnits=\"substance\"/>             \
+    </listOfSpecies>                                                                                                            \
+    <listOfParameters>                                                                                                          \
+      <parameter id=\"k1\" name=\"k1\" value=\"1\"/>                                                                            \
+    </listOfParameters>                                                                                                         \
+    <listOfReactions>                                                                                                           \
+      <reaction id=\"reaction1\" name=\"reaction1\" reversible=\"false\" fast=\"false\">                                        \
+        <listOfReactants>                                                                                                       \
+          <speciesReference species=\"S1\"/>                                                                                    \
+        </listOfReactants>                                                                                                      \
+        <listOfProducts>                                                                                                        \
+          <speciesReference species=\"S2\"/>                                                                                    \
+        </listOfProducts>                                                                                                       \
+        <kineticLaw>                                                                                                            \
+          <math xmlns=\"http://www.w3.org/1998/Math/MathML\">                                                                   \
+            <apply>                                                                                                             \
+              <times/>                                                                                                          \
+              <ci> compartment </ci>                                                                                            \
+              <ci> k1 </ci>                                                                                                     \
+              <ci> S1 </ci>                                                                                                     \
+            </apply>                                                                                                            \
+          </math>                                                                                                               \
+        </kineticLaw>                                                                                                           \
+      </reaction>                                                                                                               \
+    </listOfReactions>                                                                                                          \
+  </model>                                                                                                                      \
+</sbml>                                                                                                                         \
+"
+;
 

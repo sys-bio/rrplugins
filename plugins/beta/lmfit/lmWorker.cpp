@@ -383,7 +383,7 @@ void lmWorker::workerFinished()
 
 bool lmWorker::setup()
 {
-    StringList& species         = mTheHost.mExperimentalDataSelectionList.getValueReference();   //Model data selection..
+    StringList& species         = mTheHost.mExperimentalDataSelectionList.getValueReference();
     mLMData.nrOfSpecies         = species.Count();
     Properties parameters       = mTheHost.mInputParameterList.getValue();
     mLMData.nrOfParameters      = parameters.count();
@@ -496,9 +496,9 @@ void evaluate(const double *par,       //Property vector
               int          *userBreak  //Non zero value means termination
 )
 {
-    const LM *thePlugin = (const LM*) userData;
-    LM* plugin = const_cast<LM*>(thePlugin);
-	const lmDataStructure* myData = &(thePlugin->mLMData);
+    const LM    *thePlugin = (const LM*) userData;
+    LM*         plugin = const_cast<LM*>(thePlugin);
+	const       lmDataStructure* myData = &(thePlugin->mLMData);
 
     //Check if user have asked for termination..
     if(thePlugin->isBeingTerminated())

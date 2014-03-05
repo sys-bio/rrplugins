@@ -50,6 +50,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <IncludePath>..\..\..\third_party\poco\Foundation\src\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\..\third_party\poco\Foundation\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
         <Defines>LIBSBML_USE_CPP_NAMESPACE;CG_UI;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
@@ -107,7 +109,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <IncludePath>$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
-        <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;$(Defines)</Defines>
+        <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <Debugger_HostApplication>R:\cg_installs\DRT\bin\rrWinC.exe</Debugger_HostApplication>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>

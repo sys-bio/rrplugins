@@ -136,9 +136,16 @@ class COMMON_DECLSPEC TelluriumData
         /**
          * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
          *
-         * \param rrData: RoadRunner data object
+         * \param data: RoadRunner data object
          */
         TelluriumData(const rr::RoadRunnerData& data);
+
+        /**
+         * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
+         *
+         * \param data: Pointer to a RoadRunner data object
+         */
+        TelluriumData(const rr::RoadRunnerData* data);
 
         /**
          *   \brief Destructor. De allocate any memory allocated in the class.
