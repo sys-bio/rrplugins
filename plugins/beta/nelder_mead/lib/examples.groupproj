@@ -3,20 +3,32 @@
         <ProjectGuid>{9938F6D6-4B1C-46F5-9E7A-52C64A6BBA5C}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
+        <Projects Include="..\..\..\..\source\common\telplugins_common.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\source\core\telplugins_core.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\source\math\telplugins_math.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\sbml_model\tel_sbml_model.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="..\..\lmfit\lib\lmfit-static.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="nelder_mead-static.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="maxPowerExample.cbproj">
+        <Projects Include="maxPowerExample\maxPowerExample.cbproj">
             <Dependencies/>
-        </Projects>
-        <Projects Include="simpleSBMLModel.cbproj">
-            <Dependencies>..\..\lmfit\lib\lmfit-static.cbproj</Dependencies>
         </Projects>
         <Projects Include="..\..\lmfit\tel_lm.cbproj">
             <Dependencies/>
+        </Projects>
+        <Projects Include="rr_example\nm_rr_example.cbproj">
+            <Dependencies>..\..\lmfit\lib\lmfit-static.cbproj</Dependencies>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -26,6 +38,42 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="telplugins_common">
+        <MSBuild Projects="..\..\..\..\source\common\telplugins_common.cbproj"/>
+    </Target>
+    <Target Name="telplugins_common:Clean">
+        <MSBuild Projects="..\..\..\..\source\common\telplugins_common.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_common:Make">
+        <MSBuild Projects="..\..\..\..\source\common\telplugins_common.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_core">
+        <MSBuild Projects="..\..\..\..\source\core\telplugins_core.cbproj"/>
+    </Target>
+    <Target Name="telplugins_core:Clean">
+        <MSBuild Projects="..\..\..\..\source\core\telplugins_core.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_core:Make">
+        <MSBuild Projects="..\..\..\..\source\core\telplugins_core.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_math">
+        <MSBuild Projects="..\..\..\..\source\math\telplugins_math.cbproj"/>
+    </Target>
+    <Target Name="telplugins_math:Clean">
+        <MSBuild Projects="..\..\..\..\source\math\telplugins_math.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_math:Make">
+        <MSBuild Projects="..\..\..\..\source\math\telplugins_math.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_sbml_model">
+        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj"/>
+    </Target>
+    <Target Name="tel_sbml_model:Clean">
+        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_sbml_model:Make">
+        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="lmfit-static">
         <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj"/>
     </Target>
@@ -45,22 +93,13 @@
         <MSBuild Projects="nelder_mead-static.cbproj" Targets="Make"/>
     </Target>
     <Target Name="maxPowerExample">
-        <MSBuild Projects="maxPowerExample.cbproj"/>
+        <MSBuild Projects="maxPowerExample\maxPowerExample.cbproj"/>
     </Target>
     <Target Name="maxPowerExample:Clean">
-        <MSBuild Projects="maxPowerExample.cbproj" Targets="Clean"/>
+        <MSBuild Projects="maxPowerExample\maxPowerExample.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="maxPowerExample:Make">
-        <MSBuild Projects="maxPowerExample.cbproj" Targets="Make"/>
-    </Target>
-    <Target Name="simpleSBMLModel" DependsOnTargets="lmfit-static">
-        <MSBuild Projects="simpleSBMLModel.cbproj"/>
-    </Target>
-    <Target Name="simpleSBMLModel:Clean" DependsOnTargets="lmfit-static:Clean">
-        <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="simpleSBMLModel:Make" DependsOnTargets="lmfit-static:Make">
-        <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Make"/>
+        <MSBuild Projects="maxPowerExample\maxPowerExample.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_lm">
         <MSBuild Projects="..\..\lmfit\tel_lm.cbproj"/>
@@ -71,14 +110,23 @@
     <Target Name="tel_lm:Make">
         <MSBuild Projects="..\..\lmfit\tel_lm.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="nm_rr_example" DependsOnTargets="lmfit-static">
+        <MSBuild Projects="rr_example\nm_rr_example.cbproj"/>
+    </Target>
+    <Target Name="nm_rr_example:Clean" DependsOnTargets="lmfit-static:Clean">
+        <MSBuild Projects="rr_example\nm_rr_example.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nm_rr_example:Make" DependsOnTargets="lmfit-static:Make">
+        <MSBuild Projects="rr_example\nm_rr_example.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="lmfit-static;nelder_mead-static;maxPowerExample;simpleSBMLModel;tel_lm"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;tel_sbml_model;lmfit-static;nelder_mead-static;maxPowerExample;tel_lm;nm_rr_example"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="lmfit-static:Clean;nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean;tel_lm:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;tel_sbml_model:Clean;lmfit-static:Clean;nelder_mead-static:Clean;maxPowerExample:Clean;tel_lm:Clean;nm_rr_example:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="lmfit-static:Make;nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make;tel_lm:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;tel_sbml_model:Make;lmfit-static:Make;nelder_mead-static:Make;maxPowerExample:Make;tel_lm:Make;nm_rr_example:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

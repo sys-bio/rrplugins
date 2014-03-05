@@ -43,8 +43,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ProjectType>CppConsoleApplication</ProjectType>
-        <IncludePath>R:\tlp\plugins\beta\nelder_mead\lib\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>R:\tlp\plugins\beta\nelder_mead\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
@@ -85,6 +85,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Defines>POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source;$(TLP_ROOT)\source\common;$(IncludePath)</IncludePath>
         <DynamicRTL>true</DynamicRTL>
@@ -102,6 +103,48 @@
         </CppCompile>
         <CppCompile Include="sbml_model_one_para.cpp">
             <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_chartables.c">
+            <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_compile.c">
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_exec.c">
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_fullinfo.c">
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_globals.c">
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_maketables.c">
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_newline.c">
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_ord2utf8.c">
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_study.c">
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_tables.c">
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_try_flipped.c">
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_ucd.c">
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_valid_utf8.c">
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\..\..\third_party\poco\Foundation\src\pcre_xclass.c">
+            <BuildOrder>15</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
