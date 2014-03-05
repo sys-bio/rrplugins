@@ -15,6 +15,9 @@
         <Projects Include="simpleSBMLModel.cbproj">
             <Dependencies>..\..\lmfit\lib\lmfit-static.cbproj</Dependencies>
         </Projects>
+        <Projects Include="..\..\lmfit\tel_lm.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="simpleSBMLModel:Make" DependsOnTargets="lmfit-static:Make">
         <MSBuild Projects="simpleSBMLModel.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="tel_lm">
+        <MSBuild Projects="..\..\lmfit\tel_lm.cbproj"/>
+    </Target>
+    <Target Name="tel_lm:Clean">
+        <MSBuild Projects="..\..\lmfit\tel_lm.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_lm:Make">
+        <MSBuild Projects="..\..\lmfit\tel_lm.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="lmfit-static;nelder_mead-static;maxPowerExample;simpleSBMLModel"/>
+        <CallTarget Targets="lmfit-static;nelder_mead-static;maxPowerExample;simpleSBMLModel;tel_lm"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="lmfit-static:Clean;nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean"/>
+        <CallTarget Targets="lmfit-static:Clean;nelder_mead-static:Clean;maxPowerExample:Clean;simpleSBMLModel:Clean;tel_lm:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="lmfit-static:Make;nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make"/>
+        <CallTarget Targets="lmfit-static:Make;nelder_mead-static:Make;maxPowerExample:Make;simpleSBMLModel:Make;tel_lm:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

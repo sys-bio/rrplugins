@@ -6,25 +6,33 @@
 #include "telPluginManager.h"
 
 using namespace tlp;
-double objfun(double parameters[], const void* myData)
+using rr::RoadRunner;
+typedef struct
 {
-    double someData = * (double*) myData;
-    double Req;
-    double VL;
-    double PL;
-    double Vs = 9.0;
-    double RL = parameters[0];
+    TelluriumData mExperimentalData;
+    rr::RoadRunner* mRRI;
 
-    Req = 470*RL/(470+RL);
-    VL = Vs*Req/(1000+Req);
-    PL = VL*VL/RL;
-    printf("RL:%f P:%f\n",RL,PL);
-    return -PL;
+} nmDataStructure;
+
+double objfun(double par[], const void* userData)
+{
+    double chiSquare = -1;
+    nmDataStructure* myData =  (nmDataStructure*) userData;
+    RoadRunner* rr = myData->mRRI;
+
+    double k1 = par[0];
+
+    rr->reset();
+
+    rr->setValue("k1", k1);
+
+
+    return chiSquare;
 }
 
 void my_constraints(double x[], int n)
 {
-    // resistance must be positive
+    // rate contstants must be positive
     int i;
     for (i=0; i<n; i++)
     {
@@ -34,7 +42,6 @@ void my_constraints(double x[], int n)
         }
     }
 }
-
 
 int main()
 {
