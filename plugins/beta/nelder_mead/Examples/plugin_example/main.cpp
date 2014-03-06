@@ -11,9 +11,6 @@
 #include "telPlugin.h"
 using namespace tlp;
 
-
-
-
 int main()
 {
     double scale = 1;
@@ -22,8 +19,6 @@ int main()
 
     try
     {
-        MinimizationData myData;
-
         PluginManager PM("..\\plugins");
         PM.load();
 
@@ -57,8 +52,8 @@ int main()
         Properties Parameters;
         Parameters.add(new Property<double>(12.3, "k1"));
         NMP->setPropertyValue("InputParameterList", &Parameters);
-        NMP->setProperty("ExperimentalDataSelectionList",   "S1,S2");
-        NMP->setProperty("FittedDataSelectionList",         "S1,S2");
+        NMP->setPropertyByString("ExperimentalDataSelectionList",   "S1,S2");
+        NMP->setPropertyByString("FittedDataSelectionList",         "S1,S2");
 
         NMP->execute();
 

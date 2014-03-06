@@ -205,7 +205,7 @@ class CORE_DECLSPEC Plugin
         /**
             Sets the value of specified Property with value as specified
         */
-        bool                            setProperty(const string& nameOf, const char* value);
+        bool                            setPropertyByString(const string& nameOf, const char* value);
 
         /**
             Sets the value of specified Property with value as specified

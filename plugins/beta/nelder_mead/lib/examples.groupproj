@@ -12,9 +12,6 @@
         <Projects Include="..\..\..\..\source\math\telplugins_math.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\sbml_model\tel_sbml_model.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="..\..\lmfit\lib\lmfit-static.cbproj">
             <Dependencies/>
         </Projects>
@@ -25,6 +22,9 @@
             <Dependencies/>
         </Projects>
         <Projects Include="..\..\chisquare\tel_chisquare.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\test_model\tel_test_model.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="nelder_mead-static.cbproj">
@@ -68,15 +68,6 @@
     <Target Name="telplugins_math:Make">
         <MSBuild Projects="..\..\..\..\source\math\telplugins_math.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="tel_sbml_model">
-        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj"/>
-    </Target>
-    <Target Name="tel_sbml_model:Clean">
-        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_sbml_model:Make">
-        <MSBuild Projects="..\..\sbml_model\tel_sbml_model.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="lmfit-static">
         <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj"/>
     </Target>
@@ -113,6 +104,15 @@
     <Target Name="tel_chisquare:Make">
         <MSBuild Projects="..\..\chisquare\tel_chisquare.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="tel_test_model">
+        <MSBuild Projects="..\..\test_model\tel_test_model.cbproj"/>
+    </Target>
+    <Target Name="tel_test_model:Clean">
+        <MSBuild Projects="..\..\test_model\tel_test_model.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_test_model:Make">
+        <MSBuild Projects="..\..\test_model\tel_test_model.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="nelder_mead-static">
         <MSBuild Projects="nelder_mead-static.cbproj"/>
     </Target>
@@ -132,13 +132,13 @@
         <MSBuild Projects="rr_example\nm_rr_example.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;tel_sbml_model;lmfit-static;maxPowerExample;tel_lm;tel_chisquare;nelder_mead-static;nm_rr_example"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;lmfit-static;maxPowerExample;tel_lm;tel_chisquare;tel_test_model;nelder_mead-static;nm_rr_example"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;tel_sbml_model:Clean;lmfit-static:Clean;maxPowerExample:Clean;tel_lm:Clean;tel_chisquare:Clean;nelder_mead-static:Clean;nm_rr_example:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;lmfit-static:Clean;maxPowerExample:Clean;tel_lm:Clean;tel_chisquare:Clean;tel_test_model:Clean;nelder_mead-static:Clean;nm_rr_example:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;tel_sbml_model:Make;lmfit-static:Make;maxPowerExample:Make;tel_lm:Make;tel_chisquare:Make;nelder_mead-static:Make;nm_rr_example:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;lmfit-static:Make;maxPowerExample:Make;tel_lm:Make;tel_chisquare:Make;tel_test_model:Make;nelder_mead-static:Make;nm_rr_example:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

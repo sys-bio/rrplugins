@@ -185,7 +185,7 @@ void Plugin::setLibraryName(const string& libName)
     mLibraryName = libName;
 }
 
-bool Plugin::setProperty(const string& nameOf, const char* value)
+bool Plugin::setPropertyByString(const string& nameOf, const char* value)
 {
     if(!mProperties.count())
     {
