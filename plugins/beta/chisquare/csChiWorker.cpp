@@ -77,7 +77,6 @@ void ChiWorker::run()
     int nrOfCols = expData.cSize() -  test;
     int degreeOfFreedom = expData.rSize() * nrOfCols - mTheHost.mNrOfModelParameters.getValue();
 
-
     chiSquare =  chi;
     redChiSquare = chi/degreeOfFreedom;
 
