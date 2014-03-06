@@ -7,8 +7,9 @@ try:
     
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)    
-    data = rr.simulate(0, 10, 511) # Want 512 points
+    rr.load(sbml_model)   
+    rr.setValue("k1", 2.45) 
+    data = rr.simulate(0, 10, 15)
 
     #Add noise to the data
     noisePlugin = tel.Plugin ("tel_add_noise")

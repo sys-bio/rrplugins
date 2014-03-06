@@ -153,6 +153,11 @@ class Property : public PropertyBase
         string                          getValueAsString() const;
 
                                         /**
+                                            Set a properies value from an opaque pointer
+                                        */
+        void                            setValue(const void* value);
+
+                                        /**
                                             Clear a property's value
                                         */
         bool                            clearValue();
@@ -261,6 +266,12 @@ inline void Property<bool>::setValueFromString(const string& val)
 }
 
 template<>
+inline void Property<bool>::setValue(const void* val)
+{
+    mValue = * ((bool*) (val));
+}
+
+template<>
 inline Property<bool>::operator bool () const
 {
     return mValue;
@@ -269,6 +280,12 @@ inline Property<bool>::operator bool () const
 /**
     Set an int properties value, from a string.
 */
+template<>
+inline void Property<int>::setValue(const void* val)
+{
+    mValue = * ((int*) (val));
+}
+
 template<>
 inline void Property<int>::setValueFromString(const string& val)
 {
@@ -295,6 +312,12 @@ inline Property<int>::operator int & ()
 }
 
 //================= Double ===============================
+template<>
+inline void Property<double>::setValue(const void* val)
+{
+    mValue = * ((double*) (val));
+}
+
 /**
     Set a double properties value, from a string.
 */
@@ -311,6 +334,13 @@ inline string Property<double>::getValueAsString() const
 }
 
 //================= std::string ===============================
+
+template<>
+inline void Property<string>::setValue(const void* val)
+{
+    mValue = * ((string*) (val));
+}
+
 /**
     Set a string properties value, from a string.
 */
@@ -358,6 +388,12 @@ inline bool Property<StringList>::clearValue()
     return true;
 }
 
+template<>
+inline void Property< StringList >::setValue(const void* val)
+{
+    mValue = * ((StringList* )val);
+}
+
 /**
     Set a StringList properties value, from a string. This function expects input string
     containing comma delimited values.
@@ -379,6 +415,12 @@ inline string Property<Properties>::getValueAsString() const
     stringstream ss;
     ss << mValue;
     return ss.str();
+}
+
+template<>
+inline void Property< Properties >::setValue(const void* val)
+{
+    mValue = * ((Properties* )val);
 }
 
 /**
@@ -481,6 +523,15 @@ inline string getPropertyType<Properties>(const Properties& value)
 
 
 //Temporary instantiations here ================
+
+/**
+    Set a property value
+*/
+template<>
+inline void Property< ls::Matrix<double> >::setValue(const void* val)
+{
+    mValue = * ((ls::Matrix<double>* )val);
+}
 
 /**
     Set the value of a Properties container value, from a string.

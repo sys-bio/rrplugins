@@ -30,49 +30,53 @@ class MinimizationData
 
 MinimizationData::MinimizationData()
 :
-mEpsilon(1.e-8),
+mEpsilon(1.e-18),
 mScale(1)
 {}
 
 double objfun(double par[], const void* userData)
 {
-    double chiSquare = -1;
     MinimizationData&   myData  = *((MinimizationData*) userData);
     TelluriumData&      expData = myData.mExperimentalData;
     RoadRunner&         rr      = myData.mRRI;
-    Plugin&             chi     =*(myData.mChiSquarePlugin);
-    double k1 = par[0];
+    Plugin&             chi     = *(myData.mChiSquarePlugin);
 
+    //Reset roadrunner
     rr.reset();
 
-    if(!rr.setValue("k1", k1))
+    //Get current parameter values
+    int nrOfParameters = myData.mParameters.count();
+    for(int i =0; i < nrOfParameters; i++)
     {
-        throw(Exception("Failed setting value of parameter"));
+        PropertyBase* para = myData.mParameters[i];
+        double parValue = par[i];
+        para->setValue( &parValue  );
+        if(!rr.setValue(para->getName(), * (double*) para->getValueHandle()))
+        {
+            throw(Exception("Failed setting value of parameter"));
+        }
+
     }
 
-    int    nrOfTimePoints              = expData.rSize();
-    double timeStart                   = expData.getTimeStart();
-    double timeEnd                     = expData.getTimeEnd();
-
     rr::SimulateOptions opt;
-    opt.start       = timeStart;
-    opt.duration    = timeEnd - timeStart;
-    opt.steps       = nrOfTimePoints -1;
+    opt.start       = expData.getTimeStart();
+    opt.duration    = expData.getTimeEnd() - expData.getTimeStart();
+    opt.steps       = expData.rSize() -1;
     TelluriumData simData(rr.simulate(&opt));
 
-    //Calculate Chi Square
+    //Calculate Chi Square using the ChiSquare plugin
     chi.setPropertyValue("ModelData", &(simData));
     int nrOfParas = myData.mParameters.count();
     chi.setPropertyValue("NrOfModelParameters", &(nrOfParas));
     chi.execute(false);
-    chiSquare = * (double*) chi.getPropertyValueHandle("ChiSquare");
+
+    double chiSquare = * (double*) chi.getPropertyValueHandle("ChiSquare");
     return chiSquare;
 }
 
 int main()
 {
-    double eps = 1.0e-8;
-    double scale = 1.0;
+    double scale = 1;
     Logger::setLevel(lDebug);
     Logger::enableFileLogging("Test.log");
 
@@ -98,27 +102,27 @@ int main()
             throw(Exception("ChiSquare plugin is NULL!"));
         }
 
-
         //Setup data structure
         myData.mRRI.load(model->getPropertyValueAsString("Model"));
         myData.mExperimentalData.read("ExperimentalData.dat");
         myData.mRRI.setSelections(StringList("Time, S1, S2"));
-        myData.mParameters.add(new Property<double>(2.3, "k1"));
+        myData.mParameters.add(new Property<double>(12.3, "k1"));
         myData.mChiSquarePlugin = chiSquare;
-
 
         chiSquare->setPropertyValue("ExperimentalData", &(myData.mExperimentalData));
 
-
-        double start[] = {2.3};
-
+        double* intialParameters = new double(myData.mParameters.count());
+        intialParameters[0] = * (double*) myData.mParameters[0]->getValueHandle();
         //Execute minimizer
-        double min = simplex2(objfun, &myData,
-        start,
-        myData.mParameters.count(),
-        myData.mEpsilon,
-        scale,
-        NULL);//my_constraints);
+        double min = simplex2(  objfun,
+                                &myData,
+                                intialParameters,
+                                myData.mParameters.count(),
+                                myData.mEpsilon,
+                                scale,
+                                NULL
+                                );//my_constraints);
+
     }
     catch(const rr::Exception& e)
     {

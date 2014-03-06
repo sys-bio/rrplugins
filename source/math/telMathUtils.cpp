@@ -205,13 +205,12 @@ double getRandomElement(const vector<double>& vec, Random& random)
     return vec[(int) rnd ];
 }
 
-
 vector<double> getWeightValuesInColumn(int col, const TelluriumData& data)
 {
     vector<double> vals;
     if(!data.hasWeights()) //Return weights of '1'
     {
-        Log(lWarning) <<"Trying to read non-existent weight values from data";
+        Log(lDebug3) <<"Trying to read non-existent weight values from data";
     }
 
     if(col < data.cSize())

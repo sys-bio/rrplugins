@@ -34,7 +34,7 @@ class COMMON_DECLSPEC IniSection
                             IniSection();
                             IniSection(const std::string& nameValueString, const char& sep);
                            ~IniSection();
-        IniKey*             CreateKey(const string& _keyName, const string& Value = "", const string& Comment = "");
+        IniKey*             CreateKey(const string& _keyName, const string& Value = gEmptyString, const string& Comment = gEmptyString);
         IniKey*             GetKey(const int& i);
         IniKey*             GetKey(const string& keyName, bool create = false);
         size_t              KeyCount();

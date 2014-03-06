@@ -445,6 +445,12 @@ inline string Property<tlp::TelluriumData>::getValueAsString() const
     return rrData.str();
 }
 
+template<>
+inline void Property< tlp::TelluriumData >::setValue(const void* val)
+{
+    mValue = * ((tlp::TelluriumData*) (val));
+}
+
 /**
     Set a RoadRunner data properties value, from a string.
     \note This is not implemented.

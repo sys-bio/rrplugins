@@ -526,7 +526,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!infoSection)
     {
         stringstream s;
-        s<<"RoadRunnder data file is missing section: [INFO]. Exiting reading file...";
+        s<<"Tellurium data file is missing section: [INFO]. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
@@ -537,7 +537,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!colNamesK)
     {
         stringstream s;
-        s<<"RoadRunnder data file is missing ini key: COLUMN_HEADERS. Exiting reading file...";
+        s<<"Tellurium data file is missing ini key: COLUMN_HEADERS. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
@@ -551,8 +551,8 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!commentsK)
     {
         stringstream s;
-        s<<"RoadRunnder data file is missing ini key: COMMENTS..";
-        Log(Logger::LOG_WARNING)<<s.str();
+        s<<"Tellurium data file is missing ini key: COMMENTS..";
+        Log(lDebug3)<<s.str();
     }
     else
     {
@@ -564,8 +564,8 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!arraySection)
     {
         stringstream s;
-        s<<"RoadRunnder data file is missing section: [ARRAYED_PARAMETER].";
-        Log(Logger::LOG_DEBUG)<<s.str();
+        s<<"Tellurium data file is missing section: [ARRAYED_PARAMETER].";
+        Log(lDebug3)<<s.str();
     }
     //Todo: implement reading of an arrayed parameter..
 
@@ -575,7 +575,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!aKey1 || !aKey2)
     {
        stringstream s;
-       s<<"RoadRunnder data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";
+       s<<"Tellurium data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";
        Log(Logger::LOG_ERROR)<<s.str();
        throw(Exception(s.str()));
     }
@@ -600,7 +600,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     if(!dataSection)
     {
         stringstream s;
-        s<<"RoadRunnder data file is missing ini section: DATA. Exiting reading file...";
+        s<<"Tellurium data file is missing ini section: DATA. Exiting reading file...";
         Log(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
@@ -627,7 +627,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     IniSection* weightsSection = ini.GetSection("WEIGHTS");
     if(!weightsSection)    //Optional
     {
-        Log(lDebug)<<"RoadRunnder data file is missing section: [WEIGHTS]. ";
+        Log(lDebug4)<<"Tellurium data file is missing section: [WEIGHTS]. ";
         return ss;
     }
     data.mWeights.Allocate(rDim, cDim);

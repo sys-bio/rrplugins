@@ -155,6 +155,11 @@ class COMMON_DECLSPEC PropertyBase
         /**
          * Set the value of the property, using string representation.
          */
+        virtual void                        setValue(const void* value) = 0;
+
+        /**
+         * Set the value of the property, using string representation.
+         */
         virtual void                        setValueFromString(const string& value) = 0;
 
         /**
