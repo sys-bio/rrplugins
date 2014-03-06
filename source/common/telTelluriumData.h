@@ -141,6 +141,20 @@ class COMMON_DECLSPEC TelluriumData
         TelluriumData(const rr::RoadRunnerData& data);
 
         /**
+         * \brief Copy Constructor Create a Tellurium data object from a Tellurium data object
+         *
+         * \param data: Pointer to a Telluriume data object
+         */
+        TelluriumData(const TelluriumData* data);
+
+        /**
+         * \brief Copy Constructor Create a Tellurium data object from a Tellurium data object
+         *
+         * \param data: A Telluriume data object
+         */
+        TelluriumData(const TelluriumData& data);
+
+        /**
          * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
          *
          * \param data: Pointer to a RoadRunner data object

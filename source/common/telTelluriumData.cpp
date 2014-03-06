@@ -34,6 +34,19 @@ mColumnNames(colNames),
 mTheData(theData)
 {}
 
+TelluriumData::TelluriumData(const TelluriumData& data)
+{
+    (*this) = data;
+}
+
+TelluriumData::TelluriumData(const TelluriumData* data)
+{
+    if(data)
+    {
+        (*this) = *data;
+    }
+}
+
 TelluriumData::TelluriumData(const rr::RoadRunnerData& data)
 {
     (*this) = data;
@@ -107,10 +120,12 @@ TelluriumData& TelluriumData::operator= (const TelluriumData& rhs)
         return *this;
     }
 
-    mTheData = rhs.mTheData;
-    mWeights = rhs.mWeights;
-    mColumnNames = rhs.mColumnNames;
-    mArrayedParameter = rhs.getArrayedParameter();
+    mTheData            = rhs.mTheData;
+    mWeights            = rhs.mWeights;
+    mColumnNames        = rhs.mColumnNames;
+    mArrayedParameter   = rhs.getArrayedParameter();
+    mTimePrecision      = rhs.mTimePrecision;
+    mDataPrecision      = rhs.mDataPrecision;
     return *this;
 }
 
@@ -119,6 +134,10 @@ TelluriumData& TelluriumData::operator= (const rr::RoadRunnerData& rhs)
     mTheData = rhs.getData();
     mWeights = rhs.getWeights();
     mColumnNames = rhs.getColumnNames();
+    mArrayedParameter   = ArrayedParameter();
+    mTimePrecision      = 6;
+    mDataPrecision      = 16;
+
     return *this;
 }
 
@@ -452,7 +471,7 @@ ostream& operator << (ostream& ss, const TelluriumData& data)
     {
         for(u_int col = 0; col < data.mTheData.CSize(); col++)
         {
-            if(col == 0)
+            if(col == 0 && data.isFirstColumnTime())
             {
                 ss<<setprecision(data.mTimePrecision)<<data.mTheData(row, col);
             }
@@ -472,7 +491,7 @@ ostream& operator << (ostream& ss, const TelluriumData& data)
         }
     }
 
-    if(data.mWeights.isAllocated())
+    if(data.mWeights.isAllocated() && data.isFirstColumnTime())
     {
         //Write weights section
         ss<<endl;

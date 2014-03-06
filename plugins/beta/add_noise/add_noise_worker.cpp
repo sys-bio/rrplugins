@@ -73,8 +73,8 @@ void AddNoiseWorker::run()
 
             if(mTheHost.mWorkProgressEvent)
             {
-                double progress = (row * 100.0) /(data.rSize() -1.0);
                 //The progress is communicated to the client trough the mProgress property
+                double progress = (row * 100.0) /(data.rSize() -1.0);
                 mTheHost.mProgress.setValue( progress );
                 mTheHost.mWorkProgressEvent(mTheHost.mWorkProgressData1,  mTheHost.mWorkProgressData2);
             }

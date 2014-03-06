@@ -1,16 +1,16 @@
-#ifndef SBMLModelH
-#define SBMLModelH
+#ifndef TestModelH
+#define TestModelH
 #include "telProperty.h"
 #include "telCPPPlugin.h"
-
+#include "telTelluriumData.h"
 //---------------------------------------------------------------------------
 using namespace tlp;
 
-class SBMLModel : public CPPPlugin
+class TestModel : public CPPPlugin
 {
     public:
-                                    SBMLModel(PluginManager* manager);
-                                   ~SBMLModel();
+                                    TestModel(PluginManager* manager);
+                                   ~TestModel();
         bool                        execute(bool);
         unsigned char*              getManualAsPDF() const;
         unsigned int                getPDFManualByteSize();
@@ -18,7 +18,10 @@ class SBMLModel : public CPPPlugin
     private:
         const string                mModelFileName;
         Property<string>            mModel;
-        Property<string>            mModelData;
+        Property<TelluriumData>     mSimulatedData;
+        Property<TelluriumData>     mSimulatedDataWithNoise;
+        Property<double>            mSigma;
+        void                        addWeights();
 };
 
 extern "C"

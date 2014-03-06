@@ -313,6 +313,12 @@ inline Property<int>::operator int & ()
 
 //================= Double ===============================
 template<>
+inline Property<double>::operator double& ()
+{
+    return mValue;
+}
+
+template<>
 inline void Property<double>::setValue(const void* val)
 {
     mValue = * ((double*) (val));
@@ -357,8 +363,15 @@ inline bool Property<string>::clearValue()
     return true;
 }
 
+
 template<>
 inline Property<string>::operator string () const
+{
+    return mValue;
+}
+
+template<>
+inline Property<string>::operator string & ()
 {
     return mValue;
 }

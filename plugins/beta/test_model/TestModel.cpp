@@ -1,27 +1,34 @@
 #pragma hdrstop
-#include "SBMLModel.h"
+#include "rr/rrRoadRunner.h"
+#include "TestModel.h"
 #include "telException.h"
 #include "telLogger.h"
 #include "telUtils.h"
 #include "telPluginManager.h"
-#include "example_data_doc.h"
+#include "test_model_doc.h"
 
 extern string theModel;
 //---------------------------------------------------------------------------
-SBMLModel::SBMLModel(PluginManager* manager)
+TestModel::TestModel(PluginManager* manager)
 :
-CPPPlugin(  "SBMLModel",                 "Examples",    NULL,    manager),  //Construct Base
+CPPPlugin(  "TestModel",                 "Examples",    NULL,    manager),  //Construct Base
 //Properties
-mModel(              "",       "Model",       "A SBML model"),
+mModel(                         "",                     "Model",                    "A SBML model"),
+mSimulatedData(                 TelluriumData(),        "SimulatedData",            "Simulated Data"),
+mSimulatedDataWithNoise(        TelluriumData(),        "SimulatedDataWithNoise",   "Simulated Data With Noise"),
+mSigma(                         3.e-6,                  "Sigma",                    "Sigma (<=> size of applied noise)"),
+//Non properties
 mModelFileName("sbml_test_0001.xml")
 {
     mVersion = "1.0";
     //Setup the plugins properties
     mProperties.add(&mModel);
+    mProperties.add(&mSimulatedData);
+    mProperties.add(&mSimulatedDataWithNoise);
 
-    mHint ="Get access to an SBML model as a string";
-    mDescription="The SBMLModel plugin exposes one property containing data, as a string, for an ExampleModel. \
-The ExampleModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.";
+    mHint ="Get access to a SBML model, and simulated data using the model.";
+    mDescription="The TestModel plugin exposes one property containing a simple SBML model as a string. \
+The TestModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.";
 
     //Load the model from file here..
     try
@@ -30,34 +37,89 @@ The ExampleModel plugin was developed at the University of Washington by Totte K
     }
     catch(const exception& ex)
     {
-        Log(lError)<<"There was a problem in the SBMLModel plugin: "<<ex.what();
+        Log(lError)<<"There was a problem in the TestModel plugin: "<<ex.what();
     }
 }
 
-SBMLModel::~SBMLModel()
+TestModel::~TestModel()
 {}
 
-unsigned char* SBMLModel::getManualAsPDF() const
+unsigned char* TestModel::getManualAsPDF() const
 {
     return pdf_doc;
 }
 
-unsigned int SBMLModel::getPDFManualByteSize()
+unsigned int TestModel::getPDFManualByteSize()
 {
     return sizeofPDF;
 }
 
-bool SBMLModel::execute(bool inThread)
+bool TestModel::execute(bool inThread)
 {
-    Log(lDebug)<<"Executing the SBMLModel plugin by Totte Karlsson";
+    Log(lDebug)<<"Executing the TestModel plugin by Totte Karlsson";
+    RoadRunner rr;
+    rr.load(mModel);
+
+    rr::SimulateOptions opt;
+    opt.start       = 0;
+    opt.duration    = 10;
+    opt.steps       = 15;
+
+    TelluriumData data(rr.simulate(&opt));
+    mSimulatedData.setValue(data);
+
+    //Add noise
+    const PluginManager* PM = this->getPluginManager();
+    Plugin* noise = PM->getPlugin("AddNoise");
+
+    mSimulatedDataWithNoise.setValue(mSimulatedData.getValue());
+
+    noise->setPropertyValue("Sigma", mSigma.getValueHandle());
+    noise->setPropertyValue("InputData", mSimulatedDataWithNoise.getValueHandle());
+    noise->execute();
+
+    mSimulatedDataWithNoise.setValue(noise->getPropertyValueHandle("InputData"));
+
+    //Add weights
+    addWeights();
     return true;
+}
+
+void TestModel::addWeights()
+{
+    TelluriumData &data = * (TelluriumData*) mSimulatedDataWithNoise.getValueHandle();
+    if(!data.hasWeights())
+    {
+        data.allocateWeights();
+    }
+
+    double sigma = mSigma;
+
+    for(int r = 0; r < data.rSize(); r++)
+    {
+        for(int c = 0; c < data.cSize(); c++)
+        {
+            if( compareNoCase(data.getColumnName(c), "Time") == false )
+            {
+                double weight = data.getWeight(r,c);
+                if(weight == 1)
+                {
+                    data.setWeight(r,c, weight * sigma * sigma);
+                }
+                else
+                {
+                    data.setWeight(r,c, weight + sigma * sigma);
+                }
+            }
+        }
+    }
 }
 
 // Plugin factory function
 Plugin* plugins_cc createPlugin(void* manager)
 {
     //allocate a new object and return it
-    return new SBMLModel((PluginManager*) manager);
+    return new TestModel((PluginManager*) manager);
 }
 
 const char* plugins_cc getImplementationLanguage()
