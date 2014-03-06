@@ -134,6 +134,9 @@
             <DependentOn>lmfit_doc.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
+        <CppCompile Include="lmObjectiveFunction.cpp">
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="lmUtils.cpp">
             <DependentOn>lmUtils.h</DependentOn>
             <BuildOrder>4</BuildOrder>

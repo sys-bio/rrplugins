@@ -10,69 +10,9 @@
 #include "telLogger.h"
 #include "telPlugin.h"
 using namespace tlp;
-using rr::RoadRunner;
-class MinimizationData
-{
-    public:
 
-        double              mEpsilon;
-        double              mScale;
 
-        TelluriumData       mExperimentalData;
-        rr::RoadRunner      mRRI;
-        TelluriumData       mChiSquares;
-        Properties          mParameters;        //Parameters to be minimized
-        Plugin*             mChiSquarePlugin;
 
-    public:
-                            MinimizationData();
-};
-
-MinimizationData::MinimizationData()
-:
-mEpsilon(1.e-18),
-mScale(1)
-{}
-
-double objfun(double par[], const void* userData)
-{
-    MinimizationData&   myData  = *((MinimizationData*) userData);
-    TelluriumData&      expData = myData.mExperimentalData;
-    RoadRunner&         rr      = myData.mRRI;
-    Plugin&             chi     = *(myData.mChiSquarePlugin);
-
-    //Reset roadrunner
-    rr.reset();
-
-    //Get current parameter values
-    int nrOfParameters = myData.mParameters.count();
-    for(int i =0; i < nrOfParameters; i++)
-    {
-        PropertyBase* para = myData.mParameters[i];
-        double parValue = par[i];
-        para->setValue( &parValue  );
-        if(!rr.setValue(para->getName(), * (double*) para->getValueHandle()))
-        {
-            throw(Exception("Failed setting value of parameter"));
-        }
-
-    }
-
-    rr::SimulateOptions opt;
-    opt.start       = expData.getTimeStart();
-    opt.duration    = expData.getTimeEnd() - expData.getTimeStart();
-    opt.steps       = expData.rSize() -1;
-    TelluriumData simData(rr.simulate(&opt));
-
-    //Calculate Chi Square using the ChiSquare plugin
-    chi.setPropertyValue("ModelData", &(simData));
-    int nrOfParas = myData.mParameters.count();
-    chi.setPropertyValue("NrOfModelParameters", &(nrOfParas));
-    chi.execute(false);
-
-    double chiSquare = * (double*) chi.getPropertyValueHandle("ChiSquare");
-    return chiSquare;
-}
 
 int main()
 {
@@ -97,32 +37,30 @@ int main()
         }
         test_model->execute();
 
+//        TelluriumData model(        (TelluriumData*) test_model->getPropertyValueHandle("SimulatedData"));
+//        TelluriumData experiment(   (TelluriumData*) test_model->getPropertyValueHandle("SimulatedDataWithNoise"));
+//        model.write("r:\\modelData.dat");
+//        experiment.write("r:\\expData.dat");
 
-        TelluriumData model(        (TelluriumData*) test_model->getPropertyValueHandle("SimulatedData"));
-        TelluriumData experiment(   (TelluriumData*) test_model->getPropertyValueHandle("SimulatedDataWithNoise"));
+        Plugin* NMP = PM.getPlugin("Nelder-Mead");
 
-
-        model.write("r:\\modelData.dat");
-        experiment.write("r:\\expData.dat");
-
-        Plugin* NMP = PM.getPlugin("Nelder_Mead");
-
-         if(!NMP)
+        if(!NMP)
         {
             throw(Exception("NelderMead plugin is NULL.. Exiting"));
         }
 
         //Setup data structure
         NMP->setPropertyValue("SBML", test_model->getPropertyValueHandle("Model"));
-        NMP->setPropertyValue("DataWithNoise", test_model->getPropertyValueHandle("DataWithNoise"));
+        NMP->setPropertyValue("ExperimentalData", test_model->getPropertyValueHandle("SimulatedDataWithNoise"));
 
         //Setup parameters to fit
         Properties Parameters;
         Parameters.add(new Property<double>(12.3, "k1"));
         NMP->setPropertyValue("InputParameterList", &Parameters);
-        NMP->setProperty("ExperimentalDataSelectionList", "S1,S2");
-        NMP->setProperty("FittedDataSelectionList", "S1,S2");
+        NMP->setProperty("ExperimentalDataSelectionList",   "S1,S2");
+        NMP->setProperty("FittedDataSelectionList",         "S1,S2");
 
+        NMP->execute();
 
     }
     catch(const rr::Exception& e)

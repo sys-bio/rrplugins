@@ -59,6 +59,13 @@ TelluriumData  getDataSet(int expNr, const TelluriumData& data)
     return dataSet;
 }
 
+double getNorm(const TelluriumData& data1, const TelluriumData& data2)
+{
+    double norm(0);
+
+    return norm;
+}
+
 double getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances)
 {
     stringstream msg;

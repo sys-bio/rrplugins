@@ -231,7 +231,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             return true;
         }
 
-        if(type == "string")
+        if(type == "std::string")
         {
             Property<string>* prop = dynamic_cast< Property<string>* >(property);
             const string* theData = (string*) value;
@@ -246,6 +246,15 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             prop->setValue(*theData);
             return true;
         }
+
+        if(type == "listOfProperties")
+        {
+            Property<Properties>* props = dynamic_cast< Property<Properties>* >(property);
+            const Properties* theData = (Properties*) value;
+            props->setValue(*theData);
+            return true;
+        }
+
         stringstream msg;
         msg<<"Conversion of property of type: \""<<type<<" is not implemented";
         throw(Exception(msg.str()));

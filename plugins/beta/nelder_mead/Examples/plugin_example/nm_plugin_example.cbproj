@@ -43,8 +43,8 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Multithreaded>true</Multithreaded>
         <ProjectType>CppConsoleApplication</ProjectType>
-        <IncludePath>..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\;..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\;..\..\..\..\..\third_party\poco\Foundation\src\;..\;..\..\..\..\third_party\poco\Foundation\src\;R:\rrl\third_party\poco\Foundation\src\;R:\tlp\plugins\beta\nelder_mead\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
