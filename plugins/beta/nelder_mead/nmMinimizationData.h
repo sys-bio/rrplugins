@@ -8,6 +8,7 @@
 using rr::RoadRunner;
 using tlp::TelluriumData;
 using tlp::Properties;
+
 class MinimizationData
 {
     public:
@@ -17,7 +18,6 @@ class MinimizationData
         TelluriumData       mExperimentalData;
         Properties          mParameters;        //Parameters to be minimized
         rr::RoadRunner      mRRI;
-
         TelluriumData       mNorms;
 
     public:

@@ -6,6 +6,13 @@
 #include "telUtils.h"
 #include "telException.h"
 
+#define LM_MACHEP     DBL_EPSILON   /* resolution of arithmetic */
+#define LM_DWARF      DBL_MIN       /* smallest nonzero number */
+#define LM_SQRT_DWARF sqrt(DBL_MIN) /* square should not underflow */
+#define LM_SQRT_GIANT sqrt(DBL_MAX) /* square should not overflow */
+#define LM_USERTOL    30*LM_MACHEP  /* users are recommended to require this */
+#define SQR(x)   (x)*(x)
+
 namespace tlp
 {
 using namespace std;
@@ -59,11 +66,76 @@ TelluriumData  getDataSet(int expNr, const TelluriumData& data)
     return dataSet;
 }
 
-double getNorm(const TelluriumData& data1, const TelluriumData& data2)
+double getEuclideanNorm(const vector<double>& x)
 {
-    double norm(0);
+/*     Given an n-vector x, this function calculates the
+ *     euclidean norm of x.
+ *
+ *     The euclidean norm is computed by accumulating the sum of
+ *     squares in three different sums. The sums of squares for the
+ *     small and large components are scaled so that no overflows
+ *     occur. Non-destructive underflows are permitted. Underflows
+ *     and overflows do not occur in the computation of the unscaled
+ *     sum of squares for the intermediate components.
+ *     The definitions of small, intermediate and large components
+ *     depend on two constants, LM_SQRT_DWARF and LM_SQRT_GIANT. The main
+ *     restrictions on these constants are that LM_SQRT_DWARF**2 not
+ *     underflow and LM_SQRT_GIANT**2 not overflow.
+ *
+ *     Parameters
+ *
+ *      n is a positive integer input variable.
+ *
+ *      x is an input array of length n.
+ */
+    int i;
+    double agiant, s1, s2, s3, xabs, x1max, x3max, temp;
 
-    return norm;
+    s1 = 0;
+    s2 = 0;
+    s3 = 0;
+    x1max = 0;
+    x3max = 0;
+    unsigned int n = x.size();
+    agiant = LM_SQRT_GIANT / n;
+
+    /** sum squares. **/
+
+    for (i = 0; i < n; i++) {
+        xabs = fabs(x[i]);
+        if (xabs > LM_SQRT_DWARF) {
+            if ( xabs < agiant ) {
+                s2 += xabs * xabs;
+            } else if ( xabs > x1max ) {
+                temp = x1max / xabs;
+                s1 = 1 + s1 * SQR(temp);
+                x1max = xabs;
+            } else {
+                temp = xabs / x1max;
+                s1 += SQR(temp);
+            }
+        } else if ( xabs > x3max ) {
+            temp = x3max / xabs;
+            s3 = 1 + s3 * SQR(temp);
+            x3max = xabs;
+        } else if (xabs != 0.) {
+            temp = xabs / x3max;
+            s3 += SQR(temp);
+        }
+    }
+
+    /** calculation of norm. **/
+
+    if (s1 != 0)
+        return x1max * sqrt(s1 + (s2 / x1max) / x1max);
+    else if (s2 != 0)
+        if (s2 >= x3max)
+            return sqrt(s2 * (1 + (x3max / s2) * (x3max * s3)));
+        else
+            return sqrt(x3max * ((s2 / x3max) + (x3max * s3)));
+    else
+        return x3max * sqrt(s3);
+
 }
 
 double getChiSquare(const vector<double>& O, const vector<double>& E, const vector<double>& variances)

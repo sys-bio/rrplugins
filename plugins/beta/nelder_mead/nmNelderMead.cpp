@@ -8,6 +8,7 @@
 #include "nelder_mead_doc.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
+#include "telPluginManager.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -40,13 +41,15 @@ mStatusMessage(                 "<none>",               "StatusMessage",        
 
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
-//ftol(                           LM_USERTOL,              "ftol"       ,                         "Relative error desired in the sum of squares. "),
-//xtol(                           LM_USERTOL,              "xtol"       ,                         "Relative error between last two approximations. "),
-//gtol(                           LM_USERTOL,              "gtol"       ,                         "Orthogonality desired between fvec and its derivs. "),
-//epsilon(                        LM_USERTOL,              "epsilon"    ,                         "Step used to calculate the jacobian. "),
-//stepbound(                      100.,                    "stepbound"  ,                         "Initial bound to steps in the outer loop. "),
-//patience(                       100,                     "patience"    ,                        "Maximum number of iterations as patience*(nr_of_parameters +1). "),
+mEpsilon(                       1.e-16,                  "Epsilon",                               "Relative error. "),
+mScale(                         1,                      "Scale",                                 "Scaling of vertices. "),
+mMaxIterations(                 1000,                   "MaxNrOfIterations",                     "Maximum number of iterations"),
+mALPHA(                         1,                      "Alpha",                                 "Reflection coefficient. "),
+mBETA(                          0.5,                    "Beta",                                  "Contraction coefficient. "),
+mGAMMA(                         2,                      "Gamma",                                 "Expansion coefficient."),
+
 mWorker(*this),
+mRRI(NULL),
 //mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
 {
@@ -71,12 +74,12 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mReducedChiSquare);
 
     //Add the lmfit parameters
-//    mProperties.add(&ftol);
-//    mProperties.add(&xtol);
-//    mProperties.add(&gtol);
-//    mProperties.add(&epsilon);
-//    mProperties.add(&stepbound);
-//    mProperties.add(&patience);
+    mProperties.add(&mEpsilon);
+    mProperties.add(&mScale);
+    mProperties.add(&mMaxIterations);
+    mProperties.add(&mALPHA);
+    mProperties.add(&mBETA);
+    mProperties.add(&mGAMMA);
 
     mProperties.add(&mStatusMessage);
 
@@ -88,14 +91,25 @@ rNormsData(mNorms.getValueReference())
     mDescription="The Nelder-Mead plugin is used to fit a proposed \
 SBML models parameters to experimental data. \
 The current implementation is based on the Nelder-Mead C library by Mike Hutt (see http://www.mikehutt.com/neldermead.html). \
-The Plugin has only a few parameters for fine tuning the algorithm. See the embedded PDF for more information. \
+The Plugin has a number of parameters for fine tuning the algorithm. See the embedded PDF for more information. \
 ";
     //The function below assigns property descriptions
     assignPropertyDescriptions();
 }
 
+
 NelderMead::~NelderMead()
 {}
+
+RoadRunner* NelderMead::getRoadRunner()
+{
+    return mRRI;
+}
+
+Plugin* NelderMead::getChiSquarePlugin()
+{
+    return mChiSquarePlugin;
+}
 
 bool NelderMead::isWorking() const
 {
@@ -180,6 +194,13 @@ string NelderMead::getResult()
 
 bool NelderMead::execute(bool inThread)
 {
+    const PluginManager *PM = this->getPluginManager();
+    mChiSquarePlugin = PM->getPlugin("ChiSquare");
+    if(!mChiSquarePlugin)
+    {
+        throw(Exception("ChiSquare plugin is NULL!"));
+    }
+
     stringstream msg;
     try
     {

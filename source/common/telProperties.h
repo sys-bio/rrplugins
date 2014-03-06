@@ -117,6 +117,12 @@ class COMMON_DECLSPEC Properties
         PropertyBase*                       getProperty(const string& paraName);
 
         /**
+           Get a parameter at a certain index
+           \return A Pointer to a PropertyBase if present, NULL otherwise
+        */
+        PropertyBase*                       getPropertyAt(int index);
+
+        /**
            Set the value of a property, from string
            \return true or false, indicating success/failure
            \note may be renamed to setPropertyValue
@@ -167,18 +173,19 @@ class COMMON_DECLSPEC Properties
             The parameter container may owe the parameter, default is false. In certain circumstances, the container need to owe
             the memory of the parameter and will de-allocate it on clear, or in the destruction of the container.
         */
-        vector< pair<PropertyBase*, bool> >                  mProperties;
+        vector< pair<PropertyBase*, bool> >                 mProperties;
 
         /**
             Iterator used to iterate trough the properties container
-        */    
-        vector< pair<PropertyBase*, bool> >::iterator        mPropertiesIter;
+        */
+        vector< pair<PropertyBase*, bool> >::iterator       mPropertiesIter;
 
 
         /**
             Boolean indicating if a client of the container can clear the list. True by default
         */
-        bool                                                 mCanClientClearList;
+        bool                                                mCanClientClearList;
+        bool                                                checkIndex(int index);
 };
 
 }

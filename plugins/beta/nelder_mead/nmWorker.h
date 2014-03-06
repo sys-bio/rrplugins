@@ -7,6 +7,7 @@
 #include "nmUtils.h"
 #include "telTelluriumData.h"
 #include "telProperties.h"
+#include "nmMinimizationData.h"
 //---------------------------------------------------------------------------
 
 using std::vector;
@@ -26,10 +27,9 @@ class nmWorker : public Poco::Runnable
         bool                        isRunning() const;
 
     protected:
-        rr::RoadRunner             *mRRI;
         Poco::Thread                mThread;
-
         NelderMead&                 mHost;
+//        MinimizationData            mMinData;
 
         bool                        setupRoadRunner();
         bool                        setup();

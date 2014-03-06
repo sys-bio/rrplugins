@@ -29,13 +29,13 @@ class NelderMead : public CPPPlugin
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
         Property<int>                           mNrOfIter;                      //Part of minimization result
 
-        //LMFIT Tuning parameters
-//        Property<double>                        ftol;                           /* relative error desired in the sum of squares. */
-//        Property<double>                        xtol;                           /* relative error between last two approximations. */
-//        Property<double>                        gtol;                           /* orthogonality desired between fvec and its derivs. */
-//        Property<double>                        epsilon;                        /* step used to calculate the jacobian. */
-//        Property<double>                        stepbound;                      /* initial bound to steps in the outer loop. */
-//        Property<int>                           patience;                       /* maximum number of iterations. */
+        //Nelder-Mead tuning parameters
+        Property<double>                        mEpsilon;
+        Property<double>                        mScale;
+        Property<int>                           mMaxIterations;                 /* maximum number of iterations */
+        Property<double>                        mALPHA;                         /* reflection coefficient */
+        Property<double>                        mBETA;                          /* contraction coefficient */
+        Property<double>                        mGAMMA;                         /* expansion coefficient */
 
         //Output data
         Property<string>                        mStatusMessage;                 //Message regarding the status of the fit
@@ -56,11 +56,11 @@ class NelderMead : public CPPPlugin
         string                                  getTempFolder();
         string                                  getSBML();
 
-//		nmDataStructure							&mLMData;        //LevenbergMarq.. data structure
-
     protected:
         //The worker is doing the work
         nmWorker                                mWorker;
+        rr::RoadRunner                         *mRRI;
+        Plugin*                                 mChiSquarePlugin;
 
     public:
                                                 NelderMead(PluginManager* manager);
@@ -77,6 +77,8 @@ class NelderMead : public CPPPlugin
         unsigned int                            getPDFManualByteSize();
         tlp::StringList                         getExperimentalDataSelectionList();
         void                                    assignPropertyDescriptions();
+        RoadRunner*                             getRoadRunner();
+        Plugin*                                 getChiSquarePlugin();
 };
 
 extern "C"

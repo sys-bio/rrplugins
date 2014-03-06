@@ -36,9 +36,9 @@
 #include <math.h>
 
 #ifdef MACOSX
-#include <malloc/malloc.h>
+    #include <malloc/malloc.h>
 #else
-#include <malloc.h>
+    #include <malloc.h>
 #endif
 
 #define MAX_IT      1000      /* maximum number of iterations */

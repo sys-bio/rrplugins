@@ -11,7 +11,7 @@ namespace tlp
 
 using std::vector;
 
-MATH_DECLSPEC double                getNorm(const TelluriumData& data1, const TelluriumData& data2);
+MATH_DECLSPEC double                getEuclideanNorm(const vector<double>& data);
 MATH_DECLSPEC TelluriumData         getNormalProbabilityPlot(const TelluriumData& stdPops);
 
 MATH_DECLSPEC TelluriumData         getStandardizedPopulations(const TelluriumData& population);

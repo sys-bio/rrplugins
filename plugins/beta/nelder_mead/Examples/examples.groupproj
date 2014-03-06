@@ -27,11 +27,17 @@
         <Projects Include="..\..\test_model\tel_test_model.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\lib\rr_example\nm_rr_example.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="..\tel_nelder_mead.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="plugin_example\nm_plugin_example.cbproj">
             <Dependencies>..\..\..\..\source\common\telplugins_common.cbproj;..\..\..\..\source\core\telplugins_core.cbproj;..\..\..\..\source\math\telplugins_math.cbproj;..\tel_nelder_mead.cbproj;..\..\test_model\tel_test_model.cbproj</Dependencies>
+        </Projects>
+        <Projects Include="R:\sbmlstudio\SBMLStudio.cbproj">
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -113,6 +119,15 @@
     <Target Name="tel_test_model:Make">
         <MSBuild Projects="..\..\test_model\tel_test_model.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="nm_rr_example">
+        <MSBuild Projects="..\lib\rr_example\nm_rr_example.cbproj"/>
+    </Target>
+    <Target Name="nm_rr_example:Clean">
+        <MSBuild Projects="..\lib\rr_example\nm_rr_example.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nm_rr_example:Make">
+        <MSBuild Projects="..\lib\rr_example\nm_rr_example.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="tel_nelder_mead">
         <MSBuild Projects="..\tel_nelder_mead.cbproj"/>
     </Target>
@@ -131,14 +146,23 @@
     <Target Name="nm_plugin_example:Make" DependsOnTargets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;tel_nelder_mead:Make;tel_test_model:Make">
         <MSBuild Projects="plugin_example\nm_plugin_example.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="SBMLStudio">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj"/>
+    </Target>
+    <Target Name="SBMLStudio:Clean">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SBMLStudio:Make">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;lmfit-static;tel_add_noise;tel_lm;tel_chisquare;tel_test_model;tel_nelder_mead;nm_plugin_example"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;lmfit-static;tel_add_noise;tel_lm;tel_chisquare;tel_test_model;nm_rr_example;tel_nelder_mead;nm_plugin_example;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;lmfit-static:Clean;tel_add_noise:Clean;tel_lm:Clean;tel_chisquare:Clean;tel_test_model:Clean;tel_nelder_mead:Clean;nm_plugin_example:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;lmfit-static:Clean;tel_add_noise:Clean;tel_lm:Clean;tel_chisquare:Clean;tel_test_model:Clean;nm_rr_example:Clean;tel_nelder_mead:Clean;nm_plugin_example:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;lmfit-static:Make;tel_add_noise:Make;tel_lm:Make;tel_chisquare:Make;tel_test_model:Make;tel_nelder_mead:Make;nm_plugin_example:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;lmfit-static:Make;tel_add_noise:Make;tel_lm:Make;tel_chisquare:Make;tel_test_model:Make;nm_rr_example:Make;tel_nelder_mead:Make;nm_plugin_example:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

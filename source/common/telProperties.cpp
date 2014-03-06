@@ -3,6 +3,7 @@
 #include "libxml/xpath.h"
 #include "telLogger.h"
 #include "telProperties.h"
+#include "telException.h"
 
 namespace tlp
 {
@@ -98,6 +99,23 @@ const PropertyBase* Properties::operator[](const int& i) const
 PropertyBase* Properties::operator[](const int& i)
 {
     return mProperties[i].first;
+}
+
+PropertyBase* Properties::getPropertyAt(int i)
+{
+    if(checkIndex(i))
+    {
+       return mProperties[i].first;
+    }
+    else
+    {
+        throw(Exception("Trying to access non exisiting property"));
+    }
+}
+
+bool Properties::checkIndex(int index)
+{
+    return (index >= 0 && index < mProperties.size()) ? true : false;
 }
 
 u_int Properties::count() const

@@ -85,7 +85,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <Debugger_DebugSourcePath>R:\tlp\source\common\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+        <Debugger_DebugSourcePath>R:\tlp\source\common\;R:\tlp\plugins\beta\nelder_mead\lib\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
         <Defines>POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <FinalOutputDir>$(TLP_INSTALL)\bin</FinalOutputDir>
         <IncludePath>$(TLP_INSTALL)\include;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source;$(TLP_ROOT)\source\common;$(IncludePath)</IncludePath>

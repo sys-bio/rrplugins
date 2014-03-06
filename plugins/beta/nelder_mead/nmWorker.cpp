@@ -13,7 +13,7 @@
 #include "telProperty.h"
 #include "telPluginManager.h"
 #include "nmNelderMead.h"
-
+#include "nmObjectiveFunction.h"
 //---------------------------------------------------------------------------
 using namespace rrc;
 using namespace std;
@@ -21,8 +21,7 @@ using namespace tlp;
 
 nmWorker::nmWorker(NelderMead& host)
 :
-mHost(host),
-mRRI(NULL)
+mHost(host)
 {}
 
 bool nmWorker::isRunning() const
@@ -54,6 +53,8 @@ void nmWorker::run()
 
     setupRoadRunner();
 
+
+
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
     Log(lInfo)<<"The following species are selected: "<<species.AsString();
 
@@ -66,29 +67,31 @@ void nmWorker::run()
 
     mHost.mNrOfIter.setValue(0);
     mHost.mNorm.setValue(0.0);
-    //Some parameters to the Algorithm..
-
-//    //Set defaults from Plugin
-//    control.ftol                    =       *(double*)  mHost.ftol.getValueHandle();
-//    control.xtol                    =       *(double*)  mHost.xtol.getValueHandle();
-//    control.gtol                    =       *(double*)  mHost.gtol.getValueHandle();
-//    control.epsilon                 =       *(double*)  mHost.epsilon.getValueHandle();
-//    control.stepbound               =       *(double*)  mHost.stepbound.getValueHandle();
-//    control.patience                =       *(int*)     mHost.patience.getValueHandle();
-
+    //Parameters for the Algorithm..
 
     //Setup data structures
     setup();
 
-    //This is the library function doing the minimization..
-//    lmmin(  mLMData.nrOfParameters,
-//            mLMData.parameters,
-//            mLMData.nrOfResiduePoints,
-//			(const void*) &mHost,
-//            evaluate,
-//            &control,
-//            &mHost.mLMStatus);
 
+    Properties* paras = (Properties*) mHost.mInputParameterList.getValueHandle();
+    int nrOfParameters = paras->count();
+
+    double* intialParameters = new double[nrOfParameters];
+
+    for(int i =0; i < nrOfParameters; i++)
+    {
+        intialParameters[i] = * (double*) paras->getPropertyAt(i)->getValueHandle();
+    }
+
+    //Execute minimizer
+    double min = simplex2(  NelderMeadObjectiveFunction,
+                            &mHost,
+                            intialParameters,
+                            nrOfParameters,
+                            mHost.mEpsilon,
+                            mHost.mScale,
+                            NULL
+                            );//my_constraints);
 
     //The user may have aborted the minization... check here..
     if(mHost.mTerminate)
@@ -101,21 +104,39 @@ void nmWorker::run()
     }
 
     //Post fitting data calculations
-//    Log(lInfo)<<"==================== Fitting Result ================================";
-//    Log(lInfo)<<"Nr of function evaluations: "  <<  mHost.mLMStatus.nfev;
+    Log(lInfo)<<"==================== Fitting Result ================================";
+    Log(lInfo)<<"Nr of function evaluations: "  <<  mHost.mNrOfIter;
 //    Log(lInfo)<<"Status message: "              <<  lm_infmsg[mHost.mLMStatus.outcome];
-//    Log(lInfo)<<"Minimized parameter values: ";
-//
+    Log(lInfo)<<"Minimized parameter values: ";
+
 //    mHost.mStatusMessage.setValueFromString(lm_infmsg[mHost.mLMStatus.outcome]);
 //
-//    for (int i = 0; i < mLMData.nrOfParameters; ++i)
+//    for (int i = 0; i < mHost.nrOfParameters; ++i)
 //    {
 //        Log(lInfo)<<"Parameter "<<mLMData.parameterLabels[i]<<" = "<< mLMData.parameters[i];
 //    }
-//
-//    Log(lInfo)<<"Norm:  "<<mHost.mLMStatus.fnorm;
-//    postFittingWork();
+
+    Log(lInfo)<<"Norm:  "<<mHost.mNorm;
+    postFittingWork();
     workerFinished();
+}
+
+bool nmWorker::setup()
+{
+
+}
+
+bool nmWorker::setupRoadRunner()
+{
+    if(mHost.mRRI)
+    {
+        delete mHost.mRRI;
+    }
+
+    mHost.mRRI = new RoadRunner;
+    mHost.mRRI->load(mHost.mSBML.getValue());
+    mHost.mRRI->setSelections(mHost.getExperimentalDataSelectionList());
+    return true;
 }
 
 void nmWorker::postFittingWork()
@@ -212,12 +233,12 @@ double nmWorker::getChi(const Properties& parameters)
 {
     Log(lDebug)<<"Getting chisquare using parameters: "<<parameters;
     //Reset RoadRunner
-    reset(mRRI);
+    reset(mHost.mRRI);
 
     for(int i = 0; i < parameters.count(); i++)
     {
         Property<double> *para = (Property<double>*) (parameters[i]);
-        mRRI->setValue(para->getName(), para->getValue());
+        mHost.mRRI->setValue(para->getName(), para->getValue());
     }
 
     rr::SimulateOptions options;
@@ -340,21 +361,6 @@ void nmWorker::calculateCovariance()
     mHost.mCovarianceMatrix.setValue(temp2);
 }
 
-void nmWorker::calculateConfidenceLimits()
-{
-    Properties& parameters = mHost.mOutputParameterList.getValueReference();
-
-    Properties& conf = mHost.mConfidenceLimits.getValueReference();
-    conf.clear();
-
-    DoubleMatrix mat = mHost.mCovarianceMatrix.getValue();
-    double chiReduced = mHost.mReducedChiSquare.getValue();
-//    for (int i = 0; i < mLMData.nrOfParameters; ++i)
-//    {
-//        double delta = 1.96*sqrt(mat(i,i) * chiReduced);
-//        conf.add(new Property<double>(delta, mLMData.parameterLabels[i] + string("_confidence"), ""), true);
-//    }
-}
 
 void nmWorker::workerStarted()
 {
@@ -372,216 +378,6 @@ void nmWorker::workerFinished()
     {
         mHost.mWorkFinishedEvent(mHost.mWorkFinishedData1, mHost.mWorkFinishedData2);
     }
-}
-
-bool nmWorker::setup()
-{
-    StringList& species         = mHost.mExperimentalDataSelectionList.getValueReference();   //Model data selection..
-//    mLMData.nrOfSpecies         = species.Count();
-//    Properties parameters       = mHost.mInputParameterList.getValue();
-//    mLMData.nrOfParameters      = parameters.count();
-//    mLMData.parameters          = new double[mLMData.nrOfParameters];
-//    mLMData.mLMPlugin           = static_cast<TELHandle> (&mHost);
-//
-//    //Setup initial parameter values
-//    for(int i = 0; i < mLMData.nrOfParameters; i++)
-//    {
-//        Property<double> *par = (Property<double>*) parameters[i];
-//        if(par)
-//        {
-//            mLMData.parameters[i] = par->getValue();
-//        }
-//        else
-//        {
-//            throw("Bad stuff..");
-//        }
-//    }
-//
-//    //Patience is max number of iterations
-//    mHost.rNormsData.reSize(mHost.patience.getValue() * (mLMData.nrOfParameters + 1), 1);
-//
-//    TelluriumData& obsData             = (mHost.mExperimentalData.getValueReference());
-//    mLMData.nrOfTimePoints              = obsData.rSize();
-//    mLMData.timeStart                   = obsData.getTimeStart();
-//    mLMData.timeEnd                     = obsData.getTimeEnd();
-//    mLMData.nrOfResiduePoints           = mLMData.nrOfSpecies * mLMData.nrOfTimePoints;
-//    mLMData.time                        = new double[mLMData.nrOfTimePoints];
-//
-//    mLMData.experimentalData            = new double*[mLMData.nrOfSpecies];
-//
-//    if(obsData.hasWeights())
-//    {
-//        mLMData.experimentalDataWeights = new double*[mLMData.nrOfSpecies];
-//    }
-//
-//    mLMData.speciesLabels               = new char*[mLMData.nrOfSpecies];
-//
-//    //Each species data points and label
-//    for (int i = 0; i < mLMData.nrOfSpecies; i++)
-//    {
-//        mLMData.experimentalData[i]     = new double[mLMData.nrOfTimePoints];
-//        mLMData.speciesLabels[i]        = createText(species[i]);
-//
-//        if(obsData.hasWeights())
-//        {
-//            mLMData.experimentalDataWeights[i] = new double[mLMData.nrOfTimePoints];
-//        }
-//    }
-//
-//    //Populate Experimental Data
-//    for (int i = 0; i < mLMData.nrOfSpecies; i++)
-//    {
-//        for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
-//        {
-//            if(i == 0)
-//            {
-//                mLMData.time[timePoint] = obsData(timePoint, 0);
-//            }
-//            mLMData.experimentalData[i][timePoint] = obsData(timePoint, i + 1);
-//        }
-//    }
-//
-//    //Populate weights..
-//    if(obsData.hasWeights())
-//    {
-//        for (int i = 0; i < mLMData.nrOfSpecies; i++)
-//        {
-//            for(int timePoint = 0; timePoint < mLMData.nrOfTimePoints; timePoint++)
-//            {
-//                mLMData.experimentalDataWeights[i][timePoint] = obsData.getWeight(timePoint, i + 1);
-//            }
-//        }
-//    }
-//
-//    mLMData.parameterLabels           = new char*[mLMData.nrOfParameters];
-//    for (int i = 0; i < mLMData.nrOfParameters; i++)
-//    {
-//        mLMData.parameterLabels[i]     = createText(parameters[i]->getName());
-//    }
-//
-//    mLMData.rrHandle                = mRRI;
-//    mRRI->setSelections(species);
-//
-//    mLMData.mProgressEvent               = mHost.mWorkProgressEvent;
-//    mLMData.mProgressEventContextData    = mHost.mWorkProgressData1;
-//
-//    return true;
-}
-
-bool nmWorker::setupRoadRunner()
-{
-    if(mRRI)
-    {
-        delete mRRI;
-    }
-
-    mRRI = new RoadRunner;
-    mRRI->load(mHost.mSBML.getValue());
-    mRRI->setSelections(mHost.getExperimentalDataSelectionList());
-    return true;
-}
-
-/* function evaluation, determination of residues */
-void evaluate(const double *par,       //Property vector
-              int           m_dat,      //Dimension of residue vector
-              const void   *userData,  //Data structure
-              double       *fvec,      //residue vector..
-              int          *userBreak  //Non zero value means termination
-)
-{
-//    const NelderMead *thePlugin = (const NelderMead*) userData;
-//    NelderMead* plugin = const_cast<NelderMead*>(thePlugin);
-//	const lmDataStructure* myData = &(thePlugin->mLMData);
-//
-//    //Check if user have asked for termination..
-//    if(thePlugin->isBeingTerminated())
-//    {
-//        (*userBreak) = -1; //This signals lmfit algorithm to break
-//        return;
-//    }
-//
-//    //Reset RoadRunner
-//    reset(myData->rrHandle);
-//
-//    for(int i = 0; i < myData->nrOfParameters; i++)
-//    {
-//        setValue(myData->rrHandle, myData->parameterLabels[i], par[i]);
-//        Log(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
-//    }
-//
-//    rrc::RRDataHandle rrData = NULL;
-//    rrData = simulateEx(   myData->rrHandle,
-//                                myData->timeStart,
-//                                myData->timeEnd,
-//                                myData->nrOfTimePoints);
-//    if(!rrData)
-//    {
-//        stringstream msg;
-//        msg << "NULL data returned from RoadRunner simulateEx() function.";
-//        char* lastError = getLastError();
-//
-//        if(lastError)
-//        {
-//            msg << "\nLast error was: "<<lastError;
-//        }
-//
-//        Log(lError)<<msg.str();
-//        rrc::freeText(lastError);
-//        return;
-//    }
-//
-//    //Don't create RRC data, use rrData directly here
-//    RRCDataPtr rrcData = createRRCData(rrData);
-//    //calculate fvec for each specie
-//    int count = 0;
-//    for(int i = 0; i < myData->nrOfSpecies; i++)
-//    {
-//        fvec[count] = 0;
-//        for(int j = 0; j < myData->nrOfTimePoints; j++ )
-//        {
-//            double modelValue;
-//            if(!rrc::getRRCDataElement(rrcData, j, i, &modelValue))
-//            {
-//                throw("Bad stuff...") ;
-//            }
-//
-//            if(!isNaN(myData->experimentalData[i][j]))
-//            {
-//                fvec[count] = myData->experimentalData[i][j] - modelValue;
-//
-//                if(myData->experimentalDataWeights != NULL)
-//                {
-//                    if(myData->experimentalDataWeights[i][j] != 0) //Cause the first column is time... :( loks ugly
-//                    {
-//                        double weight =  myData->experimentalDataWeights[i][j];
-//                        fvec[count] = fvec[count] / weight;
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                fvec[count] = 0;
-//            }
-//            count++;
-//        }
-//    }
-//
-//    freeRRCData(rrcData);
-//
-//    if(plugin->hasProgressEvent())
-//    {
-//        //Assign data relevant to the progress
-//        double norm = lm_enorm(m_dat, fvec);
-//        plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
-//        plugin->mNorm.setValue(norm);
-//
-//        //Add norm to Norms property
-//        plugin->rNormsData(plugin->mNrOfIter.getValue() -1, 0) = plugin->mNorm.getValue();
-//
-//        //Pass trough event data
-//        pair<void*, void*> passTroughData = plugin->getWorkProgressData();
-//        plugin->WorkProgressEvent(passTroughData.first, passTroughData.second);
-//    }
 }
 
 void nmWorker::createModelData(TelluriumData* _data)
@@ -651,3 +447,20 @@ void nmWorker::createResidualsData(TelluriumData* _data)
 //        }
 //    }
 }
+
+void nmWorker::calculateConfidenceLimits()
+{
+    Properties& parameters = mHost.mOutputParameterList.getValueReference();
+
+    Properties& conf = mHost.mConfidenceLimits.getValueReference();
+    conf.clear();
+
+    DoubleMatrix mat = mHost.mCovarianceMatrix.getValue();
+    double chiReduced = mHost.mReducedChiSquare.getValue();
+//    for (int i = 0; i < mLMData.nrOfParameters; ++i)
+//    {
+//        double delta = 1.96*sqrt(mat(i,i) * chiReduced);
+//        conf.add(new Property<double>(delta, mLMData.parameterLabels[i] + string("_confidence"), ""), true);
+//    }
+}
+
