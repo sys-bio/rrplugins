@@ -1025,6 +1025,7 @@ def setTelluriumDataProperty(propertyHandle, value):
 ## \param propertyHandle A Handle to a property
 ## \return Returns the value of the property if succesful, None otherwise
 ## \ingroup plugin_properties
+## \todo rename to getPropertyValue (?)
 def getProperty(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if paraType == 'bool':

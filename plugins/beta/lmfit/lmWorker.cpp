@@ -332,7 +332,6 @@ void lmWorker::calculateHessian()
     mTheHost.mHessian.setValue(mat);
 }
 
-
 void lmWorker::calculateCovariance()
 {
     //Check if Hessain is invertible

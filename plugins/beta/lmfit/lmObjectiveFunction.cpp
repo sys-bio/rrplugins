@@ -2,6 +2,7 @@
 #include "lmObjectiveFunction.h"
 #include "rr/rrRoadRunner.h"
 #include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert and use the CPP api directly
+#include "telMathUtils.h"
 #include "lm.h"
 
 using namespace std;
@@ -39,9 +40,9 @@ void lmObjectiveFunction(const double *par,       //Property vector
 
     rrc::RRDataHandle rrData = NULL;
     rrData = simulateEx(   myData->rrHandle,
-                                myData->timeStart,
-                                myData->timeEnd,
-                                myData->nrOfTimePoints);
+                           myData->timeStart,
+                           myData->timeEnd,
+                           myData->nrOfTimePoints);
     if(!rrData)
     {
         stringstream msg;
@@ -62,6 +63,7 @@ void lmObjectiveFunction(const double *par,       //Property vector
     RRCDataPtr rrcData = createRRCData(rrData);
     //calculate fvec for each specie
     int count = 0;
+    vector<double> residuals(myData->nrOfSpecies *  myData->nrOfTimePoints);
     for(int i = 0; i < myData->nrOfSpecies; i++)
     {
         fvec[count] = 0;
@@ -76,7 +78,9 @@ void lmObjectiveFunction(const double *par,       //Property vector
             if(!isNaN(myData->experimentalData[i][j]))
             {
                 fvec[count] = myData->experimentalData[i][j] - modelValue;
+                residuals[count] = fvec[count];
 
+                //If data points are weighted, weigh fvec data points
                 if(myData->experimentalDataWeights != NULL)
                 {
                     if(myData->experimentalDataWeights[i][j] != 0) //Cause the first column is time... :( loks ugly
@@ -97,8 +101,8 @@ void lmObjectiveFunction(const double *par,       //Property vector
     freeRRCData(rrcData);
 
     //Assign data relevant to the progress
-    double norm = lm_enorm(m_dat, fvec);
     plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
+    double norm = getEuclideanNorm(residuals);
     plugin->mNorm.setValue(norm);
 
     //Add norm to Norms property
