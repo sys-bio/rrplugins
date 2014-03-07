@@ -2,13 +2,13 @@ import roadrunner
 from telplugins import *
 
 try:
-    #Get a sbml model from the sbml_model plugin
-    modelPlugin= Plugin("tel_sbml_model")        
-    sbml_model = modelPlugin.Model
+    #Get a sbml model from the test_model plugin
+    modelPlugin= Plugin("tel_test_model")        
+    test_model = modelPlugin.Model
 
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model) 
+    rr.load(test_model) 
     
     rr.setValue("k1", .57)   
     rr.reset()   

@@ -10,12 +10,12 @@ try:
     chiPlugin   = tel.Plugin("tel_chisquare")
     
     #Retrieve a SBML model from plugin        
-    modelPlugin= tel.Plugin("tel_sbml_model")        
-    sbml_model = modelPlugin.Model
+    modelPlugin= tel.Plugin("tel_test_model")        
+    test_model = modelPlugin.Model
 
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
+    rr.load(test_model)
     data = rr.simulate(0, 10, 15000) # Want 512 points
 
     #Add noise to the data
@@ -40,7 +40,7 @@ try:
     experimentalData = tel.DataSeries.readDataSeries (fName)
 
     lmPlugin.ExperimentalData = experimentalData;
-    lmPlugin.SBML = sbml_model
+    lmPlugin.SBML = test_model
 
     # Add the parameters that we're going to fit and the initial value
     lmPlugin.InputParameterList = ["k1", .1]

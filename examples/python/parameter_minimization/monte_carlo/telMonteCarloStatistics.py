@@ -9,7 +9,7 @@ def myEventFunction(ignore):
 
 try:    
     #Load some plugins        
-    modelP      = Plugin("tel_sbml_model")
+    modelP      = Plugin("tel_test_model")
     chiP        = Plugin("tel_chisquare")
     lmP         = Plugin("tel_lm")
     mcP         = Plugin("tel_monte_carlo_bs") 

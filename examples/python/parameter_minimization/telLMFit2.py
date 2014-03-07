@@ -9,14 +9,14 @@ try:
         print 'Iteration, Norm = ' + `lmObject.getProperty("NrOfIter")` + ',' + `lmObject.getProperty("Norm")` #Retrieve plugin parameters
 
     #Retrieve a SBML model from plugin        
-    modelPlugin= tel.Plugin("tel_sbml_model")        
-    sbml_model = modelPlugin.Model
+    modelPlugin= tel.Plugin("tel_test_model")        
+    test_model = modelPlugin.Model
 
     chiPlugin   = tel.Plugin("tel_chisquare")        
     lm          = tel.Plugin("tel_lm")
     experimentalData = tel.DataSeries.readDataSeries ("testData.dat")   
     lm.ExperimentalData = experimentalData;
-    lm.SBML = sbml_model
+    lm.SBML = test_model
     
     # Add the parameters that we're going to fit and the initial value
     lm.InputParameterList = ["k1", 0.2]   

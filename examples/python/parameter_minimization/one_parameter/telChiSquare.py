@@ -12,12 +12,12 @@ try:
     #This does not look right..
     expData = expData.readDataSeries('ExperimentalData.dat')   
         
-    modelPlugin = Plugin("tel_sbml_model")   
-    sbml_model  = modelPlugin.Model
+    modelPlugin = Plugin("tel_test_model")   
+    test_model  = modelPlugin.Model
     
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
+    rr.load(test_model)
     rr.setValue('k1', 0.3)
     data = rr.simulate(0, 10, 49) 
 

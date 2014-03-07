@@ -22,11 +22,11 @@ try:
     #This does not look right.. but it works..
     expData = expData.readDataSeries('ExperimentalData.dat')   
             
-    sbml_model = 'two_parameters.xml'            
+    test_model = 'two_parameters.xml'            
 
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
+    rr.load(test_model)
 
     #Get chi square plugin and set it up
     chiSquare =  tel.Plugin("tel_chisquare")    

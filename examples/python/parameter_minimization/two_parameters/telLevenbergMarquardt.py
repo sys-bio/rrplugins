@@ -23,10 +23,10 @@ try:
     #============================================================
     #Retrieve a SBML model from plugin        
         
-    sbml_model = tel.readAllText('two_parameters.xml')
+    test_model = tel.readAllText('two_parameters.xml')
     
     #Setup lmfit properties.
-    lm.SBML = sbml_model
+    lm.SBML = test_model
     experimentalData = tel.DataSeries.readDataSeries ('ExperimentalData.dat')
     lm.ExperimentalData = experimentalData
     
@@ -41,11 +41,11 @@ try:
     lm.execute()
         
     hessian = lm.getProperty("Hessian")        
-    print hessian
+    print 'Hessian: \n' + `hessian`
     
     cov = lm.getProperty("CovarianceMatrix")        
-    print cov
-
+    print 'CovarianceMatrix: \n' + `cov`
+            
     print 'Minimization finished. \n==== Result ====' 
     print tel.getPluginResult(lm.plugin)
     

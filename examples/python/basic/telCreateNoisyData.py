@@ -2,12 +2,12 @@ import roadrunner
 import telplugins as tel
 
 try:
-    modelPlugin= tel.Plugin("tel_sbml_model")        
-    sbml_model = modelPlugin.Model
+    modelPlugin= tel.Plugin("tel_test_model")        
+    test_model = modelPlugin.Model
     
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)   
+    rr.load(test_model)   
     rr.setValue("k1", 2.45) 
     data = rr.simulate(0, 10, 15)
 

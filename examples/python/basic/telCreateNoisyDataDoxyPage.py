@@ -8,12 +8,12 @@ print noisePlugin.hint()
 print noisePlugin.description()
 
 print noisePlugin.listOfProperties()
-modelPlugin= tel.Plugin("tel_sbml_model")        
-sbml_model = modelPlugin.Model
+modelPlugin= tel.Plugin("tel_test_model")        
+test_model = modelPlugin.Model
 
 # Create a roadrunner instance
 rr = roadrunner.RoadRunner()
-rr.load(sbml_model)
+rr.load(test_model)
 
 # Generate data
 data = rr.simulate(0, 10, 511) # Want 512 points

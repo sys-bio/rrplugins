@@ -24,10 +24,10 @@ try:
     #============================================================
     #Retrieve a SBML model from plugin        
     modelPlugin= tel.Plugin("tel_test_model")        
-    sbml_model = modelPlugin.Model
+    test_model = modelPlugin.Model
     
     #Setup nmfit properties.
-    nm.SBML = sbml_model
+    nm.SBML = test_model
     experimentalData = tel.DataSeries.readDataSeries ("testData.dat")
     nm.ExperimentalData = experimentalData
     

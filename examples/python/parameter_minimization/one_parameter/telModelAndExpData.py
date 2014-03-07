@@ -9,10 +9,10 @@ try:
     nrPoints = 15         
     k = 0.57
 
-    modelPlugin = Plugin("tel_sbml_model")   
-    sbml_model  = modelPlugin.Model    
+    modelPlugin = Plugin("tel_test_model")   
+    test_model  = modelPlugin.Model    
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
+    rr.load(test_model)
     
     data = rr.simulate(timeStart, timeEnd, nrPoints -1)
     noisePlugin = Plugin ("tel_add_noise")    

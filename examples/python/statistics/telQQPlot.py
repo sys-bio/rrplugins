@@ -9,7 +9,7 @@ try:
     chiPlugin   = tel.Plugin("tel_chisquare")
 
     #Retrieve a SBML model from plugin        
-    modelPlugin= tel.Plugin("tel_sbml_model")        
+    modelPlugin= tel.Plugin("tel_test_model")        
     sbmlModel= modelPlugin.Model   
 
     # Create a roadrunner instance and create some data

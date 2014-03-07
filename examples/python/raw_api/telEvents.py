@@ -25,7 +25,7 @@ try:
     rr = roadrunner.RoadRunner()
 
     #Retrieve a SBML model from plugin        
-    modelPlugin = Plugin("tel_sbml_model")        
+    modelPlugin = Plugin("tel_test_model")        
     sbmlModel= modelPlugin.Model   
     
     #Check if model file exists

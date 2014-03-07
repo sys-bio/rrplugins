@@ -3,7 +3,7 @@ from telplugins import *
 
 try:
     # Create a roadrunner instance and create some data
-    modelPlugin = Plugin("tel_sbml_model")     
+    modelPlugin = Plugin("tel_test_model")     
     
     rr = roadrunner.RoadRunner()
     rr.load(modelPlugin.Model) 

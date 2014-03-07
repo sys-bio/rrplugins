@@ -14,11 +14,11 @@ try:
     expData = expData.readDataSeries('ExperimentalData.dat')   
         
     #Get a model               
-    sbml_model = 'two_parameters.xml'
+    test_model = 'two_parameters.xml'
     
     # Create a roadrunner instance and create some MODEL data
     rr = roadrunner.RoadRunner()
-    rr.load(sbml_model)
+    rr.load(test_model)
     
     #Simulate using the same numbers as in the 'Experimental data
     x = np.array([])
