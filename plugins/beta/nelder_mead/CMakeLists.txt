@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_lm)
+set(target tel_nelder_mead)
 
 include_directories(
 ../source
@@ -15,14 +15,13 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-lm
-lmWorker
-lmUtils
-lmfit_doc
+nelder_mead_doc
+nmWorker
+nmUtils
+nmObjectiveFunction
+nmNelderMead
+lib/nmsimplex2
 )
-
-#This is where the Levenberg C lib is built
-add_subdirectory(lib)
 
 add_definitions(
 -DPOCO_STATIC

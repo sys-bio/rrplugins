@@ -18,6 +18,7 @@ set(sources
 lm
 lmWorker
 lmUtils
+lmObjectiveFunction
 lmfit_doc
 )
 

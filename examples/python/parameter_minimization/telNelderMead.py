@@ -1,52 +1,53 @@
 import ctypes
 import telplugins as tel
 
-#Get a lmfit plugin object
+#Get a nmfit plugin object
 chiPlugin   = tel.Plugin("tel_chisquare")
-lm          = tel.Plugin("tel_lm")
+nm          = tel.Plugin("tel_nelder_mead")
 
 #========== EVENT FUNCTION SETUP ===========================
-def pluginIsProgressing(lmP):
+def pluginIsProgressing(nmP):
     # The plugin don't know what a python object is.
     # We need to cast it here, to a proper python object
-    lmObject = ctypes.cast(lmP, ctypes.py_object).value
-    print 'Iterations = ' + `lmObject.getProperty("NrOfIter")` \
-        + '\tNorm = ' + `lmObject.getProperty("Norm")`
+    nmObject = ctypes.cast(nmP, ctypes.py_object).value
+    print 'Iterations = ' + `nmObject.getProperty("NrOfIter")` \
+                + 'FuncIterations = ' + `nmObject.getProperty("NrOfFuncIter")` \
+                + '\tNorm = ' + `nmObject.getProperty("Norm")`
 
 try:   
     progressEvent =  tel.NotifyEventEx(pluginIsProgressing)
     
     #The ID of the plugin is passed as the last argument in the assignOnProgressEvent. 
     #The plugin ID is later on retrieved in the plugin Event handler, see above
-    theId = id(lm)
-    tel.assignOnProgressEvent(lm.plugin, progressEvent, theId)
+    theId = id(nm)
+    tel.assignOnProgressEvent(nm.plugin, progressEvent, theId)
     #============================================================
     #Retrieve a SBML model from plugin        
     modelPlugin= tel.Plugin("tel_test_model")        
     sbml_model = modelPlugin.Model
     
-    #Setup lmfit properties.
-    lm.SBML = sbml_model
+    #Setup nmfit properties.
+    nm.SBML = sbml_model
     experimentalData = tel.DataSeries.readDataSeries ("testData.dat")
-    lm.ExperimentalData = experimentalData
+    nm.ExperimentalData = experimentalData
     
     # Add the parameters that we're going to fit and a initial 'start' value
-    lm.setProperty("InputParameterList", ["k1", .3])
-    lm.setProperty("FittedDataSelectionList", "[S1] [S2]")
-    lm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
+    nm.setProperty("InputParameterList", ["k1", .03])
+    nm.setProperty("FittedDataSelectionList", "[S1] [S2]")
+    nm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
     
     # Start minimization
-    lm.execute()
+    nm.execute()
     
     print 'Minimization finished. \n==== Result ====' 
-    print tel.getPluginResult(lm.plugin)
+    print tel.getPluginResult(nm.plugin)
     
     # Get the experimental data as a numpy array
     experimentalData = experimentalData.toNumpy
     
     # Get the fitted and residual data
-    fittedData = lm.getProperty ("FittedData").toNumpy
-    residuals  = lm.getProperty ("Residuals").toNumpy
+    fittedData = nm.getProperty ("FittedData").toNumpy
+    residuals  = nm.getProperty ("Residuals").toNumpy
     
     tel.telplugins.plot(fittedData         [:,[0,1]], "blue", "-",    "",    "S1 Fitted")
     tel.telplugins.plot(fittedData         [:,[0,2]], "blue", "-",    "",    "S2 Fitted")

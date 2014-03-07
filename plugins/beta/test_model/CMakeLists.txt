@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_sbml_model)
+set(target tel_test_model)
 
 set(sources
-SBMLModel
-sbml_model_doc
+TestModel
+test_model_doc
 )
 
 add_library(${target} MODULE ${sources})
@@ -43,7 +43,6 @@ COMPONENT plugins
 )
 
 install(FILES
-sbml_test_0001.xml
 DESTINATION plugins
 )
 

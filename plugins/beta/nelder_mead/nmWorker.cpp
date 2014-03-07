@@ -381,8 +381,8 @@ void nmWorker::createModelData(TelluriumData* _data)
     TelluriumData& data = *(_data);
     TelluriumData* expData = (TelluriumData*) mHost.mExperimentalData.getValueHandle();
 
-    Properties& inParas =  * (Properties*) mHost.mInputParameterList.getValueHandle();
-    int nrOfParameters = inParas.count();
+    Properties& outParas =  * (Properties*) mHost.mOutputParameterList.getValueHandle();
+    int nrOfParameters = outParas.count();
 
     //We now have the parameters
     StringList selList("time");
@@ -394,7 +394,7 @@ void nmWorker::createModelData(TelluriumData* _data)
 
     for(int i = 0; i < nrOfParameters; i++)
     {
-        mHost.mRRI->setValue(inParas[i]->getName(),  * (double*) inParas[i]->getValueHandle());
+        mHost.mRRI->setValue(outParas[i]->getName(),  * (double*) outParas[i]->getValueHandle());
     }
 
     rr::SimulateOptions options;
