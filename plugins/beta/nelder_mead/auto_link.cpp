@@ -20,7 +20,6 @@
 //#endif
 
 #pragma comment(lib, "rr-libstruct-static.lib")
-#pragma comment(lib, "nelder_mead-static.lib")
 #pragma comment(lib, "poco_foundation-static.lib")
 
 #pragma comment(lib, "blas.lib")

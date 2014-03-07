@@ -50,8 +50,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <IncludePath>..\lmfit\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\lmfit\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>lib\;..\lmfit\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>lib\;..\lmfit\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
         <Defines>LIBSBML_USE_CPP_NAMESPACE;CG_UI;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
@@ -125,6 +125,9 @@
     <ItemGroup>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="lib\nmsimplex2.cpp">
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="nelder_mead_doc.cpp">
             <BuildOrder>4</BuildOrder>

@@ -34,6 +34,7 @@ int main()
         {
             throw(Exception("Test Model plugin is NULL!"));
         }
+
         test_model->execute();
 
         TelluriumData model(        (TelluriumData*) test_model->getPropertyValueHandle("SimulatedData"));
@@ -91,7 +92,7 @@ void onProgress(void* data1, void* data2)
 {
     Plugin* NMP = (Plugin*) data1;
 
-    Log(lInfo) <<"Iteration, NORM: "<<NMP->getPropertyValueAsString("NrOfIter")<<", "<<NMP->getPropertyValueAsString("Norm");
+    Log(lInfo) <<"Iteration, FuncIter, NORM: "<<NMP->getPropertyValueAsString("NrOfIter")<<", "<<NMP->getPropertyValueAsString("NrOfFuncIter")<<", "<<NMP->getPropertyValueAsString("Norm");
 }
 
 void onFinished(void* data1, void* data2)

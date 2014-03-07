@@ -99,6 +99,9 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\nmsimplex2.cpp">
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>

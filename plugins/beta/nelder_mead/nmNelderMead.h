@@ -28,6 +28,7 @@ class NelderMead : public CPPPlugin
         Property<tlp::StringList>               mExperimentalDataSelectionList; //Species selection list for observed data
         Property<tlp::StringList>               mModelDataSelectionList;        //Species selection list for observed data
         Property<int>                           mNrOfIter;                      //Part of minimization result
+        Property<int>                           mNrOfFuncIter;                  //Part of minimization result
 
         //Nelder-Mead tuning parameters
         Property<double>                        mEpsilon;
@@ -52,6 +53,7 @@ class NelderMead : public CPPPlugin
         Property< ls::Matrix<double> >          mHessian;                       //Hessian
         Property< ls::Matrix<double> >          mCovarianceMatrix;              //Covariance Matrix
 
+         vector<double>                          mTheNorms;              //For effiency
 		//Utility functions for the thread
         string                                  getTempFolder();
         string                                  getSBML();

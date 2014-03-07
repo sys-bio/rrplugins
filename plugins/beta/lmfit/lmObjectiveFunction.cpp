@@ -96,16 +96,16 @@ void lmObjectiveFunction(const double *par,       //Property vector
 
     freeRRCData(rrcData);
 
+    //Assign data relevant to the progress
+    double norm = lm_enorm(m_dat, fvec);
+    plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
+    plugin->mNorm.setValue(norm);
+
+    //Add norm to Norms property
+    plugin->rNormsData(plugin->mNrOfIter.getValue() -1, 0) = plugin->mNorm.getValue();
+
     if(plugin->hasProgressEvent())
     {
-        //Assign data relevant to the progress
-        double norm = lm_enorm(m_dat, fvec);
-        plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
-        plugin->mNorm.setValue(norm);
-
-        //Add norm to Norms property
-        plugin->rNormsData(plugin->mNrOfIter.getValue() -1, 0) = plugin->mNorm.getValue();
-
         //Pass trough event data
         pair<void*, void*> passTroughData = plugin->getWorkProgressData();
         plugin->WorkProgressEvent(passTroughData.first, passTroughData.second);

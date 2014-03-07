@@ -28,7 +28,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- * Jan. 6, 1999 
+ * Jan. 6, 1999
  * Modified to conform to the algorithm presented
  * in Margaret H. Wright's paper on Direct Search Methods.
  *
@@ -47,11 +47,27 @@
 */
 #include <iostream>
 #include "nmsimplex.h"
+#include "../nmNelderMead.h"
+
 using std::cerr;
 using std::clog;
 
-double simplex2(double (*evaluate)(double[], const void* userData), const void* userData, double start[],int n, double EPSILON, double scale, void (*constrain)(double[],int n))
+double simplex2(
+double (*evaluate)(double[], const void* userData),
+const void* userData,
+double start[],
+int n,
+double epsilon,
+double scale,
+void (*constrain)(double[],int n),
+int maxIterations,
+double alpha,
+double beta,
+double gamma
+)
 {
+    NelderMead&         plugin      = *((NelderMead*) userData);
+
 	int vs;         /* vertex with smallest value */
 	int vh;         /* vertex with next smallest value */
 	int vg;         /* vertex with largest value */
@@ -139,8 +155,11 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 //	}
 
 	/* begin the main loop of the minimization */
-	for(itr = 1; itr <= MAX_IT; itr++)
+	for(itr = 1; itr <= maxIterations; itr++)
     {
+        //Assign data relevant to the progress
+        plugin.mNrOfIter.setValue(plugin.mNrOfIter.getValue() + 1);
+
 		/* find the index of the largest value */
 		vg = 0;
 		for(j = 0; j <= n; j++)
@@ -189,7 +208,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 		for(j = 0; j <= n-1; j++)
         {
 			/*vr[j] = (1+ALPHA)*vm[j] - ALPHA*v[vg][j];*/
-			vr[j] = vm[j]+ALPHA*(vm[j]-v[vg][j]);
+			vr[j] = vm[j]+alpha*(vm[j]-v[vg][j]);
 		}
 
 		if (constrain != NULL)
@@ -216,7 +235,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 			for(j = 0; j <= n-1; j++)
             {
 				/*ve[j] = GAMMA*vr[j] + (1-GAMMA)*vm[j];*/
-				ve[j] = vm[j]+GAMMA*(vr[j]-vm[j]);
+				ve[j] = vm[j]+gamma*(vr[j]-vm[j]);
 			}
 
 			if (constrain != NULL)
@@ -260,7 +279,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 				for(j = 0; j <= n-1; j++)
                 {
 					/*vc[j] = BETA*v[vg][j] + (1-BETA)*vm[j];*/
-					vc[j] = vm[j]+BETA*(vr[j]-vm[j]);
+					vc[j] = vm[j]+beta*(vr[j]-vm[j]);
 				}
 
 				if (constrain != NULL)
@@ -277,7 +296,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 				for(j = 0; j <= n-1; j++)
                 {
 					/*vc[j] = BETA*v[vg][j] + (1-BETA)*vm[j];*/
-					vc[j] = vm[j]-BETA*(vm[j]-v[vg][j]);
+					vc[j] = vm[j]-beta*(vm[j]-v[vg][j]);
 				}
 
 				if (constrain != NULL)
@@ -361,7 +380,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 
 		s = sqrt(s);
 
-		if (s < EPSILON)
+		if (s < epsilon)
         {
             break;
         }

@@ -31,6 +31,7 @@ mModelDataSelectionList(        StringList(),           "FittedDataSelectionList
 mNorm(                          0,                      "Norm",                                 "Norm of fitting. An estimate of goodness of fit"),
 mNorms(                         TelluriumData(),        "Norms",                                "Norms from fitting session.", "", "", true),
 mNrOfIter(                      0,                      "NrOfIter",                             "Number of iterations"),
+mNrOfFuncIter(                  0,                      "NrOfFuncIter",                         "Number of objective function iterations"),
 
 mStandardizedResiduals(         TelluriumData(),        "StandardizedResiduals",                "Standarized residuals.", "", "", true),
 mNormalProbabilityOfResiduals(  TelluriumData(),        "NormalProbabilityOfResiduals",         "Normal Probability of Residuals.", "", "", true),
@@ -65,6 +66,7 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mNorm);
     mProperties.add(&mNorms);
     mProperties.add(&mNrOfIter);
+    mProperties.add(&mNrOfFuncIter);
     mProperties.add(&mStandardizedResiduals);
     mProperties.add(&mNormalProbabilityOfResiduals);
     mProperties.add(&mChiSquare);

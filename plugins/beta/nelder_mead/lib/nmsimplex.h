@@ -41,15 +41,17 @@
     #include <malloc.h>
 #endif
 
-#define MAX_IT      1000      /* maximum number of iterations */
-#define ALPHA       1.0       /* reflection coefficient */
-#define BETA        0.5       /* contraction coefficient */
-#define GAMMA       2.0       /* expansion coefficient */
 
 void my_constraints(double x[], int n);
 
-
-double simplex(double (*objfunc)(double[]), double start[],int n, double EPSILON, double scale, void (*constrain)(double[],int n));
+double simplex(
+    double (*objfunc)(double[]),
+    double start[],
+    int n,
+    double EPSILON,
+    double scale,
+    void (*constrain)(double[],int n)
+);
 
 double simplex2(
     double (*evaluate)(double[], const void* userData),
@@ -58,7 +60,10 @@ double simplex2(
     int n,
     double EPSILON,
     double scale,
-    void (*constrain)(double[],
-    int n)
+    void (*constrain)(double[], int n),
+    int maxIterations = 1000,
+    double alpha = 1,
+    double beta = 0.5,
+    double gamma = 2
 );
 #endif

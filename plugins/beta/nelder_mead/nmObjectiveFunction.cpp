@@ -27,8 +27,7 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     for(int i = 0; i < nrOfParameters; i++)
     {
         PropertyBase* para = inParas->getPropertyAt(i);
-//        para->setValue( &parValue  );
-        if(!rr->setValue(para->getName(), par[i])) //* (double*) para->getValueHandle()))
+        if(!rr->setValue(para->getName(), par[i]))
         {
             throw(Exception("Failed setting value of RoadRunner parameter"));
         }
@@ -60,17 +59,14 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
 
     //Calculate Norm
     double norm = getEuclideanNorm(residuals);
+    plugin.mNorm.setValue(norm);
+    plugin.mTheNorms.push_back(norm);
+    //Assign data relevant to the progress
+     plugin.mNrOfFuncIter.setValue(plugin.mNrOfFuncIter.getValue() + 1);
 
     //Call OnProgress
     if(plugin.hasProgressEvent())
     {
-        //Assign data relevant to the progress
-        plugin.mNrOfIter.setValue(plugin.mNrOfIter.getValue() + 1);
-        plugin.mNorm.setValue(norm);
-
-        //Add norm to Norms property
-        plugin.rNormsData(plugin.mNrOfIter.getValue() -1, 0) = plugin.mNorm.getValue();
-
         //Pass trough event data
         pair<void*, void*> passTroughData = plugin.getWorkProgressData();
         plugin.WorkProgressEvent(passTroughData.first, passTroughData.second);

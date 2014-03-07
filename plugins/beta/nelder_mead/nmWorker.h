@@ -29,7 +29,6 @@ class nmWorker : public Poco::Runnable
     protected:
         Poco::Thread                mThread;
         NelderMead&                 mHost;
-
         bool                        setupRoadRunner();
 
         void                        createModelData(TelluriumData* data);

@@ -63,7 +63,7 @@ bool TestModel::execute(bool inThread)
     rr::SimulateOptions opt;
     opt.start       = 0;
     opt.duration    = 10;
-    opt.steps       = 15;
+    opt.steps       = 14;
 
     TelluriumData data(rr.simulate(&opt));
     mSimulatedData.setValue(data);

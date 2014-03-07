@@ -49,6 +49,11 @@
 using std::cerr;
 using std::clog;
 
+#define MAX_IT      1000      /* maximum number of iterations */
+#define ALPHA       1.0       /* reflection coefficient */
+#define BETA        0.5       /* contraction coefficient */
+#define GAMMA       2.0       /* expansion coefficient */
+
 double simplex(double (*objfunc)(double[]), double start[],int n, double EPSILON, double scale, void (*constrain)(double[],int n))
 {
 	int vs;         /* vertex with smallest value */

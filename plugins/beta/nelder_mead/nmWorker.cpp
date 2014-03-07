@@ -58,7 +58,6 @@ void nmWorker::run()
     workerStarted();
     setupRoadRunner();
 
-    mHost.rNormsData.reSize(mHost.mMaxIterations, 1);
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
     Log(lInfo)<<"The following species are selected: "<<species.AsString();
 
@@ -73,6 +72,7 @@ void nmWorker::run()
     }
 
     mHost.mNrOfIter.setValue(0);
+    mHost.mNrOfFuncIter.setValue(0);
     mHost.mNorm.setValue(0.0);
 
     //Parameters for the Algorithm..
@@ -90,12 +90,14 @@ void nmWorker::run()
                             nrOfParameters,
                             mHost.mEpsilon,
                             mHost.mScale,
-                            NULL
-                            );//my_constraints);
+                            NULL,
+                            mHost.mMaxIterations,
+                            mHost.mALPHA,
+                            mHost.mBETA,
+                            mHost.mGAMMA
+                            );
 
     //Populate with data to report back
-
-
     for (int i = 0; i < nrOfParameters; ++i)
     {
         outParas.add(new Property<double>(intialParameters[i], inParas[i]->getName(), ""), true);
@@ -146,16 +148,14 @@ void nmWorker::postFittingWork()
     //Create model and residuals data
     createModelData(mHost.mModelData.getValuePointer());
     createResidualsData(mHost.mResidualsData.getValuePointer());
-//
-    //Truncate Norms property to actual number of iterations
-    TelluriumData tempData(mHost.mNrOfIter, 1);
-    for(int r = 0; r < tempData.rSize(); r++)
-    {
-        tempData(r,0) = mHost.rNormsData(r, 0);
-    }
 
-    mHost.rNormsData = tempData;
+    //Copy Norms
+    mHost.rNormsData.reSize(mHost.mTheNorms.size(), 1);
     mHost.rNormsData.setColumnNames(StringList("Norm"));
+    for(int r = 0; r < mHost.mTheNorms.size(); r++)
+    {
+        mHost.rNormsData(r,0) = mHost.mTheNorms[r];
+    }
 
     //Calculate standardized residuals
     TelluriumData& residuals = *(TelluriumData*) mHost.mResidualsData.getValueHandle();
