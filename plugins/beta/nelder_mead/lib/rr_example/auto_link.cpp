@@ -3,8 +3,6 @@
 #pragma comment(lib, "telplugins_core.lib")
 #pragma comment(lib, "telplugins_common.lib")
 
-#pragma comment(lib, "poco_pcre-static.lib")
-
 #pragma comment(lib, "poco_foundation-static.lib")
 #pragma comment(lib, "libsbml-static.lib")
 
@@ -19,6 +17,3 @@
 #pragma comment(lib, "blas.lib")
 #pragma comment(lib, "lapack.lib")
 #pragma comment(lib, "libf2c.lib")
-
-
-

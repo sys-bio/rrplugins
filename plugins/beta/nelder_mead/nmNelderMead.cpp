@@ -32,6 +32,8 @@ mNorm(                          0,                      "Norm",                 
 mNorms(                         TelluriumData(),        "Norms",                                "Norms from fitting session.", "", "", true),
 mNrOfIter(                      0,                      "NrOfIter",                             "Number of iterations"),
 mNrOfFuncIter(                  0,                      "NrOfFuncIter",                         "Number of objective function iterations"),
+mHessian(                       ls::Matrix<double>(),   "Hessian",                              "Hessian Matrix"),
+mCovarianceMatrix(              ls::Matrix<double>(),   "CovarianceMatrix",                     "Covariance Matrix"),
 
 mStandardizedResiduals(         TelluriumData(),        "StandardizedResiduals",                "Standarized residuals.", "", "", true),
 mNormalProbabilityOfResiduals(  TelluriumData(),        "NormalProbabilityOfResiduals",         "Normal Probability of Residuals.", "", "", true),
@@ -71,6 +73,8 @@ rNormsData(mNorms.getValueReference())
     mProperties.add(&mNormalProbabilityOfResiduals);
     mProperties.add(&mChiSquare);
     mProperties.add(&mReducedChiSquare);
+    mProperties.add(&mHessian);
+    mProperties.add(&mCovarianceMatrix);
 
     //Add the lmfit parameters
     mProperties.add(&mEpsilon);

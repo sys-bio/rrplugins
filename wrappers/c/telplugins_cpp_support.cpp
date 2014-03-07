@@ -56,6 +56,12 @@ Plugin* registerPlugin(Plugin* plugin)
             gHM.registerHandle(propValue, typeid(propValue).name());
         }
 
+        if(prop->getType() == "matrix")
+        {
+            ls::Matrix<double>* propValue = (ls::Matrix<double>*) prop->getValueHandle();
+            gHM.registerHandle(propValue, typeid(propValue).name());
+        }
+
         prop = props->getNext();
     }
     return plugin;

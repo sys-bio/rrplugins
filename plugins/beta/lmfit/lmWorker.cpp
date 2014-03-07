@@ -338,7 +338,6 @@ void lmWorker::calculateCovariance()
     DoubleMatrix mat = mTheHost.mHessian.getValue();
 
     ls::ComplexMatrix temp(mat); //Get a complex matrix from a double one. Imag part is zero
-
     ls::ComplexMatrix Inv = GetInverse(temp);
 
     DoubleMatrix temp2(mat.RSize(), mat.CSize());

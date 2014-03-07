@@ -89,7 +89,7 @@ try:
         shutil.copy(file, destPluginFolder)
     
     #Copy any files necessary for plugins to work properly
-    pluginSupportFiles =['sbml_test_0001.xml', 'README.txt']    
+    pluginSupportFiles =['README.txt']    
     for file in pluginSupportFiles:
         theFile = os.path.join(pluginsFolder, file)
         print 'Copying file: ' + theFile + ' -> ' + destPluginFolder

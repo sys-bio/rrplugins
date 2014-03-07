@@ -46,10 +46,10 @@
         <DynamicRTL>true</DynamicRTL>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Defines>EXPORT_RRP;POCO_STATIC;$(Defines)</Defines>
-        <ILINK_LibraryPath>..\..\source\;;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <ProjectType>CppDynamicLibrary</ProjectType>
-        <IncludePath>..\..\source\;;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\;$(IncludePath)</IncludePath>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -126,12 +126,16 @@
         <CppCompile Include="telplugins_logging_api.cpp">
             <BuildOrder>8</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telplugins_matrix_api.cpp">
+            <DependentOn>telplugins_matrix_api.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telplugins_properties_api.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
         <CppCompile Include="telplugins_telluriumdata_api.cpp">
             <DependentOn>telplugins_telluriumdata_api.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
+            <BuildOrder>9</BuildOrder>
         </CppCompile>
         <CppCompile Include="telplugins_utilities.cpp">
             <DependentOn>telplugins_utilities.h</DependentOn>

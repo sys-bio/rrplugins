@@ -1028,24 +1028,34 @@ def setTelluriumDataProperty(propertyHandle, value):
 ## \todo rename to getPropertyValue (?)
 def getProperty(propertyHandle):
     paraType = getPropertyType(propertyHandle)
+
     if paraType == 'bool':
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_bool))
         return ptr[0]
+
     if paraType == 'int':
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_int))
         return ptr[0]
+
     if paraType == 'double':
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_double))
         return ptr[0]
+
     if paraType == 'std::string':
         return getPropertyValueAsString(propertyHandle)
+
     if paraType == 'string':
         return getPropertyValueAsString(propertyHandle)
+
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
+
+    if paraType == 'matrix':
+        return getPropertyValueHandle(propertyHandle)
+
     if paraType == 'telluriumData': #The value of this is a handle
         ptr = getPropertyValueHandle(propertyHandle)
         return ptr
@@ -1063,20 +1073,29 @@ def getPropertyValue(propertyHandle):
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_bool))
         return ptr[0]
+
     if paraType == 'int':
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_int))
         return ptr[0]
+
     if paraType == 'double':
         paraVoidPtr = getPropertyValueHandle(propertyHandle)
         ptr = cast(paraVoidPtr, POINTER(c_double))
         return ptr[0]
+
     if paraType == 'std::string':
         return getPropertyValueAsString(propertyHandle)
+
     if paraType == 'string':
         return getPropertyValueAsString(propertyHandle)
+
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
+
+    if paraType == 'matrix':
+        return getPropertyValueHandle(propertyHandle)
+
     if paraType == 'telluriumData': #The value of this is a handle
         ptr = getPropertyValueHandle(propertyHandle)
         return ptr
@@ -1297,6 +1316,7 @@ def getText(fName):
     file = open(fName, 'r')
     return file.read()
 
+
 ## \brief Reads the entire contents of a file and returns it as a string
 ##@code
 ## str = readAllText ("mytextfile.txt")
@@ -1326,6 +1346,36 @@ def getLastError():
 ## \ingroup utilities
 def unLoadAPI():
     windll.kernel32.FreeLibrary(telLib._handle)
+
+
+
+######### MATRIX WRAPPERS
+## \brief Return unerlying data array for a Tellurium matrix
+## \return Returns a ctypes pointer to double object on success, None otherwise
+## \ingroup utilities
+telLib.getDataArray.restype = int
+def getDataArray(matrixH):
+    mat = telLib.getDataArray(matrixH)
+    if mat:            
+        return mat
+    else:
+        return None
+
+telLib.getMatrixNumRows.restype = int
+def getMatrixNumRows(matrixH):
+    rSize = telLib.getMatrixNumRows(matrixH)
+    if rSize != -1:            
+        return rSize
+    else:
+        return None
+
+telLib.getMatrixNumCols.restype = int
+def getMatrixNumCols(matrixH):
+    cSize = telLib.getMatrixNumCols(matrixH)
+    if cSize != -1:            
+        return cSize
+    else:
+        return None
 
 ##\mainpage Plugins for Tellurium
 #\section Introduction

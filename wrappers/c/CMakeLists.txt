@@ -19,6 +19,7 @@ add_library(${target} SHARED
 telplugins_c_api
 telplugins_properties_api
 telplugins_telluriumdata_api
+telplugins_matrix_api
 telplugins_cpp_support
 telplugins_utilities
 telAPIHandleManager

@@ -5,6 +5,7 @@
 
 import telplugins_c_api as tpc
 import matplotlib.pyplot as plt
+import numpy as np
 import os.path
 import ctypes
 
@@ -322,9 +323,26 @@ class Plugin (object):
         handle = tpc.getPluginProperty (self.plugin, name)
         if handle == 0:
             raise ValueError ("Property: " + name + " does not exist")
+        
         value = tpc.getProperty (handle)
-        if (tpc.getPropertyType(handle) == "telluriumData"):
+        
+        if tpc.getPropertyType(handle) == "telluriumData":
             return DataSeries (value)
+        
+        elif tpc.getPropertyType(handle) == "matrix":
+            dblArray = tpc.getDataArray(value)
+            
+            rSize = tpc.getMatrixNumRows(value)
+            cSize = tpc.getMatrixNumCols(value)            
+            length = rSize*cSize            
+            shape = (rSize, cSize)                                    
+                                    
+            arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double * length))                                                            
+            a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))      
+                              
+            a= a.reshape(2,2)                              
+            return a            
+            
         else:
            return value
 

@@ -22,23 +22,30 @@ try:
     tel.assignOnProgressEvent(lm.plugin, progressEvent, theId)
     #============================================================
     #Retrieve a SBML model from plugin        
-    modelPlugin= tel.Plugin("tel_test_model")        
-    sbml_model = modelPlugin.Model
+        
+    sbml_model = tel.readAllText('two_parameters.xml')
     
     #Setup lmfit properties.
     lm.SBML = sbml_model
-    experimentalData = tel.DataSeries.readDataSeries ("testData.dat")
+    experimentalData = tel.DataSeries.readDataSeries ('ExperimentalData.dat')
     lm.ExperimentalData = experimentalData
     
     # Add the parameters that we're going to fit and a initial 'start' value
-    lm.setProperty("InputParameterList", ["k1", .3])
+    lm.setProperty("InputParameterList", ["k1", 0.8])
+    lm.setProperty("InputParameterList", ["k2", 2.3])  
+      
     lm.setProperty("FittedDataSelectionList", "[S1] [S2]")
     lm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
     
     # Start minimization
     lm.execute()
+        
+    hessian = lm.getProperty("Hessian")        
+    print hessian
     
-    hessian = lm.getProperty("Hessian")
+    cov = lm.getProperty("CovarianceMatrix")        
+    print cov
+
     print 'Minimization finished. \n==== Result ====' 
     print tel.getPluginResult(lm.plugin)
     

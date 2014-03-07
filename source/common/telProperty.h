@@ -559,7 +559,7 @@ inline void Property< ls::Matrix<double> >::setValueFromString(const string& val
 template<>
 inline string getPropertyType< ls::Matrix<double> >(const ls::Matrix<double>& a)
 {
-    return "Matrix";
+    return "matrix";
 }
 
 }
