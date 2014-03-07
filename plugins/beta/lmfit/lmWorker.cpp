@@ -150,6 +150,7 @@ void lmWorker::postFittingWork()
         tempData(r,0) = mTheHost.rNormsData(r, 0);
     }
     mTheHost.rNormsData = tempData;
+    mTheHost.rNormsData.setColumnNames(StringList("Norm"));
 
     //Calculate standardized residuals
     TelluriumData& residuals = *(TelluriumData*) mTheHost.mResidualsData.getValueHandle();

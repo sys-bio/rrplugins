@@ -15,6 +15,9 @@
         <Projects Include="..\..\lmfit\lib\lmfit-static.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\lib\nelder_mead-static.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="..\..\add_noise\tel_add_noise.cbproj">
             <Dependencies/>
         </Projects>
@@ -82,6 +85,15 @@
     </Target>
     <Target Name="lmfit-static:Make">
         <MSBuild Projects="..\..\lmfit\lib\lmfit-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="nelder_mead-static">
+        <MSBuild Projects="..\lib\nelder_mead-static.cbproj"/>
+    </Target>
+    <Target Name="nelder_mead-static:Clean">
+        <MSBuild Projects="..\lib\nelder_mead-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nelder_mead-static:Make">
+        <MSBuild Projects="..\lib\nelder_mead-static.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_add_noise">
         <MSBuild Projects="..\..\add_noise\tel_add_noise.cbproj"/>
@@ -156,13 +168,13 @@
         <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;lmfit-static;tel_add_noise;tel_lm;tel_chisquare;tel_test_model;nm_rr_example;tel_nelder_mead;nm_plugin_example;SBMLStudio"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_math;lmfit-static;nelder_mead-static;tel_add_noise;tel_lm;tel_chisquare;tel_test_model;nm_rr_example;tel_nelder_mead;nm_plugin_example;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;lmfit-static:Clean;tel_add_noise:Clean;tel_lm:Clean;tel_chisquare:Clean;tel_test_model:Clean;nm_rr_example:Clean;tel_nelder_mead:Clean;nm_plugin_example:Clean;SBMLStudio:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_math:Clean;lmfit-static:Clean;nelder_mead-static:Clean;tel_add_noise:Clean;tel_lm:Clean;tel_chisquare:Clean;tel_test_model:Clean;nm_rr_example:Clean;tel_nelder_mead:Clean;nm_plugin_example:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;lmfit-static:Make;tel_add_noise:Make;tel_lm:Make;tel_chisquare:Make;tel_test_model:Make;nm_rr_example:Make;tel_nelder_mead:Make;nm_plugin_example:Make;SBMLStudio:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_math:Make;lmfit-static:Make;nelder_mead-static:Make;tel_add_noise:Make;tel_lm:Make;tel_chisquare:Make;tel_test_model:Make;nm_rr_example:Make;tel_nelder_mead:Make;nm_plugin_example:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

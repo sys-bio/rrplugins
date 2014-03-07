@@ -29,10 +29,9 @@ class nmWorker : public Poco::Runnable
     protected:
         Poco::Thread                mThread;
         NelderMead&                 mHost;
-//        MinimizationData            mMinData;
 
         bool                        setupRoadRunner();
-        bool                        setup();
+
         void                        createModelData(TelluriumData* data);
         void                        createResidualsData(TelluriumData* data);
         void                        workerStarted();
@@ -44,6 +43,7 @@ class nmWorker : public Poco::Runnable
         void                        calculateCovariance();
         void                        calculateConfidenceLimits();
         double                      getChi(const Properties& parameters);
+        int                         getNumberOfParameters();
 
 };
 

@@ -53,7 +53,7 @@
         <IncludePath>..\..\..\third_party\poco\Foundation\src\;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>..\..\..\third_party\poco\Foundation\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <AllPackageLibs>rtl.lib</AllPackageLibs>
-        <Defines>LIBSBML_USE_CPP_NAMESPACE;CG_UI;$(Defines)</Defines>
+        <Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
         <Manifest_File>None</Manifest_File>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>

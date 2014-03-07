@@ -128,15 +128,15 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 
 	k = n+1;
 
-	/* print out the initial values */
-	cerr << "Initial Values\n";
-	for(j = 0; j <= n; j++)
-    {
-	    for(i = 0; i < n; i++)
-        {
-		  cerr<<v[j][i]<<"\t"<<f[j]<<"\n";
-	    }
-	}
+//	/* print out the initial values */
+//	cerr << "Initial Values\n";
+//	for(j = 0; j <= n; j++)
+//    {
+//	    for(i = 0; i < n; i++)
+//        {
+//		  cerr<<v[j][i]<<"\t"<<f[j]<<"\n";
+//	    }
+//	}
 
 	/* begin the main loop of the minimization */
 	for(itr = 1; itr <= MAX_IT; itr++)
@@ -335,15 +335,15 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 			}
 		}
 
-		/* print out the value at each iteration */
-		clog<<"Iteration:  "<<itr<<"\n";
-		for(j = 0; j <= n; j++)
-        {
-  	        for(i=0;i<n;i++)
-            {
-  		        clog<<v[j][i]<<"\t"<<f[j]<<"\n";
-		    }
-  	    }
+//		/* print out the value at each iteration */
+//		clog<<"Iteration:  "<<itr<<"\n";
+//		for(j = 0; j <= n; j++)
+//        {
+//  	        for(i=0;i<n;i++)
+//            {
+//  		        clog<<v[j][i]<<"\t"<<f[j]<<"\n";
+//		    }
+//  	    }
 
 		/* test for convergence */
 		fsum = 0.0;
@@ -369,7 +369,7 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 	/* end main loop of the minimization */
 
 	/* find the index of the smallest value */
-	vs=0;
+	vs = 0;
 	for(j = 0; j <= n; j++)
     {
 		if (f[j] < f[vs])
@@ -378,17 +378,17 @@ double simplex2(double (*evaluate)(double[], const void* userData), const void* 
 		}
 	}
 
-	clog<<"A minimum was found at\n";
+//	clog<<"A minimum was found at\n";
 	for(j = 0; j < n; j++)
     {
-		clog <<v[vs][j] << "\n";
+//		clog <<v[vs][j] << "\n";
 		start[j] = v[vs][j];
 	}
 
 	min = evaluate(v[vs], userData);
 	k++;
-	cerr << k   <<" Function Evaluations\n";
-    cerr <<	itr <<" Iterations through program\n";
+//	cerr << k   <<" Function Evaluations\n";
+//    cerr <<	itr <<" Iterations through program\n";
 
 	free(f);
 	free(vr);

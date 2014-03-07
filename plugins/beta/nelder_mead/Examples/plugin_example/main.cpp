@@ -11,6 +11,10 @@
 #include "telPlugin.h"
 using namespace tlp;
 
+void onStarted(void* data1, void* data2);
+void onProgress(void* data1, void* data2);
+void onFinished(void* data1, void* data2);
+
 int main()
 {
     double scale = 1;
@@ -32,10 +36,10 @@ int main()
         }
         test_model->execute();
 
-//        TelluriumData model(        (TelluriumData*) test_model->getPropertyValueHandle("SimulatedData"));
-//        TelluriumData experiment(   (TelluriumData*) test_model->getPropertyValueHandle("SimulatedDataWithNoise"));
-//        model.write("r:\\modelData.dat");
-//        experiment.write("r:\\expData.dat");
+        TelluriumData model(        (TelluriumData*) test_model->getPropertyValueHandle("SimulatedData"));
+        TelluriumData experiment(   (TelluriumData*) test_model->getPropertyValueHandle("SimulatedDataWithNoise"));
+        model.write("r:\\modelData.dat");
+        experiment.write("r:\\expData.dat");
 
         Plugin* NMP = PM.getPlugin("Nelder-Mead");
 
@@ -55,7 +59,16 @@ int main()
         NMP->setPropertyByString("ExperimentalDataSelectionList",   "S1,S2");
         NMP->setPropertyByString("FittedDataSelectionList",         "S1,S2");
 
+        NMP->assignOnStartedEvent(onStarted, NMP);
+        NMP->assignOnProgressEvent(onProgress, NMP);
+        NMP->assignOnFinishedEvent(onFinished, NMP);
         NMP->execute();
+
+
+        Log(lInfo) <<"======== RESULT ==========";
+        Log(lInfo) << NMP->getResult();
+
+//        Log(lInfo) << "Norms: "<<NMP->getPropertyValueAsString("Norms");
 
     }
     catch(const rr::Exception& e)
@@ -66,24 +79,23 @@ int main()
     {
         Log(lError) << "There was a problem: " << e.what();
     }
-
-
     return 0;
 }
 
+void onStarted(void* data1, void* data2)
+{
+    Log(lInfo) <<"Started ..";
+}
 
-//void my_constraints(double x[], int n)
-//{
-//    // rate contstants must be positive
-//    int i;
-//    for (i=0; i<n; i++)
-//    {
-//        if (x[i] < 0)
-//        {
-//            x[i] = fabs(x[i]);
-//        }
-//    }
-//}
+void onProgress(void* data1, void* data2)
+{
+    Plugin* NMP = (Plugin*) data1;
 
+    Log(lInfo) <<"Iteration, NORM: "<<NMP->getPropertyValueAsString("NrOfIter")<<", "<<NMP->getPropertyValueAsString("Norm");
+}
 
+void onFinished(void* data1, void* data2)
+{
+    Log(lInfo) <<"Finished..";
+}
 

@@ -9,10 +9,10 @@ using namespace tlp;
 
 double NelderMeadObjectiveFunction(double par[], const void* userData)
 {
-    NelderMead&         NMP     = *((NelderMead*) userData);
-    TelluriumData&      expData = NMP.mExperimentalData;
-    RoadRunner*         rr      = NMP.getRoadRunner();
-    Plugin&             chi     = *(NMP.getChiSquarePlugin());
+    NelderMead&         plugin      = *((NelderMead*) userData);
+    TelluriumData&      expData     = plugin.mExperimentalData;
+    RoadRunner*         rr          = plugin.getRoadRunner();
+
     if(!rr)
     {
         throw(Exception("RoadRunner is NULL in Nelder-Mead objective function"));
@@ -21,19 +21,17 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     rr->reset();
 
     //Get current parameter values
-    Properties* paras = (Properties*) NMP.mInputParameterList.getValueHandle();
-    int nrOfParameters = paras->count();
+    Properties* inParas = (Properties*) plugin.mInputParameterList.getValueHandle();
+    int nrOfParameters = inParas->count();
 
-    for(int i =0; i < nrOfParameters; i++)
+    for(int i = 0; i < nrOfParameters; i++)
     {
-        PropertyBase* para = paras->getPropertyAt(i);
-        double parValue = par[i];
-        para->setValue( &parValue  );
-        if(!rr->setValue(para->getName(), * (double*) para->getValueHandle()))
+        PropertyBase* para = inParas->getPropertyAt(i);
+//        para->setValue( &parValue  );
+        if(!rr->setValue(para->getName(), par[i])) //* (double*) para->getValueHandle()))
         {
             throw(Exception("Failed setting value of RoadRunner parameter"));
         }
-
     }
 
     rr::SimulateOptions opt;
@@ -44,7 +42,7 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     //Simulate
     TelluriumData   simData(rr->simulate(&opt));
 
-    StringList* species = (StringList*) NMP.mExperimentalDataSelectionList.getValueHandle();
+    StringList* species = (StringList*) plugin.mExperimentalDataSelectionList.getValueHandle();
     int nrOfSpecies = species->Count();
 
     //Calculate residuals
@@ -59,12 +57,24 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
             resIndex ++;
         }
     }
+
     //Calculate Norm
-
-
     double norm = getEuclideanNorm(residuals);
 
-
     //Call OnProgress
+    if(plugin.hasProgressEvent())
+    {
+        //Assign data relevant to the progress
+        plugin.mNrOfIter.setValue(plugin.mNrOfIter.getValue() + 1);
+        plugin.mNorm.setValue(norm);
+
+        //Add norm to Norms property
+        plugin.rNormsData(plugin.mNrOfIter.getValue() -1, 0) = plugin.mNorm.getValue();
+
+        //Pass trough event data
+        pair<void*, void*> passTroughData = plugin.getWorkProgressData();
+        plugin.WorkProgressEvent(passTroughData.first, passTroughData.second);
+    }
+
     return norm;
 }

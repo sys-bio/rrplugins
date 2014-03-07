@@ -29,6 +29,12 @@ bool nmWorker::isRunning() const
     return mThread.isRunning();
 }
 
+int nmWorker::getNumberOfParameters()
+{
+    Properties& inParas  =  mHost.mInputParameterList.getValueReference();
+    return inParas.count();
+}
+
 void nmWorker::start(bool runInThread)
 {
     if(runInThread)
@@ -50,37 +56,31 @@ void nmWorker::start(bool runInThread)
 void nmWorker::run()
 {
     workerStarted();
-
     setupRoadRunner();
 
-
-
+    mHost.rNormsData.reSize(mHost.mMaxIterations, 1);
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
     Log(lInfo)<<"The following species are selected: "<<species.AsString();
 
-    Properties& Paras =  mHost.mInputParameterList.getValueReference();
+    Properties& inParas  =  mHost.mInputParameterList.getValueReference();
+    Properties& outParas =  mHost.mOutputParameterList.getValueReference();
+    int         nrOfParameters = inParas.count();
+
     Log(lInfo)<<"The following parameters are to be minimized";
-    for(int i = 0; i < Paras.count(); i++)
+    for(int i = 0; i < nrOfParameters; i++)
     {
-        Log(lInfo)<<Paras[i]->getName()<<" with initial value: "<<Paras[i]->getValueAsString();
+        Log(lInfo)<<inParas[i]->getName()<<" with initial value: "<<inParas[i]->getValueAsString();
     }
 
     mHost.mNrOfIter.setValue(0);
     mHost.mNorm.setValue(0.0);
+
     //Parameters for the Algorithm..
-
-    //Setup data structures
-    setup();
-
-
-    Properties* paras = (Properties*) mHost.mInputParameterList.getValueHandle();
-    int nrOfParameters = paras->count();
-
     double* intialParameters = new double[nrOfParameters];
 
     for(int i =0; i < nrOfParameters; i++)
     {
-        intialParameters[i] = * (double*) paras->getPropertyAt(i)->getValueHandle();
+        intialParameters[i] = * (double*) inParas[i]->getValueHandle();
     }
 
     //Execute minimizer
@@ -93,7 +93,15 @@ void nmWorker::run()
                             NULL
                             );//my_constraints);
 
-    //The user may have aborted the minization... check here..
+    //Populate with data to report back
+
+
+    for (int i = 0; i < nrOfParameters; ++i)
+    {
+        outParas.add(new Property<double>(intialParameters[i], inParas[i]->getName(), ""), true);
+    }
+
+    //The user may have aborted the minimzation... check here..
     if(mHost.mTerminate)
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
@@ -104,26 +112,17 @@ void nmWorker::run()
     }
 
     //Post fitting data calculations
-    Log(lInfo)<<"==================== Fitting Result ================================";
-    Log(lInfo)<<"Nr of function evaluations: "  <<  mHost.mNrOfIter;
-//    Log(lInfo)<<"Status message: "              <<  lm_infmsg[mHost.mLMStatus.outcome];
-    Log(lInfo)<<"Minimized parameter values: ";
+    Log(lDebug)<<"==================== Fitting Result ================================";
+    Log(lDebug)<<"Nr of function evaluations: "  <<  mHost.mNrOfIter.getValue();
+    Log(lDebug)<<"Minimized parameter values: ";
+    for (int i = 0; i < inParas.count(); ++i)
+    {
+        Log(lDebug)<<"\t"<<outParas[i]->getName()<<" = "<< outParas[i]->getValueAsString();
+    }
 
-//    mHost.mStatusMessage.setValueFromString(lm_infmsg[mHost.mLMStatus.outcome]);
-//
-//    for (int i = 0; i < mHost.nrOfParameters; ++i)
-//    {
-//        Log(lInfo)<<"Parameter "<<mLMData.parameterLabels[i]<<" = "<< mLMData.parameters[i];
-//    }
-
-    Log(lInfo)<<"Norm:  "<<mHost.mNorm;
+    Log(lDebug)<<"Final Norm:  "<<mHost.mNorm.getValue();
     postFittingWork();
     workerFinished();
-}
-
-bool nmWorker::setup()
-{
-
 }
 
 bool nmWorker::setupRoadRunner()
@@ -141,65 +140,61 @@ bool nmWorker::setupRoadRunner()
 
 void nmWorker::postFittingWork()
 {
-//    //Populate with data to report back
-//    Properties& parsOut = mHost.mOutputParameterList.getValueReference();
-//    parsOut.clear();
-//    for (int i = 0; i < mLMData.nrOfParameters; ++i)
-//    {
-//        parsOut.add(new Property<double>(mLMData.parameters[i], mLMData.parameterLabels[i], ""), true);
-//    }
+    Properties* inParas = (Properties*) mHost.mInputParameterList.getValueHandle();
+    int nrOfParameters = inParas->count();
+
+    //Create model and residuals data
+    createModelData(mHost.mModelData.getValuePointer());
+    createResidualsData(mHost.mResidualsData.getValuePointer());
 //
-//    Log(lError) <<"Parameters out.."<<parsOut;
-//    //Set the norm property
-//    mHost.mNorm.setValue(mHost.mLMStatus.fnorm);
-//
-//    //Create model and residuals data
-//    createModelData(mHost.mModelData.getValuePointer());
-//    createResidualsData(mHost.mResidualsData.getValuePointer());
-//
-//    //Truncate Norms property to actual number of iterations
-//    TelluriumData tempData(mHost.mLMStatus.nfev, 1);
-//    for(int r = 0; r < tempData.rSize(); r++)
-//    {
-//        tempData(r,0) = mHost.rNormsData(r, 0);
-//    }
-//    mHost.rNormsData = tempData;
-//
-//    //Calculate standardized residuals
-//    TelluriumData& residuals = *(TelluriumData*) mHost.mResidualsData.getValueHandle();
-//
-//
-//    //When there is a bad fit, residuals get really large and so
-//    //several of the statistics below overflow
-//
-//    //Populate the standardized residuals
-//    try
-//    {
-//        TelluriumData& stdRes = *(TelluriumData*) mHost.mStandardizedResiduals.getValueHandle();
-//        stdRes = getStandardizedPopulations(residuals);
-//
-//        //Create a probability plot for the residuals
-//        TelluriumData& probPlot = *(TelluriumData*) mHost.mNormalProbabilityOfResiduals.getValueHandle();
-//        probPlot = getNormalProbabilityPlot(stdRes);
-//
-//        calculateChiSquare();
-//        calculateHessian();
-//        calculateCovariance();
-//        calculateConfidenceLimits();
-//    }
-//    catch(...)
-//    {
-//        Log(lError) << "There was problems calculating fit statistics";
-//    }
-//
+    //Truncate Norms property to actual number of iterations
+    TelluriumData tempData(mHost.mNrOfIter, 1);
+    for(int r = 0; r < tempData.rSize(); r++)
+    {
+        tempData(r,0) = mHost.rNormsData(r, 0);
+    }
+
+    mHost.rNormsData = tempData;
+    mHost.rNormsData.setColumnNames(StringList("Norm"));
+
+    //Calculate standardized residuals
+    TelluriumData& residuals = *(TelluriumData*) mHost.mResidualsData.getValueHandle();
+
+
+    //When there is a bad fit, residuals get really large and so
+    //several of the statistics below overflow
+
+    //Populate the standardized residuals
+    try
+    {
+        TelluriumData& stdRes   = *(TelluriumData*) mHost.mStandardizedResiduals.getValueHandle();
+        stdRes                  = getStandardizedPopulations(residuals);
+
+        //Create a probability plot for the residuals
+        TelluriumData& probPlot = *(TelluriumData*) mHost.mNormalProbabilityOfResiduals.getValueHandle();
+        probPlot                = getNormalProbabilityPlot(stdRes);
+
+        calculateChiSquare();
+        calculateHessian();
+        calculateCovariance();
+        calculateConfidenceLimits();
+    }
+    catch(...)
+    {
+        Log(lError) << "There was problems calculating fit statistics";
+    }
+
 }
 
 void nmWorker::calculateChiSquare()
 {
+    Properties* inParas = (Properties*) mHost.mInputParameterList.getValueHandle();
+    int nrOfParameters = inParas->count();
+
     //Calculate ChiSquare(s)
     TelluriumData& modelData    = *(TelluriumData*) mHost.mModelData.getValuePointer();
     TelluriumData& obsData      = *(TelluriumData*) mHost.mExperimentalData.getValuePointer();
-    
+
     Plugin* chi = mHost.mPM->getPlugin("tel_chisquare");
 
     if(!chi)
@@ -214,26 +209,26 @@ void nmWorker::calculateChiSquare()
     para->setValue(modelData);
 
     Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
-//    intPara->setValue(mLMData.nrOfParameters);
-//
-//    //Calculate Chi square
-//    chi->execute();
-//
-//    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
-//    Property<double>* rChiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ReducedChiSquare"));
-//
-//    mHost.mChiSquare.setValue(chiSquare->getValue());
-//    mHost.mReducedChiSquare.setValue(rChiSquare->getValue());
-//
-//    Log(lInfo)<<"Chi Square = "<<chiSquare->getValue();
-//    Log(lInfo)<<"Reduced Chi Square = "<<rChiSquare->getValue();
+    intPara->setValue(nrOfParameters);
+
+    //Calculate Chi square
+    chi->execute();
+
+    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
+    Property<double>* rChiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ReducedChiSquare"));
+
+    mHost.mChiSquare.setValue(chiSquare->getValue());
+    mHost.mReducedChiSquare.setValue(rChiSquare->getValue());
+
+    Log(lDebug)<<"Chi Square = "<<chiSquare->getValue();
+    Log(lDebug)<<"Reduced Chi Square = "<<rChiSquare->getValue();
 }
 
 double nmWorker::getChi(const Properties& parameters)
 {
     Log(lDebug)<<"Getting chisquare using parameters: "<<parameters;
     //Reset RoadRunner
-    reset(mHost.mRRI);
+    mHost.mRRI->reset();
 
     for(int i = 0; i < parameters.count(); i++)
     {
@@ -241,34 +236,36 @@ double nmWorker::getChi(const Properties& parameters)
         mHost.mRRI->setValue(para->getName(), para->getValue());
     }
 
+    TelluriumData* expData = (TelluriumData*) mHost.mExperimentalData.getValueHandle();
     rr::SimulateOptions options;
-//    options.start = mLMData.timeStart;
-//    options.duration = mLMData.timeEnd - mLMData.timeStart;
-//    options.steps = mLMData.nrOfTimePoints - 1;
-//    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
-//
-//    rr::RoadRunnerData *modelData = NULL;
-//    if(mRRI->simulate(&options))
-//    {
-//        modelData = mRRI->getSimulationResult();
-//    }
-//
-//    TelluriumData& obsData      = *(TelluriumData*) mHost.mExperimentalData.getValuePointer();
-//    Plugin* chi                 = mHost.mPM->getPlugin("tel_chisquare");
-//
-//    Property<TelluriumData>* para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ExperimentalData"));
-//    para->setValue(obsData);
-//
-//    para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ModelData"));
-//    para->setValue(TelluriumData(*(modelData)));
-//
-//    Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
-//    intPara->setValue(mLMData.nrOfParameters);
-//
-//    //Calculate Chi square
-//    chi->execute();
-//    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
-//    return chiSquare->getValue();
+    options.start       = expData->getTimeStart();
+    options.duration    = expData->getTimeEnd() - expData->getTimeStart();
+    options.steps       = expData->rSize() - 1;
+
+    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+
+    rr::RoadRunnerData *modelData = NULL;
+    if(mHost.mRRI->simulate(&options))
+    {
+        modelData = mHost.mRRI->getSimulationResult();
+    }
+
+    TelluriumData& obsData      = *(TelluriumData*) mHost.mExperimentalData.getValuePointer();
+    Plugin* chi                 = mHost.mPM->getPlugin("tel_chisquare");
+
+    Property<TelluriumData>* para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ExperimentalData"));
+    para->setValue(obsData);
+
+    para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ModelData"));
+    para->setValue(TelluriumData(*(modelData)));
+
+    Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
+    intPara->setValue(getNumberOfParameters());
+
+    //Calculate Chi square
+    chi->execute();
+    Property<double>* chiSquare =  dynamic_cast< Property<double>* >(chi->getProperty("ChiSquare"));
+    return chiSquare->getValue();
 }
 
 void nmWorker::calculateHessian()
@@ -345,7 +342,6 @@ void nmWorker::calculateHessian()
     mHost.mHessian.setValue(mat);
 }
 
-
 void nmWorker::calculateCovariance()
 {
     //Check if Hessain is invertible
@@ -383,69 +379,75 @@ void nmWorker::workerFinished()
 void nmWorker::createModelData(TelluriumData* _data)
 {
     TelluriumData& data = *(_data);
+    TelluriumData* expData = (TelluriumData*) mHost.mExperimentalData.getValueHandle();
+
+    Properties& inParas =  * (Properties*) mHost.mInputParameterList.getValueHandle();
+    int nrOfParameters = inParas.count();
+
     //We now have the parameters
     StringList selList("time");
     selList.Append(mHost.mModelDataSelectionList.getValue());
 
-//    data.reSize(mLMData.nrOfTimePoints, selList.Count());
-//    mRRI->reset();
-//    mRRI->setSelections(selList);
-//
-//    for(int i = 0; i < mLMData.nrOfParameters; i++)
-//    {
-//        mRRI->setValue(mLMData.parameterLabels[i], mLMData.parameters[i]);
-//    }
-//
-//    rr::SimulateOptions options;
-//    options.start = mLMData.timeStart;
-//    options.duration = mLMData.timeEnd - mLMData.timeStart;
-//    options.steps = mLMData.nrOfTimePoints - 1;
-//    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
-//
-//    if(mRRI->simulate(&options))
-//    {
-//        rr::RoadRunnerData rrData = *mRRI->getSimulationResult();
-//        data = rrData;
-//    }
+    data.reSize(expData->rSize(), selList.Count());
+    mHost.mRRI->reset();
+    mHost.mRRI->setSelections(selList);
+
+    for(int i = 0; i < nrOfParameters; i++)
+    {
+        mHost.mRRI->setValue(inParas[i]->getName(),  * (double*) inParas[i]->getValueHandle());
+    }
+
+    rr::SimulateOptions options;
+    options.start       = expData->getTimeStart();
+    options.duration    = expData->getTimeEnd() - expData->getTimeStart();
+    options.steps       = expData->rSize() - 1;
+
+    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+
+    if(mHost.mRRI->simulate(&options))
+    {
+        data = * (mHost.mRRI->getSimulationResult());
+    }
 }
 
 void nmWorker::createResidualsData(TelluriumData* _data)
 {
-//    TelluriumData& resData = *(_data);
-//    //We now have the parameters
-//    TelluriumData& obsData = (mHost.mExperimentalData.getValueReference());
-//    TelluriumData& modData = (mHost.mModelData.getValueReference());
-//
-//    resData.reSize(modData.rSize(), modData.cSize());
-//
-//    //setup coulumn names
-//    resData.setColumnNames(modData.getColumnNames());
-//
-//    for(int sel = 0; sel < mLMData.nrOfSpecies + 1; sel++)    //selection 1 becuase of time column..
-//    {
-//        for(int i = 0; i < mLMData.nrOfTimePoints; i++)
-//        {
-//            if(sel == 0)
-//            {
-//                resData(i, sel) = modData(i, sel);    //Time
-//            }
-//            else
-//            {
-//                //The modData may contain data for other species than that was fitted..
-//                //We need to find out what coulmn correspond to what..
-//                string specie = obsData.getColumnName(sel);
-//                int colNr = modData.getColumnIndex(specie);
-//                if(colNr != -1)
-//                {
-//                    resData(i,sel) = obsData(i, sel) - modData(i, colNr);
-//                }
-//                else
-//                {
-//                    Log(lError)<<"Problem with column names when creating residual data!";
-//                }
-//            }
-//        }
-//    }
+    TelluriumData& resData = *(_data);
+    //We now have the parameters
+    TelluriumData& obsData = (mHost.mExperimentalData.getValueReference());
+    TelluriumData& modData = (mHost.mModelData.getValueReference());
+
+    resData.reSize(modData.rSize(), modData.cSize());
+
+    //setup coulumn names
+    resData.setColumnNames(modData.getColumnNames());
+    StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
+
+    for(int sel = 0; sel < species.Count() + 1; sel++)    //selection 1 becuase of time column..
+    {
+        for(int i = 0; i < obsData.rSize(); i++)
+        {
+            if(sel == 0)
+            {
+                resData(i, sel) = modData(i, sel);    //Time
+            }
+            else
+            {
+                //The modData may contain data for other species than that was fitted..
+                //We need to find out what coulmn correspond to what..
+                string specie = obsData.getColumnName(sel);
+                int colNr = modData.getColumnIndex(specie);
+                if(colNr != -1)
+                {
+                    resData(i,sel) = obsData(i, sel) - modData(i, colNr);
+                }
+                else
+                {
+                    Log(lError)<<"Problem with column names when creating residual data!";
+                }
+            }
+        }
+    }
 }
 
 void nmWorker::calculateConfidenceLimits()
@@ -457,10 +459,10 @@ void nmWorker::calculateConfidenceLimits()
 
     DoubleMatrix mat = mHost.mCovarianceMatrix.getValue();
     double chiReduced = mHost.mReducedChiSquare.getValue();
-//    for (int i = 0; i < mLMData.nrOfParameters; ++i)
-//    {
-//        double delta = 1.96*sqrt(mat(i,i) * chiReduced);
-//        conf.add(new Property<double>(delta, mLMData.parameterLabels[i] + string("_confidence"), ""), true);
-//    }
+    for (int i = 0; i < parameters.count(); ++i)
+    {
+        double delta = 1.96*sqrt(mat(i,i) * chiReduced);
+        conf.add(new Property<double>(delta, parameters[i]->getName() + string("_confidence"), ""), true);
+    }
 }
 

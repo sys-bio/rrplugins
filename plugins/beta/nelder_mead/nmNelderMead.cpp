@@ -38,19 +38,16 @@ mChiSquare(                     0,                      "ChiSquare",            
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
 mStatusMessage(                 "<none>",               "StatusMessage",                        "Status message from fitting engine", "", "", true),
 
-
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
-mEpsilon(                       1.e-16,                  "Epsilon",                               "Relative error. "),
+mEpsilon(                       1.e-16,                 "Epsilon",                               "Relative error. "),
 mScale(                         1,                      "Scale",                                 "Scaling of vertices. "),
 mMaxIterations(                 1000,                   "MaxNrOfIterations",                     "Maximum number of iterations"),
 mALPHA(                         1,                      "Alpha",                                 "Reflection coefficient. "),
 mBETA(                          0.5,                    "Beta",                                  "Contraction coefficient. "),
 mGAMMA(                         2,                      "Gamma",                                 "Expansion coefficient."),
-
 mWorker(*this),
 mRRI(NULL),
-//mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
 {
     mVersion = "0.5";
@@ -188,7 +185,7 @@ string NelderMead::getResult()
     msg<<"Norm: "<<mNorm.getValue()<<endl;
     msg<<"Chi Square: "<<mChiSquare.getValue()<<endl;
     msg<<"Reduced Chi Square: "<<mReducedChiSquare.getValue()<<endl;
-    msg<<"Fit Engine Status: "<<mStatusMessage.getValue()<<endl;
+//    msg<<"Fit Engine Status: "<<mStatusMessage.getValue()<<endl;
     return msg.str();
 }
 

@@ -16,9 +16,10 @@
     #pragma comment(lib, "telplugins_common.lib")
     #pragma comment(lib, "telplugins_math.lib")
 //    #pragma comment(lib, "roadrunner_c_api.lib")
-//    #pragma comment(lib, "rr-libstruct-static.lib")
+
 //#endif
 
+#pragma comment(lib, "rr-libstruct-static.lib")
 #pragma comment(lib, "nelder_mead-static.lib")
 #pragma comment(lib, "poco_foundation-static.lib")
 
