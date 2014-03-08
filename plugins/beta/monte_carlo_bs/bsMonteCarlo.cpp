@@ -25,6 +25,7 @@ mConfidenceLimits(              Properties(),           "ConfidenceLimits",     
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
 mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
 mNrOfMCRuns(                    5,                      "NrOfMCRuns",                           "Number of Monte Carlo Data Sets"),
+mMinimizerPlugin(               "Levenberg-Marquardt",  "MinimizerPlugin",                      "Minimizer used by the Monte Carlo Engine"),
 mWorker(*this)
 {
     mVersion = "0.8";
@@ -39,6 +40,7 @@ mWorker(*this)
     mProperties.add(&mExperimentalDataSelectionList);
     mProperties.add(&mModelDataSelectionList);
     mProperties.add(&mNrOfMCRuns);
+    mProperties.add(&mMinimizerPlugin);
 
     //Add the lmfit parameters
     mHint ="";

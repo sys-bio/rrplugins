@@ -28,7 +28,7 @@ class bsWorker : public Poco::Runnable
 
     protected:
         Poco::Thread                    mThread;
-        MonteCarlo&                     mHostPlugin;
+        MonteCarlo&                     mParent;
 
         bool                            setup();
 
@@ -41,7 +41,7 @@ class bsWorker : public Poco::Runnable
         const tlp::PluginManager*       mPM;
         tlp::Random                     mRandom;
 
-        TELHandle                       mLMPlugin;
+        TELHandle                       mMinimizerPlugin;
         std::vector<double>             mResiduals;
         std::vector<TelluriumData*>     mMCDataSets;
         std::vector<Properties>         mMCParameters;

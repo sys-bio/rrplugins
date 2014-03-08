@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B5E5AD3D-A847-40E1-83F5-6FE5F3BAB896}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\misc\cg_ide\roadrunner.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\source\common\telplugins_common.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="property_container\property_container.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="roadrunner">
+        <MSBuild Projects="..\..\misc\cg_ide\roadrunner.cbproj"/>
+    </Target>
+    <Target Name="roadrunner:Clean">
+        <MSBuild Projects="..\..\misc\cg_ide\roadrunner.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="roadrunner:Make">
+        <MSBuild Projects="..\..\misc\cg_ide\roadrunner.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_common">
+        <MSBuild Projects="..\..\source\common\telplugins_common.cbproj"/>
+    </Target>
+    <Target Name="telplugins_common:Clean">
+        <MSBuild Projects="..\..\source\common\telplugins_common.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_common:Make">
+        <MSBuild Projects="..\..\source\common\telplugins_common.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="property_container">
+        <MSBuild Projects="property_container\property_container.cbproj"/>
+    </Target>
+    <Target Name="property_container:Clean">
+        <MSBuild Projects="property_container\property_container.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_container:Make">
+        <MSBuild Projects="property_container\property_container.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="roadrunner;telplugins_common;property_container"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="roadrunner:Clean;telplugins_common:Clean;property_container:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="roadrunner:Make;telplugins_common:Make;property_container:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

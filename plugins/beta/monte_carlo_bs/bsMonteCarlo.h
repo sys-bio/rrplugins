@@ -28,6 +28,7 @@ class MonteCarlo : public CPPPlugin
         Property<StringList>                    mExperimentalDataSelectionList;
         Property<StringList>                    mModelDataSelectionList;
         Property<int>                           mNrOfMCRuns;
+        Property<string>                        mMinimizerPlugin;
 
 		//Utility functions for the thread
         string                                  getTempFolder();

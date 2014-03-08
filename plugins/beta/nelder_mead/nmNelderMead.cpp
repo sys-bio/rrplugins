@@ -43,7 +43,7 @@ mStatusMessage(                 "<none>",               "StatusMessage",        
 
 //The following Properties are the members of lmfits control_structure.
 //Changing their default values may be needed depending on the problem.
-mEpsilon(                       1.e-16,                 "Epsilon",                               "Relative error. "),
+mEpsilon(                       1.e-6,                  "Epsilon",                               "Relative error. "),
 mScale(                         1,                      "Scale",                                 "Scaling of vertices. "),
 mMaxIterations(                 1000,                   "MaxNrOfIterations",                     "Maximum number of iterations"),
 mALPHA(                         1,                      "Alpha",                                 "Reflection coefficient. "),

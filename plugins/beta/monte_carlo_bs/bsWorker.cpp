@@ -20,8 +20,8 @@ double getRandomElement(const vector<double>& vec);
 
 bsWorker::bsWorker(MonteCarlo& host)
 :
-mHostPlugin(host),
-mPM(mHostPlugin.getPluginManager()),
+mParent(host),
+mPM(mParent.getPluginManager()),
 mRandom( (unsigned long) time( NULL ))
 {
     if(!mPM)
@@ -32,11 +32,14 @@ mRandom( (unsigned long) time( NULL ))
 
 bool bsWorker::setup()
 {
-    mLMPlugin = mPM->getPlugin("tel_lm");
+    mMinimizerPlugin = mPM->getPlugin(mParent.mMinimizerPlugin);
 
-    if(!mLMPlugin)
+    if(!mMinimizerPlugin)
     {
-        throw(Exception("Monte Carlo plugin need the lmfit plugin"));
+        stringstream msg;
+        msg << "Failed loading minimizer plugin ("<<mParent.mMinimizerPlugin<<")";
+        msg << "Monte Carlo Plugin cannot proceede";
+        throw(Exception(msg.str()));
     }
     reset();
     return true;
@@ -81,7 +84,7 @@ void bsWorker::run()
     workerStarted();
 
     //The user may have aborted the monte carlo run. check if so here..
-    if(mHostPlugin.mTerminate)
+    if(mParent.mTerminate)
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
@@ -122,17 +125,17 @@ void bsWorker::run()
 
     //Now fit each data set and collect parameter statistics
     //Each fit should be carried out in a thread.. Skip the threading for now
-    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    for(int i = 0; i < mParent.mNrOfMCRuns; i++)
     {
         Properties parameters = getParameters(mMCDataSets[i]);
-        mHostPlugin.mCurrentParameters.setValue(parameters);
+        mParent.mCurrentParameters.setValue(parameters);
         mMCParameters.push_back(parameters);
         workerProgress();
     }
 
-    TelluriumData& parasData = mHostPlugin.mMonteCarloParameters.getValueReference();
-    Properties& fitParas = mHostPlugin.mInputParameterList.getValueReference();
-    parasData.reSize(mHostPlugin.mNrOfMCRuns, mHostPlugin.mInputParameterList.getValue().count());
+    TelluriumData& parasData = mParent.mMonteCarloParameters.getValueReference();
+    Properties& fitParas = mParent.mInputParameterList.getValueReference();
+    parasData.reSize(mParent.mNrOfMCRuns, mParent.mInputParameterList.getValue().count());
 
 
     //Setup column header
@@ -145,7 +148,7 @@ void bsWorker::run()
     parasData.setColumnNames(hdr);
 
     //Copy parameters to parameters container
-    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    for(int i = 0; i < mParent.mNrOfMCRuns; i++)
     {
         Log(lInfo) << "MC Run: "<<i;
         Properties& vecParas = mMCParameters[i];
@@ -160,14 +163,14 @@ void bsWorker::run()
     }
 
     //Calculate confidence limits
-    Properties& inpParaList         = mHostPlugin.mInputParameterList.getValueReference();
-    Properties& confidenceLimits    = mHostPlugin.mConfidenceLimits.getValueReference();
+    Properties& inpParaList         = mParent.mInputParameterList.getValueReference();
+    Properties& confidenceLimits    = mParent.mConfidenceLimits.getValueReference();
     confidenceLimits.clear();
 
     for(int para = 0; para < inpParaList.count(); para++)
     {
         vector<double> values;
-        for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+        for(int i = 0; i < mParent.mNrOfMCRuns; i++)
         {
             Properties& paras = mMCParameters[i];
             double val = *((double*) paras[para]->getValueHandle());
@@ -176,7 +179,7 @@ void bsWorker::run()
         //Do the statistics for each parameter
         double mean;
         double sigma = getStandardDeviation(values, &mean);
-        double limit = 1.96*sigma/( sqrt((double) mHostPlugin.mNrOfMCRuns));
+        double limit = 1.96*sigma/( sqrt((double) mParent.mNrOfMCRuns));
 
         Property<double>* prop = new Property<double>(limit, inpParaList[para]->getName());
         confidenceLimits.add(prop);
@@ -188,16 +191,16 @@ void bsWorker::run()
 
 Properties bsWorker::getParameters(TelluriumData* mcData)
 {
-    resetPlugin(mLMPlugin);
+    resetPlugin(mMinimizerPlugin);
 
-    TELHandle parasHandle = getPluginPropertyValueHandle(mLMPlugin, "InputParameterList");
+    TELHandle parasHandle = getPluginPropertyValueHandle(mMinimizerPlugin, "InputParameterList");
     if(!parasHandle)
     {
         throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
     }
 
     //Add input parameters, only the checked ones
-    Properties* inputParameters = (Properties*) mHostPlugin.mInputParameterList.getValueHandle();
+    Properties* inputParameters = (Properties*) mParent.mInputParameterList.getValueHandle();
     int cnt = inputParameters->count();
     for(int i = 0; i < cnt ; i++)
     {
@@ -210,16 +213,16 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     }
 
     //Set input data to fit to
-    TELHandle experimentalData = getPluginProperty(mLMPlugin, "ExperimentalData");
+    TELHandle experimentalData = getPluginProperty(mMinimizerPlugin, "ExperimentalData");
     setTelluriumDataProperty(experimentalData, mcData);
 
     //Add species to minimization data structure.. The species are defined in the input data
-    StringList modelDataSelectionList = mHostPlugin.mModelDataSelectionList.getValue();
-    TELHandle paraHandle = getPluginProperty(mLMPlugin, "FittedDataSelectionList");
+    StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
+    TELHandle paraHandle = getPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
     setPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
 
-    TELHandle obsList = getPluginProperty(mLMPlugin, "ExperimentalDataSelectionList");
-    StringList ExpDataSelectionList = mHostPlugin.mExperimentalDataSelectionList.getValue();
+    TELHandle obsList = getPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
+    StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
     setPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
 
@@ -231,18 +234,18 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
         return false;
     }
 
-    string strVal = mHostPlugin.mSBML.getValue();
-    if(!setPluginProperty(mLMPlugin, "SBML", strVal.c_str()))
+    string strVal = mParent.mSBML.getValue();
+    if(!setPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
         Log(lError)<<"Failed setting sbml";
         return false;
     }
 
-    executePluginEx(mLMPlugin, false);
+    executePluginEx(mMinimizerPlugin, false);
 
     //Check on success of fitting. If failing, bail
     //Extract the parameters
-    parasHandle = getPluginPropertyValueHandle(mLMPlugin, "OutputParameterList");
+    parasHandle = getPluginPropertyValueHandle(mMinimizerPlugin, "OutputParameterList");
     if(!parasHandle)
     {
         throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
@@ -258,8 +261,8 @@ bool bsWorker::createInitialResiduals()
     //Use the current minimization plugin to run one minimization and then use
     //the result to create residuals
     //Reset on each run
-    resetPlugin(mLMPlugin);
-    TELHandle paraHandle = getPluginProperty(mLMPlugin, "InputParameterList");
+    resetPlugin(mMinimizerPlugin);
+    TELHandle paraHandle = getPluginProperty(mMinimizerPlugin, "InputParameterList");
 
     if(!paraHandle)
     {
@@ -269,7 +272,7 @@ bool bsWorker::createInitialResiduals()
     TELHandle parasHandle = getPropertyValueHandle(paraHandle);
 
     //Add input parameters, only the checked ones
-    Properties* inputParameters = (Properties*) mHostPlugin.mInputParameterList.getValueHandle();
+    Properties* inputParameters = (Properties*) mParent.mInputParameterList.getValueHandle();
     int cnt = inputParameters->count();
     for(int i = 0; i < cnt ; i++)
     {
@@ -282,17 +285,17 @@ bool bsWorker::createInitialResiduals()
     }
 
     //Set input data to fit to
-    TelluriumData*  data = (TelluriumData*) mHostPlugin.mExperimentalData.getValueHandle();
-    TELHandle       experimentalData    = getPluginProperty(mLMPlugin, "ExperimentalData");
+    TelluriumData*  data = (TelluriumData*) mParent.mExperimentalData.getValueHandle();
+    TELHandle       experimentalData    = getPluginProperty(mMinimizerPlugin, "ExperimentalData");
     setTelluriumDataProperty(experimentalData, data);
 
     //Add species to minimization data structure.. The species are defined in the input data
-    StringList modelDataSelectionList = mHostPlugin.mModelDataSelectionList.getValue();
-    paraHandle = getPluginProperty(mLMPlugin, "FittedDataSelectionList");
+    StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
+    paraHandle = getPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
     setPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
 
-    TELHandle obsList = getPluginProperty(mLMPlugin, "ExperimentalDataSelectionList");
-    StringList ExpDataSelectionList = mHostPlugin.mExperimentalDataSelectionList.getValue();
+    TELHandle obsList = getPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
+    StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
     setPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
 
@@ -304,19 +307,19 @@ bool bsWorker::createInitialResiduals()
         return false;
     }
 
-    string strVal = mHostPlugin.mSBML.getValue();
-    if(!setPluginProperty(mLMPlugin, "SBML", strVal.c_str()))
+    string strVal = mParent.mSBML.getValue();
+    if(!setPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
         Log(lError)<<"Failed setting sbml";
         return false;
     }
 
-    executePluginEx(mLMPlugin, false);
+    executePluginEx(mMinimizerPlugin, false);
 
     //Check on success of fitting. If failing, bail the monte carlo..
 
     //We should now have residuals
-    TelluriumData* residuals =   (TelluriumData*) getPluginPropertyValueHandle(mLMPlugin, "Residuals");
+    TelluriumData* residuals =   (TelluriumData*) getPluginPropertyValueHandle(mMinimizerPlugin, "Residuals");
 
     Log(lDebug) <<"Logging residuals: ";
     Log(lDebug) << *(residuals);
@@ -335,11 +338,11 @@ bool bsWorker::createInitialResiduals()
 
 bool bsWorker::createMonteCarloDataSets()
 {
-    TelluriumData& expData      = mHostPlugin.mExperimentalData;
-    TelluriumData* initialFit   = (TelluriumData*) getPluginPropertyValueHandle(mLMPlugin, "FittedData");
+    TelluriumData& expData      = mParent.mExperimentalData;
+    TelluriumData* initialFit   = (TelluriumData*) getPluginPropertyValueHandle(mMinimizerPlugin, "FittedData");
 
     //Create data sets, use fitted data as the "base", to add residuals to later on
-    for(int i = 0; i < mHostPlugin.mNrOfMCRuns; i++)
+    for(int i = 0; i < mParent.mNrOfMCRuns; i++)
     {
         mMCDataSets.push_back(new TelluriumData((*initialFit)));
     }
@@ -366,27 +369,27 @@ bool bsWorker::createMonteCarloDataSets()
 
 void bsWorker::workerStarted()
 {
-    mHostPlugin.mIsWorking = true;
-    if(mHostPlugin.mWorkStartedEvent)
+    mParent.mIsWorking = true;
+    if(mParent.mWorkStartedEvent)
     {
-        mHostPlugin.mWorkStartedEvent(mHostPlugin.mWorkStartedData1, mHostPlugin.mWorkStartedData2);
+        mParent.mWorkStartedEvent(mParent.mWorkStartedData1, mParent.mWorkStartedData2);
     }
 }
 
 void bsWorker::workerProgress()
 {
-    if(mHostPlugin.mWorkProgressEvent)
+    if(mParent.mWorkProgressEvent)
     {
-        mHostPlugin.mWorkProgressEvent(mHostPlugin.mWorkProgressData1, mHostPlugin.mWorkProgressData2);
+        mParent.mWorkProgressEvent(mParent.mWorkProgressData1, mParent.mWorkProgressData2);
     }
 }
 
 void bsWorker::workerFinished()
 {
-    mHostPlugin.mIsWorking = false;//Set this flag before event so client can query plugin about termination
-    if(mHostPlugin.mWorkFinishedEvent)
+    mParent.mIsWorking = false;//Set this flag before event so client can query plugin about termination
+    if(mParent.mWorkFinishedEvent)
     {
-        mHostPlugin.mWorkFinishedEvent(mHostPlugin.mWorkFinishedData1, mHostPlugin.mWorkFinishedData2);
+        mParent.mWorkFinishedEvent(mParent.mWorkFinishedData1, mParent.mWorkFinishedData2);
     }
 }
 
