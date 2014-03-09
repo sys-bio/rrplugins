@@ -166,7 +166,6 @@ install(
     LICENSE.txt 
     AUTHORS.txt 
     FUNDING.txt
-    NOTICE.txt
     VERSION.txt
     NEWS.txt
     DESTINATION .

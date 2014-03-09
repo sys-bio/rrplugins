@@ -5,8 +5,9 @@ try:
     #Create a plugin manager
     pm = createPluginManager()
     
-    pluginName = "tel_add_noise" 
-    plugin = loadPlugin(pm, pluginName)
+    
+    pluginName = "chisquare" 
+    plugin = loadPlugin(pm, 'tel_' + pluginName)
     if not plugin:
         print getLastError()
         exit()

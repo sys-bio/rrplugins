@@ -27,7 +27,6 @@ add_library(${target} MODULE ${sources})
 
 if(WIN32)
 target_link_libraries (${target}
-roadrunner
 telplugins_core
 telplugins_common
 telplugins_math
@@ -47,10 +46,6 @@ else()
     target_link_libraries ( ${target}
         telplugins
         )
-endif()
-
-if(${INSTALL_EXAMPLES})
-add_subdirectory(Examples)
 endif()
 
 install (TARGETS ${target}
