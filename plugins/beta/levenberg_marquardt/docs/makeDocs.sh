@@ -2,7 +2,7 @@
 
 echo "Creating documentation for the plugin"
 mainDoc=mainDoc.tex
-pluginName=lmfit
+pluginName=levenber_marquardt
 chapter=plugin_$pluginName
 pdflatex -jobname=$pluginName "\includeonly{$chapter}\input{$mainDoc}"
 

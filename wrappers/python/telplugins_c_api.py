@@ -167,7 +167,7 @@ def unLoadPlugins(pm):
 ## \return Returns a handle to a plugin, None if unsuccesful
 ##
 ## @code
-## lmPlugin = telPlugins.loadPlugin(pm, "tel_levenberg_marquardt")
+## lmPlugin = telPlugins.loadPlugin(pm, "tel_lm")
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
@@ -221,7 +221,7 @@ def getPluginNames(pm):
 ## @code
 ## names = telPlugins.getPluginLibraryNames(pm)
 ## print names
-## ['tel_add_noise', 'tel_levenberg_marquardt']
+## ['tel_add_noise', 'tel_lm']
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
@@ -613,7 +613,7 @@ telLib.getNamesFromPropertyList.restype = c_char_p
 def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if paraType != 'listOfProperties':
-        raise 'That is not a valid list property'
+        raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
     paras = telLib.getNamesFromPropertyList(listHandle)
     if not paras:
