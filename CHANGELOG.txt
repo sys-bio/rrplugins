@@ -1,82 +1,96 @@
-Release 1.0.0 (Release is created as the current code is merged into 'Releases' branch
-* Refactoring sbml_model -> test_model
-* Added ability to retreve a C++ matrix class from python
-* Added the Hessian and Covariance matrices properties to both lmfit and nelder-mead
-* Added C API functions to get a matrix underlying array
-* Added CAPI functions to get a matrix dimensions
-* Added matrix API to the overall Tellurium C API
-* Fixed bug in how the norm was calculated in the LM fit plugin
-* Got Nelder-Mead working in python script
-* Added Test-Model to CMake system
-* Added Nelder-Mead to CMake system
-* Changed how nr of iterations and number of function evaluations are handled (not the same)
-* Added NM code accept more settings on execution, max iterations, alpha, beta and gamma
-* Added exposure of NOrm values in NM plugin
-* Added calculation of Hessian matrix in NM plugin
-* Added exposure of covariance matrix in NM plugin
-* Added exposure of residuals in NM plugin
-* Added exposure of standarized residuals in NM plugin
-* Added normal probability plot of residuals in NM plugin
-* Added chi and reduced chi square calculation  in NM plugin
-* Added calculation of confidence limits in NM plugin
-* Added getEuclideanNorm to Math utils
-* Added more tuning parameters to NelderMead
-* Added getPropertyAt function to Properties class
-* Removing the 'minimization' class. Not needed, pass handle to plugin to objective function
-* Got the NM plugin working using residuals and norm instead of chi square
-* Changed name of Plugin function setProperty to setPropertyByString
-* Moved lmfits objective function to separate unit
-* Added getNorm function to math utils
-* Added various units to nm fit plugin
-* Renamed sbml_model to test_model
-* Added new copy constructors to TelluriumData, taking Telluriumdata object and Tellurium data pointer as arguments
-* Added conversion operators to double and string properties
-* changed name of sbml_model plugin to test_model
-* added simulated data and simulated data with noise to test_model plugin
-* created example using the NelderMead plugin
-* Removed various log statements when reading data
-* Added setValue(void*) functions to Property classes
-* Added new copy constructor to TelluriumData, taking a pointer to roadrunner data as argument
-* Added convenience functions to the abstract plugin interface: getPropertyValueAsString, getPropertyValueHandle and setPropertyValue(name, void*)
-* Added conversion operator to Property<string> property
-* Embedded the SBML model to model plugin
-* Got Nelder Mead example (rr_example) minimizing a sbml model
-* Organized NM folder
-* Added poco as a third party to Tellurium plugins
-* Setting up simple NM example with RoadRunner
-* Added new simplex method, simplex2, that allow user data to be passed into the callback function
-* Added NelderMead example for a simple sbml model
-* Nelder-Mead work
-* First compile of NelderMead plugin
-* Initial commit of Nelder Mead plugin sources
-* Cleaned up (removed obsolete) files in the plugins site_packages folder
-* Added API version info to CPP/C and Python API's
-* Added getCopyright function to CPP/C and Python API's
-* White space cleanup in python ctypes api
-* Added Wilberts model and data
-* Added LMFit engine status message as a plugin property
-* Improved exception handling when fitting is failing
-* Added plugin C API function getPluginPropertyValueAsString(pluginHandle, "NameOfProperty")
-* Ran some MonteCarlo
-* Added python script showing MonteCarlo parameters as a histogram
-* Updated Monte Carlo plugin to expose fitted parameters (as tellurium Data) from each monte carlo run.
-* Added a 'Current' parameters property that can be used to monitor calculated parameters as the MOnte Carlo progresses
-* Added some more files
-* Updated doxy introduction in OO python file
-* Updated python doxygen example docs
-* Merge branch 'master' of https://github.com/sys-bio/telPlugins
-* Updated documentation
-* Created example folder containing scripts mainly using the raw python API
-* Renamed telLMFit1
-* Adding property to monitor parameters in each MC run (onProgress)
-* Added script to read monte carlo data sets
-* Implemented the first python Monte Carlo script
-* Minor update
-* Updated installation of Python examples
-* Updated all python examples to use the sbml model plugin as an example model
-* Added catch of exception in Python plugins execute method
-* Added exception in lm fit plugin for the case the chi square plugin is not loaded
-* Organized examples into folders
+Release 1.0.1 (2014-03-08)
+* Marked TestModel plugin as released (TK)
+* Added more python examples (TK)
+* Updated TestModel plugin documentation (TK)
+* Moved AddNoise plugin to release folder (TK)
+* Renamed lmfit folder to levenberg_marquardt (TK)
+* Updated cmake files to create a cleaner release (TK)
+* Updated AddNoise plugin docs (TK)
+* Updated MonteCarlo python script (TK)
+* Ran Monte carlo using Nelder-Mead from python (TK)
+* Updated Monte Carlo plugin to accept custom minimizer plugin (TK)
+* Added new Monte-Carlo string property to use for assigning minimizer plugin (defaults to Levenberg-Marquadt) (TK)
+* Added matrix C api to tellurium plugins (TK)
+
+Release 1.0.0 (2014-03-08) (TK)
+* Refactoring sbml_model -> test_model (TK)
+* Added ability to retreve a C++ matrix class from python (TK)
+* Added the Hessian and Covariance matrices properties to both lmfit and nelder-mead (TK)
+* Added C API functions to get a matrix underlying array (TK)
+* Added CAPI functions to get a matrix dimensions (TK)
+* Added matrix API to the overall Tellurium C API (TK)
+* Fixed bug in how the norm was calculated in the LM fit plugin (TK)
+* Got Nelder-Mead working in python script (TK)
+* Added Test-Model to CMake system (TK)
+* Added Nelder-Mead to CMake system (TK)
+* Changed how nr of iterations and number of function evaluations are handled (not the same) (TK)
+* Added NM code accept more settings on execution, max iterations, alpha, beta and gamma (TK)
+* Added exposure of NOrm values in NM plugin (TK)
+* Added calculation of Hessian matrix in NM plugin (TK)
+* Added exposure of covariance matrix in NM plugin (TK)
+* Added exposure of residuals in NM plugin (TK)
+* Added exposure of standarized residuals in NM plugin (TK)
+* Added normal probability plot of residuals in NM plugin (TK)
+* Added chi and reduced chi square calculation  in NM plugin (TK)
+* Added calculation of confidence limits in NM plugin (TK)
+* Added getEuclideanNorm to Math utils (TK)
+* Added more tuning parameters to NelderMead (TK)
+* Added getPropertyAt function to Properties class (TK)
+* Removing the 'minimization' class. Not needed, pass handle to plugin to objective function (TK)
+* Got the NM plugin working using residuals and norm instead of chi square (TK)
+* Changed name of Plugin function setProperty to setPropertyByString (TK)
+* Moved lmfits objective function to separate unit (TK)
+* Added getNorm function to math utils (TK)
+* Added various units to nm fit plugin (TK)
+* Renamed sbml_model to test_model (TK)
+* Added new copy constructors to TelluriumData, taking Telluriumdata object and Tellurium data pointer as arguments (TK)
+* Added conversion operators to double and string properties (TK)
+* changed name of sbml_model plugin to test_model (TK)
+* added simulated data and simulated data with noise to test_model plugin (TK)
+* created example using the NelderMead plugin (TK)
+* Removed various log statements when reading data (TK)
+* Added setValue(void*) functions to Property classes (TK)
+* Added new copy constructor to TelluriumData, taking a pointer to roadrunner data as argument (TK)
+* Added convenience functions to the abstract plugin interface: getPropertyValueAsString, getPropertyValueHandle and setPropertyValue(name, void*) (TK)
+* Added conversion operator to Property<string> property (TK)
+* Embedded the SBML model to model plugin (TK)
+* Got Nelder Mead example (rr_example) minimizing a sbml model (TK)
+* Organized NM folder (TK)
+* Added poco as a third party to Tellurium plugins (TK)
+* Setting up simple NM example with RoadRunner (TK)
+* Added new simplex method, simplex2, that allow user data to be passed into the callback function (TK)
+* Added NelderMead example for a simple sbml model (TK)
+* Nelder-Mead work (TK)
+* First compile of NelderMead plugin (TK)
+* Initial commit of Nelder Mead plugin sources (TK)
+* Cleaned up (removed obsolete) files in the plugins site_packages folder (TK)
+* Added API version info to CPP/C and Python API's (TK)
+* Added getCopyright function to CPP/C and Python API's (TK)
+* White space cleanup in python ctypes api (TK)
+* Added Wilberts model and data (TK)
+* Added LMFit engine status message as a plugin property (TK)
+* Improved exception handling when fitting is failing (TK)
+* Added plugin C API function getPluginPropertyValueAsString(pluginHandle, "NameOfProperty") (TK)
+* Ran some MonteCarlo (TK)
+* Added python script showing MonteCarlo parameters as a histogram (TK)
+* Updated Monte Carlo plugin to expose fitted parameters (as tellurium Data) from each monte carlo run. (TK)
+* Added a 'Current' parameters property that can be used to monitor calculated parameters as the MOnte Carlo progresses (TK)
+* Added some more files (TK)
+* Updated doxy introduction in OO python file (TK)
+* Updated python doxygen example docs (TK)
+* Merge branch 'master' of https://github.com/sys-bio/telPlugins (TK)
+* Updated documentation (TK)
+* Created example folder containing scripts mainly using the raw python API (TK)
+* Renamed telLMFit1 (TK)
+* Adding property to monitor parameters in each MC run (onProgress) (TK)
+* Added script to read monte carlo data sets (TK)
+* Implemented the first python Monte Carlo script (TK)
+* Minor update (TK)
+* Updated installation of Python examples (TK)
+* Updated all python examples to use the sbml model plugin as an example model (TK)
+* Added catch of exception in Python plugins execute method (TK)
+* Added exception in lm fit plugin for the case the chi square plugin is not loaded (TK)
+* Organized examples into folders (TK)
 
 Release 0.6.9 (2014-02-27)
 * installer scripts added (MG)

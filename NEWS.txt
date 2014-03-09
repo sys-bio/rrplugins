@@ -1,2 +1,8 @@
-Jan 13 2014
+== 2014 ==
+
+March 6
+    The AddNoise and TestModel plugins were released.
+
+Jan 13 
     This file was added and git repository was initially populated (TK)
+    
