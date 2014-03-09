@@ -1,3 +1,13 @@
+Release 1.0.3 (2014-03-09)
+* Added viewing of manual and version number in root example scripts
+* Updated Readme file in python examples folder
+* Updated LM fit example. Not using getResult() function anymore.
+* Fixed bug in getNextProperty() python function
+* Updated Levenberg_Marquardt docs
+* Changed name of lmfit plugin from tel_lm to tel_levenberg_marquardt
+* Refactoring -> changed all py scripts using the lmfit plugin to use the new name
+* Added file ChangeLog.txt to install
+
 Release 1.0.2 (2014-03-08)
 * Added example for AddNoise  (TK)
 * Released chisquare plugin (TK)
