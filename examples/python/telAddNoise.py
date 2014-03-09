@@ -21,5 +21,7 @@ try:
     # Get the data to plot
     noisePlugin.InputData.plot()            
 
+    noisePlugin.viewManual()
+    print 'Plugin version: ' + `noisePlugin.getVersion()`    
 except Exception as e:
     print 'Problem: ' + `e`

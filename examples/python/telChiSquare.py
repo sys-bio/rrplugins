@@ -21,6 +21,8 @@ try:
     
     print 'ChiSquare is: ' + `chi`
     print 'Reduced ChiSquare is: ' + `reduced_chi`
-    
+    chiSquarePlugin.viewManual()
+    print 'Plugin version: ' + `chiSquarePlugin.getVersion()`  
+          
 except Exception as e:
     print 'Problem: ' + `e`
