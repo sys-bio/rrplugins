@@ -1,16 +1,18 @@
-\chapter{Parameter Minimization using the Levenberg-Marquardt algorithm}
+\chapter*{Parameter Minimization using the Levenberg-Marquardt algorithm}
+\setcounter{chapter}{1}
 \emph{Do some fitting}
 \section{Introduction}
 The Levenberg-Marquardt plugin is used to fit a SBML models parameters to experimental data. 
 
-The current implementation is based on the lmfit C library by Joachim Wuttke. See footnote\footnote{The package lmfit is distributed under the FreeBSD License:
+The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as 
+access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values do also come with estimated confidence limits.
+
+The current implementation is based on the lmfit C library by Joachim Wuttke\footnote{The package lmfit is distributed under the FreeBSD License:
 
 --
   Copyright (c) 2013 Joachim Wuttke All rights reserved.
---} for license disclosure.
+--}.
 
-The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as 
-access to generated fitted data after a minimization session. 
 
 Plugin properties are documented in the next section.
 
@@ -97,41 +99,11 @@ Line by line description of the code is given below.
 \lstinputlisting[label=plugin_lmfit_header,caption={Minimization example.},language=Python]{Examples/telLevenbergMarquardt.py}
 \end{singlespace}
 
-\begin{description}
-{
-\setlength\labelwidth{3in}
-}
-\item[Line 1-3:] \hfill \\
-    Import necessary python packages.
-\item[Line 6:] \hfill \\
-Create a lmFit python object.
-\item[Line 9-21:]\hfill \\
- This section defines an event function (line 9-14), creates a 
-variable representing the function (line 16). Line 20 retrieves a unique ID for the plugin object. Line 21 assigns the event function variable and the ID of the plugin to the event
-functions first argument. 
-When the plugin calls the event function, the ID of the plugin object can be retrieved in the functions first argument.
-
-The sole purpose of the progress event function is to give the user information on how the minimization is progressing. 
-
-\item[Line 25:] \hfill \\
-Read a sbml model from file to be used in the fitting.
-\item[Line 26-27:]\hfill \\
- Read experimental data from  file, and assign it to the plugins experimental data property.
-\item[Line 30-32:]\hfill \\
- Setup required plugin properties. Line 30 assigns a parameter to be fitted, with an initial valur. Line 31 and 32 assigns selections for input and output data.
-\item[Line 35:] \hfill \\
-Execute the plugin.
-\item[Line 37-38:]\hfill \\
- After finishing the minimization, print the result.
-\item[Line 40-53:]\hfill \\
- These lines prepares data to be plotted, (line 41-52) and then plots it on line 53
-
-\end{description}
 
 \begin{sidewaysfigure}
 \centering
 \includegraphics[width=220mm]{Minimization.jpg}
-\caption{Output for the LMFit python example script discussed above.}
+\caption{Typical output for the example script above.}
 \label{fig:lmfitFig}
 \end{sidewaysfigure}
 

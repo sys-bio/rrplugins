@@ -612,7 +612,9 @@ def clearPropertyList(propertyListHandle):
 telLib.getNamesFromPropertyList.restype = c_char_p
 def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
-    if paraType != 'listOfProperties':
+    if not paraType:
+        print getLastError()
+    if paraType != 'listOfProperties':        
         raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
     paras = telLib.getNamesFromPropertyList(listHandle)
@@ -642,8 +644,9 @@ def getFirstProperty(paraListHandle):
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
-def getNextProperty(propertyListHandle):
-    return telLib.getNextProperty(paraListHandle)
+def getNextProperty(paraListHandle):
+    handle = getPropertyValueHandle(paraListHandle)
+    return telLib.getNextProperty(handle)
 
 ## \brief Get a property handle to a property given the name of the property.
 ## \param pluginHandle Handle to a plugin

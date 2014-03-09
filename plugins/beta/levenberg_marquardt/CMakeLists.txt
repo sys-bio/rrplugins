@@ -19,7 +19,7 @@ lm
 lmWorker
 lmUtils
 lmObjectiveFunction
-lmfit_doc
+levenberg_marquardt
 )
 
 #This is where the Levenberg C lib is built

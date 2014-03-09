@@ -41,17 +41,21 @@ try:
     print 'Covariance  Matrix'
     print lm.getProperty("CovarianceMatrix")
              
-    print 'ChiSquare = ' + `lm.getProperty("ChiSquare")`
-    print 'Reduced ChiSquare = ' + `lm.getProperty("ReducedChiSquare")`
+    print 'ChiSquare = '            + `lm.getProperty("ChiSquare")`
+    print 'Reduced ChiSquare = '    + `lm.getProperty("ReducedChiSquare")`
         
+    #This is a list of parameters
+    parameters = tpc.getPluginProperty (lm.plugin, "OutputParameterList")
+    confLimits = tpc.getPluginProperty (lm.plugin, "ConfidenceLimits")    
     
-    parameters = lm.getProperty("OutputParameterList")
-    
-    names = getNamesFromPropertyList (parameters)
-        
-    
-    getPluginResult(lm.plugin)
-    
+    #Iterate trough list of parameters and confidence limits
+    para  = getFirstProperty(parameters)
+    limit = getFirstProperty(confLimits)     
+    while para and limit:           
+        print getPropertyName(para) + ' = ' + `getPropertyValue(para)` + ' +/- ' + `getPropertyValue(limit)`
+        para  = getNextProperty(parameters)
+        limit = getNextProperty(confLimits)                        
+                                 
     # Get the experimental data as a numpy array
     experimentalData = modelPlugin.TestDataWithNoise.toNumpy
     

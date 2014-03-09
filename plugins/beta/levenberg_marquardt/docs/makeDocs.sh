@@ -2,7 +2,7 @@
 
 echo "Creating documentation for the plugin"
 mainDoc=mainDoc.tex
-pluginName=levenber_marquardt
+pluginName=levenberg_marquardt
 chapter=plugin_$pluginName
 pdflatex -jobname=$pluginName "\includeonly{$chapter}\input{$mainDoc}"
 
@@ -26,7 +26,7 @@ echo "unsigned char pdf_doc[]={" >> $cppFile
 cat $pluginName.pdf | (xxd -i; echo "};") >> $cppFile
 echo "size_t sizeofPDF = sizeof(pdf_doc);" >> $cppFile
 
-cp $hdrFile $cppFile ..
+mv $hdrFile $cppFile ..
 echo "Done.."
 
 

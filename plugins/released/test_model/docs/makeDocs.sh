@@ -26,7 +26,7 @@ echo "unsigned char pdf_doc[]={" >> $cppFile
 cat $pluginName.pdf | (xxd -i; echo "};") >> $cppFile
 echo "size_t sizeofPDF = sizeof(pdf_doc);" >> $cppFile
 
-cp $hdrFile $cppFile ..
+mv $hdrFile $cppFile ..
 echo "Done.."
 
 
