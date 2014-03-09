@@ -14,17 +14,15 @@ TestModel::TestModel(PluginManager* manager)
 CPPPlugin(  "TestModel",                 "Examples",    NULL,    manager),  //Construct Base
 //Properties
 mModel(                         "",                     "Model",                    "A SBML model"),
-mSimulatedData(                 TelluriumData(),        "SimulatedData",            "Simulated Data"),
-mSimulatedDataWithNoise(        TelluriumData(),        "SimulatedDataWithNoise",   "Simulated Data With Noise"),
-mSigma(                         3.e-6,                  "Sigma",                    "Sigma (<=> size of applied noise)"),
-//Non properties
-mModelFileName("sbml_test_0001.xml")
+mTestData(                      TelluriumData(),        "TestData",            "Simulated Data"),
+mTestDataWithNoise(             TelluriumData(),        "TestDataWithNoise",   "Simulated Data With Noise"),
+mSigma(                         3.e-6,                  "Sigma",                    "Sigma (<=> size of applied noise)")
 {
-    mVersion = "1.0";
+    mVersion = "1.0.0";
     //Setup the plugins properties
     mProperties.add(&mModel);
-    mProperties.add(&mSimulatedData);
-    mProperties.add(&mSimulatedDataWithNoise);
+    mProperties.add(&mTestData);
+    mProperties.add(&mTestDataWithNoise);
 
     mHint ="Get access to a SBML model, and simulated data using the model.";
     mDescription="The TestModel plugin exposes one property containing a simple SBML model as a string. \
@@ -66,19 +64,19 @@ bool TestModel::execute(bool inThread)
     opt.steps       = 14;
 
     TelluriumData data(rr.simulate(&opt));
-    mSimulatedData.setValue(data);
+    mTestData.setValue(data);
 
     //Add noise
     const PluginManager* PM = this->getPluginManager();
     Plugin* noise = PM->getPlugin("AddNoise");
 
-    mSimulatedDataWithNoise.setValue(mSimulatedData.getValue());
+    mTestDataWithNoise.setValue(mTestData.getValue());
 
     noise->setPropertyValue("Sigma", mSigma.getValueHandle());
-    noise->setPropertyValue("InputData", mSimulatedDataWithNoise.getValueHandle());
+    noise->setPropertyValue("InputData", mTestDataWithNoise.getValueHandle());
     noise->execute();
 
-    mSimulatedDataWithNoise.setValue(noise->getPropertyValueHandle("InputData"));
+    mTestDataWithNoise.setValue(noise->getPropertyValueHandle("InputData"));
 
     //Add weights
     addWeights();
@@ -87,7 +85,7 @@ bool TestModel::execute(bool inThread)
 
 void TestModel::addWeights()
 {
-    TelluriumData &data = * (TelluriumData*) mSimulatedDataWithNoise.getValueHandle();
+    TelluriumData &data = * (TelluriumData*) mTestDataWithNoise.getValueHandle();
     if(!data.hasWeights())
     {
         data.allocateWeights();

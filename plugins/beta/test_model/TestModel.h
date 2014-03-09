@@ -16,10 +16,9 @@ class TestModel : public CPPPlugin
         unsigned int                getPDFManualByteSize();
 
     private:
-        const string                mModelFileName;
         Property<string>            mModel;
-        Property<TelluriumData>     mSimulatedData;
-        Property<TelluriumData>     mSimulatedDataWithNoise;
+        Property<TelluriumData>     mTestData;
+        Property<TelluriumData>     mTestDataWithNoise;
         Property<double>            mSigma;
         void                        addWeights();
 };
