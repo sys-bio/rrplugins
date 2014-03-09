@@ -16,6 +16,7 @@ if(${TLP_BUILD_BETA_PLUGINS} STREQUAL ON)
     add_subdirectory(beta)
 endif()
 
+    add_subdirectory(released)
 install(
     FILES README.txt
     DESTINATION plugins

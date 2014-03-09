@@ -14,8 +14,8 @@ TestModel::TestModel(PluginManager* manager)
 CPPPlugin(  "TestModel",                 "Examples",    NULL,    manager),  //Construct Base
 //Properties
 mModel(                         "",                     "Model",                    "A SBML model"),
-mTestData(                      TelluriumData(),        "TestData",            "Simulated Data"),
-mTestDataWithNoise(             TelluriumData(),        "TestDataWithNoise",   "Simulated Data With Noise"),
+mTestData(                      TelluriumData(),        "TestData",                 "Simulated Data"),
+mTestDataWithNoise(             TelluriumData(),        "TestDataWithNoise",        "Simulated Data With Noise"),
 mSigma(                         3.e-6,                  "Sigma",                    "Sigma (<=> size of applied noise)")
 {
     mVersion = "1.0.0";

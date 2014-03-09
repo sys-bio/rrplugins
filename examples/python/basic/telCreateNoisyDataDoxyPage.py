@@ -28,9 +28,10 @@ noisePlugin.InputData = d
 # Get parameter for the 'size' of the noise
 noisePlugin.Sigma = 5.e-6
 
-noisePlugin.execute ()
+noisePlugin.InputData.plot()
+noisePlugin.execute()
 
-noisePlugin.InputData.plot ()
+noisePlugin.InputData.plot()
 tel.show()
 
 print "done"

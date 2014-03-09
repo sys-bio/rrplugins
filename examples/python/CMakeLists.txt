@@ -1,9 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(TEL_PYTHON_EXAMPLES)
 
+FILE (GLOB plugin_examples *.py)
 
 install(    
-FILES README.txt 
+FILES README.txt ${plugin_examples}
 DESTINATION examples/python 	
 COMPONENT examples
 )
@@ -50,6 +51,3 @@ FILES ${stat}
 DESTINATION examples/python/statistics
 COMPONENT examples
 )
-
-
-
