@@ -6,9 +6,7 @@ lm              = Plugin("tel_levenberg_marquardt")
 modelPlugin     = Plugin("tel_test_model")
 addNoisePlugin  = Plugin("tel_add_noise")
 
-try:
-    print 'Plugin version: ' + `lm.getVersion()`
-    
+try:    
     #========== EVENT FUNCTION SETUP ===========================
     def myEvent(dummy): #We are not capturing any data from the plugin, so just pass a dummy
         print 'Iteration, Norm = ' + `lm.getProperty("NrOfIter")`  + ', ' + `lm.getProperty("Norm")`
@@ -75,6 +73,7 @@ try:
     
     #Finally, view the manual and version
     lm.viewManual()    
+    print 'Plugin version: ' + `lm.getVersion()`
     
 except Exception as e:
     print 'Problem.. ' + `e`         

@@ -1,29 +1,29 @@
 from telplugins import *
 
-#Get a lmfit plugin object
+# Load Plugins
 chiPlugin       = Plugin("tel_chisquare")
 lm              = Plugin("tel_levenberg_marquardt")
 modelPlugin     = Plugin("tel_test_model")
 addNoisePlugin  = Plugin("tel_add_noise")
 
-#========== EVENT FUNCTION SETUP ===========================
-def myEvent(dummy):
-    print 'Iteration, Norm = ' + `lm.getProperty("NrOfIter")`  + ', ' + `lm.getProperty("Norm")`
+try:
+    #========== EVENT FUNCTION SETUP ===========================
+    def myEvent(dummy): #We are not capturing any data from the plugin, so just pass a dummy
+        print 'Iteration, Norm = ' + `lm.getProperty("NrOfIter")`  + ', ' + `lm.getProperty("Norm")`
 
-try:   
     #Setup progress event function
     progressEvent =  NotifyEventEx(myEvent)     
     assignOnProgressEvent(lm.plugin, progressEvent)
     #============================================================
     
-    #Create model data, with and without noise
+    #Create model data, with and without noise using the test_model plugin
     modelPlugin.execute()     
     
     #Setup lmfit properties.
     lm.SBML             = modelPlugin.Model 
     lm.ExperimentalData = modelPlugin.TestDataWithNoise
     
-    # Add the parameters that we're going to fit and a initial 'start' value
+    # Add the parameters that we're going to fit and an initial 'start' value
     lm.setProperty("InputParameterList", ["k1", .3])
     lm.setProperty("FittedDataSelectionList", "[S1] [S2]")
     lm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
@@ -32,7 +32,6 @@ try:
     lm.execute()
     
     print 'Minimization finished. \n==== Result ===='    
-
     print 'Fit engine status: ' + `lm.getProperty('StatusMessage')`
 
     print 'Hessian Matrix'
@@ -56,12 +55,13 @@ try:
         para  = getNextProperty(parameters)
         limit = getNextProperty(confLimits)                        
                                  
-    # Get the experimental data as a numpy array
-    experimentalData = modelPlugin.TestDataWithNoise.toNumpy
     
     # Get the fitted and residual data
     fittedData = lm.getProperty ("FittedData").toNumpy
     residuals  = lm.getProperty ("Residuals").toNumpy
+
+    # Get the experimental data as a numpy array
+    experimentalData = modelPlugin.TestDataWithNoise.toNumpy
     
     telplugins.plot(fittedData         [:,[0,1]], "blue", "-",    "",    "S1 Fitted")
     telplugins.plot(fittedData         [:,[0,2]], "blue", "-",    "",    "S2 Fitted")

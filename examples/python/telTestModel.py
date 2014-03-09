@@ -15,6 +15,7 @@ try:
     test_data_with_noise.plot()
         
     modelPlugin.viewManual()   
-    print 'Plugin version: ' + `modelPlugin.getVersion()`         
+    print 'Plugin version: ' + `modelPlugin.getVersion()`
+             
 except Exception as e:
     print 'Problem: ' + `e`

@@ -1,10 +1,9 @@
-Release 1.0.1 (2014-03-09)
+Release 1.0.0 (2014-03-09)
 ==========================
-
-
-Release 1.0.0 (2014-01-23)
-==========================
+- Updated PDF documentation (TK)
+- Added retrieval of individual fitted parameters and their confidence limits in example script (TK)
 - Version number bumped to 1.0.0 (TK)
+
 
 Release 0.6.6 (2014-01-12)
 ==========================

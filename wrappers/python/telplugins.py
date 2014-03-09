@@ -95,8 +95,8 @@ class DataSeries(object):
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
-
-    ## \brief Retrive the column headers as a list
+           
+    ## \brief Retrieve the column headers as a list
     ##@code
     ## print d.getColumnHeaders()
     ##@endcode
@@ -287,6 +287,14 @@ class Plugin (object):
             for element in lp:
                 self._propertyNames.append (element[0])
       
+    ## \brief Retrieve the plugins version
+    ##@code
+    ## print plugin.getVersion()
+    ##@endcode
+    def getVersion(self):
+        text = tpc.getPluginVersion(self.plugin)
+        return text
+
     ## \brief Set a given propoerty in the plugin.
     ##@code
     ## myPlugin.setProperty ("Sigma", 0.1)

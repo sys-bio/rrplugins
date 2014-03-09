@@ -22,7 +22,7 @@ mChiSquare(                     0,                      "ChiSquare",            
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square (output)", "", "", true),
 mWorker(*this)
 {
-    mVersion = "0.8";
+    mVersion = "1.0.0";
 
     //Add plugin properties to property container
     mProperties.add(&mExperimentalData);

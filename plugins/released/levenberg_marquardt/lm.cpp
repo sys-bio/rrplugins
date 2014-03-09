@@ -4,7 +4,7 @@
 #include "rr/rrException.h"
 #include "telException.h"
 #include "rr/rrRoadRunner.h"
-#include "lmfit_doc.h"
+#include "levenberg_marquardt_doc.h"
 #include "lm.h"
 #include "telTelluriumData.h"
 #include "telUtils.h"
@@ -62,7 +62,7 @@ mWorker(*this),
 mLMData(mWorker.mLMData),
 rNormsData(mNorms.getValueReference())
 {
-    mVersion = "0.8";
+    mVersion = "1.0.0";
 
     //Add plugin properties to property container
     mProperties.add(&mSBML);

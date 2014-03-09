@@ -24,7 +24,7 @@ Available properties in the Levenberg-Marquardt plugin are listed in the table b
 \centering % used for centering table
 \begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns 
 
-Parameter Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
+Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
 SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
@@ -68,7 +68,7 @@ patience                        &   double              & 100                   
 \end{landscape}
 
 \section{Plugin Events}
-The lmFit plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+The Levenberg-Marquardt plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
 the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
@@ -93,12 +93,9 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \section{Python example}
 The following Python script illustrate how the plugin can be used. 
 
-Line by line description of the code is given below.
-
 \begin{singlespace}
 \lstinputlisting[label=plugin_lmfit_header,caption={Minimization example.},language=Python]{Examples/telLevenbergMarquardt.py}
 \end{singlespace}
-
 
 \begin{sidewaysfigure}
 \centering

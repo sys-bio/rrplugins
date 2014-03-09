@@ -2,16 +2,16 @@ Folder containing example/demo scripts on how to use plugins.
 
 The following folders are currently part of the Tellurium plugin distribution
 == basic ==
-    *Contain various scripts deomonstrating basic interaction with the plugin system
+    Contain various scripts deomonstrating basic interaction with the plugin system
 
 == parameter_minimization ==
-    *Scripts and examples using minimization plugins
+    Scripts and examples using minimization plugins
 
 == statistics ==
-    *Scripts showing how to use various statistic features of plugins
+    Scripts showing how to use various statistic features of plugins
 
 
-In addition, this folder contain example script for each released plugin:
+In addition, this current folder contain one example script for each released plugin:
 
 * telTestModel.py                   - Demonstrate usage of the TestModel plugin
 * telAddNoise.py                    - Demonstrate usage of the AddNoise plugin
