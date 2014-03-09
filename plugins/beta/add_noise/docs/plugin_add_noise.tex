@@ -14,9 +14,9 @@ PWS Publishing Company, 1998, pp 49-50.}
 
 Currently only Gaussian noise is implemented. 
 
- 
 \section{Plugin Parameters}
-In the following, plugin parameters available in the AddNoise plugin are discussed.
+Table \ref{table:AddNoisePluginParameters} lists available plugin property names, along with their data type and purpose.
+
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -25,9 +25,10 @@ In the following, plugin parameters available in the AddNoise plugin are discuss
 Parameter Name & Data Type & Purpose \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
-Sigma,($\sigma$)         	& 	double & Size of applied noise. Noise is generated for each single data value, with a probability corresponding to a Gaussian distribution, centered around the value, and with a variance equal to $\sigma^2$ .\\
-NoiseType      	& 	int    & Type of noise generated. Only Gaussian noise is currently supported. \\
-Progress     	& 	double  & The progress property communicates the progress of Noise application. \\
+InputData         		& 	TelluriumData & Data on which noise will be applied to. \\
+Sigma,($\sigma$)      	& 	double & Size of applied noise. Noise is generated for each single data value, with a probability corresponding to a Gaussian distribution, centered around the value, and with a variance equal to $\sigma^2$ .\\
+NoiseType      	& 	int    & Type of noise applied on data. Only Gaussian noise is currently supported. \\
+Progress     	& 	double  & The progress property communicates the progress (in percent) of Noise application. \\
 
 \hline %inserts single line
 \end{tabular}
@@ -68,7 +69,7 @@ The inThread argument defaults to \textbf{false}.
 \section{Python examples}
 
 \subsection{Add noise to data acquired from RoadRunner}
-The python script below shows how to acquire simulation data from RoadRunner and pass it to he noise plugin. The format of the data that is obtained from the \verb|simulate()| function (line 8), is not directly compatible with the Noise plugins InputData property. This incompatibility is handled by an intermediate data structure in Python, that is called DataSeries (line 14). 
+The python script below shows how to acquire simulation data from RoadRunner and pass it to he noise plugin. The format of the data, that is obtained from the \verb|simulate()| function (line 8), is not directly compatible with the Noise plugins InputData property. This incompatibility is handled by an intermediate data structure in Python, that is called DataSeries (line 14). 
 The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respectively. Line 23 denote the execution of the noise plugin, and after that has finished, data can be visualized by using the \verb|plot| function (line 26). The output is shown below the script. 
 
 \begin{singlespace}
@@ -83,7 +84,7 @@ The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respe
 \end{figure}
 
 \subsection{Visualization of the noise distribution used in the AddNoise plugin}
-The Python script below demonstrate the actual distribution (Gaussian) of noise that is applied on data.
+The Python script below demonstrate how to obtain and visualize the actual distribution (Gaussian) of noise that is applied on data.
 
 \begin{singlespace}
 \lstinputlisting[label=plugin_addNoise_header,caption={Noise distribution example.},language=Python]{Examples/telNoisePluginEx2.py}
