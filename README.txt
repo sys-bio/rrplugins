@@ -3,7 +3,7 @@ Copyright 2013-2014
 
 M. T. Karlsson 1, M. Galdzicki 2  and H. M Sauro 2
 
-1 Dune Scientific, 10522 Lake City Way NE, #302 Seattle WA
+1 Dune Scientific, LLC 10522 Lake City Way NE, #302 Seattle WA
 2 Department of Bioengineering, University of Washington, Seattle, WA, 98195
 
 Availability
