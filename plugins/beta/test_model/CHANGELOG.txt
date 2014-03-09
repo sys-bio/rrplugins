@@ -1,9 +1,5 @@
-Release 0.6.7 (2014-01-23)
+Release 1.0.0 (2014-03-08)
 ==========================
-- Added example showing the noise distribution as a histogram
-- Updated Noise plugin noise generation
+- Test model plugin release
 
-Release 0.6.6 (2014-01-12)
-==========================
-- Initial commit of plugin and third party source from roadrunner repository at: https://github.com/AndySomogyi/roadrunner (TK)
 

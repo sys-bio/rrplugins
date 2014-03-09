@@ -17,7 +17,7 @@ OPTION (TLP_BUILD_TEST_MODEL_PLUGIN	            "Build the Test Model Plugin"	  
 OPTION (TLP_BUILD_MONTE_CARLO_BS_PLUGIN	        "Build the Monte Carlo BS (bootstrap) Plugin"   ON)
 
 if(${TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN} STREQUAL ON)
-    add_subdirectory(lmfit)
+    add_subdirectory(levenberg_marquardt)
 endif()
 
 if(${TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN} STREQUAL ON)
