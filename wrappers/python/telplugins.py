@@ -340,7 +340,7 @@ class Plugin (object):
             arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double * length))                                                            
             a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))      
                               
-            a= a.reshape(2,2)                              
+            a= a.reshape(rSize,cSize)                              
             return a            
             
         else:

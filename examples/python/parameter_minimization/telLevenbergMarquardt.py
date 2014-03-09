@@ -38,8 +38,11 @@ try:
     # Start minimization
     lm.execute()
     
-    hessian = lm.getProperty("Hessian")
-    print 'Minimization finished. \n==== Result ====' 
+    print 'Minimization finished. \n==== Result ===='
+    
+    print 'Hessian Matrix'
+    print lm.getProperty("Hessian")    
+     
     print tel.getPluginResult(lm.plugin)
     
     # Get the experimental data as a numpy array

@@ -5,7 +5,7 @@ try:
     #Create a plugin manager
     pm = createPluginManager()
     
-    pluginName = "tel_add_noise" #"tel_lm"
+    pluginName = "tel_add_noise" 
     plugin = loadPlugin(pm, pluginName)
     if not plugin:
         print getLastError()

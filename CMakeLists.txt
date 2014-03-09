@@ -42,7 +42,7 @@ set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 OPTION (INSTALL_APPS            "Build and Install Apps"                         ON )
 OPTION (INSTALL_STATIC_LIB      "Install TelluriumPlugins CXX Static Lib"        OFF)
 OPTION (TLP_BUILD_SHARED_CORE   "Build TelluriumPlugins Core Shared Library"     ON)
-OPTION (BUILD_EXAMPLES          "Build and Install Tellurium Plugin Examples"    OFF)
+OPTION (INSTALL_EXAMPLES        "Build and Install Tellurium Plugin Examples"    OFF)
 OPTION (BUILD_TEST_TOOLS        "Build Tellurium Plugins Test Tools"             OFF)
 
 set(TLP_ROOT                      ${CMAKE_CURRENT_SOURCE_DIR})
@@ -133,7 +133,7 @@ if(INSTALL_APPS)
     add_subdirectory(apps)
 endif()
 
-if(BUILD_EXAMPLES)
+if(INSTALL_EXAMPLES)
     add_subdirectory(examples)
 endif()
 

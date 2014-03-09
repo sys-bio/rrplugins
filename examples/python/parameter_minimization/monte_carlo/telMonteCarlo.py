@@ -34,7 +34,7 @@ try:
     mcP.ExperimentalData                 = DataSeries.readDataSeries ("testData.dat")    
     mcP.SBML                             = modelP.Model             
     mcP.MinimizerPlugin                  = "Nelder-Mead"
-    mcP.NrOfMCRuns                       = 1
+    mcP.NrOfMCRuns                       = 10
     mcP.InputParameterList               = ["k1", 1.3]
     mcP.FittedDataSelectionList          = "[S1] [S2]"
     mcP.ExperimentalDataSelectionList    = "[S1] [S2]"

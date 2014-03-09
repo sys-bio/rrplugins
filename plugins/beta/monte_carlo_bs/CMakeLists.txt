@@ -70,9 +70,9 @@ else()
         )
 endif()
 
-if(${INSTALL_EXAMPLES})
-add_subdirectory(Examples)
-endif()
+#if(${INSTALL_EXAMPLES})
+#add_subdirectory(Examples)
+#endif()
 
 install (TARGETS ${target}
 DESTINATION plugins

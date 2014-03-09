@@ -1,9 +1,4 @@
-This directory contains examples plugins
+The folders in this directory contains examples on how to use plugins, in various languages.
 
-List of examples:
-1. c_plugin_demo_1
-Example illustrating how to write a plugin using pure C language, using the plugins C API.
-
-2. cpp_plugin_demo_1
-Example illustrating how to write a plugin using C++ language.
+Depending on the current distribution, you may find, C, CPP, Delphi and Python subfolders in here
 

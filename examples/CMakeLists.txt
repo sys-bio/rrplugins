@@ -10,9 +10,21 @@ include_directories(
  	${THIRD_PARTY_INSTALL_FOLDER}/include/rr/C
 )
 
+OPTION (INSTALL_C_EXAMPLES              "Build and Install Tellurium Plugin C Examples"         OFF)
+OPTION (INSTALL_CPP_EXAMPLES            "Build and Install Tellurium Plugin CPP Examples"       OFF)
+OPTION (INSTALL_PYTHON_EXAMPLES         "Install Tellurium Plugin PYTHON Examples"    OFF)
+
+if(INSTALL_C_EXAMPLES)
 add_subdirectory(c)
+endif()
+
+if(INSTALL_CPP_EXAMPLES)
 add_subdirectory(cpp)
+endif()
+
+if(INSTALL_PYTHON_EXAMPLES)
 add_subdirectory(python)
+endif()
 
 
 install(
