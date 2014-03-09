@@ -35,7 +35,7 @@ try:
     noisePlugin.InputData.writeDataSeries (fName)
     #=========== FIT DATA =============================================
 
-    lm = tel.Plugin ("tel_lm")
+    lm = tel.Plugin ("tel_levenberg_marquardt")
     experimentalData = tel.DataSeries.readDataSeries (fName)
 
     lm.ExperimentalData = experimentalData;

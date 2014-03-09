@@ -16,6 +16,3 @@ try:
         
 except Exception as e:
     print 'Problem: ' + `e`
-    
-    
-    

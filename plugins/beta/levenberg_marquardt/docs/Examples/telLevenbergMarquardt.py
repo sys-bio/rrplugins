@@ -2,51 +2,48 @@ import ctypes
 import telplugins as tel
 
 #Get a lmfit plugin object
-chiPlugin   = tel.Plugin("tel_chisquare")
-lm          = tel.Plugin("tel_levenberg_marquardt")
+chiPlugin       = tel.Plugin("tel_chisquare")
+lm              = tel.Plugin("tel_levenberg_marquardt")
+modelPlugin     = tel.Plugin("tel_test_model")
+addNoisePlugin  = tel.Plugin("tel_add_noise")
 
 #========== EVENT FUNCTION SETUP ===========================
-def pluginIsProgressing(lmP):
+def pluginIsProgressing(dummy):
     # The plugin don't know what a python object is.
     # We need to cast it here, to a proper python object
-    lmObject = ctypes.cast(lmP, ctypes.py_object).value
-    print 'Iterations = ' + `lmObject.getProperty("NrOfIter")` \
-        + '\tNorm = ' + `lmObject.getProperty("Norm")`
+    
+    print 'Iterations = ' + `lm.getProperty("NrOfIter")` \
+        + '\tNorm = ' + `lm.getProperty("Norm")`
 
 try:   
-    progressEvent =  tel.NotifyEventEx(pluginIsProgressing)
-    
-    #The ID of the plugin is passed as the last argument in the assignOnProgressEvent. 
-    #The plugin ID is later on retrieved in the plugin Event handler, see above
-    theId = id(lm)
-    tel.assignOnProgressEvent(lm.plugin, progressEvent, theId)
+    progressEvent =  tel.NotifyEventEx(pluginIsProgressing)     
+    tel.assignOnProgressEvent(lm.plugin, progressEvent)
     #============================================================
-    #Retrieve a SBML model from plugin        
-        
-    test_model = tel.readAllText('two_parameters.xml')
+    
+    #Create model data, with and without noise
+    modelPlugin.execute()     
+    
+    #Retrieve a SBML model from plugin               
+    test_model = modelPlugin.Model    
     
     #Setup lmfit properties.
     lm.SBML = test_model
-    experimentalData = tel.DataSeries.readDataSeries ('ExperimentalData.dat')
+    experimentalData = modelPlugin.TestDataWithNoise
     lm.ExperimentalData = experimentalData
     
     # Add the parameters that we're going to fit and a initial 'start' value
-    lm.setProperty("InputParameterList", ["k1", 0.8])
-    lm.setProperty("InputParameterList", ["k2", 2.3])  
-      
+    lm.setProperty("InputParameterList", ["k1", .3])
     lm.setProperty("FittedDataSelectionList", "[S1] [S2]")
     lm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
     
     # Start minimization
     lm.execute()
-        
-    hessian = lm.getProperty("Hessian")        
-    print 'Hessian: \n' + `hessian`
     
-    cov = lm.getProperty("CovarianceMatrix")        
-    print 'CovarianceMatrix: \n' + `cov`
-            
-    print 'Minimization finished. \n==== Result ====' 
+    print 'Minimization finished. \n==== Result ===='
+    
+    print 'Hessian Matrix'
+    print lm.getProperty("Hessian")    
+     
     print tel.getPluginResult(lm.plugin)
     
     # Get the experimental data as a numpy array
@@ -65,4 +62,4 @@ try:
     tel.telplugins.plt.show()
     
 except Exception as e:
-    print 'Problem.. ' + `e`          
+    print 'Problem.. ' + `e`         

@@ -70,6 +70,14 @@ bool TestModel::execute(bool inThread)
     const PluginManager* PM = this->getPluginManager();
     Plugin* noise = PM->getPlugin("AddNoise");
 
+    if(!noise)
+    {
+        stringstream msg;
+        msg<<"The TestModel plugin dependes on the AddNoise plugin, which is not yet loaded.";
+
+        throw(Exception(msg.str()));
+
+    }
     mTestDataWithNoise.setValue(mTestData.getValue());
 
     noise->setPropertyValue("Sigma", mSigma.getValueHandle());

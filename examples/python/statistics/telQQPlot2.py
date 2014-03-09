@@ -40,7 +40,7 @@ try:
     noisePlugin.InputData.writeDataSeries (fName)    
     
     #===================================================================
-    lm = Plugin ("tel_lm")
+    lm = Plugin ("tel_levenberg_marquardt")
     experimentalData = DataSeries.readDataSeries (fName)    
        
     lm.ExperimentalData = experimentalData;

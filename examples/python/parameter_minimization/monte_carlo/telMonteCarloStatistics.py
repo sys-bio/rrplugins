@@ -11,7 +11,7 @@ try:
     #Load some plugins        
     modelP      = Plugin("tel_test_model")
     chiP        = Plugin("tel_chisquare")
-    lmP         = Plugin("tel_lm")
+    lmP         = Plugin("tel_levenberg_marquardt")
     mcP         = Plugin("tel_monte_carlo_bs") 
     myEventFunction.runNr = 0  
     #=== The above variables are available in the following callback

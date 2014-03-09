@@ -4,7 +4,7 @@ from telplugins import *
 
 #Get a lmfit plugin object
 chiPlugin   = Plugin("tel_chisquare")
-lm          = Plugin("tel_lm")
+lm          = Plugin("tel_levenberg_marquardt")
 
 #========== EVENT FUNCTION SETUP ===========================
 def pluginIsProgressing(lmP):

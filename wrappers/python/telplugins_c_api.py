@@ -167,7 +167,7 @@ def unLoadPlugins(pm):
 ## \return Returns a handle to a plugin, None if unsuccesful
 ##
 ## @code
-## lmPlugin = telPlugins.loadPlugin(pm, "tel_lm")
+## lmPlugin = telPlugins.loadPlugin(pm, "tel_levenberg_marquardt")
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly
@@ -221,7 +221,7 @@ def getPluginNames(pm):
 ## @code
 ## names = telPlugins.getPluginLibraryNames(pm)
 ## print names
-## ['tel_add_noise', 'tel_lm']
+## ['tel_add_noise', 'tel_levenberg_marquardt']
 ## @endcode
 ## \htmlonly  <br/>
 ## \endhtmlonly

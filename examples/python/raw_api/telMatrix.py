@@ -13,7 +13,7 @@ import telplugins as tel
 
 #Get a lmfit plugin object
 chiPlugin   = tel.Plugin("tel_chisquare")
-lm          = tel.Plugin("tel_lm")
+lm          = tel.Plugin("tel_levenberg_marquardt")
 
 
 try:    

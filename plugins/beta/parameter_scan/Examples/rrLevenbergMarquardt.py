@@ -3,7 +3,7 @@ from telPlugins_CAPI import *
 import telPlugins as tel
 
 #Get a lmfit plugin object
-lm = tel.Plugin("tel_lm")
+lm = tel.Plugin("tel_levenberg_marquardt")
 
 #========== EVENT FUNCTION SETUP ===========================
 def pluginIsProgressing(lmP, dummy):

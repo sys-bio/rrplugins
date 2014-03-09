@@ -13,7 +13,7 @@ try:
     test_model = modelPlugin.Model
 
     chiPlugin   = tel.Plugin("tel_chisquare")        
-    lm          = tel.Plugin("tel_lm")
+    lm          = tel.Plugin("tel_levenberg_marquardt")
     experimentalData = tel.DataSeries.readDataSeries ("testData.dat")   
     lm.ExperimentalData = experimentalData;
     lm.SBML = test_model

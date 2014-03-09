@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target tel_lm)
+set(target tel_levenberg_marquardt)
 
 include_directories(
 ../source
@@ -30,7 +30,6 @@ add_definitions(
 -DLIBSBML_STATIC
 -DEXPORT_RR_PLUGIN
 -DSTATIC_LIBSTRUCT
-
 )
 
 add_library(${target} MODULE ${sources})
@@ -70,10 +69,6 @@ else()
         #roadrunner_c_api
         telplugins_api-static
         )
-endif()
-
-if(${INSTALL_EXAMPLES})
-add_subdirectory(Examples)
 endif()
 
 install (TARGETS ${target}
