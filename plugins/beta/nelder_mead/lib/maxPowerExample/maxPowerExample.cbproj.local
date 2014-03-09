@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/03/15 13:46:02.000.969,=C:\Users\Totte\Documents\RAD Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2013/03/15 13:46:02.000.987,=C:\Users\Totte\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2014/03/04 13:25:58.000.167,=C:\Users\Totte\Documents\RAD Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2014/03/04 13:25:58.000.160,=C:\Users\Totte\Documents\RAD Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2014/03/04 13:26:40.000.541,C:\Users\Totte\Documents\RAD Studio\Projects\File1.cpp=R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample.cpp</Transaction>
+    <Transaction>2014/03/04 13:26:44.000.045,C:\Users\Totte\Documents\RAD Studio\Projects\Project1PCH1.h=R:\tlp\plugins\beta\nelder_mead\lib\Project1PCH1.h</Transaction>
+    <Transaction>2014/03/04 13:26:55.000.694,R:\tlp\plugins\beta\nelder_mead\lib\Project1PCH1.h=R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExamplePCH1.h</Transaction>
+    <Transaction>2014/03/04 13:26:55.000.711,C:\Users\Totte\Documents\RAD Studio\Projects\Project1.cbproj=R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample.cbproj</Transaction>
+    <Transaction>2014/03/04 13:28:17.000.596,=R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex.c</Transaction>
+    <Transaction>2014/03/04 13:30:23.000.587,R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex.c=</Transaction>
+    <Transaction>2014/03/04 13:30:27.000.163,R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExamplePCH1.h=</Transaction>
+    <Transaction>2014/03/04 13:48:22.000.167,=R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex.cpp</Transaction>
+    <Transaction>2014/03/04 14:15:14.000.519,R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex2.cpp=R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex.cpp</Transaction>
+    <Transaction>2014/03/05 12:10:00.000.096,R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample.cbproj=R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample\maxPowerExample.cbproj</Transaction>
+    <Transaction>2014/03/05 12:10:13.000.959,R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample.cpp=R:\tlp\plugins\beta\nelder_mead\lib\maxPowerExample\maxPowerExample.cpp</Transaction>
+    <Transaction>2014/03/05 12:11:36.000.305,R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex2.cpp=</Transaction>
+  </Transactions>
+</BorlandProject>

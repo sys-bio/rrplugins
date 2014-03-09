@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/03/04 12:52:42.000.684,R:\tlp\plugins\beta\nelder_mead\nelder_mead_doc.cpp=</Transaction>
+    <Transaction>2014/03/04 12:53:14.000.059,=R:\tlp\plugins\beta\nelder_mead\nelder_mead_doc.cpp</Transaction>
+    <Transaction>2014/03/06 11:57:25.000.042,=R:\tlp\plugins\beta\nelder_mead\nmObjectiveFunction.cpp</Transaction>
+    <Transaction>2014/03/06 11:57:32.000.680,=R:\tlp\plugins\beta\nelder_mead\nmMinimizationData.cpp</Transaction>
+    <Transaction>2014/03/06 12:07:33.000.205,=R:\tlp\plugins\beta\nelder_mead\Unit1.cpp</Transaction>
+    <Transaction>2014/03/06 12:07:49.000.385,R:\tlp\plugins\beta\nelder_mead\Unit1.cpp=R:\tlp\plugins\beta\lmfit\lmObjectiveFunction.cpp</Transaction>
+    <Transaction>2014/03/06 12:07:49.000.385,R:\tlp\plugins\beta\nelder_mead\Unit1.h=R:\tlp\plugins\beta\lmfit\lmObjectiveFunction.h</Transaction>
+    <Transaction>2014/03/06 12:10:07.000.536,R:\tlp\plugins\beta\lmfit\lmObjectiveFunction.cpp=</Transaction>
+    <Transaction>2014/03/06 17:55:10.000.216,=R:\tlp\plugins\beta\nelder_mead\lib\nmsimplex2.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

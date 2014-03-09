@@ -1,0 +1,12 @@
+from telplugins import *
+
+try:
+    info = getPluginInfo(12)
+    if info == None:
+        print getLastError()
+    
+except Exception as e:
+    print `e`    
+
+
+

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/02/19 18:19:24.000.332,R:\tlp\source\common\telplugins.cbproj=R:\tlp\source\common\telcommon.cbproj</Transaction>
+    <Transaction>2014/02/19 18:24:50.000.727,R:\tlp\source\common\telcommon.cbproj=R:\tlp\source\common\telplugins_common.cbproj</Transaction>
+    <Transaction>2014/02/19 19:36:00.000.051,=R:\tlp\source\common\telLogger.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

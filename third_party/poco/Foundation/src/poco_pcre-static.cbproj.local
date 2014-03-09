@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/03/15 13:46:02.000.969,=C:\Users\Totte\Documents\RAD Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2013/03/15 13:46:02.000.987,=C:\Users\Totte\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2014/03/05 10:59:46.409,R:\tlp\third_party\poco\Foundation\src\poco_pcre-static.cbproj=C:\Users\Totte\Documents\RAD Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>2014/03/05 11:00:28.697,=R:\tlp\third_party\poco\Foundation\src\pcre_chartables.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.698,=R:\tlp\third_party\poco\Foundation\src\pcre_compile.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.700,=R:\tlp\third_party\poco\Foundation\src\pcre_exec.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.701,=R:\tlp\third_party\poco\Foundation\src\pcre_fullinfo.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.703,=R:\tlp\third_party\poco\Foundation\src\pcre_globals.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.706,=R:\tlp\third_party\poco\Foundation\src\pcre_maketables.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.708,=R:\tlp\third_party\poco\Foundation\src\pcre_newline.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.711,=R:\tlp\third_party\poco\Foundation\src\pcre_ord2utf8.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.714,=R:\tlp\third_party\poco\Foundation\src\pcre_study.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.717,=R:\tlp\third_party\poco\Foundation\src\pcre_tables.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.721,=R:\tlp\third_party\poco\Foundation\src\pcre_try_flipped.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.724,=R:\tlp\third_party\poco\Foundation\src\pcre_ucd.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.728,=R:\tlp\third_party\poco\Foundation\src\pcre_valid_utf8.c</Transaction>
+    <Transaction>2014/03/05 11:00:28.733,=R:\tlp\third_party\poco\Foundation\src\pcre_xclass.c</Transaction>
+    <Transaction>2014/03/05 11:04:23.021,=R:\tlp\third_party\poco\Foundation\src\RegularExpression.cpp</Transaction>
+  </Transactions>
+</BorlandProject>
