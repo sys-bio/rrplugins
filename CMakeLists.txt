@@ -168,6 +168,7 @@ install(
     FUNDING.txt
     VERSION.txt
     NEWS.txt
+    CHANGELOG.txt
     DESTINATION .
 )
 
