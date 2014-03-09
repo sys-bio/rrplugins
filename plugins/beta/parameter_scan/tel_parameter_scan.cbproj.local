@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2014/02/06 12:51:54.000.432,R:\tlp\plugins\parameter_scan\psArrayedParameter.h=R:\tlp\source\telArrayedParameter.h</Transaction>
-    <Transaction>2014/02/06 12:51:54.000.432,R:\tlp\plugins\parameter_scan\psArrayedParameter.cpp=R:\tlp\source\telArrayedParameter.cpp</Transaction>
-    <Transaction>2014/02/24 16:09:55.000.223,=R:\tlp\plugins\beta\parameter_scan\Unit1.cpp</Transaction>
-  </Transactions>
-</BorlandProject>

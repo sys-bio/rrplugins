@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2014/01/20 10:21:48.000.594,C:\Users\Totte\Documents\RAD Studio\Projects\ProjectGroup1.groupproj=R:\tlp\examples\c\c_plugin_demo_1\demoGroup.groupproj</Transaction>
-  </Transactions>
-	<Default.Personality>
-		<Projects ActiveProject="R:\tlp\examples\c\c_plugin_demo_1\c_plugin_demo.cbproj"/>
-	</Default.Personality>
-</BorlandProject>

@@ -37,7 +37,7 @@ bool bsWorker::setup()
     if(!mMinimizerPlugin)
     {
         stringstream msg;
-        msg << "Failed loading minimizer plugin ("<<mParent.mMinimizerPlugin.getValueAsString()<<"). ";
+        msg << "Failed loading minimizer plugin ("<<mParent.mMinimizerPlugin<<")";
         msg << "Monte Carlo Plugin cannot proceede";
         throw(Exception(msg.str()));
     }

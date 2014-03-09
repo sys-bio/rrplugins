@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2014/01/18 15:28:31.000.635,R:\rrl\examples\one_rr\one_rr.cbproj=R:\tlp\testing\cpp\data_handles\data_handles.cbproj</Transaction>
-    <Transaction>2014/01/18 15:28:54.000.685,R:\rrl\examples\one_rr\main.cpp=R:\tlp\testing\cpp\data_handles\main.cpp</Transaction>
-  </Transactions>
-</BorlandProject>
