@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plugins_20for_20roadrunner',['Plugins for RoadRunner',['../index.html',1,'']]]
+  ['plugins_20for_20tellurium',['Plugins for Tellurium',['../index.html',1,'']]]
 ];

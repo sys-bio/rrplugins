@@ -1,7 +1,9 @@
 var searchData=
 [
   ['getboolproperty',['getBoolProperty',['../group__plugin__properties.html#ga075b02bf4853e3245fc0e256b50c09d6',1,'python::telplugins_c_api']]],
+  ['getcopyright',['getCopyright',['../group__utilities.html#gaaa0aa2224f6999281b4d70ffc6d6c4bb',1,'python::telplugins_c_api']]],
   ['getcurrentplugin',['getCurrentPlugin',['../group__plugin__manager.html#gaf426e48ea275db07a74e28cb9a7e3595',1,'python::telplugins_c_api']]],
+  ['getdataarray',['getDataArray',['../group__utilities.html#gab6fe3d04ef52b87460710172c1877a24',1,'python::telplugins_c_api']]],
   ['getdoubleproperty',['getDoubleProperty',['../group__plugin__properties.html#gacb149460b60b19f682d1f222955bc9fa',1,'python::telplugins_c_api']]],
   ['getfirstplugin',['getFirstPlugin',['../group__plugin__manager.html#ga9f19ce1f85059e9770efb792fae46d68',1,'python::telplugins_c_api']]],
   ['getfirstproperty',['getFirstProperty',['../group__plugin__properties.html#ga432c4c14b364ef1fedd00273fa7d7f62',1,'python::telplugins_c_api']]],
@@ -44,12 +46,13 @@ var searchData=
   ['getpropertyvalueasstring',['getPropertyValueAsString',['../group__plugin__properties.html#gaa8ff6a25f16d9f77184bbb1ababd5593',1,'python::telplugins_c_api']]],
   ['getpropertyvaluehandle',['getPropertyValueHandle',['../group__plugin__properties.html#gada4bc485d848ccea8145629c72b48ec0',1,'python::telplugins_c_api']]],
   ['getstringproperty',['getStringProperty',['../group__plugin__properties.html#ga5f53518667b36f2a1781a5f6f45914ad',1,'python::telplugins_c_api']]],
-  ['gettelluriumdatacolumnheader',['getTelluriumDataColumnHeader',['../group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8',1,'python.telplugins_c_api.getTelluriumDataColumnHeader()'],['../group__utilities.html#ga6c8924ca29f6114438916f45b0291bc9',1,'python.telplugins_telluriumdata_api.getTelluriumDataColumnHeader()']]],
+  ['gettelluriumdatacolumnheader',['getTelluriumDataColumnHeader',['../group__utilities.html#ga62351cab3716f09159e270b86f070bb7',1,'telplugins_telluriumdata_api.getTelluriumDataColumnHeader()'],['../group__utilities.html#gad07a899a9a6a780c9d471f67fa9143d8',1,'python.telplugins_c_api.getTelluriumDataColumnHeader()']]],
   ['gettelluriumdatacolumnheaderbyindex',['getTelluriumDataColumnHeaderByIndex',['../group__utilities.html#gaac526f0a748a44ec824270d695f3d340',1,'python::telplugins_c_api']]],
   ['gettelluriumdataelement',['getTelluriumDataElement',['../group__utilities.html#ga0d750b1b8aa3490b32bb59f196379b4b',1,'python::telplugins_c_api']]],
-  ['gettelluriumdatahandle',['getTelluriumDataHandle',['../group__utilities.html#ga0d1cdb2bcf81733835aca858b198f46c',1,'python::telplugins_telluriumdata_api']]],
+  ['gettelluriumdatahandle',['getTelluriumDataHandle',['../group__utilities.html#ga29d094a9d0ddbb6e8bab2a83ce1ae093',1,'telplugins_telluriumdata_api']]],
   ['gettelluriumdatanumcols',['getTelluriumDataNumCols',['../group__utilities.html#ga05137f4616ffbc8ddefaab88ef51e5f8',1,'python::telplugins_c_api']]],
   ['gettelluriumdatanumrows',['getTelluriumDataNumRows',['../group__utilities.html#gafe4fcc3d8aa22661d27dcb05e8d419f1',1,'python::telplugins_c_api']]],
   ['gettelluriumdataproperty',['getTelluriumDataProperty',['../group__plugin__properties.html#gad71e467254118c8688b43729efa77899',1,'python::telplugins_c_api']]],
-  ['gettelluriumdataweight',['getTelluriumDataWeight',['../group__utilities.html#ga26e4023a436617521a74028f8e9f28db',1,'python::telplugins_c_api']]]
+  ['gettelluriumdataweight',['getTelluriumDataWeight',['../group__utilities.html#ga26e4023a436617521a74028f8e9f28db',1,'python::telplugins_c_api']]],
+  ['getversion',['getVersion',['../group__utilities.html#ga71ccc408dbd26c047e9a2e8a7348187a',1,'python::telplugins_c_api']]]
 ];

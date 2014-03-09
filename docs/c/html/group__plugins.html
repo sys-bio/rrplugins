@@ -175,6 +175,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#ga012bd8ec60c8b38db2e86b15ff561b4f">getPluginPropertyValueHandle</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName)</td></tr>
 <tr class="memdesc:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a handle to a property value.  <a href="#ga012bd8ec60c8b38db2e86b15ff561b4f">More...</a><br/></td></tr>
 <tr class="separator:ga012bd8ec60c8b38db2e86b15ff561b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa1095f7a59afc011a0e6222060faa7d3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gaa1095f7a59afc011a0e6222060faa7d3">getPluginPropertyValueAsString</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName)</td></tr>
+<tr class="memdesc:gaa1095f7a59afc011a0e6222060faa7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a property value as string.  <a href="#gaa1095f7a59afc011a0e6222060faa7d3">More...</a><br/></td></tr>
+<tr class="separator:gaa1095f7a59afc011a0e6222060faa7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabfda45fb199d7c64a94e9911b0468175"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__plugins.html#gabfda45fb199d7c64a94e9911b0468175">setPluginProperty</a> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *propertyName, const char *value)</td></tr>
 <tr class="memdesc:gabfda45fb199d7c64a94e9911b0468175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of a PluginProperty by a string.  <a href="#gabfda45fb199d7c64a94e9911b0468175">More...</a><br/></td></tr>
 <tr class="separator:gabfda45fb199d7c64a94e9911b0468175"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -825,6 +828,42 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gaa1095f7a59afc011a0e6222060faa7d3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getPluginPropertyValueAsString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>propertyName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a property value as string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>Handle to a plugin </td></tr>
+    <tr><td class="paramname">propertyName</td><td>Name of the property </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string (char*) if succesful, returns NULL otherwise. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga012bd8ec60c8b38db2e86b15ff561b4f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1168,7 +1207,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 2 2014 14:20:32 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 8 2014 21:22:51 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

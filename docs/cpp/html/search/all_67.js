@@ -29,6 +29,8 @@ var searchData=
   ['getproperties',['getProperties',['../classtlp_1_1_plugin.html#a832af3027c7c383b53bdd9234b77cb99',1,'tlp::Plugin']]],
   ['getproperty',['getProperty',['../classtlp_1_1_c_plugin.html#a930df9d88bccdf76b6541a9f4ca43a57',1,'tlp::CPlugin::getProperty()'],['../classtlp_1_1_plugin.html#a5b1568f22edfd8c1a0ae5a3e1dba530d',1,'tlp::Plugin::getProperty()']]],
   ['getpropertynames',['getPropertyNames',['../classtlp_1_1_c_plugin.html#aacd38ae520474d88d4ba9383447d39ee',1,'tlp::CPlugin::getPropertyNames()'],['../classtlp_1_1_plugin.html#a58304cc641b029979ae839566bff42b8',1,'tlp::Plugin::getPropertyNames()']]],
+  ['getpropertyvalueasstring',['getPropertyValueAsString',['../classtlp_1_1_plugin.html#a57e7c5c6c402cb19335b638eb777ce89',1,'tlp::Plugin']]],
+  ['getpropertyvaluehandle',['getPropertyValueHandle',['../classtlp_1_1_plugin.html#a5960cde51bb46e101e649d65375bc138',1,'tlp::Plugin']]],
   ['getresult',['getResult',['../classtlp_1_1_plugin.html#a361516efc8f78517eddfa1a4192064d3',1,'tlp::Plugin']]],
   ['getroadrunnerinstance',['getRoadRunnerInstance',['../classtlp_1_1_plugin.html#a0082a9bab49263c5ea6018599c9964a5',1,'tlp::Plugin']]],
   ['getstatus',['getStatus',['../classtlp_1_1_plugin.html#a60c43aefda756e0a945b8fc8c320bc1d',1,'tlp::Plugin']]],

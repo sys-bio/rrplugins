@@ -121,31 +121,34 @@ Introduction</h1>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordflow">print</span> noisePlugin.hint()</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordflow">print</span> noisePlugin.description()</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordflow">print</span> noisePlugin.listOfProperties()</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;modelPlugin= tel.Plugin(<span class="stringliteral">&quot;tel_sbml_model&quot;</span>)        </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;sbml_model = modelPlugin.Model</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"># Create a roadrunner instance</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;rr = roadrunner.RoadRunner()</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;rr.load(sbml_model)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"># Generate data</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;data = rr.simulate(0, 10, 511) <span class="comment"># Want 512 points</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"># The plugin will need a handle to the underlying roadrunner data</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;d = tel.getDataSeries (data)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;noisePlugin.InputData = d</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&#39;==== List of properties ====&#39;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordflow">print</span> noisePlugin.listOfProperties()</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;modelPlugin= tel.Plugin(<span class="stringliteral">&quot;tel_test_model&quot;</span>)        </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;test_model = modelPlugin.Model</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"># Create a roadrunner instance</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;rr = roadrunner.RoadRunner()</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;rr.load(test_model)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"># Generate data</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;data = rr.simulate(0, 10, 50) </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"># The plugin will need a handle to the underlying roadrunner data</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;d = tel.getDataSeries (data)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"># Get parameter for the &#39;size&#39; of the noise</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;noisePlugin.Sigma = 1.e-5</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;noisePlugin.execute ()</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;noisePlugin.InputData = d</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"># Get parameter for the &#39;size&#39; of the noise</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;noisePlugin.Sigma = 5.e-6</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;noisePlugin.InputData.plot ()</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;tel.show()</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;noisePlugin.InputData.plot()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;noisePlugin.execute()</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;done&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;noisePlugin.InputData.plot()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;tel.show()</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordflow">print</span> <span class="stringliteral">&quot;done&quot;</span></div>
 </div><!-- fragment --><h1><a class="anchor" id="DataSeries"></a>
 DataSeries</h1>
 <p>The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call: </p>
@@ -199,7 +202,7 @@ Plugins</h1>
 </div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 2 2014 14:20:33 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 8 2014 21:22:53 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
