@@ -1,9 +1,11 @@
 Release 1.0.2 (2014-03-08)
-
-
+* Added example for AddNoise  (TK)
+* Released chisquare plugin (TK)
+* Updated version numbers (TK)
+* Updated root folder text files (TK)
 
 Release 1.0.1 (2014-03-08)
-* Marked TestModel plugin as released (TK)
+* Released TestModel plugin (TK)
 * Added more python examples (TK)
 * Updated TestModel plugin documentation (TK)
 * Moved AddNoise plugin to release folder (TK)
