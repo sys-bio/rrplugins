@@ -1,24 +1,24 @@
-\chapter*{Parameter Minimization using the Levenberg-Marquardt algorithm}
+\chapter*{Parameter Minimization using the Nelder-Mead algorithm}
 \setcounter{chapter}{1}
 \emph{Do some fitting}
 \section{Introduction}
-The Levenberg-Marquardt plugin is used to fit a SBML models parameters to experimental data. 
+The Nelder-Mead plugin is used to fit a SBML models parameters to experimental data. 
 
 The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as 
 access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values do also come with estimated confidence limits.
 
-The current implementation is based on the lmfit C library by Joachim Wuttke\footnote{The package lmfit is distributed under the FreeBSD License:
+The current implementation is based on the Nelder-Mead C implementation by Michael F. Hutt\footnote{ 
 
---
-  Copyright (c) 2013 Joachim Wuttke All rights reserved.
---}.
+ An implementation of the Nelder-Mead simplex method. 
+ Copyright (c) 1997-2011 Michael F. Hutt
+}.
 
 
 Plugin properties are documented in the next section.
 
 \begin{landscape}
 \section{Plugin Properties}
-Available properties in the Levenberg-Marquardt plugin are listed in the table below.
+Available properties in the Nelder-Mead plugin are listed in the table below.
 
 %\begin{table}[ht]
 \centering % used for centering table
@@ -52,23 +52,23 @@ NrOfIter                        &   int                 & N/A    &   Number of i
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are preset with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
 \hline %inserts single line                                           
 \\[2pt]                                                               
-ftol                            &   double              & machine dep.          &   Relative error desired in the sum of squares. \\
-xtol                            &   double              & machine dep.          &   Relative error between last two approximations. \\
-gtol                            &   double              & machine dep.          &   Orthogonality desired between fvec and its derivs. \\
-epsilon                         &   double              & machine dep.          &   Step used to calculate the jacobian. \\
-stepbound                       &   double              & 100.0                 &   Initial bound to steps in the outer loop. \\
-patience                        &   double              & 100                   &   Used for setting maximum number of iterations, calculated as \verb|patience*(nr_of_parameters +1)|. \\
+Epsilon                         &   double              & 1.e-6          		&   Relative error. \\
+Scale                           &   double              & 1			            &   Scaling of vertices. \\
+MaxNrOfIterations               &   int		            & 1000          		&   Maximum number of iterations. \\
+Alpha                         	&   double              & 1.          			&   Reflection coefficient. \\
+Beta                       		&   double              & 0.5                 	&   Contraction coefficient. \\
+Gamma                        	&   double              & 1                   	&   Expansion coefficient. \\
                                                         
 \hline %inserts single line                             
-\caption{LM fit plugin parameters} 
-\label{table:lmfitPluginParameters} 
+\caption{Plugin Properties} 
+\label{table:nmPluginProperties} 
 \end{longtable}
 %\end{table}
 
 \end{landscape}
 
 \section{Plugin Events}
-The Levenberg-Marquardt plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+The Nelder-Mead plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
 the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
@@ -94,14 +94,14 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 The following Python script illustrate how the plugin can be used. 
 
 \begin{singlespace}
-\lstinputlisting[label=plugin_lmfit_header,caption={Minimization example.},language=Python]{Examples/telNelderMead.py}
+\lstinputlisting[label=NelderMeadExample,caption={Minimization example.},language=Python]{Examples/telNelderMead.py}
 \end{singlespace}
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=220mm]{Minimization.jpg}
+\includegraphics[width=220mm]{NelderMeadOutput.png}
 \caption{Typical output for the example script above.}
-\label{fig:lmfitFig}
+\label{fig:nmFig}
 \end{sidewaysfigure}
 
 

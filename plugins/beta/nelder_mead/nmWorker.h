@@ -7,7 +7,6 @@
 #include "nmUtils.h"
 #include "telTelluriumData.h"
 #include "telProperties.h"
-#include "nmMinimizationData.h"
 //---------------------------------------------------------------------------
 
 using std::vector;
