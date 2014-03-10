@@ -1,3 +1,6 @@
+Release 1.0.4 (2014-03-09)
+* Released Nelder-Mead plugin
+
 Release 1.0.3 (2014-03-09)
 * Added viewing of manual and version number in root example scripts
 * Updated Readme file in python examples folder
