@@ -17,6 +17,7 @@ In addition, this current folder contain one example script for each released pl
 * telAddNoise.py                    - Demonstrate usage of the AddNoise plugin
 * telChiSquare.py                   - Demonstrate usage of the ChiSquare plugin
 * telLevenbergMarquardt.py          - Demonstrate usage of the Levenberg-Marquardt plugin
+* telNelderMead.py                  - Demonstrate usage of the Nelder-Mead plugin
 
 Info: Each of the above examples will attempt to open the plugins embedded PDF documentation on exit. 
 
