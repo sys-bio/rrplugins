@@ -36,16 +36,16 @@ Progress     	& 	double  & The progress property communicates the progress (in p
 \label{table:AddNoisePluginParameters} 
 \end{table}
 
-\section{Plugin Callbacks}
+\section{Plugin Events}
 The AddNoiseplugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
-the plugins execute function (in the assingOn.. family of functions), can be retrieved \emph{unmodified} in the corresponding event function.
+the plugins execute function (in the assingOn() family of functions), can be retrieved \emph{unmodified} in the corresponding event function.
 \begin{table}[ht]
 \centering % used for centering table
 \begin{tabular}{l l p{7.5cm}} % centered columns (4 columns)
 
-Callback & Arguments & Purpose \\ [0.5ex] % inserts table 
+Event & Arguments & Purpose \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
 \hline % inserts single horizontal line
@@ -55,8 +55,8 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 
 \hline %inserts single line
 \end{tabular}
-\caption{AddNoise Plugin callbacks} 
-\label{table:AddNoisePluginCallBacks} 
+\caption{AddNoise Plugin Events} 
+\label{table:AddNoisePluginEvents} 
 \end{table}
 
 \section{The \texttt{execute(bool inThread)} function}
@@ -69,8 +69,11 @@ The inThread argument defaults to \textbf{false}.
 \section{Python examples}
 
 \subsection{Add noise to data acquired from RoadRunner}
-The python script below shows how to acquire simulation data from RoadRunner and pass it to he noise plugin. The format of the data, that is obtained from the \verb|simulate()| function (line 8), is not directly compatible with the Noise plugins InputData property. This incompatibility is handled by an intermediate data structure in Python, that is called DataSeries (line 14). 
-The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respectively. Line 23 denote the execution of the noise plugin, and after that has finished, data can be visualized by using the \verb|plot| function (line 26). The output is shown below the script. 
+The python script below shows how to acquire simulation data from RoadRunner and pass it to the noise plugin. The format of the data, that is obtained from the \verb|simulate()| function (line 8), is not directly compatible with the Noise plugins InputData property. This incompatibility is handled by an intermediate data structure in Python, that is called DataSeries (line 14). 
+
+The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respectively. 
+
+Line 23 denote the execution of the noise plugin, and after that has finished, data can be visualized by using the \verb|plot| function (line 26). The output is shown below the script. 
 
 \begin{singlespace}
 \lstinputlisting[label=plugin_addNoise_header,caption={Add noise example.},language=Python]{Examples/telNoisePluginEx1.py}

@@ -21,6 +21,7 @@ class TestModel : public CPPPlugin
         Property<TelluriumData>     mTestDataWithNoise;
         Property<double>            mSigma;
         void                        addWeights();
+        void                        assignPropertyDescriptions();
 };
 
 extern "C"

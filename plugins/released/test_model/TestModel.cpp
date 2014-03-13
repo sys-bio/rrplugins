@@ -25,7 +25,8 @@ mSigma(                         3.e-6,                  "Sigma",                
     mProperties.add(&mTestDataWithNoise);
 
     mHint ="Get access to a SBML model, and simulated data using the model.";
-    mDescription="The TestModel plugin exposes one property containing a simple SBML model as a string. \
+    mDescription="The TestModel plugin exposes properties representing a simple SBML model and simulated data using the model. The purpose of this plugin is to give a client easy access to a test model \
+as well as data to test with. \
 The TestModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.";
 
     //Load the model from file here..
@@ -119,6 +120,24 @@ void TestModel::addWeights()
             }
         }
     }
+}
+
+void TestModel::assignPropertyDescriptions()
+{
+    stringstream s;
+
+s << "The actual test model, in XML format.";
+mModel.setDescription(s.str());
+s.str("");
+
+s << "Simulated data, using the TestModel as input and default RoadRunner Simulation values.";
+mTestData.setDescription(s.str());
+s.str("");
+
+s << "Simulated data, with applied noise. ";
+mTestDataWithNoise.setDescription(s.str());
+s.str("");
+
 }
 
 // Plugin factory function
