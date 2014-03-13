@@ -148,6 +148,12 @@ endif(BUILD_TEST_TOOLS)
 
 
 #======================= INSTALL STUFF ============================
+#Install the "installer". Can make this more elegant later on
+FILE (GLOB installerFiles installer/windows/*.*)
+install ( FILES 
+${installerFiles} 
+DESTINATION ./installer/windows
+)
 
 #=== ThirdParties
 if(${BORLAND})

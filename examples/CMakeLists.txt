@@ -26,7 +26,6 @@ if(INSTALL_PYTHON_EXAMPLES)
 add_subdirectory(python)
 endif()
 
-
 install(
     FILES README.txt
     DESTINATION examples
