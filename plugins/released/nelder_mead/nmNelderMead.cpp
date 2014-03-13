@@ -41,13 +41,13 @@ mChiSquare(                     0,                      "ChiSquare",            
 mReducedChiSquare(              0,                      "ReducedChiSquare",                     "Reduced Chi-Square after fitting", "", "", true),
 mStatusMessage(                 "<none>",               "StatusMessage",                        "Status message from fitting engine", "", "", true),
 
-//The following Properties are the members of lmfits control_structure.
+//The following Properties are properties controlling the internal working of the algorithm.
 //Changing their default values may be needed depending on the problem.
-mEpsilon(                       1.e-6,                  "Epsilon",                               "Relative error. "),
-mScale(                         1,                      "Scale",                                 "Scaling of vertices. "),
-mMaxIterations(                 1000,                   "MaxNrOfIterations",                     "Maximum number of iterations"),
-mALPHA(                         1,                      "Alpha",                                 "Reflection coefficient. "),
-mBETA(                          0.5,                    "Beta",                                  "Contraction coefficient. "),
+mEpsilon(                       1.e-6,                  "Epsilon",                               "Convergence tolerance."),
+mScale(                         1,                      "Scale",                                 "Scaling of vertices."),
+mMaxIterations(                 1000,                   "MaxNrOfIterations",                     "Maximum number of iterations."),
+mALPHA(                         1,                      "Alpha",                                 "Reflection coefficient."),
+mBETA(                          0.5,                    "Beta",                                  "Contraction coefficient."),
 mGAMMA(                         2,                      "Gamma",                                 "Expansion coefficient."),
 mWorker(*this),
 mRRI(NULL),
@@ -272,10 +272,6 @@ s << "The confidence limits parameter list holds resulting confidence limits, as
 mConfidenceLimits.setDescription(s.str());
 s.str("");
 
-s << "The Status Message should be checked after fitting.";
-mStatusMessage.setDescription(s.str());
-s.str("");
-
 s << "The data input may contain multiple columns of data. The Experimental data selection list \
 should contain the columns in the input data that is intended to be used in the fitting.";
 mExperimentalDataSelectionList.setDescription(s.str());
@@ -294,8 +290,69 @@ s << "The norm is calculated throughout a fitting session. Each Norm value is st
 mNorms.setDescription(s.str());
 s.str("");
 
-s << "The number of iterations wil hold the number of iterations of the internal fitting routine.";
+s << "The number of iterations will hold the number of iterations of the internal fitting routine.";
 mNrOfIter.setDescription(s.str());
+s.str("");
+
+s << "The number of function iterations (NrOfFuncIter) wil hold the number of times the objective function was called.";
+mNrOfFuncIter.setDescription(s.str());
+s.str("");
+
+s << "The status message give information on the status of an obtained fit (currently unused).";
+mStatusMessage.setDescription(s.str());
+s.str("");
+
+s << "Hessian matrix. The Hessian is calculated using approximation at a found parameter minimum.";
+mHessian.setDescription(s.str());
+s.str("");
+
+s << "Covariance matrix. Calculated as the inverse of the Hessian.";
+mCovarianceMatrix.setDescription(s.str());
+s.str("");
+
+s << "Covariance matrix. Calculated as the inverse of the Hessian.";
+mCovarianceMatrix.setDescription(s.str());
+s.str("");
+
+s << "Standardized residuals are the residuals normalized to a normal distribution.";
+mStandardizedResiduals.setDescription(s.str());
+s.str("");
+
+s << "Normal Probability of Residuals, i.e. Q-Q data.";
+mNormalProbabilityOfResiduals.setDescription(s.str());
+s.str("");
+
+s << "The calculated ChiSquare at the found minimum.";
+mChiSquare.setDescription(s.str());
+s.str("");
+
+s << "The calculated reduced ChiSquare at the found minimum.";
+mReducedChiSquare.setDescription(s.str());
+s.str("");
+
+//Add internal NelderMead properties
+s << "Epsilon control the convergence tolerance. The smaller value the smaller steps.";
+mEpsilon.setDescription(s.str());
+s.str("");
+
+s << "Internal Scaling of vertices.";
+mScale.setDescription(s.str());
+s.str("");
+
+s << "Maximum number of iterations.";
+mMaxIterations.setDescription(s.str());
+s.str("");
+
+s << "Reflection coefficient.";
+mALPHA.setDescription(s.str());
+s.str("");
+
+s << "Contraction coefficient.";
+mBETA.setDescription(s.str());
+s.str("");
+
+s << "Expansion coefficient.";
+mGAMMA.setDescription(s.str());
 s.str("");
 
 }

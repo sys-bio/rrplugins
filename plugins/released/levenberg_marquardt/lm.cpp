@@ -300,7 +300,7 @@ s << "The norm is calculated throughout a fitting session. Each Norm value is st
 mNorms.setDescription(s.str());
 s.str("");
 
-s << "The number of iterations wil hold the number of iterations of the internal fitting routine.";
+s << "The number of iterations will hold the number of iterations of the internal fitting routine.";
 mNrOfIter.setDescription(s.str());
 s.str("");
 
@@ -337,7 +337,7 @@ s << "ftol is a nonnegative input variable. Termination occurs when \
 both the actual and predicted relative reductions in the sum \
 of squares are at most ftol. Therefore, ftol measures the \
 relative error desired in the sum of squares.";
-    ftol.setDescription(s.str());
+ftol.setDescription(s.str());
 s.str("");
 
 s << "xtol is a nonnegative input variable. Termination occurs when \
