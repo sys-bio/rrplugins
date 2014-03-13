@@ -1,3 +1,9 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to add noise to Tellurium data using the 
+# AddNoise plugin. This example also shows how to save the data to a file.
+#
+# Author:      Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 import telplugins as tel
 
 try:

@@ -51,7 +51,7 @@ try:
                 weight = theData.getWeight(r,c)
                 theData.setWeight(r,c, sigma * sigma)
 
-    noisePlugin.InputData.writeDataSeries("testlData.dat")
+    noisePlugin.InputData.writeDataSeries("testData.dat")
     print "done"
 
 except Exception as e:

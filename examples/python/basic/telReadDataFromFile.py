@@ -1,12 +1,11 @@
 from telplugins import *
 
-try:
-    rrDataHandle = createTelluriumDataFromFile("testData.dat")
-    hdr = getTelluriumDataColumnHeader(rrDataHandle)
-    npData = getNumpyData(rrDataHandle)
-    print `hdr` + `npData`
-
-    plotTelluriumData(npData, hdr)
+try:    
+    #Make sure the file testData.dat exists 
+    #You can generate a testData.dat file by executing the telCreateNoisyData.py example script
+    dataSeries =  DataSeries.readDataSeries("testData.dat")    
+    dataSeries.plot()           
+    
     print "done"
 except Exception as e:
     print 'Exception: ' + `e`

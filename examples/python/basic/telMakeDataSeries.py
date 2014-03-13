@@ -1,6 +1,9 @@
-
-# Example of creating a new dataseries, adding noise and plotting
-
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating creation of a new dataseries, 
+# adding noise and plotting 
+#
+# Author: Herbert Sauro
+#-------------------------------------------------------------------------------
 import telplugins as tel
 import numpy
 import math
