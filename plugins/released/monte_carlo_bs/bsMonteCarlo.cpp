@@ -43,8 +43,9 @@ mWorker(*this)
     mProperties.add(&mMinimizerPlugin);
 
     //Add the lmfit parameters
-    mHint ="";
-    mDescription="";
+    mHint ="Monte Carlo bootstrap algorithm.";
+    mDescription="The Monte Carlo plugin is used to get estimates of a models parameters confidence limits. This is in a context where experimental data exists and a parameter minimization method, such as Levenberg-Marquardt or Nelder-Mead is used first in order to find a parameter minimum.";
+    
     //The function below assigns property descriptions
     assignPropertyDescriptions();
 }

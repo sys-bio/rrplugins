@@ -15,10 +15,10 @@ This plugin is used to calculate the chisquare for two data sets.
 * tel_levenberg_marquardt.dll 
 This plugin implements the Levenberg-Marquardt optimizer for fitting multi parameter data to models.
 
-* tel_nelder_mead.dll Version 0.9.0
+* tel_nelder_mead.dll 
 This plugin implements the Nelder-Mead optimizer for fitting multi parameter data to models.
 
-* tel_monte_carlo.dll Version 
+* tel_monte_carlo.dll 
 This plugin implements a Monte Carlo bootstrap parameter estimation algorithm. 
 It has been tested with the levenberg_marquardt and the nelder_mead plugin.
 
