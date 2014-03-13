@@ -18,9 +18,9 @@ This plugin implements the Levenberg-Marquardt optimizer for fitting multi param
 * tel_nelder_mead.dll Version 0.9.0
 This plugin implements the Nelder-Mead optimizer for fitting multi parameter data to models.
 
-* tel_monte_carlo.dll Version 0.9.0
+* tel_monte_carlo.dll Version 1.0.0
 This plugin implements a Monte Carlo bootstrap parameter estimation algorithm. 
-It has been tested with the levenberg_marquardt and the nelder_mead plugin..
+It has been tested with the levenberg_marquardt and the nelder_mead plugin.
 
 See http://tellurium.analogmachine.org/plugins for more details.
 

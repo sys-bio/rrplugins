@@ -1,12 +1,9 @@
 from telplugins import *
 
-try:
-    rrDataHandle = createTelluriumDataFromFile("MCDataSets.dat")
-    hdr = getTelluriumDataColumnHeader(rrDataHandle)
-    npData = getNumpyData(rrDataHandle)
-    print `hdr` + `npData`
-
-    plotTelluriumData(npData, hdr)
+try:    
+    #Plot Monte Carlo data sets        
+    dataSeries =  DataSeries.readDataSeries("MCDataSets.dat")    
+    dataSeries.plot()
 
     print "done"
 except Exception as e:

@@ -2,7 +2,7 @@
 
 echo "Creating documentation for the plugin"
 mainDoc=mainDoc.tex
-pluginName=monte_carlo
+pluginName=monte_carlo_bs
 chapter=plugin_$pluginName
 pdflatex -jobname=$pluginName "\includeonly{$chapter}\input{$mainDoc}"
 

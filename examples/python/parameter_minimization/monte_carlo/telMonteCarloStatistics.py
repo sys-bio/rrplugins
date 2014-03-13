@@ -39,6 +39,7 @@ try:
     mcParaData = mcP.MonteCarloParameters.toNumpy         
     plt.hist(mcParaData, 50, normed=True)
     plt.show()
+        
                           
 except Exception as e:
     print 'Problem.. ' + `e`    

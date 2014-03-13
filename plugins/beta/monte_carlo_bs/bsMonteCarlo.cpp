@@ -20,15 +20,15 @@ mSBML(                          "<none>",               "SBML",                 
 mExperimentalData(              TelluriumData(),        "ExperimentalData",                     "Data object holding Experimental data: Provided by client"),
 mInputParameterList(            Properties(),           "InputParameterList",                   "List of parameters to fit"),
 mMonteCarloParameters(          TelluriumData(),        "MonteCarloParameters",                 "Parameters obtained from a Monte Carlo session."),
-mCurrentParameters(             Properties(),           "CurrentParameters",                    "List of parameters"),
+mCurrentParameters(             Properties(),           "CurrentParameters",                    "List of parameters (to be removed)"),
 mConfidenceLimits(              Properties(),           "ConfidenceLimits",                     "Confidence limits for each parameter"),
 mExperimentalDataSelectionList( StringList(),           "ExperimentalDataSelectionList",        "Experimental data selection list"),
-mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Fitted data selection list"),
+mModelDataSelectionList(        StringList(),           "FittedDataSelectionList",              "Model data selection list"),
 mNrOfMCRuns(                    5,                      "NrOfMCRuns",                           "Number of Monte Carlo Data Sets"),
 mMinimizerPlugin(               "Levenberg-Marquardt",  "MinimizerPlugin",                      "Minimizer used by the Monte Carlo Engine"),
 mWorker(*this)
 {
-    mVersion = "0.8";
+    mVersion = "1.0.0";
 
     //Add plugin properties to property container
     mProperties.add(&mSBML);
@@ -177,7 +177,11 @@ The input parameters are properties of the input SBML model";
 mInputParameterList.setDescription(s.str());
 s.str("");
 
-s << "The confidence limits parameter list holds resulting confidence limits, as calculated using obtained Monte Carlo Parameters";
+s << "Parameter values obtained from a Monte Carlo session. The data is ordered so each set of values for parameter 1 is in column 1, and parameters 2 values are in column 2, etc.";
+mMonteCarloParameters.setDescription(s.str());
+s.str("");
+
+s << "The confidence limits parameter list holds resulting confidence limits, as calculated using the obtained Monte Carlo Parameters";
 mConfidenceLimits.setDescription(s.str());
 s.str("");
 
@@ -187,12 +191,16 @@ mExperimentalDataSelectionList.setDescription(s.str());
 s.str("");
 
 s << "The model data selection list contains the selections for which model data will be genereated.  \
-Model data can only be generated for selections present in the experimental data selectionlist.";
+Internally this data is used to calcualte residual data.";
 mModelDataSelectionList.setDescription(s.str());
 s.str("");
 
-s << "The number of iterations wil hold the number of iterations of the internal fitting routine.";
+s << "The number of Monte Carlo runs, i.e. the number of Monte Carlo data sets to generate.";
 mNrOfMCRuns.setDescription(s.str());
+s.str("");
+
+s << "The Monte Carlo plugin will use a minimization routine internally. The routine to use can be set using the MinimizerPlugin property.";
+mMinimizerPlugin.setDescription(s.str());
 s.str("");
 
 }

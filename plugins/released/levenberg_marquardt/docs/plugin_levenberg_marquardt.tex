@@ -1,3 +1,5 @@
+\newcommand{\pname}{Levenberg-Maqrquardt}
+
 \chapter*{Parameter Minimization using the Levenberg-Marquardt algorithm}
 \setcounter{chapter}{1}
 \emph{Do some fitting}
@@ -67,6 +69,15 @@ patience                        &   double              & 100                   
 
 \end{landscape}
 
+
+\section{The \texttt{execute(bool inThread)} function}
+The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time. 
+
+The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the \pname\ plugin.
+
+The inThread argument defaults to \textbf{false}.
+
+
 \section{Plugin Events}
 The Levenberg-Marquardt plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
@@ -89,6 +100,7 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \caption{Plugin callbacks} 
 \label{table:lmfitPluginCallBacks} 
 \end{table}
+
 
 \section{Python example}
 The following Python script illustrate how the plugin can be used. 

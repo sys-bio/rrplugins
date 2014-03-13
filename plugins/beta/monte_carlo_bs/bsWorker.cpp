@@ -88,7 +88,7 @@ void bsWorker::run()
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The minimization was terminated.. aborting";
+        Log(lInfo)<<"The Monte Carlo plugin was terminated. Aborting";
         workerFinished();
         return;
     }
@@ -96,7 +96,7 @@ void bsWorker::run()
     //Get to work..
     if(!setup())
     {
-        Log(lError)<<"Failed setting up the Monte Carlo Bootstrap plugin aborting";
+        Log(lError)<<"Failed setting up the Monte Carlo Bootstrap plugin. Aborting.";
         return;
     }
 
@@ -105,7 +105,7 @@ void bsWorker::run()
     //First get initial residuals
     if(!createInitialResiduals())
     {
-        Log(lError)<<"Failed creating initial residuals in Monte Carlo plugin..";
+        Log(lError)<<"Failed creating initial residuals in Monte Carlo plugin.";
         return;
     }
     else
@@ -133,10 +133,9 @@ void bsWorker::run()
         workerProgress();
     }
 
-    TelluriumData& parasData = mParent.mMonteCarloParameters.getValueReference();
-    Properties& fitParas = mParent.mInputParameterList.getValueReference();
+    TelluriumData& parasData    = mParent.mMonteCarloParameters.getValueReference();
+    Properties& fitParas        = mParent.mInputParameterList.getValueReference();
     parasData.reSize(mParent.mNrOfMCRuns, mParent.mInputParameterList.getValue().count());
-
 
     //Setup column header
     StringList hdr;
