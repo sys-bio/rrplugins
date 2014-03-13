@@ -10,7 +10,6 @@ include_directories(
 
 OPTION (TLP_BUILD_AUTO_2000_PLUGIN	            "Build the Auto 2000 Plugin"	                ON)
 OPTION (TLP_BUILD_STAT_PLUGIN	                "Build the STAT (statistics) Plugin"	        ON)
-OPTION (TLP_BUILD_MONTE_CARLO_BS_PLUGIN	        "Build the Monte Carlo BS (bootstrap) Plugin"   ON)
 
 if(${TLP_BUILD_AUTO_2000_PLUGIN} STREQUAL ON)
     add_subdirectory(auto_2000)
@@ -18,9 +17,5 @@ endif()
 
 if(${TLP_BUILD_STAT_PLUGIN} STREQUAL ON)
     add_subdirectory(statistics)
-endif()
-
-if(${TLP_BUILD_MONTE_CARLO_BS_PLUGIN} STREQUAL ON)
-    add_subdirectory(monte_carlo_bs)
 endif()
 
