@@ -168,12 +168,8 @@ install(
     FUNDING.txt
     VERSION.txt
     NEWS.txt
+    NOTICE.txt
     CHANGELOG.txt
     DESTINATION .
 )
 
-#if(WIN32)
-#    install(
-#        FILES win32_bin_README.txt DESTINATION bin/ RENAME README.txt
-#    )
-#endif(WIN32)

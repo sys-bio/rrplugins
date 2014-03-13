@@ -7,8 +7,8 @@ namespace tlp {
 
 #define TLP_VERSION_MAJOR 1
 #define TLP_VERSION_MINOR 0
-#define TLP_VERSION_PATCH 4
-#define TLP_VERSION_STR "1.0.4"
+#define TLP_VERSION_PATCH 5
+#define TLP_VERSION_STR "1.0.5"
 
 #if defined(__llvm__)
     #define TLP_COMPILER "clang"

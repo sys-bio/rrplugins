@@ -1,6 +1,6 @@
 This directory contains Tellurium plugins. 
 
-List of Plugins expected in a official Tellurium release:
+List of Plugins expected in an official Tellurium release:
 
 * tel_test_model.dll 1.0.0 
 This plugin contain an embedded test model. Upon execute(), plugin properties are populated holding test data and test data with noise.
@@ -18,7 +18,11 @@ This plugin implements the Levenberg-Marquardt optimizer for fitting multi param
 * tel_nelder_mead.dll Version 0.9.0
 This plugin implements the Nelder-Mead optimizer for fitting multi parameter data to models.
 
-See http://tellurium.analogmachine.org/plugins/  for more details.
+* tel_monte_carlo.dll Version 0.9.0
+This plugin implements a Monte Carlo bootstrap parameter estimation algorithm. 
+It has been tested with the levenberg_marquardt and the nelder_mead plugin..
+
+See http://tellurium.analogmachine.org/plugins for more details.
 
 
 
