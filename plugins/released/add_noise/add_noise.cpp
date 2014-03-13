@@ -19,7 +19,7 @@ mData(              TelluriumData(),    "InputData",   "Data on which noise will
 mProgress(          0,                  "Progress",    "Indicate progress in (0-100%)"),
 mAddNoiseWorker(*this)
 {
-    mVersion = "1.0.0";
+    mVersion = "1.0.1";
 
     //Setup the plugins capabilities
     mProperties.add(&mNoiseType);

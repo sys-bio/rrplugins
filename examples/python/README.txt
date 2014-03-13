@@ -1,7 +1,7 @@
 Folder containing example/demo scripts demonstrating plugin usage.
 
-* telTestModel.py                   - Demonstrate usage of the TestModel plugin
 * telAddNoise.py                    - Demonstrate usage of the AddNoise plugin
+* telTestModel.py                   - Demonstrate usage of the TestModel plugin
 * telChiSquare.py                   - Demonstrate usage of the ChiSquare plugin
 * telLevenbergMarquardt.py          - Demonstrate usage of the Levenberg-Marquardt plugin
 * telNelderMead.py                  - Demonstrate usage of the Nelder-Mead plugin
