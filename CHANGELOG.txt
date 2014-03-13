@@ -1,3 +1,12 @@
+Release 1.0.6 (2014-03-13)
+* Updated Nelder-Mead documentation
+* Updated Levenberg-Marquardt documentation. Added property descriptions.
+* Added description for the ChiSquare plugin
+* Went trought the ChiSquare plugin release check list
+* Added property description to test_model plugin
+* Bumped AddNoise plugin version to 1.0.1
+* Added assignment of NOise plugin property descriptions
+
 Release 1.0.5 (2014-03-13)
 * Added CMake files to example folders to fine tune example release
 * Other minor updates
