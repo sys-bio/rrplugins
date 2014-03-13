@@ -33,7 +33,8 @@ mWorker(*this)
     mProperties.add(&mReducedChiSquare);
 
     mHint = "Calculate Chisquare and Reduced Chisquare.";
-    mDescription="";
+    mDescription="The purpose of the ChiSquare plugin is to calculate the ChiSquare and the reduced ChiSquare, for two sets of data.";
+
     //The function below assigns property descriptions
     assignPropertyDescriptions();
 }

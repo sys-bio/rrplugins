@@ -304,7 +304,35 @@ s << "The number of iterations wil hold the number of iterations of the internal
 mNrOfIter.setDescription(s.str());
 s.str("");
 
-    //Add the lmfit parameters
+s << "Hessian matrix. The Hessian is calculated using approximation at a found parameter minimum.";
+mHessian.setDescription(s.str());
+s.str("");
+
+s << "Covariance matrix. Calculated as the inverse of the Hessian.";
+mCovarianceMatrix.setDescription(s.str());
+s.str("");
+
+s << "Covariance matrix. Calculated as the inverse of the Hessian.";
+mCovarianceMatrix.setDescription(s.str());
+s.str("");
+
+s << "Standardized residuals are the residuals normalized to a normal distribution.";
+mStandardizedResiduals.setDescription(s.str());
+s.str("");
+
+s << "Normal Probability of Residuals, i.e. Q-Q data.";
+mNormalProbabilityOfResiduals.setDescription(s.str());
+s.str("");
+
+s << "The calculated ChiSquare at the found minimum.";
+mChiSquare.setDescription(s.str());
+s.str("");
+
+s << "The calculated reduced ChiSquare at the found minimum.";
+mReducedChiSquare.setDescription(s.str());
+s.str("");
+
+//Add the lmfit parameters
 s << "ftol is a nonnegative input variable. Termination occurs when \
 both the actual and predicted relative reductions in the sum \
 of squares are at most ftol. Therefore, ftol measures the \

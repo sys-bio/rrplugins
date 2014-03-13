@@ -62,7 +62,7 @@ stepbound                       &   double              & 100.0                 
 patience                        &   double              & 100                   &   Used for setting maximum number of iterations, calculated as \verb|patience*(nr_of_parameters +1)|. \\
                                                         
 \hline %inserts single line                             
-\caption{LM fit plugin parameters} 
+\caption{\pname\ plugin properties} 
 \label{table:lmfitPluginParameters} 
 \end{longtable}
 %\end{table}
@@ -82,7 +82,7 @@ The inThread argument defaults to \textbf{false}.
 The Levenberg-Marquardt plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
-the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
+the plugins execute function (in the assignOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -97,8 +97,8 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 
 \hline %inserts single line
 \end{tabular}
-\caption{Plugin callbacks} 
-\label{table:lmfitPluginCallBacks} 
+\caption{Plugin events} 
+\label{table:lmfitPluginEvents} 
 \end{table}
 
 
