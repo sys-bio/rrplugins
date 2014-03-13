@@ -7,7 +7,6 @@ try:
     print `hdr` + `npData`
 
     plotTelluriumData(npData, hdr)
-
     print "done"
 except Exception as e:
     print 'Exception: ' + `e`

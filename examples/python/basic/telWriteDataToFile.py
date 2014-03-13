@@ -3,15 +3,15 @@ from telplugins import *
 
 try:
     #Get a sbml model from the test_model plugin
-    modelPlugin= Plugin("tel_test_model")        
+    modelPlugin= Plugin("tel_test_model")
     test_model = modelPlugin.Model
 
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
-    rr.load(test_model) 
-    
-    rr.setValue("k1", .57)   
-    rr.reset()   
+    rr.load(test_model)
+
+    rr.setValue("k1", .57)
+    rr.reset()
     timeStart = 0
     timeEnd = 10
     nrPoints  = 15
@@ -29,28 +29,28 @@ try:
     # Set parameter for the 'size' of the noise
     sigma = 1.34e-6
     noisePlugin.Sigma = sigma
-        
+
     # Add the noise
     noisePlugin.execute()
 
     # Get the data to plot
     theData = noisePlugin.InputData
     theData.plot()
-            
-    # Need to add weight stuff to DataSeries class?            
+
+    # Allocate weights, if not present
     dataHandle = theData._data
     if not hasWeights(dataHandle):
         allocateWeights(dataHandle)
-                    
+
     #Populate weights, using the sigma above
     hdrs = list(theData.getColumnHeaders().split(','))
-    
+
     for c in range(theData.cols):
-        for r in range(theData.rows):    
+        for r in range(theData.rows):
             if hdrs[c].lower() != "Time".lower():
                 weight = theData.getWeight(r,c)
-                theData.setWeight(r,c, sigma * sigma)                
-    
+                theData.setWeight(r,c, sigma * sigma)
+
     noisePlugin.InputData.writeDataSeries("testlData.dat")
     print "done"
 
