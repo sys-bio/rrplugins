@@ -1,4 +1,6 @@
 == 2014 ==
+March 07-13
+    Released the Levenberg-Marquardt, Nelder-Mead and Monte Carlo bootstrap plugins
 
 March 6
     The AddNoise and TestModel plugins were released.

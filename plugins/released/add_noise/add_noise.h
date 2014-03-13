@@ -23,6 +23,7 @@ class AddNoise : public CPPPlugin
         Property<TelluriumData>     mData;
         Property<double>            mProgress;
         AddNoiseWorker              mAddNoiseWorker;
+        void                        assignPropertyDescriptions();
 
     public:
                                     AddNoise(RoadRunner* aRR = NULL, PluginEvent fn1 = NULL, PluginEvent fn2 = NULL, PluginEvent fn3 = NULL);

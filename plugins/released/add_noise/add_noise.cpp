@@ -10,11 +10,10 @@
 namespace addNoise
 {
 
-
 AddNoise::AddNoise(rr::RoadRunner* aRR, PluginEvent fn1, PluginEvent fn2, PluginEvent fn3)
 :
 CPPPlugin(  "AddNoise",                 "Signal Processing",    aRR,    NULL),  //Construct Base
-mNoiseType(         ntGaussian,         "NoiseType",   "Type of noise (Gaussian = 0, Psychological = 1)."),
+mNoiseType(         ntGaussian,         "NoiseType",   "Type of noise (Gaussian = 0)."),
 mSigma(             1,                  "Sigma",       "Size of applied noise"),
 mData(              TelluriumData(),    "InputData",   "Data on which noise will be applied to"),
 mProgress(          0,                  "Progress",    "Indicate progress in (0-100%)"),
@@ -37,6 +36,9 @@ Currently only Gaussian noise is supported. \
 The progress of the application of noise can be read in the Progress property. \
 Noise will not be generated onto the first column of data, if its column label is equal to \"Time\", (not case sensitive). \
 The AddNoise plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.";
+
+    //The function below assigns property descriptions
+    assignPropertyDescriptions();
 }
 
 AddNoise::~AddNoise()
@@ -63,6 +65,28 @@ bool AddNoise::execute(bool inThread)
 
     //go away and carry out the work in a thread
     return mAddNoiseWorker.start(inThread);
+}
+
+void AddNoise::assignPropertyDescriptions()
+{
+    stringstream s;
+
+s << "Type of noise applied on data. Only Gaussian noise is currently supported.";
+mNoiseType.setDescription(s.str());
+s.str("");
+
+s << "Size of applied noise. Noise is generated for each single data value, with a probability corresponding to a Gaussian distribution, centered around the value, and with a variance equal to sigma^2";
+mSigma.setDescription(s.str());
+s.str("");
+
+s << "Data on which noise will be applied to";
+mData.setDescription(s.str());
+s.str("");
+
+s << "The progress property communicates the progress (in percent) of Noise application.";
+mProgress.setDescription(s.str());
+s.str("");
+
 }
 
 // Plugin factory function
