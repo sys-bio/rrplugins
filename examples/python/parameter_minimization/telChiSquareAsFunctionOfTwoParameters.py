@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
 # Purpose: Example demonstrating how to calculate the ChiSquare, using the 
 # ChiSquare plugin, as a function of a TWO model parameter.
-# This example are using example data in the file TwoParameters.dat, which is 
+# This example are using example data in the file TwoParameters.dat, which was 
 # generated using the model in 'two_parameters.xml'. Both of these files are 
 # needed for the example 
 # The generated contour plot will indicate the value of k1 and k2 that was
-# used in generating the 'Experimental' data.
+# used in generation of the 'Experimental' data.
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
 
@@ -65,7 +65,8 @@ try:
     CS = plt.contour(X, Y, Z, 400)
     plt.clabel(CS, inline=1, fontsize=10)        
     plt.title('Reduced ChiSquare for SBML model with two parameters')
-
+    plt.xlabel('k1')
+    plt.ylabel('k2')    
     plt.show()                                                
     print "done"
 
