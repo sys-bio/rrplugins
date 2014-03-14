@@ -4,7 +4,10 @@ PROJECT(TEL_PYTHON_EXAMPLES)
 
 set(plugin_examples
 telFittingStatistics.py
-telChiSquareAsFunctionOfParameter.py
+telChiSquareAsFunctionOfOneParameter.py
+telChiSquareAsFunctionOfTwoParameters.py
+two_parameters.xml
+TwoParametersData.dat
 )
 
 install(    

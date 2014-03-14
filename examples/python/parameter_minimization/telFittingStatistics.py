@@ -22,7 +22,7 @@ try:
     # Create a roadrunner instance and create some data
     rr = roadrunner.RoadRunner()
     rr.load(test_model)
-    data = rr.simulate(0, 10, 15000) # Want 512 points
+    data = rr.simulate(0, 10, 15000)
 
     #Add noise to the data
     noisePlugin = tel.Plugin ("tel_add_noise")
