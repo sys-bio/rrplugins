@@ -1,3 +1,10 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to access and plot various statistics from 
+# a fitting session, e.g. RESIDUALS, STANDARDIZED RESIDUALS and  
+# NORMAL PROBABILITY OF RESIDUALS (Q-Q plot)
+# 
+# Author:      Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,7 +13,6 @@ import telplugins as tel
 import ctypes as ct
 
 try:
-
     chiPlugin   = tel.Plugin("tel_chisquare")
     
     #Retrieve a SBML model from plugin        

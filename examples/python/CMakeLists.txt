@@ -11,9 +11,5 @@ COMPONENT examples
 )
 
 add_subdirectory(basic)
-#add_subdirectory(parameter_minimization)
-#add_subdirectory(parameter_minimization/one_parameter)
-#add_subdirectory(parameter_minimization/two_parameters)
-#add_subdirectory(parameter_minimization/monte_carlo)
-#add_subdirectory(parameter_minimization/statistics)
+add_subdirectory(parameter_minimization)
 

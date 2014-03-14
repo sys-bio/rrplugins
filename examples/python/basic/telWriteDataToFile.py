@@ -1,3 +1,11 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to create data using a roadrunner instance
+# and then add noise to it. The example also demonstrate how to populate a Tellurium data 
+# object weights property. 
+# Finally it is shown how to save data to file, using the writeDataSeries() function   
+#
+# Author: Totte Karlsson
+#-------------------------------------------------------------------------------
 import roadrunner
 from telplugins import *
 

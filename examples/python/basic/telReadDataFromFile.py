@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to read Tellurium data from file, and plot it.
+#
+# Author: Totte Karlsson
+#-------------------------------------------------------------------------------
 from telplugins import *
 
 try:    

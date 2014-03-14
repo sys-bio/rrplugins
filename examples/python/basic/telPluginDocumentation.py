@@ -1,3 +1,4 @@
+#-------------------------------------------------------------------------------
 # Purpose: Example demonstrating various documentation features of plugins.
 # The plugin shows how to get names of a plugins properties, get description of each property
 # and finaly shows how to view a plugins embedded (PDF) manual.  
