@@ -1,3 +1,9 @@
+Release 1.0.7 (2014-03-13)
+* Added example script showing ChiSquare as a function of two parameters.
+* Added example script showing ChiSquare as a function of one parameter.
+* Added more examples to the release
+* Updated example scripts with more information on their purpose and function
+
 Release 1.0.6 (2014-03-13)
 * Updated Nelder-Mead documentation
 * Updated Levenberg-Marquardt documentation. Added property descriptions.
