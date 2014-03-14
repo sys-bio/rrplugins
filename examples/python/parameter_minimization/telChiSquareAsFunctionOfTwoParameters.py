@@ -1,11 +1,13 @@
 #-------------------------------------------------------------------------------
-# Purpose: Example demonstrating how to calculate the ChiSquare, using the 
-# ChiSquare plugin, as a function of a TWO model parameter.
-# This example are using example data in the file TwoParameters.dat, which was 
-# generated using the model in 'two_parameters.xml'. Both of these files are 
-# needed for the example 
+# Purpose: Example demonstrating how to calculate the ChiSquare, using the
+# ChiSquare plugin, as a function of a TWO model parameters.
+#
+# This example are using example data in the file TwoParameters.dat, which is
+# generated using the model in 'two_parameters.xml'. Both of these files are
+# needed for the example
+#
 # The generated contour plot will indicate the value of k1 and k2 that was
-# used in generation of the 'Experimental' data.
+# used in generating the 'Experimental' data.
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
 
