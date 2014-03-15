@@ -1,0 +1,87 @@
+/* ------------------
+ styling for the tables 
+   ------------------   */
+
+
+body
+{
+	line-height: 1.6em;
+}
+
+#pluginsTable
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	background: #fff;
+	margin: 0px;
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+#pluginsTable th
+{
+	font-size: 14px;
+	font-weight: normal;
+	color: #039;
+	padding: 3px 8px;
+	border-bottom: 2px solid #6678b1;
+}
+#pluginsTable td
+{
+	color: #669;
+	padding: 9px 8px 0px 8px;
+}
+#pluginsTable tbody tr:hover td
+{
+	color: #009;
+}
+
+#pluginsTable caption
+{	
+    font-size: 15px;
+	font-weight: normal;
+    text-align:left;
+}
+
+#detailsTable
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 80%;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+#detailsTable caption
+{	
+    font-size: 15px;
+	font-weight: normal;
+    text-align:left;
+}
+#detailsTable th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-top: 4px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+#detailsTable td
+{
+	padding: 12px;
+	background: #e8edff; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+#detailsTable tr:hover td
+{
+	background: #d0dafd;
+	color: #339;
+}
+
+
