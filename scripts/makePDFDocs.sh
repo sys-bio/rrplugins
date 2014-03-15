@@ -1,10 +1,17 @@
 #! /usr/bin/bash
 
-echo "Creating documentation for the plugin"
+if [ $# -ne 1 ]; then
+    echo "Missing argument -> plugin name"
+    exit 1
+fi
+echo "Creating PDF documentation for the plugin"
 mainDoc=mainDoc.tex
-pluginName=levenberg_marquardt
-chapter=plugin_$pluginName
-pdflatex -jobname=$pluginName "\includeonly{$chapter}\input{$mainDoc}"
+pluginName=$1
+pdfName=$pluginName.pdf
+chapter=$pluginName
+pdflatex -jobname=thePDF "\includeonly{$chapter}\input{$mainDoc}"
+
+mv thePDF.pdf $pdfName
 
 ##Create the C file to link with the plugin
 hdrFile="$pluginName"_doc.h
@@ -27,10 +34,8 @@ cat $pluginName.pdf | (xxd -i; echo "};") >> $cppFile
 echo "size_t sizeofPDF = sizeof(pdf_doc);" >> $cppFile
 
 mv $hdrFile $cppFile ./..
-mv $pluginName.pdf ./pdf
-
-echo "Cleaning"
-./clean.sh
-echo "Done.."
+mkdir html
+mv $pdfName ./pdf
+echo "========== Done createing PDF for plugin: $pluginName."
 
 

@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 
 scripts="./../../../../scripts"
-plugin=monte_carlo_bs
+plugin=levenberg_marquardt
 
 $scripts/makePDFDocs.sh $plugin
 $scripts/makeHTMLDocs.sh $plugin

@@ -1,6 +1,7 @@
 #! /usr/bin/bash
 
-echo "Cleaning docs folder"
+folder=`pwd`
+echo "Cleaning folder: $folder"
 
 extensions="4ct 4tc aux css dvi idv lg log tmp xref html"
 
