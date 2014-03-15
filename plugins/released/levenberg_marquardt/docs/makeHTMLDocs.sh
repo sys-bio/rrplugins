@@ -7,7 +7,8 @@ pluginName=levenberg_marquardt
 htlatex $mainDoc.tex
 
 mkdir html
-cp -v $mainDoc.html ./html/$pluginName.html
+cp -v $mainDoc.html ./html/index.html
+rm -v $mainDoc.html
 cp *.html ./html
 cp -r Figures ./html
 cp *.css ./html
