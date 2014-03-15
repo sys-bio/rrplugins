@@ -34,7 +34,7 @@ cat $pluginName.pdf | (xxd -i; echo "};") >> $cppFile
 echo "size_t sizeofPDF = sizeof(pdf_doc);" >> $cppFile
 
 mv $hdrFile $cppFile ./..
-mkdir html
+mkdir pdf
 mv $pdfName ./pdf
 echo "========== Done createing PDF for plugin: $pluginName."
 
