@@ -1,5 +1,16 @@
  
 /* start css.sty */
+.cmr-10{font-size:83%;}
+.cmtt-12{font-family: monospace;}
+.cmtt-12{font-family: monospace;}
+.cmtt-12{font-family: monospace;}
+.cmr-8{font-size:66%;}
+.cmmi-12{font-style: italic;}
+.cmti-12{ font-style: italic;}
+.cmtt-10{font-size:83%;font-family: monospace;}
+.cmtt-10{font-family: monospace;}
+.cmtt-10{font-family: monospace;}
+.cmitt-10{font-size:83%;font-family: monospace; font-style: italic;}
 p.noindent { text-indent: 0em }
 td p.noindent { text-indent: 0em; margin-top:0em; }
 p.nopar { text-indent: 0em; }
