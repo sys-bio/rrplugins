@@ -24,7 +24,7 @@ class DataSeries(object):
     def __init__ (self, handle=None, myData = False):
         if handle == None:
            self._myData = True
-           self._data = tpc.telLib.createTelluriumData(0, 0, "")           
+           self._data = tpc.telLib.tpCreateTelluriumData(0, 0, "")           
         else:   
            self._data = handle
            self._myData = myData 
@@ -58,7 +58,7 @@ class DataSeries(object):
         columnStr = str(colHdr).strip('[]')
         columnStr = columnStr.strip('()')
         columnStr = columnStr.translate(None, '\' ')
-        dataHandle = tpc.telLib.createTelluriumData(nrRows,nrCols, columnStr)        
+        dataHandle = tpc.telLib.tpCreateTelluriumData(nrRows,nrCols, columnStr)        
                 
         #Copy the data
         for row in range(nrRows):
@@ -83,14 +83,14 @@ class DataSeries(object):
         
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
-        return tpc.telLib.getTelluriumDataNumRows(self._data)
+        return tpc.telLib.tpGetTelluriumDataNumRows(self._data)
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
-        return tpc.telLib.getTelluriumDataNumCols(self._data)
+        return tpc.telLib.tpGetTelluriumDataNumCols(self._data)
      
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
@@ -101,7 +101,7 @@ class DataSeries(object):
     ## print d.getColumnHeaders()
     ##@endcode
     def getColumnHeaders (self):
-        value = tpc.telLib.getTelluriumDataColumnHeader(self._data)
+        value = tpc.telLib.tpGetTelluriumDataColumnHeader(self._data)
         if value == None:
            value = []
         return value
@@ -111,8 +111,8 @@ class DataSeries(object):
     ## print d.getElement (1,2)
     ##@endcode       
     def getElement (self, row, col):
-        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
-        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -121,7 +121,7 @@ class DataSeries(object):
             raise Exception("Column index out of bounds in dataseries element access")
 
         val = ctypes.c_double()
-        if tpc.telLib.getTelluriumDataElement(self._data, row, col, ctypes.byref(val)) == True:
+        if tpc.telLib.tpGetTelluriumDataElement(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:
            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
@@ -133,8 +133,8 @@ class DataSeries(object):
     ## d.setElement (1,2, 3.1415)
     ##@endcode       
     def setElement (self, row, col, value):
-        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
-        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -148,8 +148,8 @@ class DataSeries(object):
     ## print d.getWeight (1,2)
     ##@endcode       
     def getWeight (self, row, col):
-        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
-        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -157,16 +157,16 @@ class DataSeries(object):
         if col >= colCount:
             raise Exception("Column index out of bounds in dataseries element access")
 
-        if not tpc.telLib.hasWeights(self._data):
+        if not tpc.telLib.tpHasWeights(self._data):
             raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
         
         val = ctypes.c_double()
-        if tpc.telLib.getTelluriumDataWeight(self._data, row, col, ctypes.byref(val)) == True:
+        if tpc.telLib.tpGetTelluriumDataWeight(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:                               
            # Is there a getLastError for this?
            # TK: When an API function fails, the reason for the failure should always be recorded in a message in getLastError()
-           msg = tpc.telLib.getLastError()
+           msg = tpc.telLib.tpGetLastError()
            raise Exception("Unable to retrieve element. The problem was: " + `msg`)
 
     ## \brief Set a specific element
@@ -174,8 +174,8 @@ class DataSeries(object):
     ## d.setElement (1,2, 3.1415)
     ##@endcode       
     def setWeight (self, row, col, value):
-        rowCount = tpc.telLib.getTelluriumDataNumRows(self._data)
-        colCount = tpc.telLib.getTelluriumDataNumCols(self._data)
+        rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
         if (row < 0) or (col < 0):
             raise Exception("DataSeries indices must be positive")
         if row >= rowCount:
@@ -183,7 +183,7 @@ class DataSeries(object):
         if col >= colCount:
             raise Exception("Column index out of bounds in dataseries element access")
         
-        if not tpc.telLib.hasWeights(self._data):
+        if not tpc.telLib.tpHasWeights(self._data):
             raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
 
         tpc.setTelluriumDataWeight(self._data, row, col, value)
@@ -514,7 +514,7 @@ class Plugin (object):
 
      
     def info (self):
-        return tpc.telLib.getPluginInfo(self.plugin)
+        return tpc.telLib.tpGetPluginInfo(self.plugin)
 
 # ----------------------------------------------------------------
 
