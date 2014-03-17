@@ -49,9 +49,9 @@ int main()
         string sbml = getFileContent(sbmlFile);
 
         //Various plugin constants
-        autoPlugin->setProperty("SBML", sbml.c_str());
-        autoPlugin->setProperty("TempFolder", tempFolder.c_str());
-        autoPlugin->setProperty("KeepTempFiles", "false");
+        autoPlugin->setPropertyByString("SBML", sbml.c_str());
+        autoPlugin->setPropertyByString("TempFolder", tempFolder.c_str());
+        autoPlugin->setPropertyByString("KeepTempFiles", "false");
 
         //Specific auto parameters
         PropertyBase* para = autoPlugin->getProperty("AutoParameters");
@@ -59,12 +59,10 @@ int main()
 
         cout<<autoParas->getNames();
 
-//        RL0->setValueFromString("1.12");
-
-        autoPlugin->setProperty("ScanDirection", "Positive");
-        autoPlugin->setProperty("PrincipalContinuationParameter", "k3");
-        autoPlugin->setProperty("PCPLowerBound", "1.1");
-        autoPlugin->setProperty("PCPUpperBound", "1.4");
+        autoPlugin->setPropertyByString("ScanDirection", "Positive");
+        autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
+        autoPlugin->setPropertyByString("PCPLowerBound", "1.1");
+        autoPlugin->setPropertyByString("PCPUpperBound", "1.4");
 
         if(!autoPlugin->execute())
         {

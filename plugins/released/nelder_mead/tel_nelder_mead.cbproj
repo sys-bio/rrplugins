@@ -132,9 +132,6 @@
         <CppCompile Include="nelder_mead_doc.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="nmMinimizationData.cpp">
-            <BuildOrder>6</BuildOrder>
-        </CppCompile>
         <CppCompile Include="nmNelderMead.cpp">
             <DependentOn>nmNelderMead.h</DependentOn>
             <BuildOrder>1</BuildOrder>

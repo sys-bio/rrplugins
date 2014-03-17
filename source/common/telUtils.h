@@ -49,7 +49,6 @@
 #include <string>
 #include <sstream>
 #include <set>
-//#include "rr/rrSelectionRecord.h"
 #include "telCommonExporter.h"
 #include "telStringList.h"
 #include "telUtils.h"
@@ -80,13 +79,6 @@ using std::string;
 //    lDebug5     = rr::Logger::LOG_TRACE,
 //    lUser       = rr::Logger::LOG_TRACE
 //};
-/**
-    \brief Takes a vector of SelectionRecords and returns their representation as
-    a StringList
-*/
-//COMMON_DECLSPEC tlp::StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& recs);
-
-//COMMON_DECLSPEC StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
 COMMON_DECLSPEC bool           cleanFolder(const string& folder, const string& baseName,  const std::vector<std::string>& extensions);
 COMMON_DECLSPEC string         getTime();
 COMMON_DECLSPEC string         getDateTime();

@@ -126,13 +126,13 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <CppCompile Include="levenberg_marquardt_doc.cpp">
+            <DependentOn>levenberg_marquardt_doc.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="lm.cpp">
             <DependentOn>lm.h</DependentOn>
             <BuildOrder>1</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="lmfit_doc.cpp">
-            <DependentOn>lmfit_doc.h</DependentOn>
-            <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="lmObjectiveFunction.cpp">
             <BuildOrder>5</BuildOrder>

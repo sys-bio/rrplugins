@@ -10,6 +10,12 @@
 namespace rrauto
 {
 
+/**
+    \brief Takes a vector of SelectionRecords and returns their representation as
+    a StringList
+*/
+
+tlp::StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
 using namespace tlp;
 using namespace autolib;
 
@@ -413,5 +419,16 @@ bool RRAuto::reset()
     //Remove temporary files
     return true;
 }
+
+StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
+{
+    StringList sels;
+    for(int i = 0; i < _sels.size(); i++)
+    {
+        sels.add(_sels[i].to_string());
+    }
+    return sels;
+}
+
 
 } //namespace au
