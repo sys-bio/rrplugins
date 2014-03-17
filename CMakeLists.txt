@@ -155,6 +155,11 @@ ${installerFiles}
 DESTINATION ./installer/windows
 )
 
+#Install createPythonReleaseScript
+install (
+FILES scripts/createPythonRelease.sh
+DESTINATION ./../
+)
 #=== ThirdParties
 if(${BORLAND})
     set(CG_RUNTIMES        cc32110MT.dll)
