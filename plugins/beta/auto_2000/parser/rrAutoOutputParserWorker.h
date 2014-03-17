@@ -2,8 +2,8 @@
 #define rrAutoOutputParserWorkerH
 #include "Poco/Thread.h"
 #include "Poco/Runnable.h"
-#include "rrRoadRunner.h"
-#include "rrOSSpecifics.h"
+#include "rr/rrRoadRunner.h"
+#include "rr/rrOSSpecifics.h"
 #include "../rrAutoInterface/rrAutoData.h"
 //---------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ class RRAuto;
 
 namespace autoplugin
 {
-typedef void (callback_cc *ThreadCB)(void*);
+typedef void (*ThreadCB)(void*);
 
 class AutoOutputParser;
 

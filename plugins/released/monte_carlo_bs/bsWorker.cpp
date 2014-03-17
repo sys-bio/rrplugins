@@ -190,9 +190,9 @@ void bsWorker::run()
 
 Properties bsWorker::getParameters(TelluriumData* mcData)
 {
-    resetPlugin(mMinimizerPlugin);
+    tpResetPlugin(mMinimizerPlugin);
 
-    TELHandle parasHandle = getPluginPropertyValueHandle(mMinimizerPlugin, "InputParameterList");
+    TELHandle parasHandle = tpGetPluginPropertyValueHandle(mMinimizerPlugin, "InputParameterList");
     if(!parasHandle)
     {
         throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
@@ -207,23 +207,23 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
         Property<double>* para = (Property<double>*) (base); //->Items->Objects[i];
 
         //Do the creation of parameters earlier instead...
-        TELHandle newPara = createProperty(para->getName().c_str(), "double", "", para->getValueHandle());
-        addPropertyToList(parasHandle, newPara);
+        TELHandle newPara = tpCreateProperty(para->getName().c_str(), "double", "", para->getValueHandle());
+        tpAddPropertyToList(parasHandle, newPara);
     }
 
     //Set input data to fit to
-    TELHandle experimentalData = getPluginProperty(mMinimizerPlugin, "ExperimentalData");
-    setTelluriumDataProperty(experimentalData, mcData);
+    TELHandle experimentalData = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalData");
+    tpSetTelluriumDataProperty(experimentalData, mcData);
 
     //Add species to minimization data structure.. The species are defined in the input data
     StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
-    TELHandle paraHandle = getPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
-    setPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
+    TELHandle paraHandle = tpGetPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
+    tpSetPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
 
-    TELHandle obsList = getPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
+    TELHandle obsList = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
     StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
-    setPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
 
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
     if(ExpDataSelectionList.Count() > modelDataSelectionList.Count())
@@ -234,17 +234,17 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     }
 
     string strVal = mParent.mSBML.getValue();
-    if(!setPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
+    if(!tpSetPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
         Log(lError)<<"Failed setting sbml";
         return false;
     }
 
-    executePluginEx(mMinimizerPlugin, false);
+    tpExecutePluginEx(mMinimizerPlugin, false);
 
     //Check on success of fitting. If failing, bail
     //Extract the parameters
-    parasHandle = getPluginPropertyValueHandle(mMinimizerPlugin, "OutputParameterList");
+    parasHandle = tpGetPluginPropertyValueHandle(mMinimizerPlugin, "OutputParameterList");
     if(!parasHandle)
     {
         throw(Exception("Failed to get plugin property in Monte Carlo plugin.."));
@@ -260,15 +260,15 @@ bool bsWorker::createInitialResiduals()
     //Use the current minimization plugin to run one minimization and then use
     //the result to create residuals
     //Reset on each run
-    resetPlugin(mMinimizerPlugin);
-    TELHandle paraHandle = getPluginProperty(mMinimizerPlugin, "InputParameterList");
+    tpResetPlugin(mMinimizerPlugin);
+    TELHandle paraHandle = tpGetPluginProperty(mMinimizerPlugin, "InputParameterList");
 
     if(!paraHandle)
     {
         throw(Exception("Failed to get Plugin Property in Monte Carlo plugin.."));
     }
 
-    TELHandle parasHandle = getPropertyValueHandle(paraHandle);
+    TELHandle parasHandle = tpGetPropertyValueHandle(paraHandle);
 
     //Add input parameters, only the checked ones
     Properties* inputParameters = (Properties*) mParent.mInputParameterList.getValueHandle();
@@ -279,24 +279,24 @@ bool bsWorker::createInitialResiduals()
         Property<double>* para = (Property<double>*) (base); //->Items->Objects[i];
 
         //Do the creation of parameters earlier instead...
-        TELHandle newPara = createProperty(para->getName().c_str(), "double", "", para->getValueHandle());
-        addPropertyToList(parasHandle, newPara);
+        TELHandle newPara = tpCreateProperty(para->getName().c_str(), "double", "", para->getValueHandle());
+        tpAddPropertyToList(parasHandle, newPara);
     }
 
     //Set input data to fit to
     TelluriumData*  data = (TelluriumData*) mParent.mExperimentalData.getValueHandle();
-    TELHandle       experimentalData    = getPluginProperty(mMinimizerPlugin, "ExperimentalData");
-    setTelluriumDataProperty(experimentalData, data);
+    TELHandle       experimentalData    = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalData");
+    tpSetTelluriumDataProperty(experimentalData, data);
 
     //Add species to minimization data structure.. The species are defined in the input data
     StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
-    paraHandle = getPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
-    setPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
+    paraHandle = tpGetPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
+    tpSetPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
 
-    TELHandle obsList = getPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
+    TELHandle obsList = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
     StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
-    setPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
 
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
     if(ExpDataSelectionList.Count() > modelDataSelectionList.Count())
@@ -307,18 +307,18 @@ bool bsWorker::createInitialResiduals()
     }
 
     string strVal = mParent.mSBML.getValue();
-    if(!setPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
+    if(!tpSetPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
         Log(lError)<<"Failed setting sbml";
         return false;
     }
 
-    executePluginEx(mMinimizerPlugin, false);
+    tpExecutePluginEx(mMinimizerPlugin, false);
 
     //Check on success of fitting. If failing, bail the monte carlo..
 
     //We should now have residuals
-    TelluriumData* residuals =   (TelluriumData*) getPluginPropertyValueHandle(mMinimizerPlugin, "Residuals");
+    TelluriumData* residuals =   (TelluriumData*) tpGetPluginPropertyValueHandle(mMinimizerPlugin, "Residuals");
 
     Log(lDebug) <<"Logging residuals: ";
     Log(lDebug) << *(residuals);
@@ -338,7 +338,7 @@ bool bsWorker::createInitialResiduals()
 bool bsWorker::createMonteCarloDataSets()
 {
     TelluriumData& expData      = mParent.mExperimentalData;
-    TelluriumData* initialFit   = (TelluriumData*) getPluginPropertyValueHandle(mMinimizerPlugin, "FittedData");
+    TelluriumData* initialFit   = (TelluriumData*) tpGetPluginPropertyValueHandle(mMinimizerPlugin, "FittedData");
 
     //Create data sets, use fitted data as the "base", to add residuals to later on
     for(int i = 0; i < mParent.mNrOfMCRuns; i++)

@@ -91,33 +91,41 @@ string RRAuto::getTempFolder()
 
 bool RRAuto::run()
 {
-    if(!mRR)
+    try
     {
-        return false;
+        if(!mRR)
+        {
+            return false;
+        }
+
+        reset();
+
+        mAutoSetup.mRunContinuation = false;
+        double parValue = (mAutoSetup.mDirectionPositive == true)
+                        ? mAutoSetup.mInputConstants.RL0.getValue() : mAutoSetup.mInputConstants.RL1.getValue();
+
+        //Set initial value of Primary cintinuation parameter
+        mRR->setValue(mSelectedParameter, parValue);
+
+
+        if(mAutoSetup.mCalculateSteadyState)
+        {
+            mRR->steadyState();
+        }
+
+        if(!setupUsingCurrentModel())
+        {
+            return false;
+        }
+
+        CallAuto(getTempFolder());
+        return true;
     }
-
-    reset();
-
-    mAutoSetup.mRunContinuation = false;
-    double parValue = (mAutoSetup.mDirectionPositive == true)
-                    ? mAutoSetup.mInputConstants.RL0.getValue() : mAutoSetup.mInputConstants.RL1.getValue();
-
-    //Set initial value of Primary cintinuation parameter
-    mRR->setValue(mSelectedParameter, parValue);
-
-
-    if(mAutoSetup.mCalculateSteadyState)
+    catch(exception& ex)
     {
-        mRR->steadyState();
+        Log(lError) << ex.what();
+        throw(Exception(ex.what()));
     }
-
-    if(!setupUsingCurrentModel())
-    {
-        return false;
-    }
-
-    CallAuto(getTempFolder());
-    return true;
 }
 
 bool RRAuto::setupUsingCurrentModel()

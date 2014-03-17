@@ -32,7 +32,7 @@ TELHandle tlp_cc loadSBMLFromFileJob(tlpc::TELHandle handle, const char* fileNam
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            setError(msg.str());
+            tpSetError(msg.str());
             return NULL;
         }
 
@@ -41,7 +41,7 @@ TELHandle tlp_cc loadSBMLFromFileJob(tlpc::TELHandle handle, const char* fileNam
 
         if(!loadThread)
         {
-            tlpc::setError("Failed to create a LoadModel Thread");
+            tlpc::tpSetError("Failed to create a LoadModel Thread");
         }
         loadThread->addJob(rr);
         loadThread->start();
@@ -58,7 +58,7 @@ TELHandle tlp_cc loadSBMLJob(tlpc::TELHandle handle, const char* sbml)
 
         if(!loadThread)
         {
-            tlpc::setError("Failed to create a LoadModel Thread");
+            tlpc::tpSetError("Failed to create a LoadModel Thread");
         }
         loadThread->addJob(rr);
         loadThread->start();
@@ -74,7 +74,7 @@ TELHandle tlp_cc loadSBMLFromFileJobEx(tlpc::TELHandle handle, const char* fileN
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            tlpc::setError(msg.str());
+            tlpc::tpSetError(msg.str());
             return NULL;
         }
 
@@ -83,7 +83,7 @@ TELHandle tlp_cc loadSBMLFromFileJobEx(tlpc::TELHandle handle, const char* fileN
 
         if(!loadThread)
         {
-            tlpc::setError("Failed to create a LoadModel Thread");
+            tlpc::tpSetError("Failed to create a LoadModel Thread");
         }
 
         loadThread->addJob(rr);
@@ -101,7 +101,7 @@ TELHandle tlp_cc loadSBMLJobEx(tlpc::TELHandle handle, const char* sbml, bool re
 
         if(!loadThread)
         {
-            tlpc::setError("Failed to create a LoadModel Thread");
+            tlpc::tpSetError("Failed to create a LoadModel Thread");
         }
 
         loadThread->addJob(rr);
@@ -118,7 +118,7 @@ TELHandle tlp_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char* fi
         {
             stringstream msg;
             msg<<"The file "<<fileName<<" do not exist";
-            tlpc::setError(msg.str());
+            tlpc::tpSetError(msg.str());
             return NULL;
         }
 
@@ -127,7 +127,7 @@ TELHandle tlp_cc loadSBMLFromFileJobs(RRInstanceListPtr _handles, const char* fi
 
         if(!tp)
         {
-            tlpc::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::tpSetError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
@@ -142,7 +142,7 @@ TELHandle tlp_cc loadSBMLJobs(RRInstanceListPtr _handles, const char* sbml, int 
 
         if(!tp)
         {
-            tlpc::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::tpSetError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
@@ -157,7 +157,7 @@ TELHandle tlp_cc loadSBMLJobsEx(RRInstanceListPtr _handles, const char* sbml, in
 
         if(!tp)
         {
-            tlpc::setError("Failed to create a LoadModel Thread Pool");
+            tlpc::tpSetError("Failed to create a LoadModel Thread Pool");
         }
         return tp;
     catch_ptr_macro
@@ -233,7 +233,7 @@ TELHandle tlp_cc simulateJob(tlpc::TELHandle rrHandle)
 
         if(!t)
         {
-            tlpc::setError("Failed to create a Simulate Thread Pool");
+            tlpc::tpSetError("Failed to create a Simulate Thread Pool");
         }
         t->addJob(aRR);
         t->start();
@@ -255,7 +255,7 @@ TELHandle tlp_cc simulateJobEx(    tlpc::TELHandle rrHandle,
 
         if(!t)
         {
-            tlpc::setError("Failed to create a Simulate Thread Pool");
+            tlpc::tpSetError("Failed to create a Simulate Thread Pool");
         }
         t->addJob(aRR);
         t->start();
@@ -271,7 +271,7 @@ TELHandle tlp_cc simulateJobs(RRInstanceListPtr _handles, int nrOfThreads)
 
         if(!tp)
         {
-            tlpc::setError("Failed to create a Simulate Thread Pool");
+            tlpc::tpSetError("Failed to create a Simulate Thread Pool");
         }
         return tp;
     catch_ptr_macro
@@ -300,7 +300,7 @@ TELHandle tlp_cc simulateJobsEx(    RRInstanceListPtr _handles,
 
         if(!tp)
         {
-            tlpc::setError("Failed to create a Simulate Thread Pool");
+            tlpc::tpSetError("Failed to create a Simulate Thread Pool");
         }
         return tp;
     catch_ptr_macro

@@ -44,8 +44,10 @@
 #include "telplugins_exporter.h"
 #include "telplugins_types.h"
 //---------------------------------------------------------------------------
+using namespace tlpc;
+
 #if defined(__cplusplus)
-namespace tlpc { extern "C" {
+extern "C" {
 #endif
 
 /*!
@@ -54,7 +56,7 @@ namespace tlpc { extern "C" {
  \return Returns a pointer to a double data array if succesfull, NULL otherwise;
  \ingroup matrix
 */
-TLP_C_DS double* tlp_cc getDataArray(TELHandle matrixH);
+TLP_C_DS double* tlp_cc tpGetDataArray(TELHandle matrixH);
 
 /*!
  \brief Retrieves the number of rows in a Tellurium matrix object.
@@ -63,7 +65,7 @@ TLP_C_DS double* tlp_cc getDataArray(TELHandle matrixH);
  \return Returns the number of rows in the underlying data object.
  \ingroup matrix
 */
-TLP_C_DS int tlp_cc getMatrixNumRows(TELHandle data);
+TLP_C_DS int tlp_cc tpGetMatrixNumRows(TELHandle data);
 
 /*!
  \brief Retrieves the number of cols in a Tellurium matrix object.
@@ -72,7 +74,7 @@ TLP_C_DS int tlp_cc getMatrixNumRows(TELHandle data);
  \return Returns the number of cols in the underlying data object.
  \ingroup matrix
 */
-TLP_C_DS int tlp_cc getMatrixNumCols(TELHandle data);
+TLP_C_DS int tlp_cc tpGetMatrixNumCols(TELHandle data);
 
 /*!
  \brief Retrieves an element at a given row and column from a Tellurium matrix type variable
@@ -88,7 +90,7 @@ TLP_C_DS int tlp_cc getMatrixNumCols(TELHandle data);
  \return Returns true if succesful;
  \ingroup matrix
 */
-TLP_C_DS bool tlp_cc getMatrixElement(TELHandle matrixH, int r, int c, double *value);
+TLP_C_DS bool tlp_cc tpGetMatrixElement(TELHandle matrixH, int r, int c, double *value);
 
 /*!
  \brief Set an data element at a given row and column in a Tellurium matrix type variable
@@ -104,7 +106,7 @@ TLP_C_DS bool tlp_cc getMatrixElement(TELHandle matrixH, int r, int c, double *v
  \return Returns true if succesful
  \ingroup matrix
 */
-TLP_C_DS bool tlp_cc setMatrixElement(TELHandle matrixH, int r, int c, double value);
+TLP_C_DS bool tlp_cc tpSetMatrixElement(TELHandle matrixH, int r, int c, double value);
 
 /*!
  \brief Creates a Tellurium matrix object, and returns a handle to it.
@@ -115,7 +117,7 @@ TLP_C_DS bool tlp_cc setMatrixElement(TELHandle matrixH, int r, int c, double va
  \return Returns a handle to a Tellurium matrix object, NULL if unsuccessfull.
  \ingroup matrix
 */
-TLP_C_DS TELHandle tlp_cc createMatrix(int rows, int cols, char* colNames);
+TLP_C_DS TELHandle tlp_cc tpCreateMatrix(int rows, int cols, char* colNames);
 
 /*!
  \brief Free the memory allocated by a Tellurium matrix object.
@@ -124,11 +126,11 @@ TLP_C_DS TELHandle tlp_cc createMatrix(int rows, int cols, char* colNames);
  \return Returns a boolean indicating success.
  \ingroup matrix
 */
-TLP_C_DS bool tlp_cc freeMatrix(TELHandle handle);
+TLP_C_DS bool tlp_cc tpFreeMatrix(TELHandle handle);
 
 
 #if defined(__cplusplus)
-} }    //rrp namespace and extern "C"
+}    //rrp namespace and extern "C"
 #endif
 
 #endif

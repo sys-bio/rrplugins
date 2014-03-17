@@ -1,10 +1,10 @@
 #ifndef rrAutoOutputParserH
 #define rrAutoOutputParserH
 #include <vector>
-#include "rrCapability.h"
-#include "rrParameter.h"
+//#include "rr/rrCapability.h"
+//#include "rrParameter.h"
 #include "telCPPPlugin.h"
-#include "rrRoadRunner.h"
+#include "rr/rrRoadRunner.h"
 #include "telStringList.h"
 #include "../rrAutoInterface/rrAutoData.h"
 #include "../rrAutoInterface/rrRRAuto.h"
@@ -32,8 +32,7 @@ class AutoOutputParser : public CPPPlugin
         bool                                    isWorking();
 
     protected:
-        Capability                              mAutoOutputParser;
-        Property<string>                       mBiFurcationDiagram;        //This is the input
+        Property<string>                        mBiFurcationDiagram;        //This is the input
         Property< tlp::StringList >             mLabeledSolutionPoints;     //Part of output
 
 
@@ -55,29 +54,29 @@ RR_PLUGIN_DECLSPEC const char* plugins_cc           getImplementationLanguage();
 
 namespace tlp
 {
-template<>
-inline std::string Property< rrauto::ScanDirection >::getType() const
-{
-    return "ScanDirection";
-}
-
-template<>
-inline string Property< rrauto::ScanDirection >::getValueAsString() const
-{
-    return mValue == rrauto::sdPositive ? "Positive" : "Negative";
-}
-
-template<>
-inline void Property< rrauto::ScanDirection >::setValueFromString(const string& val)
-{
-    mValue = compareNoCase(val, "Positive") == 0 ? rrauto::sdPositive : rrauto::sdNegative;
-}
-
-template<>
-inline void Property< rrauto::ScanDirection >::setValue(const rrauto::ScanDirection& val)
-{
-    mValue = (val);
-}
+//template<>
+//inline std::string Property< rrauto::ScanDirection >::getType() const
+//{
+//    return "ScanDirection";
+//}
+//
+//template<>
+//inline string Property< rrauto::ScanDirection >::getValueAsString() const
+//{
+//    return mValue == rrauto::sdPositive ? "Positive" : "Negative";
+//}
+//
+//template<>
+//inline void Property< rrauto::ScanDirection >::setValueFromString(const string& val)
+//{
+//    mValue = compareNoCase(val, "Positive") == 0 ? rrauto::sdPositive : rrauto::sdNegative;
+//}
+//
+//template<>
+//inline void Property< rrauto::ScanDirection >::setValue(const rrauto::ScanDirection& val)
+//{
+//    mValue = (val);
+//}
 }
 
 

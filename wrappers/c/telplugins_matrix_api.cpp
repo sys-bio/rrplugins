@@ -9,17 +9,14 @@
 #include "telStringUtils.h"
 #include "telTelluriumData.h"
 
-namespace tlpc
-{
 using rr::RoadRunner;
 using namespace std;
 using tlp::StringList;
-using tlpc::createText;
 
 typedef ls::Matrix<double> Matrix;
 
 
-double* tlp_cc getDataArray(TELHandle handle)
+double* tlp_cc tpGetDataArray(TELHandle handle)
 {
     start_try
         Matrix* matrixH = castHandle< ls::Matrix<double> >(handle, __FILE__);
@@ -27,7 +24,7 @@ double* tlp_cc getDataArray(TELHandle handle)
     catch_ptr_macro
 }
 
-int tlp_cc getMatrixNumRows(TELHandle handle)
+int tlp_cc tpGetMatrixNumRows(TELHandle handle)
 {
     start_try
         Matrix* matrixH = castHandle< ls::Matrix<double> >(handle, __FILE__);
@@ -35,7 +32,7 @@ int tlp_cc getMatrixNumRows(TELHandle handle)
     catch_int_macro
 }
 
-int tlp_cc getMatrixNumCols(TELHandle handle)
+int tlp_cc tpGetMatrixNumCols(TELHandle handle)
 {
     start_try
         Matrix* matrixH = castHandle< ls::Matrix<double> >(handle, __FILE__);
@@ -43,7 +40,7 @@ int tlp_cc getMatrixNumCols(TELHandle handle)
     catch_int_macro
 }
 
-bool tlp_cc getMatrixElement(TELHandle handle, int row, int col, double* value)
+bool tlp_cc tpGetMatrixElement(TELHandle handle, int row, int col, double* value)
 {
     start_try
         Matrix* matrixH = castHandle< ls::Matrix<double> >(handle, __FILE__);
@@ -52,7 +49,7 @@ bool tlp_cc getMatrixElement(TELHandle handle, int row, int col, double* value)
     catch_bool_macro
 }
 
-bool tlp_cc setMatrixElement(TELHandle handle, int row, int col, double value)
+bool tlp_cc tpSetMatrixElement(TELHandle handle, int row, int col, double value)
 {
     start_try
         Matrix* matrix = castHandle< ls::Matrix<double> >(handle, __FUNC__);
@@ -61,7 +58,7 @@ bool tlp_cc setMatrixElement(TELHandle handle, int row, int col, double value)
     catch_bool_macro
 }
 
-TELHandle tlp_cc createMatrix(int nRows, int nCols, char* colNames)
+TELHandle tlp_cc tpCreateMatrix(int nRows, int nCols, char* colNames)
 {
     start_try
         Matrix* data = new Matrix(nRows, nCols);
@@ -74,13 +71,11 @@ TELHandle tlp_cc createMatrix(int nRows, int nCols, char* colNames)
     catch_ptr_macro
 }
 
-bool tlp_cc freeMatrix(TELHandle handle)
+bool tlp_cc tpFreeMatrix(TELHandle handle)
 {
     start_try
         Matrix* data = castHandle< Matrix >(handle, __FUNC__);
         delete data;
         return true;
     catch_bool_macro
-}
-
 }

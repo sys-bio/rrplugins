@@ -4,7 +4,7 @@
 #include "rr/rrRoadRunnerData.h"
 #include "rr/rrRoadRunnerOptions.h"
 #include "rr/rrRoadRunner.h"
-#include "nmsimplex.h"
+#include "../../lib/nmsimplex.h"
 #include "telTelluriumData.h"
 #include "telPluginManager.h"
 #include "telLogger.h"

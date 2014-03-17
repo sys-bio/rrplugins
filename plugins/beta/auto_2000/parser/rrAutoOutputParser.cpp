@@ -1,10 +1,10 @@
 #pragma hdrstop
-#include "rrLogger.h"
+#include "rr/rrLogger.h"
 #include "rrAutoOutputParser.h"
-#include "rrc_api.h"
-#include "rrc_utilities.h"
-#include "rrRoadRunner.h"
-#include "rrTelluriumData.h"
+#include "rr/c/rrc_api.h"
+#include "rr/c/rrc_utilities.h"
+#include "rr/rrRoadRunner.h"
+#include "telTelluriumData.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 namespace autoplugin
@@ -17,15 +17,15 @@ AutoOutputParser::AutoOutputParser()
 :
 CPPPlugin("AutoOutputParser", "Bifurcation", NULL, NULL),
 //The Capability
-mAutoOutputParser(              "AutoOutputParser",                     "<none>",               "Bifurcation"),
+//mAutoOutputParser(              "AutoOutputParser",                     "<none>",               "Bifurcation"),
 mBiFurcationDiagram(            "BiFurcationDiagram",                   "<none>",               "BifurcationDiagram"),
-mLabeledSolutionPoints(         "LabeledSolutionPoints",                StringList(),               "Special, Labeled solution points"),
+//mLabeledSolutionPoints(         "LabeledSolutionPoints",                StringList(),               "Special, Labeled solution points"),
 mAutoOutputParserWorker(*this)
 {
     //Setup the plugins capabilities
-    mAutoOutputParser.addParameter(&mBiFurcationDiagram);
-    mAutoOutputParser.addParameter(&mLabeledSolutionPoints);
-    mCapabilities.add(mAutoOutputParser);
+//    mAutoOutputParser.addParameter(&mBiFurcationDiagram);
+//    mAutoOutputParser.addParameter(&mLabeledSolutionPoints);
+//    mCapabilities.add(mAutoOutputParser);
 }
 
 AutoOutputParser::~AutoOutputParser()
@@ -73,14 +73,14 @@ bool AutoOutputParser::execute(void* inputData, bool useThread)
 
     //go away and carry out the work in a thread
     //Assign callback functions to communicate the progress of the thread
-    mAutoOutputParserWorker.assignCallBacks(mWorkStartedCB, mWorkFinishedCB, mUserData);
+//    mAutoOutputParserWorker.assignCallBacks(mWorkStartedCB, mWorkFinishedCB, mUserData);
 
     //Check if inputData is supplied
     if(inputData)
     {
         //It HAS to be a Parameter<string>
-        Parameter<string> &para = *((Parameter<string>*) inputData);
-        mBiFurcationDiagram.setValue( para.getValue());
+//        Parameter<string> &para = *((Parameter<string>*) inputData);
+//        mBiFurcationDiagram.setValue( para.getValue());
     }
     mAutoOutputParserWorker.start(useThread);
     return true;
@@ -90,7 +90,7 @@ bool AutoOutputParser::execute(void* inputData, bool useThread)
 AutoOutputParser* plugins_cc createPlugin(rr::RoadRunner* aRR, const PluginManager* pm)
 {
     //allocate a new object and return it
-    return new AutoOutputParser();
+//    return new AutoOutputParser();
 }
 
 

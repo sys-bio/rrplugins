@@ -15,6 +15,7 @@ namespace rrauto
 
 using std::string;
 using rr::RoadRunner;
+
 enum ScanDirection {sdPositive, sdNegative};
 
 class RRA_DECLSPEC RRAuto

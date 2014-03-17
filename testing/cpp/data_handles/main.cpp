@@ -7,19 +7,17 @@ using namespace rr;
 
 int main(int argc, char** argv)
 {
-    const char* rootPath = "..";
+    const char* rootPath = "r:\\";
 
     try
     {
         gLog.setLevel(lInfo);
-        string tmpFolder = joinPath(rootPath, "r:\\temp");
-
         const string modelFile = joinPath(rootPath, "models", "test_1.xml");
 
         //Load modelFiles..
         Log(lInfo)<<" ---------- LOADING/GENERATING MODELS ------";
 
-        RoadRunner rr1("", tmpFolder);
+        RoadRunner rr1;
         LoadSBMLOptions opt;
         opt.modelGeneratorOpt |= LoadSBMLOptions::RECOMPILE;
         if(!rr1.load(modelFile, &opt))
@@ -31,10 +29,10 @@ int main(int argc, char** argv)
         Log(lInfo)<<" ---------- SIMULATE ---------------------";
         Log(lInfo)<<"Data:"<<*(rr1.simulate());
     }
-    catch(const Exception& ex)
+    catch(const exception& ex)
     {
 
-        Log(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.getMessage();
+        Log(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.what();
     }
 
     return 0;

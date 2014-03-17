@@ -8,15 +8,12 @@
 #include "telStringUtils.h"
 #include "telTelluriumData.h"
 
-namespace tlpc
-{
 using rr::RoadRunner;
 using namespace std;
 using tlp::TelluriumData;
 using tlp::StringList;
-using tlpc::createText;
 
-TELHandle tlp_cc getRoadRunnerDataHandle(TELHandle handle)
+TELHandle tlp_cc tpGetRoadRunnerDataHandle(TELHandle handle)
 {
     start_try
         RoadRunner* rri = castHandle< RoadRunner >(handle, __FILE__);
@@ -24,7 +21,7 @@ TELHandle tlp_cc getRoadRunnerDataHandle(TELHandle handle)
     catch_ptr_macro
 }
 
-bool tlp_cc getTelluriumDataElement(TELHandle handle, int row, int col, double* value)
+bool tlp_cc tpGetTelluriumDataElement(TELHandle handle, int row, int col, double* value)
 {
     start_try
         TelluriumData* rrData = castHandle< TelluriumData >(handle, __FILE__);
@@ -33,7 +30,7 @@ bool tlp_cc getTelluriumDataElement(TELHandle handle, int row, int col, double* 
     catch_bool_macro
 }
 
-bool tlp_cc setTelluriumDataElement(TELHandle handle, int row, int col, double value)
+bool tlp_cc tpSetTelluriumDataElement(TELHandle handle, int row, int col, double value)
 {
     start_try
         TelluriumData* rrData = castHandle< TelluriumData >(handle, __FUNC__);
@@ -42,14 +39,14 @@ bool tlp_cc setTelluriumDataElement(TELHandle handle, int row, int col, double v
     catch_bool_macro
 }
 
-bool tlp_cc getTelluriumDataWeight(TELHandle handle, int row, int col, double* value)
+bool tlp_cc tpGetTelluriumDataWeight(TELHandle handle, int row, int col, double* value)
 {
     start_try
         TelluriumData* rrData = castHandle< TelluriumData >(handle, __FUNC__);
 
         if(rrData->hasWeights())
         {
-            (*value) = rrData->getWeight(row, col);            
+            (*value) = rrData->getWeight(row, col);
             return true;
         }
         else
@@ -59,13 +56,13 @@ bool tlp_cc getTelluriumDataWeight(TELHandle handle, int row, int col, double* v
     catch_bool_macro
 }
 
-bool tlp_cc setTelluriumDataWeight(TELHandle handle, int row, int col, double value)
+bool tlp_cc tpSetTelluriumDataWeight(TELHandle handle, int row, int col, double value)
 {
     start_try
         TelluriumData* rrData = castHandle< TelluriumData >(handle, __FUNC__);
         if(rrData->hasWeights())
         {
-            rrData->setWeight(row, col, value);            
+            rrData->setWeight(row, col, value);
             return true;
         }
         else
@@ -75,7 +72,7 @@ bool tlp_cc setTelluriumDataWeight(TELHandle handle, int row, int col, double va
     catch_bool_macro
 }
 
-bool tlp_cc hasWeights(TELHandle handle, bool* value)
+bool tlp_cc tpHasWeights(TELHandle handle, bool* value)
 {
     start_try
         TelluriumData* Data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -84,7 +81,7 @@ bool tlp_cc hasWeights(TELHandle handle, bool* value)
     catch_bool_macro
 }
 
-bool tlp_cc allocateWeights(TELHandle handle, bool* success)
+bool tlp_cc tpAllocateWeights(TELHandle handle, bool* success)
 {
     start_try
         TelluriumData* Data = castHandle< TelluriumData > (handle, __FUNC__);
@@ -94,24 +91,24 @@ bool tlp_cc allocateWeights(TELHandle handle, bool* success)
     catch_bool_macro
 }
 
-char* tlp_cc getTelluriumDataColumnHeader(TELHandle handle)
+char* tlp_cc tpGetTelluriumDataColumnHeader(TELHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        return tlpc::createText(data->getColumnNamesAsString());
+        return tpCreateText(data->getColumnNamesAsString());
     catch_ptr_macro
 }
 
-char* tlp_cc getTelluriumDataColumnHeaderByIndex(TELHandle handle, int index)
+char* tlp_cc tpGetTelluriumDataColumnHeaderByIndex(TELHandle handle, int index)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        StringList cols = data->getColumnNames();        
-        return createText(cols[index]);
+        StringList cols = data->getColumnNames();
+        return tpCreateText(cols[index]);
     catch_ptr_macro
 }
 
-bool tlp_cc setTelluriumDataColumnHeader(TELHandle handle, char* hdr)
+bool tlp_cc tpSetTelluriumDataColumnHeader(TELHandle handle, char* hdr)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -120,7 +117,7 @@ bool tlp_cc setTelluriumDataColumnHeader(TELHandle handle, char* hdr)
     catch_bool_macro
 }
 
-bool tlp_cc setTelluriumDataColumnHeaderByIndex(TELHandle handle, int index, char* hdr)
+bool tlp_cc tpSetTelluriumDataColumnHeaderByIndex(TELHandle handle, int index, char* hdr)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -128,7 +125,7 @@ bool tlp_cc setTelluriumDataColumnHeaderByIndex(TELHandle handle, int index, cha
     catch_bool_macro
 }
 
-int tlp_cc getTelluriumDataNumRows(TELHandle handle)
+int tlp_cc tpGetTelluriumDataNumRows(TELHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -136,7 +133,7 @@ int tlp_cc getTelluriumDataNumRows(TELHandle handle)
     catch_int_macro
 }
 
-int tlp_cc getTelluriumDataNumCols(TELHandle handle)
+int tlp_cc tpGetTelluriumDataNumCols(TELHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -144,7 +141,7 @@ int tlp_cc getTelluriumDataNumCols(TELHandle handle)
     catch_int_macro
 }
 
-TELHandle tlp_cc createTelluriumData(int nRows, int nCols, char* colNames)
+TELHandle tlp_cc tpCreateTelluriumData(int nRows, int nCols, char* colNames)
 {
     start_try
         TelluriumData* data = new TelluriumData(nRows, nCols);
@@ -159,7 +156,18 @@ TELHandle tlp_cc createTelluriumData(int nRows, int nCols, char* colNames)
     catch_ptr_macro
 }
 
-bool tlp_cc freeTelluriumData(TELHandle handle)
+TELHandle tlp_cc tpCreateTelluriumDataFromRoadRunnerData(TELHandle _data)
+{
+    start_try
+        rr::RoadRunnerData* rrData =(rr::RoadRunnerData*) _data;
+
+        TelluriumData* data = new TelluriumData(rrData);
+        gHM.registerHandle(data, typeid(data).name());
+        return data;
+    catch_ptr_macro
+}
+
+bool tlp_cc tpFreeTelluriumData(TELHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -168,7 +176,7 @@ bool tlp_cc freeTelluriumData(TELHandle handle)
     catch_bool_macro
 }
 
-bool tlp_cc writeTelluriumDataToFile(TELHandle handle, const char* fName)
+bool tlp_cc tpWriteTelluriumDataToFile(TELHandle handle, const char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
@@ -176,14 +184,12 @@ bool tlp_cc writeTelluriumDataToFile(TELHandle handle, const char* fName)
     catch_bool_macro
 }
 
-bool tlp_cc readTelluriumDataFromFile(TELHandle handle, const char* fName)
+bool tlp_cc tpReadTelluriumDataFromFile(TELHandle handle, const char* fName)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
         //Check if file exists first
         return data->read(fName);
     catch_bool_macro
-
-}
 
 }

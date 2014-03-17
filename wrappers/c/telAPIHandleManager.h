@@ -1,11 +1,12 @@
 #ifndef telAPIHandleManagerH
 #define telAPIHandleManagerH
 #include <map>
+#include "telplugins_types.h"
 //---------------------------------------------------------------------------
 //Class keeping track of all handles that are created in the Tellurium C API
 
+using namespace tlpc;
 using std::map;
-typedef void* TELHandle;
 typedef map<TELHandle, const char*>   HandleMap;
 
 class APIHandleManager
@@ -23,3 +24,5 @@ class APIHandleManager
 
 };
 #endif
+
+

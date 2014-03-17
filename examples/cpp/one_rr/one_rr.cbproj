@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{5FD409AE-B242-4E0F-BA87-22377B2877A6}</ProjectGuid>
+        <ProjectGuid>{97A06276-478A-4ADA-982D-47A5E5958A4B}</ProjectGuid>
         <ProjectVersion>14.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
@@ -45,8 +45,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <ILINK_LibraryPath>..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\..\source\;..\..\source;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\..\third_party\poco\Foundation\src\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\..\third_party\poco\Foundation\src\;..\..\source\;..\..\source;$(IncludePath)</IncludePath>
         <Defines>LIBSBML_USE_CPP_NAMESPACE;POCO_STATIC;STATIC_LIBSTRUCT;STATIC_RR;CG_IDE;$(Defines)</Defines>
         <DynamicRTL>true</DynamicRTL>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
@@ -94,7 +94,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DynamicRTL>false</DynamicRTL>
+        <IncludePath>$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;$(TLP_ROOT)\wrappers\C;$(IncludePath)</IncludePath>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -111,8 +111,53 @@
         <ILINK_LibraryPath>$(RR_RELEASE)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="auto_link.cpp">
+            <BuildOrder>1</BuildOrder>
+        </CppCompile>
         <CppCompile Include="main.cpp">
             <BuildOrder>1</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_chartables.c">
+            <BuildOrder>2</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_compile.c">
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_exec.c">
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_fullinfo.c">
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_globals.c">
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_maketables.c">
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_newline.c">
+            <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_ord2utf8.c">
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_study.c">
+            <BuildOrder>10</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_tables.c">
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_try_flipped.c">
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_ucd.c">
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_valid_utf8.c">
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\third_party\poco\Foundation\src\pcre_xclass.c">
+            <BuildOrder>15</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

@@ -60,6 +60,7 @@ namespace tlp
 {
 class RoadRunnerList;
 }
+
 namespace tlpc
 {
 using std::string;
@@ -79,7 +80,7 @@ extern APIHandleManager gHM;
  \param[in] error A string containg the error
  \ingroup cpp_support
 */
-TLP_C_DS void                        setError(const string& err);
+TLP_C_DS void tpSetError(const string& err);
 
 /*!
  \brief Cast a handle. This function throws a InvalidHandle exception if it fails
@@ -96,10 +97,16 @@ T* castHandle(TELHandle handle, const char* fnc, bool allowBase = false)
     return ptr;
 }
 
-Plugin* registerPlugin(Plugin* plugin);
+Plugin* tpRegisterPlugin(Plugin* plugin);
 
 //Use internally
-char*  createText(const string& str);
+/*!
+ \brief Utility function to create a C string from a std::string
+ \return Returns a char* on success, NULL otherwise
+ \ingroup freeRoutines
+*/
+TLP_C_DS char*  tpCreateText(const string& str);
+
 
 /*!
  \brief Cast a handle to RoadRunner Instance list to a RoadRunnerList pointer, throws if it fails

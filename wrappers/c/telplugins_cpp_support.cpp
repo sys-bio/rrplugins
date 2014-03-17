@@ -16,7 +16,7 @@ using tlp::TelluriumData;
 //A global handle manager
 APIHandleManager gHM;
 
-void setError(const string& err)
+void tpSetError(const string& err)
 {
     if(gLastError)
     {
@@ -26,7 +26,7 @@ void setError(const string& err)
     gLastError = tlp::createText(err);
 }
 
-Plugin* registerPlugin(Plugin* plugin)
+Plugin* tpRegisterPlugin(Plugin* plugin)
 {
     gHM.registerHandle(plugin, typeid(Plugin*).name());
 
@@ -67,7 +67,7 @@ Plugin* registerPlugin(Plugin* plugin)
     return plugin;
 }
 
-char*  createText(const string& str)
+char*  tpCreateText(const string& str)
 {
     char* textHandle = tlp::createText(str);
     return (char*) gHM.registerHandle(textHandle, typeid(textHandle).name());

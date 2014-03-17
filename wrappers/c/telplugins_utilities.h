@@ -47,7 +47,7 @@
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
-namespace tlpc { extern "C" {
+extern "C" {
 #endif
 
 /*!
@@ -70,8 +70,11 @@ extern const char*     ALLOCATE_API_ERROR_MSG;
 */
 extern const char*     INVALID_HANDLE_ERROR_MSG;
 
+TLP_C_DS char* tpCreateText(const char* str);
+
+
 #if defined(__cplusplus)
-}}  
+}
 #endif
 
 #endif

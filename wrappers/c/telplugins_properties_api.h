@@ -46,7 +46,8 @@
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
-namespace tlpc { extern "C" {
+using namespace tlpc;
+extern "C" {
 #endif
 
 /*! \addtogroup plugin_properties
@@ -61,27 +62,27 @@ namespace tlpc { extern "C" {
  \param value The property's initial value casted to a (void*) pointer
  \return Returns a handle to a new property, if succesful, NULL otherwise
 */
-TLP_C_DS TELHandle tlp_cc createProperty(const char* label, const char* type, const char* hint, void* value);
+TLP_C_DS TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const char* hint, void* value);
 
 /*!
  \brief Create a PropertyList, i.e. an object of type Properties
  \return Returns a handle to a new PropertyList, if succesful, NULL otherwise
 */
-TLP_C_DS TELHandle tlp_cc createPropertyList(void);
+TLP_C_DS TELHandle tlp_cc tpCreatePropertyList(void);
 
 /*!
  \brief Free a list of properties
  \param propertiesH A handle a list of properties
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc freeProperties(TELHandle propertiesH);
+TLP_C_DS bool tlp_cc tpFreeProperties(TELHandle propertiesH);
 
 /*!
  \brief Free the memory created by a property
  \param property A handle to the property
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc freeProperty(TELHandle property);
+TLP_C_DS bool tlp_cc tpFreeProperty(TELHandle property);
 
 /*!
  \brief Add a property to a properties container, from a property pointer.
@@ -89,7 +90,7 @@ TLP_C_DS bool tlp_cc freeProperty(TELHandle property);
  \param property Handle to a roadrunner property
  \return Returns a booelan indicating success
 */
-TLP_C_DS bool tlp_cc addPropertyToList(TELHandle handle, TELHandle property);
+TLP_C_DS bool tlp_cc tpAddPropertyToList(TELHandle handle, TELHandle property);
 
 /*!
  \brief Set a property value by a string
@@ -97,7 +98,7 @@ TLP_C_DS bool tlp_cc addPropertyToList(TELHandle handle, TELHandle property);
  \param value Pointer to string holding the value to assign to the property, e.g. "0.01" to set a double to 0.01
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setPropertyByString(TELHandle handle, const char* value);
+TLP_C_DS bool tlp_cc tpSetPropertyByString(TELHandle handle, const char* value);
 
 /*!
  \brief Get a boolean property
@@ -105,7 +106,7 @@ TLP_C_DS bool tlp_cc setPropertyByString(TELHandle handle, const char* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getBoolProperty(TELHandle handle, bool* value);
+TLP_C_DS bool tlp_cc tpGetBoolProperty(TELHandle handle, bool* value);
 
 /*!
  \brief Set a boolean property
@@ -113,7 +114,7 @@ TLP_C_DS bool tlp_cc getBoolProperty(TELHandle handle, bool* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setBoolProperty(TELHandle handle, bool value);
+TLP_C_DS bool tlp_cc tpSetBoolProperty(TELHandle handle, bool value);
 
 /*!
  \brief Set an int property
@@ -121,7 +122,7 @@ TLP_C_DS bool tlp_cc setBoolProperty(TELHandle handle, bool value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setIntProperty(TELHandle handle, int value);
+TLP_C_DS bool tlp_cc tpSetIntProperty(TELHandle handle, int value);
 
 /*!
  \brief Get the value of an int property
@@ -129,7 +130,7 @@ TLP_C_DS bool tlp_cc setIntProperty(TELHandle handle, int value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getIntProperty(TELHandle handle, int *value);
+TLP_C_DS bool tlp_cc tpGetIntProperty(TELHandle handle, int *value);
 
 /*!
  \brief Set a double property
@@ -137,7 +138,7 @@ TLP_C_DS bool tlp_cc getIntProperty(TELHandle handle, int *value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setDoubleProperty(TELHandle handle, double value);
+TLP_C_DS bool tlp_cc tpSetDoubleProperty(TELHandle handle, double value);
 
 /*!
  \brief Get the value of a double property
@@ -145,7 +146,7 @@ TLP_C_DS bool tlp_cc setDoubleProperty(TELHandle handle, double value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getDoubleProperty(TELHandle handle, double *value);
+TLP_C_DS bool tlp_cc tpGetDoubleProperty(TELHandle handle, double *value);
 
 /*!
  \brief Set a string (char*) property
@@ -153,7 +154,7 @@ TLP_C_DS bool tlp_cc getDoubleProperty(TELHandle handle, double *value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setStringProperty(TELHandle handle, char* value);
+TLP_C_DS bool tlp_cc tpSetStringProperty(TELHandle handle, char* value);
 
 /*!
  \brief Get the value of a string (char*) property
@@ -161,7 +162,7 @@ TLP_C_DS bool tlp_cc setStringProperty(TELHandle handle, char* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getStringProperty(TELHandle handle, const char* (*value));
+TLP_C_DS bool tlp_cc tpGetStringProperty(TELHandle handle, const char* (*value));
 
 /*!
  \brief Set a listOfProperties (Properties) property
@@ -169,7 +170,7 @@ TLP_C_DS bool tlp_cc getStringProperty(TELHandle handle, const char* (*value));
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setListProperty(TELHandle handle, void* value);
+TLP_C_DS bool tlp_cc tpSetListProperty(TELHandle handle, void* value);
 
 /*!
  \brief Get the value of a listOfProperties (Properties) property
@@ -177,7 +178,7 @@ TLP_C_DS bool tlp_cc setListProperty(TELHandle handle, void* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getListProperty(TELHandle handle, void* value);
+TLP_C_DS bool tlp_cc tpGetListProperty(TELHandle handle, void* value);
 
 /*!
  \brief Set a telluriumDataProperty property
@@ -185,7 +186,7 @@ TLP_C_DS bool tlp_cc getListProperty(TELHandle handle, void* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setTelluriumDataProperty(TELHandle handle, void* value);
+TLP_C_DS bool tlp_cc tpSetTelluriumDataProperty(TELHandle handle, void* value);
 
 /*!
  \brief Get the value of a telluriumDataProperty property
@@ -193,42 +194,42 @@ TLP_C_DS bool tlp_cc setTelluriumDataProperty(TELHandle handle, void* value);
  \param value to assign to the property.
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc getTelluriumDataProperty(TELHandle handle, void* value);
+TLP_C_DS bool tlp_cc tpGetTelluriumDataProperty(TELHandle handle, void* value);
 
 /*!
  \brief Get a property's info
  \param handle Handle to a property instance
  \return Returns informational text about the property if sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyInfo(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyInfo(TELHandle handle);
 
 /*!
  \brief Get a property's value as char*
  \param handle to a Property instance
  \return Returns the property's value if sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyValueAsString(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyValueAsString(TELHandle handle);
 
 /*!
  \brief Get a handle to a property's value
  \param handle to a Property instance
  \return Returns a Handle to the property's value if sucessful, NULL otherwise
 */
-TLP_C_DS void* tlp_cc getPropertyValueHandle(TELHandle handle);
+TLP_C_DS void* tlp_cc tpGetPropertyValueHandle(TELHandle handle);
 
 /*!
  \brief Get a property's name
  \param handle to a Property instance
  \return Returns the property's name if sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyName(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyName(TELHandle handle);
 
 /*!
  \brief Get a property's hint
  \param handle to a Property instance
  \return Returns the property's hint if sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyHint(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyHint(TELHandle handle);
 
 /*!
  \brief Set a property's hint
@@ -236,14 +237,14 @@ TLP_C_DS char* tlp_cc getPropertyHint(TELHandle handle);
  \param value The property hint as a string
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setPropertyHint(TELHandle handle, const char* value);
+TLP_C_DS bool tlp_cc tpSetPropertyHint(TELHandle handle, const char* value);
 
 /*!
  \brief Get a property's description
  \param handle to a Property instance
  \return Returns the property's description as a string sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyDescription(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyDescription(TELHandle handle);
 
 /*!
  \brief Set a property's Description
@@ -251,14 +252,14 @@ TLP_C_DS char* tlp_cc getPropertyDescription(TELHandle handle);
  \param value The property description as a string
  \return Returns true if sucessful, false otherwise
 */
-TLP_C_DS bool tlp_cc setPropertyDescription(TELHandle handle, const char* value);
+TLP_C_DS bool tlp_cc tpSetPropertyDescription(TELHandle handle, const char* value);
 
 /*!
  \brief Get a property's type
  \param handle Handle to a Property instance
  \return Returns the property's type if sucessful, NULL otherwise
 */
-TLP_C_DS char* tlp_cc getPropertyType(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPropertyType(TELHandle handle);
 
 /*!
  \brief Get a property containers 'first' property.
@@ -267,7 +268,7 @@ TLP_C_DS char* tlp_cc getPropertyType(TELHandle handle);
  \note This function is typically used together with the getNextProperty,
  getPreviuosProperty and getCurrentProperty when iterating trough properties.
 */
-TLP_C_DS TELHandle tlp_cc getFirstProperty(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetFirstProperty(TELHandle handle);
 
 /*!
  \brief Get a property containers 'next' property.
@@ -277,7 +278,7 @@ TLP_C_DS TELHandle tlp_cc getFirstProperty(TELHandle handle);
  getPreviuosProperty and getCurrentProperty when iterating trough properties.
  This function do not wrap around. This function move an internal Property iterator forward one step.
 */
-TLP_C_DS TELHandle tlp_cc getNextProperty(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetNextProperty(TELHandle handle);
 
 /*!
  \brief Get a property containers 'previous' property.
@@ -287,7 +288,7 @@ TLP_C_DS TELHandle tlp_cc getNextProperty(TELHandle handle);
  getNextProperty and getCurrentProperty when iterating trough properties. This function
  move an internal Property iterator back one step.
 */
-TLP_C_DS TELHandle tlp_cc getPreviousProperty(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetPreviousProperty(TELHandle handle);
 
 /*!
  \brief Get a property containers 'current' property.
@@ -296,7 +297,7 @@ TLP_C_DS TELHandle tlp_cc getPreviousProperty(TELHandle handle);
  \note This function is typically used together with the getNextProperty,
  getPreviuosProperty and getFirstProperty, when iterating trough properties.
 */
-TLP_C_DS TELHandle tlp_cc getCurrentProperty(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetCurrentProperty(TELHandle handle);
 
 /*!
  \brief Get a list of names for a plugins property's.
@@ -304,7 +305,7 @@ TLP_C_DS TELHandle tlp_cc getCurrentProperty(TELHandle handle);
  \return Returns a string with the names of each property, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getNamesFromPropertyList(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetNamesFromPropertyList(TELHandle handle);
 
 /*!
  \brief Get a handle to a particular property
@@ -313,7 +314,7 @@ TLP_C_DS char* tlp_cc getNamesFromPropertyList(TELHandle handle);
  \return Returns a handle to a property if successfull, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getProperty(TELHandle handle, const char* name);
+TLP_C_DS TELHandle tlp_cc tpGetProperty(TELHandle handle, const char* name);
 
 /*!
  \brief Clear a list of properties
@@ -321,12 +322,12 @@ TLP_C_DS TELHandle tlp_cc getProperty(TELHandle handle, const char* name);
   \return Returns true or false indicating result
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc clearPropertyList(TELHandle handle);
+TLP_C_DS bool tlp_cc tpClearPropertyList(TELHandle handle);
 
 /*! @} */
 
 #if defined(__cplusplus)
-}}    //rrc namespace
+}
 #endif
 
 

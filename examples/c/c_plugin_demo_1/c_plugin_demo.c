@@ -16,8 +16,8 @@ const char* call_conv getImplementationLanguage()
 bool call_conv destroyPlugin(TELHandle plugin)
 {
     //Free any data that the plugin generated..
-    freeProperty(gDemoProperty);
-    freeProperties(gProperties);
+    tpFreeProperty(gDemoProperty);
+    tpFreeProperties(gProperties);
     return true;
 }
 
@@ -33,7 +33,7 @@ const char* call_conv getCategory()
 
 char* call_conv getListOfCPluginPropertyNames(TELHandle plugin)
 {
-    char* names = getNamesFromPropertyList(gProperties);
+    char* names = tpGetNamesFromPropertyList(gProperties);
     return names;
 }
 
@@ -41,7 +41,7 @@ void*  call_conv getCPluginProperty(const char* name)
 {
     if(gPlugin)
     {
-        return getProperty(gProperties, name);
+        return tpGetProperty(gProperties, name);
     }
     else
     {
@@ -52,7 +52,7 @@ void*  call_conv getCPluginProperty(const char* name)
 bool call_conv setupCPlugin(TELHandle aPlugin)
 {
     gPlugin = aPlugin;
-    gDemoProperty   = createProperty("DemoProperty", "string", "Demo Hint", 0);
+    gDemoProperty   = tpCreateProperty("DemoProperty", "string", "Demo Hint", 0);
     if(!gDemoProperty)
     {
         //Failed to create property! Set last error and return false
@@ -60,15 +60,15 @@ bool call_conv setupCPlugin(TELHandle aPlugin)
         return false;
     }
 
-    if(!setPropertyByString(gDemoProperty, "Intial Demo Property Value"))
+    if(!tpSetPropertyByString(gDemoProperty, "Intial Demo Property Value"))
     {
         setError("Failed setting Property in c_plugin_demo");
         return false;
     }
 
     //Add the property to the property container
-    gProperties = createPropertyList();
-    if(!addPropertyToList(gProperties, gDemoProperty))
+    gProperties = tpCreatePropertyList();
+    if(!tpAddPropertyToList(gProperties, gDemoProperty))
     {
         setError("Failed adding property to Property list in c_plugin_demo");
         return false;
@@ -89,7 +89,7 @@ bool call_conv execute(bool inThread)
     if(text2)
     {
         strcat(text1, text2);
-        setPropertyByString(gDemoProperty, text1);
+        tpSetPropertyByString(gDemoProperty, text1);
     }
     else
     {
@@ -98,7 +98,7 @@ bool call_conv execute(bool inThread)
 
     //cleanup
     freeRRInstance(rrHandle);
-    freeText(text2);
+    tpFreeText(text2);
     free(text1);
     return true;
 }
@@ -112,9 +112,9 @@ void setError(const char* err)
 {
     if(gLastError)
     {
-        freeText(gLastError);
+        tpFreeText(gLastError);
     }
 
-    gLastError = createText(err);
+    gLastError = tpCreateText(err);
 }
 

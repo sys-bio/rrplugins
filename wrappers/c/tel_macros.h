@@ -60,7 +60,7 @@
     {                                                       \
         stringstream msg;                                   \
         msg<<"Tellurium exception: "<<ex.what();            \
-        setError(msg.str());                                \
+        tpSetError(msg.str());                                \
         return false;                                       \
     }
 
@@ -74,7 +74,7 @@
     {                                                       \
         stringstream msg;                                   \
         msg<<"Tellurium exception: "<<ex.what();            \
-        setError(msg.str());                                \
+        tpSetError(msg.str());                                \
         return NULL;                                        \
     }
 
@@ -88,7 +88,7 @@
     {                                                       \
         stringstream msg;                                   \
         msg<<"Tellurium exception: "<<ex.what();            \
-        setError(msg.str());                                \
+        tpSetError(msg.str());                                \
         return -1;                                          \
     }
 
@@ -102,7 +102,7 @@
     {                                                       \
         stringstream msg;                                   \
         msg<<"Tellurium exception: "<<ex.what();            \
-        setError(msg.str());                                \
+        tpSetError(msg.str());                                \
     }
 
 #endif

@@ -9,6 +9,7 @@
 #include "telPluginManager.h"
 #include "telLogger.h"
 #include "telPlugin.h"
+
 using namespace tlp;
 using rr::RoadRunner;
 class MinimizationData

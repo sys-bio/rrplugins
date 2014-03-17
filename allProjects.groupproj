@@ -9,6 +9,9 @@
         <Projects Include="misc\cg_ide\roadrunner_c_api.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="plugins\released\levenberg_marquardt\lib\lmfit.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="source\common\telplugins_common.cbproj">
             <Dependencies/>
         </Projects>
@@ -27,7 +30,25 @@
         <Projects Include="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
+        <Projects Include="plugins\released\add_noise\tel_add_noise.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\beta\auto_2000\source\tel_auto2000.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\levenberg_marquardt\tel_levenberg_marquardt.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\monte_carlo_bs\tel_monte_carlo_bs.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\nelder_mead\tel_nelder_mead.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\test_model\tel_test_model.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="apps\plugin_info\plugin_info.cbproj">
@@ -36,8 +57,32 @@
         <Projects Include="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="testing\cpp\data_handles\data_handles.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\nelder_mead\lib\rr_example\nm_rr_example.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="examples\cpp\one_rr\one_rr.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="testing\c\handle_manager\handle_manager.cbproj">
             <Dependencies>wrappers\c\telplugins_c_api.cbproj</Dependencies>
+        </Projects>
+        <Projects Include="examples\CPP\property_meta_data\property_meta_data.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="examples\cpp\property_container\property_container.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="R:\sbmlstudio\SBMLStudio.cbproj">
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -64,6 +109,15 @@
     </Target>
     <Target Name="roadrunner_c_api:Make">
         <MSBuild Projects="misc\cg_ide\roadrunner_c_api.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="lmfit">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\lib\lmfit.cbproj"/>
+    </Target>
+    <Target Name="lmfit:Clean">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\lib\lmfit.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="lmfit:Make">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\lib\lmfit.cbproj" Targets="Make"/>
     </Target>
     <Target Name="telplugins_common">
         <MSBuild Projects="source\common\telplugins_common.cbproj"/>
@@ -119,14 +173,68 @@
     <Target Name="tel_c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\tel_c_plugin_demo.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="property_meta_data">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
+    <Target Name="tel_add_noise">
+        <MSBuild Projects="plugins\released\add_noise\tel_add_noise.cbproj"/>
     </Target>
-    <Target Name="property_meta_data:Clean">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Clean"/>
+    <Target Name="tel_add_noise:Clean">
+        <MSBuild Projects="plugins\released\add_noise\tel_add_noise.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="property_meta_data:Make">
-        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Make"/>
+    <Target Name="tel_add_noise:Make">
+        <MSBuild Projects="plugins\released\add_noise\tel_add_noise.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_auto2000">
+        <MSBuild Projects="plugins\beta\auto_2000\source\tel_auto2000.cbproj"/>
+    </Target>
+    <Target Name="tel_auto2000:Clean">
+        <MSBuild Projects="plugins\beta\auto_2000\source\tel_auto2000.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_auto2000:Make">
+        <MSBuild Projects="plugins\beta\auto_2000\source\tel_auto2000.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_levenberg_marquardt">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\tel_levenberg_marquardt.cbproj"/>
+    </Target>
+    <Target Name="tel_levenberg_marquardt:Clean">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\tel_levenberg_marquardt.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_levenberg_marquardt:Make">
+        <MSBuild Projects="plugins\released\levenberg_marquardt\tel_levenberg_marquardt.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs">
+        <MSBuild Projects="plugins\released\monte_carlo_bs\tel_monte_carlo_bs.cbproj"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs:Clean">
+        <MSBuild Projects="plugins\released\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_monte_carlo_bs:Make">
+        <MSBuild Projects="plugins\released\monte_carlo_bs\tel_monte_carlo_bs.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_nelder_mead">
+        <MSBuild Projects="plugins\released\nelder_mead\tel_nelder_mead.cbproj"/>
+    </Target>
+    <Target Name="tel_nelder_mead:Clean">
+        <MSBuild Projects="plugins\released\nelder_mead\tel_nelder_mead.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_nelder_mead:Make">
+        <MSBuild Projects="plugins\released\nelder_mead\tel_nelder_mead.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_test_model">
+        <MSBuild Projects="plugins\released\test_model\tel_test_model.cbproj"/>
+    </Target>
+    <Target Name="tel_test_model:Clean">
+        <MSBuild Projects="plugins\released\test_model\tel_test_model.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_test_model:Make">
+        <MSBuild Projects="plugins\released\test_model\tel_test_model.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="nm_plugin_example">
+        <MSBuild Projects="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj"/>
+    </Target>
+    <Target Name="nm_plugin_example:Clean">
+        <MSBuild Projects="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nm_plugin_example:Make">
+        <MSBuild Projects="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj" Targets="Make"/>
     </Target>
     <Target Name="plugin_info">
         <MSBuild Projects="apps\plugin_info\plugin_info.cbproj"/>
@@ -146,6 +254,33 @@
     <Target Name="c_plugin_demo:Make">
         <MSBuild Projects="examples\C\c_plugin_demo_1\c_plugin_demo.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="data_handles">
+        <MSBuild Projects="testing\cpp\data_handles\data_handles.cbproj"/>
+    </Target>
+    <Target Name="data_handles:Clean">
+        <MSBuild Projects="testing\cpp\data_handles\data_handles.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="data_handles:Make">
+        <MSBuild Projects="testing\cpp\data_handles\data_handles.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="nm_rr_example">
+        <MSBuild Projects="plugins\released\nelder_mead\lib\rr_example\nm_rr_example.cbproj"/>
+    </Target>
+    <Target Name="nm_rr_example:Clean">
+        <MSBuild Projects="plugins\released\nelder_mead\lib\rr_example\nm_rr_example.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nm_rr_example:Make">
+        <MSBuild Projects="plugins\released\nelder_mead\lib\rr_example\nm_rr_example.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="one_rr">
+        <MSBuild Projects="examples\cpp\one_rr\one_rr.cbproj"/>
+    </Target>
+    <Target Name="one_rr:Clean">
+        <MSBuild Projects="examples\cpp\one_rr\one_rr.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="one_rr:Make">
+        <MSBuild Projects="examples\cpp\one_rr\one_rr.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="handle_manager" DependsOnTargets="telplugins_c_api">
         <MSBuild Projects="testing\c\handle_manager\handle_manager.cbproj"/>
     </Target>
@@ -155,14 +290,59 @@
     <Target Name="handle_manager:Make" DependsOnTargets="telplugins_c_api:Make">
         <MSBuild Projects="testing\c\handle_manager\handle_manager.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="property_meta_data">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj"/>
+    </Target>
+    <Target Name="property_meta_data:Clean">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_meta_data:Make">
+        <MSBuild Projects="examples\CPP\property_meta_data\property_meta_data.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="property_container">
+        <MSBuild Projects="examples\cpp\property_container\property_container.cbproj"/>
+    </Target>
+    <Target Name="property_container:Clean">
+        <MSBuild Projects="examples\cpp\property_container\property_container.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="property_container:Make">
+        <MSBuild Projects="examples\cpp\property_container\property_container.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="tel_AutoOutputParser">
+        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj"/>
+    </Target>
+    <Target Name="tel_AutoOutputParser:Clean">
+        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="tel_AutoOutputParser:Make">
+        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="bistable">
+        <MSBuild Projects="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj"/>
+    </Target>
+    <Target Name="bistable:Clean">
+        <MSBuild Projects="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bistable:Make">
+        <MSBuild Projects="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="SBMLStudio">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj"/>
+    </Target>
+    <Target Name="SBMLStudio:Clean">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SBMLStudio:Make">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;property_meta_data;plugin_info;c_plugin_demo;handle_manager"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;lmfit;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;tel_add_noise;tel_auto2000;tel_levenberg_marquardt;tel_monte_carlo_bs;tel_nelder_mead;tel_test_model;nm_plugin_example;plugin_info;c_plugin_demo;data_handles;nm_rr_example;one_rr;handle_manager;property_meta_data;property_container;tel_AutoOutputParser;bistable;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;property_meta_data:Clean;plugin_info:Clean;c_plugin_demo:Clean;handle_manager:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;lmfit:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_levenberg_marquardt:Clean;tel_monte_carlo_bs:Clean;tel_nelder_mead:Clean;tel_test_model:Clean;nm_plugin_example:Clean;plugin_info:Clean;c_plugin_demo:Clean;data_handles:Clean;nm_rr_example:Clean;one_rr:Clean;handle_manager:Clean;property_meta_data:Clean;property_container:Clean;tel_AutoOutputParser:Clean;bistable:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;property_meta_data:Make;plugin_info:Make;c_plugin_demo:Make;handle_manager:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;lmfit:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;tel_add_noise:Make;tel_auto2000:Make;tel_levenberg_marquardt:Make;tel_monte_carlo_bs:Make;tel_nelder_mead:Make;tel_test_model:Make;nm_plugin_example:Make;plugin_info:Make;c_plugin_demo:Make;data_handles:Make;nm_rr_example:Make;one_rr:Make;handle_manager:Make;property_meta_data:Make;property_container:Make;tel_AutoOutputParser:Make;bistable:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

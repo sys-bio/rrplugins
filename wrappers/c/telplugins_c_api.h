@@ -49,10 +49,11 @@
 #include "telplugins_logging_api.h"
 //---------------------------------------------------------------------------
 
-#if defined(__cplusplus)
-namespace tlpc { extern "C" {
-#endif
 
+#if defined(__cplusplus)
+using tlpc::PluginEvent;
+extern "C" {
+#endif
 
 /*!
  \brief Create a new instance of a plugin manager.
@@ -62,7 +63,7 @@ namespace tlpc { extern "C" {
  \return On success, a handle to a Plugin manager, on failure, NULL.
  \ingroup plugin_manager
  */
-TLP_C_DS TELHandle tlp_cc createPluginManager(const char* pluginDir);
+TLP_C_DS TELHandle tlp_cc tpCreatePluginManager(const char* pluginDir);
 
 /*!
  \brief Free the plugin manager. A call to this function will also unload any loaded plugins.
@@ -70,22 +71,22 @@ TLP_C_DS TELHandle tlp_cc createPluginManager(const char* pluginDir);
  \return true if success, false otherwise. 
  \ingroup plugin_manager
  */
-TLP_C_DS bool tlp_cc freePluginManager(TELHandle handle);
+TLP_C_DS bool tlp_cc tpFreePluginManager(TELHandle handle);
 
 /*!
  \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
  \param handle Handle to a PluginManager instance
  \return Returns a boolean indicating success/failure
- \note Failure during the loadPlugins call can be retrieved using the getPluginsLoadError() function
+ \note Failure during the tpLoadPlugins call can be retrieved using the getPluginsLoadError() function
  \ingroup plugin_manager
 */
-TLP_C_DS bool tlp_cc loadPlugins(TELHandle handle);
+TLP_C_DS bool tlp_cc tpLoadPlugins(TELHandle handle);
 
 /*!
  \brief Retrieve any errors that occured durig loading of plugins
  \ingroup plugin_manager
 */
-TLP_C_DS char* tlp_cc getPluginLoadErrors(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginLoadErrors(TELHandle handle);
 
 /*!
  \brief Unload plugins
@@ -93,7 +94,7 @@ TLP_C_DS char* tlp_cc getPluginLoadErrors(TELHandle handle);
  \return Returns true if Plugins are unloaded succesfully, false otherwise
  \ingroup plugin_manager
 */
-TLP_C_DS bool tlp_cc unLoadPlugins(TELHandle handle);
+TLP_C_DS bool tlp_cc tpUnLoadPlugins(TELHandle handle);
 
 /*!
  \brief Load a particular plugin
@@ -102,7 +103,7 @@ TLP_C_DS bool tlp_cc unLoadPlugins(TELHandle handle);
  \return Returns a handle to a plugin, NULL if unsuccesfull
  \ingroup plugin_manager 
 */
-TLP_C_DS TELHandle tlp_cc loadPlugin(TELHandle handle, const char* pluginName);
+TLP_C_DS TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName);
 
 /*!
  \brief unload a particular plugin
@@ -111,7 +112,7 @@ TLP_C_DS TELHandle tlp_cc loadPlugin(TELHandle handle, const char* pluginName);
  \return Returns true if the Plugin are unloaded succesfully, false otherwise
  \ingroup plugin_manager
 */
-TLP_C_DS bool tlp_cc unLoadPlugin(TELHandle handle, TELHandle plugin);
+TLP_C_DS bool tlp_cc tpUnLoadPlugin(TELHandle handle, TELHandle plugin);
 
 /*!
  \brief Get Number of loaded plugins.
@@ -119,7 +120,7 @@ TLP_C_DS bool tlp_cc unLoadPlugin(TELHandle handle, TELHandle plugin);
  \return Returns the number of loaded plugins, -1 if a problem is encountered
  \ingroup plugin_manager
 */
-TLP_C_DS int tlp_cc getNumberOfPlugins(TELHandle handle);
+TLP_C_DS int tlp_cc tpGetNumberOfPlugins(TELHandle handle);
 
 /*!
  \brief Function to retrieve the names of currently loaded plugins.
@@ -127,7 +128,7 @@ TLP_C_DS int tlp_cc getNumberOfPlugins(TELHandle handle);
  \return Returns names for loaded plugins as a RRStringArrayPtr, NULL otherwise
  \ingroup plugin_manager
 */
-TLP_C_DS char* tlp_cc getPluginNames(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginNames(TELHandle handle);
 
 /*!
  \brief Function to retrieve the library name of currently loaded plugins.
@@ -135,7 +136,7 @@ TLP_C_DS char* tlp_cc getPluginNames(TELHandle handle);
  \return Returns names for loaded plugins as a RRStringArrayPtr, NULL otherwise
  \ingroup plugin_manager
 */
-TLP_C_DS char* tlp_cc getPluginLibraryNames(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginLibraryNames(TELHandle handle);
 
 /*!
  \brief getFirstPlugin retrieves the "first" plugin in the plugin managers internal list of plugins.
@@ -144,7 +145,7 @@ TLP_C_DS char* tlp_cc getPluginLibraryNames(TELHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-TLP_C_DS TELHandle tlp_cc getFirstPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetFirstPlugin(TELHandle handle);
 
 /*!
  \brief getNextPlugin retrieves the "next" plugin in the plugin managers internal list of plugins. This function
@@ -153,7 +154,7 @@ TLP_C_DS TELHandle tlp_cc getFirstPlugin(TELHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-TLP_C_DS TELHandle tlp_cc getNextPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetNextPlugin(TELHandle handle);
 
 /*!
  \brief getPreviousPlugin retrieves the "previous" plugin in the plugin managers internal list of plugins. This function
@@ -162,7 +163,7 @@ TLP_C_DS TELHandle tlp_cc getNextPlugin(TELHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-TLP_C_DS TELHandle tlp_cc getPreviousPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetPreviousPlugin(TELHandle handle);
 
 /*!
  \brief getCurrentPlugin retrieves the "current" plugin in the plugin managers internal list of plugins. This function
@@ -171,7 +172,7 @@ TLP_C_DS TELHandle tlp_cc getPreviousPlugin(TELHandle handle);
  \return Returns a handle to a plugin. Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-TLP_C_DS TELHandle tlp_cc getCurrentPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetCurrentPlugin(TELHandle handle);
 
 /*!
  \brief GetPluginHandle
@@ -181,7 +182,7 @@ TLP_C_DS TELHandle tlp_cc getCurrentPlugin(TELHandle handle);
  Returns NULL if the plugin is not found
  \ingroup plugin_manager
 */
-TLP_C_DS TELHandle tlp_cc getPlugin(TELHandle handle, const char* pluginName);
+TLP_C_DS TELHandle tlp_cc tpGetPlugin(TELHandle handle, const char* pluginName);
 
 /*!
  \brief Get a handle to a plugins shared library
@@ -191,7 +192,7 @@ TLP_C_DS TELHandle tlp_cc getPlugin(TELHandle handle, const char* pluginName);
  \note This function is not yet implemented..
  \ingroup plugin_manager
 */
-TLP_C_DS long tlp_cc getPluginSharedLibHandle(TELHandle handle, TELHandle pluginHandle);
+TLP_C_DS long tlp_cc tpGetPluginSharedLibHandle(TELHandle handle, TELHandle pluginHandle);
 
 
 //==========================  PLUGIN HANDLE functions
@@ -201,7 +202,7 @@ TLP_C_DS long tlp_cc getPluginSharedLibHandle(TELHandle handle, TELHandle plugin
  \return Returns a string on success, NULL otherwise
   \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginName(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginName(TELHandle handle);
 
 /*!
  \brief Return a plugins Category. A plugin developer may assign this information.
@@ -210,7 +211,7 @@ TLP_C_DS char* tlp_cc getPluginName(TELHandle handle);
 
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginCategory(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginCategory(TELHandle handle);
 
 /*!
  \brief Return a plugins description. This is assigned by the plugin developer.
@@ -218,7 +219,7 @@ TLP_C_DS char* tlp_cc getPluginCategory(TELHandle handle);
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginDescription(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginDescription(TELHandle handle);
 
 /*!
  \brief Return a plugins Hint. This information is assigned by the plugin developer.
@@ -226,7 +227,7 @@ TLP_C_DS char* tlp_cc getPluginDescription(TELHandle handle);
  \return Returns a string on success, NULL otherwise
   \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginHint(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginHint(TELHandle handle);
 
 /*!
  \brief Return information about a Plugin.
@@ -234,7 +235,7 @@ TLP_C_DS char* tlp_cc getPluginHint(TELHandle handle);
  \return Returns info, as a string, for the plugin, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginInfo(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginInfo(TELHandle handle);
 
 /*!
  \brief Return plugin author information
@@ -242,7 +243,7 @@ TLP_C_DS char* tlp_cc getPluginInfo(TELHandle handle);
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginAuthor(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginAuthor(TELHandle handle);
 
 /*!
  \brief Return plugin copyright information
@@ -250,7 +251,7 @@ TLP_C_DS char* tlp_cc getPluginAuthor(TELHandle handle);
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginCopyright(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginCopyright(TELHandle handle);
 
 /*!
  \brief Return plugin version information
@@ -258,7 +259,7 @@ TLP_C_DS char* tlp_cc getPluginCopyright(TELHandle handle);
  \return Returns a string on success, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginVersion(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginVersion(TELHandle handle);
 
 /*!
  \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF. This function return such as a pointer to a string.
@@ -267,7 +268,7 @@ TLP_C_DS char* tlp_cc getPluginVersion(TELHandle handle);
  \return Returns the plugins manuals pdf file as a unsigned char*. If not available, returns NULL.
  \ingroup plugins
 */
-TLP_C_DS unsigned char* tlp_cc getPluginManualAsPDF(TELHandle handle);
+TLP_C_DS unsigned char* tlp_cc tpGetPluginManualAsPDF(TELHandle handle);
 
 /*!
  \brief Get the byte size for the PDF manual.
@@ -275,7 +276,7 @@ TLP_C_DS unsigned char* tlp_cc getPluginManualAsPDF(TELHandle handle);
  \return Returns the nr of bytes in the plugins manuals pdf file as an unsigned int.
  \ingroup plugins
 */
-TLP_C_DS unsigned int tlp_cc getPluginManualNrOfBytes(TELHandle handle);
+TLP_C_DS unsigned int tlp_cc tpGetPluginManualNrOfBytes(TELHandle handle);
 
 /*!
  \brief Assign a roadrunner instance handle for the plugin to use.
@@ -285,7 +286,7 @@ TLP_C_DS unsigned int tlp_cc getPluginManualNrOfBytes(TELHandle handle);
   \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc assignRoadRunnerInstance(TELHandle pHandle, TELHandle rrHandle);
+TLP_C_DS bool tlp_cc tpAssignRoadRunnerInstance(TELHandle pHandle, TELHandle rrHandle);
 
 /*!
  \brief The executePlugin function is the function designated to fire of a Plugins "worker".
@@ -296,7 +297,7 @@ TLP_C_DS bool tlp_cc assignRoadRunnerInstance(TELHandle pHandle, TELHandle rrHan
  the executePluginEx function that have the option to execute the plugin code in a thread.
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc executePlugin(TELHandle handle);
+TLP_C_DS bool tlp_cc tpExecutePlugin(TELHandle handle);
 
 /*!
  \brief The executePluginEx is similar to the executePlugin function, except it takes two extra arguments.
@@ -305,23 +306,23 @@ TLP_C_DS bool tlp_cc executePlugin(TELHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc executePluginEx(TELHandle handle, bool inAThread);
+TLP_C_DS bool tlp_cc tpExecutePluginEx(TELHandle handle, bool inAThread);
 
 /*!
- \brief Get some status of a plugin. See the plugins documentation on what to expect. 
+ \brief Get some status of a plugin. See the plugins documentation on what to expect.
  \param handle Handle to a plugin
  \return Returns plugin status if available, as a string. NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginStatus(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginStatus(TELHandle handle);
 
 /*!
- \brief Returns a plugins result, as a string. See the plugins documentation on what to expect. 
+ \brief Returns a plugins result, as a string. See the plugins documentation on what to expect.
  \param handle Handle to a plugin
  \return Returns a plugins result if available. NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginResult(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginResult(TELHandle handle);
 
 /*!
  \brief Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state
@@ -329,7 +330,7 @@ TLP_C_DS char* tlp_cc getPluginResult(TELHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc resetPlugin(TELHandle handle);
+TLP_C_DS bool tlp_cc tpResetPlugin(TELHandle handle);
 
 /*!
  \brief check if plugin is actively working
@@ -337,16 +338,16 @@ TLP_C_DS bool tlp_cc resetPlugin(TELHandle handle);
  \return Returns true or false indicating i the plugin is busy or not
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc isPluginWorking(TELHandle handle);
+TLP_C_DS bool tlp_cc tpIsPluginWorking(TELHandle handle);
 
 /*!
  \brief Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function
- will signal the internals of the plugin to terminate. 
+ will signal the internals of the plugin to terminate.
  \param handle Handle to a plugin
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS void tlp_cc terminateWork(TELHandle handle);
+TLP_C_DS void tlp_cc tpTerminateWork(TELHandle handle);
 
 /*!
  \brief Check if the work of a plugin is currently being terminated
@@ -354,7 +355,7 @@ TLP_C_DS void tlp_cc terminateWork(TELHandle handle);
  \return Returns true or false indicating if the work within the plugin is in the process of being terminated
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc isBeingTerminated(TELHandle handle);
+TLP_C_DS bool tlp_cc tpIsBeingTerminated(TELHandle handle);
 
 /*!
  \brief wasTerminated. query a  plugin if work was terminated before completion
@@ -362,7 +363,7 @@ TLP_C_DS bool tlp_cc isBeingTerminated(TELHandle handle);
  \return Returns true or false indicating if the work in the plugin was terminated or not
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc wasTerminated(TELHandle handle);
+TLP_C_DS bool tlp_cc tpWasTerminated(TELHandle handle);
 
 /*!
  \brief Assign event function fired when a plugin starts its work
@@ -373,7 +374,7 @@ TLP_C_DS bool tlp_cc wasTerminated(TELHandle handle);
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc assignOnStartedEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool tlp_cc tpAssignOnStartedEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 /*!
  \brief Assign event function fired as a plugin progresses
@@ -384,7 +385,7 @@ TLP_C_DS bool tlp_cc assignOnStartedEvent(TELHandle handle, PluginEvent cb, void
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc assignOnProgressEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool tlp_cc tpAssignOnProgressEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 /*!
  \brief Assign event function fired when a plugin finishes its work
@@ -395,7 +396,7 @@ TLP_C_DS bool tlp_cc assignOnProgressEvent(TELHandle handle, PluginEvent cb, voi
  \return Returns true or false indicating success/failure
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc assignOnFinishedEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
+TLP_C_DS bool tlp_cc tpAssignOnFinishedEvent(TELHandle handle, PluginEvent cb, void* userData1, void* userData2);
 
 /*!
  \brief Get roadrunner instance handle from plugin
@@ -403,7 +404,7 @@ TLP_C_DS bool tlp_cc assignOnFinishedEvent(TELHandle handle, PluginEvent cb, voi
  \return Returns a handle if available, returns NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getRoadRunnerHandleFromPlugin(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetRoadRunnerHandleFromPlugin(TELHandle handle);
 
 /*!
  \brief Get a Plugins Propertiese as an xml document. The string returned from this function is formated as xml.
@@ -411,7 +412,7 @@ TLP_C_DS TELHandle tlp_cc getRoadRunnerHandleFromPlugin(TELHandle handle);
  \return Returns available properties in the plugin, as a pointer to a string, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginPropertiesAsXML(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetPluginPropertiesAsXML(TELHandle handle);
 
 /*!
  \brief Get a handle to a plugins properties
@@ -419,7 +420,7 @@ TLP_C_DS char* tlp_cc getPluginPropertiesAsXML(TELHandle handle);
   \return Returns a handle to a plugins property container, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getPluginProperties(TELHandle handle);
+TLP_C_DS TELHandle tlp_cc tpGetPluginProperties(TELHandle handle);
 
 /*!
  \brief Get a list of a plugins property names, as a string. Space being the delimiter.
@@ -427,7 +428,7 @@ TLP_C_DS TELHandle tlp_cc getPluginProperties(TELHandle handle);
   \return Returns a string if succesfull, NULL otherwise
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getListOfPluginPropertyNames(TELHandle handle);
+TLP_C_DS char* tlp_cc tpGetListOfPluginPropertyNames(TELHandle handle);
 
 /*!
  \brief Get a handle to a property.
@@ -436,7 +437,7 @@ TLP_C_DS char* tlp_cc getListOfPluginPropertyNames(TELHandle handle);
  \return Returns a handle to a property. Returns NULL if not found
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* propertyName);
+TLP_C_DS TELHandle tlp_cc tpGetPluginProperty(TELHandle handle, const char* propertyName);
 
 /*!
  \brief Get a handle to a property value.
@@ -445,7 +446,7 @@ TLP_C_DS TELHandle tlp_cc getPluginProperty(TELHandle handle, const char* proper
  \return Returns a handle to the value of a property. Returns NULL if unsuccesful
  \ingroup plugins
 */
-TLP_C_DS TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const char* propertyName);
+TLP_C_DS TELHandle tlp_cc tpGetPluginPropertyValueHandle(TELHandle handle, const char* propertyName);
 
 /*!
  \brief Get a property value as string.
@@ -454,7 +455,7 @@ TLP_C_DS TELHandle tlp_cc getPluginPropertyValueHandle(TELHandle handle, const c
  \return Returns a string (char*) if succesful, returns NULL otherwise.
  \ingroup plugins
 */
-TLP_C_DS char* tlp_cc getPluginPropertyValueAsString(TELHandle handle, const char* propertyName);
+TLP_C_DS char* tlp_cc tpGetPluginPropertyValueAsString(TELHandle handle, const char* propertyName);
 
 /*!
  \brief Set the value of a PluginProperty by a string.
@@ -464,27 +465,14 @@ TLP_C_DS char* tlp_cc getPluginPropertyValueAsString(TELHandle handle, const cha
  \return true if succesful, false otherwise
  \ingroup plugins
 */
-TLP_C_DS bool tlp_cc setPluginProperty(TELHandle handle, const char* propertyName, const char* value);
+TLP_C_DS bool tlp_cc tpSetPluginProperty(TELHandle handle, const char* propertyName, const char* value);
 
 /*!
  \brief Return last API error
  \return Returns a string with the error
  \ingroup utilities
 */
-TLP_C_DS char* tlp_cc getLastError();
-
-/*!
- \brief Return last API error
- \return Returns a string with the error
- \ingroup utilities
-*/
-TLP_C_DS char* tlp_cc getLastPluginAPIError();
-
-/*!
- \brief Free char* generated by library routines
- \ingroup freeRoutines
-*/
-TLP_C_DS bool tlp_cc freeText(char* text);
+TLP_C_DS char* tlp_cc tpGetLastError();
 
 /*!
  \brief Free char* generated by library routines
@@ -509,17 +497,17 @@ TLP_C_DS char* tlp_cc tpGetCopyright();
  \return Returns NULL if unsuccefull, otherwise return the registered handle
  \ingroup utilities
 */
-TLP_C_DS TELHandle tlp_cc registerHandle(TELHandle handle, char* name);
+TLP_C_DS TELHandle tlp_cc tpRegisterHandle(TELHandle handle, char* name);
 
 /*!
  \brief UnRegister a handle
  \return Returns true/false indicating success
  \ingroup utilities
 */
-TLP_C_DS bool tlp_cc unRegisterHandle(TELHandle handle);
+TLP_C_DS bool tlp_cc tpUnRegisterHandle(TELHandle handle);
 
 #if defined(__cplusplus)
-} }    //rrp namespace and extern "C"
+}    //rrp namespace and extern "C"
 #endif
 
 #endif
@@ -545,11 +533,11 @@ using namespace tlp;
 
 int main()
 {
-    TELHandle pmHandle = createPluginManager();
-    loadPlugins(pmHandle);
+    TELHandle pmHandle = tpCreatePluginManager();
+    tpLoadPlugins(pmHandle);
 
-    cout<<"Nr of loaded plugins:" << getNumberOfPlugins(pmHandle)<<endl;
-    RRStringArrayPtr names = getPluginNames(pmHandle);
+    cout<<"Nr of loaded plugins:" << tpGetNumberOfPlugins(pmHandle)<<endl;
+    RRStringArrayPtr names = tpGetPluginNames(pmHandle);
 
     if(!names)
     {
@@ -562,15 +550,15 @@ int main()
         cout<<"Plugin name: " <<names->String[i]<<endl;
 
         //Get a handle to a plugin
-        TELHandle plHandle = getPlugin(pmHandle, names->String[i]);
-        cout <<getPluginInfo(plHandle)<<endl;
+        TELHandle plHandle = tpGetPlugin(pmHandle, names->String[i]);
+        cout <<tpGetPluginInfo(plHandle)<<endl;
     }
 
 
     //Cleanup.
-    freeStringArray(names);
-    unLoadPlugins(pmHandle);
-    freePluginManager(pmHandle);
+    tpFreeStringArray(names);
+    tpUnLoadPlugins(pmHandle);
+    tpFreePluginManager(pmHandle);
     return 0;
 }
 \endcode

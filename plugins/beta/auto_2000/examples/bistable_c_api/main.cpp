@@ -1,12 +1,12 @@
 #pragma hdrstop
 #include <iostream>
 #include <string>
-#include "rrc_api.h"
+#include "rr/c/rrc_api.h"
 #include "telplugins_c_api.h"
 
 using namespace std;
-using namespace rrc;
-using namespace tlp; //Plugin stuff
+//using namespace rrc;
+//using namespace tlp; //Plugin stuff
 //using namespace autoplugin;
 
 int main()
@@ -14,104 +14,104 @@ int main()
     string tempFolder("r:/temp");
     string sbmlFile("../models/bistable.xml");
 
-    RRHandle  rri = NULL;
+    rrc::RRHandle  rri = NULL;
     try
     {
         string autoPluginName("rrp_auto2000");
         string autoOutputParserPluginName("rrp_AutoOutputParser");
-        setLogLevel("LOG_DEBUG");
+        tpSetLogLevel("LOG_DEBUG");
 
-        cout<<"Current log level is: "<<getLogLevel();
+        cout<<"Current log level is: "<<tpGetLogLevel();
         //A roadrunner object
-        rri = createRRInstance();
-        setTempFolder(rri, tempFolder.c_str());
+        rri = rrc::createRRInstance();
+        rrc::setTempFolder(rri, tempFolder.c_str());
 
         //A Plugin manager, using a roadrunner instance
-        RRPluginManagerHandle pm = createPluginManager(rri);
+        TELHandle pm = tpCreatePluginManager("");
 
         //Load auto plugin
-        if(!loadPlugin(pm, autoPluginName.c_str()))
+        if(!tpLoadPlugin(pm, autoPluginName.c_str()))
         {
-            logMsg(clError, "Failed to load auto plugin");
+            tpLogMsg(clError, "Failed to load auto plugin");
             return 0;
         }
 
         //Get a plugin handle
-        RRPluginHandle autoPlugin = getPlugin(pm, autoPluginName.c_str());
+        TELHandle autoPlugin = tpGetPlugin(pm, autoPluginName.c_str());
         if(!autoPlugin)
         {
-            logMsg(clError, "Problem..");
+            tpLogMsg(clError, "Problem..");
             throw("AutoPlugin don't exist");
         }
 
         //A serious client would check if these calls are succesfull or not
-        setPluginParameter(autoPlugin, "ScanDirection", "Negative");
-        setPluginParameter(autoPlugin, "PrincipalContinuationParameter", "k3");
-        setPluginParameter(autoPlugin, "PCPLowerBound", "0.2");
-        setPluginParameter(autoPlugin, "PCPUpperBound", "1.2");
+        tpSetPluginProperty(autoPlugin, "ScanDirection", "Negative");
+        tpSetPluginProperty(autoPlugin, "PrincipalContinuationParameter", "k3");
+        tpSetPluginProperty(autoPlugin, "PCPLowerBound", "0.2");
+        tpSetPluginProperty(autoPlugin, "PCPUpperBound", "1.2");
 
         //We can set the sbml parameter here or load into the roadrunner instance first
         //autoPlugin->setParameter("SBML", getFileContent(sbmlFile).c_str());
 
         //The load function does throw if file is not found.. is that what we want??
-        if(!loadSBML(rri, sbmlFile.c_str()))
+        if(!rrc::loadSBML(rri, sbmlFile.c_str()))
         {
             throw("Failed loading sbml model");
         }
 
         bool runInThread = true;
-        if(!executePluginEx(autoPlugin, NULL, runInThread))
+        if(!tpExecutePluginEx(autoPlugin, runInThread))
         {
-            logMsg(clError, "Problem executing the Auto plugin");
+            tpLogMsg(clError, "Problem executing the Auto plugin");
             return 0;
         }
 
         if(runInThread)
         {
-            while(isPluginWorking(autoPlugin))
+            while(tpIsPluginWorking(autoPlugin))
             {
-                logMsg(clInfo, "Plugin is working..");
+                tpLogMsg(clInfo, "Plugin is working..");
             }
         }
 
-        logMsg(clInfo, "Auto plugin is done.");
-        RRParameterHandle biFurcationDiagram = getPluginParameter(autoPlugin, "BiFurcationDiagram", NULL);
+        tpLogMsg(clInfo, "Auto plugin is done.");
+        TELHandle biFurcationDiagram = tpGetPluginProperty(autoPlugin, "BiFurcationDiagram");
         if(biFurcationDiagram)
         {
-            string *temp =  (string*) getParameterValueAsPointer(biFurcationDiagram);
-            logMsg(clInfo, temp->c_str());
+            string *temp =  (string*) tpGetPropertyValueHandle(biFurcationDiagram);
+            tpLogMsg(clInfo, temp->c_str());
         }
 
         //Parse auto output
-        if(!loadPlugin(pm, autoOutputParserPluginName.c_str()))
+        if(!tpLoadPlugin(pm, autoOutputParserPluginName.c_str()))
         {
-            logMsg(clError, "Failed to load auto output plugin");
+            tpLogMsg(clError, "Failed to load auto output plugin");
             return 0;
         }
 
         //Get a plugin handle
-        RRPluginHandle parseAutoOutput = getPlugin(pm, autoOutputParserPluginName.c_str());
+        TELHandle parseAutoOutput = tpGetPlugin(pm, autoOutputParserPluginName.c_str());
         if(!parseAutoOutput)
         {
-            logMsg(clError, "Problem..");
+            tpLogMsg(clError, "Problem..");
             throw("The parseAutoOutput Plugin don't exist");
         }
 
-        executePluginEx(parseAutoOutput, getPluginParameter(autoPlugin, "BiFurcationDiagram", NULL), false);
+        tpExecutePluginEx(parseAutoOutput, false);
 
         //Check if there were special solution points
-        RRParameterHandle solutionPoints = getPluginParameter(parseAutoOutput, "LabeledSolutionPoints", NULL);
+        TELHandle solutionPoints = tpGetPluginProperty(parseAutoOutput, "LabeledSolutionPoints");
 
-        char* msg = getParameterValueAsString(solutionPoints);
+        char* msg = tpGetPropertyValueAsString(solutionPoints);
 
-        logMsg(clInfo, msg);
-        freeText(msg);
-        unLoadPlugin(pm, parseAutoOutput);
-        unLoadPlugin(pm, autoPlugin);
+        tpLogMsg(clInfo, msg);
+        tpFreeText(msg);
+        tpUnLoadPlugin(pm, parseAutoOutput);
+        tpUnLoadPlugin(pm, autoPlugin);
     }
     catch(...)
     {
-        logMsg(clError, "Holy cow problem...!");
+        tpLogMsg(clError, "Holy cow problem...!");
     }
 
     return 0;

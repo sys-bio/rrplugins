@@ -4,12 +4,11 @@
 #include "telplugins_cpp_support.h"
 //---------------------------------------------------------------------------
 
-namespace tlpc
-{
 using namespace std;
 using namespace tlp;
+using namespace tlpc;
 
-bool tlp_cc tlpEnableLoggingToConsole()
+bool tlp_cc tpEnableLoggingToConsole()
 {
     start_try
         Logger::enableConsoleLogging();
@@ -17,7 +16,7 @@ bool tlp_cc tlpEnableLoggingToConsole()
     catch_bool_macro
 }
 
-bool tlp_cc tlpDisableLoggingToConsole()
+bool tlp_cc tpDisableLoggingToConsole()
 {
     start_try
         Logger::disableConsoleLogging();
@@ -25,7 +24,7 @@ bool tlp_cc tlpDisableLoggingToConsole()
     catch_bool_macro
 }
 
-bool tlp_cc tlpEnableLoggingToFile(char* fName)
+bool tlp_cc tpEnableLoggingToFile(char* fName)
 {
     start_try
 //        char* tempFolder = getTempFolder(handle);
@@ -37,7 +36,7 @@ bool tlp_cc tlpEnableLoggingToFile(char* fName)
     catch_bool_macro
 }
 
-bool tlp_cc tlpDisableLoggingToFile()
+bool tlp_cc tpDisableLoggingToFile()
 {
     start_try
         Logger::disableFileLogging();
@@ -45,7 +44,7 @@ bool tlp_cc tlpDisableLoggingToFile()
     catch_bool_macro
 }
 
-bool tlp_cc tlpSetLogLevel(const char* _lvl)
+bool tlp_cc tpSetLogLevel(const char* _lvl)
 {
     start_try
         Logger::Level lvl = Logger::stringToLevel(_lvl);
@@ -54,23 +53,23 @@ bool tlp_cc tlpSetLogLevel(const char* _lvl)
     catch_bool_macro
 }
 
-char* tlp_cc tlpGetLogLevel()
+char* tlp_cc tpGetLogLevel()
 {
     start_try
         string level = Logger::getCurrentLevelAsString();
-        char* lvl = tlp::createText(level.c_str());
+        char* lvl = tpCreateText(level.c_str());
         return lvl;
     catch_ptr_macro
 }
 
-char* tlp_cc tlpGetLogFileName()
+char* tlp_cc tpGetLogFileName()
 {
     start_try
-        return tlp::createText(Logger::getFileName().c_str());
+        return tpCreateText(Logger::getFileName().c_str());
     catch_ptr_macro
 }
 
-void tlp_cc tlpLogMsg(CLogLevel lvl, const char* msg)
+void tlp_cc tpLogMsg(CLogLevel lvl, const char* msg)
 {
     start_try
         if(msg)
@@ -84,4 +83,4 @@ void tlp_cc tlpLogMsg(CLogLevel lvl, const char* msg)
     catch_void_macro
 }
 
-}
+

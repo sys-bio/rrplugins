@@ -46,7 +46,7 @@
 //---------------------------------------------------------------------------
 
 #if defined(__cplusplus)
-namespace tlpc { extern "C" {
+extern "C" {
 #endif
 
 /*!
@@ -78,28 +78,28 @@ enum
  \return Returns true if succesful, false otherwise
  \ingroup logging
 */
-TLP_C_DS bool tlp_cc tlpEnableLoggingToConsole(void);
+TLP_C_DS bool tlp_cc tpEnableLoggingToConsole(void);
 
 /*!
  \brief Disable logging to console
  \return Returns true if succesful, false otherwise
  \ingroup logging
 */
-TLP_C_DS bool tlp_cc tlpDisableLoggingToConsole(void);
+TLP_C_DS bool tlp_cc tpDisableLoggingToConsole(void);
 
 /*!
  \brief Enable logging to logFile
  \return Returns true if succesful, false otherwise
  \ingroup logging
 */
-TLP_C_DS bool tlp_cc tlpEnableLoggingToFile(char* fName);
+TLP_C_DS bool tlp_cc tpEnableLoggingToFile(char* fName);
 
 /*!
  \brief Disable logging to logFile
  \return Returns true if succesful, false otherwise
  \ingroup logging
 */
-TLP_C_DS bool tlp_cc tlpDisableLoggingToFile();
+TLP_C_DS bool tlp_cc tpDisableLoggingToFile();
 
 /*!
  \brief Set the logging status level
@@ -116,7 +116,7 @@ TLP_C_DS bool tlp_cc tlpDisableLoggingToFile();
  \return Returns true if succesful
  \ingroup logging
 */
-TLP_C_DS bool tlp_cc tlpSetLogLevel(const char* lvl);
+TLP_C_DS bool tlp_cc tpSetLogLevel(const char* lvl);
 
 /*!
  \brief Get the logging status level as a pointer to a string
@@ -131,7 +131,7 @@ TLP_C_DS bool tlp_cc tlpSetLogLevel(const char* lvl);
  \return Returns null if it fails else returns a pointer to the logging string
  \ingroup logging
 */
-TLP_C_DS char* tlp_cc tlpGetLogLevel(void);
+TLP_C_DS char* tlp_cc tpGetLogLevel(void);
 
 /*!
  \brief Get a pointer to the string that holds the logging file name path
@@ -141,7 +141,7 @@ TLP_C_DS char* tlp_cc tlpGetLogLevel(void);
  \return Returns null if it fails otherwise returns the full path to the logging file name
  \ingroup logging
 */
-TLP_C_DS char* tlp_cc tlpGetLogFileName(void);
+TLP_C_DS char* tlp_cc tpGetLogFileName(void);
 
 /*!
  \brief Create a log message
@@ -149,11 +149,11 @@ TLP_C_DS char* tlp_cc tlpGetLogFileName(void);
  \param msg Log message
  \ingroup logging
 */
-TLP_C_DS void tlp_cc tlpLogMsg(enum CLogLevel lvl, const char* msg);
+TLP_C_DS void tlp_cc tpLogMsg(enum CLogLevel lvl, const char* msg);
 
 
 #if defined(__cplusplus)
-} }
+}
 #endif
 
 #endif

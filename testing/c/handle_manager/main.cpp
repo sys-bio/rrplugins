@@ -14,28 +14,28 @@ int main()
     try
     {
         string fldr(joinPath("..", "plugins"));
-        TELHandle pm = createPluginManager(fldr.c_str());
+        TELHandle pm = tpCreatePluginManager(fldr.c_str());
 
-        if(!loadPlugins(pm))
+        if(!tpLoadPlugins(pm))
         {
-            cout<<getLastError();
+            cout<<tpGetLastError();
         }
 
-        TELHandle aPlugin = getFirstPlugin(pm);
+        TELHandle aPlugin = tpGetFirstPlugin(pm);
 
         //Pass a handle of wrong type
-        TELHandle aPlugin2 = getFirstPlugin(aPlugin);
+        TELHandle aPlugin2 = tpGetFirstPlugin(aPlugin);
         if(!aPlugin2)
         {
-            cout<<getLastError();
+            cout<<tpGetLastError();
         }
 
         //Plugin handles are supported too
         int bad = 123;
-        char* name = getPluginName(&bad);
+        char* name = tpGetPluginName(&bad);
         if(!name)
         {
-            cout<<getLastError();
+            cout<<tpGetLastError();
         }
 
 
