@@ -9,8 +9,6 @@
 #include "rrAutoPluginExporter.h"
 //---------------------------------------------------------------------------
 
-namespace autoplugin
-{
 #if defined(__BORLANDC__)
     #define auto_cc __cdecl
 #else
@@ -27,10 +25,6 @@ class AutoPlugin : public CPPPlugin
                                                ~AutoPlugin();
         //Data input
         void                                    setScanDirection(ScanDirection dir);
-        void                                    setPrincipalContinuationParameter(const string& para);
-        void                                    setPCPLowerBound(double lb);
-        void                                    setPCPUpperBound(double ub);
-        void                                    setSBML(const string& sbml);
         bool                                    execute(bool inThread = false);
         string                                  getResult();
         string                                  getConstants();
@@ -42,19 +36,17 @@ class AutoPlugin : public CPPPlugin
 
     protected:
 
+        Property<string>                        mSBML;                  //This is the model
         Property<string>                        mTempFolder;
         Property<bool>                          mKeepTempFiles;
-        Property<string>                        mSBML;                  //This is the model
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
         Property<double>                        mPCPLowerBound;
         Property<double>                        mPCPUpperBound;
         Property<string>                        mBiFurcationDiagram;    //This is generated data
 
-        //This property is a container for parameters inside auto
-        Property<Properties>                    mAutoParameters;
-
-        RRAuto                                  mRRAuto;                //The interface to auto. Takes mAutoData as reference
+        //The interface to auto. Takes mAutoData as reference
+        RRAuto                                  mRRAuto;
 
         string                                  getTempFolder();
         string                                  getSBML();
@@ -72,7 +64,7 @@ RR_PLUGIN_DECLSPEC AutoPlugin* auto_cc       createPlugin();
 RR_PLUGIN_DECLSPEC const char* auto_cc       getImplementationLanguage();
 }
 
-}
+
 
 
 namespace tlp

@@ -24,7 +24,7 @@ class RRA_DECLSPEC AutoData
                                         AutoData();
                                        ~AutoData();
                                         AutoData(const AutoData& data);
-        AutoData&                       operator=(AutoData& rhs);
+        AutoData&                       operator=(const AutoData& rhs);
         string                          getBifurcationDiagram() const;
         void                            setBifurcationDiagram(const string& str);
 

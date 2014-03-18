@@ -9,14 +9,13 @@
 #include "../../source/rrAutoPlugin.h"
 #include "../../rrAutoInterface/rrRRAuto.h"
 
-
 using namespace tlp;
-using namespace autoplugin;
 using namespace std;
 using namespace rr;
+
 int main()
 {
-    string tempFolder(".");
+    string tempFolder("r:\\temp");
     string sbmlFile("../models/bistable.xml");
 	gLog.setLevel(lInfo);
     gLog.enableConsoleLogging();
@@ -45,24 +44,20 @@ int main()
         }
 
         //A serious client would check if these calls are succesfull or not
-
         string sbml = getFileContent(sbmlFile);
 
         //Various plugin constants
         autoPlugin->setPropertyByString("SBML", sbml.c_str());
         autoPlugin->setPropertyByString("TempFolder", tempFolder.c_str());
-        autoPlugin->setPropertyByString("KeepTempFiles", "false");
+        autoPlugin->setPropertyByString("KeepTempFiles", "true");
 
         //Specific auto parameters
-        PropertyBase* para = autoPlugin->getProperty("AutoParameters");
-        Properties* autoParas = (Properties*) (para->getValueHandle());
 
-        cout<<autoParas->getNames();
-
-        autoPlugin->setPropertyByString("ScanDirection", "Positive");
+ //       autoPlugin->setPropertyByString("ScanDirection", "Positive");
+        autoPlugin->setPropertyByString("ScanDirection", "Negative");
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
-        autoPlugin->setPropertyByString("PCPLowerBound", "1.1");
-        autoPlugin->setPropertyByString("PCPUpperBound", "1.4");
+        autoPlugin->setPropertyByString("PCPLowerBound", "0.2");
+        autoPlugin->setPropertyByString("PCPUpperBound", "1.5");
 
         if(!autoPlugin->execute())
         {
@@ -72,9 +67,9 @@ int main()
 
         Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
-        cout<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
+        Log(lInfo)<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
 
-        cout<<"\n\nAUTO 2000 is unloading...\n";
+        Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
         //Check plugin data..
         pm.unload(autoPlugin);
     }

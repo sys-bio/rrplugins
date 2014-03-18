@@ -35,7 +35,7 @@ if(WIN32)
     target_link_libraries ( ${target}-static
 #        libAuto-static
 #        roadrunner
-        telplugins
+        telplugins_common
 #        poco_foundation-static
 #        IPHLPAPI
         )

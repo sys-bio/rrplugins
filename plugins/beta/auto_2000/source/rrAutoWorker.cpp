@@ -9,9 +9,6 @@
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 
-namespace autoplugin
-{
-
 AutoWorker::AutoWorker(AutoPlugin& host)
 :
 mTheHost(host),
@@ -71,9 +68,18 @@ void AutoWorker::run()
 
     mRRAuto.setStartParameterValue(spvL);
     mRRAuto.setEndParameterValue(spvU);
-    mRRAuto.setScanDirection(sdNegative);
 
-    ScanDirection sDirection = mTheHost.mScanDirection.getValue() == "Positive" ? sdPositive : sdNegative;
+
+    ScanDirection sDirection;
+    if(mTheHost.mScanDirection.getValue() == "Positive")
+    {
+        sDirection = sdPositive;
+    }
+    else
+    {
+        sDirection = sdNegative;
+    }
+    mRRAuto.setScanDirection(sDirection);
 
     string str = mRRAuto.getConstantsAsString();
     Log(lInfo)<<str;
@@ -152,8 +158,6 @@ bool AutoWorker::setup()
     {
         return mTheHost.mRR->load(mTheHost.getSBML());
     }
-}
-
 }
 
 

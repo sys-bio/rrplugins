@@ -9,21 +9,20 @@
 
 namespace rrauto
 {
+using namespace tlp;
+using namespace autolib;
 
 /**
     \brief Takes a vector of SelectionRecords and returns their representation as
     a StringList
 */
-
 tlp::StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
-using namespace tlp;
-using namespace autolib;
 
 //Statics
 RoadRunner*     RRAuto::mRR = NULL;
 SetupControl    RRAuto::mAutoSetup;
 string          RRAuto::mSelectedParameter = gEmptyString;
-
+StringList      RRAuto::mModelParameters = StringList();
 RRAuto::RRAuto(RoadRunner* rr)
 {
     mRR = rr;
@@ -40,7 +39,6 @@ void RRAuto::assignRoadRunner(RoadRunner* rrInstance)
 bool RRAuto::selectParameter(const string& para)
 {
     mSelectedParameter = para;
-//    mAutoSetup.mParameter = &para;
     return false;
 }
 
@@ -68,7 +66,7 @@ bool RRAuto::setScanDirection(ScanDirection val)
     {
         mAutoSetup.mInputConstants.DS = -1 * fabs(mAutoSetup.mInputConstants.DS);
     }
-    return false;
+    return true;
 }
 
 bool RRAuto::setTempFolder(const string& fldr)
@@ -101,12 +99,18 @@ bool RRAuto::run()
         reset();
 
         mAutoSetup.mRunContinuation = false;
-        double parValue = (mAutoSetup.mDirectionPositive == true)
-                        ? mAutoSetup.mInputConstants.RL0.getValue() : mAutoSetup.mInputConstants.RL1.getValue();
+        double parValue = 0;
+        if(mAutoSetup.mDirectionPositive == true)
+        {
+            parValue = mAutoSetup.mInputConstants.RL0.getValue();
+        }
+        else
+        {
+            parValue = mAutoSetup.mInputConstants.RL1.getValue();
+        }
 
-        //Set initial value of Primary cintinuation parameter
+        //Set initial value of Primary continuation parameter
         mRR->setValue(mSelectedParameter, parValue);
-
 
         if(mAutoSetup.mCalculateSteadyState)
         {
@@ -133,6 +137,8 @@ bool RRAuto::setupUsingCurrentModel()
     int ndim = mRR->getSteadyStateSelections().size();
     mAutoSetup.mInputConstants.NDIM = ndim;
 
+
+    mModelParameters = mRR->getGlobalParameterIds();
     setCallbackStpnt(ModelInitializationCallback);
     setCallbackFunc2(ModelFunctionCallback);
 
@@ -151,11 +157,11 @@ int autoCallConv RRAuto::ModelInitializationCallback(long ndim, double t, double
 {
     rr::ExecutableModel* lModel = mRR->getModel();
 
-    int numBoundaries = 0;  //ToDo: to be set from the outside
-    int numParameters = 1;  //ToDo: to be set from the outside
+    int numBoundaries = 0;
+    int numParameters = 1;
 
-    vector<double> oBoundary(numBoundaries);
-    vector<double> oGlobalParameters(numParameters);
+    vector<double> boundaryValues(numBoundaries);
+    vector<double> globalParameters(numParameters);
 
     if (numBoundaries > 0)
     {
@@ -163,42 +169,41 @@ int autoCallConv RRAuto::ModelInitializationCallback(long ndim, double t, double
         oSelectedBoundary[0] = 0;           //ToDo: This need to be set from the outside!
         for (int i = 0; i < numBoundaries; i++)
         {
-            oBoundary[i] = mRR->getBoundarySpeciesByIndex(oSelectedBoundary[i]);
+            boundaryValues[i] = mRR->getBoundarySpeciesByIndex(oSelectedBoundary[i]);
         }
     }
 
     if (numParameters > 0)
     {
         double val  = mRR->getValue(mSelectedParameter);
-        oGlobalParameters[0] = val;
+//        globalParameters[0] = val;
 
-//        for (int i = 0; i < numParameters; i++)
-//        {
-//            oGlobalParameters[i] = mRR->getGlobalParameterByIndex(oSelectedParameters[i]);
-//        }
+        for (int i = 0; i < numParameters; i++)
+        {
+            int selParameter = mModelParameters.indexOf(mSelectedParameter);
+            globalParameters[i] = mRR->getGlobalParameterByIndex(selParameter);
+        }
     }
 
     int oParaSize = numBoundaries + numParameters;
-    vector<double> oParameters(oParaSize);
+    vector<double> parameterValues(oParaSize);
 
     for(int i = 0; i < numBoundaries; i++)
     {
-        oParameters[i] = oBoundary[i];
+        parameterValues[i] = boundaryValues[i];
     }
 
     //Array.Copy(oGlobalParameters, 0, oParameters, oBoundary.Length, oGlobalParameters.Length);
     for(int i = 0; i < numParameters; i++)
     {
-        oParameters[numBoundaries + i] = oGlobalParameters[i];
+        parameterValues[numBoundaries + i] = globalParameters[i];
     }
 
     //Marshal.Copy(oParameters, 0, par, oParameters.Length);
     for(int i = 0; i < oParaSize; i++)
     {
-        par[i] = oParameters[i];
+        par[i] = parameterValues[i];
     }
-
-    //Marshal.Copy(CurrentModel.y, 0, u, Math.Min(CurrentModel.y.Length, ndim));
 
     int nrFloatingSpecies = lModel->getNumFloatingSpecies();
     double* floatCon = new double[nrFloatingSpecies];

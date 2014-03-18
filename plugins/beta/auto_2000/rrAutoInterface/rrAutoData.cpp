@@ -11,7 +11,7 @@ AutoData::AutoData(const AutoData& data)
 {
 }
 
-AutoData& AutoData::operator=(AutoData& rhs)
+AutoData& AutoData::operator=(const AutoData& rhs)
 {
     return *this;
 }

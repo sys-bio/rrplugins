@@ -1,10 +1,11 @@
 #ifndef rrRRAutoH
 #define rrRRAutoH
-#include "telProperty.h"
 #include "rr/rrRoadRunner.h"
-#include "telLogger.h"
 #include "rrRRAutoSetupControl.h"
 #include "rrRRAutoExporter.h"
+#include "telProperty.h"
+#include "telLogger.h"
+#include "telStringList.h"
 //---------------------------------------------------------------------------
 
 #define autoCallConv __cdecl
@@ -15,7 +16,7 @@ namespace rrauto
 
 using std::string;
 using rr::RoadRunner;
-
+using tlp::StringList;
 enum ScanDirection {sdPositive, sdNegative};
 
 class RRA_DECLSPEC RRAuto
@@ -37,6 +38,7 @@ class RRA_DECLSPEC RRAuto
 
     private:
         static string               mSelectedParameter;
+        static StringList           mModelParameters;
         string                      mTempFolder;
 
         static RoadRunner*          mRR;         //Static so we can access this in autos callback

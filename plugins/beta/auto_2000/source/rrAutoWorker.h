@@ -13,8 +13,6 @@ namespace rrauto
 class RRAuto;
 }
 
-namespace autoplugin
-{
 typedef void (*ThreadCB)(void*, void*);
 
 class AutoPlugin;
@@ -39,5 +37,5 @@ class AutoWorker : public Poco::Runnable
         TelluriumData              createModelData();
         TelluriumData              createResidualsData();
 };
-}
+
 #endif

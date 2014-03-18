@@ -47,7 +47,7 @@
         <ILINK_LibraryPath>..\..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <_TCHARMapping>char</_TCHARMapping>
-        <IncludePath>..\..\..\source\;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source\common;$(IncludePath)</IncludePath>
         <ProjectType>CppDynamicLibrary</ProjectType>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
