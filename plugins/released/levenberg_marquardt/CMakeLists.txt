@@ -28,7 +28,7 @@ add_subdirectory(lib)
 add_definitions(
 -DPOCO_STATIC
 -DLIBSBML_STATIC
--DEXPORT_RR_PLUGIN
+-DEXPORT_TEL_PLUGIN
 -DSTATIC_LIBSTRUCT
 )
 

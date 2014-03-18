@@ -3,10 +3,12 @@
 #include "telLogger.h"
 #include "rr/rrRoadRunner.h"
 #include "telTelluriumData.h"
-#include "rrAutoPlugin.h"
+#include "telAutoPlugin.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
 using namespace std;
+using namespace tlp;
+using namespace telauto;
 
 AutoPlugin::AutoPlugin()
 :
@@ -49,7 +51,7 @@ AutoPlugin::~AutoPlugin()
     delete mRR;
 }
 
-RRAuto& AutoPlugin::getRRAuto()
+AutoTellurimInterface& AutoPlugin::getRRAuto()
 {
     return mRRAuto;
 }

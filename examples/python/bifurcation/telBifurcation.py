@@ -17,7 +17,8 @@ try:
         
     print auto._propertyNames
     #Set Auto Propertys
-    auto.setProperty("ScanDirection", "Negative")
+    #auto.setProperty("ScanDirection", "Negative")
+    auto.setProperty("ScanDirection", "Positive")    
     auto.setProperty("SBML", readAllText(sbmlModel))
         
     #True for debugging

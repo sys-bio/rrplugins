@@ -6,6 +6,9 @@
         <Projects Include="..\..\..\source\common\telplugins_common.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\..\source\core\telplugins_core.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="libAuto\libAuto-static.cbproj">
             <Dependencies/>
         </Projects>
@@ -37,6 +40,15 @@
     </Target>
     <Target Name="telplugins_common:Make">
         <MSBuild Projects="..\..\..\source\common\telplugins_common.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_core">
+        <MSBuild Projects="..\..\..\source\core\telplugins_core.cbproj"/>
+    </Target>
+    <Target Name="telplugins_core:Clean">
+        <MSBuild Projects="..\..\..\source\core\telplugins_core.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_core:Make">
+        <MSBuild Projects="..\..\..\source\core\telplugins_core.cbproj" Targets="Make"/>
     </Target>
     <Target Name="libAuto-static">
         <MSBuild Projects="libAuto\libAuto-static.cbproj"/>
@@ -84,13 +96,13 @@
         <MSBuild Projects="examples\bistable\bistable.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins_common;libAuto-static;libAutoTelluriumInterface;libAutoTelluriumInterface-static;tel_auto2000;bistable"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;libAuto-static;libAutoTelluriumInterface;libAutoTelluriumInterface-static;tel_auto2000;bistable"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins_common:Clean;libAuto-static:Clean;libAutoTelluriumInterface:Clean;libAutoTelluriumInterface-static:Clean;tel_auto2000:Clean;bistable:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;libAuto-static:Clean;libAutoTelluriumInterface:Clean;libAutoTelluriumInterface-static:Clean;tel_auto2000:Clean;bistable:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins_common:Make;libAuto-static:Make;libAutoTelluriumInterface:Make;libAutoTelluriumInterface-static:Make;tel_auto2000:Make;bistable:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;libAuto-static:Make;libAutoTelluriumInterface:Make;libAutoTelluriumInterface-static:Make;tel_auto2000:Make;bistable:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

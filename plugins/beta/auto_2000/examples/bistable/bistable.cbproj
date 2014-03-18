@@ -43,10 +43,10 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>R:\rre\plugins\bifurcation\examples\bistable\;$(IncludePath)</IncludePath>
+        <IncludePath>..\..\source\;$(IncludePath)</IncludePath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <_TCHARMapping>char</_TCHARMapping>
-        <ILINK_LibraryPath>R:\rre\plugins\bifurcation\examples\bistable\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\source\;R:\rre\plugins\bifurcation\examples\bistable\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
@@ -94,7 +94,7 @@
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <ILINK_DisableIncrementalLinking>true</ILINK_DisableIncrementalLinking>
         <BCC_PCHInject>bistable_pch.h</BCC_PCHInject>
-        <IncludePath>$(TLP_ROOT)\source;$(TLP_INSTALL)\include;$(TLP_ROOT)\wrappers\C;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source\common;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source;$(TLP_INSTALL)\include;$(TLP_ROOT)\wrappers\C;$(TLP_ROOT)\source\core;$(TLP_ROOT)\source\common;..\..\libAutoTelluriumInterface;$(IncludePath)</IncludePath>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(TLP_INSTALL)\plugins;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
         <Debugger_DebugSourcePath>R:\rre\plugins\bifurcation\rrAutoInterface\;R:\rre\plugins\bifurcation\libAuto\;R:\rre\source\;R:\rrl\source\c\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
@@ -110,6 +110,10 @@
         </CppCompile>
         <CppCompile Include="main.cpp">
             <BuildOrder>0</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\source\telAutoOutputParser.cpp">
+            <DependentOn>..\..\source\telAutoOutputParser.h</DependentOn>
+            <BuildOrder>2</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

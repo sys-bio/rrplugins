@@ -40,8 +40,8 @@ class ChiSquare : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC ChiSquare*   plugins_cc       createPlugin();
-RR_PLUGIN_DECLSPEC const char*  plugins_cc       getImplementationLanguage();
+TLP_DS ChiSquare*   plugins_cc       createPlugin();
+TLP_DS const char*  plugins_cc       getImplementationLanguage();
 }
 
 #endif

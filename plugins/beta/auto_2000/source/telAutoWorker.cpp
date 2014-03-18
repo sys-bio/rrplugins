@@ -3,11 +3,14 @@
 #include "Poco/File.h"
 #include "telTelluriumData.h"
 #include "telLogger.h"
-#include "rrAutoWorker.h"
-#include "rrAutoPlugin.h"
+#include "telAutoWorker.h"
+#include "telAutoPlugin.h"
 #include "telStringUtils.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
+
+using namespace tlp;
+using namespace telauto;
 
 AutoWorker::AutoWorker(AutoPlugin& host)
 :

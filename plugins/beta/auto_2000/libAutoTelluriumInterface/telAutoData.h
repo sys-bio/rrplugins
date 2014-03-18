@@ -12,7 +12,7 @@
 using namespace tlp;
 using std::ostream;
 
-class RRA_DECLSPEC AutoData
+class TA_DS AutoData
 {
     protected:
         string                          mBifurcationDiagram;     //This is the main resulting  data file
@@ -25,7 +25,7 @@ class RRA_DECLSPEC AutoData
         string                          getBifurcationDiagram() const;
         void                            setBifurcationDiagram(const string& str);
 
-        friend RRA_DECLSPEC
+        friend TA_DS
         ostream& operator<<(ostream& stream, const AutoData& outMe);
 };
 

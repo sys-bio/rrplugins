@@ -11,7 +11,7 @@ cpp_plugin_demo
 add_library(${target} SHARED ${sources})
 
 add_definitions(
--DEXPORT_RR_PLUGIN
+-DEXPORT_TEL_PLUGIN
 -DPOCO_STATIC
 )
 

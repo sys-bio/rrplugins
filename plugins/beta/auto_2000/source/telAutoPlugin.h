@@ -1,12 +1,11 @@
-#ifndef rrAutoPluginH
-#define rrAutoPluginH
+#ifndef telAutoPluginH
+#define telAutoPluginH
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "telPluginManager.h"
-#include "../rrAutoInterface/rrAutoData.h"
-#include "../rrAutoInterface/rrRRAuto.h"
-#include "rrAutoWorker.h"
-#include "rrAutoPluginExporter.h"
+#include "telAutoWorker.h"
+#include "telAutoInputConstants.h"
+#include "telAutoTelluriumInterface.h"
 //---------------------------------------------------------------------------
 
 #if defined(__BORLANDC__)
@@ -15,16 +14,16 @@
     #define auto_cc
 #endif
 
-using namespace rrauto;
-
-class AutoPlugin : public CPPPlugin
+using telauto::AutoTellurimInterface;
+using tlp::Property;
+class AutoPlugin : public tlp::CPPPlugin
 {
     friend AutoWorker;
     public:
                                                 AutoPlugin();
                                                ~AutoPlugin();
         //Data input
-        void                                    setScanDirection(ScanDirection dir);
+        void                                    setScanDirection(telauto::ScanDirection dir);
         bool                                    execute(bool inThread = false);
         string                                  getResult();
         string                                  getConstants();
@@ -32,7 +31,7 @@ class AutoPlugin : public CPPPlugin
         bool                                    setInputData(void* data);
         string                                  getStatus();
         bool                                    isWorking() const;
-        RRAuto&                                 getRRAuto();
+        telauto::AutoTellurimInterface&         getRRAuto();
 
     protected:
 
@@ -46,7 +45,7 @@ class AutoPlugin : public CPPPlugin
         Property<string>                        mBiFurcationDiagram;    //This is generated data
 
         //The interface to auto. Takes mAutoData as reference
-        RRAuto                                  mRRAuto;
+        AutoTellurimInterface                   mRRAuto;
 
         string                                  getTempFolder();
         string                                  getSBML();
@@ -60,8 +59,8 @@ class AutoPlugin : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC AutoPlugin* auto_cc       createPlugin();
-RR_PLUGIN_DECLSPEC const char* auto_cc       getImplementationLanguage();
+TLP_DS AutoPlugin* auto_cc       createPlugin();
+TLP_DS const char* auto_cc       getImplementationLanguage();
 }
 
 
@@ -71,19 +70,19 @@ namespace tlp
 {
 
 template<>
-inline string Property< rrauto::ScanDirection >::getValueAsString() const
+inline string Property< telauto::ScanDirection >::getValueAsString() const
 {
-    return mValue == rrauto::sdPositive ? "Positive" : "Negative";
+    return mValue == telauto::sdPositive ? "Positive" : "Negative";
 }
 
 template<>
-inline void Property< rrauto::ScanDirection >::setValueFromString(const string& val)
+inline void Property< telauto::ScanDirection >::setValueFromString(const string& val)
 {
-    mValue = compareNoCase(val, "Positive") == 0 ? rrauto::sdPositive : rrauto::sdNegative;
+    mValue = compareNoCase(val, "Positive") == 0 ? telauto::sdPositive : telauto::sdNegative;
 }
 
 template<>
-inline void Property< rrauto::ScanDirection >::setValue(const rrauto::ScanDirection& val)
+inline void Property< telauto::ScanDirection >::setValue(const telauto::ScanDirection& val)
 {
     mValue = (val);
 }

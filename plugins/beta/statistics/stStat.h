@@ -43,8 +43,8 @@ class Stat : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC Stat*        plugins_cc       createPlugin();
-RR_PLUGIN_DECLSPEC const char*  plugins_cc       getImplementationLanguage();
+TLP_DS Stat*        plugins_cc       createPlugin();
+TLP_DS const char*  plugins_cc       getImplementationLanguage();
 }
 
 #endif

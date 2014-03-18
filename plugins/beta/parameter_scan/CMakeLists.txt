@@ -21,7 +21,7 @@ stat_doc
 
 add_definitions(
 -DPOCO_STATIC
--DEXPORT_RR_PLUGIN
+-DEXPORT_TEL_PLUGIN
 )
 
 add_library(${target} MODULE ${sources})

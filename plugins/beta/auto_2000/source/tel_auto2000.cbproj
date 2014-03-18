@@ -107,12 +107,12 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <IncludePath>$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;$(IncludePath)</IncludePath>
+        <IncludePath>$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;..\libAutoTelluriumInterface;$(IncludePath)</IncludePath>
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <LinkPackageStatics>rtl.lib</LinkPackageStatics>
-        <Defines>EXPORT_RR_PLUGIN;POCO_STATIC;PCRE_STATIC;$(Defines)</Defines>
+        <Defines>POCO_STATIC;PCRE_STATIC;EXPORT_TEL_PLUGIN;$(Defines)</Defines>
         <Debugger_HostApplication>R:\cg_installs\DRT\bin\bistable.exe</Debugger_HostApplication>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
@@ -133,11 +133,11 @@
             <DependentOn>auto_utils.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="rrAutoPlugin.cpp">
-            <DependentOn>rrAutoPlugin.h</DependentOn>
+        <CppCompile Include="telAutoPlugin.cpp">
+            <DependentOn>telAutoPlugin.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="rrAutoWorker.cpp">
+        <CppCompile Include="telAutoWorker.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

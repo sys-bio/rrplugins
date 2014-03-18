@@ -19,11 +19,11 @@ class TestPlugin : public tlp::CPPPlugin
 extern "C"
 {
 
-RR_PLUGIN_DECLSPEC  const char*     plugins_cc    getImplementationLanguage();
-RR_PLUGIN_DECLSPEC  TestPlugin*     plugins_cc    createPlugin();
+TLP_DS  const char*     plugins_cc    getImplementationLanguage();
+TLP_DS  TestPlugin*     plugins_cc    createPlugin();
 
 // Plugin cleanup function
-RR_PLUGIN_DECLSPEC bool             plugins_cc    destroyPlugin(tlp::Plugin *plugin);
+TLP_DS bool             plugins_cc    destroyPlugin(tlp::Plugin *plugin);
 
 }
 

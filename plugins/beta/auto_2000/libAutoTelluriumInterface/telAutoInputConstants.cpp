@@ -5,10 +5,9 @@
 #include "telAutoInputConstants.h"
 #include "telUtils.h"
 //---------------------------------------------------------------------------
-namespace rrauto
+namespace telauto
 {
     using namespace tlp;
-    
     using namespace std;
 
 string getWhiteSpaces(string& line, int maxLength);

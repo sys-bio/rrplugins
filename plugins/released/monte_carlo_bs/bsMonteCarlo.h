@@ -58,8 +58,8 @@ class MonteCarlo : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC MonteCarlo*    plugins_cc    createPlugin(void* manager);
-RR_PLUGIN_DECLSPEC const char*    plugins_cc    getImplementationLanguage();
+TLP_DS MonteCarlo*    plugins_cc    createPlugin(void* manager);
+TLP_DS const char*    plugins_cc    getImplementationLanguage();
 }
 
 

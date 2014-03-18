@@ -45,8 +45,8 @@ class ParameterScan : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC ParameterScan*   plugins_cc       createPlugin();
-RR_PLUGIN_DECLSPEC const char*      plugins_cc       getImplementationLanguage();
+TLP_DS ParameterScan*   plugins_cc       createPlugin();
+TLP_DS const char*      plugins_cc       getImplementationLanguage();
 }
 
 #endif

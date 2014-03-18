@@ -75,9 +75,6 @@
         <Projects Include="examples\cpp\property_container\property_container.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj">
             <Dependencies/>
         </Projects>
@@ -308,15 +305,6 @@
     <Target Name="property_container:Make">
         <MSBuild Projects="examples\cpp\property_container\property_container.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="tel_AutoOutputParser">
-        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj"/>
-    </Target>
-    <Target Name="tel_AutoOutputParser:Clean">
-        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="tel_AutoOutputParser:Make">
-        <MSBuild Projects="plugins\beta\auto_2000\parser\tel_AutoOutputParser.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="bistable">
         <MSBuild Projects="plugins\beta\auto_2000\examples\bistable_c_api\bistable.cbproj"/>
     </Target>
@@ -336,13 +324,13 @@
         <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;lmfit;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;tel_add_noise;tel_auto2000;tel_levenberg_marquardt;tel_monte_carlo_bs;tel_nelder_mead;tel_test_model;nm_plugin_example;plugin_info;c_plugin_demo;data_handles;nm_rr_example;one_rr;handle_manager;property_meta_data;property_container;tel_AutoOutputParser;bistable;SBMLStudio"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;lmfit;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;tel_add_noise;tel_auto2000;tel_levenberg_marquardt;tel_monte_carlo_bs;tel_nelder_mead;tel_test_model;nm_plugin_example;plugin_info;c_plugin_demo;data_handles;nm_rr_example;one_rr;handle_manager;property_meta_data;property_container;bistable;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;lmfit:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_levenberg_marquardt:Clean;tel_monte_carlo_bs:Clean;tel_nelder_mead:Clean;tel_test_model:Clean;nm_plugin_example:Clean;plugin_info:Clean;c_plugin_demo:Clean;data_handles:Clean;nm_rr_example:Clean;one_rr:Clean;handle_manager:Clean;property_meta_data:Clean;property_container:Clean;tel_AutoOutputParser:Clean;bistable:Clean;SBMLStudio:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;lmfit:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;tel_add_noise:Clean;tel_auto2000:Clean;tel_levenberg_marquardt:Clean;tel_monte_carlo_bs:Clean;tel_nelder_mead:Clean;tel_test_model:Clean;nm_plugin_example:Clean;plugin_info:Clean;c_plugin_demo:Clean;data_handles:Clean;nm_rr_example:Clean;one_rr:Clean;handle_manager:Clean;property_meta_data:Clean;property_container:Clean;bistable:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;lmfit:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;tel_add_noise:Make;tel_auto2000:Make;tel_levenberg_marquardt:Make;tel_monte_carlo_bs:Make;tel_nelder_mead:Make;tel_test_model:Make;nm_plugin_example:Make;plugin_info:Make;c_plugin_demo:Make;data_handles:Make;nm_rr_example:Make;one_rr:Make;handle_manager:Make;property_meta_data:Make;property_container:Make;tel_AutoOutputParser:Make;bistable:Make;SBMLStudio:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;lmfit:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;tel_add_noise:Make;tel_auto2000:Make;tel_levenberg_marquardt:Make;tel_monte_carlo_bs:Make;tel_nelder_mead:Make;tel_test_model:Make;nm_plugin_example:Make;plugin_info:Make;c_plugin_demo:Make;data_handles:Make;nm_rr_example:Make;one_rr:Make;handle_manager:Make;property_meta_data:Make;property_container:Make;bistable:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

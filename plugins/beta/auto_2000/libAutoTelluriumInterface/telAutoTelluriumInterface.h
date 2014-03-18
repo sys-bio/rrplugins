@@ -11,19 +11,19 @@
 #define autoCallConv __cdecl
 
 //This class serves as a RoadRunner-Auto interface. It needs a roadrunner instance on creation
-namespace rrauto
+namespace telauto
 {
 
 using std::string;
 using rr::RoadRunner;
 using tlp::StringList;
-enum ScanDirection {sdPositive, sdNegative};
 
-class RRA_DECLSPEC RRAuto
+
+class TA_DS AutoTellurimInterface
 {
     public:
-                                    RRAuto(RoadRunner* rr);
-                                   ~RRAuto();
+                                    AutoTellurimInterface(RoadRunner* rr);
+                                   ~AutoTellurimInterface();
         string                      getTempFolder();
         bool                        setTempFolder(const string& fldr);
         bool                        setupUsingCurrentModel();
@@ -52,7 +52,7 @@ class RRA_DECLSPEC RRAuto
 namespace tlp
 {
 template<>
-inline string getPropertyType<rrauto::ScanDirection>(const rrauto::ScanDirection& a)
+inline string getPropertyType<telauto::ScanDirection>(const telauto::ScanDirection& a)
 {
     return "ScanDirection";
 }

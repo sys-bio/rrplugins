@@ -1,17 +1,16 @@
 #ifndef telAutoOutputParserH
 #define telAutoOutputParserH
 #include <vector>
-#include "rr/rrRoadRunner.h"
-#include "../rrAutoInterface/rrAutoData.h"
-#include "../rrAutoInterface/rrRRAuto.h"
-#include "telProperty.h"
+
+#include "telTelluriumData.h"
 #include "telStringList.h"
+#include "telConstants.h"
 //---------------------------------------------------------------------------
 
 class AutoOutputParser
 {
     public:
-                                                AutoOutputParser();
+                                                AutoOutputParser(const string& input = tlp::gEmptyString);
                                                ~AutoOutputParser();
         //Data input
         bool                                    setInputData(const string& data);

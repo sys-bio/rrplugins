@@ -6,7 +6,7 @@
 #include "telStringList.h"
 #include "telUtils.h"
 
-namespace rrauto
+namespace telauto
 {
 using namespace tlp;
 using namespace autolib;
@@ -18,42 +18,42 @@ using namespace autolib;
 tlp::StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
 
 //Statics
-RoadRunner*     RRAuto::mRR = NULL;
-SetupControl    RRAuto::mAutoSetup;
-string          RRAuto::mSelectedParameter = gEmptyString;
-StringList      RRAuto::mModelParameters = StringList();
-RRAuto::RRAuto(RoadRunner* rr)
+RoadRunner*     AutoTellurimInterface::mRR = NULL;
+SetupControl    AutoTellurimInterface::mAutoSetup;
+string          AutoTellurimInterface::mSelectedParameter = gEmptyString;
+StringList      AutoTellurimInterface::mModelParameters = StringList();
+AutoTellurimInterface::AutoTellurimInterface(RoadRunner* rr)
 {
     mRR = rr;
 }
 
-RRAuto::~RRAuto()
+AutoTellurimInterface::~AutoTellurimInterface()
 {}
 
-void RRAuto::assignRoadRunner(RoadRunner* rrInstance)
+void AutoTellurimInterface::assignRoadRunner(RoadRunner* rrInstance)
 {
     mRR = rrInstance;
 }
 
-bool RRAuto::selectParameter(const string& para)
+bool AutoTellurimInterface::selectParameter(const string& para)
 {
     mSelectedParameter = para;
     return false;
 }
 
-bool RRAuto::setStartParameterValue(const double& val)
+bool AutoTellurimInterface::setStartParameterValue(const double& val)
 {
     mAutoSetup.mInputConstants.RL0 = val;
     return false;
 }
 
-bool RRAuto::setEndParameterValue(const double& val)
+bool AutoTellurimInterface::setEndParameterValue(const double& val)
 {
     mAutoSetup.mInputConstants.RL1 = val;
     return false;
 }
 
-bool RRAuto::setScanDirection(ScanDirection val)
+bool AutoTellurimInterface::setScanDirection(ScanDirection val)
 {
     mAutoSetup.mDirectionPositive = (val == sdPositive) ? true : false;
 
@@ -68,7 +68,7 @@ bool RRAuto::setScanDirection(ScanDirection val)
     return true;
 }
 
-bool RRAuto::setTempFolder(const string& fldr)
+bool AutoTellurimInterface::setTempFolder(const string& fldr)
 {
     if(folderExists(fldr))
     {
@@ -81,12 +81,12 @@ bool RRAuto::setTempFolder(const string& fldr)
     }
 }
 
-string RRAuto::getTempFolder()
+string AutoTellurimInterface::getTempFolder()
 {
     return mTempFolder;
 }
 
-bool RRAuto::run()
+bool AutoTellurimInterface::run()
 {
     try
     {
@@ -131,7 +131,7 @@ bool RRAuto::run()
     }
 }
 
-bool RRAuto::setupUsingCurrentModel()
+bool AutoTellurimInterface::setupUsingCurrentModel()
 {
     int ndim = mRR->getSteadyStateSelections().size();
     mAutoSetup.mInputConstants.NDIM = ndim;
@@ -146,13 +146,13 @@ bool RRAuto::setupUsingCurrentModel()
     return true;
 }
 
-string RRAuto::getConstantsAsString()
+string AutoTellurimInterface::getConstantsAsString()
 {
     return mAutoSetup.getConstantsAsString();
 }
 
 //Called by Auto
-int autoCallConv RRAuto::ModelInitializationCallback(long ndim, double t, double* u, double* par)
+int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, double t, double* u, double* par)
 {
     rr::ExecutableModel* lModel = mRR->getModel();
 
@@ -261,7 +261,7 @@ int autoCallConv RRAuto::ModelInitializationCallback(long ndim, double t, double
 //            return 0;
 //        }
 
-void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const double* par, double* oResult)
+void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVariables, const double* par, double* oResult)
 {
     int numBoundaries = 0;
     int numParameters = 1;
@@ -330,7 +330,7 @@ void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const 
         double* tempConc = new double[numFloatingSpecies];
         if(!tempConc)
         {
-            throw std::runtime_error("Failed to allocate memory in RRAuto ModelFunction CallBack.");
+            throw std::runtime_error("Failed to allocate memory in AutoTellurimInterface ModelFunction CallBack.");
         }
 
         for(int i = 0; i < numFloatingSpecies; i++)
@@ -426,7 +426,7 @@ void autoCallConv RRAuto::ModelFunctionCallback(const double* oVariables, const 
 //        }
 
 
-bool RRAuto::reset()
+bool AutoTellurimInterface::reset()
 {
     //Remove temporary files
     return true;

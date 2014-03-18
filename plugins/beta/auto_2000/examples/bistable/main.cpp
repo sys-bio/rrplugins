@@ -6,8 +6,9 @@
 #include "telPlugin.h"
 #include "telUtils.h"
 #include "telProperty.h"
-#include "../../source/rrAutoPlugin.h"
-#include "../../rrAutoInterface/rrRRAuto.h"
+#include "telAutoPlugin.h"
+#include "telAutoTelluriumInterface.h"
+#include "telAutoData.h"
 
 using namespace tlp;
 using namespace std;
@@ -68,6 +69,12 @@ int main()
         Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
         Log(lInfo)<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
+
+
+        //Parse the data
+        AutoData ad;
+
+
 
         Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
         //Check plugin data..

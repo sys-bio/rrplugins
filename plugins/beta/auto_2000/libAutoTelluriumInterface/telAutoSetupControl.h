@@ -4,14 +4,14 @@
 #include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
-namespace rrauto
+namespace telauto
 {
 
-class RRAuto;
+class AutoTelluriumInterface;
 
-class RRA_DECLSPEC SetupControl
+class TA_DS SetupControl
 {
-    friend RRAuto;
+    friend AutoTellurimInterface;
 
     public:
                                     SetupControl();

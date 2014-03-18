@@ -3,18 +3,18 @@
 #ifndef tai_exporterH
 #define tai_exporterH
 
-#if defined(_WIN32) || defined(__WIN32__)
-    #if defined(STATIC_RR_AUTO)
-        #define RRA_DECLSPEC
+#if defined(_WIN32)
+    #if defined(STATIC_TEL_AUTO)
+        #define TA_DS
     #else
-        #if defined(EXPORT_RR_AUTO)
-            #define RRA_DECLSPEC __declspec(dllexport)
+        #if defined(EXPORT_TEL_AUTO)
+            #define TA_DS __declspec(dllexport)
         #else
-            #define RRA_DECLSPEC __declspec(dllimport)
+            #define TA_DS __declspec(dllimport)
         #endif
     #endif
 #else
-    #define RRA_DECLSPEC
+    #define TA_DS
 #endif
 
 #endif

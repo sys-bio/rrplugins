@@ -85,8 +85,8 @@ class NelderMead : public CPPPlugin
 
 extern "C"
 {
-RR_PLUGIN_DECLSPEC NelderMead* plugins_cc       createPlugin(void* manager);
-RR_PLUGIN_DECLSPEC const char* plugins_cc       getImplementationLanguage();
+TLP_DS NelderMead* plugins_cc       createPlugin(void* manager);
+TLP_DS const char* plugins_cc       getImplementationLanguage();
 }
 
 #endif

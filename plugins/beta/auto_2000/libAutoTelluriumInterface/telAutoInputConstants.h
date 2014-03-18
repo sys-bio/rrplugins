@@ -7,17 +7,19 @@
 #include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
-namespace rrauto
+namespace telauto
 {
 class SetupControl;
-class RRAuto;
+class AutoTellurimInterface;
 using std::vector;
 using std::string;
 
-class RRA_DECLSPEC InputConstants
+enum ScanDirection {sdPositive, sdNegative};
+
+class TA_DS InputConstants
 {
     friend SetupControl;
-    friend RRAuto;
+    friend AutoTellurimInterface;
     public:
         // NDIM: dimension of the system of equations, as specified in the user-supplied subroutine 'func'
         int             NDIM;

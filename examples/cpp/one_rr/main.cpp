@@ -20,10 +20,8 @@ int main(int argc, char** argv)
     {
         Logger::setLevel(lDebug);
         Logger::enableFileLogging("Test.log");
-
-
-        const string modelFile = joinPath(rootPath, "models", "sbml_test_0001.xml");
-
+        string model = "bistable.xml";
+        const string modelFile = joinPath(rootPath, "models", model);
 
         RoadRunner rr1;
         LoadSBMLOptions opt;
@@ -32,7 +30,7 @@ int main(int argc, char** argv)
 
         if(!rr1.load(modelFile, &opt))
         {
-            Log(Logger::LOG_ERROR)<<"There was a problem loading model in file: "<<modelFile;
+            Log(lError)<<"There was a problem loading model in file: "<<modelFile;
             throw(Exception("Bad things in loadSBMLFromFile function"));
         }
 
@@ -41,9 +39,10 @@ int main(int argc, char** argv)
         simOpt.start = 10;
         simOpt.steps= 511;
 
+        rr1.setGlobalParameterByIndex(2, 0.2);
+        double ss = rr1.steadyState();
 
-
-
+        Log(lInfo) << "Steady State: " <<ss;
         const RoadRunnerData* rrData = rr1.simulate(&simOpt);
 
         TELHandle dataHandle = tpCreateTelluriumDataFromRoadRunnerData( (TELHandle) rrData);
@@ -54,7 +53,7 @@ int main(int argc, char** argv)
 
         cout<<"NrRows: "<<nrRows<<endl;
         cout<<"NrCols "<<nrCols<<endl;
-        cout<<"Headaer: "<<colHeader<<endl;
+        cout<<"Header: "<<colHeader<<endl;
         for(int row = 0; row < nrRows; row++)
         {
             cout<<"row: "<<row<<"\t";

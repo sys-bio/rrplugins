@@ -2,7 +2,7 @@
 #include "telAutoSetupControl.h"
 //---------------------------------------------------------------------------
 
-namespace rrauto
+namespace telauto
 {
 
 SetupControl::SetupControl()

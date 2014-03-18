@@ -96,7 +96,7 @@
         <BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
         <BCC_MonitorThis>true</BCC_MonitorThis>
         <Debugger_HostApplication>R:\cg_installs\DRT\bin\rrWinC.exe</Debugger_HostApplication>
-        <Defines>POCO_STATIC;EXPORT_RR_PLUGIN;$(Defines)</Defines>
+        <Defines>POCO_STATIC;EXPORT_TEL_PLUGIN;$(Defines)</Defines>
         <IncludePath>..\..\Source;$(TLP_INSTALL)\include;..\..\Wrappers\C;$(TLP_ROOT)\source\common;$(TLP_ROOT)\source\core;$(IncludePath)</IncludePath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <FinalOutputDir>$(TLP_INSTALL)\plugins</FinalOutputDir>

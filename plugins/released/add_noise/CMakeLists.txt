@@ -14,7 +14,7 @@ noise
 add_library(${target} MODULE ${sources})
 
 add_definitions(
--DEXPORT_RR_PLUGIN
+-DEXPORT_TEL_PLUGIN
 -DPOCO_STATIC
 )
 
