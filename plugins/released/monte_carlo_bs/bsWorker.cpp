@@ -218,15 +218,15 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     //Add species to minimization data structure.. The species are defined in the input data
     StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
     TELHandle paraHandle = tpGetPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
-    tpSetPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(paraHandle, modelDataSelectionList.asString().c_str());
 
     TELHandle obsList = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
     StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
-    tpSetPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(obsList, ExpDataSelectionList.asString().c_str());
 
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
-    if(ExpDataSelectionList.Count() > modelDataSelectionList.Count())
+    if(ExpDataSelectionList.count() > modelDataSelectionList.count())
     {
         Log(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
         Log(lError)<<"Exiting Monte Carlo.";
@@ -291,15 +291,15 @@ bool bsWorker::createInitialResiduals()
     //Add species to minimization data structure.. The species are defined in the input data
     StringList modelDataSelectionList = mParent.mModelDataSelectionList.getValue();
     paraHandle = tpGetPluginProperty(mMinimizerPlugin, "FittedDataSelectionList");
-    tpSetPropertyByString(paraHandle, modelDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(paraHandle, modelDataSelectionList.asString().c_str());
 
     TELHandle obsList = tpGetPluginProperty(mMinimizerPlugin, "ExperimentalDataSelectionList");
     StringList ExpDataSelectionList = mParent.mExperimentalDataSelectionList.getValue();
 
-    tpSetPropertyByString(obsList, ExpDataSelectionList.AsString().c_str());
+    tpSetPropertyByString(obsList, ExpDataSelectionList.asString().c_str());
 
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
-    if(ExpDataSelectionList.Count() > modelDataSelectionList.Count())
+    if(ExpDataSelectionList.count() > modelDataSelectionList.count())
     {
         Log(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
         Log(lError)<<"Exiting Monte Carlo.";

@@ -73,12 +73,12 @@ int main()
 
         //Retrieve any properties that the plugin has
         StringList properties = plugin->getPropertyNames();
-        if(!properties.Count())
+        if(!properties.count())
         {
             throw("Plugin do not have any properties. For this demo, this is an error!");
         }
 
-        for(int i = 0; i < properties.Count(); i++)
+        for(int i = 0; i < properties.count(); i++)
         {
             cout << properties[i] << endl;
         }

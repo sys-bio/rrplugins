@@ -26,9 +26,9 @@ class COMMON_DECLSPEC StringList
 //                                    StringList(rrc::RRStringArrayPtr cp);
                                    ~StringList();
 
-        void                        InsertAt(const int& index, const string& item);
-        void                        Append(const StringList& list);
-        string                      AsString(const string& delimiter = gComma) const;
+        void                        insertAt(const int& index, const string& item);
+        void                        append(const StringList& list);
+        string                      asString(const string& delimiter = gComma) const;
 
         /**
          * get the size to be compatible with vector<string>
@@ -36,7 +36,7 @@ class COMMON_DECLSPEC StringList
         unsigned int size() const;
 
 
-        unsigned int                Count() const;
+        unsigned int                count() const;
 
 
         StringList&                 operator=(const StringList& rhs);
@@ -50,15 +50,15 @@ class COMMON_DECLSPEC StringList
         int                         indexOf(const string& item);
         void                        clear();
         void                        empty();
-        bool                        Contains(const string& item) const;
-        bool                        DontContain(const string& item) const;
+        bool                        contains(const string& item) const;
+        bool                        dontContain(const string& item) const;
         string                      getLongest();
         string                      getShortest();
         void                        add(const string& item);
         vector<string>::iterator    begin();
         vector<string>::iterator    end();
-        void                        PreFix(const string& fix);
-        void                        PostFix(const string& fix);
+        void                        preFix(const string& fix);
+        void                        postFix(const string& fix);
         COMMON_DECLSPEC
         friend ostream&             operator<<(ostream& stream, const StringList& list);
 

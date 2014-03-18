@@ -111,8 +111,8 @@
         <CppCompile Include="main.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\source\telAutoOutputParser.cpp">
-            <DependentOn>..\..\source\telAutoOutputParser.h</DependentOn>
+        <CppCompile Include="..\..\source\telAutoDataParser.cpp">
+            <DependentOn>..\..\source\telAutoDataParser.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

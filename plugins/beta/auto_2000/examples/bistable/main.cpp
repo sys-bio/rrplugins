@@ -8,7 +8,7 @@
 #include "telProperty.h"
 #include "telAutoPlugin.h"
 #include "telAutoTelluriumInterface.h"
-#include "telAutoData.h"
+#include "telAutoDataParser.h"
 
 using namespace tlp;
 using namespace std;
@@ -72,7 +72,11 @@ int main()
 
 
         //Parse the data
-        AutoData ad;
+        AutoDataParser adp(biD->getValue());
+
+        Log(lInfo) << "Number of data points: "         <<adp.getNumberOfDataPoints();
+        Log(lInfo) << "Number of bifurcation points: "  <<adp.getNumberOfBifurcationPoints();
+
 
 
 
@@ -93,6 +97,6 @@ int main()
         Log(lError)<<"Bad problem...!";
     }
 
-     pause(true);
+    pause(true);
     return 0;
 }

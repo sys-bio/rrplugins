@@ -42,7 +42,7 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     TelluriumData   simData(rr->simulate(&opt));
 
     StringList* species = (StringList*) plugin.mExperimentalDataSelectionList.getValueHandle();
-    int nrOfSpecies = species->Count();
+    int nrOfSpecies = species->count();
 
     //Calculate residuals
     vector<double> residuals(simData.rSize() * nrOfSpecies);

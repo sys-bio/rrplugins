@@ -60,7 +60,7 @@ void lmWorker::run()
     setupRoadRunner();
 
     StringList& species = mTheHost.mExperimentalDataSelectionList.getValueReference();//mMinData.getExperimentalDataSelectionList();
-    Log(lInfo)<<"The following species are selected: "<<species.AsString();
+    Log(lInfo)<<"The following species are selected: "<<species.asString();
 
     Properties& Paras =  mTheHost.mInputParameterList.getValueReference(); //mMinData.getProperties();
     Log(lInfo)<<"The following parameters are to be minimized";
@@ -383,7 +383,7 @@ void lmWorker::workerFinished()
 bool lmWorker::setup()
 {
     StringList& species         = mTheHost.mExperimentalDataSelectionList.getValueReference();
-    mLMData.nrOfSpecies         = species.Count();
+    mLMData.nrOfSpecies         = species.count();
     Properties parameters       = mTheHost.mInputParameterList.getValue();
     mLMData.nrOfParameters      = parameters.count();
     mLMData.parameters          = new double[mLMData.nrOfParameters];
@@ -492,9 +492,9 @@ void lmWorker::createModelData(TelluriumData* _data)
     TelluriumData& data = *(_data);
     //We now have the parameters
     StringList selList("time");
-    selList.Append(mTheHost.mModelDataSelectionList.getValue());
+    selList.append(mTheHost.mModelDataSelectionList.getValue());
 
-    data.reSize(mLMData.nrOfTimePoints, selList.Count());
+    data.reSize(mLMData.nrOfTimePoints, selList.count());
     mRRI->reset();
     mRRI->setSelections(selList);
 

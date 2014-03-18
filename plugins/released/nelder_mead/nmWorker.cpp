@@ -59,7 +59,7 @@ void nmWorker::run()
     setupRoadRunner();
 
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
-    Log(lInfo)<<"The following species are selected: "<<species.AsString();
+    Log(lInfo)<<"The following species are selected: "<<species.asString();
 
     Properties& inParas  =  mHost.mInputParameterList.getValueReference();
     Properties& outParas =  mHost.mOutputParameterList.getValueReference();
@@ -386,9 +386,9 @@ void nmWorker::createModelData(TelluriumData* _data)
 
     //We now have the parameters
     StringList selList("time");
-    selList.Append(mHost.mModelDataSelectionList.getValue());
+    selList.append(mHost.mModelDataSelectionList.getValue());
 
-    data.reSize(expData->rSize(), selList.Count());
+    data.reSize(expData->rSize(), selList.count());
     mHost.mRRI->reset();
     mHost.mRRI->setSelections(selList);
 
@@ -423,7 +423,7 @@ void nmWorker::createResidualsData(TelluriumData* _data)
     resData.setColumnNames(modData.getColumnNames());
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
 
-    for(int sel = 0; sel < species.Count() + 1; sel++)    //selection 1 becuase of time column..
+    for(int sel = 0; sel < species.count() + 1; sel++)    //selection 1 becuase of time column..
     {
         for(int i = 0; i < obsData.rSize(); i++)
         {

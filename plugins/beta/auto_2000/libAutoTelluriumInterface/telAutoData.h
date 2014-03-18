@@ -9,6 +9,8 @@
 #include "telProperties.h"
 //---------------------------------------------------------------------------
 
+// To be trashed... use autodataparser instead
+
 using namespace tlp;
 using std::ostream;
 

@@ -98,7 +98,7 @@ StringList ArrayList::GetStringList(const string& lName)
                         {
                             //This is a stringList
                             StringList  list = (StringList) *(dynamic_cast<ArrayListItem<StringList>*>(anItem));
-                            for(int i = 0; i < list.Count(); i++)
+                            for(int i = 0; i < list.count(); i++)
                             {
                                 string str = list[i];
                                 aList.add(str);

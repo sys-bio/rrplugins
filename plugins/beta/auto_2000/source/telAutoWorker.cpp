@@ -122,7 +122,7 @@ void AutoWorker::run()
     if(mTheHost.mKeepTempFiles.getValue() == false)
     {
         StringList tempFiles("fort.2, fort.3, fort.8, fort.7, fort.9, stdout");
-        for(int i =0; i < tempFiles.Count(); i++)
+        for(int i =0; i < tempFiles.count(); i++)
         {
             Poco::File tempFile(joinPath(tempFolder, tempFiles[i]));
             tempFile.remove();

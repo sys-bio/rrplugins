@@ -449,7 +449,7 @@ char* tlp_cc tpGetNamesFromPropertyList(TELHandle handle)
         {
             aList.add((*paras)[i]->getName());
         }
-        return tlp::createText(aList.AsString().c_str());
+        return tlp::createText(aList.asString().c_str());
 
     catch_ptr_macro
 }

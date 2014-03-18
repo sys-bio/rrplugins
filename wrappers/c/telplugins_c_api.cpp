@@ -186,7 +186,7 @@ char* tlp_cc tpGetPluginNames(TELHandle handle)
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         StringList names = pm->getPluginNames();
-        return createText(names.AsString());
+        return createText(names.asString());
     catch_ptr_macro
 }
 
@@ -195,7 +195,7 @@ char* tlp_cc tpGetPluginLibraryNames(TELHandle handle)
     start_try
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         StringList names = pm->getPluginLibraryNames();
-        return createText(names.AsString());
+        return createText(names.asString());
     catch_ptr_macro
 }
 
@@ -267,7 +267,7 @@ char* tlp_cc tpGetListOfPluginPropertyNames(TELHandle handle)
 {
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
-        return createText(aPlugin->getPropertyNames().AsString());
+        return createText(aPlugin->getPropertyNames().asString());
     catch_ptr_macro
 }
 

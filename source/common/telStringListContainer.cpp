@@ -33,7 +33,7 @@ int StringListContainer::TotalCount() const
     int cnt = 0;
     for(int i = 0; i < Count(); i++)
     {
-        cnt += mContainer[i].Count();
+        cnt += mContainer[i].count();
     }
     return cnt;
 }
@@ -114,7 +114,7 @@ ostream& operator<<(ostream& stream, const StringListContainer& list)
     vector<StringList>::iterator iter;
     for(int  i = 0; i < list.Count(); i++)
     {
-        string item = list[i].AsString();
+        string item = list[i].asString();
         stream<<"List Item "<<i+1<<" : "<<item<<endl;
     }
     return stream;

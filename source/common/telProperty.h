@@ -391,7 +391,7 @@ inline void Property< std::vector<string> >::setValueFromString(const string& va
 template<>
 inline string Property<tlp::StringList>::getValueAsString() const
 {
-    return mValue.AsString();
+    return mValue.asString();
 }
 
 template<>
