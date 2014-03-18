@@ -1,7 +1,7 @@
-#ifndef rrRRAutoSetupControlH
-#define rrRRAutoSetupControlH
-#include "rrAutoInputConstants.h"
-#include "rrRRAutoExporter.h"
+#ifndef telAutoSetupControlH
+#define telAutoSetupControlH
+#include "telAutoInputConstants.h"
+#include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
 namespace rrauto

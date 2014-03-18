@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target rrAutoInterface)
+set(target libTelluriumAutoInterface)
 
 include_directories(
 ../../source        #Plugin lib source
@@ -14,10 +14,10 @@ ${CMAKE_BINARY_DIR}/lib
 
 #The api is built as a static library..
 set(src
-rrAutoData
-rrAutoInputConstants
-rrRRAuto
-rrRRAutoSetupControl
+telAutoData
+telAutoInputConstants
+telTelluriumAutoInterface
+telAutoSetupControl
 )
 
 add_library(${target}-static STATIC
@@ -29,15 +29,10 @@ if(WIN32)
         PROPERTY  COMPILE_DEFINITIONS 
         STATIC_AUTO
         STATIC_RR_AUTO
-        #STATIC_PLUGIN_API
         )
     
     target_link_libraries ( ${target}-static
-#        libAuto-static
-#        roadrunner
         telplugins_common
-#        poco_foundation-static
-#        IPHLPAPI
         )
  
 endif()

@@ -1,5 +1,5 @@
-#ifndef rr_auto_exporterH
-#define rr_auto_exporterH
+#ifndef telLibTelluriumAutoInterfaceExporterH
+#define telLibTelluriumAutoInterfaceExporterH
 
 #if defined(_WIN32) || defined(__WIN32__)
     #if defined(STATIC_RR_AUTO)

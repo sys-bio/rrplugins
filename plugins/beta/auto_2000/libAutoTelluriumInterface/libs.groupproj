@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{11547EE3-0F32-4B01-864B-87F0264800E7}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="libTelluriumAutoInterface.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="libTelluriumAutoInterface-static.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="libTelluriumAutoInterface">
+        <MSBuild Projects="libTelluriumAutoInterface.cbproj"/>
+    </Target>
+    <Target Name="libTelluriumAutoInterface:Clean">
+        <MSBuild Projects="libTelluriumAutoInterface.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="libTelluriumAutoInterface:Make">
+        <MSBuild Projects="libTelluriumAutoInterface.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="libTelluriumAutoInterface-static">
+        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj"/>
+    </Target>
+    <Target Name="libTelluriumAutoInterface-static:Clean">
+        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="libTelluriumAutoInterface-static:Make">
+        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="libTelluriumAutoInterface;libTelluriumAutoInterface-static"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="libTelluriumAutoInterface:Clean;libTelluriumAutoInterface-static:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="libTelluriumAutoInterface:Make;libTelluriumAutoInterface-static:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,10 +1,10 @@
-#ifndef rrAutoInputConstantsH
-#define rrAutoInputConstantsH
+#ifndef telAutoInputConstantsH
+#define telAutoInputConstantsH
 #include <vector>
 #include <string>
 #include "telProperties.h"
 #include "telProperty.h"
-#include "rrRRAutoExporter.h"
+#include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
 namespace rrauto

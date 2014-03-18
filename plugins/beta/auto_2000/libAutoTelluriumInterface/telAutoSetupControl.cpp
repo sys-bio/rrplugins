@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "rrRRAutoSetupControl.h"
+#include "telAutoSetupControl.h"
 //---------------------------------------------------------------------------
 
 namespace rrauto

@@ -1,17 +1,14 @@
-#ifndef rrAutoDataH
-#define rrAutoDataH
+#ifndef telAutoDataH
+#define telAutoDataH
 #include <ostream>
 #include "telTelluriumData.h"
 #include "telLogger.h"
-
-#include "rrRRAutoExporter.h"
+#include "telLibTelluriumAutoInterfaceExporter.h"
 #include "telStringList.h"
 #include "telProperty.h"
 #include "telProperties.h"
-
 //---------------------------------------------------------------------------
 
-//
 using namespace tlp;
 using std::ostream;
 
