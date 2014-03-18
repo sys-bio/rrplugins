@@ -125,7 +125,7 @@ int AUTO_main(int argc, char *argv[])
     if(!fort_names_are_valid)
     {
         SetFortNames("fort");
-        strcpy(fort_name[6], "stdout");
+        //strcpy(fort_name[6], "stdout");
     }
 
 OPEN_FP3:

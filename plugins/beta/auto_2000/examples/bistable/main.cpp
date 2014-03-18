@@ -76,8 +76,21 @@ int main()
 
         Log(lInfo) << "Number of data points: "         <<adp.getNumberOfDataPoints();
         Log(lInfo) << "Number of bifurcation points: "  <<adp.getNumberOfBifurcationPoints();
+        StringList lines = adp.getDataFileHeader();
+        Log(lInfo) << "Data header ===";
+        for(int i = 0; i < lines.count(); i++)
+        {
+            Log(lInfo) << "line " << i << ": "<< lines[i];
+        }
 
+        Log(lInfo) <<"\n\n";
 
+        lines = adp.getBiFurcationPoints();
+        Log(lInfo) << "Labeled solutions header ===";
+        for(int i = 0; i < lines.count(); i++)
+        {
+            Log(lInfo) << "line " << i << ": "<< lines[i];
+        }
 
 
         Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
