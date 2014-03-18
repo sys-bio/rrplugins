@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include "rr/rrRoadRunner.h"
+
 #include "telLogger.h"
 #include "telStringList.h"
 #include "telUtils.h"

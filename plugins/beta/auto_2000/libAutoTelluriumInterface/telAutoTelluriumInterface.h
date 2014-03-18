@@ -1,5 +1,5 @@
-#ifndef telTelluriumAutoInterfaceH
-#define telTelluriumAutoInterfaceH
+#ifndef telAutoTelluriumInterfaceH
+#define telAutoTelluriumInterfaceH
 #include "rr/rrRoadRunner.h"
 #include "telAutoSetupControl.h"
 #include "tai_exporter.h"

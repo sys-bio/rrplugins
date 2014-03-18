@@ -5,7 +5,7 @@ ${CMAKE_BINARY_DIR}/lib
 )
 
 add_subdirectory(libAuto)
-add_subdirectory(rrAutoInterface)
+add_subdirectory(libAutoTelluriumInterface)
 add_subdirectory(source)
 
 if(${TLP_BUILD_EXAMPLES})

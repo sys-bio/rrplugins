@@ -1,5 +1,5 @@
 #pragma hdrstop
-#include "telTelluriumAutoInterface.h"
+#include "telAutoTelluriumInterface.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
 #include "telLogger.h"

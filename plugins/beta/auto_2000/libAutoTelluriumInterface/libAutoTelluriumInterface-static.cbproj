@@ -108,7 +108,7 @@
         <CppCompile Include="telAutoSetupControl.cpp">
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="telTelluriumAutoInterface.cpp">
+        <CppCompile Include="telAutoTelluriumInterface.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

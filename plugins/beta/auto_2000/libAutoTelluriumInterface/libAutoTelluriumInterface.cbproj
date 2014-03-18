@@ -121,8 +121,8 @@
             <DependentOn>telAutoSetupControl.h</DependentOn>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <CppCompile Include="telTelluriumAutoInterface.cpp">
-            <DependentOn>telTelluriumAutoInterface.h</DependentOn>
+        <CppCompile Include="telAutoTelluriumInterface.cpp">
+            <DependentOn>telAutoTelluriumInterface.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
         <BuildConfiguration Include="Release">

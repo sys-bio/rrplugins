@@ -3,10 +3,10 @@
         <ProjectGuid>{11547EE3-0F32-4B01-864B-87F0264800E7}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="libTelluriumAutoInterface.cbproj">
+        <Projects Include="libAutoTelluriumInterface.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="libTelluriumAutoInterface-static.cbproj">
+        <Projects Include="libAutoTelluriumInterface-static.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,32 +17,32 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="libTelluriumAutoInterface">
-        <MSBuild Projects="libTelluriumAutoInterface.cbproj"/>
+    <Target Name="libAutoTelluriumInterface">
+        <MSBuild Projects="libAutoTelluriumInterface.cbproj"/>
     </Target>
-    <Target Name="libTelluriumAutoInterface:Clean">
-        <MSBuild Projects="libTelluriumAutoInterface.cbproj" Targets="Clean"/>
+    <Target Name="libAutoTelluriumInterface:Clean">
+        <MSBuild Projects="libAutoTelluriumInterface.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="libTelluriumAutoInterface:Make">
-        <MSBuild Projects="libTelluriumAutoInterface.cbproj" Targets="Make"/>
+    <Target Name="libAutoTelluriumInterface:Make">
+        <MSBuild Projects="libAutoTelluriumInterface.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="libTelluriumAutoInterface-static">
-        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj"/>
+    <Target Name="libAutoTelluriumInterface-static">
+        <MSBuild Projects="libAutoTelluriumInterface-static.cbproj"/>
     </Target>
-    <Target Name="libTelluriumAutoInterface-static:Clean">
-        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj" Targets="Clean"/>
+    <Target Name="libAutoTelluriumInterface-static:Clean">
+        <MSBuild Projects="libAutoTelluriumInterface-static.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="libTelluriumAutoInterface-static:Make">
-        <MSBuild Projects="libTelluriumAutoInterface-static.cbproj" Targets="Make"/>
+    <Target Name="libAutoTelluriumInterface-static:Make">
+        <MSBuild Projects="libAutoTelluriumInterface-static.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="libTelluriumAutoInterface;libTelluriumAutoInterface-static"/>
+        <CallTarget Targets="libAutoTelluriumInterface;libAutoTelluriumInterface-static"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="libTelluriumAutoInterface:Clean;libTelluriumAutoInterface-static:Clean"/>
+        <CallTarget Targets="libAutoTelluriumInterface:Clean;libAutoTelluriumInterface-static:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="libTelluriumAutoInterface:Make;libTelluriumAutoInterface-static:Make"/>
+        <CallTarget Targets="libAutoTelluriumInterface:Make;libAutoTelluriumInterface-static:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

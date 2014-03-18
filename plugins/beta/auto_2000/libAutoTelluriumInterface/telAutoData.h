@@ -3,7 +3,7 @@
 #include <ostream>
 #include "telTelluriumData.h"
 #include "telLogger.h"
-#include "telLibTelluriumAutoInterfaceExporter.h"
+#include "tai_exporter.h"
 #include "telStringList.h"
 #include "telProperty.h"
 #include "telProperties.h"
