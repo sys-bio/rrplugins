@@ -185,24 +185,19 @@ void Plugin::setLibraryName(const string& libName)
     mLibraryName = libName;
 }
 
-bool Plugin::setPropertyByString(const string& nameOf, const char* value)
+void Plugin::setPropertyByString(const string& nameOf, const char* value)
 {
-    if(!mProperties.count())
-    {
-        return false;
-    }
-
     string val(value);
-    return mProperties.setProperty(nameOf, val);
+    if(!mProperties.setProperty(nameOf, val))
+    {
+        stringstream msg;
+        msg<<"Failed setting property value; No property with name: "<<nameOf;
+        throw(Exception(msg.str()));
+    }
 }
 
-bool Plugin::setPropertyValue(const string& nameOf, const void* value)
+void Plugin::setPropertyValue(const string& nameOf, const void* value)
 {
-    if(!mProperties.count())
-    {
-        return false;
-    }
-
     PropertyBase* property = mProperties.getProperty(nameOf);
     if(property)
     {
@@ -212,7 +207,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<bool>* prop = dynamic_cast< Property<bool>* >(property);
             const bool* theData = (bool*) value;
             prop->setValue(*theData);
-            return true;
+            return;
         }
 
         if(type == "int")
@@ -220,7 +215,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<int>* prop = dynamic_cast< Property<int>* >(property);
             const int* theData = (int*) value;
             prop->setValue(*theData);
-            return true;
+            return;
         }
 
         if(type == "double")
@@ -228,7 +223,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<double>* prop = dynamic_cast< Property<double>* >(property);
             const double* theData = (double*) value;
             prop->setValue(*theData);
-            return true;
+            return;
         }
 
         if(type == "std::string")
@@ -236,7 +231,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<string>* prop = dynamic_cast< Property<string>* >(property);
             const string* theData = (string*) value;
             prop->setValue(*theData);
-            return true;
+            return;
         }
 
         if(type == "telluriumData")
@@ -244,7 +239,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<TelluriumData>* prop = dynamic_cast< Property<TelluriumData>* >(property);
             const TelluriumData* theData = (TelluriumData*) value;
             prop->setValue(*theData);
-            return true;
+            return;
         }
 
         if(type == "listOfProperties")
@@ -252,7 +247,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
             Property<Properties>* props = dynamic_cast< Property<Properties>* >(property);
             const Properties* theData = (Properties*) value;
             props->setValue(*theData);
-            return true;
+            return;
         }
 
         stringstream msg;
@@ -261,7 +256,7 @@ bool Plugin::setPropertyValue(const string& nameOf, const void* value)
     }
 
     stringstream msg;
-    msg<<"No property with name: "<<nameOf;
+    msg<<"Failed setting property value; No property with name: "<<nameOf;
     throw(Exception(msg.str()));
 }
 

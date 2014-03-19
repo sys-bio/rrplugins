@@ -47,13 +47,13 @@ NTHU(0),
 NTST(15),
 NUZR(0),
 NWTN(3),
-RL0(0.01, "RL0", "Start value for primary continuation parameter"),   //Parameter startValue
+RL0(0.01),   //Parameter startValue
 RL1(30),     //Parameter endValue
 THL(NTHL),
 THU(NTHU),
 UZR(NUZR)
 {
-    mInputConstants.add(&RL0);
+
 }
 
 string InputConstants::getConstantsAsString()
@@ -79,27 +79,12 @@ string InputConstants::GetICP()
     return builder.ToString();
 }
 
-//        private string GetICP()
-//        {
-//            StringBuilder builder = new StringBuilder();
-//            builder.Append(NICP);
-//
-//            foreach (int i in ICP)
-//            {
-//                builder.Append(" " + i);
-//            }
-//
-//            if (ICP.Count == 0) builder.Append(" 0");
-//
-//            return builder.ToString();
-//        }
-
 string InputConstants::ToInputString()
 {
     string line1  = formatN("{0} {1} {2} {3}", NDIM, IPS, IRS, ILP);
     string line2  = GetICP();
     string line3  = formatN("{0} {1} {2} {3} {4} {5} {6} {7}", NTST, NCOL, IAD, ISP, ISW, IPLT, NBC, NINT);
-    string line4  = formatN("{0} {1} {2} {3} {4}", NMX, RL0.getValue(), RL1.getValue(), A0, A1);
+    string line4  = formatN("{0} {1} {2} {3} {4}", NMX, RL0, RL1, A0, A1);
     string line5  = formatN("{0} {1} {2} {3} {4} {5} {6}", NPR, MXBF, IID, ITMX, ITNW, NWTN, JAC);
     string line6  = formatN("{0} {1} {2}", EPSL, EPSU, EPSS);
     string line7  = formatN("{0} {1} {2} {3}", DS, DSMIN, DSMAX, IADS);

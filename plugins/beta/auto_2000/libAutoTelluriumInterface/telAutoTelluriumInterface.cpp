@@ -101,13 +101,15 @@ bool AutoTellurimInterface::run()
         double parValue = 0;
         if(mAutoSetup.mDirectionPositive == true)
         {
-            parValue = mAutoSetup.mInputConstants.RL0.getValue();
+            parValue = mAutoSetup.mInputConstants.RL0;
         }
         else
         {
-            parValue = mAutoSetup.mInputConstants.RL1.getValue();
+            parValue = mAutoSetup.mInputConstants.RL1;
         }
 
+//        mRR->setValue(mSelectedParameter, mAutoSetup.mInputConstants.RL1.getValue());
+//        mRR->steadyState();
         //Set initial value of Primary continuation parameter
         mRR->setValue(mSelectedParameter, parValue);
 

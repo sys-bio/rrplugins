@@ -78,10 +78,10 @@ class TA_DS InputConstants
         int             NMX;
 
         /// bifurcation diagram lower limit for the “first” parameter
-        tlp::Property<double>    RL0;
+        double          RL0;
 
         /// bifurcation diagram upper limit for the “first” parameter
-        tlp::Property<double>    RL1;
+        double          RL1;
 
         /// bifurcation diagram lower limit for the “principal solution measure”
         double          A0;
@@ -157,7 +157,6 @@ class TA_DS InputConstants
                         InputConstants();
         string          getConstantsAsString();
         string          ToInputString();
-        tlp::Properties mInputConstants;
 };
 }
 #endif

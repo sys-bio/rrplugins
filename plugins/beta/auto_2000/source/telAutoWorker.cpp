@@ -66,8 +66,8 @@ void AutoWorker::run()
 
     //Do the AUTO thing, pass data from the outside here..
     mRRAuto.selectParameter(mTheHost.mPrincipalContinuationParameter.getValue());
-    double spvL = mTheHost.mPCPLowerBound.getValue();
-    double spvU = mTheHost.mPCPUpperBound.getValue();
+    double spvL = mTheHost.mRL0.getValue();
+    double spvU = mTheHost.mRL1.getValue();
 
     mRRAuto.setStartParameterValue(spvL);
     mRRAuto.setEndParameterValue(spvU);
@@ -105,12 +105,18 @@ void AutoWorker::run()
         tempFolder = mTheHost.mTempFolder.getValue();
     }
 
-    mTheHost.mFort2.setValue(getFileContent(joinPath(tempFolder, "fort.2")));
-    mTheHost.mFort3.setValue(getFileContent(joinPath(tempFolder, "fort.3")));
-    mTheHost.mFort6.setValue(getFileContent(joinPath(tempFolder, "fort.6")));
-    mTheHost.mFort8.setValue(getFileContent(joinPath(tempFolder, "fort.8")));
-    mTheHost.mFort9.setValue(getFileContent(joinPath(tempFolder, "fort.9")));
+    if(mTheHost.mCaptureOutputFiles.getValue() == true)
+    {
 
+        mTheHost.mFort2.setValue(getFileContent(joinPath(tempFolder, "fort.2")));
+        mTheHost.mFort3.setValue(getFileContent(joinPath(tempFolder, "fort.3")));
+
+        mTheHost.mFort8.setValue(getFileContent(joinPath(tempFolder, "fort.8")));
+        mTheHost.mFort9.setValue(getFileContent(joinPath(tempFolder, "fort.9")));
+    }
+
+    //Fort 6 and 7 is always captured
+    mTheHost.mFort6.setValue(getFileContent(joinPath(tempFolder, "fort.6")));
     //The bifurcation diagram is in fort.7, most important
     string fort7 = joinPath(tempFolder, "fort.7");
     if(!fileExists(fort7))

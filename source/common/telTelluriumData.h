@@ -197,7 +197,7 @@ class COMMON_DECLSPEC TelluriumData
         void                                    reSize(int rows, int cols);
         string                                  getComments() const;
         void                                    setComments(const string& coms);
-
+        void                                    swapRows(int r1, int r2);
         /**
          * Clear all data allocated
          */

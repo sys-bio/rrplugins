@@ -103,6 +103,11 @@ double TelluriumData::getTimeEnd() const
     return gDoubleNaN;
 }
 
+void TelluriumData::swapRows(int r1, int r2)
+{
+    mTheData.swapRows(r1,r2);
+}
+
 ArrayedParameter TelluriumData::getArrayedParameter() const
 {
     return mArrayedParameter;
@@ -277,6 +282,7 @@ string TelluriumData::getColumnNamesAsString() const
 void TelluriumData::allocate(const int& rSize, const int& cSize)
 {
     mTheData.Allocate(rSize, cSize);
+    mColumnNames.reSize(cSize);
 }
 
 //=========== OPERATORS
@@ -340,7 +346,7 @@ string TelluriumData::getComments() const
     return mComments;
 }
 
-void   TelluriumData::setComments(const string& coms)
+void TelluriumData::setComments(const string& coms)
 {
     mComments = coms;
 }
@@ -348,6 +354,7 @@ void   TelluriumData::setComments(const string& coms)
 void TelluriumData::reSize(int rows, int cols)
 {
     mTheData.Allocate(rows, cols);
+    mColumnNames.reSize(cols);
 }
 
 void TelluriumData::setData(const DoubleMatrix& theData)

@@ -25,7 +25,7 @@ class COMMON_DECLSPEC StringList
                                     StringList(const StringList& cp);
 //                                    StringList(rrc::RRStringArrayPtr cp);
                                    ~StringList();
-
+        void                        reSize(int size);
         void                        insertAt(const int& index, const string& item);
         void                        append(const StringList& list);
         string                      asString(const string& delimiter = gComma) const;

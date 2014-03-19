@@ -40,10 +40,8 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
-        Property<double>                        mPCPLowerBound;
-        Property<double>                        mPCPUpperBound;
-//        Property<string>                        mBiFurcationDiagram;    //This is generated data, fort.7
-//        Property<string>                        mBiFurcationSummary;    //fort.6
+
+        Property<bool>                          mCaptureOutputFiles;
         Property<string>                        mFort2;
         Property<string>                        mFort3;
         Property<string>                        mFort6;     //Alias BifurcationSummary
@@ -51,6 +49,9 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mFort8;
         Property<string>                        mFort9;
 
+        //Auto parameters
+        Property<double>                        mRL0;
+        Property<double>                        mRL1;
 
         //The interface to auto. Takes mAutoData as reference
         AutoTellurimInterface                   mRRAuto;

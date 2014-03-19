@@ -23,17 +23,20 @@ mTempFolder(                        ".",                    "TempFolder",       
 mKeepTempFiles(                     false,                  "KeepTempFiles",                        "Keep temporary files."),
 mSBML(                              "<none>",               "SBML",                                 "SBML, i.e. the model to be used to analyze"),
 mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan"),
-mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",       "Principal Continuation Parameter"),
-mPCPLowerBound(                     0,                      "PCPLowerBound",                        "Principal Continuation Parameter Lower Bound"),
-mPCPUpperBound(                     0,                      "PCPUpperBound",                        "Principal Continuation Parameter Upper Bound"),
 
 //Output
+mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
 mFort2(                             "<none>",               "fort2",                                "fort2",                                                        "",                 ""),
 mFort3(                             "<none>",               "fort3",                                "fort3",                                                        "",                 ""),
 mFort6(                             "<none>",               "BiFurcationSummary",                   "BifurcationSummary",                                           "",                 "BiFurcationSummary"),
 mFort7(                             "<none>",               "BiFurcationDiagram",                   "BifurcationDiagram",                                           "",                 "BiFurcationDiagram"),
 mFort8(                             "<none>",               "fort8",                                "fort9",                                                        "",                 ""),
 mFort9(                             "<none>",               "fort9",                                "fort9",                                                        "",                 ""),
+
+//AUTO parameters
+mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",       "Principal Continuation Parameter"),
+mRL0(                               0,                      "RL0",                                  "Principal Continuation Parameter Lower Bound",                 "",                 "PCPLowerBound"              ),
+mRL1(                               0,                      "RL1",                                  "Principal Continuation Parameter Upper Bound",                 "",                 "PCPUpperBound"              ),
 
 mRRAuto(NULL),
 mAutoWorker(*this)
@@ -46,8 +49,8 @@ mAutoWorker(*this)
     mProperties.add(&mSBML);
     mProperties.add(&mScanDirection);
     mProperties.add(&mPrincipalContinuationParameter);
-    mProperties.add(&mPCPLowerBound);
-    mProperties.add(&mPCPUpperBound);
+    mProperties.add(&mRL0);
+    mProperties.add(&mRL1);
     mProperties.add(&mFort2);
     mProperties.add(&mFort3);
     mProperties.add(&mFort6);

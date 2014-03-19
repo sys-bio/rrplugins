@@ -18,6 +18,7 @@ int main()
 {
     string tempFolder("r:\\temp");
     string sbmlFile("../models/bistable.xml");
+//    string sbmlFile("r:/models/BIOMD0000000203.xml");
 	gLog.setLevel(lInfo);
     gLog.enableConsoleLogging();
     gLog.enableFileLogging(joinPath(tempFolder, "bistable.log"));
@@ -54,11 +55,12 @@ int main()
 
         //Specific auto parameters
 
- //       autoPlugin->setPropertyByString("ScanDirection", "Positive");
+//        autoPlugin->setPropertyByString("ScanDirection", "Positive");
         autoPlugin->setPropertyByString("ScanDirection", "Negative");
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
-        autoPlugin->setPropertyByString("PCPLowerBound", "0.2");
-        autoPlugin->setPropertyByString("PCPUpperBound", "1.5");
+        autoPlugin->setPropertyByString("RL0", "0.25");
+        autoPlugin->setPropertyByString("RL1", "1.25");
+        autoPlugin->setPropertyByString("NMX", "100");
 
         if(!autoPlugin->execute())
         {
@@ -94,6 +96,12 @@ int main()
             Log(lInfo) << "line " << i << ": "<< lines[i];
         }
 
+        Log(lInfo) << "As TelluriumData ===";
+
+        TelluriumData data = adp.getSolutionData();
+        Log(lInfo) << data;
+
+        data.write("auto_data.dat");
 
         Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
         //Check plugin data..
@@ -107,6 +115,11 @@ int main()
     {
         Log(lError)<<"Problem..."<<ex.message();
     }
+    catch(exception& ex)
+    {
+        Log(lError)<<"Bad problem...!"<<ex.what();
+    }
+
     catch(...)
     {
         Log(lError)<<"Bad problem...!";

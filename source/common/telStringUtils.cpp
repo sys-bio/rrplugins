@@ -1,4 +1,5 @@
 #pragma hdrstop
+#include "telStringUtils.h"
 #include <algorithm>
 #include <ctype.h>
 #include <stdlib.h>
@@ -7,7 +8,8 @@
 #include <sstream>
 #include <cstring>
 #include "rr-libstruct/lsMatrix.h"
-#include "telStringUtils.h"
+#include "telException.h"
+
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -40,8 +42,23 @@ char* createText(const int& count)
 }
 
 unsigned int indexOf(const string& text, char checkFor)
-{    
-    return text.find(checkFor);    
+{
+    return text.find(checkFor);
+}
+
+double extractDouble(std::string const& s, bool failIfLeftoverChars)
+{
+    std::istringstream i(s);
+    double x;
+    char c;
+    if (!(i >> x) || (failIfLeftoverChars && i.get(c)))
+    {
+        stringstream  msg;
+        msg << "Function \"" << __FUNC__ <<"\" failed with input: (" <<s<<")";
+
+        throw BadStringToNumberConversion(msg.str());
+    }
+    return x;
 }
 
 string substituteCharInString(const string& text, char chToReplace, char withChar)

@@ -31,5 +31,13 @@ class COMMON_DECLSPEC BadHandleException : public Exception
         BadHandleException(const string& msg1, const string& msg2);
 };
 
+class COMMON_DECLSPEC BadStringToNumberConversion : public Exception
+{
+    public:
+        BadStringToNumberConversion(std::string const& s);
+};
+
+
+
 }//namepsace rr
 #endif

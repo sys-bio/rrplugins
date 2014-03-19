@@ -301,6 +301,11 @@ int indexOf(const std::vector<std::string>& vec, const std::string& elem )
     else
     {
         int index = distance(vec.begin(), find(vec.begin(), vec.end(), elem));
+
+        if(index > vec.size() - 1)
+        {
+            return -1;
+        }
         return index;
     }
 }

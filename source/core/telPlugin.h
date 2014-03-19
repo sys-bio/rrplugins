@@ -205,12 +205,12 @@ class CORE_DECLSPEC Plugin
         /**
             Sets the value of specified Property with value as specified
         */
-        bool                            setPropertyByString(const string& nameOf, const char* value);
+        void                            setPropertyByString(const string& nameOf, const char* value);
 
         /**
             Sets the value of specified Property with value as specified
         */
-        bool                            setPropertyValue(const string& nameOf, const void* value);
+        void                            setPropertyValue(const string& nameOf, const void* value);
         /**
             If the work of the plugin is carried out in a separate thread, terminate() will
             signal termination of such work.

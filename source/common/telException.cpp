@@ -2,7 +2,6 @@
 #include "telException.h"
 //---------------------------------------------------------------------------
 
-
 namespace tlp
 {
 
@@ -39,5 +38,9 @@ BadHandleException::BadHandleException(const string& msg1, const string& msg2)
 Exception(msg1 + msg2)
 {}
 
+BadStringToNumberConversion::BadStringToNumberConversion(std::string const& s)
+: Exception(s)
+{}
 
 }
+
