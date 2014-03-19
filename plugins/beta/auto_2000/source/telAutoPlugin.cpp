@@ -35,8 +35,52 @@ mFort9(                             "<none>",               "fort9",            
 
 //AUTO parameters
 mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",       "Principal Continuation Parameter"),
-mRL0(                               0,                      "RL0",                                  "Principal Continuation Parameter Lower Bound",                 "",                 "PCPLowerBound"              ),
-mRL1(                               0,                      "RL1",                                  "Principal Continuation Parameter Upper Bound",                 "",                 "PCPUpperBound"              ),
+
+//                                  value,                  name,                                   hint,                                                           descr,              alias,              readonly
+mNDIM(                              1,                      "NDIM",                                 "Dimension of the system of equations",                            "",                 ""),
+mIPS(                               1,                      "IPS",                                  "Constant defining the problem type",                              "",                 ""),
+mIRS(                               1,                      "IRS",                                  "Restart label",                                                   "",                 ""),
+mILP(                               1,                      "ILP",                                  "Locate limit points",                                             "",                 ""),
+mNICP(                              1,                      "NICP",                                 "Number of free parameters",                                       "",                 ""),
+mICP(                               0,                      "ICP",                                  "Free parameters",                                                 "",                 ""),
+mNTST(                              15,                     "NTST",                                 "Number of mesh intervals",                                        "",                 ""),
+mNCOL(                              3,                      "NCOL",                                 "Number of collocation points per mesh interval",                  "",                 ""),
+mIAD(                               3,                      "IAD",                                  "Mesh adaption",                                                   "",                 ""),
+mISP(                               1,                      "ISP",                                  "Detection of branch points",                                      "",                 ""),
+mISW(                               1,                      "ISW",                                  "At a restart solution",                                           "",                 ""),
+mIPLT(                              0,                      "IPLT",                                 "The \"principal solution measure\"",                              "",                 ""),
+mNBC(                               0,                      "NBC",                                  "Number of boundary conditions",                                   "",                 ""),
+mNINT(                              0,                      "NINT",                                 "Number of integral constraints",                                  "",                 ""),
+mNMX(                               1000,                   "NMX",                                  "Maximum number of continuation step along any branch",            "",                 ""),
+mRL0(                               0.01,                   "RL0",                                  "Principal Continuation Parameter Lower Bound",                    "",                 "PCPLowerBound"              ),
+mRL1(                               30,                     "RL1",                                  "Principal Continuation Parameter Upper Bound",                    "",                 "PCPUpperBound"              ),
+mA0(                                0,                      "A0",                                   "Bifurcation diagram lower limit for the \"principal solution measure\"",  "",         ""),
+mA1(                                10000,                  "A1",                                   "Bifurcation diagram upper limit for the \"principal solution measure\"",  "",         ""),
+mNPR(                               50,                     "NPR",                                  "Save the solution in the solution file every NPR continuation steps",                 "",         ""),
+mMXBF(                              -1,                     "MXBF",                                 "Maximum number of branch switches",                               "",         ""),
+mIID(                               0,                      "IID",                                  "Controls the diagnostic file output",                             "",         ""),
+mITMX(                              8,                      "ITMX",                                 "Maximum number of iterations for detecting “special” solutions",  "",         ""),
+mITNW(                              5,                      "ITNW",                                 "Maximum number of Newton+Chord iterations",                       "",         ""),
+mNWTN(                              3,                      "NWTN",                                 "Maximum number of Newton iterations",                             "",         ""),
+mJAC(                               0,                      "JAC",                                  "Jacobian supplied ?",                                             "",         ""),
+mEPSL(                              1e-8,                   "EPSL",                                 "Newton/Chord convergence tolerance for free parameters",          "",         ""),
+mEPSU(                              1e-8,                   "EPSU",                                 "Newton/Chord convergence tolerance for solutions",                "",         ""),
+mEPSS(                              1e-6,                   "EPSS",                                 "Continuation step size tolerance when locating special solutions","",         ""),
+mDS(                                0.001,                  "DS",                                   "Nominal continuation step size",                                  "",         ""),
+mDSMIN(                             1e-5,                   "DSMIN",                                "Minimum continuation step size",                                  "",         ""),
+mDSMAX(                             0.1,                    "DSMAX",                                "Maximum continuation step size",                                  "",         ""),
+mIADS(                              1,                      "IADS",                                 "Adapt the continuation step size every IADS steps",               "",         ""),
+mNTHL(                              0,                      "NTHL",                                 "The number of modified parameter \"weights\" (for BVP)",          "",         ""),
+mTHL(                               0,                      "THL",                                  "Parameter index, parameter weight",                               "",         ""),
+mNTHU(                              0,                      "NTHU",                                 "The number of modified solution component \"weights\" (for BVP)", "",         ""),
+mTHU(                               0,                      "THU",                                  "Component index, component weight",                               "",         ""),
+mNUZR(                              0,                      "NUZR",                                 "The number of “user output points” specified",                    "",         ""),
+mUZR(                               0,                      "UZR",                                  "Parameter index, parameter value",                                "",         ""),
+
+
+
+
+
 
 mRRAuto(NULL),
 mAutoWorker(*this)

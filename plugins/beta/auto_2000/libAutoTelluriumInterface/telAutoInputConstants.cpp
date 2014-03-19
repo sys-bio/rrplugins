@@ -47,8 +47,8 @@ NTHU(0),
 NTST(15),
 NUZR(0),
 NWTN(3),
-RL0(0.01),   //Parameter startValue
-RL1(30),     //Parameter endValue
+RL0(0.01),   
+RL1(30),    
 THL(NTHL),
 THU(NTHU),
 UZR(NUZR)

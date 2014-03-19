@@ -50,8 +50,136 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mFort9;
 
         //Auto parameters
+
+        // NDIM: dimension of the system of equations, as specified in the user-supplied subroutine 'func'
+        Property<int>                           mNDIM;
+
+        /// IPS: Constant defining the problem type (-2 -> 14) : 1 : stationary states 2 : periodic solutions 4 : BVP
+        Property<int>                           mIPS;
+
+        /// Restart label
+        Property<int>                           mIRS;
+
+        /// Locate limit points (folds)
+        Property<int>                           mILP;
+
+        /// the number of free parameters
+        Property<int>                           mNICP;
+
+        /// the free parameters
+        vector<int>                             mICP;
+
+        /// the number of mesh intervals
+        Property<int>                           mNTST;
+
+        /// the number of collocation points per mesh interval
+        Property<int>                           mNCOL;
+
+        /// Mesh adaption:
+        ///     0 :fixedmesh
+        ///   > 0 : adapt mesh every IAD continuation steps
+        Property<int>                           mIAD;
+
+        /// Detection of branch points:
+        ///   0 : don’t detect
+        ///   1 : detect for algebraic problems
+        ///   2 : detect for all problems
+        Property<int>                           mISP;
+
+        /// At a restart solution:
+        ///   1 : just follow the branch
+        ///  -1 : switch branches (for BPs in BVPs)
+        ///   2 : two-parameter continuation (LPs, HBs, PDs, TRs)
+        Property<int>                           mISW;
+
+        /// The ”principal solution measure”
+        /// (the second real column in the bifurcation diagram file):
+        ///      0 : the L2 norm
+        ///   != 0 : other measures (see manual)
+        Property<int>                           mIPLT;
+
+        /// the number of boundary conditions (for BVP)
+        Property<int>                           mNBC;
+
+        /// the number of integral constraints (for BVP)
+        Property<int>                           mNINT;
+
+        /// maximum number of continuation step along any branch
+        Property<int>                           mNMX;
+
+        /// bifurcation diagram lower limit for the “first” parameter
         Property<double>                        mRL0;
+
+        /// bifurcation diagram upper limit for the “first” parameter
         Property<double>                        mRL1;
+
+        /// bifurcation diagram lower limit for the “principal solution measure”
+        Property<double>                        mA0;
+
+        /// bifurcation diagram upper limit for the “principal solution measure”
+        Property<double>                        mA1;
+
+        /// Save the solution in the solution file every NPR continuation steps
+        Property<int>                           mNPR;
+
+        /// For algebraic problems: Maximum number of branch switches (if negative only one “leg” will be computed)
+        Property<int>                           mMXBF;
+
+        /// Controls the diagnostic file output (normal value is 2; see manual)
+        Property<int>                           mIID;
+
+        /// maximum number of iterations for detecting “special” solutions
+        Property<int>                           mITMX;
+
+        /// maximum number of Newton+Chord iterations
+        Property<int>                           mITNW;
+
+        /// maximum number of Newton iterations
+        Property<int>                           mNWTN;
+
+        /// Jacobian supplied ?
+        Property<int>                           mJAC;
+
+        /// Newton/Chord convergence tolerance for free parameters
+        Property<double>                        mEPSL;
+
+        /// Newton/Chord convergence tolerance for solutions
+        Property<double>                        mEPSU;
+
+        /// Continuation step size tolerance when locating special solutions
+        Property<double>                        mEPSS;
+
+        /// Nominal continuation step size
+        Property<double>                        mDS;
+
+        /// Minimum continuation step size
+        Property<double>                        mDSMIN;
+
+        /// Maximum continuation step size
+        Property<double>                        mDSMAX;
+
+        /// Adapt the continuation step size every IADS steps
+        Property<int>                           mIADS;
+
+        /// the number of modified parameter “weights” (for BVP)
+        Property<int>                           mNTHL;
+
+        /// <summary>
+        /// parameter index, parameter weight (e.g., ICP(11)=0 means PAR(11) is excluded from the step size)
+        /// </summary>
+        vector<int>                             mTHL;
+
+        /// the number of modified solution component “weights” (for BVP)
+        Property<int>                           mNTHU;
+
+        /// component index, component weight
+        vector<int>                             mTHU;
+
+        /// the number of “user output points” specified
+        Property<int>                           mNUZR;
+
+        /// parameter index, parameter value (if I is negative the continuation stops at the parameter value)
+        vector<int>                             mUZR;
 
         //The interface to auto. Takes mAutoData as reference
         AutoTellurimInterface                   mRRAuto;
