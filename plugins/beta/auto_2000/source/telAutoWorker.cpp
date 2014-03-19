@@ -90,11 +90,11 @@ void AutoWorker::run()
     //==================== This is where auto is called
     if(!mRRAuto.run())
     {
-        Log(lError)<<"There was a problem running auto";
+        throw(Exception("There was a problem running auto"));
     }
     //================================================
 
-    //Parse output;
+    //Capture output data files
     string tempFolder;
     if(mTheHost.mTempFolder.getValue() == ".")
     {
@@ -105,17 +105,21 @@ void AutoWorker::run()
         tempFolder = mTheHost.mTempFolder.getValue();
     }
 
-    //The bifurcation diagram is in fort.7
-    string fName = joinPath(tempFolder, "fort.7");
-    if(!fileExists(fName))
+    mTheHost.mFort2.setValue(getFileContent(joinPath(tempFolder, "fort.2")));
+    mTheHost.mFort3.setValue(getFileContent(joinPath(tempFolder, "fort.3")));
+    mTheHost.mFort6.setValue(getFileContent(joinPath(tempFolder, "fort.6")));
+    mTheHost.mFort8.setValue(getFileContent(joinPath(tempFolder, "fort.8")));
+    mTheHost.mFort9.setValue(getFileContent(joinPath(tempFolder, "fort.9")));
+
+    //The bifurcation diagram is in fort.7, most important
+    string fort7 = joinPath(tempFolder, "fort.7");
+    if(!fileExists(fort7))
     {
-        throw(Exception("No Auto output data exists!"));
+        throw(Exception("Could not read auto data output file fort.7!"));
     }
 
-    string f7(getFileContent(fName));
 
-    //Pass the data to
-    mTheHost.mBiFurcationDiagram.setValue(f7);
+    mTheHost.mFort7.setValue(getFileContent(fort7));
 
     //Cleanup after auto..
 

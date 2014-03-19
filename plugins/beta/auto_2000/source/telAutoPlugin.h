@@ -42,7 +42,15 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mPrincipalContinuationParameter;
         Property<double>                        mPCPLowerBound;
         Property<double>                        mPCPUpperBound;
-        Property<string>                        mBiFurcationDiagram;    //This is generated data
+//        Property<string>                        mBiFurcationDiagram;    //This is generated data, fort.7
+//        Property<string>                        mBiFurcationSummary;    //fort.6
+        Property<string>                        mFort2;
+        Property<string>                        mFort3;
+        Property<string>                        mFort6;     //Alias BifurcationSummary
+        Property<string>                        mFort7;     //Alias BiFurcationDiagram
+        Property<string>                        mFort8;
+        Property<string>                        mFort9;
+
 
         //The interface to auto. Takes mAutoData as reference
         AutoTellurimInterface                   mRRAuto;

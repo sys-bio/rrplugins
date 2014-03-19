@@ -68,8 +68,10 @@ int main()
 
         Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
+        Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BiFurcationSummary");
         Log(lInfo)<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
 
+        Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Parse the data
         AutoDataParser adp(biD->getValue());

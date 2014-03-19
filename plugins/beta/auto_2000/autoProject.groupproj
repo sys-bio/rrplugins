@@ -22,7 +22,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="examples\bistable\bistable.cbproj">
-            <Dependencies/>
+            <Dependencies>libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj;source\tel_auto2000.cbproj</Dependencies>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -86,13 +86,13 @@
     <Target Name="tel_auto2000:Make">
         <MSBuild Projects="source\tel_auto2000.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="bistable">
+    <Target Name="bistable" DependsOnTargets="libAutoTelluriumInterface;tel_auto2000">
         <MSBuild Projects="examples\bistable\bistable.cbproj"/>
     </Target>
-    <Target Name="bistable:Clean">
+    <Target Name="bistable:Clean" DependsOnTargets="libAutoTelluriumInterface:Clean;tel_auto2000:Clean">
         <MSBuild Projects="examples\bistable\bistable.cbproj" Targets="Clean"/>
     </Target>
-    <Target Name="bistable:Make">
+    <Target Name="bistable:Make" DependsOnTargets="libAutoTelluriumInterface:Make;tel_auto2000:Make">
         <MSBuild Projects="examples\bistable\bistable.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">

@@ -10,17 +10,31 @@ using namespace std;
 using namespace tlp;
 using namespace telauto;
 
+
+
 AutoPlugin::AutoPlugin()
 :
 CPPPlugin("Auto-2000", "Bifurcation", NULL, NULL),
-mTempFolder(                        ".",                    "TempFolder",                                       "Tempfolder used by auto and roadrunner"),
-mKeepTempFiles(                     false,                  "KeepTempFiles",                                    "Keep temporary files."),
-mSBML(                              "<none>",               "SBML",                                             "SBML, i.e. the model to be used to analyze"),
-mScanDirection(                     "Negative",             "ScanDirection",                                    "Direction of parameter scan"),
-mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",                   "Principal Continuation Property"),
-mPCPLowerBound(                     0,                      "PCPLowerBound",                                    "Principal Continuation Parameter Lower Bound"),
-mPCPUpperBound(                     0,                      "PCPUpperBound",                                    "Principal Continuation Parameter Upper Bound"),
-mBiFurcationDiagram(                "<none>",               "BiFurcationDiagram",                               "BifurcationDiagram"),
+
+//PROPERTIES
+//                                  value,                  name,                                   hint,                                                           descr,              alias,              readonly
+
+mTempFolder(                        ".",                    "TempFolder",                           "Tempfolder used by auto and roadrunner"),
+mKeepTempFiles(                     false,                  "KeepTempFiles",                        "Keep temporary files."),
+mSBML(                              "<none>",               "SBML",                                 "SBML, i.e. the model to be used to analyze"),
+mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan"),
+mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",       "Principal Continuation Parameter"),
+mPCPLowerBound(                     0,                      "PCPLowerBound",                        "Principal Continuation Parameter Lower Bound"),
+mPCPUpperBound(                     0,                      "PCPUpperBound",                        "Principal Continuation Parameter Upper Bound"),
+
+//Output
+mFort2(                             "<none>",               "fort2",                                "fort2",                                                        "",                 ""),
+mFort3(                             "<none>",               "fort3",                                "fort3",                                                        "",                 ""),
+mFort6(                             "<none>",               "BiFurcationSummary",                   "BifurcationSummary",                                           "",                 "BiFurcationSummary"),
+mFort7(                             "<none>",               "BiFurcationDiagram",                   "BifurcationDiagram",                                           "",                 "BiFurcationDiagram"),
+mFort8(                             "<none>",               "fort8",                                "fort9",                                                        "",                 ""),
+mFort9(                             "<none>",               "fort9",                                "fort9",                                                        "",                 ""),
+
 mRRAuto(NULL),
 mAutoWorker(*this)
 {
@@ -34,7 +48,12 @@ mAutoWorker(*this)
     mProperties.add(&mPrincipalContinuationParameter);
     mProperties.add(&mPCPLowerBound);
     mProperties.add(&mPCPUpperBound);
-    mProperties.add(&mBiFurcationDiagram);
+    mProperties.add(&mFort2);
+    mProperties.add(&mFort3);
+    mProperties.add(&mFort6);
+    mProperties.add(&mFort7);
+    mProperties.add(&mFort8);
+    mProperties.add(&mFort9);
 
     //Create a roadrunner to use
     mRR = new RoadRunner;
@@ -110,7 +129,7 @@ string AutoPlugin::getResult()
 {
     stringstream msg;
     msg<<"AUTO 2000 DATA\n";
-    msg<<mBiFurcationDiagram.getValue();
+    msg<<mFort7.getValue();
     return msg.str();
 }
 
