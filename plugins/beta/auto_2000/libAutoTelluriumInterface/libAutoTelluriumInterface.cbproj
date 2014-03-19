@@ -125,6 +125,9 @@
             <DependentOn>telAutoTelluriumInterface.h</DependentOn>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telAutoUtils.cpp">
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -77,6 +77,7 @@ COMMON_DECLSPEC string              toString(const char n);
 COMMON_DECLSPEC string              toString(const unsigned char n);
 COMMON_DECLSPEC string              toString(const string& s);
 COMMON_DECLSPEC string              toString(const char* str);
+COMMON_DECLSPEC string              toString(const vector<int>& vec, const string& sep = ", ");
 COMMON_DECLSPEC string              toString(const vector<string>& vec, const string& sep = ", ");
 //COMMON_DECLSPEC string              toString(const ls::Matrix<double> mat);
 COMMON_DECLSPEC string              toString(const ls::Matrix<double>& mat);

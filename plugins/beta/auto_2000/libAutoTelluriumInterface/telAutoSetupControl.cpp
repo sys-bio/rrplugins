@@ -15,6 +15,6 @@ mDirectionPositive(true)
 
 string SetupControl::getConstantsAsString()
 {
-    return mInputConstants.getConstantsAsString();
+//    return mInputConstants.getConstantsAsString();
 }
 }

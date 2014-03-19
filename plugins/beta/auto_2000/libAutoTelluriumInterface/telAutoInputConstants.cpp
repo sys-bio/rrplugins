@@ -11,7 +11,9 @@ namespace telauto
     using namespace std;
 
 string getWhiteSpaces(string& line, int maxLength);
-InputConstants::InputConstants()
+
+
+AutoConstants::AutoConstants()
 :
 A0(0),
 A1(10000),
@@ -47,42 +49,87 @@ NTHU(0),
 NTST(15),
 NUZR(0),
 NWTN(3),
-RL0(0.01),   
-RL1(30),    
+RL0(0.01),
+RL1(30),
 THL(NTHL),
 THU(NTHU),
 UZR(NUZR)
+{}
+
+void AutoConstants::reset()
+{}
+
+void AutoConstants::populateFrom(Properties* props)
 {
-
-}
-
-string InputConstants::getConstantsAsString()
-{
-    return ToInputString();
-}
-
-string InputConstants::GetICP()
-{
-    StringBuilder builder;
-    builder << (NICP);
-
-    for(int i = 0; i < ICP.size(); i++)
+    if(!props)
     {
-        builder<<(" " + i);
+        throw(Exception("Handed  NULL object to function AutoConstants::populateFrom"));
     }
 
-    if (ICP.size() == 0)
+//    Property<int>* intProp = dynamic_cast< Property<int>* > (mProperties->getProperty("NDIM"));
+    try
     {
-        builder<<(" 0");
+        A0              =           dynamic_cast< Property<double>*         > (props->getProperty("A0"))->getValue();
+        A1              =           dynamic_cast< Property<double>*         > (props->getProperty("A1"))->getValue();
+        DS              =           dynamic_cast< Property<double>*         > (props->getProperty("DS"))->getValue();
+        DSMAX           =           dynamic_cast< Property<double>*         > (props->getProperty("DSMAX"))->getValue();
+        DSMIN           =           dynamic_cast< Property<double>*         > (props->getProperty("DSMIN"))->getValue();
+        EPSL            =           dynamic_cast< Property<double>*         > (props->getProperty("EPSL"))->getValue();
+        EPSS            =           dynamic_cast< Property<double>*         > (props->getProperty("EPSS"))->getValue();
+        EPSU            =           dynamic_cast< Property<double>*         > (props->getProperty("EPSU"))->getValue();
+        IAD             =           dynamic_cast< Property<int   >*         > (props->getProperty("IAD"))->getValue();
+        IADS            =           dynamic_cast< Property<int   >*         > (props->getProperty("IADS"))->getValue();
+        ICP             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("ICP"))->getValue();
+        IID             =           dynamic_cast< Property<int   >*         > (props->getProperty("IID"))->getValue();
+        ILP             =           dynamic_cast< Property<int   >*         > (props->getProperty("ILP"))->getValue();
+        IPLT            =           dynamic_cast< Property<int   >*         > (props->getProperty("IPLT"))->getValue();
+        IPS             =           dynamic_cast< Property<int   >*         > (props->getProperty("IPS"))->getValue();
+        IRS             =           dynamic_cast< Property<int   >*         > (props->getProperty("IRS"))->getValue();
+        ISP             =           dynamic_cast< Property<int   >*         > (props->getProperty("ISP"))->getValue();
+        ISW             =           dynamic_cast< Property<int   >*         > (props->getProperty("ISW"))->getValue();
+        ITMX            =           dynamic_cast< Property<int   >*         > (props->getProperty("ITMX"))->getValue();
+        ITNW            =           dynamic_cast< Property<int   >*         > (props->getProperty("ITNW"))->getValue();
+        JAC             =           dynamic_cast< Property<int   >*         > (props->getProperty("JAC"))->getValue();
+        MXBF            =           dynamic_cast< Property<int   >*         > (props->getProperty("MXBF"))->getValue();
+        NBC             =           dynamic_cast< Property<int   >*         > (props->getProperty("NBC"))->getValue();
+        NCOL            =           dynamic_cast< Property<int   >*         > (props->getProperty("NCOL"))->getValue();
+        NDIM            =           dynamic_cast< Property<int   >*         > (props->getProperty("NDIM"))->getValue();
+        NICP            =           dynamic_cast< Property<int   >*         > (props->getProperty("NICP"))->getValue();
+        NINT            =           dynamic_cast< Property<int   >*         > (props->getProperty("NINT"))->getValue();
+        NMX             =           dynamic_cast< Property<int   >*         > (props->getProperty("NMX"))->getValue();
+        NPR             =           dynamic_cast< Property<int   >*         > (props->getProperty("NPR"))->getValue();
+        NTHL            =           dynamic_cast< Property<int   >*         > (props->getProperty("NTHL"))->getValue();
+        NTHU            =           dynamic_cast< Property<int   >*         > (props->getProperty("NTHU"))->getValue();
+        NTST            =           dynamic_cast< Property<int   >*         > (props->getProperty("NTST"))->getValue();
+        NUZR            =           dynamic_cast< Property<int   >*         > (props->getProperty("NUZR"))->getValue();
+        NWTN            =           dynamic_cast< Property<int   >*         > (props->getProperty("NWTN"))->getValue();
+        RL0             =           dynamic_cast< Property<double>*         > (props->getProperty("RL0"))->getValue();
+        RL1             =           dynamic_cast< Property<double>*         > (props->getProperty("RL1"))->getValue();
+        THL             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THL"))->getValue();
+        THU             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THU"))->getValue();
+        UZR             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("UZR"))->getValue();
+    }
+    catch(Exception& ex)
+    {                   
+        Log(lError) << "Failed transfer data to auto constants class";
+    }
+    catch(const std::bad_cast& e)
+    {
+        Log(lError) << "Failed transfer data to auto constants class";
+    }
+    catch(...)
+    {
+        Log(lError) << "Failed transfer data to auto constants class";
     }
 
-    return builder.ToString();
+
 }
 
-string InputConstants::ToInputString()
+
+string AutoConstants::getConstantsAsString()
 {
     string line1  = formatN("{0} {1} {2} {3}", NDIM, IPS, IRS, ILP);
-    string line2  = GetICP();
+    string line2  = getICP();
     string line3  = formatN("{0} {1} {2} {3} {4} {5} {6} {7}", NTST, NCOL, IAD, ISP, ISW, IPLT, NBC, NINT);
     string line4  = formatN("{0} {1} {2} {3} {4}", NMX, RL0, RL1, A0, A1);
     string line5  = formatN("{0} {1} {2} {3} {4} {5} {6}", NPR, MXBF, IID, ITMX, ITNW, NWTN, JAC);
@@ -128,6 +175,24 @@ string InputConstants::ToInputString()
 
     string aStr = builder.ToString();
     return aStr;
+}
+
+string AutoConstants::getICP()
+{
+    StringBuilder builder;
+    builder << (NICP);
+
+    for(int i = 0; i < ICP.size(); i++)
+    {
+        builder<<(" " + i);
+    }
+
+    if (ICP.size() == 0)
+    {
+        builder<<(" 0");
+    }
+
+    return builder.ToString();
 }
 
 string getWhiteSpaces(string& line, int maxLength)

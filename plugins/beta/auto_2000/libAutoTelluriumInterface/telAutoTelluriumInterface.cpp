@@ -5,23 +5,20 @@
 #include "telLogger.h"
 #include "telStringList.h"
 #include "telUtils.h"
+#include "telAutoUtils.h"
 
 namespace telauto
 {
 using namespace tlp;
 using namespace autolib;
 
-/**
-    \brief Takes a vector of SelectionRecords and returns their representation as
-    a StringList
-*/
-tlp::StringList     getRecordsAsStrings(const vector<rr::SelectionRecord>& folder);
-
 //Statics
-RoadRunner*     AutoTellurimInterface::mRR = NULL;
-SetupControl    AutoTellurimInterface::mAutoSetup;
+RoadRunner*     AutoTellurimInterface::mRR              = NULL;
+Properties*     AutoTellurimInterface::mProperties      = NULL;
+AutoConstants   AutoTellurimInterface::mAutoConstants;
 string          AutoTellurimInterface::mSelectedParameter = gEmptyString;
 StringList      AutoTellurimInterface::mModelParameters = StringList();
+
 AutoTellurimInterface::AutoTellurimInterface(RoadRunner* rr)
 {
     mRR = rr;
@@ -35,36 +32,38 @@ void AutoTellurimInterface::assignRoadRunner(RoadRunner* rrInstance)
     mRR = rrInstance;
 }
 
+void AutoTellurimInterface::assignProperties(Properties* props)
+{
+    mProperties = props;
+    if(mProperties)
+    {
+        mAutoConstants.populateFrom(mProperties);
+    }
+    else
+    {
+        mAutoConstants.reset();
+    }
+}
+
 bool AutoTellurimInterface::selectParameter(const string& para)
 {
     mSelectedParameter = para;
     return false;
 }
 
-bool AutoTellurimInterface::setStartParameterValue(const double& val)
-{
-    mAutoSetup.mInputConstants.RL0 = val;
-    return false;
-}
-
-bool AutoTellurimInterface::setEndParameterValue(const double& val)
-{
-    mAutoSetup.mInputConstants.RL1 = val;
-    return false;
-}
-
 bool AutoTellurimInterface::setScanDirection(ScanDirection val)
 {
-    mAutoSetup.mDirectionPositive = (val == sdPositive) ? true : false;
 
-    if(mAutoSetup.mDirectionPositive)
+    if(val == sdPositive)
     {
-        mAutoSetup.mInputConstants.DS = fabs(mAutoSetup.mInputConstants.DS);
+        mAutoConstants.DS = fabs(mAutoConstants.DS);
     }
     else
     {
-        mAutoSetup.mInputConstants.DS = -1 * fabs(mAutoSetup.mInputConstants.DS);
+        mAutoConstants.DS = -1 * fabs(mAutoConstants.DS);
     }
+
+    mAutoConstants.mScanDirection = val;
     return true;
 }
 
@@ -95,28 +94,24 @@ bool AutoTellurimInterface::run()
             return false;
         }
 
-        reset();
-
-        mAutoSetup.mRunContinuation = false;
+        //mAutoSetup.mRunContinuation = false;
         double parValue = 0;
-        if(mAutoSetup.mDirectionPositive == true)
+        if(mAutoConstants.mScanDirection == sdPositive)
         {
-            parValue = mAutoSetup.mInputConstants.RL0;
+            parValue = mAutoConstants.RL0;
         }
         else
         {
-            parValue = mAutoSetup.mInputConstants.RL1;
+            parValue = mAutoConstants.RL1;
         }
 
-//        mRR->setValue(mSelectedParameter, mAutoSetup.mInputConstants.RL1.getValue());
-//        mRR->steadyState();
         //Set initial value of Primary continuation parameter
         mRR->setValue(mSelectedParameter, parValue);
 
-        if(mAutoSetup.mCalculateSteadyState)
-        {
+//        if(mAutoSetup.mCalculateSteadyState)
+//        {
             mRR->steadyState();
-        }
+//        }
 
         if(!setupUsingCurrentModel())
         {
@@ -136,22 +131,21 @@ bool AutoTellurimInterface::run()
 bool AutoTellurimInterface::setupUsingCurrentModel()
 {
     int ndim = mRR->getSteadyStateSelections().size();
-    mAutoSetup.mInputConstants.NDIM = ndim;
+//    mAutoSetup.mInputConstants.NDIM = ndim;
 
 
     mModelParameters = mRR->getGlobalParameterIds();
+
     setCallbackStpnt(ModelInitializationCallback);
     setCallbackFunc2(ModelFunctionCallback);
 
-    string temp = mAutoSetup.getConstantsAsString();
+    //string temp = mAutoSetup.getConstantsAsString();
+    string temp = getConstantsAsString();
+
     autolib::createFort2File(temp.c_str(), joinPath(getTempFolder(),"fort.2"));
     return true;
 }
 
-string AutoTellurimInterface::getConstantsAsString()
-{
-    return mAutoSetup.getConstantsAsString();
-}
 
 //Called by Auto
 int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, double t, double* u, double* par)
@@ -316,7 +310,9 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
 //    var variableTemp = new double[CurrentModel.y.Length];
 
     vector<double> variableTemp(selList.size());
-    int ndim = mAutoSetup.mInputConstants.NDIM;
+//    int ndim = mAutoSetup.mInputConstants.NDIM;
+    Property<int>* intProp = dynamic_cast< Property<int>* > (mProperties->getProperty("NDIM"));
+    int ndim = intProp->getValue();
     int nMin = min(selList.size(), ndim);
 
 //    Marshal.Copy(oVariables, variableTemp, 0, Math.Min(CurrentModel.y.Length, nDim));
@@ -428,20 +424,9 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
 //        }
 
 
-bool AutoTellurimInterface::reset()
+string AutoTellurimInterface::getConstantsAsString()
 {
-    //Remove temporary files
-    return true;
-}
-
-StringList getRecordsAsStrings(const vector<rr::SelectionRecord>& _sels)
-{
-    StringList sels;
-    for(int i = 0; i < _sels.size(); i++)
-    {
-        sels.add(_sels[i].to_string());
-    }
-    return sels;
+    return mAutoConstants.getConstantsAsString();
 }
 
 

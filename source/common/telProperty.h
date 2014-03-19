@@ -376,6 +376,28 @@ inline Property<string>::operator string & ()
     return mValue;
 }
 
+//================= vector<int> ===============================
+/**
+    Set a vector<int> properties value, from a string. This function expects input string
+    containing comma delimited values, and braces, e.g. {1, 3, 5 ,2}
+*/
+template<>
+inline void Property< vector<int> >::setValue(const void* val)
+{
+    mValue = * ((vector<int> *) (val));
+}
+
+template<>
+inline void Property< std::vector<int> >::setValueFromString(const string& val)
+{
+    StringList nrList = tlp::splitString(val,", {}");
+    mValue.clear();
+    for(int i = 0; i < nrList.size(); i++)
+    {
+        mValue.push_back( toInt(nrList[i]));
+    }
+}
+
 //================= vector<string> ===============================
 /**
     Set a vector<string> properties value, from a string. This function expects input string
@@ -505,6 +527,15 @@ template<>
 inline string getPropertyType<string>(const string& a)
 {
     return "std::string";
+}
+
+/**
+    \brief Returns the type as a string.
+*/
+template<>
+inline string getPropertyType< vector<int> >(const vector<int> &a)
+{
+    return "vector<int>";
 }
 
 /**

@@ -1,5 +1,6 @@
 #ifndef telAutoPluginH
 #define telAutoPluginH
+#include <vector>
 #include "telProperty.h"
 #include "telCPPPlugin.h"
 #include "telPluginManager.h"
@@ -16,6 +17,7 @@
 
 using telauto::AutoTellurimInterface;
 using tlp::Property;
+using std::vector;
 class AutoPlugin : public tlp::CPPPlugin
 {
     friend AutoWorker;
@@ -35,12 +37,21 @@ class AutoPlugin : public tlp::CPPPlugin
 
     protected:
 
+        //The interface to auto. Takes the property container as a reference
+        AutoTellurimInterface                   mRRAuto;
+
+        //The worker
+        AutoWorker                              mAutoWorker;
+
+        //So make it a friend
+        friend class AutoWorker;
+
         Property<string>                        mSBML;                  //This is the model
         Property<string>                        mTempFolder;
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
-
+//        Property<bool>                          mCalculateSteadyState;
         Property<bool>                          mCaptureOutputFiles;
         Property<string>                        mFort2;
         Property<string>                        mFort3;
@@ -67,7 +78,7 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<int>                           mNICP;
 
         /// the free parameters
-        vector<int>                             mICP;
+        Property< vector<int> >                 mICP;
 
         /// the number of mesh intervals
         Property<int>                           mNTST;
@@ -167,31 +178,24 @@ class AutoPlugin : public tlp::CPPPlugin
         /// <summary>
         /// parameter index, parameter weight (e.g., ICP(11)=0 means PAR(11) is excluded from the step size)
         /// </summary>
-        vector<int>                             mTHL;
+        Property< vector<int> >                 mTHL;
 
         /// the number of modified solution component “weights” (for BVP)
         Property<int>                           mNTHU;
 
         /// component index, component weight
-        vector<int>                             mTHU;
+        Property< vector<int> >                 mTHU;
 
         /// the number of “user output points” specified
         Property<int>                           mNUZR;
 
         /// parameter index, parameter value (if I is negative the continuation stops at the parameter value)
-        vector<int>                             mUZR;
-
-        //The interface to auto. Takes mAutoData as reference
-        AutoTellurimInterface                   mRRAuto;
+        Property< vector<int> >                 mUZR;
 
         string                                  getTempFolder();
         string                                  getSBML();
 
-        //The worker
-        AutoWorker                              mAutoWorker;
-
-        //So make it a friend
-        friend class AutoWorker;
+        void                                    addProperties();
 };
 
 extern "C"
@@ -199,9 +203,6 @@ extern "C"
 TLP_DS AutoPlugin* auto_cc       createPlugin();
 TLP_DS const char* auto_cc       getImplementationLanguage();
 }
-
-
-
 
 namespace tlp
 {

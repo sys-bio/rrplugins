@@ -20,7 +20,7 @@ class TA_DS SetupControl
         string                      getConstantsAsString();
 
     protected:
-        InputConstants              mInputConstants;
+//        InputConstants              mInputConstants;
 
         bool                        mCalculateSteadyState;
         bool                        mRunContinuation;

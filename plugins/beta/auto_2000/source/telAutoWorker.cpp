@@ -66,23 +66,22 @@ void AutoWorker::run()
 
     //Do the AUTO thing, pass data from the outside here..
     mRRAuto.selectParameter(mTheHost.mPrincipalContinuationParameter.getValue());
-    double spvL = mTheHost.mRL0.getValue();
-    double spvU = mTheHost.mRL1.getValue();
+//    double spvL = mTheHost.mRL0.getValue();
+//    double spvU = mTheHost.mRL1.getValue();
 
-    mRRAuto.setStartParameterValue(spvL);
-    mRRAuto.setEndParameterValue(spvU);
+//    mRRAuto.setStartParameterValue(spvL);
+//    mRRAuto.setEndParameterValue(spvU);
 
 
-    ScanDirection sDirection;
     if(mTheHost.mScanDirection.getValue() == "Positive")
     {
-        sDirection = sdPositive;
+        mRRAuto.setScanDirection(sdPositive);
     }
     else
     {
-        sDirection = sdNegative;
+        mRRAuto.setScanDirection(sdNegative);
     }
-    mRRAuto.setScanDirection(sDirection);
+
 
     string str = mRRAuto.getConstantsAsString();
     Log(lInfo)<<str;
@@ -148,6 +147,8 @@ void AutoWorker::run()
 
 bool AutoWorker::setup()
 {
+    //Transfer AUTO constants to AUTO interface
+     mRRAuto.assignProperties(&(mTheHost.mProperties));
     //Tempfolder setup
     string tFolder;
     if(mTheHost.mTempFolder.getValue() == ".")

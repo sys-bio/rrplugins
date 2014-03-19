@@ -1,11 +1,13 @@
 #ifndef telAutoTelluriumInterfaceH
 #define telAutoTelluriumInterfaceH
 #include "rr/rrRoadRunner.h"
-#include "telAutoSetupControl.h"
+//#include "telAutoSetupControl.h"
+#include "telAutoInputConstants.h"
 #include "tai_exporter.h"
 #include "telProperty.h"
 #include "telLogger.h"
 #include "telStringList.h"
+#include "telProperties.h"
 //---------------------------------------------------------------------------
 
 #define autoCallConv __cdecl
@@ -17,7 +19,7 @@ namespace telauto
 using std::string;
 using rr::RoadRunner;
 using tlp::StringList;
-
+using tlp::Properties;
 
 class TA_DS AutoTellurimInterface
 {
@@ -29,20 +31,19 @@ class TA_DS AutoTellurimInterface
         bool                        setupUsingCurrentModel();
         string                      getConstantsAsString();
         bool                        run();
-        bool                        reset();
         bool                        selectParameter(const string& para);
-        bool                        setStartParameterValue(const double& val);
-        bool                        setEndParameterValue(const double& val);
         bool                        setScanDirection(ScanDirection val);
         void                        assignRoadRunner(RoadRunner* rrInstance);
+        void                        assignProperties(Properties* props);
 
     private:
         static string               mSelectedParameter;
         static StringList           mModelParameters;
         string                      mTempFolder;
 
-        static RoadRunner*          mRR;         //Static so we can access this in autos callback
-        static SetupControl         mAutoSetup;  //Auto constants, parameters
+        static RoadRunner*          mRR;            //Static so we can access this in autos callback
+        static Properties*          mProperties;
+        static AutoConstants        mAutoConstants;
 
         static int  autoCallConv    ModelInitializationCallback(long ndim, double t, double* u, double* par);
         static void autoCallConv    ModelFunctionCallback(const double* oVariables, const double* par, double* oResult);

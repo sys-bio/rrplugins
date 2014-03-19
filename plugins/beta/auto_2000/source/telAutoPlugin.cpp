@@ -16,6 +16,8 @@ AutoPlugin::AutoPlugin()
 :
 CPPPlugin("Auto-2000", "Bifurcation", NULL, NULL),
 
+mRRAuto(NULL),
+mAutoWorker(*this),
 //PROPERTIES
 //                                  value,                  name,                                   hint,                                                           descr,              alias,              readonly
 
@@ -32,17 +34,17 @@ mFort6(                             "<none>",               "BiFurcationSummary"
 mFort7(                             "<none>",               "BiFurcationDiagram",                   "BifurcationDiagram",                                           "",                 "BiFurcationDiagram"),
 mFort8(                             "<none>",               "fort8",                                "fort9",                                                        "",                 ""),
 mFort9(                             "<none>",               "fort9",                                "fort9",                                                        "",                 ""),
-
-//AUTO parameters
+//mCalculateSteadyState(              true,                   "CalculateSteadyStateOnInit",                                "fort9",                                                        "",                 ""),
+//Pure AUTO parameters
 mPrincipalContinuationParameter(    "<none>",               "PrincipalContinuationParameter",       "Principal Continuation Parameter"),
 
 //                                  value,                  name,                                   hint,                                                           descr,              alias,              readonly
 mNDIM(                              1,                      "NDIM",                                 "Dimension of the system of equations",                            "",                 ""),
 mIPS(                               1,                      "IPS",                                  "Constant defining the problem type",                              "",                 ""),
-mIRS(                               1,                      "IRS",                                  "Restart label",                                                   "",                 ""),
+mIRS(                               0,                      "IRS",                                  "Restart label",                                                   "",                 ""),
 mILP(                               1,                      "ILP",                                  "Locate limit points",                                             "",                 ""),
 mNICP(                              1,                      "NICP",                                 "Number of free parameters",                                       "",                 ""),
-mICP(                               0,                      "ICP",                                  "Free parameters",                                                 "",                 ""),
+mICP(                               vector<int>(0),         "ICP",                                  "Free parameters",                                                 "",                 ""),
 mNTST(                              15,                     "NTST",                                 "Number of mesh intervals",                                        "",                 ""),
 mNCOL(                              3,                      "NCOL",                                 "Number of collocation points per mesh interval",                  "",                 ""),
 mIAD(                               3,                      "IAD",                                  "Mesh adaption",                                                   "",                 ""),
@@ -71,45 +73,24 @@ mDSMIN(                             1e-5,                   "DSMIN",            
 mDSMAX(                             0.1,                    "DSMAX",                                "Maximum continuation step size",                                  "",         ""),
 mIADS(                              1,                      "IADS",                                 "Adapt the continuation step size every IADS steps",               "",         ""),
 mNTHL(                              0,                      "NTHL",                                 "The number of modified parameter \"weights\" (for BVP)",          "",         ""),
-mTHL(                               0,                      "THL",                                  "Parameter index, parameter weight",                               "",         ""),
+mTHL(                               vector<int>(0),         "THL",                                  "Parameter index, parameter weight",                               "",         ""),
 mNTHU(                              0,                      "NTHU",                                 "The number of modified solution component \"weights\" (for BVP)", "",         ""),
-mTHU(                               0,                      "THU",                                  "Component index, component weight",                               "",         ""),
+mTHU(                               vector<int>(0),         "THU",                                  "Component index, component weight",                               "",         ""),
 mNUZR(                              0,                      "NUZR",                                 "The number of “user output points” specified",                    "",         ""),
-mUZR(                               0,                      "UZR",                                  "Parameter index, parameter value",                                "",         ""),
-
-
-
-
-
-
-mRRAuto(NULL),
-mAutoWorker(*this)
+mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         "")
 {
     mVersion = "0.8";
 
     //Setup the plugin properties
-    mProperties.add(&mTempFolder);
-    mProperties.add(&mKeepTempFiles);
-    mProperties.add(&mSBML);
-    mProperties.add(&mScanDirection);
-    mProperties.add(&mPrincipalContinuationParameter);
-    mProperties.add(&mRL0);
-    mProperties.add(&mRL1);
-    mProperties.add(&mFort2);
-    mProperties.add(&mFort3);
-    mProperties.add(&mFort6);
-    mProperties.add(&mFort7);
-    mProperties.add(&mFort8);
-    mProperties.add(&mFort9);
+    addProperties();
 
     //Create a roadrunner to use
     mRR = new RoadRunner;
     mRRAuto.assignRoadRunner(mRR);
 
     mHint ="BiFurcation Analyis using AUTO2000";
-    mDescription="The auto2000 plugin is a wrapper around the AUTO 2000 BiFurcation analysis library. This plugin was inspired and are using many of Frank Bergmann's \
+    mDescription="The Auto2000 plugin is a wrapper around the AUTO 2000 BiFurcation analysis library. This plugin was inspired and are using many of Frank Bergmann's \
 ideas on how to create a usable interface to the AUTO 2000 library.";
-
 }
 
 AutoPlugin::~AutoPlugin()
@@ -188,6 +169,61 @@ bool AutoPlugin::execute(bool inThread)
     return true;
 }
 
+void AutoPlugin::addProperties()
+{
+    mProperties.add(&mTempFolder);
+    mProperties.add(&mKeepTempFiles);
+    mProperties.add(&mSBML);
+    mProperties.add(&mScanDirection);
+    mProperties.add(&mPrincipalContinuationParameter);
+    mProperties.add(&mFort2);
+    mProperties.add(&mFort3);
+    mProperties.add(&mFort6);
+    mProperties.add(&mFort7);
+    mProperties.add(&mFort8);
+    mProperties.add(&mFort9);
+
+    //AUTO parameters
+    mProperties.add(&mNDIM);
+    mProperties.add(&mIPS);
+    mProperties.add(&mIRS);
+    mProperties.add(&mILP);
+    mProperties.add(&mNICP);
+    mProperties.add(&mICP);
+    mProperties.add(&mNTST);
+    mProperties.add(&mNCOL);
+    mProperties.add(&mIAD);
+    mProperties.add(&mISP);
+    mProperties.add(&mISW);
+    mProperties.add(&mIPLT);
+    mProperties.add(&mNBC);
+    mProperties.add(&mNINT);
+    mProperties.add(&mNMX);
+    mProperties.add(&mRL0);
+    mProperties.add(&mRL1);
+    mProperties.add(&mA0);
+    mProperties.add(&mA1);
+    mProperties.add(&mNPR);
+    mProperties.add(&mMXBF);
+    mProperties.add(&mIID);
+    mProperties.add(&mITMX);
+    mProperties.add(&mITNW);
+    mProperties.add(&mNWTN);
+    mProperties.add(&mJAC);
+    mProperties.add(&mEPSL);
+    mProperties.add(&mEPSU);
+    mProperties.add(&mEPSS);
+    mProperties.add(&mDS);
+    mProperties.add(&mDSMIN);
+    mProperties.add(&mDSMAX);
+    mProperties.add(&mIADS);
+    mProperties.add(&mNTHL);
+    mProperties.add(&mTHL);
+    mProperties.add(&mNTHU);
+    mProperties.add(&mTHU);
+    mProperties.add(&mNUZR);
+    mProperties.add(&mUZR);
+}
 //Functions allowing the plugin to be loaded by plugin manager
 AutoPlugin* auto_cc createPlugin()
 {

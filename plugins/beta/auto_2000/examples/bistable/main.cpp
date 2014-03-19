@@ -60,7 +60,7 @@ int main()
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
         autoPlugin->setPropertyByString("RL0", "0.25");
         autoPlugin->setPropertyByString("RL1", "1.25");
-        autoPlugin->setPropertyByString("NMX", "100");
+        autoPlugin->setPropertyByString("NMX", "1000");
 
         if(!autoPlugin->execute())
         {

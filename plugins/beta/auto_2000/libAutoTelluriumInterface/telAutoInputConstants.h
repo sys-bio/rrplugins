@@ -7,19 +7,24 @@
 #include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
+namespace tlp
+{
+class Properties;
+}
+
 namespace telauto
 {
+enum ScanDirection {sdPositive, sdNegative};
 class SetupControl;
 class AutoTellurimInterface;
+using tlp::Properties;
 using std::vector;
 using std::string;
 
-enum ScanDirection {sdPositive, sdNegative};
-
-class TA_DS InputConstants
+class AutoConstants
 {
-    friend SetupControl;
-    friend AutoTellurimInterface;
+    public:
+        ScanDirection   mScanDirection;
     public:
         // NDIM: dimension of the system of equations, as specified in the user-supplied subroutine 'func'
         int             NDIM;
@@ -151,12 +156,13 @@ class TA_DS InputConstants
         /// parameter index, parameter value (if I is negative the continuation stops at the parameter value)
         vector<int>     UZR;
 
-        string          GetICP();
 
     public:
-                        InputConstants();
+                        AutoConstants();
+        void            populateFrom(Properties* props);
         string          getConstantsAsString();
-        string          ToInputString();
+        string          getICP();
+        void            reset();
 };
 }
 #endif
