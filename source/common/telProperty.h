@@ -596,7 +596,7 @@ inline string getPropertyType< vector<string> >(const vector<string> &a)
 template<>
 inline string getPropertyType<tlp::StringList>(const tlp::StringList& a)
 {
-    return "StringList";
+    return "stringList";
 }
 
 /**

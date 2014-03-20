@@ -75,9 +75,9 @@ int main()
         Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Check bifurcaation data
-        Property< vector<int> >* biPtsP          = (Property< vector<int> >*)       autoPlugin->getProperty("BiFurcationPoints");
-        Property< vector<string> >* biLblsP      = (Property< vector<string> >*)    autoPlugin->getProperty("BiFurcationLabels");
-        Property< TelluriumData >* biDataP      = (Property< TelluriumData >*)      autoPlugin->getProperty("BiFurcationData");
+        Property< vector<int> >* biPtsP         = (Property< vector<int> >*)       autoPlugin->getProperty("BiFurcationPoints");
+        Property< vector<string> >* biLblsP     = (Property< vector<string> >*)    autoPlugin->getProperty("BiFurcationLabels");
+        Property< TelluriumData >* biDataP      = (Property< TelluriumData >*)     autoPlugin->getProperty("BiFurcationData");
 
         vector<int>         biPts = biPtsP->getValue();
         vector<string>      biLbls = biLblsP->getValue();

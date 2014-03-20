@@ -15,7 +15,8 @@ try:
     if info == None:
         print getLastError()
         
-    print auto._propertyNames
+    print auto.listOfPropertyNames()
+    
     #Set Auto Propertys
     auto.setProperty("ScanDirection", "Negative")
     #auto.setProperty("ScanDirection", "Positive")    
@@ -32,10 +33,16 @@ try:
     
     #Get some info 
     # =Bifurcation summary
-    print auto.BiFurcationSummary
+    print "Summary: " + auto.BiFurcationSummary
     
-    print 'Bifurcation Diagram ========================' 
-    print auto.BiFurcationDiagram
+    pts = auto.BiFurcationPoints
+    lbls = auto.BiFurcationLabels
+    
+    print pts
+    print lbls
+    
+    #print 'Bifurcation Diagram ========================' 
+    #print auto.BiFurcationDiagram
     
     print "done"
 

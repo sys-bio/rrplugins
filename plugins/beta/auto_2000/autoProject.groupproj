@@ -9,6 +9,12 @@
         <Projects Include="..\..\..\source\core\telplugins_core.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\..\source\jobs\telplugins_jobs.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\wrappers\c\telplugins_c_api.cbproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="libAuto\libAuto.cbproj">
             <Dependencies/>
         </Projects>
@@ -26,6 +32,9 @@
         </Projects>
         <Projects Include="examples\bistable\bistable.cbproj">
             <Dependencies>source\tel_auto2000.cbproj</Dependencies>
+        </Projects>
+        <Projects Include="R:\sbmlstudio\SBMLStudio.cbproj">
+            <Dependencies/>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -52,6 +61,24 @@
     </Target>
     <Target Name="telplugins_core:Make">
         <MSBuild Projects="..\..\..\source\core\telplugins_core.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_jobs">
+        <MSBuild Projects="..\..\..\source\jobs\telplugins_jobs.cbproj"/>
+    </Target>
+    <Target Name="telplugins_jobs:Clean">
+        <MSBuild Projects="..\..\..\source\jobs\telplugins_jobs.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_jobs:Make">
+        <MSBuild Projects="..\..\..\source\jobs\telplugins_jobs.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="telplugins_c_api">
+        <MSBuild Projects="..\..\..\wrappers\c\telplugins_c_api.cbproj"/>
+    </Target>
+    <Target Name="telplugins_c_api:Clean">
+        <MSBuild Projects="..\..\..\wrappers\c\telplugins_c_api.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="telplugins_c_api:Make">
+        <MSBuild Projects="..\..\..\wrappers\c\telplugins_c_api.cbproj" Targets="Make"/>
     </Target>
     <Target Name="libAuto">
         <MSBuild Projects="libAuto\libAuto.cbproj"/>
@@ -107,14 +134,23 @@
     <Target Name="bistable:Make" DependsOnTargets="tel_auto2000:Make">
         <MSBuild Projects="examples\bistable\bistable.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="SBMLStudio">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj"/>
+    </Target>
+    <Target Name="SBMLStudio:Clean">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SBMLStudio:Make">
+        <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="telplugins_common;telplugins_core;libAuto;libAuto-static;libAutoTelluriumInterface-static;libAutoTelluriumInterface;tel_auto2000;bistable"/>
+        <CallTarget Targets="telplugins_common;telplugins_core;telplugins_jobs;telplugins_c_api;libAuto;libAuto-static;libAutoTelluriumInterface-static;libAutoTelluriumInterface;tel_auto2000;bistable;SBMLStudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;libAuto:Clean;libAuto-static:Clean;libAutoTelluriumInterface-static:Clean;libAutoTelluriumInterface:Clean;tel_auto2000:Clean;bistable:Clean"/>
+        <CallTarget Targets="telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_c_api:Clean;libAuto:Clean;libAuto-static:Clean;libAutoTelluriumInterface-static:Clean;libAutoTelluriumInterface:Clean;tel_auto2000:Clean;bistable:Clean;SBMLStudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;libAuto:Make;libAuto-static:Make;libAutoTelluriumInterface-static:Make;libAutoTelluriumInterface:Make;tel_auto2000:Make;bistable:Make"/>
+        <CallTarget Targets="telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_c_api:Make;libAuto:Make;libAuto-static:Make;libAutoTelluriumInterface-static:Make;libAutoTelluriumInterface:Make;tel_auto2000:Make;bistable:Make;SBMLStudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

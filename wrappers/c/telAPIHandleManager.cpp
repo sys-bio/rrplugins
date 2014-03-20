@@ -65,7 +65,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
         msg<<"No such handle is registered. "<<endl;
         throw(BadHandleException(msg.str()));
     }
-
+    return NULL;
 }
 
 TELHandle APIHandleManager::registerHandle(TELHandle handle, const char* type)

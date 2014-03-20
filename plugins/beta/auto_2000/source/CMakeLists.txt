@@ -19,6 +19,8 @@ ${CMAKE_INSTALL_PREFIX}/lib
 set(sources
 telAutoPlugin
 telAutoWorker
+telAutoDataParser
+auto_utils
 )
 
 

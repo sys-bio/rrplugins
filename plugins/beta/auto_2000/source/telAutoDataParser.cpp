@@ -244,10 +244,11 @@ int AutoDataParser::getNrOfSolutions()
 
 string AutoDataParser::getDataHeaderLine()
 {
-    if(!mDataHeader.count() > 0)
+    if(mDataHeader.count() > 0)
     {
-        return "";
+        return mDataHeader[mDataHeader.count() -1];
     }
-    return mDataHeader[mDataHeader.count() -1];
+
+    return "";    
 }
 

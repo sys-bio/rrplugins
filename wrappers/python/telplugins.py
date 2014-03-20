@@ -337,6 +337,14 @@ class Plugin (object):
         if tpc.getPropertyType(handle) == "telluriumData":
             return DataSeries (value)
         
+        elif tpc.getPropertyType(handle) == "stringList":
+            return value.split(',')
+        
+        elif tpc.getPropertyType(handle) == "vector<int>":
+            val = value.strip('{}')
+            val = val.split(',')
+            return map(int, val)
+
         elif tpc.getPropertyType(handle) == "matrix":
             dblArray = tpc.getDataArray(value)
             
@@ -380,6 +388,13 @@ class Plugin (object):
             hint = tpc.getPropertyHint(handle)
             aList.append ([name, hint])
         return aList
+
+## \brief List all the property names in the plugin
+    ##@code
+    ## print myPlugin.listOfPropertyNames()
+    ##@endcode         
+    def listOfPropertyNames(self):
+        return tpc.getListOfPluginPropertyNames (self.plugin)        
 
     ## \brief List all the property descriptions in the plugin
     ##@code

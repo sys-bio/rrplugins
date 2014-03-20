@@ -1053,8 +1053,17 @@ def getProperty(propertyHandle):
     if paraType == 'string':
         return getPropertyValueAsString(propertyHandle)
 
+    if paraType == 'stringList':
+        return getPropertyValueAsString(propertyHandle)
+
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
+
+    if paraType == 'vector<int>': 
+        return getPropertyValueAsString(propertyHandle) 
+
+    if paraType == 'vector<double>':
+        return getPropertyValueAsString(propertyHandle)
 
     if paraType == 'matrix':
         return getPropertyValueHandle(propertyHandle)
