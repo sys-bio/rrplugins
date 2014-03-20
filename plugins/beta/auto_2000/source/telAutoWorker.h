@@ -13,8 +13,6 @@ namespace telauto
 class AutoTellurimInterface;
 }
 
-typedef void (*ThreadCB)(void*, void*);
-
 class AutoPlugin;
 using tlp::TelluriumData;
 
@@ -31,7 +29,6 @@ class AutoWorker : public Poco::Runnable
         Poco::Thread                                mThread;
         AutoPlugin&                                 mTheHost;
         telauto::AutoTellurimInterface&             mRRAuto;        //This class communicate with auto
-
         bool                                        setupAuto();
 };
 

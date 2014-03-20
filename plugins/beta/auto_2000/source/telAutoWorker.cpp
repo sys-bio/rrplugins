@@ -67,7 +67,6 @@ void AutoWorker::run()
     //==================== This is where we call auto
     mRRAuto.run();
 
-
     //Capture output data files
     string tempFolder;
     if(mTheHost.mTempFolder.getValue() == ".")
@@ -95,7 +94,6 @@ void AutoWorker::run()
     {
         throw(Exception("Could not read auto data output file fort.7!"));
     }
-
 
     mTheHost.mFort7.setValue(getFileContent(fort7));
 
@@ -144,7 +142,6 @@ bool AutoWorker::setupAuto()
 
     string str = mRRAuto.getConstantsAsString();
     Log(lInfo)<<str;
-
 }
 
 

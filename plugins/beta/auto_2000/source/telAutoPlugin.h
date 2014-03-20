@@ -51,7 +51,7 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
-//        Property<bool>                          mCalculateSteadyState;
+
         Property<bool>                          mCaptureOutputFiles;
         Property<string>                        mFort2;
         Property<string>                        mFort3;

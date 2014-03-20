@@ -36,14 +36,16 @@ class TA_DS AutoTellurimInterface
         void                        assignProperties(Properties* props);
 
     private:
-        static string               mSelectedParameter;
+        static string               mPCPParameterName;
         static StringList           mModelParameters;
+        static StringList           mModelBoundarySpecies;
         string                      mTempFolder;
 
         static RoadRunner*          mRR;            //Static so we can access this in autos callback
         static Properties*          mProperties;
         static AutoConstants        mAutoConstants;
 
+        void                        setInitialPCPValue();
         static int  autoCallConv    ModelInitializationCallback(long ndim, double t, double* u, double* par);
         static void autoCallConv    ModelFunctionCallback(const double* oVariables, const double* par, double* oResult);
 };
@@ -51,11 +53,13 @@ class TA_DS AutoTellurimInterface
 
 namespace tlp
 {
+
 template<>
 inline string getPropertyType<telauto::ScanDirection>(const telauto::ScanDirection& a)
 {
     return "ScanDirection";
 }
+
 }
 
 #endif

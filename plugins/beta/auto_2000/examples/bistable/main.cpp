@@ -21,7 +21,7 @@ int main()
 //    string sbmlFile("r:/models/BIOMD0000000203.xml");
 	gLog.setLevel(lInfo);
     gLog.enableConsoleLogging();
-    gLog.enableFileLogging(joinPath(tempFolder, "bistable.log"));
+    gLog.enableFileLogging(joinPath(tempFolder, "auto.log"));
 
     try
     {
@@ -55,22 +55,18 @@ int main()
 
         //Specific auto parameters
 
-//        autoPlugin->setPropertyByString("ScanDirection", "Positive");
-        autoPlugin->setPropertyByString("ScanDirection", "Negative");
+        autoPlugin->setPropertyByString("ScanDirection", "Positive");
+//        autoPlugin->setPropertyByString("ScanDirection", "Negative");
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
-        autoPlugin->setPropertyByString("RL0", "0.25");
-        autoPlugin->setPropertyByString("RL1", "1.25");
-        autoPlugin->setPropertyByString("NMX", "1000");
+//        autoPlugin->setPropertyByString("PrincipalContinuationParameter", "A");
+        autoPlugin->setPropertyByString("RL0", ".1");
+        autoPlugin->setPropertyByString("RL1", "120");
+        autoPlugin->setPropertyByString("NMX", "15000");
 
         if(!autoPlugin->execute(false))
         {
             Log(lError)<<"Problem executing the Auto plugin";
             return 0;
-        }
-
-        while(autoPlugin->isWorking())
-        {
-            ;
         }
 
         Log(lInfo)<<"Auto plugin is done.";
