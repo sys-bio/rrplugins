@@ -5,7 +5,7 @@
 #include "telCPPPlugin.h"
 #include "telPluginManager.h"
 #include "telAutoWorker.h"
-#include "telAutoInputConstants.h"
+#include "telAutoConstants.h"
 #include "telAutoTelluriumInterface.h"
 //---------------------------------------------------------------------------
 

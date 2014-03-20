@@ -85,29 +85,24 @@ string AutoTellurimInterface::getTempFolder()
     return mTempFolder;
 }
 
-bool AutoTellurimInterface::run()
+void AutoTellurimInterface::run()
 {
-    try
-    {
+//    try
+//    {
         if(!mRR)
         {
-            return false;
-        }
-
-        //mAutoSetup.mRunContinuation = false;
-        double parValue = 0;
-        if(mAutoConstants.mScanDirection == sdPositive)
-        {
-            parValue = mAutoConstants.RL0;
-        }
-        else
-        {
-            parValue = mAutoConstants.RL1;
+            throw(Exception("Roadrunner is NULL in AutoTelluriumInterface function run()"));
         }
 
         //Set initial value of Primary continuation parameter
-        mRR->setValue(mSelectedParameter, parValue);
-
+        if(mAutoConstants.mScanDirection == sdPositive)
+        {
+            mRR->setValue(mSelectedParameter, mAutoConstants.RL0);
+        }
+        else
+        {
+            mRR->setValue(mSelectedParameter, mAutoConstants.RL1);
+        }
 //        if(mAutoSetup.mCalculateSteadyState)
 //        {
             mRR->steadyState();
@@ -115,34 +110,31 @@ bool AutoTellurimInterface::run()
 
         if(!setupUsingCurrentModel())
         {
-            return false;
+            throw(Exception("Failed in Setup AutoTelluriumInterface"));
         }
 
+        //Create fort.2 file
+        string temp = getConstantsAsString();
+        autolib::createFort2File(temp.c_str(), joinPath(getTempFolder(),"fort.2"));
         CallAuto(getTempFolder());
-        return true;
-    }
-    catch(exception& ex)
-    {
-        Log(lError) << ex.what();
-        throw(Exception(ex.what()));
-    }
+
+//    }
+//    catch(exception& ex)
+//    {
+//        Log(lError) << ex.what();
+//        throw(Exception(ex.what()));
+//    }
 }
 
 bool AutoTellurimInterface::setupUsingCurrentModel()
 {
     int ndim = mRR->getSteadyStateSelections().size();
-//    mAutoSetup.mInputConstants.NDIM = ndim;
 
-
+    //k1,k2 etc
     mModelParameters = mRR->getGlobalParameterIds();
 
     setCallbackStpnt(ModelInitializationCallback);
     setCallbackFunc2(ModelFunctionCallback);
-
-    //string temp = mAutoSetup.getConstantsAsString();
-    string temp = getConstantsAsString();
-
-    autolib::createFort2File(temp.c_str(), joinPath(getTempFolder(),"fort.2"));
     return true;
 }
 
@@ -175,7 +167,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
 
         for (int i = 0; i < numParameters; i++)
         {
-            int selParameter = mModelParameters.indexOf(mSelectedParameter);
+            int selParameter    = mModelParameters.indexOf(mSelectedParameter);
             globalParameters[i] = mRR->getGlobalParameterByIndex(selParameter);
         }
     }

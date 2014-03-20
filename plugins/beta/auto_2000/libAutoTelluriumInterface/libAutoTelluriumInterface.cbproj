@@ -109,17 +109,13 @@
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>6</BuildOrder>
         </CppCompile>
+        <CppCompile Include="telAutoConstants.cpp">
+            <DependentOn>telAutoConstants.h</DependentOn>
+            <BuildOrder>9</BuildOrder>
+        </CppCompile>
         <CppCompile Include="telAutoData.cpp">
             <DependentOn>telAutoData.h</DependentOn>
             <BuildOrder>8</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="telAutoInputConstants.cpp">
-            <DependentOn>telAutoInputConstants.h</DependentOn>
-            <BuildOrder>9</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="telAutoSetupControl.cpp">
-            <DependentOn>telAutoSetupControl.h</DependentOn>
-            <BuildOrder>10</BuildOrder>
         </CppCompile>
         <CppCompile Include="telAutoTelluriumInterface.cpp">
             <DependentOn>telAutoTelluriumInterface.h</DependentOn>

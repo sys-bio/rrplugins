@@ -164,6 +164,20 @@ string AutoPlugin::getResult()
 bool AutoPlugin::execute(bool inThread)
 {
     Log(lInfo)<<"Executing the AutoPlugin plugin";
+
+    //Tempfolder setup
+    if(getTempFolder() == ".")
+    {
+        mRR->setTempFileFolder(getCWD());
+        mRRAuto.setTempFolder(getCWD());
+    }
+    else
+    {
+        mRR->setTempFileFolder(getTempFolder());
+        mRRAuto.setTempFolder(getTempFolder());
+    }
+
+
     //go away and carry out the work
     mAutoWorker.start(inThread);
     return true;

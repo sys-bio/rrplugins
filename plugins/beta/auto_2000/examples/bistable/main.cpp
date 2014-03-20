@@ -62,17 +62,21 @@ int main()
         autoPlugin->setPropertyByString("RL1", "1.25");
         autoPlugin->setPropertyByString("NMX", "1000");
 
-        if(!autoPlugin->execute())
+        if(!autoPlugin->execute(false))
         {
             Log(lError)<<"Problem executing the Auto plugin";
             return 0;
+        }
+
+        while(autoPlugin->isWorking())
+        {
+            ;
         }
 
         Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
         Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BiFurcationSummary");
         Log(lInfo)<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
-
         Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Parse the data

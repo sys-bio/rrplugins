@@ -53,7 +53,7 @@ void AutoWorker::run()
         mTheHost.mWorkStartedEvent(passTroughData.first, passTroughData.second);    //Tell anyone who wants to know
     }
 
-    if(!setup())
+    if(!setupAuto())
     {
         Log(lError)<<"Failed to setup auto..";
         if(mTheHost.hasFinishedEvent())
@@ -64,34 +64,9 @@ void AutoWorker::run()
         return;
     }
 
-    //Do the AUTO thing, pass data from the outside here..
-    mRRAuto.selectParameter(mTheHost.mPrincipalContinuationParameter.getValue());
-//    double spvL = mTheHost.mRL0.getValue();
-//    double spvU = mTheHost.mRL1.getValue();
+    //==================== This is where we call auto
+    mRRAuto.run();
 
-//    mRRAuto.setStartParameterValue(spvL);
-//    mRRAuto.setEndParameterValue(spvU);
-
-
-    if(mTheHost.mScanDirection.getValue() == "Positive")
-    {
-        mRRAuto.setScanDirection(sdPositive);
-    }
-    else
-    {
-        mRRAuto.setScanDirection(sdNegative);
-    }
-
-
-    string str = mRRAuto.getConstantsAsString();
-    Log(lInfo)<<str;
-
-    //==================== This is where auto is called
-    if(!mRRAuto.run())
-    {
-        throw(Exception("There was a problem running auto"));
-    }
-    //================================================
 
     //Capture output data files
     string tempFolder;
@@ -106,10 +81,8 @@ void AutoWorker::run()
 
     if(mTheHost.mCaptureOutputFiles.getValue() == true)
     {
-
         mTheHost.mFort2.setValue(getFileContent(joinPath(tempFolder, "fort.2")));
         mTheHost.mFort3.setValue(getFileContent(joinPath(tempFolder, "fort.3")));
-
         mTheHost.mFort8.setValue(getFileContent(joinPath(tempFolder, "fort.8")));
         mTheHost.mFort9.setValue(getFileContent(joinPath(tempFolder, "fort.9")));
     }
@@ -127,7 +100,6 @@ void AutoWorker::run()
     mTheHost.mFort7.setValue(getFileContent(fort7));
 
     //Cleanup after auto..
-
     if(mTheHost.mKeepTempFiles.getValue() == false)
     {
         StringList tempFiles("fort.2, fort.3, fort.8, fort.7, fort.9, fort.6");
@@ -145,33 +117,34 @@ void AutoWorker::run()
     }
 }
 
-bool AutoWorker::setup()
+bool AutoWorker::setupAuto()
 {
     //Transfer AUTO constants to AUTO interface
-     mRRAuto.assignProperties(&(mTheHost.mProperties));
-    //Tempfolder setup
-    string tFolder;
-    if(mTheHost.mTempFolder.getValue() == ".")
-    {
-        tFolder = getCWD();
-    }
-    else
-    {
-        tFolder = mTheHost.mTempFolder.getValue();
-    }
-
-    mTheHost.mRR->setTempFileFolder(tFolder);
-    mTheHost.mRRAuto.setTempFolder(tFolder);
+    mRRAuto.assignProperties(&(mTheHost.mProperties));
 
     if(mTheHost.mRR->isModelLoaded())
     {
-        Log(lInfo)<<"Model loaded by roadrunner outside of auto..";
-        return true;
+        Log(lInfo)<<"Model already loaded..";
     }
     else
     {
-        return mTheHost.mRR->load(mTheHost.getSBML());
+        mTheHost.mRR->load(mTheHost.getSBML());
     }
+
+    mRRAuto.selectParameter(mTheHost.mPrincipalContinuationParameter.getValue());
+
+    if(mTheHost.mScanDirection.getValue() == "Positive")
+    {
+        mRRAuto.setScanDirection(sdPositive);
+    }
+    else
+    {
+        mRRAuto.setScanDirection(sdNegative);
+    }
+
+    string str = mRRAuto.getConstantsAsString();
+    Log(lInfo)<<str;
+
 }
 
 

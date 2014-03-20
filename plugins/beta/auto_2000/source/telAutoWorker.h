@@ -32,7 +32,7 @@ class AutoWorker : public Poco::Runnable
         AutoPlugin&                                 mTheHost;
         telauto::AutoTellurimInterface&             mRRAuto;        //This class communicate with auto
 
-        bool                                        setup();
+        bool                                        setupAuto();
 };
 
 #endif

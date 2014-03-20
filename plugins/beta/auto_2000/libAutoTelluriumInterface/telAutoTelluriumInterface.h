@@ -1,8 +1,7 @@
 #ifndef telAutoTelluriumInterfaceH
 #define telAutoTelluriumInterfaceH
 #include "rr/rrRoadRunner.h"
-//#include "telAutoSetupControl.h"
-#include "telAutoInputConstants.h"
+#include "telAutoConstants.h"
 #include "tai_exporter.h"
 #include "telProperty.h"
 #include "telLogger.h"
@@ -30,7 +29,7 @@ class TA_DS AutoTellurimInterface
         bool                        setTempFolder(const string& fldr);
         bool                        setupUsingCurrentModel();
         string                      getConstantsAsString();
-        bool                        run();
+        void                        run();
         bool                        selectParameter(const string& para);
         bool                        setScanDirection(ScanDirection val);
         void                        assignRoadRunner(RoadRunner* rrInstance);
