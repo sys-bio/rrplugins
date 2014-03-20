@@ -55,8 +55,8 @@ int main()
 
         //Specific auto parameters
 
-        autoPlugin->setPropertyByString("ScanDirection", "Positive");
-//        autoPlugin->setPropertyByString("ScanDirection", "Negative");
+//        autoPlugin->setPropertyByString("ScanDirection", "Positive");
+        autoPlugin->setPropertyByString("ScanDirection", "Negative");
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
 //        autoPlugin->setPropertyByString("PrincipalContinuationParameter", "A");
         autoPlugin->setPropertyByString("RL0", ".1");

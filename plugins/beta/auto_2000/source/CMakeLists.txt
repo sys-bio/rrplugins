@@ -6,6 +6,7 @@ include_directories(
 ../../source   #RoadRunner Sources
 ../../../source   #RoadRunner Sources
 ../../wrappers/C
+../libAutoTelluriumInterface
 ${CMAKE_INSTALL_PREFIX}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
@@ -16,8 +17,8 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-rrAutoPlugin
-rrAutoWorker
+telAutoPlugin
+telAutoWorker
 )
 
 
@@ -26,7 +27,7 @@ add_definitions(
 -DPOCO_STATIC
 -DLIBSBML_STATIC
 -DSTATIC_AUTO
--DSTATIC_RR_AUTO
+-DSTATIC_TEL_AUTO
 -DSTATIC_LIBSTRUCT
 -DLIBLAX_STATIC
 -DSTATIC_NLEQ
@@ -45,7 +46,7 @@ target_link_libraries (${target}
 roadrunner
 telplugins_core
 telplugins_common
-rrAutoInterface-static
+libTelluriumAutoInterface-static
 libAuto-static
 )
 endif()

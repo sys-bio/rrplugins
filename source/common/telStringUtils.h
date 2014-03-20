@@ -8,6 +8,7 @@
 #include "telUtils.h"
 #include "telCommonExporter.h"
 #include "rr-libstruct/lsMatrix.h"
+#include "telOSSpecifics.h"
 
 namespace tlp
 {

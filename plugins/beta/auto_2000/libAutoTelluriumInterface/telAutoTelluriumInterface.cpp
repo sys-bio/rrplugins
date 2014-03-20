@@ -147,8 +147,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
     rr::ExecutableModel* theModel = mRR->getModel();
 
     //The continuation parameter can be a 'parameter' or a boundary species
-    int numBoundaries(0);
-    int numParameters(0);
+    int numBoundaries(0), numParameters(0);
 
     if(mModelBoundarySpecies.indexOf(mPCPParameterName) != -1)
     {
@@ -163,7 +162,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
     vector<double> boundaryValues(numBoundaries);
     vector<double> globalParameters(numParameters);
 
-    if (numBoundaries > 0)
+    if(numBoundaries > 0)
     {
         for (int i = 0; i < numBoundaries; i++)
         {
@@ -172,7 +171,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
         }
     }
 
-    if (numParameters > 0)
+    if(numParameters > 0)
     {
         for (int i = 0; i < numParameters; i++)
         {
@@ -210,6 +209,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
     {
         u[i] = floatCon[i];
     }
+
     delete [] floatCon;
     return 0;
 }
@@ -249,11 +249,14 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
 
     if (numParameters > 0)
     {
-        double* oParameters = new double[numParameters];
-        for(int i = 0; i < numParameters; i ++)
+        //Todo memory leak
+        vector<double> oParameters(numParameters);
+        for(int i = 0; i < numParameters; i++)
         {
             oParameters[i] = par[i];
         }
+
+        //Currently only one variable is supported
         mRR->setValue(mPCPParameterName, oParameters[0]);
     }
 

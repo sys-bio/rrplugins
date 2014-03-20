@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 set(target libTelluriumAutoInterface)
 
 include_directories(
-../../source        #Plugin lib source
-../../../source     #RoadRunner lib source
 
 )
 
@@ -14,10 +12,10 @@ ${CMAKE_BINARY_DIR}/lib
 
 #The api is built as a static library..
 set(src
-telAutoData
-telAutoInputConstants
-telTelluriumAutoInterface
-telAutoSetupControl
+#telAutoData
+telAutoConstants
+telAutoTelluriumInterface
+telAutoUtils
 )
 
 add_library(${target}-static STATIC
@@ -28,7 +26,7 @@ if(WIN32)
     set_property(TARGET ${target}-static 
         PROPERTY  COMPILE_DEFINITIONS 
         STATIC_AUTO
-        STATIC_RR_AUTO
+        STATIC_TEL_AUTO
         )
     
     target_link_libraries ( ${target}-static

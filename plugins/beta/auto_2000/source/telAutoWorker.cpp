@@ -142,6 +142,7 @@ bool AutoWorker::setupAuto()
 
     string str = mRRAuto.getConstantsAsString();
     Log(lInfo)<<str;
+    return true;
 }
 
 
