@@ -315,4 +315,4 @@ string AutoTellurimInterface::getConstantsAsString()
     return mAutoConstants.getConstantsAsString();
 }
 
-} //namespace au
+}

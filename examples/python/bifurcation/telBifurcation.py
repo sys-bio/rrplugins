@@ -17,8 +17,8 @@ try:
         
     print auto._propertyNames
     #Set Auto Propertys
-    #auto.setProperty("ScanDirection", "Negative")
-    auto.setProperty("ScanDirection", "Positive")    
+    auto.setProperty("ScanDirection", "Negative")
+    #auto.setProperty("ScanDirection", "Positive")    
     auto.setProperty("SBML", readAllText(sbmlModel))
         
     #True for debugging
@@ -29,6 +29,10 @@ try:
            
     #Execute the plugin
     auto.execute()
+    
+    #Get some info 
+    # =Bifurcation summary
+    print auto.BiFurcationSummary
     
     print 'Bifurcation Diagram ========================' 
     print auto.BiFurcationDiagram

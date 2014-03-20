@@ -3,9 +3,9 @@ set(target libAuto)
 include_directories(
 libf2c
 )
-#The api is built as a shared library..
+
 set(src
-main
+theMain
 autlab
 autlib1
 autlib2

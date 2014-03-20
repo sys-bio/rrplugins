@@ -131,7 +131,7 @@ int AUTO_main(int argc, char *argv[])
 OPEN_FP3:
     fp3 = fopen(fort_name[3],"r");
     if(fp3 == NULL) {
-        fprintf(stderr,"warning:  Could not open %s\n", fort_name[3]);
+        //fprintf(stderr,"warning:  Could not open %s\n", fort_name[3]);
 
         // don't die, just "touch" the file
         fp3 = fopen(fort_name[3], "w");
