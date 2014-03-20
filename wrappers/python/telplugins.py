@@ -216,6 +216,15 @@ class DataSeries(object):
         npData = tpc.getNumpyData(self._data)
         tpc.plotTelluriumData(npData, hdr)
 
+    ## \brief Plot a dataseries using Bifurcation additional data as input
+    ##@code
+    ## d.plot()
+    ##@endcode       
+    def plotBiFurcationDiagram (self, bfPoints, bfLabels):
+        hdr = tpc.getTelluriumDataColumnHeader(self._data)
+        npData = tpc.getNumpyData(self._data)
+        tpc.plotBifurcationData(npData, hdr, bfPoints, bfLabels)
+
     data = property (__getHandle)
 
     ## \brief Return a numpy array from a data series

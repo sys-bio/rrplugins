@@ -1,7 +1,8 @@
 from telplugins import *
 
 try:  
-    sbmlModel ="bistable.xml"                   
+    sbmlModel ="bistable.xml"
+    sbmlModel ="BIOMD0000000203.xml"                       
     
     #Get an auto2000 plugin object
     auto = Plugin("tel_auto2000")
@@ -18,15 +19,16 @@ try:
     print auto.listOfPropertyNames()
     
     #Set Auto Propertys
-    auto.setProperty("ScanDirection", "Negative")
-    #auto.setProperty("ScanDirection", "Positive")    
+    #auto.setProperty("ScanDirection", "Negative")
+    auto.setProperty("ScanDirection", "Positive")    
     auto.setProperty("SBML", readAllText(sbmlModel))
         
     #True for debugging
     auto.setProperty("KeepTempFiles", True)
-    auto.setProperty("PrincipalContinuationParameter", "k3")
-    auto.setProperty("PCPLowerBound", 0.1)
-    auto.setProperty("PCPUpperBound", 1.2)  
+    auto.setProperty("PrincipalContinuationParameter", "A")
+    auto.setProperty("PCPLowerBound", 10)
+    auto.setProperty("PCPUpperBound", 100)
+    auto.setProperty("NMX", 5000)  
            
     #Execute the plugin
     auto.execute()
@@ -37,9 +39,15 @@ try:
     
     pts = auto.BiFurcationPoints
     lbls = auto.BiFurcationLabels
+    biData = auto.BiFurcationData
     
+    biData.writeDataSeries('r:/temp/autoData.dat')
+    
+    biDataHdrs = biData.getColumnHeaders()
+        
     print pts
     print lbls
+    biData.plotBiFurcationDiagram(pts, lbls) 
     
     #print 'Bifurcation Diagram ========================' 
     #print auto.BiFurcationDiagram

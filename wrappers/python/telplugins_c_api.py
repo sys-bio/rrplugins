@@ -1154,6 +1154,41 @@ def plotTelluriumData(data, colHeaders):
     plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plot.xlabel(xlbl)
     plot.show()
+    
+def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
+    nrCols = data.shape[1]
+    nrRows = data.shape[0]
+
+    if colHeaders == None or len(colHeaders) < 1:
+        print "Bad Data ColumnHeader"
+        return
+    xlbl = colHeaders[0]
+    nrOfSeries = nrCols -1
+    x = data[:,0]
+
+    for serie in range(nrOfSeries):
+        ySeries = np.zeros([nrRows])
+        ySeries = data[:,serie + 1]
+        plot.plot(x, ySeries, "", linewidth=3.0, label=colHeaders[serie +1], )
+
+    
+    #Plot bifurcation labels       
+    for serie in range(nrOfSeries):
+        labelNr = 0
+        ySeries = data[:,serie + 1]
+        for label in bfLabels:
+            if label != 'EP':
+                xPtn = bfPoints[labelNr] - 1
+                xCoord = x[xPtn]
+                yCoord = ySeries[xPtn] 
+                plot.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
+            labelNr = labelNr + 1
+            
+    plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
+    plot.xlabel(xlbl)
+    
+    plot.show()
+        
 
 ## \brief Get column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
