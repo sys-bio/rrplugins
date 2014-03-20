@@ -14,7 +14,8 @@
     #pragma comment(lib, "roadrunner.lib")
     #pragma comment(lib, "telplugins_core.lib")
     #pragma comment(lib, "telplugins_common.lib")
-    #pragma comment(lib, "libAutoTelluriumInterface-static.lib")
+//    #pragma comment(lib, "libAutoTelluriumInterface-static.lib")
+    #pragma comment(lib, "libAutoTelluriumInterface.lib")
 #endif
 
 #pragma comment(lib, "poco_foundation-static.lib")

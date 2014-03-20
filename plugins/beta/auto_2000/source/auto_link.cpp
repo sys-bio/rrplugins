@@ -16,8 +16,7 @@
     #pragma comment(lib, "roadrunner.lib")
     #pragma comment(lib, "telplugins_common.lib")
     #pragma comment(lib, "telplugins_core.lib")
-    #pragma comment(lib, "libAuto-static.lib")
-//    #pragma comment(lib, "rrAutoInterface-static.lib")
+    #pragma comment(lib, "libAuto.lib")
     #pragma comment(lib, "libAutoTelluriumInterface.lib")
 //#endif
 

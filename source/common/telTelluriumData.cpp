@@ -18,7 +18,7 @@ namespace tlp
 TelluriumData::TelluriumData(const int& rSize, const int& cSize ) 
 :
 mTimePrecision(6),
-mDataPrecision(16)
+mDataPrecision(12)
 {
     if(cSize && rSize)
     {

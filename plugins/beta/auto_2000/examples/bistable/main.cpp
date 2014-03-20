@@ -60,8 +60,8 @@ int main()
         autoPlugin->setPropertyByString("PrincipalContinuationParameter", "k3");
 //        autoPlugin->setPropertyByString("PrincipalContinuationParameter", "A");
         autoPlugin->setPropertyByString("RL0", ".1");
-        autoPlugin->setPropertyByString("RL1", "120");
-        autoPlugin->setPropertyByString("NMX", "15000");
+        autoPlugin->setPropertyByString("RL1", "20");
+        autoPlugin->setPropertyByString("NMX", "1000");
 
         if(!autoPlugin->execute(false))
         {
@@ -72,40 +72,39 @@ int main()
         Log(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
         Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BiFurcationSummary");
-        Log(lInfo)<<"BIFURCATION DIAGRAM\n"<< biD->getValue();
         Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
-        //Parse the data
-        AutoDataParser adp(biD->getValue());
+        //Check bifurcaation data
+        Property< vector<int> >* biPtsP          = (Property< vector<int> >*)       autoPlugin->getProperty("BiFurcationPoints");
+        Property< vector<string> >* biLblsP      = (Property< vector<string> >*)    autoPlugin->getProperty("BiFurcationLabels");
+        Property< TelluriumData >* biDataP      = (Property< TelluriumData >*)      autoPlugin->getProperty("BiFurcationData");
 
-        Log(lInfo) << "Number of data points: "         <<adp.getNumberOfDataPoints();
-        Log(lInfo) << "Number of bifurcation points: "  <<adp.getNumberOfBifurcationPoints();
-        StringList lines = adp.getDataFileHeader();
-        Log(lInfo) << "Data header ===";
-        for(int i = 0; i < lines.count(); i++)
-        {
-            Log(lInfo) << "line " << i << ": "<< lines[i];
-        }
+        vector<int>         biPts = biPtsP->getValue();
+        vector<string>      biLbls = biLblsP->getValue();
+        TelluriumData       biData = biDataP->getValue();
+
+        Log(lInfo) << "Number of bifurc points: "  <<biPts.size();
+        Log(lInfo) << "Number of bifurc labels: "  <<biLbls.size();
 
         Log(lInfo) <<"\n\n";
 
-        lines = adp.getBiFurcationPoints();
-        Log(lInfo) << "Labeled solutions header ===";
-        for(int i = 0; i < lines.count(); i++)
+        if(biPts.size() != biLbls.size())
         {
-            Log(lInfo) << "line " << i << ": "<< lines[i];
+            throw("Bad");
         }
 
-        Log(lInfo) << "As TelluriumData ===";
+        Log(lInfo) << "Solution points ===";
+        for(int i = 0; i < biPts.size(); i++)
+        {
+            Log(lInfo) << "Point, Label " << biPts[i] << ": "<< biLbls[i];
+        }
 
-        TelluriumData data = adp.getSolutionData();
-        Log(lInfo) << data;
-
-        data.write("auto_data.dat");
-
+        Log(lInfo) << "Save TelluriumData ===";
+        biData.write(joinPath(tempFolder, "auto_data.dat"));
         Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
+
         //Check plugin data..
-        pm.unload(autoPlugin);
+//        pm.unload(autoPlugin);
     }
     catch(Exception& ex)
     {

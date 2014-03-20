@@ -377,16 +377,16 @@ inline Property<string>::operator string & ()
 }
 
 //================= vector<int> ===============================
-/**
-    Set a vector<int> properties value, from a string. This function expects input string
-    containing comma delimited values, and braces, e.g. {1, 3, 5 ,2}
-*/
 template<>
 inline void Property< vector<int> >::setValue(const void* val)
 {
     mValue = * ((vector<int> *) (val));
 }
 
+/**
+    Set a vector<int> properties value, from a string. This function expects input string
+    containing comma delimited values, and braces, e.g. {1, 3, 5 ,2}
+*/
 template<>
 inline void Property< std::vector<int> >::setValueFromString(const string& val)
 {
@@ -396,6 +396,40 @@ inline void Property< std::vector<int> >::setValueFromString(const string& val)
     {
         mValue.push_back( toInt(nrList[i]));
     }
+}
+
+template<>
+inline Property< vector<int> >::operator vector<int> () const
+{
+    return mValue;
+}
+
+//================= vector<double> ===============================
+template<>
+inline void Property< vector<double> >::setValue(const void* val)
+{
+    mValue = * ((vector<double> *) (val));
+}
+
+/**
+    Set a vector<double> properties value, from a string. This function expects input string
+    containing comma delimited values, and braces, e.g. {1, 3, 5 ,2}
+*/
+template<>
+inline void Property< std::vector<double> >::setValueFromString(const string& val)
+{
+    StringList nrList = tlp::splitString(val,", {}");
+    mValue.clear();
+    for(int i = 0; i < nrList.size(); i++)
+    {
+        mValue.push_back( toDouble(nrList[i]));
+    }
+}
+
+template<>
+inline Property< vector<double> >::operator vector<double> () const
+{
+    return mValue;
 }
 
 //================= vector<string> ===============================
@@ -536,6 +570,15 @@ template<>
 inline string getPropertyType< vector<int> >(const vector<int> &a)
 {
     return "vector<int>";
+}
+
+/**
+    \brief Returns the type as a string.
+*/
+template<>
+inline string getPropertyType< vector<double> >(const vector<double> &a)
+{
+    return "vector<double>";
 }
 
 /**

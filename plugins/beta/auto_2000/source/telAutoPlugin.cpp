@@ -28,6 +28,9 @@ mScanDirection(                     "Negative",             "ScanDirection",    
 
 //Output
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
+mBiFurcationPoints(                 vector<int>(0),         "BiFurcationPoints",                    "Points that AUTO marked as 'special'",                         "",                 ""),
+mBiFurcationLabels(                 StringList(""),         "BiFurcationLabels",                    "BiFurcation labels for the data.",                             "",                 ""),
+mBiFurcationData(                   TelluriumData(),        "BiFurcationData",                      "Parsed BiFurcation data.",                             "",                 ""),
 mFort2(                             "<none>",               "fort2",                                "fort2",                                                        "",                 ""),
 mFort3(                             "<none>",               "fort3",                                "fort3",                                                        "",                 ""),
 mFort6(                             "<none>",               "BiFurcationSummary",                   "BiFurcationSummary (auto output file fort.6)",                 "",                 "BiFurcationSummary"),
@@ -196,6 +199,9 @@ void AutoPlugin::addProperties()
     mProperties.add(&mFort7);
     mProperties.add(&mFort8);
     mProperties.add(&mFort9);
+    mProperties.add(&mBiFurcationPoints);
+    mProperties.add(&mBiFurcationLabels);
+    mProperties.add(&mBiFurcationData);
 
     //AUTO parameters
     mProperties.add(&mNDIM);
@@ -238,14 +244,15 @@ void AutoPlugin::addProperties()
     mProperties.add(&mNUZR);
     mProperties.add(&mUZR);
 }
+
 //Functions allowing the plugin to be loaded by plugin manager
-AutoPlugin* auto_cc createPlugin()
+AutoPlugin* createPlugin()
 {
     //allocate a new object and return it
     return new AutoPlugin;
 }
 
-const char* auto_cc getImplementationLanguage()
+const char* getImplementationLanguage()
 {
     return "CPP";
 }

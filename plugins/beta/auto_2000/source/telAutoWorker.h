@@ -6,6 +6,7 @@
 #include "rr/rrOSSpecifics.h"
 #include "telTelluriumData.h"
 #include "auto_utils.h"
+#include "telAutoDataParser.h"
 //---------------------------------------------------------------------------
 
 namespace telauto
@@ -29,6 +30,10 @@ class AutoWorker : public Poco::Runnable
         Poco::Thread                                mThread;
         AutoPlugin&                                 mTheHost;
         telauto::AutoTellurimInterface&             mRRAuto;        //This class communicate with auto
+
+        //Auto Data parser
+        AutoDataParser                              mAutoDataParser;
+
         bool                                        setupAuto();
 };
 

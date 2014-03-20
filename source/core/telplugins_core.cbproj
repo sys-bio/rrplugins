@@ -47,8 +47,8 @@
         <Defines>EXPORT_CORE_API;POCO_STATIC;POCO_NO_AUTOMATIC_LIBS;$(Defines)</Defines>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <Manifest_File>None</Manifest_File>
-        <ILINK_LibraryPath>..\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-        <IncludePath>..\;..\..\third_party\poco\Foundation\src\;..\..\source\;$(TLP_INSTALL)\include;$(TLP_INSTALL)\include\libxml2;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\common\;..\;$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\common\;..\;..\..\third_party\poco\Foundation\src\;..\..\source\;$(TLP_INSTALL)\include;$(TLP_INSTALL)\include\libxml2;$(IncludePath)</IncludePath>
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <ProjectType>CppDynamicLibrary</ProjectType>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -108,6 +108,9 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\common\telUnresolvedSTDExternals.cpp">
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="auto_link.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>

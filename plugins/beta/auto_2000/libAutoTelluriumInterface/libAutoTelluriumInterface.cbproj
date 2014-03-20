@@ -91,9 +91,9 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <DynamicRTL>true</DynamicRTL>
         <LinkPackageStatics>vcl.lib;rtl.lib</LinkPackageStatics>
         <BCC_PCHInject>tai_pch.h</BCC_PCHInject>
-        <DynamicRTL>true</DynamicRTL>
         <BPILibOutputDir>$(TLP_INSTALL)\lib</BPILibOutputDir>
         <ILINK_LibraryPath>$(TLP_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <IncludePath>$(RR_SOURCE);$(TLP_INSTALL)\include;$(IncludePath)</IncludePath>
@@ -112,10 +112,6 @@
         <CppCompile Include="telAutoConstants.cpp">
             <DependentOn>telAutoConstants.h</DependentOn>
             <BuildOrder>9</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="telAutoData.cpp">
-            <DependentOn>telAutoData.h</DependentOn>
-            <BuildOrder>8</BuildOrder>
         </CppCompile>
         <CppCompile Include="telAutoTelluriumInterface.cpp">
             <DependentOn>telAutoTelluriumInterface.h</DependentOn>

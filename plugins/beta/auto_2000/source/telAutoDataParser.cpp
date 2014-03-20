@@ -4,6 +4,7 @@
 #include "telTelluriumData.h"
 #include "telUtils.h"
 #include "telLogger.h"
+#include "auto_utils.h"
 //---------------------------------------------------------------------------
 
 using namespace tlp;
@@ -38,7 +39,7 @@ int AutoDataParser::getNumberOfDataPoints()
 
 int AutoDataParser::getNumberOfBifurcationPoints()
 {
-    return mBiFurcationPoints.count();
+    return mBiFurcationPoints.size();
 }
 
 string AutoDataParser::getBiFurcationDiagram()
@@ -56,9 +57,14 @@ TelluriumData AutoDataParser::getSolutionData()
     return mSolutionData;
 }
 
-StringList AutoDataParser::getBiFurcationPoints()
+vector<int> AutoDataParser::getBiFurcationPoints()
 {
     return mBiFurcationPoints;
+}
+
+StringList AutoDataParser::getBiFurcationLabels()
+{
+    return mBiFurcationLabels;
 }
 
 StringList AutoDataParser::getDataFileHeader()
@@ -96,6 +102,7 @@ bool AutoDataParser::parse(const string& input)
         {
             StringList dataRecord = splitString(line, " ");
             mRawSolutionData.add(line);
+
             //look for special points, i.e. third record not being 0 or 4
             if(dataRecord.size() > 4)
             {
@@ -106,11 +113,17 @@ bool AutoDataParser::parse(const string& input)
                         dataRecord[2] == "6" ||
                         dataRecord[2] == "7" ||
                         dataRecord[2] == "8" ||
+                        dataRecord[2] == "9" ||
                         dataRecord[2] == "-9"
-                    )
+                  )
                 {
-                    //We have a special point. Add the whole line
-                    mBiFurcationPoints.add(line);
+                    //We have a special point. Parse the line and populate
+                    //Bifurcation point and labels vector
+
+                    int ptNr    = abs(toInt(dataRecord[1]));
+                    string lbl  = toAutoLabel(toInt(dataRecord[2]));
+                    mBiFurcationPoints.push_back(ptNr);
+                    mBiFurcationLabels.push_back(lbl);
                 }
             }
         }

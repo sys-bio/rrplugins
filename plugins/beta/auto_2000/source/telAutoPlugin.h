@@ -9,12 +9,6 @@
 #include "telAutoTelluriumInterface.h"
 //---------------------------------------------------------------------------
 
-#if defined(__BORLANDC__)
-    #define auto_cc __cdecl
-#else
-    #define auto_cc
-#endif
-
 using telauto::AutoTellurimInterface;
 using tlp::Property;
 using std::vector;
@@ -52,6 +46,10 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
 
+        Property< TelluriumData >               mBiFurcationData;
+        Property< vector<int> >                 mBiFurcationPoints;
+        Property< StringList >                  mBiFurcationLabels;
+
         Property<bool>                          mCaptureOutputFiles;
         Property<string>                        mFort2;
         Property<string>                        mFort3;
@@ -61,7 +59,6 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mFort9;
 
         //Auto parameters
-
         // NDIM: dimension of the system of equations, as specified in the user-supplied subroutine 'func'
         Property<int>                           mNDIM;
 
@@ -200,8 +197,8 @@ class AutoPlugin : public tlp::CPPPlugin
 
 extern "C"
 {
-TLP_DS AutoPlugin* auto_cc       createPlugin();
-TLP_DS const char* auto_cc       getImplementationLanguage();
+TLP_DS AutoPlugin* createPlugin();
+TLP_DS const char* getImplementationLanguage();
 }
 
 namespace tlp

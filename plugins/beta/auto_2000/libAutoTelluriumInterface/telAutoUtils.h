@@ -3,6 +3,7 @@
 #include <vector>
 #include "telStringList.h"
 #include "rr/rrRoadRunner.h"
+#include "tai_exporter.h"
 //---------------------------------------------------------------------------
 
 namespace telauto
@@ -13,7 +14,7 @@ using std::vector;
     \brief Takes a vector of SelectionRecords and returns their representation as
     a StringList
 */
-tlp::StringList     getRecordsAsStrings(const vector< rr::SelectionRecord >& folder);
+TA_DS tlp::StringList     getRecordsAsStrings(const vector< rr::SelectionRecord >& folder);
 
 }
 #endif

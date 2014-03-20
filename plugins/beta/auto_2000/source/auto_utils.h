@@ -1,7 +1,8 @@
 #ifndef auto_utilsH
 #define auto_utilsH
-//#include "rrc_types.h"
+#include <string>
 //---------------------------------------------------------------------------
 
+std::string toAutoLabel(int nr);
 
 #endif

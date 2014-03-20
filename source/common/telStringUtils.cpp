@@ -912,6 +912,22 @@ string toString(const vector<int>& vec, const string& sep)
     return text.str();
 }
 
+string toString(const vector<double>& vec, const string& sep)
+{
+	stringstream text;
+    text<<"{";
+    for(int i = 0; i < vec.size(); i++)
+    {
+        text<<vec[i];
+        if(i < vec.size() - 1)
+        {
+            text<<sep;
+        }
+    }
+    text<<"}";
+    return text.str();
+}
+
 string toString(const vector<string>& vec, const string& sep)
 {
 	stringstream text;
