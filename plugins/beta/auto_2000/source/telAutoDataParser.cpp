@@ -184,14 +184,14 @@ bool AutoDataParser::parse(const string& input)
         }
     }
 
-    //If scan direction was negative, swap the data so the parameter values are increasing
-    if(getScanDirection() == sdNegative)
-    {
-        for(int row = 0; row < nrOfDataRows/2; row++)
-        {
-            mSolutionData.swapRows(row, (nrOfDataRows -1 ) - row);
-        }
-    }
+    ////If scan direction was negative, swap the data so the parameter values are increasing
+    //if(getScanDirection() == sdNegative)
+    //{
+    //    for(int row = 0; row < nrOfDataRows/2; row++)
+    //    {
+    //        mSolutionData.swapRows(row, (nrOfDataRows -1 ) - row);
+    //    }
+    //}
 
     return true;
 }

@@ -7,7 +7,7 @@ import roadrunner
 import tempfile
 import time
 from ctypes import *
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plt
 #from telpluginutils import *
 
 """
@@ -1149,11 +1149,11 @@ def plotTelluriumData(data, colHeaders):
     for serie in range(nrOfSeries):
         ySeries = np.zeros([nrRows])
         ySeries = data[:,serie + 1]
-        plot.plot(x, ySeries, "", label=colHeaders[serie +1])
+        plt.plot(x, ySeries, "", label=colHeaders[serie +1])
 
-    plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
-    plot.xlabel(xlbl)
-    plot.show()
+    plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
+    plt.xlabel(xlbl)
+    plt.show()
     
 def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     nrCols = data.shape[1]
@@ -1165,40 +1165,35 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
     x = data[:,0]
-
      
     previousLbl = ''
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = np.zeros([nrRows])
-        ySeries = data[:,serie + 1]
-        #seriesColor = plot._colors[serie]
-        xIndx = 0        
+        ySeries = data[:,serie + 1]        
+        xIndx = 0
+        ax = plt.subplot(1,1,1)        
+        colors = ax._get_lines.color_cycle
+        theColor = colors.next()        
         for label in bfLabels:
             xPtn = bfPoints[labelNr] - 1                
             xSegment = x[xIndx:xPtn]
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plot.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], )
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)                    
                 else:
-                    plot.plot(xSegment, ySegment, "-", linewidth=3.0,)                    
-                       
-                
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)                                                           
             elif label == 'LP':
                 #Check Previous label
                 if previousLbl == 'LP':  
-                    plot.plot(xSegment, ySegment, "--", linewidth=2.0,  )
+                    plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
                 elif previousLbl == 'EP':
-                    plot.plot(xSegment, ySegment, "-", linewidth=2.0,  )                                                        
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)                                                        
                                 
             xIndx = xPtn                                 
             labelNr = labelNr + 1
-            previousLbl = label
-            
-                        
-            #plot.plot(x, ySeries, "-", linewidth=3.0, label=colHeaders[serie +1], )
-
+            previousLbl = label            
     
     #Plot bifurcation labels       
     for serie in range(nrOfSeries):
@@ -1209,13 +1204,13 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
                 xPtn = bfPoints[labelNr] - 1
                 xCoord = x[xPtn]
                 yCoord = ySeries[xPtn] 
-                plot.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
+                plt.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
             labelNr = labelNr + 1
             
-    plot.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
-    plot.xlabel(xlbl)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
+    plt.xlabel(xlbl)
     
-    plot.show()
+    plt.show()
         
 
 ## \brief Get column header in tellurium data
