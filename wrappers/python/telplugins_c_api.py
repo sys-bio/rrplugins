@@ -1166,10 +1166,38 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     nrOfSeries = nrCols -1
     x = data[:,0]
 
+     
+    previousLbl = ''
     for serie in range(nrOfSeries):
+        labelNr = 0
         ySeries = np.zeros([nrRows])
         ySeries = data[:,serie + 1]
-        plot.plot(x, ySeries, "", linewidth=3.0, label=colHeaders[serie +1], )
+        #seriesColor = plot._colors[serie]
+        xIndx = 0        
+        for label in bfLabels:
+            xPtn = bfPoints[labelNr] - 1                
+            xSegment = x[xIndx:xPtn]
+            ySegment = ySeries[xIndx:xPtn]
+            if label == 'EP':
+                if xIndx == 0 :
+                    plot.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], )
+                else:
+                    plot.plot(xSegment, ySegment, "-", linewidth=3.0,)                    
+                       
+                
+            elif label == 'LP':
+                #Check Previous label
+                if previousLbl == 'LP':  
+                    plot.plot(xSegment, ySegment, "--", linewidth=2.0,  )
+                elif previousLbl == 'EP':
+                    plot.plot(xSegment, ySegment, "-", linewidth=2.0,  )                                                        
+                                
+            xIndx = xPtn                                 
+            labelNr = labelNr + 1
+            previousLbl = label
+            
+                        
+            #plot.plot(x, ySeries, "-", linewidth=3.0, label=colHeaders[serie +1], )
 
     
     #Plot bifurcation labels       

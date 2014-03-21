@@ -26,9 +26,10 @@ try:
     #True for debugging
     auto.setProperty("KeepTempFiles", True)
     auto.setProperty("PrincipalContinuationParameter", "A")
+    #auto.setProperty("PrincipalContinuationParameter", "k3")    
     auto.setProperty("PCPLowerBound", 10)
     auto.setProperty("PCPUpperBound", 100)
-    auto.setProperty("NMX", 5000)  
+    auto.setProperty("NMX", 3000)  
            
     #Execute the plugin
     auto.execute()
