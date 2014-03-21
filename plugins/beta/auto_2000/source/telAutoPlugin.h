@@ -73,7 +73,7 @@ class AutoPlugin : public tlp::CPPPlugin
         /// the number of free parameters
         Property<int>                           mNICP;
 
-        /// the free parameters
+        /// The free parameters
         Property< vector<int> >                 mICP;
 
         /// the number of mesh intervals
@@ -171,9 +171,7 @@ class AutoPlugin : public tlp::CPPPlugin
         /// the number of modified parameter “weights” (for BVP)
         Property<int>                           mNTHL;
 
-        /// <summary>
         /// parameter index, parameter weight (e.g., ICP(11)=0 means PAR(11) is excluded from the step size)
-        /// </summary>
         Property< vector<int> >                 mTHL;
 
         /// the number of modified solution component “weights” (for BVP)
@@ -192,6 +190,7 @@ class AutoPlugin : public tlp::CPPPlugin
         string                                  getSBML();
 
         void                                    addProperties();
+        void                                    assignPropertyDescriptions();
 };
 
 extern "C"
