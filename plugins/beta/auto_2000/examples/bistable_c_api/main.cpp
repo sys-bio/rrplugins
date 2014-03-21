@@ -75,10 +75,10 @@ int main()
         }
 
         tpLogMsg(clInfo, "Auto plugin is done.");
-        TELHandle biFurcationDiagram = tpGetPluginProperty(autoPlugin, "BiFurcationDiagram");
-        if(biFurcationDiagram)
+        TELHandle bifurcationDiagram = tpGetPluginProperty(autoPlugin, "BifurcationDiagram");
+        if(bifurcationDiagram)
         {
-            string *temp =  (string*) tpGetPropertyValueHandle(biFurcationDiagram);
+            string *temp =  (string*) tpGetPropertyValueHandle(bifurcationDiagram);
             tpLogMsg(clInfo, temp->c_str());
         }
 

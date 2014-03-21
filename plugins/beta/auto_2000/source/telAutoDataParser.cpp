@@ -11,7 +11,7 @@ using namespace tlp;
 using namespace telauto;
 AutoDataParser::AutoDataParser(const string& input)
 :
-mBiFurcationDiagram(input)
+mBifurcationDiagram(input)
 {
     if(input.size())
     {
@@ -39,12 +39,12 @@ int AutoDataParser::getNumberOfDataPoints()
 
 int AutoDataParser::getNumberOfBifurcationPoints()
 {
-    return mBiFurcationPoints.size();
+    return mBifurcationPoints.size();
 }
 
-string AutoDataParser::getBiFurcationDiagram()
+string AutoDataParser::getBifurcationDiagram()
 {
-    return mBiFurcationDiagram;
+    return mBifurcationDiagram;
 }
 
 StringList AutoDataParser::getRawSolutionData()
@@ -57,14 +57,14 @@ TelluriumData AutoDataParser::getSolutionData()
     return mSolutionData;
 }
 
-vector<int> AutoDataParser::getBiFurcationPoints()
+vector<int> AutoDataParser::getBifurcationPoints()
 {
-    return mBiFurcationPoints;
+    return mBifurcationPoints;
 }
 
-StringList AutoDataParser::getBiFurcationLabels()
+StringList AutoDataParser::getBifurcationLabels()
 {
-    return mBiFurcationLabels;
+    return mBifurcationLabels;
 }
 
 StringList AutoDataParser::getDataFileHeader()
@@ -76,9 +76,9 @@ bool AutoDataParser::parse(const string& input)
 {
     if(input.size())
     {
-        mBiFurcationDiagram = (input);
+        mBifurcationDiagram = (input);
     }
-    else if(!mBiFurcationDiagram.size())
+    else if(!mBifurcationDiagram.size())
     {
         return false;
     }
@@ -86,7 +86,7 @@ bool AutoDataParser::parse(const string& input)
     resetOutput();
 
     //Parse the bifurcation diagram and get the special points
-    StringList diagram(splitString(mBiFurcationDiagram,"\n"));
+    StringList diagram(splitString(mBifurcationDiagram,"\n"));
 
     for(int i = 0; i < diagram.size(); i++)
     {
@@ -122,8 +122,8 @@ bool AutoDataParser::parse(const string& input)
 
                     int ptNr    = abs(toInt(dataRecord[1]));
                     string lbl  = toAutoLabel(toInt(dataRecord[2]));
-                    mBiFurcationPoints.push_back(ptNr);
-                    mBiFurcationLabels.push_back(lbl);
+                    mBifurcationPoints.push_back(ptNr);
+                    mBifurcationLabels.push_back(lbl);
                 }
             }
         }

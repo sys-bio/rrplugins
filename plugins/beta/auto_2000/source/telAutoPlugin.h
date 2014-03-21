@@ -25,7 +25,6 @@ class AutoPlugin : public tlp::CPPPlugin
         string                                  getConstants();
         bool                                    resetPlugin();
         bool                                    setInputData(void* data);
-        string                                  getStatus();
         bool                                    isWorking() const;
         telauto::AutoTellurimInterface&         getRRAuto();
 
@@ -46,15 +45,15 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
         Property<string>                        mPrincipalContinuationParameter;
 
-        Property< TelluriumData >               mBiFurcationData;
-        Property< vector<int> >                 mBiFurcationPoints;
-        Property< StringList >                  mBiFurcationLabels;
+        Property< TelluriumData >               mBifurcationData;
+        Property< vector<int> >                 mBifurcationPoints;
+        Property< StringList >                  mBifurcationLabels;
 
         Property<bool>                          mCaptureOutputFiles;
         Property<string>                        mFort2;
         Property<string>                        mFort3;
         Property<string>                        mFort6;     //Alias BifurcationSummary
-        Property<string>                        mFort7;     //Alias BiFurcationDiagram
+        Property<string>                        mFort7;     //Alias BifurcationDiagram
         Property<string>                        mFort8;
         Property<string>                        mFort9;
 

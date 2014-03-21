@@ -28,13 +28,13 @@ mScanDirection(                     "Negative",             "ScanDirection",    
 
 //Output
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
-mBiFurcationPoints(                 vector<int>(0),         "BiFurcationPoints",                    "Points that AUTO marked as 'special'",                         "",                 ""),
-mBiFurcationLabels(                 StringList(""),         "BiFurcationLabels",                    "BiFurcation labels for the data.",                             "",                 ""),
-mBiFurcationData(                   TelluriumData(),        "BiFurcationData",                      "Parsed BiFurcation data.",                             "",                 ""),
+mBifurcationPoints(                 vector<int>(0),         "BifurcationPoints",                    "Points that AUTO marked as 'special'",                         "",                 ""),
+mBifurcationLabels(                 StringList(""),         "BifurcationLabels",                    "Bifurcation labels for the data.",                             "",                 ""),
+mBifurcationData(                   TelluriumData(),        "BifurcationData",                      "Parsed Bifurcation data.",                             "",                 ""),
 mFort2(                             "<none>",               "fort2",                                "fort2",                                                        "",                 ""),
 mFort3(                             "<none>",               "fort3",                                "fort3",                                                        "",                 ""),
-mFort6(                             "<none>",               "BiFurcationSummary",                   "BiFurcationSummary (auto output file fort.6)",                 "",                 "BiFurcationSummary"),
-mFort7(                             "<none>",               "BiFurcationDiagram",                   "BiFurcationDiagram (auto output file fort.7)",                 "",                 "BiFurcationDiagram"),
+mFort6(                             "<none>",               "BifurcationSummary",                   "BifurcationSummary (auto output file fort.6)",                 "",                 "BifurcationSummary"),
+mFort7(                             "<none>",               "BifurcationDiagram",                   "BifurcationDiagram (auto output file fort.7)",                 "",                 "BifurcationDiagram"),
 mFort8(                             "<none>",               "fort8",                                "fort9",                                                        "",                 ""),
 mFort9(                             "<none>",               "fort9",                                "fort9",                                                        "",                 ""),
 //mCalculateSteadyState(              true,                   "CalculateSteadyStateOnInit",                                "fort9",                                                        "",                 ""),
@@ -83,7 +83,6 @@ mNUZR(                              0,                      "NUZR",             
 mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         "")
 {
     mVersion = "0.8";
-
     //Setup the plugin properties
     addProperties();
 
@@ -91,8 +90,8 @@ mUZR(                               vector<int>(0),         "UZR",              
     mRR = new RoadRunner;
     mRRAuto.assignRoadRunner(mRR);
 
-    mHint ="BiFurcation Analyis using AUTO2000";
-    mDescription="The Auto2000 plugin is a wrapper around the AUTO 2000 BiFurcation analysis library. This plugin was inspired and are using many of Frank Bergmann's \
+    mHint ="Bifurcation Analyis using AUTO2000";
+    mDescription="The Auto2000 plugin is a wrapper around the AUTO 2000 Bifurcation analysis library. This plugin was inspired and are using many of Frank Bergmann's \
 ideas on how to create a usable interface to the AUTO 2000 library.";
 }
 
@@ -126,14 +125,6 @@ string AutoPlugin::getConstants()
 bool AutoPlugin::isWorking() const
 {
     return mAutoWorker.isRunning();
-}
-
-string AutoPlugin::getStatus()
-{
-    stringstream msg;
-    msg<<Plugin::getStatus();
-    msg<<"TempFolder: "<<mTempFolder<<"\n";
-    return msg.str();
 }
 
 bool AutoPlugin::resetPlugin()
@@ -199,9 +190,9 @@ void AutoPlugin::addProperties()
     mProperties.add(&mFort7);
     mProperties.add(&mFort8);
     mProperties.add(&mFort9);
-    mProperties.add(&mBiFurcationPoints);
-    mProperties.add(&mBiFurcationLabels);
-    mProperties.add(&mBiFurcationData);
+    mProperties.add(&mBifurcationPoints);
+    mProperties.add(&mBifurcationLabels);
+    mProperties.add(&mBifurcationData);
 
     //AUTO parameters
     mProperties.add(&mNDIM);

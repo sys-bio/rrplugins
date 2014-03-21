@@ -70,14 +70,14 @@ int main()
         }
 
         Log(lInfo)<<"Auto plugin is done.";
-        Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BiFurcationDiagram");
-        Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BiFurcationSummary");
+        Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BifurcationDiagram");
+        Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BifurcationSummary");
         Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Check bifurcaation data
-        Property< vector<int> >* biPtsP         = (Property< vector<int> >*)       autoPlugin->getProperty("BiFurcationPoints");
-        Property< vector<string> >* biLblsP     = (Property< vector<string> >*)    autoPlugin->getProperty("BiFurcationLabels");
-        Property< TelluriumData >* biDataP      = (Property< TelluriumData >*)     autoPlugin->getProperty("BiFurcationData");
+        Property< vector<int> >* biPtsP         = (Property< vector<int> >*)       autoPlugin->getProperty("BifurcationPoints");
+        Property< vector<string> >* biLblsP     = (Property< vector<string> >*)    autoPlugin->getProperty("BifurcationLabels");
+        Property< TelluriumData >* biDataP      = (Property< TelluriumData >*)     autoPlugin->getProperty("BifurcationData");
 
         vector<int>         biPts = biPtsP->getValue();
         vector<string>      biLbls = biLblsP->getValue();

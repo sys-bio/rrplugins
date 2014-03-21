@@ -112,15 +112,15 @@ void AutoWorker::run()
     mAutoDataParser.parse(mTheHost.mFort7);
 
     //Copy data from the parser to the plugins Properties
-    mTheHost.mBiFurcationData.setValue(mAutoDataParser.getSolutionData());
-    mTheHost.mBiFurcationPoints.setValue(mAutoDataParser.getBiFurcationPoints());
-    mTheHost.mBiFurcationLabels.setValue(mAutoDataParser.getBiFurcationLabels());
+    mTheHost.mBifurcationData.setValue(mAutoDataParser.getSolutionData());
+    mTheHost.mBifurcationPoints.setValue(mAutoDataParser.getBifurcationPoints());
+    mTheHost.mBifurcationLabels.setValue(mAutoDataParser.getBifurcationLabels());
 
     //Change Telluriumdata header to match labels in the SBML model
     vector<rr::SelectionRecord>  selRecs = mTheHost.mRR->getSteadyStateSelections();
     StringList                   selList = getRecordsAsStrings(selRecs);
 
-    TelluriumData& data =  mTheHost.mBiFurcationData.getValueReference();
+    TelluriumData& data =  mTheHost.mBifurcationData.getValueReference();
 
     //First column is the selected parameter
     data.setColumnName(0, mTheHost.mPrincipalContinuationParameter.getValue());
