@@ -20,10 +20,7 @@ try:
     auto.setProperty("PrincipalContinuationParameter", "k3")
     auto.setProperty("PCPLowerBound", .35)
     auto.setProperty("PCPUpperBound", 1.5)
-    
-    auto.setProperty("TempFolder", 'r:/temp')
-    auto.setProperty("KeepTempFiles", True)    
-    
+        
     #Max numberof points
     auto.setProperty("NMX", 5000)  
            

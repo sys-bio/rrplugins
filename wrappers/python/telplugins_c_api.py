@@ -681,7 +681,7 @@ def setPluginProperty(pluginHandle, propertyName, propertyValue):
             return setListProperty(propertyHandle, propertyValue)
         if paraType == 'telluriumData': #The value of this is a handle
             return setTelluriumDataProperty (propertyHandle, propertyValue)
-        if paraType == 'StringList':
+        if paraType == 'stringList':
             return setPropertyByString(propertyHandle, propertyValue)
         else:
            raise TypeError ('Cannot set the value of such property')
@@ -711,7 +711,7 @@ def setProperty(propertyHandle, paraValue):
             return setListProperty(propertyHandle, paraValue)
         if paraType == 'telluriumData': #The value of this is a handle
             return setTelluriumDataProperty(propertyHandle, paraValue)
-        if paraType == 'StringList':
+        if paraType == 'stringList':
             return setPropertyByString(propertyHandle, paraValue)
         else:
            raise TypeError ('Cannot set the value of such property')
