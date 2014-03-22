@@ -10,9 +10,7 @@ endif()
 
 include_directories(
 ../../source   #RoadRunner Sources
-../../../source   #RoadRunner Sources
-../../wrappers/C
-../libAutoTelluriumInterface
+libAutoTelluriumInterface
 ${CMAKE_INSTALL_PREFIX}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 )

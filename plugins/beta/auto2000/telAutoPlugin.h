@@ -27,6 +27,8 @@ class AutoPlugin : public tlp::CPPPlugin
         bool                                    setInputData(void* data);
         bool                                    isWorking() const;
         telauto::AutoTellurimInterface&         getRRAuto();
+        unsigned char*                          getManualAsPDF() const;
+        unsigned int                            getPDFManualByteSize();
 
     protected:
 

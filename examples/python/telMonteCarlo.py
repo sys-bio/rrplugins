@@ -1,3 +1,9 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to setup the the MonteCarlo plugin and
+# retrieve parameter confidence limits for a models parameters.
+#
+# Author: Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 from telplugins import *
 import matplotlib.pyplot as plt
 

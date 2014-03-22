@@ -1,3 +1,10 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to setup the Levenberg-Marquardt plugin
+# and find parameter minimums. This example also shows how to setup a
+# user defined event function that is called during plugin execution. 
+#
+# Author: Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 from telplugins import *
 
 # Load Plugins

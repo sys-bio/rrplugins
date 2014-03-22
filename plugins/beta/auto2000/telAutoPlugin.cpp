@@ -5,6 +5,7 @@
 #include "telTelluriumData.h"
 #include "telAutoPlugin.h"
 #include "telUtils.h"
+#include "auto2000_doc.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace tlp;
@@ -22,7 +23,7 @@ mAutoWorker(*this),
 mTempFolder(                        ".",                    "TempFolder",                           "Tempfolder used by auto and roadrunner"),
 mKeepTempFiles(                     false,                  "KeepTempFiles",                        "Keep or remove temporary files."),
 mSBML(                              "<none>",               "SBML",                                 "SBML, i.e. the model to be used to analyze"),
-mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan"),
+mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan (Positive or Negative)"),
 
 //Output
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
@@ -237,6 +238,18 @@ void AutoPlugin::addProperties()
     mProperties.add(&mUZR);
 }
 
+
+unsigned char* AutoPlugin::getManualAsPDF() const
+{
+    return pdf_doc;
+}
+
+unsigned int AutoPlugin::getPDFManualByteSize()
+{
+    return sizeofPDF;
+}
+
+
 //Functions allowing the plugin to be loaded by plugin manager
 AutoPlugin* createPlugin()
 {
@@ -268,7 +281,7 @@ assignDescription(mTempFolder, s);
 s << "Boolean indicating if temporary files should be deleted after an AUTO session or not. ";
 assignDescription(mKeepTempFiles, s);
 
-s << "Parameter instructing AUTO how to sweep its principal continuation parameter.";
+s << "Parameter instructing AUTO how to sweep its principal continuation parameter. Possible values: 'Positive', 'Negative'";
 assignDescription(mScanDirection, s);
 
 s << "The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \

@@ -1,3 +1,9 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to setup the add noise pluging and
+# add noise to simulated data
+#
+# Author: Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 import telplugins as tel
 
 try:

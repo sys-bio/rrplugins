@@ -1,3 +1,10 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to setup and use the TestModel plugin
+# This example also shows how to plot data and how to view a plugins 
+# embedded manual 
+#
+# Author: Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 import telplugins as tel
 
 try:    

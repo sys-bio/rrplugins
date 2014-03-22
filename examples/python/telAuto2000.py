@@ -38,7 +38,7 @@ try:
     biData.plotBifurcationDiagram(pts, lbls) 
 
     auto.viewManual()   
-    print 'Plugin version: ' + `modelPlugin.getVersion()`    
+    print 'Plugin version: ' + `auto.getVersion()`    
 
 except Exception as e:
     print "There was a problem: " + `e`

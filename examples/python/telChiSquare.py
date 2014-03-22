@@ -1,3 +1,9 @@
+#-------------------------------------------------------------------------------
+# Purpose: Example demonstrating how to setup the ChiSquare plugin and
+# calculate the ChiSquare for two data sets
+#
+# Author: Totte Karlsson (totte@dunescientific.com)
+#-------------------------------------------------------------------------------
 from telplugins import *
 
 try:   
