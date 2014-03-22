@@ -10,8 +10,6 @@ using namespace std;
 using namespace tlp;
 using namespace telauto;
 
-
-
 AutoPlugin::AutoPlugin()
 :
 CPPPlugin("Auto-2000", "Bifurcation", NULL, NULL),
@@ -261,14 +259,14 @@ void AutoPlugin::assignPropertyDescriptions()
 {
     stringstream s;
 
-s.str("Tempfolder used by auto and the plugin for saving Temporary files.");
+s << "SBML document as a string. Model to be used by AUTO.";
+assignDescription(mSBML, s);
+
+s.str("Tempfolder used by auto and the plugin for saving temporary files.");
 assignDescription(mTempFolder, s);
 
 s << "Boolean indicating if temporary files should be deleted after an AUTO session or not. ";
 assignDescription(mKeepTempFiles, s);
-
-s << "SBML document as a string. Model to be used by AUTO.";
-assignDescription(mSBML, s);
 
 s << "Parameter instructing AUTO how to sweep its principal continuation parameter.";
 assignDescription(mScanDirection, s);

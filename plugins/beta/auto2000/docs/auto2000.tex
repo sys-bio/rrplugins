@@ -14,7 +14,8 @@ Available properties in the auto2000 plugin are documented in the next section.
 
 \begin{landscape}
 \section{Plugin Properties}
-The AUTO library have numerous properties that has been wrapped and made available to a plugin client. Each property listed below have a short description. For the exact usage and a more in detail description please consult the main AUTO2000 manual.
+The AUTO library have numerous properties that has been wrapped and made available to a plugin client. Each property is listed below with its data type, default value and 
+a short description. For the exact usage and a more in detail description please consult the main AUTO2000 manual.
 
 
 %\begin{table}[ht]
@@ -24,13 +25,67 @@ The AUTO library have numerous properties that has been wrapped and made availab
 Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
-SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
+SBML                                &   string              & N/A       &   SBML document as a string. Model to be used by AUTO \\
+TempFolder                          &   string              & "."       &   Tempfolder used by auto and the plugin for saving temporary files \\
+mKeepTempFiles                      &   bool                &           &   Boolean indicating if temporary files should be deleted after an AUTO session or not \\
+mScanDirection                      &   string              &           &   Parameter instructing AUTO how to sweep its principal continuation parameter. \\
+mPrincipalCont\-inuationParameter   &   string              &           &   The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
+                                                                            supported, which then by default is the PCP\\
+
 
 \\[2pt]                                                               
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are preset with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
 \hline %inserts single line                                           
 \\[2pt]                                                               
-Epsilon                         &   double              & 1.e-6          		&   Convergence tolerance. \\
+mFort2                              &   string              & N/A      &   Property containing the content of the AUTO temporary file, fort.2. Fort.2 is the input file for AUTO and created by the plugin \\
+mFort3                              &   string              & N/A      &   Property containing the content of the AUTO temporary file, fort.3. The content of fort.3 file is undocumented in AUTO's documentation \\
+mFort6                              &   string              & N/A      &   \\
+mFort7                              &   string              & N/A      &   \\
+mFort8                              &   string              & N/A      &   \\
+mFort9                              &   string              & N/A      &   \\
+mBifurcationPoints                  &   vector<int>         & N/A      &   \\
+mBifurcationLabels                  &   stringList          & N/A      &   \\
+mBifurcationData                    &   telluriumData       & N/A      &   \\
+mNDIM                               &   int                 & 1        &   \\
+mIPS                                &   int                 & 1        &   \\
+mIRS                                &   int                 & 1        &   \\
+mILP                                &   int                 & 1        &   \\
+mNICP                               &   vector<int>         & N/A      &   \\
+mICP                                &   int                 & N/A      &   \\
+mNTST                               &   int                 & 15       &   \\
+mNCOL                               &   int                 & 3        &   \\
+mIAD                                &   int                 & 3        &   \\
+mISP                                &   int                 & 1        &   \\
+mISW                                &   int                 & 1        &   \\
+mIPLT                               &   int                 & 0        &   \\
+mNBC                                &   int                 & 0        &   \\
+mNINT                               &   int                 & 0        &   \\
+mNMX                                &   double              & 1000     &   \\
+mRL0                                &   double              & 0.01     &   \\
+mRL1                                &   double              & 30       &   \\
+mA0                                 &   double              & 0        &   \\
+mA1                                 &   int                 & 10000    &   \\
+mNPR                                &   int                 & 50       &   \\
+mMXBF                               &   int                 & -1       &   \\
+mIID                                &   int                 & 0        &   \\
+mITMX                               &   int                 & 8,       &   \\
+mITNW                               &   int                 & 5,       &   \\
+mNWTN                               &   int                 & 3,       &   \\
+mJAC                                &   double              & 0,       &   \\
+mEPSL                               &   double              & 1e-8     &   \\
+mEPSU                               &   double              & 1e-8     &   \\
+mEPSS                               &   double              & 1e-6     &   \\
+mDS                                 &   double              & 0.001    &   \\
+mDSMIN                              &   double              & 1e-5     &   \\
+mDSMAX                              &   double              & 0.1      &   \\
+mIADS                               &   int                 & 1        &   \\
+mNTHL                               &   int                 & 0        &   \\
+mTHL                                &   vector<int>         & N/A      &   \\
+mNTHU                               &   int                 & 0        &   \\
+mTHU                                &   vector<int>         & N/A      &   \\
+mNUZR                               &   int                 & 0        &   \\
+mUZR                                &   vector<int>         & N/A      &   \\
+
                                                         
 \hline %inserts single line                             
 \caption{Plugin Properties} 
