@@ -22,6 +22,10 @@ This plugin implements the Nelder-Mead optimizer for fitting multi parameter dat
 This plugin implements a Monte Carlo bootstrap parameter estimation algorithm. 
 It has been tested with the levenberg_marquardt and the nelder_mead plugin.
 
+* tel_auto2000.dll 
+This plugin serve as a wrapper for the AUTO2000 continuation and bifurcation library. It currently
+supports bifurcation problems using one continuatio parameter.
+
 See http://tellurium.analogmachine.org/plugins for more details.
 
 
