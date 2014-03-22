@@ -27,8 +27,8 @@ telAutoPlugin
 telAutoWorker
 telAutoDataParser
 auto_utils
+auto2000_doc
 )
-
 
 add_definitions(
 -DEXPORT_TEL_PLUGIN

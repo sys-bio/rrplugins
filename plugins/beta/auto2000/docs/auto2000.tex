@@ -1,0 +1,84 @@
+\chapter*{Bifurcation using AUTO2000 and the Auto2000 Telluurium Plugin}
+\setcounter{chapter}{1}
+\emph{Continue with some bifurcation}
+\section{Introduction}
+The AUTO2000 plugin serves as a front-end for the AUTO2000 library. AUTO is a library for continuation and bifurcation problems in ordinary differential equations 
+\footnote{AUTO2000 by 
+Eusebius J. Doedel , Randy C. Paffenroth, Alan R. Champneys, Thomas F. Fairgrieve, Yuri A. Kuznetsov, Bart E. Oldeman, Bj\"orn Sandstede and Xianjun Wang.
+See http://www.dam.brown.edu/people/sandsted/publications/auto2000.pdf.
+}.
+
+Current limitations: Multiple continuation parameters are not supported, i.e. only one parameter can be selected for any continuation problem.
+
+Available properties in the auto2000 plugin are documented in the next section.
+
+\begin{landscape}
+\section{Plugin Properties}
+The AUTO library have numerous properties that has been wrapped and made available to a plugin client. Each property listed below have a short description. For the exact usage and a more in detail description please consult the main AUTO2000 manual.
+
+
+%\begin{table}[ht]
+\centering % used for centering table
+\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns 
+
+Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
+%heading
+\hline % inserts single horizontal line
+SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
+
+\\[2pt]                                                               
+\multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are preset with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
+\hline %inserts single line                                           
+\\[2pt]                                                               
+Epsilon                         &   double              & 1.e-6          		&   Convergence tolerance. \\
+                                                        
+\hline %inserts single line                             
+\caption{Plugin Properties} 
+\label{table:autoPluginProperties} 
+\end{longtable}
+%\end{table}
+
+\end{landscape}
+
+\section{Plugin Events}
+The auto2000 plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+
+The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
+the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
+
+\begin{table}[ht]
+\centering % used for centering table
+\begin{tabular}{l l p{9cm}} 
+
+Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table 
+%heading
+\hline % inserts single horizontal line
+PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
+PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin. \\[0.5ex]
+PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\
+
+\hline %inserts single line
+\end{tabular}
+\caption{Plugin Events} 
+\label{table:autoPluginEvents} 
+\end{table}
+
+\section{Python example}
+The following Python script illustrate how the plugin can be used. 
+
+\begin{singlespace}
+\lstinputlisting[label=AutoPluginExample,caption={Bifurcation example using a complex model.},language=Python]{Examples/telAUTO2000.py}
+\end{singlespace}
+
+\begin{figure}
+\centering
+\includegraphics[width=160mm]{AUTOOutput.png}
+\caption{Output for the example script above.}
+\label{fig:nmFig}
+\end{figure}
+
+
+
+
+
+
