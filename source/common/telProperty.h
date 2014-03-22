@@ -383,6 +383,13 @@ inline void Property< vector<int> >::setValue(const void* val)
     mValue = * ((vector<int> *) (val));
 }
 
+template<>
+inline bool Property< vector<int> >::clearValue()
+{
+    mValue.clear();
+    return true;
+}
+
 /**
     Set a vector<int> properties value, from a string. This function expects input string
     containing comma delimited values, and braces, e.g. {1, 3, 5 ,2}

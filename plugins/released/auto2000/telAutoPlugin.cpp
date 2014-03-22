@@ -174,6 +174,9 @@ bool AutoPlugin::execute(bool inThread)
     }
 
 
+    mBifurcationData.clearValue();
+    mBifurcationPoints.setValue(vector<int>(0));
+    mBifurcationLabels.clearValue();
     //go away and carry out the work
     mAutoWorker.start(inThread);
     return true;

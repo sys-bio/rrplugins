@@ -33,7 +33,7 @@ class AutoWorker : public Poco::Runnable
 
         //Auto Data parser
         AutoDataParser                              mAutoDataParser;
-
+        bool                                        removeTempFiles(const string& fldr);
         bool                                        setupAuto();
 };
 

@@ -15,13 +15,16 @@
         <Projects Include="plugins\released\levenberg_marquardt\lib\lmfit-static.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto2000\libAuto\libAuto-static.cbproj">
+        <Projects Include="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj">
+        <Projects Include="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj">
+        <Projects Include="plugins\released\auto2000\libAuto\libAuto-static.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="plugins\released\auto2000\libAuto\libAuto.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="plugins\released\nelder_mead\lib\nelder_mead-static.cbproj">
@@ -60,7 +63,7 @@
         <Projects Include="plugins\released\test_model\tel_test_model.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto2000\tel_auto2000.cbproj">
+        <Projects Include="plugins\released\auto2000\tel_auto2000.cbproj">
             <Dependencies/>
         </Projects>
         <Projects Include="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj">
@@ -93,7 +96,7 @@
         <Projects Include="R:\sbmlstudio\SBMLStudio.cbproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="plugins\beta\auto2000\examples\bistable\bistable.cbproj">
+        <Projects Include="plugins\released\auto2000\examples\bistable\bistable.cbproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -140,32 +143,41 @@
     <Target Name="lmfit-static:Make">
         <MSBuild Projects="plugins\released\levenberg_marquardt\lib\lmfit-static.cbproj" Targets="Make"/>
     </Target>
-    <Target Name="libAuto-static">
-        <MSBuild Projects="plugins\beta\auto2000\libAuto\libAuto-static.cbproj"/>
-    </Target>
-    <Target Name="libAuto-static:Clean">
-        <MSBuild Projects="plugins\beta\auto2000\libAuto\libAuto-static.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="libAuto-static:Make">
-        <MSBuild Projects="plugins\beta\auto2000\libAuto\libAuto-static.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="libAutoTelluriumInterface">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj"/>
     </Target>
     <Target Name="libAutoTelluriumInterface:Clean">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="libAutoTelluriumInterface:Make">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface.cbproj" Targets="Make"/>
     </Target>
     <Target Name="libAutoTelluriumInterface-static">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj"/>
     </Target>
     <Target Name="libAutoTelluriumInterface-static:Clean">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="libAutoTelluriumInterface-static:Make">
-        <MSBuild Projects="plugins\beta\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\released\auto2000\libAutoTelluriumInterface\libAutoTelluriumInterface-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="libAuto-static">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto-static.cbproj"/>
+    </Target>
+    <Target Name="libAuto-static:Clean">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto-static.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="libAuto-static:Make">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto-static.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="libAuto">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto.cbproj"/>
+    </Target>
+    <Target Name="libAuto:Clean">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="libAuto:Make">
+        <MSBuild Projects="plugins\released\auto2000\libAuto\libAuto.cbproj" Targets="Make"/>
     </Target>
     <Target Name="nelder_mead-static">
         <MSBuild Projects="plugins\released\nelder_mead\lib\nelder_mead-static.cbproj"/>
@@ -276,13 +288,13 @@
         <MSBuild Projects="plugins\released\test_model\tel_test_model.cbproj" Targets="Make"/>
     </Target>
     <Target Name="tel_auto2000">
-        <MSBuild Projects="plugins\beta\auto2000\tel_auto2000.cbproj"/>
+        <MSBuild Projects="plugins\released\auto2000\tel_auto2000.cbproj"/>
     </Target>
     <Target Name="tel_auto2000:Clean">
-        <MSBuild Projects="plugins\beta\auto2000\tel_auto2000.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\released\auto2000\tel_auto2000.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="tel_auto2000:Make">
-        <MSBuild Projects="plugins\beta\auto2000\tel_auto2000.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\released\auto2000\tel_auto2000.cbproj" Targets="Make"/>
     </Target>
     <Target Name="nm_plugin_example">
         <MSBuild Projects="plugins\released\nelder_mead\Examples\plugin_example\nm_plugin_example.cbproj"/>
@@ -375,22 +387,22 @@
         <MSBuild Projects="R:\sbmlstudio\SBMLStudio.cbproj" Targets="Make"/>
     </Target>
     <Target Name="bistable">
-        <MSBuild Projects="plugins\beta\auto2000\examples\bistable\bistable.cbproj"/>
+        <MSBuild Projects="plugins\released\auto2000\examples\bistable\bistable.cbproj"/>
     </Target>
     <Target Name="bistable:Clean">
-        <MSBuild Projects="plugins\beta\auto2000\examples\bistable\bistable.cbproj" Targets="Clean"/>
+        <MSBuild Projects="plugins\released\auto2000\examples\bistable\bistable.cbproj" Targets="Clean"/>
     </Target>
     <Target Name="bistable:Make">
-        <MSBuild Projects="plugins\beta\auto2000\examples\bistable\bistable.cbproj" Targets="Make"/>
+        <MSBuild Projects="plugins\released\auto2000\examples\bistable\bistable.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="roadrunner;roadrunner_c_api;lmfit;lmfit-static;libAuto-static;libAutoTelluriumInterface;libAutoTelluriumInterface-static;nelder_mead-static;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;tel_add_noise;tel_levenberg_marquardt;tel_monte_carlo_bs;tel_nelder_mead;tel_test_model;tel_auto2000;nm_plugin_example;plugin_info;c_plugin_demo;data_handles;nm_rr_example;one_rr;handle_manager;property_meta_data;property_container;SBMLStudio;bistable"/>
+        <CallTarget Targets="roadrunner;roadrunner_c_api;lmfit;lmfit-static;libAutoTelluriumInterface;libAutoTelluriumInterface-static;libAuto-static;libAuto;nelder_mead-static;telplugins_common;telplugins_core;telplugins_jobs;telplugins_math;telplugins_c_api;tel_c_plugin_demo;tel_add_noise;tel_levenberg_marquardt;tel_monte_carlo_bs;tel_nelder_mead;tel_test_model;tel_auto2000;nm_plugin_example;plugin_info;c_plugin_demo;data_handles;nm_rr_example;one_rr;handle_manager;property_meta_data;property_container;SBMLStudio;bistable"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;lmfit:Clean;lmfit-static:Clean;libAuto-static:Clean;libAutoTelluriumInterface:Clean;libAutoTelluriumInterface-static:Clean;nelder_mead-static:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;tel_add_noise:Clean;tel_levenberg_marquardt:Clean;tel_monte_carlo_bs:Clean;tel_nelder_mead:Clean;tel_test_model:Clean;tel_auto2000:Clean;nm_plugin_example:Clean;plugin_info:Clean;c_plugin_demo:Clean;data_handles:Clean;nm_rr_example:Clean;one_rr:Clean;handle_manager:Clean;property_meta_data:Clean;property_container:Clean;SBMLStudio:Clean;bistable:Clean"/>
+        <CallTarget Targets="roadrunner:Clean;roadrunner_c_api:Clean;lmfit:Clean;lmfit-static:Clean;libAutoTelluriumInterface:Clean;libAutoTelluriumInterface-static:Clean;libAuto-static:Clean;libAuto:Clean;nelder_mead-static:Clean;telplugins_common:Clean;telplugins_core:Clean;telplugins_jobs:Clean;telplugins_math:Clean;telplugins_c_api:Clean;tel_c_plugin_demo:Clean;tel_add_noise:Clean;tel_levenberg_marquardt:Clean;tel_monte_carlo_bs:Clean;tel_nelder_mead:Clean;tel_test_model:Clean;tel_auto2000:Clean;nm_plugin_example:Clean;plugin_info:Clean;c_plugin_demo:Clean;data_handles:Clean;nm_rr_example:Clean;one_rr:Clean;handle_manager:Clean;property_meta_data:Clean;property_container:Clean;SBMLStudio:Clean;bistable:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;lmfit:Make;lmfit-static:Make;libAuto-static:Make;libAutoTelluriumInterface:Make;libAutoTelluriumInterface-static:Make;nelder_mead-static:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;tel_add_noise:Make;tel_levenberg_marquardt:Make;tel_monte_carlo_bs:Make;tel_nelder_mead:Make;tel_test_model:Make;tel_auto2000:Make;nm_plugin_example:Make;plugin_info:Make;c_plugin_demo:Make;data_handles:Make;nm_rr_example:Make;one_rr:Make;handle_manager:Make;property_meta_data:Make;property_container:Make;SBMLStudio:Make;bistable:Make"/>
+        <CallTarget Targets="roadrunner:Make;roadrunner_c_api:Make;lmfit:Make;lmfit-static:Make;libAutoTelluriumInterface:Make;libAutoTelluriumInterface-static:Make;libAuto-static:Make;libAuto:Make;nelder_mead-static:Make;telplugins_common:Make;telplugins_core:Make;telplugins_jobs:Make;telplugins_math:Make;telplugins_c_api:Make;tel_c_plugin_demo:Make;tel_add_noise:Make;tel_levenberg_marquardt:Make;tel_monte_carlo_bs:Make;tel_nelder_mead:Make;tel_test_model:Make;tel_auto2000:Make;nm_plugin_example:Make;plugin_info:Make;c_plugin_demo:Make;data_handles:Make;nm_rr_example:Make;one_rr:Make;handle_manager:Make;property_meta_data:Make;property_container:Make;SBMLStudio:Make;bistable:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -260,8 +260,8 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
         mRR->setValue(mPCPParameterName, oParameters[0]);
     }
 
-    static vector<rr::SelectionRecord>  selRecs = mRR->getSteadyStateSelections();
-    static tlp::StringList              selList = getRecordsAsStrings(selRecs);
+    vector<rr::SelectionRecord>  selRecs = mRR->getSteadyStateSelections();
+    tlp::StringList              selList = getRecordsAsStrings(selRecs);
 
     vector<double> variableTemp(selList.size());
     int ndim = mAutoConstants.NDIM;

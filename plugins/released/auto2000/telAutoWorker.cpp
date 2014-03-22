@@ -64,6 +64,7 @@ void AutoWorker::run()
         return;
     }
 
+
     //==================== This is where we call auto
     mRRAuto.run();
 
@@ -100,12 +101,7 @@ void AutoWorker::run()
     //Cleanup after auto..
     if(mTheHost.mKeepTempFiles.getValue() == false)
     {
-        StringList tempFiles("fort.2, fort.3, fort.8, fort.7, fort.9, fort.6");
-        for(int i =0; i < tempFiles.count(); i++)
-        {
-            Poco::File tempFile(joinPath(tempFolder, tempFiles[i]));
-            tempFile.remove();
-        }
+        removeTempFiles(tempFolder);
     }
 
     //Parse output data
@@ -141,15 +137,7 @@ bool AutoWorker::setupAuto()
 {
     //Transfer AUTO constants to AUTO interface
     mRRAuto.assignProperties(&(mTheHost.mProperties));
-
-    if(mTheHost.mRR->isModelLoaded())
-    {
-        Log(lInfo)<<"Model already loaded..";
-    }
-    else
-    {
-        mTheHost.mRR->load(mTheHost.getSBML());
-    }
+    mTheHost.mRR->load(mTheHost.getSBML());
 
     mRRAuto.selectParameter(mTheHost.mPrincipalContinuationParameter.getValue());
 
@@ -167,4 +155,13 @@ bool AutoWorker::setupAuto()
     return true;
 }
 
-
+bool AutoWorker::removeTempFiles(const string& tempFolder)
+{
+    StringList tempFiles("fort.2, fort.3, fort.8, fort.7, fort.9, fort.6");
+    for(int i =0; i < tempFiles.count(); i++)
+    {
+        Poco::File tempFile(joinPath(tempFolder, tempFiles[i]));
+        tempFile.remove();
+    }
+    return true;
+}

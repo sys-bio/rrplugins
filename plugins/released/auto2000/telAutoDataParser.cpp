@@ -27,9 +27,12 @@ AutoDataParser::~AutoDataParser()
 
 void AutoDataParser::resetOutput()
 {
+    mBifurcationDiagram = "";
     mDataHeader.clear();
     mRawSolutionData.clear();
     mSolutionData.clear();
+    mBifurcationPoints.clear();
+    mBifurcationLabels.clear();
 }
 
 int AutoDataParser::getNumberOfDataPoints()
@@ -74,6 +77,7 @@ StringList AutoDataParser::getDataFileHeader()
 
 bool AutoDataParser::parse(const string& input)
 {
+    resetOutput();
     if(input.size())
     {
         mBifurcationDiagram = (input);
@@ -83,7 +87,7 @@ bool AutoDataParser::parse(const string& input)
         return false;
     }
 
-    resetOutput();
+    
 
     //Parse the bifurcation diagram and get the special points
     StringList diagram(splitString(mBifurcationDiagram,"\n"));
