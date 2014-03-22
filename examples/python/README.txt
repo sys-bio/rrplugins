@@ -6,8 +6,10 @@ Folder containing example/demo scripts demonstrating plugin usage.
 * telLevenbergMarquardt.py          - Demonstrate usage of the Levenberg-Marquardt plugin
 * telNelderMead.py                  - Demonstrate usage of the Nelder-Mead plugin
 * telMonteCarlo.py                  - Demonstrate usage of the Monte Carlo bootstrap plugin
+* telAuto2000.py                    - Demonstrate usage of the Auto2000 plugin (need bistable.xml on input, also in this folder)
 
 Info: Each of the above examples will attempt to open the plugins embedded PDF documentation on exit. 
+
 
 The following folders contain various scripts, organized into categories. 
 == basic ==
