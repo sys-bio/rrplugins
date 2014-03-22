@@ -94,11 +94,11 @@ Introduction</h1>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">    TELHandle pmHandle = <a class="code" href="group__plugin__manager.html#gaa6675d3e294fd00e7725c4e956b2465e" title="Create a new instance of a plugin manager. ">createPluginManager</a>();</div>
-<div class="line">    <a class="code" href="group__plugin__manager.html#gacb5e72585f2138e12d057c3210a106e7" title="Load plugins. The function will look in the default plugin folder for plugins, and load them...">loadPlugins</a>(pmHandle);</div>
+<div class="line">    <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> pmHandle = <a class="code" href="group__plugin__manager.html#gacb7169642171ef5442fc850673a4dcc4" title="Create a new instance of a plugin manager. ">tpCreatePluginManager</a>();</div>
+<div class="line">    <a class="code" href="group__plugin__manager.html#ga7a97718af443fa80b4e34c0f68bfa3cc" title="Load plugins. The function will look in the default plugin folder for plugins, and load them...">tpLoadPlugins</a>(pmHandle);</div>
 <div class="line"></div>
-<div class="line">    cout&lt;&lt;<span class="stringliteral">&quot;Nr of loaded plugins:&quot;</span> &lt;&lt; <a class="code" href="group__plugin__manager.html#gadd70857d8eb41c5c6adf8ccb105b8182" title="Get Number of loaded plugins. ">getNumberOfPlugins</a>(pmHandle)&lt;&lt;endl;</div>
-<div class="line">    RRStringArrayPtr names = <a class="code" href="group__plugin__manager.html#ga00a95a5525235092f4d9ea842c6ca3de" title="Function to retrieve the names of currently loaded plugins. ">getPluginNames</a>(pmHandle);</div>
+<div class="line">    cout&lt;&lt;<span class="stringliteral">&quot;Nr of loaded plugins:&quot;</span> &lt;&lt; <a class="code" href="group__plugin__manager.html#ga52fd00f799dccff35211001ed5b95cb0" title="Get Number of loaded plugins. ">tpGetNumberOfPlugins</a>(pmHandle)&lt;&lt;endl;</div>
+<div class="line">    RRStringArrayPtr names = <a class="code" href="group__plugin__manager.html#gac4a846e956cbc3894f31888d8d247235" title="Function to retrieve the names of currently loaded plugins. ">tpGetPluginNames</a>(pmHandle);</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">if</span>(!names)</div>
 <div class="line">    {</div>
@@ -111,15 +111,15 @@ Introduction</h1>
 <div class="line">        cout&lt;&lt;<span class="stringliteral">&quot;Plugin name: &quot;</span> &lt;&lt;names-&gt;String[i]&lt;&lt;endl;</div>
 <div class="line"></div>
 <div class="line">        <span class="comment">//Get a handle to a plugin</span></div>
-<div class="line">        TELHandle plHandle = <a class="code" href="group__plugin__manager.html#ga08e75e50c96f49446e05120bd11c1a52" title="GetPluginHandle. ">getPlugin</a>(pmHandle, names-&gt;String[i]);</div>
-<div class="line">        cout &lt;&lt;<a class="code" href="group__plugins.html#ga3323b53a53207edc1ff52925455a32e1" title="Return information about a Plugin. ">getPluginInfo</a>(plHandle)&lt;&lt;endl;</div>
+<div class="line">        <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> plHandle = <a class="code" href="group__plugin__manager.html#gabb22885533e1808b6a3b820065777dcf" title="GetPluginHandle. ">tpGetPlugin</a>(pmHandle, names-&gt;String[i]);</div>
+<div class="line">        cout &lt;&lt;<a class="code" href="group__plugins.html#ga50b7cfc46dd0424535722b18f5fee014" title="Return information about a Plugin. ">tpGetPluginInfo</a>(plHandle)&lt;&lt;endl;</div>
 <div class="line">    }</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line">    <span class="comment">//Cleanup.</span></div>
-<div class="line">    freeStringArray(names);</div>
-<div class="line">    <a class="code" href="group__plugin__manager.html#ga28bd66a02ce60b5da7543b9172f392cf" title="Unload plugins. ">unLoadPlugins</a>(pmHandle);</div>
-<div class="line">    <a class="code" href="group__plugin__manager.html#gacf39c60d38cb1cd4f0d8b0dd4f282fe5" title="Free the plugin manager. A call to this function will also unload any loaded plugins. ">freePluginManager</a>(pmHandle);</div>
+<div class="line">    tpFreeStringArray(names);</div>
+<div class="line">    <a class="code" href="group__plugin__manager.html#ga24173e316c66a26b55fb263d304d8f14" title="Unload plugins. ">tpUnLoadPlugins</a>(pmHandle);</div>
+<div class="line">    <a class="code" href="group__plugin__manager.html#ga81f66e0cc21cd18dad5269b45a302a66" title="Free the plugin manager. A call to this function will also unload any loaded plugins. ">tpFreePluginManager</a>(pmHandle);</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="plugins_overview"></a>
@@ -169,7 +169,7 @@ License</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:51 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:04 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

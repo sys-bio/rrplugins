@@ -142,7 +142,7 @@ Macros</h2></td></tr>
 <div class="line">    {                                                       \</div>
 <div class="line">        stringstream msg;                                   \</div>
 <div class="line">        msg&lt;&lt;<span class="stringliteral">&quot;Tellurium exception: &quot;</span>&lt;&lt;ex.what();            \</div>
-<div class="line">        setError(msg.str());                                \</div>
+<div class="line">        tpSetError(msg.str());                                \</div>
 <div class="line">        return <span class="keyword">false</span>;                                       \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
@@ -164,7 +164,7 @@ Macros</h2></td></tr>
 <div class="line">    {                                                       \</div>
 <div class="line">        stringstream msg;                                   \</div>
 <div class="line">        msg&lt;&lt;<span class="stringliteral">&quot;Tellurium exception: &quot;</span>&lt;&lt;ex.what();            \</div>
-<div class="line">        setError(msg.str());                                \</div>
+<div class="line">        tpSetError(msg.str());                                \</div>
 <div class="line">        return -1;                                          \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
@@ -186,7 +186,7 @@ Macros</h2></td></tr>
 <div class="line">    {                                                       \</div>
 <div class="line">        stringstream msg;                                   \</div>
 <div class="line">        msg&lt;&lt;<span class="stringliteral">&quot;Tellurium exception: &quot;</span>&lt;&lt;ex.what();            \</div>
-<div class="line">        setError(msg.str());                                \</div>
+<div class="line">        tpSetError(msg.str());                                \</div>
 <div class="line">        return NULL;                                        \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
@@ -208,7 +208,7 @@ Macros</h2></td></tr>
 <div class="line">    {                                                       \</div>
 <div class="line">        stringstream msg;                                   \</div>
 <div class="line">        msg&lt;&lt;<span class="stringliteral">&quot;Tellurium exception: &quot;</span>&lt;&lt;ex.what();            \</div>
-<div class="line">        setError(msg.str());                                \</div>
+<div class="line">        tpSetError(msg.str());                                \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>macro for catch statement in a routine returning void </p>
@@ -234,7 +234,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:50 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:04 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

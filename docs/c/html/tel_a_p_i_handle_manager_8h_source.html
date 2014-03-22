@@ -89,32 +89,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef telAPIHandleManagerH</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define telAPIHandleManagerH</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//Class keeping track of all handles that are created in the Tellurium C API</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using</span> std::map;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">typedef</span> map&lt;TELHandle, const char*&gt;   HandleMap;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="class_a_p_i_handle_manager.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                                        <a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                                       ~<a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        TELHandle                       registerHandle(TELHandle handle,    <span class="keyword">const</span> <span class="keywordtype">char</span>* typeOf);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">bool</span>                            unRegisterHandle(TELHandle handle);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        TELHandle                       validate(TELHandle handle,          <span class="keyword">const</span> <span class="keywordtype">char</span>* typeOf, <span class="keyword">const</span> <span class="keywordtype">char</span>* fnc);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        HandleMap                       mHandles;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        TELHandle                       searchFor(TELHandle handle);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="telplugins__types_8h.html" title="Plugins API Types Header. ">telplugins_types.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//Class keeping track of all handles that are created in the Tellurium C API</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span>tlpc;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using</span> std::map;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">typedef</span> map&lt;TELHandle, const char*&gt;   HandleMap;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="code" href="class_a_p_i_handle_manager.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                                        <a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                                       ~<a class="code" href="class_a_p_i_handle_manager.html">APIHandleManager</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a>                       registerHandle(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> handle,    <span class="keyword">const</span> <span class="keywordtype">char</span>* typeOf);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">bool</span>                            unRegisterHandle(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> handle);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a>                       validate(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> handle,          <span class="keyword">const</span> <span class="keywordtype">char</span>* typeOf, <span class="keyword">const</span> <span class="keywordtype">char</span>* fnc);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        HandleMap                       mHandles;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a>                       searchFor(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> handle);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:50 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:03 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

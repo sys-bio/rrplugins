@@ -104,19 +104,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2ecebc83b2b0a99363af49b845859eb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>setError</b> (const string &amp;err)</td></tr>
-<tr class="memdesc:a2ecebc83b2b0a99363af49b845859eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set API error.  <a href="#a2ecebc83b2b0a99363af49b845859eb9">More...</a><br/></td></tr>
-<tr class="separator:a2ecebc83b2b0a99363af49b845859eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230bda0270385a4f9587fc71e893ce0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>tpSetError</b> (const string &amp;err)</td></tr>
+<tr class="memdesc:a230bda0270385a4f9587fc71e893ce0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set API error.  <a href="#a230bda0270385a4f9587fc71e893ce0b">More...</a><br/></td></tr>
+<tr class="separator:a230bda0270385a4f9587fc71e893ce0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>castHandle</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle, const char *fnc, bool allowBase=false)</td></tr>
 <tr class="memdesc:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle. This function throws a InvalidHandle exception if it fails.  <a href="#aecbbb5dc8d7f422ac87bdc4f627d4fb1">More...</a><br/></td></tr>
 <tr class="separator:aecbbb5dc8d7f422ac87bdc4f627d4fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eddf9dca1a14572f05bcb119bb1a4ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eddf9dca1a14572f05bcb119bb1a4ca"></a>
-Plugin *&#160;</td><td class="memItemRight" valign="bottom"><b>registerPlugin</b> (Plugin *plugin)</td></tr>
-<tr class="separator:a8eddf9dca1a14572f05bcb119bb1a4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5d7bf78b5c0a0a85f6ac4e613dc4d27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5d7bf78b5c0a0a85f6ac4e613dc4d27"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>createText</b> (const string &amp;str)</td></tr>
-<tr class="separator:ac5d7bf78b5c0a0a85f6ac4e613dc4d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fa7e9f2000c55084ce152666df26df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61fa7e9f2000c55084ce152666df26df"></a>
+Plugin *&#160;</td><td class="memItemRight" valign="bottom"><b>tpRegisterPlugin</b> (Plugin *plugin)</td></tr>
+<tr class="separator:a61fa7e9f2000c55084ce152666df26df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b5075ba3083e504afce61b946daea6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><b>tpCreateText</b> (const string &amp;str)</td></tr>
+<tr class="memdesc:ad2b5075ba3083e504afce61b946daea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function to create a C string from a std::string.  <a href="#ad2b5075ba3083e504afce61b946daea6">More...</a><br/></td></tr>
+<tr class="separator:ad2b5075ba3083e504afce61b946daea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6db1fa5409b3592ea553595f749f565"><td class="memItemLeft" align="right" valign="top">tlp::RoadRunnerList *&#160;</td><td class="memItemRight" valign="bottom"><b>getRRList</b> (<a class="el" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e">TELHandle</a> handle)</td></tr>
 <tr class="memdesc:ab6db1fa5409b3592ea553595f749f565"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a handle to RoadRunner Instance list to a RoadRunnerList pointer, throws if it fails.  <a href="#ab6db1fa5409b3592ea553595f749f565">More...</a><br/></td></tr>
 <tr class="separator:ab6db1fa5409b3592ea553595f749f565"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,7 +140,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>createText</b> (con
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:51 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:04 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

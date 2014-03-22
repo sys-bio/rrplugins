@@ -92,34 +92,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="telplugins__exporter_8h.html" title="libRoadRunner Plugins C API 2012-2013 ">telplugins_exporter.h</a>&quot;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="telplugins__types_8h.html" title="Plugins API Types Header. ">telplugins_types.h</a>&quot;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span><span class="keyword">namespace </span>tlpc { <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;TLP_C_DS <span class="keywordtype">double</span>* tlp_cc getDataArray(TELHandle matrixH);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;TLP_C_DS <span class="keywordtype">int</span> tlp_cc getMatrixNumRows(TELHandle data);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;TLP_C_DS <span class="keywordtype">int</span> tlp_cc getMatrixNumCols(TELHandle data);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc getMatrixElement(TELHandle matrixH, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span> *value);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc setMatrixElement(TELHandle matrixH, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;TLP_C_DS TELHandle tlp_cc createMatrix(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols, <span class="keywordtype">char</span>* colNames);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc freeMatrix(TELHandle handle);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"></span>} }    <span class="comment">//rrp namespace and extern &quot;C&quot;</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using namespace </span>tlpc;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;TLP_C_DS <span class="keywordtype">double</span>* tlp_cc tpGetDataArray(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> matrixH);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;TLP_C_DS <span class="keywordtype">int</span> tlp_cc tpGetMatrixNumRows(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> data);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;TLP_C_DS <span class="keywordtype">int</span> tlp_cc tpGetMatrixNumCols(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> data);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpGetMatrixElement(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> matrixH, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span> *value);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpSetMatrixElement(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> matrixH, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;TLP_C_DS <a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> tlp_cc tpCreateMatrix(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols, <span class="keywordtype">char</span>* colNames);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpFreeMatrix(<a class="code" href="telplugins__types_8h.html#a8e6f1754d6b5968e4ccbef3f97fe327e" title="Void pointer to a RoadRunner instance. ">TELHandle</a> handle);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor"></span>}    <span class="comment">//rrp namespace and extern &quot;C&quot;</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:50 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:03 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

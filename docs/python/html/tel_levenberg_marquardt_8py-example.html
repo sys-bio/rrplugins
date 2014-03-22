@@ -89,7 +89,7 @@ Image output using the example below.</div></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">#Get a lmfit plugin object</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;chiPlugin   = tel.Plugin(<span class="stringliteral">&quot;tel_chisquare&quot;</span>)</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;lm          = tel.Plugin(<span class="stringliteral">&quot;tel_lm&quot;</span>)</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;lm          = tel.Plugin(<span class="stringliteral">&quot;tel_levenberg_marquardt&quot;</span>)</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">#========== EVENT FUNCTION SETUP ===========================</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">def </span>pluginIsProgressing(lmP):</div>
@@ -155,7 +155,7 @@ Image output using the example below.</div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:52 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:06 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

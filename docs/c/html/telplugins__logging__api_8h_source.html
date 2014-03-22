@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//---------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span><span class="keyword">namespace </span>tlpc { <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">enum</span>  CLogLevel</div>
@@ -118,25 +118,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    clWarning   = CL_PRIO_WARNING</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tlpEnableLoggingToConsole(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpEnableLoggingToConsole(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tlpDisableLoggingToConsole(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpDisableLoggingToConsole(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tlpEnableLoggingToFile(<span class="keywordtype">char</span>* fName);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpEnableLoggingToFile(<span class="keywordtype">char</span>* fName);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tlpDisableLoggingToFile();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpDisableLoggingToFile();</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tlpSetLogLevel(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;TLP_C_DS <span class="keywordtype">bool</span> tlp_cc tpSetLogLevel(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;TLP_C_DS <span class="keywordtype">char</span>* tlp_cc tlpGetLogLevel(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;TLP_C_DS <span class="keywordtype">char</span>* tlp_cc tpGetLogLevel(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;TLP_C_DS <span class="keywordtype">char</span>* tlp_cc tlpGetLogFileName(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;TLP_C_DS <span class="keywordtype">char</span>* tlp_cc tpGetLogFileName(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;TLP_C_DS <span class="keywordtype">void</span> tlp_cc tlpLogMsg(<span class="keyword">enum</span> CLogLevel lvl, <span class="keyword">const</span> <span class="keywordtype">char</span>* msg);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;TLP_C_DS <span class="keywordtype">void</span> tlp_cc tpLogMsg(<span class="keyword">enum</span> CLogLevel lvl, <span class="keyword">const</span> <span class="keywordtype">char</span>* msg);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#if defined(__cplusplus)</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor"></span>} }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor"></span>}</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -144,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 8 2014 21:22:50 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 22 2014 12:36:03 for Tellurium Plugin C API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
