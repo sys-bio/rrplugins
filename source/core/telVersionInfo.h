@@ -5,7 +5,7 @@
 
 namespace tlp {
 
-#define TLP_VERSION_STR "1.0.7"
+#define TLP_VERSION_STR "1.0.8"
 
 #if defined(__llvm__)
     #define TLP_COMPILER "clang"
@@ -41,7 +41,7 @@ namespace tlp {
 
 
 /**
- * get the copyright string.
+ * get the API version string.
  */
 CORE_DECLSPEC std::string getVersion();
 
