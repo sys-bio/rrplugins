@@ -9,8 +9,7 @@ M. T. Karlsson 1, M. Galdzicki 2  and H. M Sauro 2
 Availability
 
 Tellurium Plugins are licensed for free as an open source programmatic library for use in other 
-applications. Its C++ API, C API, and 
-Python APIs have comprehensive documentation. 
+applications. Its C++ API, C API, and Python APIs have comprehensive documentation. 
 
 Acknowledgements
 

@@ -8,12 +8,7 @@ include_directories(
     ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
-OPTION (TLP_BUILD_AUTO2000_PLUGIN	            "Build the Auto 2000 Plugin"	                ON)
 OPTION (TLP_BUILD_STAT_PLUGIN	                "Build the STAT (statistics) Plugin"	        ON)
-
-if(${TLP_BUILD_AUTO_2000_PLUGIN} STREQUAL ON)
-    add_subdirectory(auto2000)
-endif()
 
 if(${TLP_BUILD_STAT_PLUGIN} STREQUAL ON)
     add_subdirectory(statistics)

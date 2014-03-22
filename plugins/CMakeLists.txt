@@ -10,7 +10,7 @@ include_directories(
     ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
-OPTION (TLP_BUILD_BETA_PLUGINS		            "Build plugins currently in Beta development state"	                ON)
+OPTION (TLP_BUILD_BETA_PLUGINS		            "Build plugins currently in a beta development state"	                ON)
 
 if(${TLP_BUILD_BETA_PLUGINS} STREQUAL ON)
     add_subdirectory(beta)

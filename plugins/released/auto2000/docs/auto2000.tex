@@ -24,29 +24,29 @@ a short description. For the exact usage and a more in detail description please
 Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
-SBML                                &   string              & N/A       &   SBML document as a string. Model to be used by AUTO \\
-TempFolder                          &   string              & "."       &   Tempfolder used by auto and the plugin for saving temporary files \\
-mKeepTempFiles                      &   bool                & false     &   Boolean indicating if temporary files should be deleted after an AUTO session or not \\
-mScanDirection                      &   string              & "Positive" &   Parameter instructing AUTO how to sweep its principal continuation parameter \\
-mPrincipalCont\-inuationParameter   &   string              & N/A          &   The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
+SBML                                &   string              & N/A     &   SBML document as a string. Model to be used by AUTO \\
+TempFolder                          &   string              & "."     &   Folder used by auto and the plugin for saving temporary files \\
+KeepTempFiles                      &   bool                & false    &   Boolean indicating if temporary files should be deleted after an AUTO session or not \\
+ScanDirection                      &   string              & "Positive" &   Parameter instructing AUTO how to sweep its principal continuation parameter \\
+PrincipalCont\-inuationParameter   &   string              & N/A      &   The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
                                                                             supported, which then by default is the PCP \\
-BifurcationPoints                  &   vector$<$int$>$     & N/A      &    This integer vector holds the exact point number (in the sequence of all output data) for an AUTO solution point. It can be used together with the labels in the bifurcationlabels property to asssist in 
+BifurcationPoints                  &   vector$<$int$>$     & N/A      &    This integer vector holds the exact point number (in the sequence of all output data) for an AUTO solution point. It can be used together with the labels in the bifurcationlabels property to assist in 
                                                                            plotting a bifurcation diagram \\
-BifurcationLabels                  &   stringList          & N/A      &    The bifurcation labels stinglist holds the AUTO designated solution type label for a solution point, as found in the bifurcationpoints property. Consult the AUTO documentation for
+BifurcationLabels                  &   stringList          & N/A      &    The bifurcation labels string list holds the AUTO designated solution type label for a solution point, as found in the bifurcationpoints property. Consult the AUTO documentation for
                                                                            possible label types and their meaning \\
-BifurcationData                    &   telluriumData       & N/A      &    The  BifurcationData property holds the bifurcation diagram after a session. First column is the values of the selected parameter, and succesive columns are selected species \\
+BifurcationData                    &   telluriumData       & N/A      &    The  BifurcationData property holds the bifurcation diagram after a session. First column is the values of the selected parameter, and successive columns are selected species \\
 
 
 \\[2pt]                                                               
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the auto library. Depending on the problem at hand, they may need to be tweaked. } \\[12pt]
 \hline %inserts single line                                           
 \\[2pt]                                                               
-mFort2                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.2. Fort.2 is the input file for AUTO and created by the plugin \\
-mFort3                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.3. The content of fort.3 file is undocumented in AUTO's documentation \\
-mFort6                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.6. The content of fort.6 file is a bifurcation session summary \\
-mFort7                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.7. The content of fort.7 file is a bifurcation diagram on success \\
-mFort8                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.8. The content of fort.8 file contain various statistics from the session \\
-mFort9                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.8. Diagnostic messages, convergence history, eigenvalues, and Floquet multipliers 
+fort2                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.2. Fort.2 is the input file for AUTO and created by the plugin \\
+fort3                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.3. The content of fort.3 file is undocumented in AUTO's documentation \\
+fort6                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.6. The content of fort.6 file is a bifurcation session summary \\
+fort7                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.7. The content of fort.7 file is a bifurcation diagram on success \\
+fort8                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.8. The content of fort.8 file contain various statistics from the session \\
+fort9                              &   string             & N/A      &    Property containing the content of the AUTO temporary file, fort.8. Diagnostic messages, convergence history, eigenvalues, and Floquet multipliers 
                                                                             are written in fort.9 \\
 NDIM                               &   int                 & 1        &    The NDIM property correspond to the dimension of the system of equations   \\
 IPS                                &   int                 & 1        &    Constant defining the problem type \\
@@ -54,7 +54,7 @@ IRS                                &   int                 & 1        &    This 
 ILP                                &   int                 & 1        &    Fold detection; 1=ON, 0=OFF  \\
 NICP                               &   vector$<$int$>$     & N/A      &    Property denoting the number of free parameters  \\
 ICP                                &   int                 & N/A      &    Free parameters  \\
-NTST                               &   int                 & 15       &    The number of mesh intervalls  \\
+NTST                               &   int                 & 15       &    The number of mesh intervals  \\
 NCOL                               &   int                 & 3        &    The number of collocation points per mesh interval  \\
 IAD                                &   int                 & 3        &    Mesh adaption every IAD steps; 0=OFF  \\
 ISP                                &   int                 & 1        &    Bifurcation detection; 0=OFF, 1=BP(FP), 3=BP(PO,BVP), 2=all  \\

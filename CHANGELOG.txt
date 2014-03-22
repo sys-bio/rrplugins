@@ -1,36 +1,41 @@
-Release 1.0.7 (2014-03-13)
-* Added example script showing ChiSquare as a function of two parameters.
-* Added example script showing ChiSquare as a function of one parameter.
-* Added more examples to the release
-* Updated example scripts with more information on their purpose and function
+Release 1.0.8 (2014-03-22)
+* Released AUTO2000 plugin (TK)
+* Cleaned up automatic generation of plugin docs (TK)
+* Refactored all C API functions. All C Functions do now have a tp prefix, i.e. tpGetVersion() (TK)
 
-Release 1.0.6 (2014-03-13)
-* Updated Nelder-Mead documentation
-* Updated Levenberg-Marquardt documentation. Added property descriptions.
-* Added description for the ChiSquare plugin
-* Went trought the ChiSquare plugin release check list
-* Added property description to test_model plugin
-* Bumped AddNoise plugin version to 1.0.1
-* Added assignment of NOise plugin property descriptions
+Release 1.0.7 (2014-03-13)
+* Added example script showing ChiSquare as a function of two parameters (TK)
+* Added example script showing ChiSquare as a function of one parameter (TK)
+* Added more examples to the release (TK)
+* Updated example scripts with more information on their purpose and function (TK)
+
+Release 1.0.6 (2014-03-13) (TK)
+* Updated Nelder-Mead documentation (TK)
+* Updated Levenberg-Marquardt documentation. Added property descriptions (TK)
+* Added description for the ChiSquare plugin (TK)
+* Went trought the ChiSquare plugin release check list (TK)
+* Added property description to test_model plugin (TK)
+* Bumped AddNoise plugin version to 1.0.1 (TK)
+* Added assignment of NOise plugin property descriptions (TK)
 
 Release 1.0.5 (2014-03-13)
-* Added CMake files to example folders to fine tune example release
-* Other minor updates
-* Updated Authors.txt
-* Released MonteCarlo Plugin
+* Added CMake files to example folders to fine tune example release (TK)
+* Other minor updates (TK)
+* Updated Authors.txt (TK)
+* Released MonteCarlo Plugin (TK)
 
 Release 1.0.4 (2014-03-09)
-* Released Nelder-Mead plugin
+* Released Nelder-Mead plugin (TK)
 
 Release 1.0.3 (2014-03-09)
-* Added viewing of manual and version number in root example scripts
-* Updated Readme file in python examples folder
-* Updated LM fit example. Not using getResult() function anymore.
-* Fixed bug in getNextProperty() python function
-* Updated Levenberg_Marquardt docs
-* Changed name of lmfit plugin from tel_lm to tel_levenberg_marquardt
-* Refactoring -> changed all py scripts using the lmfit plugin to use the new name
-* Added file ChangeLog.txt to install
+* Added viewing of manual and version number in root example scripts (TK)
+* Updated Readme file in python examples folder (TK)
+* Updated LM fit example. Not using getResult() function anymore (TK)
+* Fixed bug in getNextProperty() python function (TK)
+* Updated Levenberg_Marquardt docs (TK)
+* Changed name of lmfit plugin from tel_lm to tel_levenberg_marquardt (TK)
+* Refactoring -> changed all py scripts using the lmfit plugin to use the new name (TK)
+* Added file ChangeLog.txt to install (TK)
 
 Release 1.0.2 (2014-03-08)
 * Added example for AddNoise  (TK)
@@ -235,4 +240,4 @@ Release 0.6.6 (2014-01-12)
 ==========================
 * Initial commit of plugin and third party source from roadrunner repository at: https://github.com/AndySomogyi/roadrunner (TK)
 
-
+TK  :  Totte Karlsson  totte@dunescientific.com
