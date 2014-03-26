@@ -81,7 +81,7 @@ mTHU(                               vector<int>(0),         "THU",              
 mNUZR(                              0,                      "NUZR",                                 "The number of “user output points” specified",                    "",         ""),
 mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         "")
 {
-    mVersion = "0.8";
+    mVersion = "1.0.0";
     //Setup the plugin properties
     addProperties();
 

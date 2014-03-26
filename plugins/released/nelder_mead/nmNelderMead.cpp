@@ -53,7 +53,7 @@ mWorker(*this),
 mRRI(NULL),
 rNormsData(mNorms.getValueReference())
 {
-    mVersion = "0.9.0";
+    mVersion = "1.0.0";
 
     //Add plugin properties to property container
     mProperties.add(&mSBML);
