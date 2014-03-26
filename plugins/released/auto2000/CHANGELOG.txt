@@ -1,3 +1,8 @@
+Release 1.0.0 2014-03-26
+==========================
+* Added fix for roadrunner flag MoeityConservationAnalysis. Now it is set to true, by default.
+* Fixed model init bug in Auto plugin failing when switching model in the same session
+
 Release 0.8.0 (2014-03-22)
 ==========================
 * Auto 2000 documentation fixes
