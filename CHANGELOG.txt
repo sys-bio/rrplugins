@@ -1,15 +1,23 @@
+Release 1.0.9 (2014-03-26)
+==========================
+* Fixed a initialization setting of RoadRunner in AUTO plugin (TK)
+* Fixed a bug in AUTO giving wrong result if two different models were loaded consecutively (TK)
+
 Release 1.0.8 (2014-03-22)
+==========================
 * Released AUTO2000 plugin (TK)
 * Cleaned up automatic generation of plugin docs (TK)
 * Refactored all C API functions. All C Functions do now have a tp prefix, i.e. tpGetVersion() (TK)
 
 Release 1.0.7 (2014-03-13)
+==========================
 * Added example script showing ChiSquare as a function of two parameters (TK)
 * Added example script showing ChiSquare as a function of one parameter (TK)
 * Added more examples to the release (TK)
 * Updated example scripts with more information on their purpose and function (TK)
 
-Release 1.0.6 (2014-03-13) (TK)
+Release 1.0.6 (2014-03-13)
+==========================
 * Updated Nelder-Mead documentation (TK)
 * Updated Levenberg-Marquardt documentation. Added property descriptions (TK)
 * Added description for the ChiSquare plugin (TK)
@@ -19,15 +27,18 @@ Release 1.0.6 (2014-03-13) (TK)
 * Added assignment of NOise plugin property descriptions (TK)
 
 Release 1.0.5 (2014-03-13)
+==========================
 * Added CMake files to example folders to fine tune example release (TK)
 * Other minor updates (TK)
 * Updated Authors.txt (TK)
 * Released MonteCarlo Plugin (TK)
 
 Release 1.0.4 (2014-03-09)
+==========================
 * Released Nelder-Mead plugin (TK)
 
 Release 1.0.3 (2014-03-09)
+==========================
 * Added viewing of manual and version number in root example scripts (TK)
 * Updated Readme file in python examples folder (TK)
 * Updated LM fit example. Not using getResult() function anymore (TK)
@@ -38,12 +49,14 @@ Release 1.0.3 (2014-03-09)
 * Added file ChangeLog.txt to install (TK)
 
 Release 1.0.2 (2014-03-08)
+==========================
 * Added example for AddNoise  (TK)
 * Released chisquare plugin (TK)
 * Updated version numbers (TK)
 * Updated root folder text files (TK)
 
 Release 1.0.1 (2014-03-08)
+==========================
 * Released TestModel plugin (TK)
 * Added more python examples (TK)
 * Updated TestModel plugin documentation (TK)
@@ -57,7 +70,8 @@ Release 1.0.1 (2014-03-08)
 * Added new Monte-Carlo string property to use for assigning minimizer plugin (defaults to Levenberg-Marquadt) (TK)
 * Added matrix C api to tellurium plugins (TK)
 
-Release 1.0.0 (2014-03-08) (TK)
+Release 1.0.0 (2014-03-08)
+==========================
 * Refactoring sbml_model -> test_model (TK)
 * Added ability to retreve a C++ matrix class from python (TK)
 * Added the Hessian and Covariance matrices properties to both lmfit and nelder-mead (TK)
@@ -138,6 +152,7 @@ Release 1.0.0 (2014-03-08) (TK)
 * Organized examples into folders (TK)
 
 Release 0.6.9 (2014-02-27)
+==========================
 * installer scripts added (MG)
 * Fixed bug when copying property container (TK)
 * Got Monte Carlo parameter generation working (TK)
