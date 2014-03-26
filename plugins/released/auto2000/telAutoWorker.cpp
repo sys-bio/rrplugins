@@ -135,6 +135,9 @@ void AutoWorker::run()
 
 bool AutoWorker::setupAuto()
 {
+    //The following flag need to be true
+    mTheHost.mRR->setConservedMoietyAnalysis(true);
+
     //Transfer AUTO constants to AUTO interface
     mRRAuto.assignProperties(&(mTheHost.mProperties));
     mTheHost.mRR->load(mTheHost.getSBML());
