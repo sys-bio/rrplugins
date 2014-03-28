@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "telplugins"
-#define MyAppVersion "0127204-11.27"
+;#define MyAppVersion "01312014-13.02"  read from VERSION.txt file, below
 #define MyAppPublisher "University of Washington, Seattle, WA, USA"
 #define MyAppURL "http://tellurium.analogmachine.org/plugins/"
 #define MyAppSetupIconFile "Tellurium.ico"
@@ -15,6 +15,11 @@
 #define Matplotlib "matplotlib"
 ;#define MatplotlibVer "1.0"
 #define AppDir "telplugins"
+
+#define VerFile FileOpen("../../VERSION.txt")
+#define MyAppVersion FileRead(VerFile)
+#expr FileClose(VerFile)
+#undef VerFile
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -54,7 +59,15 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "..\..\site-packages\telplugins\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\plugins\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\FUNDING.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\CHANGELOG.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\VERSION.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\NOTICE.txt"; DestDir: "{app}"; Flags: ignoreversion 
+Source: "..\..\README.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\examples\python\*"; DestDir: "{userdocs}\tellurium-files\telplugins"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
