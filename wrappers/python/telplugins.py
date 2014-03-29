@@ -572,7 +572,7 @@ def getDataSeries (numPyData):
 ##
 ## Before using the plugin system the plugin library must be imported using the line:
 #@code
-##import telplugins as tel
+##import teplugins as tel
 #@endcode
 ## To load a plugin called "tel_add_noise" use the Python command:
 #@code
@@ -606,7 +606,7 @@ def getDataSeries (numPyData):
 ## consider a plugin called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
 ## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin would be used from Python:
 #@code
-## import telplugins as tel
+## import teplugins as tel
 ## p = tel.Plugin ("add")
 ## p.x = 1.2
 ## p.y = 4.5
@@ -624,7 +624,7 @@ def getDataSeries (numPyData):
 ## value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure 
 ## of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call:
 #@code
-## import telplugins as tel
+## import teplugins as tel
 ## data = tel.DataSeries()
 #@endcode
 ## Data can be entered into a data series either by loading the data from a specially formated file or from a Python NumPy array. For example:

@@ -4,7 +4,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from telplugins import *
+from teplugins import *
 import matplotlib.pyplot as plt
 
 try:    
@@ -82,7 +82,7 @@ try:
     #dataSeries.plot()           
 
     #Finally, view the manual and version
-    mcP.viewManual()    
+    #mcP.viewManual()    
     print 'Plugin version: ' + `mcP.getVersion()`
              
     

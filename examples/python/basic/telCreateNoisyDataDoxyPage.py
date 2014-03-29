@@ -1,5 +1,5 @@
 import roadrunner
-import telplugins as tel
+import teplugins as tel
 
 noisePlugin = tel.Plugin ("tel_add_noise")
 

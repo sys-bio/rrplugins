@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import roadrunner
-from telplugins import *
+from teplugins import *
 
 try:
     plt.rc('text', usetex=True)

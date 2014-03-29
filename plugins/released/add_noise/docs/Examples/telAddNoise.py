@@ -1,4 +1,4 @@
-import telplugins as tel
+import teplugins as tel
 
 try:
     modelPlugin = tel.Plugin("tel_test_model")        

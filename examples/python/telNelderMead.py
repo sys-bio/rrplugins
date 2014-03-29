@@ -5,7 +5,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from telplugins import *
+from teplugins import *
 
 # Load Plugins
 chiPlugin       = Plugin("tel_chisquare")
@@ -78,7 +78,7 @@ try:
     telplugins.plt.show()
     
     #Finally, view the manual and version
-    nm.viewManual()    
+    #nm.viewManual()    
     print 'Plugin version: ' + `nm.getVersion()`
     
 except Exception as e:

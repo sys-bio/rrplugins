@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 try:   
     modelPlugin     = Plugin("tel_test_model")            

@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 try:  
     sbmlModel ="BIOMD0000000203.xml"                              

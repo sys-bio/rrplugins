@@ -1,5 +1,5 @@
 import ctypes
-import telplugins as tel
+import teplugins as tel
 
 #Get a nmfit plugin object
 chiPlugin   = tel.Plugin("tel_chisquare")

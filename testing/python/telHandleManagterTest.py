@@ -1,4 +1,4 @@
-import telplugins as tel
+import teplugins as tel
 
 
 p = tel.Plugin ("tel_add_noise")

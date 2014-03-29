@@ -1,5 +1,5 @@
 import roadrunner
-import telplugins as tel
+import teplugins as tel
 
 try:
     # Create a roadrunner instance and create some data

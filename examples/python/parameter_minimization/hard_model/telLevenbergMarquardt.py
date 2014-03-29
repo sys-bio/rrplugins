@@ -1,6 +1,6 @@
 import ctypes
 import numpy as np
-from telplugins import *
+from teplugins import *
 
 #Get a lmfit plugin object
 chiPlugin   = Plugin("tel_chisquare")

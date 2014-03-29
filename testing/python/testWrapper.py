@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 pm = createPluginManager()
 print `loadPlugins(pm)`

@@ -14,7 +14,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import roadrunner
-import telplugins as tel
+import teplugins as tel
 
 def chiFun(k1,k2):
     rr.reset()

@@ -4,7 +4,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from telplugins import *
+from teplugins import *
 
 try:   
     modelPlugin     = Plugin("tel_test_model")            
@@ -27,8 +27,8 @@ try:
     
     print 'ChiSquare is: ' + `chi`
     print 'Reduced ChiSquare is: ' + `reduced_chi`
-    chiSquarePlugin.viewManual()
-    print 'Plugin version: ' + `chiSquarePlugin.getVersion()`  
-          
+    
+    #chiSquarePlugin.viewManual()
+    print 'Plugin version: ' + `chiSquarePlugin.getVersion()`            
 except Exception as e:
     print 'Problem: ' + `e`

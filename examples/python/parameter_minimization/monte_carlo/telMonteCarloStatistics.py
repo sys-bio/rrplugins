@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from telplugins import *
+from teplugins import *
 
 #========== EVENT FUNCTION SETUP ===========================
 def myEventFunction(ignore):           

@@ -1,5 +1,5 @@
 import roadrunner
-import telplugins as tel
+import teplugins as tel
 
 ##================
 ## Running this script in a internal python engine session causes a CRASH after a few iterations

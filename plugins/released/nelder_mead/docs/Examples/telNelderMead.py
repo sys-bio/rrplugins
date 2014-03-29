@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 # Load Plugins
 chiPlugin       = Plugin("tel_chisquare")

@@ -10,7 +10,7 @@ install(
         ${pyFiles}
         __init__.py
         README.txt 
-        DESTINATION site-packages/telplugins  	
+        DESTINATION site-packages/teplugins  	
         COMPONENT telplugins
        )
 

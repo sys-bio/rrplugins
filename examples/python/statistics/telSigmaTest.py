@@ -1,6 +1,6 @@
 # Show that add noise plugin correctly computes Sigma (standard deviation)
 
-import telplugins as tel
+import teplugins as tel
 import numpy
 
 p = tel.Plugin ("tel_add_noise")

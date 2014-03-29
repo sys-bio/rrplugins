@@ -1,4 +1,4 @@
-import telplugins as tel
+import teplugins as tel
 
 try:     
     p = tel.Plugin('tel_AddPlugin')

@@ -2,7 +2,7 @@ import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-from telplugins import *
+from teplugins import *
 import ctypes as ct
 
 try:

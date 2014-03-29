@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 import matplotlib.pyplot as plt
 
 try:    

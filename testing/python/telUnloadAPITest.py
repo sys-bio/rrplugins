@@ -3,7 +3,7 @@ import roadrunner
 import matplotlib.pyplot as plot
 import numpy
 import ctypes
-from telplugins import *
+from teplugins import *
 
 
 #Create a plugin manager

@@ -4,7 +4,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-import telplugins as tel
+import teplugins as tel
 
 try:
     modelPlugin = tel.Plugin("tel_test_model")        
@@ -27,7 +27,7 @@ try:
     # Get the data to plot
     noisePlugin.InputData.plot()            
 
-    noisePlugin.viewManual()
+    #noisePlugin.viewManual()
     print 'Plugin version: ' + `noisePlugin.getVersion()`    
 except Exception as e:
     print 'Problem: ' + `e`

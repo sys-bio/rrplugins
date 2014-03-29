@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-import telplugins as tel
+import teplugins as tel
 import ctypes as ct
 
 try:

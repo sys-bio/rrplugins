@@ -1,5 +1,5 @@
 import roadrunner
-import telplugins
+import teplugins
 
 try:    
     for i in range(1):

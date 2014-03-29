@@ -27,7 +27,7 @@ def cleanFolder(path):
 try:
     #============================= 
     #First get sitepackages folder
-    telPackageName = 'telplugins'
+    telPackageName = 'teplugins'
     spFolder = os.path.join(getSitePackagesFolder(), telPackageName)
     if DEBUG: 
         print "spFolder " + spFolder

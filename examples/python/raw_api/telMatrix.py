@@ -9,7 +9,7 @@
 # Licence:     <Exclusive>
 #-------------------------------------------------------------------------------
 
-import telplugins as tel
+import teplugins as tel
 
 #Get a lmfit plugin object
 chiPlugin   = tel.Plugin("tel_chisquare")

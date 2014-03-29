@@ -1,7 +1,7 @@
 # Show that add noise plugin correctly computes Sigma (standard deviation)
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-import telplugins as tel
+import teplugins as tel
 import numpy as np
 
 p = tel.Plugin ("tel_add_noise")

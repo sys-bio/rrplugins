@@ -7,7 +7,7 @@
 # Author: Totte Karlsson
 #-------------------------------------------------------------------------------
 import roadrunner
-from telplugins import *
+from teplugins import *
 
 try:
     #Get a sbml model from the test_model plugin

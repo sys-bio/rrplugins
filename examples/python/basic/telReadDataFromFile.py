@@ -3,7 +3,7 @@
 #
 # Author: Totte Karlsson
 #-------------------------------------------------------------------------------
-from telplugins import *
+from teplugins import *
 
 try:    
     #Make sure the file testData.dat exists 

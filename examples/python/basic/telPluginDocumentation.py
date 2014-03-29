@@ -6,7 +6,7 @@
 # Author: Totte Karlsson
 #-------------------------------------------------------------------------------
 
-from telplugins import *
+from teplugins import *
 
 try:
     pluginName = "levenberg_marquardt"

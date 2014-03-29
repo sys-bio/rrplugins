@@ -8,7 +8,7 @@
 import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
-import telplugins as tel
+import teplugins as tel
 
 try:
     chiPlugin   = tel.Plugin("tel_chisquare")

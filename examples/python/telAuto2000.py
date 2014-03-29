@@ -4,7 +4,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from telplugins import *
+from teplugins import *
 
 try:  
     sbmlModel ="bistable.xml"                              
@@ -37,7 +37,7 @@ try:
 
     biData.plotBifurcationDiagram(pts, lbls) 
 
-    auto.viewManual()   
+    #auto.viewManual()   
     print 'Plugin version: ' + `auto.getVersion()`    
 
 except Exception as e:

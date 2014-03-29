@@ -3,7 +3,7 @@ import numpy as np
 #from numpy import linalg
 import matplotlib.pyplot as plt
 import roadrunner
-import telplugins as tel
+import teplugins as tel
 
 
 def getHessElement(r,c, k1, k2, eta):

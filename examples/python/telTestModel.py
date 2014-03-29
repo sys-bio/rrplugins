@@ -5,7 +5,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-import telplugins as tel
+import teplugins as tel
 
 try:    
     modelPlugin = tel.Plugin("tel_test_model")            
@@ -21,7 +21,7 @@ try:
     test_data.plot()
     test_data_with_noise.plot()
         
-    modelPlugin.viewManual()   
+    #modelPlugin.viewManual()   
     print 'Plugin version: ' + `modelPlugin.getVersion()`
              
 except Exception as e:

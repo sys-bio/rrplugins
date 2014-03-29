@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 #Create a plugin manager
 pm = createPluginManager()

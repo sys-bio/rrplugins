@@ -1,4 +1,4 @@
-from telplugins import *
+from teplugins import *
 
 try:    
     #Plot Monte Carlo data sets        

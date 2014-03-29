@@ -1,7 +1,7 @@
 import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
-import telplugins as tel
+import teplugins as tel
 
 try:
     #Read some 'experimental' data   

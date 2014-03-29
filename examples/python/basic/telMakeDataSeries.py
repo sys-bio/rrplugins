@@ -4,7 +4,7 @@
 #
 # Author: Herbert Sauro
 #-------------------------------------------------------------------------------
-import telplugins as tel
+import teplugins as tel
 import numpy
 import math
 
