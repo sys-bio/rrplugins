@@ -80,7 +80,7 @@ extern APIHandleManager gHM;
  \param[in] error A string containg the error
  \ingroup cpp_support
 */
-TLP_C_DS void tpSetError(const string& err);
+void tpSetError(const string& err);
 
 /*!
  \brief Cast a handle. This function throws a InvalidHandle exception if it fails
@@ -105,7 +105,7 @@ Plugin* tpRegisterPlugin(Plugin* plugin);
  \return Returns a char* on success, NULL otherwise
  \ingroup freeRoutines
 */
-TLP_C_DS char*  tpCreateText(const string& str);
+char*  tpCreateText(const string& str);
 
 
 /*!

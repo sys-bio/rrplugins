@@ -45,6 +45,9 @@ finally:
        #Change back to our original working directory
        os.chdir(originalWorkingDirectory)
 
+if telLib == None:
+        raise Exception('Failed loading Tellurium Plugins C API shared library')
+    
 gDefaultPluginsPath   = telplugins_path 
 if not os.path.exists(gDefaultPluginsPath):
     print '==== WARNING: Roadrunner plugin folder could not be found =====\n'

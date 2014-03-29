@@ -9,6 +9,9 @@ mainDoc=mainDoc.tex
 pluginName=$1
 pdfName=$pluginName.pdf
 chapter=$pluginName
+
+#run twice to resolve references
+pdflatex -jobname=thePDF "\includeonly{$chapter}\input{$mainDoc}"
 pdflatex -jobname=thePDF "\includeonly{$chapter}\input{$mainDoc}"
 
 mv thePDF.pdf $pdfName
