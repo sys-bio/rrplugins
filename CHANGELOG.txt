@@ -1,3 +1,7 @@
+Release 1.0.11 (2014-03-29)
+==========================
+* Updated to use roadrunner build version 1.1.0-beta3
+
 Release 1.0.10 (2014-03-29)
 ==========================
 * Changed pythonmodule name telplugins to teplugins
