@@ -14,7 +14,7 @@
 ;#define NumpyVer "1.0"
 #define Matplotlib "matplotlib"
 ;#define MatplotlibVer "1.0"
-#define AppDir "telplugins"
+#define AppDir "teplugins"
 
 #define VerFile FileOpen("../../VERSION.txt")
 #define MyAppVersion FileRead(VerFile)
@@ -41,7 +41,7 @@ DefaultDirName={code:SetDefaultAppDirName}
 ;DisableDirPage=yes
 
 
-DefaultGroupName=telplugins
+DefaultGroupName=teplugins
 DisableProgramGroupPage=yes
 ;LicenseFile=..\..\LICENSE.txt
 ;InfoBeforeFile=..\..\NOTICE.txt
@@ -57,7 +57,7 @@ SolidCompression=yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\..\site-packages\telplugins\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\site-packages\teplugins\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\plugins\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\AUTHORS.txt"; DestDir: "{app}"; Flags: ignoreversion
@@ -67,7 +67,7 @@ Source: "..\..\CHANGELOG.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\VERSION.txt"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\..\NOTICE.txt"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\..\README.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\examples\python\*"; DestDir: "{userdocs}\tellurium-files\telplugins"; Flags: ignoreversion recursesubdirs
+Source: "..\..\examples\python\*"; DestDir: "{userdocs}\tellurium-files\teplugins"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
