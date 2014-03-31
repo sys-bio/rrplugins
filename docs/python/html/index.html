@@ -88,7 +88,7 @@ Introduction</h1>
 <li>Executing the plugin</li>
 </ol>
 <p>Before using the plugin system the plugin library must be imported using the line: </p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> telplugins <span class="keyword">as</span> tel</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> teplugins <span class="keyword">as</span> tel</div>
 </div><!-- fragment --><p> To load a plugin called "tel_add_noise" use the Python command: </p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p = tel.Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
 </div><!-- fragment --><p> The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For example the add noise plugin has a property called Sigma. To set this to a particular value we would use: </p>
@@ -105,7 +105,7 @@ Introduction</h1>
 </div><!-- fragment --><p>To run a plugin so that it carries out its function, use the execute method: </p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;p.execute()</div>
 </div><!-- fragment --><p> The results from an execute call will either be saved to a file or more likely via properties of the plugin. As a trivial example, consider a plugin called "add" that has three properties, x, y and z. When the execute() method is called the plugin will take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin would be used from Python: </p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> telplugins <span class="keyword">as</span> tel</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> teplugins <span class="keyword">as</span> tel</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;p = tel.Plugin (<span class="stringliteral">&quot;add&quot;</span>)</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;p.x = 1.2</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;p.y = 4.5</div>
@@ -113,7 +113,7 @@ Introduction</h1>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordflow">print</span> p.z</div>
 </div><!-- fragment --><p>The following script illustrates a more substantial example using the add_noise plugin</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> roadrunner</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">import</span> telplugins <span class="keyword">as</span> tel</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">import</span> teplugins <span class="keyword">as</span> tel</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;noisePlugin = tel.Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
@@ -152,7 +152,7 @@ Introduction</h1>
 </div><!-- fragment --><h1><a class="anchor" id="DataSeries"></a>
 DataSeries</h1>
 <p>The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call: </p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> telplugins <span class="keyword">as</span> tel</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> teplugins <span class="keyword">as</span> tel</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;data = tel.DataSeries()</div>
 </div><!-- fragment --><p> Data can be entered into a data series either by loading the data from a specially formated file or from a Python NumPy array. For example: </p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;data.readDataSeries (<span class="stringliteral">&quot;mydata.txt&quot;</span>)</div>
@@ -169,7 +169,7 @@ DataSeries</h1>
 </div><!-- fragment --><p> Data series can be plotted using the plot method: </p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;data.plot()</div>
 </div><!-- fragment --><p> The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise to all data except the data in the first column. </p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;input telplugins <span class="keyword">as</span> *</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">import</span> teplugins <span class="keyword">as</span> *</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;p = Plugin (<span class="stringliteral">&quot;tel_add_noise&quot;</span>)</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;p.viewManual()</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;pl = p.listOfProperties()</div>
@@ -202,7 +202,7 @@ Plugins</h1>
 </div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 22 2014 12:36:06 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 31 2014 14:36:34 for Tellurium Plugins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>
