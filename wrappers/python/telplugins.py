@@ -654,7 +654,7 @@ def getDataSeries (numPyData):
 ##The following script is an example of using the add_noise plugin. This plugin takes a data series and add a given amount of Guassian noise
 ## to all data except the data in the first column.
 #@code
-##    input telplugins as *
+##    import teplugins as *
 ##    p = Plugin ("tel_add_noise")
 ##    p.viewManual()
 ##    pl = p.listOfProperties()
