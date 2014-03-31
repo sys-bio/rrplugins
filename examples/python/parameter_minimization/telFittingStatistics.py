@@ -9,8 +9,10 @@ import roadrunner
 import numpy as np
 import matplotlib.pyplot as plt
 import teplugins as tel
-
+from roadrunner import Config
 try:
+    Config.setValue(Config.LOADSBMLOPTIONS_CONSERVED_MOIETIES, False)    
+    Config.setValue(Config.SIMULATEOPTIONS_STRUCTURED_RESULT, True)
     chiPlugin   = tel.Plugin("tel_chisquare")
 
     #Retrieve a SBML model from plugin

@@ -15,6 +15,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import roadrunner
 import teplugins as tel
+from roadrunner import Config
+
 
 def chiFun(k1,k2):
     rr.reset()
@@ -29,6 +31,8 @@ def chiFun(k1,k2):
     return chiSquare.ReducedChiSquare                   
             
 try:
+    Config.setValue(Config.LOADSBMLOPTIONS_CONSERVED_MOIETIES, False)    
+    Config.setValue(Config.SIMULATEOPTIONS_STRUCTURED_RESULT, True)
     #Read some 'experimental' data   
     expData = tel.DataSeries()
     

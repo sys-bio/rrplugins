@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import teplugins as tel
 
 try:       
+#    Config.setValue(Config.LOADSBMLOPTIONS_CONSERVED_MOIETIES, False)    
+#    Config.setValue(Config.SIMULATEOPTIONS_STRUCTURED_RESULT, True)    
     noisePlugin = tel.Plugin("tel_add_noise")
     modelPlugin = tel.Plugin("tel_test_model")   
     test_model  = modelPlugin.Model
