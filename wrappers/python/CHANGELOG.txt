@@ -1,3 +1,7 @@
+Release 1.0.1 (2014-04-08)
+=========================
+* Changed so a plugin is reset on each load (TK)
+
 Release 1.0.0 (2014-03-13)
 =========================
 * Changed all BiFurcation to Bifurcation (TK)

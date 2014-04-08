@@ -5,7 +5,7 @@
 
 namespace tlp {
 
-#define TLP_VERSION_STR "1.0.13"
+#define TLP_VERSION_STR "1.0.14"
 
 #if defined(__llvm__)
     #define TLP_COMPILER "clang"
