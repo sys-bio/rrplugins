@@ -295,6 +295,7 @@ class Plugin (object):
             lp = self.listOfProperties()
             for element in lp:
                 self._propertyNames.append (element[0])
+            tpc.resetPlugin(self.plugin)                
       
     ## \brief Retrieve the plugins version
     ##@code

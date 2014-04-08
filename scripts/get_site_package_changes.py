@@ -22,7 +22,7 @@ def getSitePackagesFolder():
 try:
     repoFolder=os.path.join('r:\\','tlp', 'wrappers', 'python')    
     #Where is python site packages?
-    telPackageName = 'telplugins'
+    telPackageName = 'teplugins'
     spFolder = os.path.join(getSitePackagesFolder(), telPackageName)
     
     if DEBUG: 
