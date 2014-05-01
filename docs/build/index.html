@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+
+	<meta charset="UTF-8">
+	<title>Building Tellurium Plugins from Source</title>
+	
+<link rel='stylesheet' id='wp-quicklatex-format-css'  href='http://libroadrunner.org/wp-content/plugins/wp-quicklatex/css/quicklatex-format.css?ver=3.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widgets-css'  href='http://libroadrunner.org/wp-content/plugins/jetpack/modules/widgets/widgets.css?ver=20121003' type='text/css' media='all' />
+<!-- <link rel='stylesheet' id='twentythirteen-fonts-css'  href='//fonts.googleapis.com/css?family=Source+Sans+Pro%3A300%2C400%2C700%2C300italic%2C400italic%2C700italic%7CBitter%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' /> -->
+<link rel='stylesheet' id='genericons-css'  href='http://libroadrunner.org/wp-content/plugins/jetpack/_inc/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentythirteen-style-css'  href='http://libroadrunner.org/wp-content/themes/twentythirteen/style.css?ver=2013-07-18' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentythirteen-ie-css'  href='http://libroadrunner.org/wp-content/themes/twentythirteen/css/ie.css?ver=2013-07-18' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="css/plugin_table.css"/> 
+	</head>
+
+<body class="home page page-id-5 page-template-default single-author">
+					<div class="entry-content">
+						<h1>Building Tellurium Plugins from Sources</h1>
+						<h3>Intro</h3>
+<p>This document outlines the steps needed to build Tellurium Plugins from sources, using Visual Studio 2010 (or 2012). In short, the build process involves
+to first build the plugins API's main dependency, which is a full build of the RoadRunner library (including its ThirdParties etc.)</p>
+<p>The second step involve obtaining the Tellurium Plugins source tree from the GIT repository and from the this source tree generate necessary build files. </p>
+
+<p>From the plugins source three, two separate builds are necessary, (1) 
+a build of the third party sources (found in the plugins root/third_party folder), and (2) a build of the plugins and the plugin API itself. Visual Studio solution files are generated using the CMake tool and that process is described in detail below. </p>
+<p>The final step is to use the generated solution files and build the plugins third party libraries and then, the plugins and the plugins api, from within Visual Studio. </p>
+
+<h3>Step 1: Building RoadRunner</h3>
+<p>The Tellurium plugin system rely on a fully functional and compatible RoadRunner installation.<br><br> 
+See this page on how to obtain a proper RoadRunner installation: <a href="http://libroadrunner.org/build-roarunner-from-source/"> http://libroadrunner.org/build-roarunner-from-source</a>
+
+<br><br><b>Note: </b> In the following we will create a <i>release</i> type of build. This require RoadRunner to be built as a <i>release</i> build too.
+
+<br> <br>
+
+<h3>Step 2: Get the Tellurium Plugin source code </h3>
+
+The source code for Tellurium Plugins is managed in a Git repository located on GitHub. 
+The build instructions will assume that you have cloned the code from the master branch, which has the address:
+
+<br>
+<blockquote>
+<code>
+https://github.com/sys-bio/telPlugins.git
+</code>
+</blockquote>
+
+Any standard git client can be used to clone the code repository. From the command line you would typically use the following: <br>
+<blockquote>
+<code>
+    git clone https://github.com/sys-bio/telPlugins.git
+</code>
+</blockquote>
+The repository clone will contain all source code necessary to compile and build Tellurium Plugins.
+A successful Tellurium plugins clone will have the folder structure as shown in the screen shot below.
+<br><br>
+
+<figure>
+<img src="source_tree.jpg" />
+<figcaption>Figure 1. The Tellurium Plugins source tree. For the purpose of building the library, the most important file is selected, namely <b>CMakeLists.txt</b></figcaption>
+</figure>
+<br>
+
+<p>When you have successfully obtained a source tree resembling the figure above, go to the next step.</p>
+
+<h4>Step 3: Generate Visual Studio Solution Files </h4>
+Visual Studio solution files are generated using CMake. You can download CMake from the <a href="http://www.cmake.org/cmake/resources/software.html">CMake website.</a>
+
+<br>
+<h5>A complete set of build files for the Plugins and the Plugin API includes the following:</h5>
+<ul>
+    <li> Visual Studio solution files for the Plugins API itself </li>
+    <li> Visual Studio solution files for Plugins Third Parties </li>
+</ul>
+
+<p>This is analogous to how the RoadRunner build is structured and setup.</p>
+
+
+<p>
+We will in the following steps show how to create a Visual Studio solution file for the Plugins using the CMake client for windows. When you start the CMake client you will be presented with more or less a blank screen, similar to the figure below
+</p>
+<figure>
+<img src="blank_cmake.jpg" />
+<figcaption>Figure 2: The CMake client. Observe the buttons up in the top right corner, having captions <b>Browse Source</b> and <b>Browse Build.</b> Those buttons are used to initialize a new CMake session.</figcaption>
+</figure>
+<br>
+The first step when initializing a CMake session is to click the <b>Browse Source</b> button up in the right corner of the program. This will open a new window allowing you to Browse your file system. From within this window locate the folder
+for the cloned Tellurium Plugins source code and select it. After you have selected the proper folder, click OK. The screen-shot below shows the browser window with a cloned Tellurium plugins folder selected.
+
+<figure>
+<img src="blank_browse.jpg" />
+<figcaption>Figure 3: The CMake 'Browse for folder' window. The figure shows how the cloned Tellurium Plugins folder is selected. The next step is to click 'OK'. </figcaption>
+</figure>
+
+<br>
+The next step is to setup where to <i>generate</i> build files, i.e. Visual Studio solution files. To do that, click the 'Browse Build' button. It will open another 'Browse for folder' window. It also allow you to create a new folder in case you need to-do so. 
+The figure below shows how the folder named <b>'r:/builds/plugins'</b> been selected (after being created) in the browser window. The next step is to click 'OK'.
+
+<figure>
+<img src="build_browse.jpg" />
+<figcaption>Figure 4: The CMake 'Browse for folder' window. The figure shows how the folder <b>'r:/builds/plugins'</b> been selected as being the output folder for Visual Studio solution files. The next step is to click 'OK'. </figcaption>
+</figure>
+<br>
+
+<p>You will at this point have an empty cmake window with the top edit boxes filled out with the source code location and where to build the binaries (build files), see figure below.</p>
+<figure>
+<img src="cmake_empty.jpg" />
+<figcaption>Figure 5: CMake window after source and build folders have been selected. </figcaption>
+</figure>
+<br>
+
+
+<p> Now click the 'Configure' button to start generation of build files. At this point, CMake will ask you for what compiler to generate build files for.
+For the purpose of this build demo, we will choose Visual Studio 10 using the drop down list. (see figure below). After you have selected your compiler, click the 'Finish' button.
+If you are building the sources using Visual Studio 2012, select 'Visual Studio 11' in the dropdown list.</p>
+
+<figure>
+<img src="compiler_selection.jpg" />
+<figcaption>Figure 6: Figure showing CMake's dialog box in where a compiler is selected. For this demo, select VisualStudio 10. </figcaption>
+</figure>
+<br>
+
+<p>After you have selected your compiler, cmake will do some checks and then come back with various options, that are highlighted in red color. 
+There are two important fields to setup correctly from here, in order to obtain a successful build.</p>
+
+<p>The first field is 'CMAKE_INSTALL_PREFIX'. This field define
+where resulting binaries of the build will be placed. This folder should be the EXACT SAME folder, as for where you installed roadrunner. For this demo, we used
+<b>'r:\plugins_install\release'</b>, as the installation folder for RoadRunner. So for this demo, we will set the plugins build to use the exact same folder.
+</p>
+<p>The next important field is the 'THIRD_PARTY_INSTALL_FOLDER'. It should be set to the EXACT SAME folder as the 'CMAKE_INSTALL_PREFIX' folder. </P>
+
+<p>
+The rest of the options are somewhat self-explanatory. Select which plugins you want to build by checking/unchecking the check boxes. For this Demo, we will uncheck the 
+'TLP_BUILD_BETA_PLUGINS' option and leave the rest using their default values. When you have made the changes and selections, click the 'Configure' button.
+At this point, the cmake window should resemble the figure below.
+</p>
+
+<figure>
+<img src="cmake_selected.jpg" />
+<figcaption>Figure 7: Figure showing CMake's window after the CMAKE_INSTALL_PREFIX, THIRD_PARTY_INSTALL_FOLDER and the
+TLP_BUILD_BETA_PLUGINS been modified and after that the 'Configure' button been clicked. </figcaption>
+</figure>
+
+<br>
+<p>After we have a successful build of the plugins, we may want to check the integrity of the build with some examples. Therefore, select the <b>INSTALL_EXAMPLES</b> option.
+Doing so will generate some new options, related to examples, in the CMake window and as shown in the figure below.
+<figure>
+<img src="cmake_select_python_examples.jpg" />
+<figcaption>Figure 8: Figure showing CMake's window after selecting the 'INSTALL_EXAMPLES' option and hitting the 'Generate' button. In this build demo, we have 
+choosen to only select <i>INSTALL_PYTHON_EXAMPLES</i> and left other examples unselected.
+</figcaption>
+</figure>
+
+
+<br>
+<p>The final step within CMake is to click the 'Generate' button and finish with no red fields in the CMake UI. This step will generate the VisualStudio solution file, and other files necessary for
+Visual Studio to compile the sources. </p>
+You will find the VisualStudio solution file, named <b>tellurium.sln</b> in the folder set in the 'Where to build the binaries' cmake field.
+
+<figure>
+<img src="cmake_after_generate.jpg" />
+<figcaption>Figure 9: Figure showing CMake's window after that the 'Generate' button been clicked. A Visual Studio solution file will be found in the folder pointed to by the 
+'Where to build the binaries' field. 
+</figcaption>
+</figure>
+
+
+<h5>Create solution files for Tellurium Plugins ThirdParties</h5>
+<p>The Tellurium plugins source tree do have a sub-folder named 'third_parties'. This folder contain third party libraries that need to be built and installed <b>before</b> the plugins are built. Currently
+the only necessary third party library requited by the plugins is 'poco'. </p>
+
+<p>The following steps show how to build the source code found in the third_parties folder. As you will see, the steps needed are analogous to the steps for creating build files for the Plugins API itself.
+
+Following the same steps on how to generate solution files for the Plugins API above, first select the folder for the plugins third_party sources. In our example that is <b>r:\telPlugins\third_party\poco</b>. </p>
+
+<p>Second, select/create the folder for
+where to place the generated build files for third parties. In our example that is <b>r:/builds/plugins_third_party</b>. Third, within CMake, set the CMAKE_INSTALL_PREFIX to point to the same folder as all other builds
+CMAKE_INSTALL_PREFIXes, i.e. <b>r:\plugins_install\release</b>.</p> 
+
+<p>Finally, click the generate button.</P>
+
+<p>At this point, your CMake window should look like in the figure below.</p>
+<figure>
+<img src="cmake_plugins_third_party_after_generate.jpg" />
+<figcaption>Figure 10: Figure showing CMake's window after setting up generation of build files for the plugins third party library, poco. </figcaption>
+</figure>
+
+
+
+<h3>Step 4: Build Tellurium plugins from within Visual Studio </h3>
+
+
+<p>We are now ready to build the plugins third parties and the plugins api. The first step is to build the plugins third parties, and after that, build the plugins.</p>
+<h5>Build Plugins Third Parties</h5>
+<p>Open Visual Studio 2010 and select File->Open and browse to the third party solution file. 
+In our example, we did choose to create solution files for the third parties in the folder
+<b>r:\builds\plugins_third_party</b>. The third party solution file is named <i>poco.sln</i>. 
+After you have located and loaded this file into Visual Studio, your Visual Studio workspace should look something like in the figure below.
+
+<figure>
+<img src="vs_third_party_build_1.jpg" />
+<figcaption>Figure 11: Figure showing VS 2010 after loading plugins third party solution file. </figcaption>
+</figure>
+
+<p>Before compiling, however, one important step is required, namely selection of what type of <b>target</b> to build. Type is here refering to <i>Debug, Release, RelWithDebInfo</i> etc. 
+When building various independent libraries, as we do, it is of prime importance
+that all of them are of the exact same type. As mentioned in the step of building the RoadRunner library, we are building a <b>release</b> target. 
+Therefore, on the top part of the window make sure you select 'Release' mode for the solution.
+</p>
+<p>
+After release mode is selected, right click on the <b>INSTALL</b> target and select Build (see figure below). This will start the compiler and eventually install the poco library into our install folder.
+<figure>
+<img src="vs_third_party_build_2.jpg" />
+<figcaption>Figure 12: By right clicking on the 'INSTALL' target and selecting build, we start the build process of the plugins third party library. </figcaption>
+</figure>
+
+<br>
+<p> After a successful/install build, the Output window in Visual Studio should show a list of installed files and finally a message indicating success. See below:</p>
+
+<figure>
+<img src="vs_third_party_build_3.jpg" />
+<figcaption>Figure 13: Output window in Visual Studio showing a successful build/install of Plugins third party library. </figcaption>
+</figure>
+
+
+<p>The final step is to build the plugins and the plugin API itself.
+<h5>Build Plugins and the Plugins API</h5>
+<p>As with the plugins third party code, open visual studio and select the Tellurium Plugins solution file. In our example, it was created in <b>r:/builds/plugins</b> and it is named <i>tellurium.sln</i></p>
+
+<p>The following figure show the Visual Studio window loaded with the tellurium plugins solution. You will see all plugin targets and the plugin API itself in the solution explorer.
+Again, and <b>*importantly*</b>, select the solution type to be 'Release'.</p>
+
+<figure>
+<img src="vs_third_party_build_4.jpg" />
+<figcaption>Figure 14: Visual Studio workspace before building the Plugins and the Plugins API. </figcaption>
+</figure>
+
+<p>Final step is to right click on the <i>INSTALL</i> target and select build. This will start the compilation and build of the plugins API and all the plugins.</p>
+
+
+<p> After a successful build/install of the Plugins and the Plugins API, the Visual Studio workspace should resemble the figure below.  
+</p>
+
+<figure>
+<img src="vs_plugins_build.jpg" />
+<figcaption>Figure 15: Visual Studio workspace after building the Plugins and the Plugins API. </figcaption>
+</figure>
+
+
+
+<h3>Final Step 1: Verify the build</h3>
+<p>If you got this far, its time to verify the integrity of the build, i.e. is the build properly done? Does it work?
+To check that the plugins are indeed properly built, with all their dependencies, RoadRunner, the plugins API itself, perhaps the easiest test is to 
+run the <b>install_tellurium_plugins.py</b> script, located in the install folder. In our case, the install folder was <b>R:\plugins_install\release</b>. Observe that this require a present Python environment.</p>
+
+The <b>install_tellurium_plugins.py</b> installs the plugins Python module into your python <i>site_packages</i> folder, allowing you to access plugins from within your python
+environment.
+
+The following screen-shot shows the output from running the install script from within the PyScripter python UI.
+
+<figure>
+<img src="install_plugins.jpg" />
+<figcaption>Figure 16 Running the python install script will copy necessary files into a users 'site_packags' folder. After the script is executed, Python examples in the examples/python folder can be 
+examined and run. </figcaption>
+</figure>
+<br>
+<p>The screen below shows the screen obtained when running the telLevenbergMarquardt.py example.
+
+<figure>
+<img src="python_example_1.jpg" />
+<figcaption>Figure 17 Running a python plugin example verifying the integrity of the plugins. </figcaption>
+</figure>
+
+
+<h3>Final Step 2: Create a Python release</h3>
+The final step might be to bundle the resulting build into a <i>PythonRelease</i>. If you inspect the install folder, a shell script will be found <b>above</b> the actual install folder. 
+The script is named <i>createPythonRelease.sh</i>. Executing that, from within a shell that allow bash execution, a zip file will be created containing the necessary files for a Python install. 
+
+The figure below shows the folders and files created after the <i>createPythonRelease.py</i> is executed.
+<figure>
+<img src="python_release.jpg" />
+<figcaption>Figure 18 After running the <i>createPythonRelease.py</i> script. A new folder, named <i>PythonRelease</i> is created. This folder contain only files necessary for
+ python installation. Another file, named TelluriumPlugins-1.xx.xx.zip is also created. The xxxx indicate what version of the source code was built, e.g. 1.0.14. 
+ This zip file simply contains the content of the <i>PythonRelease</i> folder. </figcaption>
+</figure>
+<br>
+
+<p>The zip file is used by the Tellurium installer.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
