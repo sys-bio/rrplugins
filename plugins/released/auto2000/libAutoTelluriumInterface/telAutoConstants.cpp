@@ -109,11 +109,11 @@ void AutoConstants::populateFrom(Properties* props)
         THU             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THU"))->getValue();
         UZR             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("UZR"))->getValue();
     }
-    catch(Exception& ex)
+    catch(Exception&)
     {                   
         Log(lError) << "Failed transfer data to auto constants class";
     }
-    catch(const std::bad_cast& e)
+    catch(const std::bad_cast&)
     {
         Log(lError) << "Failed transfer data to auto constants class";
     }

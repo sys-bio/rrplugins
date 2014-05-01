@@ -162,7 +162,6 @@ void expandtoken(char *token,int *start, int *end) {
 int command_loop(solutionp root) {
   char command[MAX_BUF];
   char *token;
-  int label;
   int start,end,i;
   printf("Enter Command : ");
   fgets(command,MAX_BUF,stdin);

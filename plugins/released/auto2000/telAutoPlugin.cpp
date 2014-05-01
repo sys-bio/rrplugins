@@ -164,12 +164,12 @@ bool AutoPlugin::execute(bool inThread)
     //Tempfolder setup
     if(getTempFolder() == ".")
     {
-        mRR->setTempFileFolder(getCWD());
+        mRR->setTempDir(getCWD());
         mRRAuto.setTempFolder(getCWD());
     }
     else
     {
-        mRR->setTempFileFolder(getTempFolder());
+        mRR->setTempDir(getTempFolder());
         mRRAuto.setTempFolder(getTempFolder());
     }
 

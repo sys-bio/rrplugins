@@ -167,7 +167,7 @@ int PluginManager::load(const string& pluginName)
     //Throw if plugin folder don't exist
     if(!folderExists(mPluginFolder))
     {
-        errors<<"The plugin folder: \""<<mPluginFolder<<"\" do not exist..";
+        errors<<"The plugin folder: \""<<mPluginFolder<<"\" does not exist.";
         Log(lError)<<errors.str();
         mLoadPluginErrors << errors.str();
         throw(Exception(errors.str()));

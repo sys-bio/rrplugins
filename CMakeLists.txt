@@ -84,7 +84,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)
 include_directories(
     ${TLP_ROOT}
     ${TLP_ROOT}/manager
-    ${THIRD_PARTY_INSTALL_FOLDERa}/include
+    ${THIRD_PARTY_INSTALL_FOLDER}/include
 )
 
 link_directories (

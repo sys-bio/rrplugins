@@ -27,10 +27,7 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     for(int i = 0; i < nrOfParameters; i++)
     {
         PropertyBase* para = inParas->getPropertyAt(i);
-        if(!rr->setValue(para->getName(), par[i]))
-        {
-            throw(Exception("Failed setting value of RoadRunner parameter"));
-        }
+        rr->setValue(para->getName(), par[i]);
     }
 
     rr::SimulateOptions opt;
@@ -39,7 +36,8 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
     opt.steps       = expData.rSize() -1;
 
     //Simulate
-    TelluriumData   simData(rr->simulate(&opt));
+    rr->simulate(&opt);
+    TelluriumData   simData(rr->getSimulationResult());
 
     StringList* species = (StringList*) plugin.mExperimentalDataSelectionList.getValueHandle();
     int nrOfSpecies = species->count();
