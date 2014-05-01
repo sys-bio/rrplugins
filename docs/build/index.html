@@ -29,7 +29,7 @@
 						<h1>Building Tellurium Plugins from Sources</h1>
 						<h3>Intro</h3>
 <p>This document outlines the steps needed to build Tellurium Plugins from sources, using Visual Studio 2010 (or 2012). In short, the build process involves
-to first build the plugins API's main dependency, which is a full build of the RoadRunner library (including its ThirdParties etc.)</p>
+to first build the plugins API's main dependency, which is a full build of the RoadRunner library (including its ThirdParties).</p>
 <p>The second step involve obtaining the Tellurium Plugins source tree from the GIT repository and from the this source tree generate necessary build files. </p>
 
 <p>From the plugins source three, two separate builds are necessary, (1) 
@@ -40,7 +40,7 @@ a build of the third party sources (found in the plugins root/third_party folder
 <p>The Tellurium plugin system rely on a fully functional and compatible RoadRunner installation.<br><br> 
 See this page on how to obtain a proper RoadRunner installation: <a href="http://libroadrunner.org/build-roarunner-from-source/"> http://libroadrunner.org/build-roarunner-from-source</a>
 
-<br><br><b>Note: </b> In the following we will create a <i>release</i> type of build. This require RoadRunner to be built as a <i>release</i> build too.
+<br><br><b>Note: </b> In the following we will create a <i>release</i> type of build. This require RoadRunner, and all its dependencies, to be built as <i>release</i> builds too.
 
 <br> <br>
 
@@ -154,7 +154,7 @@ TLP_BUILD_BETA_PLUGINS been modified and after that the 'Configure' button been 
 
 <br>
 <p>After we have a successful build of the plugins, we may want to check the integrity of the build with some examples. Therefore, select the <b>INSTALL_EXAMPLES</b> option.
-Doing so will generate some new options, related to examples, in the CMake window and as shown in the figure below.
+Doing so will generate some new options, related to examples, in the CMake window, as shown in the figure below.
 <figure>
 <img src="cmake_select_python_examples.jpg" />
 <figcaption>Figure 8: Figure showing CMake's window after selecting the 'INSTALL_EXAMPLES' option and hitting the 'Generate' button. In this build demo, we have 
@@ -178,7 +178,7 @@ You will find the VisualStudio solution file, named <b>tellurium.sln</b> in the 
 
 <h5>Create solution files for Tellurium Plugins ThirdParties</h5>
 <p>The Tellurium plugins source tree do have a sub-folder named 'third_parties'. This folder contain third party libraries that need to be built and installed <b>before</b> the plugins are built. Currently
-the only necessary third party library requited by the plugins is 'poco'. </p>
+the only necessary third party library required by the plugins is 'poco'. </p>
 
 <p>The following steps show how to build the source code found in the third_parties folder. As you will see, the steps needed are analogous to the steps for creating build files for the Plugins API itself.
 
@@ -297,21 +297,6 @@ The figure below shows the folders and files created after the <i>createPythonRe
 <br>
 
 <p>The zip file is used by the Tellurium installer.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
