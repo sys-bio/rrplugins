@@ -21,7 +21,7 @@
 <!--[if lt IE 9]>
 <link rel='stylesheet' id='twentythirteen-ie-css'  href='http://libroadrunner.org/wp-content/themes/twentythirteen/css/ie.css?ver=2013-07-18' type='text/css' media='all' />
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="css/plugin_table.css"/> 
+<link rel="stylesheet" type="text/css" href="../../css/plugin_table.css"/> 
 	</head>
 
 <body class="home page page-id-5 page-template-default single-author">
@@ -40,7 +40,8 @@ a build of the third party sources (found in the plugins root/third_party folder
 <p>The Tellurium plugin system rely on a fully functional and compatible RoadRunner installation.<br><br> 
 See this page on how to obtain a proper RoadRunner installation: <a href="http://libroadrunner.org/build-roarunner-from-source/"> http://libroadrunner.org/build-roarunner-from-source</a>
 
-<br><br><b>Note: </b> In the following we will create a <i>release</i> type of build. This require RoadRunner, and all its dependencies, to be built as <i>release</i> builds too.
+<br><br>
+<b>Note: </b> In the following we will create a <i>release</i> type of build. This require RoadRunner, and all its dependencies, to be built as <i>release</i> builds too.
 
 <br> <br>
 
@@ -62,13 +63,13 @@ Any standard git client can be used to clone the code repository. From the comma
     git clone https://github.com/sys-bio/telPlugins.git
 </code>
 </blockquote>
-The repository clone will contain all source code necessary to compile and build Tellurium Plugins.
+The repository clone will contain all source code necessary to compile and build Tellurium Plugins (except for the RoadRunner code).
 A successful Tellurium plugins clone will have the folder structure as shown in the screen shot below.
 <br><br>
 
 <figure>
 <img src="source_tree.jpg" />
-<figcaption>Figure 1. The Tellurium Plugins source tree. For the purpose of building the library, the most important file is selected, namely <b>CMakeLists.txt</b></figcaption>
+<figcaption>Figure 1. The Tellurium Plugins source tree. For the purpose of building the plugins, and the plugins  API, the most important file is selected, namely <b>CMakeLists.txt</b></figcaption>
 </figure>
 <br>
 

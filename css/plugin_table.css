@@ -1,8 +1,6 @@
 /* ------------------
  styling for the tables 
    ------------------   */
-
-
 body
 {
 	line-height: 1.6em;
@@ -84,4 +82,23 @@ body
 	color: #339;
 }
 
+h2 { margin-bottom: 4px; }
+h3 { margin-bottom: 4px; }
+h4 { margin-bottom: 4px; }
+h5 { margin-bottom: 4px; }
 
+figure
+{
+  padding: 9px 0 0 3px;
+}
+
+figcaption {
+  padding: 9px;
+  font-family: 'Cherry Swash';
+  font-size: 1em;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  word-wrap:normal;
+  text-align: left;
+}
