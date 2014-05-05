@@ -5,11 +5,11 @@ OPTION (TLP_BUILD_PLUGINS_C_API	                        "Build Plugins C API"	  
 OPTION (TLP_INSTALL_PLUGINS_PYTHON_API	                "Install Plugins Python API"	    ON)
 
 if(${TLP_BUILD_PLUGINS_C_API} STREQUAL ON)
-add_subdirectory("C")
+add_subdirectory("c")
 endif()
 
 if(${TLP_INSTALL_PLUGINS_PYTHON_API} STREQUAL ON)
-add_subdirectory("Python")
+add_subdirectory("python")
 endif()
 
 
