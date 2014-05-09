@@ -5,6 +5,7 @@ set(target lmfit)
 
 set(sources 
 lmmin.c
+lmmin.h
 )
 
 add_library(${target}-static STATIC 

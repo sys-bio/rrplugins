@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 set(target tel_test_model)
 
 set(sources
-TestModel
-test_model_doc
+TestModel.h
+test_model_doc.h
+TestModel.cpp
+test_model_doc.cpp
 )
 
 add_library(${target} MODULE ${sources})

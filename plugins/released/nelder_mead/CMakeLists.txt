@@ -15,12 +15,17 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-nelder_mead_doc
-nmWorker
-nmUtils
-nmObjectiveFunction
-nmNelderMead
-lib/nmsimplex2
+nelder_mead_doc.cpp
+nmWorker.cpp
+nmUtils.cpp
+nmObjectiveFunction.cpp
+nmNelderMead.cpp
+lib/nmsimplex2.cpp
+nelder_mead_doc.h
+nmWorker.h
+nmUtils.h
+nmObjectiveFunction.h
+nmNelderMead.h
 )
 
 add_definitions(

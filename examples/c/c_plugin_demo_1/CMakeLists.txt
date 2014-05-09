@@ -13,7 +13,8 @@ ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
 
 SET_SOURCE_FILES_PROPERTIES( c_plugin_demo.c PROPERTIES LANGUAGE C)
 set(sources
-c_plugin_demo
+c_plugin_demo.c
+c_plugin_demo.h
 )
 
 add_library(${target} MODULE ${sources})

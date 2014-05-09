@@ -15,11 +15,16 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-lm
-lmWorker
-lmUtils
-lmObjectiveFunction
-levenberg_marquardt_doc
+lm.cpp
+lmWorker.cpp
+lmUtils.cpp
+lmObjectiveFunction.cpp
+levenberg_marquardt_doc.cpp
+lm.h
+lmWorker.h
+lmUtils.h
+lmObjectiveFunction.h
+levenberg_marquardt_doc.h
 )
 
 #This is where the Levenberg C lib is built

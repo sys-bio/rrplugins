@@ -9,7 +9,11 @@
 #include "telProperties.h"
 //---------------------------------------------------------------------------
 
-#define autoCallConv __cdecl
+#if defined(_MSC_VER) || defined(__BORLANDC__)
+    #define autoCallConv __cdecl
+#else
+    #define autoCallConv
+#endif
 
 //This class serves as a RoadRunner-Auto interface. It needs a roadrunner instance on creation
 namespace telauto

@@ -13,10 +13,14 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-stStat
-stStatWorker
-stStatUtils
-stat_doc
+stStat.h
+stStatWorker.h
+stStatUtils.h
+stat_doc.h
+stStat.cpp
+stStatWorker.cpp
+stStatUtils.cpp
+stat_doc.cpp
 )
 
 add_definitions(

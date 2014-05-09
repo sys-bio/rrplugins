@@ -5,10 +5,14 @@ include_directories(
 )
 
 set(sources
-add_noise
-add_noise_worker
-add_noise_doc
-noise
+add_noise.cpp
+add_noise_worker.cpp
+add_noise_doc.cpp
+noise.cpp
+add_noise.h
+add_noise_worker.h
+add_noise_doc.h
+noise.h
 )
 
 add_library(${target} MODULE ${sources})

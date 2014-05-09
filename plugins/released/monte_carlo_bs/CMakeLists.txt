@@ -15,9 +15,12 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-bsMonteCarlo
-bsWorker
-monte_carlo_bs_doc
+bsMonteCarlo.cpp
+bsWorker.cpp
+monte_carlo_bs_doc.cpp
+bsMonteCarlo.h
+bsWorker.h
+monte_carlo_bs_doc.h
 )
 
 #This is where the Levenberg C lib is built

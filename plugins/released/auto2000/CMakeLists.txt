@@ -21,11 +21,16 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-telAutoPlugin
-telAutoWorker
-telAutoDataParser
-auto_utils
-auto2000_doc
+telAutoPlugin.cpp
+telAutoWorker.cpp
+telAutoDataParser.cpp
+auto_utils.cpp
+auto2000_doc.cpp
+telAutoPlugin.h
+telAutoWorker.h
+telAutoDataParser.h
+auto_utils.h
+auto2000_doc.h
 )
 
 add_definitions(

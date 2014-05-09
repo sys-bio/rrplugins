@@ -13,9 +13,12 @@ ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 set(sources
-chisquare_doc
-csChiSquare
-csChiWorker
+chisquare_doc.cpp
+csChiSquare.cpp
+csChiWorker.cpp
+chisquare_doc.h
+csChiSquare.h
+csChiWorker.h
 )
 
 add_definitions(

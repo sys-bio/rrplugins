@@ -12,10 +12,12 @@ ${CMAKE_BINARY_DIR}/lib
 
 #The api is built as a static library..
 set(src
-#telAutoData
-telAutoConstants
-telAutoTelluriumInterface
-telAutoUtils
+telAutoConstants.cpp
+telAutoTelluriumInterface.cpp
+telAutoUtils.cpp
+telAutoConstants.h
+telAutoTelluriumInterface.h
+telAutoUtils.h
 )
 
 add_library(${target}-static STATIC

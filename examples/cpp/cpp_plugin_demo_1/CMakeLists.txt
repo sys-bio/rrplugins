@@ -5,7 +5,8 @@ include_directories(
 )
 
 set(sources
-cpp_plugin_demo
+cpp_plugin_demo.cpp
+cpp_plugin_demo.h
 )
 
 add_library(${target} SHARED ${sources})
