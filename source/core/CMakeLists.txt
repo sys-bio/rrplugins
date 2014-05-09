@@ -49,8 +49,15 @@ lapack
 nleq-static
 rr-libstruct-static
 poco_foundation-static
-libxml2
 )
+
+if(UNIX)
+    target_link_libraries(${target} xml2)
+elseif(${MSVC})
+    target_link_libraries (${target} libxml2)
+elseif(${BORLAND})
+    target_link_libraries (${target} libxml2_xe)
+endif()
 
 if(${MSVC})
     target_link_libraries (${target}
@@ -117,26 +124,25 @@ if(UNIX)
     target_link_libraries (${target}-static
         sbml-static
         f2c
-        xml2
         dl
         pthread
         )
 endif(UNIX)
 
-#Libxml we can't build right now
-if(${BORLAND})
-    target_link_libraries (${target}-static
-        libxml2_xe
-        )
+if(UNIX)
+    target_link_libraries(${target}-static xml2)
+elseif(${MSVC})
+    target_link_libraries (${target}-static libxml2)
+elseif(${BORLAND})
+    target_link_libraries (${target}-static libxml2_xe)
 endif()
 
 if(${MSVC})
-    target_link_libraries(${target}-static libxml2) 
     #Disable some VS Warnings 
     #           4251 About exporting std classes
     #           4018 Comparing unsigned/signed ints
     #           4996 Deprecated functions   
-add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
+    add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
 
 endif()
 

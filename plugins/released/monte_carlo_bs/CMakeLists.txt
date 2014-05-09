@@ -3,8 +3,8 @@ set(target tel_monte_carlo_bs)
 
 include_directories(
 ../source
-../../source
-../../wrappers/C
+../../../source
+../../../wrappers/C
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
 ${CMAKE_INSTALL_PREFIX}/include
@@ -32,7 +32,6 @@ add_definitions(
 
 add_library(${target} MODULE ${sources})
 
-if(WIN32)
 target_link_libraries (${target}
 roadrunner
 roadrunner_c_api
@@ -47,7 +46,7 @@ rr-libstruct-static
 
 )
 
-else() 
+if(UNIX) 
     if(APPLE)
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     else()
@@ -62,12 +61,6 @@ else()
         STATIC_LIBSTRUCT
         )
 
-    target_link_libraries ( ${target}
-        roadrunner-static
-        lmfit-static
-        #roadrunner_c_api
-        telplugins_api-static
-        )
 endif()
 
 #if(${INSTALL_EXAMPLES})

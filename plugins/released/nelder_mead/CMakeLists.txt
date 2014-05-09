@@ -33,7 +33,6 @@ add_definitions(
 
 add_library(${target} MODULE ${sources})
 
-if(WIN32)
 target_link_libraries (${target}
 roadrunner
 telplugins_common
@@ -44,10 +43,9 @@ roadrunner_c_api
 blas
 lapack
 rr-libstruct-static
-
 )
 
-else() 
+if(UNIX) 
     if(APPLE)
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     else()
@@ -62,12 +60,6 @@ else()
         STATIC_LIBSTRUCT
         )
 
-    target_link_libraries ( ${target}
-        roadrunner-static
-        lmfit-static
-        #roadrunner_c_api
-        telplugins_api-static
-        )
 endif()
 
 if(${INSTALL_EXAMPLES})

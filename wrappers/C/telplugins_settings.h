@@ -10,6 +10,7 @@
     #define event_cc    __cdecl
 #else
     #define tlp_cc
+    #define event_cc
 #endif
 
 #if !defined(__cplusplus)

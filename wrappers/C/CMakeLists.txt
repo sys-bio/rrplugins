@@ -29,6 +29,15 @@ if(${BORLAND})
     set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/telplugins_c_api.def\"")
 endif()
 
+target_link_libraries ( ${target}
+        #roadrunner_c_api
+        roadrunner
+        telplugins_core
+        telplugins_common
+        telplugins_math
+        )
+
+
 #Link C_api dll statically to roadrunner and libsbml
 if(WIN32)
     set_property(TARGET ${target}
@@ -38,14 +47,6 @@ if(WIN32)
         LIBLAX_STATIC
         POCO_STATIC
         STATIC_LIBSTRUCT
-        )
-
-    target_link_libraries ( ${target}
-        #roadrunner_c_api
-        roadrunner
-        telplugins_core
-        telplugins_common
-        telplugins_math
         )
 
 else() 
@@ -63,18 +64,6 @@ else()
         STATIC_LIBSTRUCT
         )
 
-    target_link_libraries ( ${target}
-        #roadrunner_c_api
-        roadrunner-static
-        telplugins_api
-        rr-libstruct-static
-        nleq-static
-        sbml-static
-        lapack
-        blas
-        f2c
-        pthread
-        )
 endif()
 
 if(TLP_BUILD_EXAMPLES)

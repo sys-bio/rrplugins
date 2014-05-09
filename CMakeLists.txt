@@ -77,6 +77,22 @@ IF(WIN32)
     ENDIF(${MSVC})
 ENDIF(WIN32)
 
+# TODO libxml2 handling is excedingly hackish, it is all homegrown
+# manually linking crap, need to fix this!
+
+#NOTE:  if fixed here, need to make the same fix in roadrunner/CMakeLists.txt
+
+if (WIN32)
+    message(STATUS "adding ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2 to include path")
+    include_directories(${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2)
+else()
+    #UNIX
+    find_package(LibXml2 REQUIRED)
+	message(STATUS "found libxml2, include dir: ${LIBXML2_INCLUDE_DIR}") 
+	include_directories(${LIBXML2_INCLUDE_DIR})
+endif(WIN32)
+
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)

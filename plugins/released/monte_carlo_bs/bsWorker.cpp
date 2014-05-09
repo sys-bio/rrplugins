@@ -10,7 +10,7 @@
 #include "telMathUtils.h"
 #include "telProperty.h"
 #include "telPluginManager.h"
-#include "telPlugins_c_api.h"
+#include "telplugins_c_api.h"
 //---------------------------------------------------------------------------
 
 using namespace std;

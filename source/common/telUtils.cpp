@@ -35,7 +35,7 @@
 #include "Poco/File.h"
 #include "telStringUtils.h"
 #include "telUtils.h"
-//#include "rr/rrSelectionRecord.h"
+#include "rr/rrException.h"
 #include "telException.h"
 #include "telLogger.h"
 

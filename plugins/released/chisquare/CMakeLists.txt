@@ -25,14 +25,13 @@ add_definitions(
 
 add_library(${target} MODULE ${sources})
 
-if(WIN32)
 target_link_libraries (${target}
 telplugins_core
 telplugins_common
 telplugins_math
 )
 
-else() 
+if(UNIX) 
     if(APPLE)
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     else()
@@ -43,9 +42,6 @@ else()
         PROPERTY  COMPILE_DEFINITIONS
         )
 
-    target_link_libraries ( ${target}
-        telplugins
-        )
 endif()
 
 install (TARGETS ${target}

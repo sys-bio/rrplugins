@@ -48,8 +48,15 @@ target_link_libraries (${target}
     nleq-static
     rr-libstruct-static
     poco_foundation-static
-    libxml2
     )
+
+if(UNIX)
+    target_link_libraries(${target} xml2)
+elseif(${MSVC})
+    target_link_libraries (${target} libxml2)
+elseif(${BORLAND})
+    target_link_libraries (${target} libxml2_xe)
+endif()
 
 if(${MSVC})
     target_link_libraries (${target}
@@ -109,6 +116,7 @@ if(WIN32)
         libsbml-static
         libf2c
         iphlpapi
+	libxml2
         )
 endif(WIN32)
 
@@ -130,7 +138,6 @@ if(${BORLAND})
 endif()
 
 if(${MSVC})
-    target_link_libraries(${target}-static libxml2) 
     #Disable some VS Warnings 
     #           4251 About exporting std classes
     #           4018 Comparing unsigned/signed ints

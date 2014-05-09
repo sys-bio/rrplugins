@@ -44,6 +44,7 @@
 #ifndef telplugins_cpp_supportH
 #define telplugins_cpp_supportH
 #include <string>
+#include <typeinfo>
 #include "telplugins_c_api.h"
 #include "telTelluriumData.h"
 #include "telPluginManager.h"

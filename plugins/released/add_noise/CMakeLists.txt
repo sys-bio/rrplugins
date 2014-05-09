@@ -53,7 +53,9 @@ else() #UNIX
         f2c
         pthread
         #roadrunner_c_api
-        telplugins_api-static
+        telplugins_common-static
+        telplugins_core-static
+        telplugins_math-static
         )
 endif()
 
