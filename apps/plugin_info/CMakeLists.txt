@@ -5,26 +5,20 @@ add_executable(${target}
 main.cpp 
 )
 
+target_link_libraries (${target} 
+telplugins_core
+)
+
 if(WIN32)
 add_definitions(
 -DWIN32
 )
 
-target_link_libraries (${target} 
-telplugins_core
-)
 endif()
 
 if(UNIX)
 add_definitions(
 -DPOCO_STATIC
-)
-target_link_libraries (${target} 
-telplugins
-lapack
-blas
-f2c
-poco_foundation-static.a
 )
 endif()
 

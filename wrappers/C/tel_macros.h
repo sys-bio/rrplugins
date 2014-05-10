@@ -93,6 +93,20 @@
     }
 
 /*!
+ \brief macro for catch statement in a routine returning an unsigned integer
+ \ingroup macros
+*/
+#define catch_uint_macro                                     \
+    }                                                       \
+    catch(exception& ex)                                    \
+    {                                                       \
+        stringstream msg;                                   \
+        msg<<"Tellurium exception: "<<ex.what();            \
+        tpSetError(msg.str());                                \
+        return 0;                                          \
+    }
+
+/*!
  \brief macro for catch statement in a routine returning void
  \ingroup macros
 */

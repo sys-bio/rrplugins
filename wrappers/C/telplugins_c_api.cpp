@@ -339,7 +339,7 @@ unsigned int tlp_cc tpGetPluginManualNrOfBytes(TELHandle handle)
     start_try
         Plugin* aPlugin = castHandle<Plugin>(handle, __FUNC__);
         return aPlugin->getPDFManualByteSize();
-    catch_ptr_macro
+    catch_uint_macro
 }
 
 unsigned char* tlp_cc tpGetPluginManualAsPDF(TELHandle handle)

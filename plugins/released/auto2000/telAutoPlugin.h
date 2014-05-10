@@ -38,9 +38,6 @@ class AutoPlugin : public tlp::CPPPlugin
         //The worker
         AutoWorker                              mAutoWorker;
 
-        //So make it a friend
-        friend class AutoWorker;
-
         Property<string>                        mSBML;                  //This is the model
         Property<string>                        mTempFolder;
         Property<bool>                          mKeepTempFiles;

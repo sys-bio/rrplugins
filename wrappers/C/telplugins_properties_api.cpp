@@ -23,7 +23,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
         char* hint = (char*) _hint;
         if(!hint)
         {
-            hint = "";
+            hint = (char*) "";
         }
 
         if(string(type) == string("bool"))

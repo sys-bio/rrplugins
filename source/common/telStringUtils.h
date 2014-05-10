@@ -118,6 +118,28 @@ COMMON_DECLSPEC string              removeNewLines(const string& str, const int&
 
 
 /**
+    \brief Template function, substituting an occurence of a string, target, in the source string, with another string, item. The howMany argument
+    limits the number of substitutions. A value of -1 causes all occurences to be substituted. 
+    The new string with the substitions is returned.
+*/
+template <class T>
+inline string substituteN(const string& source, const string& target, const T& item, const int& howMany= -1)
+{
+    return substitute(source, target, toString(item), howMany);
+}
+
+/**
+    \brief Template function, substituting an occurence of a string, target, within the source string, with another, item. The howMany argument
+    limits the number of substitutions. A value of -1 causes all occurences to be substituted.
+    The new string with the substitions is returned.
+*/
+template<>
+inline string substituteN<double>(const string& source, const string& target, const double& item, const int& howMany)
+{
+    return substitute(source, target, toString(item, "%G"), howMany);
+}
+
+/**
     \brief Template format function. A "{0}" occurence in the src string is substituted with the
     value in arg1. The new string with the substition is returned.
 */
@@ -266,27 +288,6 @@ string formatN(const string& src, const A& arg1, const B& arg2, const C& arg3, c
     return newString;
 }
 
-/**
-    \brief Template function, substituting an occurence of a string, target, in the source string, with another string, item. The howMany argument
-    limits the number of substitutions. A value of -1 causes all occurences to be substituted. 
-    The new string with the substitions is returned.
-*/
-template <class T>
-inline string substituteN(const string& source, const string& target, const T& item, const int& howMany= -1)
-{
-    return substitute(source, target, toString(item), howMany);
-}
-
-/**
-    \brief Template function, substituting an occurence of a string, target, within the source string, with another, item. The howMany argument
-    limits the number of substitutions. A value of -1 causes all occurences to be substituted.
-    The new string with the substitions is returned.
-*/
-template<>
-inline string substituteN<double>(const string& source, const string& target, const double& item, const int& howMany)
-{
-    return substitute(source, target, toString(item, "%G"), howMany);
-}
 
 }
 #endif

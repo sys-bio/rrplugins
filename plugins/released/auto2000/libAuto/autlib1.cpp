@@ -2497,7 +2497,7 @@ L2:
         }
 
         if (iid >= 2 && iap->mynode == 0) {
-            fprintf(fp9," Branch %2ld N=%5ld IT=%2ld PAR(%2ld)=%11.3E U=",ibr,ntop,
+            fprintf(fp9," Branch %2ld N=%5ld IT=%2d PAR(%2ld)=%11.3E U=",ibr,ntop,
                 nit+1,icp[0],rlcur[0]); 
             for (i = 0; i < ndmr; ++i) {
                 fprintf(fp9,"%11.3E",u[i]); 
@@ -4362,7 +4362,7 @@ ge(integer n, integer m1a, doublereal *a, integer nrhs, integer ndxloc, doublere
 #ifdef GE_PIVOTS_DEBUG
         if(jj==0)  fprintf(fp9,"\n Pivots in GE");
         if((jj%6)==0) fprintf(fp9,"\n");
-        fprintf(fp9," %4d %12.3e ",jj,fabs(a[ir[ipiv] * m1a + ic[jpiv]]));
+        fprintf(fp9," %4ld %12.3e ",jj,fabs(a[ir[ipiv] * m1a + ic[jpiv]]));
 #endif
         if (ipiv != jj) {
             *det = -(*det);
@@ -4402,7 +4402,7 @@ ge(integer n, integer m1a, doublereal *a, integer nrhs, integer ndxloc, doublere
     *det *= a[ir[n - 1] * m1a + ic[n - 1]];
 #ifdef GE_PIVOTS_DEBUG
     if((jj%6)==0) fprintf(fp9,"\n");
-    fprintf(fp9," %4d %12.3e \n",n-1,a[ir[n - 1] * m1a + ic[n - 1]]);
+    fprintf(fp9," %4ld %12.3e \n",n-1,a[ir[n - 1] * m1a + ic[n - 1]]);
 #endif
 
     if (nrhs == 0) {
@@ -7540,7 +7540,7 @@ setpbv(iap_type *iap, rap_type *rap, doublereal *dtm)
 /* ----------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------- */
 /* @@edc added WIN32 version of timing stuff */
-#if defined(_WIN32) || defined(__WIN32__)
+//#if defined(_WIN32) || defined(__WIN32__)
 void time_start(clock_t *t)
 {
     *t = clock();
@@ -7561,6 +7561,8 @@ void time_end(clock_t start_time,char *message,FILE *fp)
     }
     return;
 }
+/* The following doesn't actually work on non-Windows systems, since 'gettimeofday' is a Windows-only function. Happily, the above seems to work regardless of platform. */
+/*
 #else
 void time_start(struct timeval **time) {
     *time = (timeval *)malloc(sizeof(struct timeval));
@@ -7588,7 +7590,7 @@ void time_end(struct timeval *start_time,char *message,FILE *fp) {
     return;
 }
 #endif
-
+*/
 #ifdef USAGE
 void usage_start (struct rusage **time) {
     *time = malloc(sizeof(struct rusage));

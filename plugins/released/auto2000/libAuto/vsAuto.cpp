@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <fstream>
 
 #if defined(_MSC_VER)

@@ -1,4 +1,5 @@
 #pragma hdrstop
+#include <stdexcept>
 #include "telAutoTelluriumInterface.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
