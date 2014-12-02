@@ -244,10 +244,10 @@ double nmWorker::getChi(const Properties& parameters)
 
     options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
 
-    rr::RoadRunnerData *modelData = NULL;
+    const ls::DoubleMatrix *modelData = NULL;
     if(mHost.mRRI->simulate(&options))
     {
-        modelData = mHost.mRRI->getSimulationResult();
+        modelData = mHost.mRRI->getSimulationData();
     }
 
     TelluriumData& obsData      = *(TelluriumData*) mHost.mExperimentalData.getValuePointer();
@@ -257,7 +257,9 @@ double nmWorker::getChi(const Properties& parameters)
     para->setValue(obsData);
 
     para =  dynamic_cast<Property<TelluriumData>*>(chi->getProperty("ModelData"));
-    para->setValue(TelluriumData(*(modelData)));
+    TelluriumData td;
+    td.setData(*modelData);
+    para->setValue(td);
 
     Property<int>* intPara =  dynamic_cast< Property<int>* >(chi->getProperty("NrOfModelParameters"));
     intPara->setValue(getNumberOfParameters());
@@ -406,7 +408,7 @@ void nmWorker::createModelData(TelluriumData* _data)
 
     if(mHost.mRRI->simulate(&options))
     {
-        data = * (mHost.mRRI->getSimulationResult());
+        data.setData(*mHost.mRRI->getSimulationData());
     }
 }
 

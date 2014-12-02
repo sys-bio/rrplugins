@@ -65,7 +65,8 @@ bool TestModel::execute(bool inThread)
     opt.steps       = 14;
 
     rr.simulate(&opt);
-    TelluriumData data(rr.getSimulationResult());
+    TelluriumData data;
+    data.setData(*rr.getSimulationData());
     mTestData.setValue(data);
 
     //Add noise

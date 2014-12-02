@@ -38,12 +38,12 @@ void lmObjectiveFunction(const double *par,       //Property vector
         Log(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
     }
 
-    rrc::RRDataHandle rrData = NULL;
-    rrData = simulateEx(   myData->rrHandle,
+    rrc::RRCDataPtr rrcData = NULL;
+    rrcData = simulateEx(  myData->rrHandle,
                            myData->timeStart,
                            myData->timeEnd,
                            myData->nrOfTimePoints);
-    if(!rrData)
+    if(!rrcData)
     {
         stringstream msg;
         msg << "NULL data returned from RoadRunner simulateEx() function.";
@@ -59,8 +59,6 @@ void lmObjectiveFunction(const double *par,       //Property vector
         return;
     }
 
-    //Don't create RRC data, use rrData directly here
-    RRCDataPtr rrcData = createRRCData(rrData);
     //calculate fvec for each specie
     int count = 0;
     vector<double> residuals(myData->nrOfSpecies *  myData->nrOfTimePoints);

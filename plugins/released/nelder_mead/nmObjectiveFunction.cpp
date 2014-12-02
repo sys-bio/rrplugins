@@ -37,7 +37,8 @@ double NelderMeadObjectiveFunction(double par[], const void* userData)
 
     //Simulate
     rr->simulate(&opt);
-    TelluriumData   simData(rr->getSimulationResult());
+    TelluriumData   simData;
+    simData.setData(*rr->getSimulationData());
 
     StringList* species = (StringList*) plugin.mExperimentalDataSelectionList.getValueHandle();
     int nrOfSpecies = species->count();

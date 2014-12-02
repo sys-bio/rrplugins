@@ -2,7 +2,6 @@
 #include <iomanip>
 #include "telException.h"
 #include "telLogger.h"
-#include "rr/rrRoadRunnerData.h"
 #include "Poco/TemporaryFile.h"
 #include "telUtils.h"
 #include "telStringUtils.h"
@@ -40,19 +39,6 @@ TelluriumData::TelluriumData(const TelluriumData& data)
 }
 
 TelluriumData::TelluriumData(const TelluriumData* data)
-{
-    if(data)
-    {
-        (*this) = *data;
-    }
-}
-
-TelluriumData::TelluriumData(const rr::RoadRunnerData& data)
-{
-    (*this) = data;
-}
-
-TelluriumData::TelluriumData(const rr::RoadRunnerData* data)
 {
     if(data)
     {
@@ -131,18 +117,6 @@ TelluriumData& TelluriumData::operator= (const TelluriumData& rhs)
     mArrayedParameter   = rhs.getArrayedParameter();
     mTimePrecision      = rhs.mTimePrecision;
     mDataPrecision      = rhs.mDataPrecision;
-    return *this;
-}
-
-TelluriumData& TelluriumData::operator= (const rr::RoadRunnerData& rhs)
-{
-    mTheData = rhs.getData();
-    mWeights = rhs.getWeights();
-    mColumnNames = rhs.getColumnNames();
-    mArrayedParameter   = ArrayedParameter();
-    mTimePrecision      = 6;
-    mDataPrecision      = 16;
-
     return *this;
 }
 

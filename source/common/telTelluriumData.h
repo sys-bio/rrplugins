@@ -9,11 +9,6 @@
 #include "telArrayedParameter.h"
 //#include "telMatrix.h"
 
-namespace rr
-{
-    class RoadRunnerData;
-}
-
 namespace tlp
 {
 using namespace ls;
@@ -134,13 +129,6 @@ class COMMON_DECLSPEC TelluriumData
         TelluriumData(const StringList& colNames, const tlp::DoubleMatrix& data);
 
         /**
-         * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
-         *
-         * \param data: RoadRunner data object
-         */
-        TelluriumData(const rr::RoadRunnerData& data);
-
-        /**
          * \brief Copy Constructor Create a Tellurium data object from a Tellurium data object
          *
          * \param data: Pointer to a Telluriume data object
@@ -153,13 +141,6 @@ class COMMON_DECLSPEC TelluriumData
          * \param data: A Telluriume data object
          */
         TelluriumData(const TelluriumData& data);
-
-        /**
-         * \brief Copy Constructor Create a Tellurium data object from a RoadRunner data object
-         *
-         * \param data: Pointer to a RoadRunner data object
-         */
-        TelluriumData(const rr::RoadRunnerData* data);
 
         /**
          *   \brief Destructor. De allocate any memory allocated in the class.
@@ -324,13 +305,6 @@ class COMMON_DECLSPEC TelluriumData
         * \param rhs TelluriumData object on the right side of the assignment ().
         */
         TelluriumData& operator=(const TelluriumData& rhs);
-
-        /**
-        * \brief Assignment operator. Deep copy of data in an assignment expression.
-        *
-        * \param rhs RoadRunnerData object on the right side of the assignment ().
-        */
-        TelluriumData& operator=(const rr::RoadRunnerData& rhs);
 
         /**
         * \brief Access a weight element.

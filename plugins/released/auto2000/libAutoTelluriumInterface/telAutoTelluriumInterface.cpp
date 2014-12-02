@@ -298,7 +298,7 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
     theModel->convertToAmounts();
 
     double  time             = theModel->getTime();
-    int     stateVecSize    = theModel->getNumFloatingSpecies() + theModel->getNumRules();
+    int     stateVecSize    = theModel->getNumFloatingSpecies() + theModel->getNumRateRules();
     double* dydts           = new double[stateVecSize];
 
     theModel->getStateVectorRate(time, NULL, dydts);

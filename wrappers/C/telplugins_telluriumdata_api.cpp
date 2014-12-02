@@ -13,14 +13,6 @@ using namespace std;
 using tlp::TelluriumData;
 using tlp::StringList;
 
-TELHandle tlp_cc tpGetRoadRunnerDataHandle(TELHandle handle)
-{
-    start_try
-        RoadRunner* rri = castHandle< RoadRunner >(handle, __FILE__);
-        return rri->getSimulationResult();
-    catch_ptr_macro
-}
-
 bool tlp_cc tpGetTelluriumDataElement(TELHandle handle, int row, int col, double* value)
 {
     start_try
@@ -152,17 +144,6 @@ TELHandle tlp_cc tpCreateTelluriumData(int nRows, int nCols, char* colNames)
             StringList colNames(cNames, ",");
             data->setColumnNames(colNames);
         }
-        return data;
-    catch_ptr_macro
-}
-
-TELHandle tlp_cc tpCreateTelluriumDataFromRoadRunnerData(TELHandle _data)
-{
-    start_try
-        rr::RoadRunnerData* rrData =(rr::RoadRunnerData*) _data;
-
-        TelluriumData* data = new TelluriumData(rrData);
-        gHM.registerHandle(data, typeid(data).name());
         return data;
     catch_ptr_macro
 }
