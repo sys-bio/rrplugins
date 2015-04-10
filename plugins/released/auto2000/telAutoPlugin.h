@@ -20,7 +20,6 @@ class AutoPlugin : public tlp::CPPPlugin
                                                ~AutoPlugin();
         //Data input
         void                                    setScanDirection(telauto::ScanDirection dir);
-		//void									setPreSimulation(bool val);
         bool                                    execute(bool inThread = false);
         string                                  getResult();
         string                                  getConstants();
@@ -44,6 +43,10 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
 		Property<bool>							mPreSimulation;
+		/*Property<float>							mPreSimulationDuration;
+		Property<float>							mPreSimulationStart;
+		Property<int>							mPreSimulationSteps;*/
+
         Property<string>                        mPrincipalContinuationParameter;
 
         Property< TelluriumData >               mBifurcationData;

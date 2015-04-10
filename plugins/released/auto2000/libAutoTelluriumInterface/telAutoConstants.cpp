@@ -54,7 +54,8 @@ RL0(0.01),
 RL1(30),
 THL(NTHL),
 THU(NTHU),
-UZR(NUZR)
+UZR(NUZR),
+PreSimulation(false)
 {}
 
 void AutoConstants::reset()
@@ -109,6 +110,9 @@ void AutoConstants::populateFrom(Properties* props)
         THL             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THL"))->getValue();
         THU             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THU"))->getValue();
         UZR             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("UZR"))->getValue();
+		//
+		PreSimulation	=			dynamic_cast< Property<bool>*			> (props->getProperty("PreSimulation"))->getValue();
+
     }
     catch(Exception&)
     {                   
