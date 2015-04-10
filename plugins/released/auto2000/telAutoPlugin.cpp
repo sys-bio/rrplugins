@@ -24,6 +24,7 @@ mTempFolder(                        ".",                    "TempFolder",       
 mKeepTempFiles(                     false,                  "KeepTempFiles",                        "Keep or remove temporary files."),
 mSBML(                              "<none>",               "SBML",                                 "SBML, i.e. the model to be used to analyze"),
 mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan (Positive or Negative)"),
+mPreSimulation(						false,					"PreSimulation",						"Simulate system prior to steady-state analysis"),
 
 //Output
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
@@ -188,6 +189,7 @@ void AutoPlugin::addProperties()
     mProperties.add(&mKeepTempFiles);
     mProperties.add(&mSBML);
     mProperties.add(&mScanDirection);
+	mProperties.add(&mPreSimulation);
     mProperties.add(&mPrincipalContinuationParameter);
     mProperties.add(&mFort2);
     mProperties.add(&mFort3);
@@ -286,6 +288,9 @@ assignDescription(mKeepTempFiles, s);
 
 s << "Parameter instructing AUTO how to sweep its principal continuation parameter. Possible values: 'Positive', 'Negative'";
 assignDescription(mScanDirection, s);
+
+s << "Instructs bifurcation plugin to simulate model prior to attempting to estimate steady-state species concentrations.";
+assignDescription(mPreSimulation, s);
 
 s << "The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
 supported, which then by default is the PCP.";

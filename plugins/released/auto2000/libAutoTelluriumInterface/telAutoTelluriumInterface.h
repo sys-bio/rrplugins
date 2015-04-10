@@ -36,6 +36,7 @@ class TA_DS AutoTellurimInterface
         void                        run();
         bool                        selectParameter(const string& para);
         bool                        setScanDirection(ScanDirection val);
+		bool						setPreSimulation(bool val);
         void                        assignRoadRunner(RoadRunner* rrInstance);
         void                        assignProperties(Properties* props);
 

@@ -69,6 +69,12 @@ bool AutoTellurimInterface::setScanDirection(ScanDirection val)
     return true;
 }
 
+bool AutoTellurimInterface::setPreSimulation(bool val)
+{
+	mAutoConstants.mPreSimulation = val;
+	return true;
+}
+
 bool AutoTellurimInterface::setTempFolder(const string& fldr)
 {
     if(folderExists(fldr))
@@ -101,8 +107,13 @@ void AutoTellurimInterface::setInitialPCPValue()
 				mRR->setValue(mPCPParameterName, value);
 			}
 
-			mRR->simulate();
-			mRR->simulate();
+
+			if(mAutoConstants.mPreSimulation)
+			{
+				mRR->simulate();
+				mRR->simulate();
+			}
+
 			mRR->steadyState();
 		}
 
