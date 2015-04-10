@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include <stdexcept>
 #include "telAutoTelluriumInterface.h"
+#include "rr/rrRoadRunner.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
 #include "telLogger.h"
@@ -110,8 +111,13 @@ void AutoTellurimInterface::setInitialPCPValue()
 
 			if(mAutoConstants.PreSimulation)
 			{
-				mRR->simulate();
-				mRR->simulate();
+				rr::BasicDictionary opt;
+				opt.setItem("start", mAutoConstants.PreSimulationStart);
+				opt.setItem("duration", mAutoConstants.PreSimulationDuration);
+				opt.setItem("steps", mAutoConstants.PreSimulationSteps);
+				opt.setItem("stiff", true);
+				mRR->simulate(&opt);			// TODO: Why are two simulate calls necessary? If there is only a single call, simulation does not tend towards steady-state, even with long simulation times.
+				mRR->simulate(&opt);
 			}
 
 			mRR->steadyState();

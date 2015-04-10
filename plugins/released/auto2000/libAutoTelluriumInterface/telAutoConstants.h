@@ -26,9 +26,9 @@ class AutoConstants
     public:
         ScanDirection   mScanDirection;
 		int				PreSimulation;
-		//float			mPreSimulationDuration;
-		//float			mPreSimulationStart;
-		//int				mPreSimulationSteps;
+		double			PreSimulationStart;
+		double			PreSimulationDuration;
+		int				PreSimulationSteps;
     public:
         // NDIM: dimension of the system of equations, as specified in the user-supplied subroutine 'func'
         int             NDIM;

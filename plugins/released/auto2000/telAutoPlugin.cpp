@@ -25,9 +25,9 @@ mKeepTempFiles(                     false,                  "KeepTempFiles",    
 mSBML(                              "<none>",               "SBML",                                 "SBML, i.e. the model to be used to analyze"),
 mScanDirection(                     "Negative",             "ScanDirection",                        "Direction of parameter scan (Positive or Negative)"),
 mPreSimulation(						false,					"PreSimulation",						"Simulate system prior to steady-state analysis"),
-//mPreSimulationDuration(				5.0,					"PreSimulationDuration",				"Set duration for pre-simulation."),
-//mPreSimulationStart(				0.0,					"PreSimulationStart",					"Set start time for pre-simulation."),
-//mPreSimulationSteps(				100,					"PreSimulationSteps",					"Set the resolution for pre-simulation."),
+mPreSimulationDuration(				5.0,					"PreSimulationDuration",				"Set duration for pre-simulation."),
+mPreSimulationStart(				0.0,					"PreSimulationStart",					"Set start time for pre-simulation."),
+mPreSimulationSteps(				100,					"PreSimulationSteps",					"Set the resolution for pre-simulation."),
 
 //Output
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
@@ -193,9 +193,9 @@ void AutoPlugin::addProperties()
     mProperties.add(&mSBML);
     mProperties.add(&mScanDirection);
 	mProperties.add(&mPreSimulation);
-	//mProperties.add(&mPreSimulationDuration);
-	//mProperties.add(&mPreSimulationStart);
-	//mProperties.add(&mPreSimulationSteps);
+	mProperties.add(&mPreSimulationDuration);
+	mProperties.add(&mPreSimulationStart);
+	mProperties.add(&mPreSimulationSteps);
     mProperties.add(&mPrincipalContinuationParameter);
     mProperties.add(&mFort2);
     mProperties.add(&mFort3);
@@ -298,14 +298,14 @@ assignDescription(mScanDirection, s);
 s << "Instructs bifurcation plugin to simulate model prior to attempting to estimate steady-state species concentrations.";
 assignDescription(mPreSimulation, s);
 
-//s << "Explictly define the duration for the pre-simulation.";
-//assignDescription(mPreSimulationDuration, s);
+s << "Explictly define the duration for the pre-simulation.";
+assignDescription(mPreSimulationDuration, s);
 
-//s << "Explictly define the start time for the pre-simulation.";
-//assignDescription(mPreSimulationStart, s);
+s << "Explictly define the start time for the pre-simulation.";
+assignDescription(mPreSimulationStart, s);
 
-//s << "Explicity define the number of time steps for the pre-simulation.";
-//assignDescription(mPreSimulationSteps, s);
+s << "Explicity define the number of time steps for the pre-simulation.";
+assignDescription(mPreSimulationSteps, s);
 
 s << "The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
 supported, which then by default is the PCP.";

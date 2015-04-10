@@ -43,9 +43,9 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
 		Property<bool>							mPreSimulation;
-		/*Property<float>							mPreSimulationDuration;
-		Property<float>							mPreSimulationStart;
-		Property<int>							mPreSimulationSteps;*/
+		Property<double>						mPreSimulationDuration;
+		Property<double>						mPreSimulationStart;
+		Property<int>							mPreSimulationSteps;
 
         Property<string>                        mPrincipalContinuationParameter;
 

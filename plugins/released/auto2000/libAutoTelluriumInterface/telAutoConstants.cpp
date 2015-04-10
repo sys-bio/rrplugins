@@ -55,7 +55,10 @@ RL1(30),
 THL(NTHL),
 THU(NTHU),
 UZR(NUZR),
-PreSimulation(false)
+PreSimulation(false),
+PreSimulationStart(0.0),		// By default RoadRunner simulates a system from t=0 to t=5 with 100 steps.
+PreSimulationDuration(5.0),		
+PreSimulationSteps(100)
 {}
 
 void AutoConstants::reset()
@@ -110,8 +113,11 @@ void AutoConstants::populateFrom(Properties* props)
         THL             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THL"))->getValue();
         THU             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("THU"))->getValue();
         UZR             =           dynamic_cast< Property< vector<int> >*  > (props->getProperty("UZR"))->getValue();
-		//
-		PreSimulation	=			dynamic_cast< Property<bool>*			> (props->getProperty("PreSimulation"))->getValue();
+		// Extended python properties for Auto plugin in Tellurium.
+		PreSimulation			=			dynamic_cast< Property<bool>*			> (props->getProperty("PreSimulation"))->getValue();
+		PreSimulationStart		=			dynamic_cast< Property<double>*			> (props->getProperty("PreSimulationStart"))->getValue();
+		PreSimulationDuration	=			dynamic_cast< Property<double>*			> (props->getProperty("PreSimulationDuration"))->getValue();
+		PreSimulationSteps		=			dynamic_cast< Property<int>*			> (props->getProperty("PreSimulationSteps"))->getValue();
 
     }
     catch(Exception&)
