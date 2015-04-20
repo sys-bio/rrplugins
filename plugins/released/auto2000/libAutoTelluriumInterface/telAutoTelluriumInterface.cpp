@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include <stdexcept>
 #include "telAutoTelluriumInterface.h"
+#include "rr/rrRoadRunner.h"
 #include "rr/rrExecutableModel.h"
 #include "../libAuto/vsAuto.h"
 #include "telLogger.h"
@@ -69,6 +70,12 @@ bool AutoTellurimInterface::setScanDirection(ScanDirection val)
     return true;
 }
 
+//bool AutoTellurimInterface::setPreSimulation(bool val)
+//{
+//	mAutoConstants.mPreSimulation = val;
+//	return true;
+//}
+
 bool AutoTellurimInterface::setTempFolder(const string& fldr)
 {
     if(folderExists(fldr))
@@ -89,20 +96,32 @@ string AutoTellurimInterface::getTempFolder()
 
 void AutoTellurimInterface::setInitialPCPValue()
 {
-    double value = (mAutoConstants.mScanDirection == sdPositive) ? mAutoConstants.RL0 : mAutoConstants.RL1;
+			double value = (mAutoConstants.mScanDirection == sdPositive) ? mAutoConstants.RL0 : mAutoConstants.RL1;
 
-    if(mModelBoundarySpecies.contains(mPCPParameterName))
-    {
-        int index = mModelBoundarySpecies.indexOf(mPCPParameterName);
-        mRR->setBoundarySpeciesByIndex(index, value);
-    }
-    else
-    {
-        mRR->setValue(mPCPParameterName, value);
-    }
+			if(mModelBoundarySpecies.contains(mPCPParameterName))
+			{
+				int index = mModelBoundarySpecies.indexOf(mPCPParameterName);
+				mRR->setBoundarySpeciesByIndex(index, value);
+			}
+			else
+			{
+				mRR->setValue(mPCPParameterName, value);
+			}
 
-    mRR->steadyState();
-}
+
+			if(mAutoConstants.PreSimulation)
+			{
+				rr::BasicDictionary opt;
+				opt.setItem("start", mAutoConstants.PreSimulationStart);
+				opt.setItem("duration", mAutoConstants.PreSimulationDuration);
+				opt.setItem("steps", mAutoConstants.PreSimulationSteps);
+				opt.setItem("stiff", true);
+				mRR->simulate(&opt);			// TODO: Why are two simulate calls necessary? If there is only a single call, simulation does not tend towards steady-state, even with long simulation times.
+				mRR->simulate(&opt);
+			}
+
+			mRR->steadyState();
+		}
 
 void AutoTellurimInterface::run()
 {
@@ -145,170 +164,170 @@ bool AutoTellurimInterface::setupUsingCurrentModel()
 //Called by Auto
 int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, double t, double* u, double* par)
 {
-    rr::ExecutableModel* theModel = mRR->getModel();
+	rr::ExecutableModel* theModel = mRR->getModel();
 
-    //The continuation parameter can be a 'parameter' or a boundary species
-    int numBoundaries(0), numParameters(0);
+	//The continuation parameter can be a 'parameter' or a boundary species
+	int numBoundaries(0), numParameters(0);
 
-    if(mModelBoundarySpecies.indexOf(mPCPParameterName) != -1)
-    {
-        numBoundaries = 1;
-    }
+	if(mModelBoundarySpecies.indexOf(mPCPParameterName) != -1)
+	{
+		numBoundaries = 1;
+	}
 
-    if(mModelParameters.indexOf(mPCPParameterName) != -1)
-    {
-        numParameters = 1;
-    }
+	if(mModelParameters.indexOf(mPCPParameterName) != -1)
+	{
+		numParameters = 1;
+	}
 
-    vector<double> boundaryValues(numBoundaries);
-    vector<double> globalParameters(numParameters);
+	vector<double> boundaryValues(numBoundaries);
+	vector<double> globalParameters(numParameters);
 
-    if(numBoundaries > 0)
-    {
-        for (int i = 0; i < numBoundaries; i++)
-        {
-            int selSpecieIndex      = mModelBoundarySpecies.indexOf(mPCPParameterName);
-            boundaryValues[i]       = mRR->getBoundarySpeciesByIndex(selSpecieIndex);
-        }
-    }
+	if(numBoundaries > 0)
+	{
+		for (int i = 0; i < numBoundaries; i++)
+		{
+			int selSpecieIndex      = mModelBoundarySpecies.indexOf(mPCPParameterName);
+			boundaryValues[i]       = mRR->getBoundarySpeciesByIndex(selSpecieIndex);
+		}
+	}
 
-    if(numParameters > 0)
-    {
-        for (int i = 0; i < numParameters; i++)
-        {
-            int selParameter    = mModelParameters.indexOf(mPCPParameterName);
-            globalParameters[i] = mRR->getGlobalParameterByIndex(selParameter);
-        }
-    }
+	if(numParameters > 0)
+	{
+		for (int i = 0; i < numParameters; i++)
+		{
+			int selParameter    = mModelParameters.indexOf(mPCPParameterName);
+			globalParameters[i] = mRR->getGlobalParameterByIndex(selParameter);
+		}
+	}
 
-    int oParaSize = numBoundaries + numParameters;
-    vector<double> parameterValues(oParaSize);
+	int oParaSize = numBoundaries + numParameters;
+	vector<double> parameterValues(oParaSize);
 
-    for(int i = 0; i < numBoundaries; i++)
-    {
-        parameterValues[i] = boundaryValues[i];
-    }
+	for(int i = 0; i < numBoundaries; i++)
+	{
+		parameterValues[i] = boundaryValues[i];
+	}
 
-    for(int i = 0; i < numParameters; i++)
-    {
-        parameterValues[numBoundaries + i] = globalParameters[i];
-    }
+	for(int i = 0; i < numParameters; i++)
+	{
+		parameterValues[numBoundaries + i] = globalParameters[i];
+	}
 
-    for(int i = 0; i < oParaSize; i++)
-    {
-        par[i] = parameterValues[i];
-    }
+	for(int i = 0; i < oParaSize; i++)
+	{
+		par[i] = parameterValues[i];
+	}
 
-    int     nrFloatingSpecies   = theModel->getNumFloatingSpecies();
-    double* floatCon            = new double[nrFloatingSpecies];
+	int     nrIndFloatingSpecies = theModel->getNumIndFloatingSpecies();
+	double* floatCon            = new double[nrIndFloatingSpecies];
 
-    theModel->getFloatingSpeciesConcentrations(nrFloatingSpecies, NULL, floatCon);
+	theModel->getFloatingSpeciesConcentrations(nrIndFloatingSpecies, NULL, floatCon);
 
-    int nMin = min(nrFloatingSpecies, ndim);
+	int nMin = min(nrIndFloatingSpecies, ndim);
 
-    for(int i = 0; i < nMin; i++)
-    {
-        u[i] = floatCon[i];
-    }
+	for(int i = 0; i < nMin; i++)
+	{
+		u[i] = floatCon[i];
+	}
 
-    delete [] floatCon;
-    return 0;
+	delete[] floatCon;
+	return 0;
 }
 
 void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVariables, const double* par, double* oResult)
 {
-    //The continuation parameter can be a 'parameter' OR a boundary species
-    int numBoundaries(0);
-    int numParameters(0);
+	//The continuation parameter can be a 'parameter' OR a boundary species
+	int numBoundaries(0);
+	int numParameters(0);
 
-    if(mModelBoundarySpecies.indexOf(mPCPParameterName) != -1)
-    {
-        numBoundaries = 1;
-    }
+	if(mModelBoundarySpecies.indexOf(mPCPParameterName) != -1)
+	{
+		numBoundaries = 1;
+	}
 
-    if(mModelParameters.indexOf(mPCPParameterName) != -1)
-    {
-        numParameters = 1;
-    }
+	if(mModelParameters.indexOf(mPCPParameterName) != -1)
+	{
+		numParameters = 1;
+	}
 
-    rr::ExecutableModel* theModel = mRR->getModel();
-    if (numBoundaries > 0)
-    {
-        vector<double> oBoundary(numBoundaries);
-        for(int i = 0; i < numBoundaries; i++)
-        {
-            oBoundary[i] = par[i];
-        }
+	rr::ExecutableModel* theModel = mRR->getModel();
+	if (numBoundaries > 0)
+	{
+		vector<double> oBoundary(numBoundaries);
+		for(int i = 0; i < numBoundaries; i++)
+		{
+			oBoundary[i] = par[i];
+		}
 
-        for (int i = 0; i < numBoundaries; i++)
-        {
-            double val = oBoundary[i];
-            int selSpecieIndex      = mModelBoundarySpecies.indexOf(mPCPParameterName);
-            mRR->setBoundarySpeciesByIndex(selSpecieIndex, val);
-        }
-    }
+		for (int i = 0; i < numBoundaries; i++)
+		{
+			double val = oBoundary[i];
+			int selSpecieIndex      = mModelBoundarySpecies.indexOf(mPCPParameterName);
+			mRR->setBoundarySpeciesByIndex(selSpecieIndex, val);
+		}
+	}
 
-    if (numParameters > 0)
-    {
-        //Todo memory leak
-        vector<double> oParameters(numParameters);
-        for(int i = 0; i < numParameters; i++)
-        {
-            oParameters[i] = par[i];
-        }
+	if (numParameters > 0)
+	{
+		//Todo memory leak
+		vector<double> oParameters(numParameters);
+		for(int i = 0; i < numParameters; i++)
+		{
+			oParameters[i] = par[i];
+		}
 
-        //Currently only one variable is supported
-        mRR->setValue(mPCPParameterName, oParameters[0]);
-    }
+		//Currently only one variable is supported
+		mRR->setValue(mPCPParameterName, oParameters[0]);
+	}
 
-    vector<rr::SelectionRecord>  selRecs = mRR->getSteadyStateSelections();
-    tlp::StringList              selList = getRecordsAsStrings(selRecs);
+	vector<rr::SelectionRecord>  selRecs = mRR->getSteadyStateSelections();
+	tlp::StringList              selList = getRecordsAsStrings(selRecs);
 
-    vector<double> variableTemp(selList.size());
-    int ndim = mAutoConstants.NDIM;
-    int nMin = min(selList.size(), ndim);
+	vector<double> variableTemp(selList.size());
+	int ndim = mAutoConstants.NDIM;
+	int nMin = min(selList.size(), ndim);
 
-    for (int i = 0; i < nMin; i++)
-    {
-        variableTemp[i] = oVariables[i];
-    }
+	for (int i = 0; i < nMin; i++)
+	{
+		variableTemp[i] = oVariables[i];
+	}
 
-    int     numFloatingSpecies  = theModel->getNumFloatingSpecies();
-    double* tempConc            = new double[numFloatingSpecies];
-    if(!tempConc)
-    {
-        throw std::runtime_error("Failed to allocate memory in AutoTellurimInterface ModelFunction CallBack.");
-    }
+	int     numIndFloatingSpecies  = theModel->getNumIndFloatingSpecies();
+	double* tempConc            = new double[numIndFloatingSpecies];
+	if(!tempConc)
+	{
+		throw std::runtime_error("Failed to allocate memory in AutoTellurimInterface ModelFunction CallBack.");
+	}
 
-    for(int i = 0; i < numFloatingSpecies; i++)
-    {
-        if(i < variableTemp.size())
-        {
-            tempConc[i] = variableTemp[i];
-        }
-        else
-        {
-            throw("Big Problem");
-        }
-    }
+	for(int i = 0; i < numIndFloatingSpecies; i++)
+	{
+		if(i < variableTemp.size())
+		{
+			tempConc[i] = variableTemp[i];
+		}
+		else
+		{
+			throw("Big Problem");
+		}
+	}
 
-    theModel->setFloatingSpeciesConcentrations(numFloatingSpecies, NULL, tempConc);
-    delete [] tempConc;
+	theModel->setFloatingSpeciesConcentrations(numIndFloatingSpecies, NULL, tempConc);
+	delete [] tempConc;
 
-    theModel->convertToAmounts();
+	//theModel->convertToAmounts();
 
-    double  time             = theModel->getTime();
-    int     stateVecSize    = theModel->getNumFloatingSpecies() + theModel->getNumRateRules();
-    double* dydts           = new double[stateVecSize];
+	double  time             = theModel->getTime();
+	int     stateVecSize    = theModel->getNumIndFloatingSpecies() + theModel->getNumRateRules();
+	double* dydts           = new double[stateVecSize];
 
-    theModel->getStateVectorRate(time, NULL, dydts);
-    nMin = min(stateVecSize, ndim);
+	theModel->getStateVectorRate(time, NULL, dydts);
+	nMin = min(stateVecSize, ndim);
 
-    for(int i = 0; i < nMin; i++)
-    {
-        oResult[i] = dydts[i];
-    }
-    delete [] dydts;
+	for(int i = 0; i < nMin; i++)
+	{
+		oResult[i] = dydts[i];
+	}
+	delete [] dydts;
 }
 
 string AutoTellurimInterface::getConstantsAsString()

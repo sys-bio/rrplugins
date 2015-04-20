@@ -42,6 +42,11 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<string>                        mTempFolder;
         Property<bool>                          mKeepTempFiles;
         Property<string>                        mScanDirection;         //How auto sweeps the parameter
+		Property<bool>							mPreSimulation;
+		Property<double>						mPreSimulationDuration;
+		Property<double>						mPreSimulationStart;
+		Property<int>							mPreSimulationSteps;
+
         Property<string>                        mPrincipalContinuationParameter;
 
         Property< TelluriumData >               mBifurcationData;

@@ -153,6 +153,8 @@ bool AutoWorker::setupAuto()
         mRRAuto.setScanDirection(sdNegative);
     }
 
+	//mRRAuto.setPreSimulation(mTheHost.mPreSimulation.getValue());
+
     string str = mRRAuto.getConstantsAsString();
     Log(lInfo)<<str;
     return true;
