@@ -145,7 +145,7 @@ void AutoTellurimInterface::run()
 
 bool AutoTellurimInterface::setupUsingCurrentModel()
 {
-    mAutoConstants.NDIM =  mRR->getSteadyStateSelections().size();
+    mAutoConstants.NDIM =  mRR->getNumberOfIndependentSpecies();
 
     //k1,k2 etc
     mModelParameters        = mRR->getGlobalParameterIds();
