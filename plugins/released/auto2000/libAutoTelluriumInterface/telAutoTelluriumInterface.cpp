@@ -70,12 +70,6 @@ bool AutoTellurimInterface::setScanDirection(ScanDirection val)
     return true;
 }
 
-//bool AutoTellurimInterface::setPreSimulation(bool val)
-//{
-//	mAutoConstants.mPreSimulation = val;
-//	return true;
-//}
-
 bool AutoTellurimInterface::setTempFolder(const string& fldr)
 {
     if(folderExists(fldr))
