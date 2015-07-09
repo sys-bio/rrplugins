@@ -334,6 +334,10 @@ void TelluriumData::reSize(int rows, int cols)
 void TelluriumData::setData(const DoubleMatrix& theData)
 {
     mTheData = theData;
+	mColumnNames.clear();
+	for (int k = 0; k < theData.getColNames().size(); ++k) {
+		mColumnNames.add(theData.getColNames().at(k));
+	}
     Log(Logger::LOG_DEBUG) << "Simulation Data =========== \n" << mTheData;
     check();
 }
