@@ -38,7 +38,7 @@ try:
         rr.setValue("k1", k)   
         rr.reset()
         #Simulate using the same numbers as in the 'Experimental' data
-        data = rr.simulate(0,10,14)
+        data = rr.simulate(0,10,15)
         #roadrunner.plot(data)
     
         #Get chi square plugin and set it up

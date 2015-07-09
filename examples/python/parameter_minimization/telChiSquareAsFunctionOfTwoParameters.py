@@ -53,7 +53,7 @@ try:
     #Simulate using the same numbers as in the 'Experimental data             
     k1Start = 1 ;  k1End = 1.8    
     k2Start = 1 ;  k2End = 4.5
-    timeStart = 0;  timeEnd = 1.5 ;  nrPoints = 15
+    timeStart = 0;  timeEnd = 1.5 ;  nrPoints = 16
              
     X = np.linspace(k1Start, k1End, 55)
     Y = np.linspace(k2Start, k2End, 55)
