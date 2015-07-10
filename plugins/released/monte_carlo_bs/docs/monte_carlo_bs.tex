@@ -5,7 +5,7 @@
 \setcounter{chapter}{1}
 \emph{Get some confidence estimates}
 \section{Introduction}
-The Monte Carlo plugin is used to get estimates of a models parameters confidence limits. This is in the context where experimental data exists and a parameter minimization method, such as Levenberg-Marquardt or Nelder-Mead is used first in order to find a parameter minimum. 
+The Monte Carlo plugin is used to get estimates of a models parameters confidence limits. This is in the context where experimental data exists and a parameter minimization method, such as Levenberg-Marquardt or Nelder-Mead is used first in order to find a parameter minimum.
 
 The Monte Carlo algorithm is used subsequently at this minimum and will give an estimate of parameter confidence limits corresponding to the variance in the original experimental data.
 
@@ -19,9 +19,9 @@ Available properties in the \pname\ plugin are listed in the table below.
 
 %\begin{table}[ht]
 \centering % used for centering table
-\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns 
+\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns
 
-Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
+Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 SBML                            &   string              & N/A    &   SBML document as a string. Model to be used by the \pname\ plugin. \\
@@ -33,21 +33,21 @@ Experimental\-DataSelectionList & 	stringList			& N/A    &   Selection list for 
 FittedDataSelectionList     	& 	stringList			& N/A    &   Selection list for model data. \\
 NrOfMCRuns						&   int 				& N/A    &   Number of Monte Carlo data sets to generate and use.\\
 MinimizerPlugin					&   string   			& N/A    &	 Minimizer used by the Monte Carlo Engine, e.g. "Levenberg\_Marquardt". \\
-                                                        
-\hline %inserts single line                             
-\caption{Plugin Properties} 
-\label{table:nmPluginProperties} 
+
+\hline %inserts single line
+\caption{Plugin Properties}
+\label{table:nmPluginProperties}
 \end{longtable}
 %\end{table}
 
 \end{landscape}
 
 \section{The \texttt{execute(bool inThread)} function}
-The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time. 
+The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time.
 
 The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the \pname\ plugin.
 
-The inThread argument defaults to \textbf{false}. 
+The inThread argument defaults to \textbf{false}.
 
 Each generated Monte Carlo dataset is available in a file named, MCDataSets.dat (saved in current working directory).
 
@@ -55,14 +55,14 @@ Each generated Monte Carlo dataset is available in a file named, MCDataSets.dat 
 \section{Plugin Events}
 The \pname\ plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
+The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
 the plugins execute function (in the assingOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
-\begin{tabular}{l l p{9cm}} 
+\begin{tabular}{l l p{9cm}}
 
-Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table 
+Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
@@ -71,23 +71,23 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 
 \hline %inserts single line
 \end{tabular}
-\caption{Plugin Events} 
-\label{table:MCPluginEvents} 
+\caption{Plugin Events}
+\label{table:MCPluginEvents}
 \end{table}
 
 \section{Python example}
-The following Python script illustrate how the plugin can be used. 
+The following Python script illustrate how the plugin can be used.
 
 \begin{singlespace}
 \lstinputlisting[label=MonteCarloExample,caption={\pname\ plugin example.},language=Python]{Examples/telMonteCarlo.py}
 \end{singlespace}
 
-\begin{sidewaysfigure}
+\begin{figure}[ht]
 \centering
-\includegraphics[width=220mm]{MonteCarloOutput.png}
+\includegraphics[width=\textwidth]{MonteCarloOutput.png}
 \caption{Output for the example script above, using 1000 Monte Carlo runs. The histogram shows the distribution for the model parameter, 'k1'. The mean for the distribution was 0.980 and  obtained confidence limits were +/- 0.001.}
 \label{fig:mcFig}
-\end{sidewaysfigure}
+\end{figure}
 
 
 

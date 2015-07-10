@@ -2,14 +2,14 @@
 \setcounter{chapter}{1}
 \emph{Do some fitting}
 \section{Introduction}
-The Nelder-Mead plugin is used to fit a SBML models parameters to experimental data. 
+The Nelder-Mead plugin is used to fit a SBML models parameters to experimental data.
 
-The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as 
+The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as
 access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values do also come with estimated confidence limits.
 
-The current implementation is based on the Nelder-Mead C implementation by Michael F. Hutt\footnote{ 
+The current implementation is based on the Nelder-Mead C implementation by Michael F. Hutt\footnote{
 
- An implementation of the Nelder-Mead simplex method. 
+ An implementation of the Nelder-Mead simplex method.
  Copyright (c) 1997-2011 Michael F. Hutt
 }.
 
@@ -22,9 +22,9 @@ Available properties in the Nelder-Mead plugin are listed in the table below.
 
 %\begin{table}[ht]
 \centering % used for centering table
-\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns 
+\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns
 
-Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
+Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
@@ -49,20 +49,20 @@ ReducedChiSquare				&	double				& N/A    &   The Reduced ChiSquare at the minimu
 StatusMessage					&	string				& N/A    &   Message from the internal fitting engine, communicating the status of the obtained fit (Currently not used).\\
 NrOfIter                        &   int                 & N/A    &   Number of (internal outer loop) iterations. \\
 NrOfFuncIter                    &   int                 & N/A    &   Number of objective function iterations. \\
-\\[2pt]                                                               
+\\[2pt]
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are pre-set with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
-\hline %inserts single line                                           
-\\[2pt]                                                               
+\hline %inserts single line
+\\[2pt]
 Epsilon                         &   double              & 1.e-6          		&   Convergence tolerance. \\
 Scale                           &   double              & 1			            &   Scaling of vertices. \\
 MaxNrOfIterations               &   int		            & 1000          		&   Maximum number of iterations. \\
 Alpha                         	&   double              & 1.          			&   Reflection coefficient. \\
 Beta                       		&   double              & 0.5                 	&   Contraction coefficient. \\
 Gamma                        	&   double              & 1                   	&   Expansion coefficient. \\
-                                                        
-\hline %inserts single line                             
-\caption{Plugin Properties} 
-\label{table:nmPluginProperties} 
+
+\hline %inserts single line
+\caption{Plugin Properties}
+\label{table:nmPluginProperties}
 \end{longtable}
 %\end{table}
 
@@ -71,14 +71,14 @@ Gamma                        	&   double              & 1                   	&  
 \section{Plugin Events}
 The Nelder-Mead plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
+The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
 the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
-\begin{tabular}{l l p{9cm}} 
+\begin{tabular}{l l p{9cm}}
 
-Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table 
+Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
@@ -87,23 +87,23 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 
 \hline %inserts single line
 \end{tabular}
-\caption{Plugin Events} 
-\label{table:nmPluginEvents} 
+\caption{Plugin Events}
+\label{table:nmPluginEvents}
 \end{table}
 
 \section{Python example}
-The following Python script illustrate how the plugin can be used. 
+The following Python script illustrate how the plugin can be used.
 
 \begin{singlespace}
 \lstinputlisting[label=NelderMeadExample,caption={Minimization example.},language=Python]{Examples/telNelderMead.py}
 \end{singlespace}
 
-\begin{sidewaysfigure}
+\begin{figure}[ht]
 \centering
-\includegraphics[width=220mm]{NelderMeadOutput.png}
+\includegraphics[width=\textwidth]{NelderMeadOutput.png}
 \caption{Typical output for the example script above.}
 \label{fig:nmFig}
-\end{sidewaysfigure}
+\end{figure}
 
 
 

@@ -4,9 +4,9 @@
 \setcounter{chapter}{1}
 \emph{Do some fitting}
 \section{Introduction}
-The Levenberg-Marquardt plugin is used to fit a SBML models parameters to experimental data. 
+The Levenberg-Marquardt plugin is used to fit a SBML models parameters to experimental data.
 
-The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as 
+The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as
 access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values do also come with estimated confidence limits.
 
 The current implementation is based on the lmfit C library by Joachim Wuttke\footnote{The package lmfit is distributed under the FreeBSD License:
@@ -24,9 +24,9 @@ Available properties in the Levenberg-Marquardt plugin are listed in the table b
 
 %\begin{table}[ht]
 \centering % used for centering table
-\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns 
+\begin{longtable}{p{4cm} l p{3cm}  p{10cm}} % centered columns
 
-Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table 
+Property Name & Data Type & Default Value  & Description \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 SBML                            &   string              & N/A    &   SBML document as a string. Model to be used in the fitting. \\
@@ -50,20 +50,20 @@ ChiSquare						&	double				& N/A    &   The ChiSquare at the minimum.\\
 ReducedChiSquare				&	double				& N/A    &   The Reduced ChiSquare at the minimum.\\
 StatusMessage					&	string				& N/A    &   Message from the internal fitting engine, communicating the status of the obtained fit.\\
 NrOfIter                        &   int                 & N/A    &   Number of iterations. \\[12pt]
-\\[2pt]                                                               
+\\[2pt]
 \multicolumn{4}{p{19cm}}{The following properties are used internally by the fitting engine. They are pre-set with default values. Depending on the minimization problem at hand, they may need to be tweaked. } \\[12pt]
-\hline %inserts single line                                           
-\\[2pt]                                                               
+\hline %inserts single line
+\\[2pt]
 ftol                            &   double              & machine dep.          &   Relative error desired in the sum of squares. \\
 xtol                            &   double              & machine dep.          &   Relative error between last two approximations. \\
 gtol                            &   double              & machine dep.          &   Orthogonality desired between fvec and its derivs. \\
 epsilon                         &   double              & machine dep.          &   Step used to calculate the Jacobian. \\
 stepbound                       &   double              & 100.0                 &   Initial bound to steps in the outer loop. \\
 patience                        &   double              & 100                   &   Used for setting maximum number of iterations, calculated as \verb|patience*(nr_of_parameters +1)|. \\
-                                                        
-\hline %inserts single line                             
-\caption{\pname\ plugin properties} 
-\label{table:lmfitPluginParameters} 
+
+\hline %inserts single line
+\caption{\pname\ plugin properties}
+\label{table:lmfitPluginParameters}
 \end{longtable}
 %\end{table}
 
@@ -71,7 +71,7 @@ patience                        &   double              & 100                   
 
 
 \section{The \texttt{execute(bool inThread)} function}
-The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time. 
+The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time.
 
 The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the \pname\ plugin.
 
@@ -81,14 +81,14 @@ The inThread argument defaults to \textbf{false}.
 \section{Plugin Events}
 The Levenberg-Marquardt plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
+The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
 the plugins execute function (in the assignOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
-\begin{tabular}{l l p{9cm}} 
+\begin{tabular}{l l p{9cm}}
 
-Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table 
+Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
@@ -97,24 +97,24 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 
 \hline %inserts single line
 \end{tabular}
-\caption{Plugin events} 
-\label{table:lmfitPluginEvents} 
+\caption{Plugin events}
+\label{table:lmfitPluginEvents}
 \end{table}
 
 
 \section{Python example}
-The following Python script illustrate how the plugin can be used. 
+The following Python script illustrate how the plugin can be used.
 
 \begin{singlespace}
 \lstinputlisting[label=plugin_lmfit_header,caption={Minimization example.},language=Python]{Examples/telLevenbergMarquardt.py}
 \end{singlespace}
 
-\begin{sidewaysfigure}
+\begin{figure}[ht]
 \centering
-\includegraphics[width=220mm]{Minimization.jpg}
+\includegraphics[width=\textwidth]{Minimization.png}
 \caption{Typical output for the example script above.}
 \label{fig:lmfitFig}
-\end{sidewaysfigure}
+\end{figure}
 
 
 
