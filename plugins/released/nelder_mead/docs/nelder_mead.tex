@@ -2,10 +2,10 @@
 \setcounter{chapter}{1}
 \emph{Do some fitting}
 \section{Introduction}
-The Nelder-Mead plugin is used to fit a SBML models parameters to experimental data.
+The Nelder-Mead plugin is used to fit an SBML model's parameters to experimental data.
 
 The plugin has numerous properties to allow the user full control over the internal fitting engine, as well as
-access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values do also come with estimated confidence limits.
+access to generated fitted data after a minimization session. In addition, various statistical properties, such as standardized residuals, Q-Q data, ChiSquare and reduced ChiSquare are made accessible to the user. The resulting parameter values also come with estimated confidence limits.
 
 The current implementation is based on the Nelder-Mead C implementation by Michael F. Hutt\footnote{
 
@@ -69,10 +69,10 @@ Gamma                        	&   double              & 1                   	&  
 \end{landscape}
 
 \section{Plugin Events}
-The Nelder-Mead plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+The Nelder-Mead plugin uses all of the available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
-the plugins execute function (in the assingOn.. family of functions), can be retrieved unmodified in the corresponding event function.
+the plugin's execute function (in the assignOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -92,7 +92,7 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \end{table}
 
 \section{Python example}
-The following Python script illustrate how the plugin can be used.
+The following Python script illustrates how the plugin can be used.
 
 \begin{singlespace}
 \lstinputlisting[label=NelderMeadExample,caption={Minimization example.},language=Python]{Examples/telNelderMead.py}

@@ -7,7 +7,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="mainDoc.tex"> 
-<meta name="date" content="2014-03-29 10:36:00"> 
+<meta name="date" content="2015-07-13 11:12:00"> 
 <link rel="stylesheet" type="text/css" href="mainDoc.css"> 
 </head><body 
 >
@@ -25,7 +25,7 @@ class="cmti-12">Add some noise</span>
 <!--l. 5--><p class="noindent" >The purpose of the <span 
 class="cmti-12">AddNoise </span>plugin is to introduce random noise to <span 
 class="cmti-12">Tellurium </span>data.
-<!--l. 7--><p class="indent" >   Generation of actual noise is using the fact that a Rayleigh-distributed random variable <span 
+<!--l. 7--><p class="indent" >   Noise generation uses the fact that a Rayleigh-distributed random variable <span 
 class="cmmi-12">R</span>, with the
 probability distribution <span 
 class="cmmi-12">F</span>(<span 
@@ -135,15 +135,15 @@ class="content">Add noise Plugin Parameters</span></div><!--tex4ht:label?: x1-30
    </div>
    <h3 class="sectionHead"><span class="titlemark">1.3   </span> <a 
  id="x1-40001.3"></a>Plugin Events</h3>
-<!--l. 40--><p class="noindent" >The AddNoiseplugin are using all of a plugins available plugin events, i.e. the <span 
-class="cmti-12">PluginStarted</span>,
-<span 
-class="cmti-12">PluginProgress </span>and the <span 
+<!--l. 40--><p class="noindent" >The AddNoiseplugin uses all of the available plugin events, i.e. the <span 
+class="cmti-12">PluginStarted</span>, <span 
+class="cmti-12">PluginProgress </span>and
+the <span 
 class="cmti-12">PluginFinished </span>events.
 <!--l. 42--><p class="indent" >   The available data variables for each event are internally treated as <span 
 class="cmti-12">pass trough </span>variables,
-so any data, for any of the events, assigned prior to the plugins execute function (in the
-assingOn() family of functions), can be retrieved <span 
+so any data, for any of the events, assigned prior to the plugin&#8217;s execute function (in the
+assignOn() family of functions), can be retrieved <span 
 class="cmti-12">unmodified </span>in the corresponding event function.
 <div class="table">
                                                                                               
@@ -174,8 +174,8 @@ class="vspace" style="font-size:2.58333pt"><td
  style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
 class="td11">PluginStarted </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
 class="td11">void*, void*</td><td  style="white-space:wrap; text-align:left;" id="TBL-2-2-3"  
-class="td11"><!--l. 52--><p class="noindent" >Signal to application that the plugin has
-started  applying  noise  on  data.  Both
+class="td11"><!--l. 52--><p class="noindent" >Signals  to  application  that  the  plugin
+has started applying noise on data. Both
 parameters  are  <span 
 class="cmti-12">pass  trough  </span>parameters
 and are unused internally by the plugin.  </td>
@@ -187,7 +187,7 @@ class="vspace" style="font-size:2.58333pt"><td
  style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
 class="td11">PluginProgress</td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-2"  
 class="td11">void*, void*</td><td  style="white-space:wrap; text-align:left;" id="TBL-2-3-3"  
-class="td11"><!--l. 53--><p class="noindent" >Communicating                       progress
+class="td11"><!--l. 53--><p class="noindent" >Communicates                         progress
 of noise generation. Both parameters are
 <span 
 class="cmti-12">pass  trough  </span>parameters  and  are  unused
@@ -225,8 +225,8 @@ exception. Data not affected are data in the first column, and if, and only if, 
 &#8221;time&#8221; (case insensitive).
 <!--l. 65--><p class="indent" >   The <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-12">execute(bool</span><span 
-class="cmtt-12">&#x00A0;inThread)</span></span></span>, do support a boolean argument indicating if the execution of the
-plugin work will be done in a thread, or not. Threading is fully implemented in the AddNoise
+class="cmtt-12">&#x00A0;inThread)</span></span></span> method supports a boolean argument indicating if the execution of
+the plugin work will be done in a thread, or not. Threading is fully implemented in the AddNoise
 plugin.
 <!--l. 67--><p class="indent" >   The inThread argument defaults to <span 
 class="cmbx-12">false</span>.
@@ -236,17 +236,18 @@ class="cmbx-12">false</span>.
 <!--l. 71--><p class="noindent" >
    <h4 class="subsectionHead"><span class="titlemark">1.5.1   </span> <a 
  id="x1-70001.5.1"></a>Add noise to data acquired from RoadRunner</h4>
-<!--l. 72--><p class="noindent" >The python script below shows how to acquire simulation data from RoadRunner and pass it to the
-noise plugin. The format of the data, that is obtained from the <span class="obeylines-h"><span class="verb"><span 
-class="cmtt-12">simulate()</span></span></span> function (line 8), is not
-directly compatible with the Noise plugins InputData property. This incompatibility is handled by an
-intermediate data structure in Python, that is called DataSeries (line 14).
-<!--l. 74--><p class="indent" >   The Plugins properties, InputData and Sigma, is assigned on line 17 and 20 respectively.
-<!--l. 76--><p class="indent" >   Line 23 denote the execution of the noise plugin, and after that has finished, data can be visualized
+<!--l. 72--><p class="noindent" >The python script below shows how to acquire simulation data from RoadRunner and pass
+it to the noise plugin. The format of this data, which is obtained from the <span class="obeylines-h"><span class="verb"><span 
+class="cmtt-12">simulate()</span></span></span>
+function (line 8), is not directly compatible with the Noise plugin&#8217;s InputData property. This
+incompatibility is handled by an intermediate data structure in Python, called DataSeries (line
+14).
+<!--l. 74--><p class="indent" >   The plugin&#8217;s properties, InputData and Sigma, are assigned on line 17 and 20 respectively.
+<!--l. 76--><p class="indent" >   Line 23 denotes the execution of the noise plugin, and after that has finished, data can be visualized
+                                                                                              
+                                                                                              
 by using the <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-12">plot</span></span></span> function (line 26). The output is shown below the script.
-                                                                                              
-                                                                                              
    <!--l. 79--><div class="lstinputlisting">
 <a 
  id="x1-7001r1"></a>
@@ -643,12 +644,10 @@ class="content">Add
  id="x1-800033"></a>
                                                                                               
                                                                                               
-                                                                                              
-                                                                                              
-<!--l. 84--><p class="noindent" >  <img 
+
+<!--l. 84--><p class="noindent" ><img 
 src="./Figures/AddNoise.png" alt="PIC"  
->                                                                                        
-                                                                                              
+>
 <br /> <div class="caption" 
 ><span class="id">Figure&#x00A0;1.1: </span><span  
 class="content">Output for the AddNoise python example script discussed above</span></div><!--tex4ht:label?: x1-7032r1 -->
@@ -657,8 +656,8 @@ class="content">Output for the AddNoise python example script discussed above</s
 <!--l. 87--><p class="indent" >   </div><hr class="endfigure">
    <h4 class="subsectionHead"><span class="titlemark">1.5.2   </span> <a 
  id="x1-80001.5.2"></a>Visualization of the noise distribution used in the AddNoise plugin</h4>
-<!--l. 90--><p class="noindent" >The Python script below demonstrate how to obtain and visualize the actual distribution (Gaussian) of
-noise that is applied on data.
+<!--l. 90--><p class="noindent" >The Python script below demonstrates how to obtain and visualize the actual distribution (Gaussian)
+of noise that is applied on data.
    <!--l. 93--><div class="lstinputlisting">
 <a 
  id="x1-8001r2"></a>
@@ -1054,12 +1053,10 @@ class="content">Noise
  id="x1-8035r2"></a>
                                                                                               
                                                                                               
-                                                                                              
-                                                                                              
-<!--l. 98--><p class="noindent" >  <img 
+
+<!--l. 98--><p class="noindent" ><img 
 src="./Figures/AddNoise2.png" alt="PIC"  
->                                                                                        
-                                                                                              
+>
 <br /> <div class="caption" 
 ><span class="id">Figure&#x00A0;1.2: </span><span  
 class="content">Output for the AddNoise python example script discussed above</span></div><!--tex4ht:label?: x1-8035r2 -->

@@ -14,7 +14,7 @@ Available properties in the auto2000 plugin are documented in the next section.
 
 \begin{landscape}
 \section{Plugin Properties}
-The AUTO library have numerous properties that has been wrapped and made available to a plugin client. Each property is listed below with its data type, default value and 
+The AUTO library has numerous properties that have been wrapped and made available to a plugin client. Each property is listed below with its data type, default value and 
 a short description. For the exact usage and a more in detail description please consult the main AUTO2000 manual.
 
 %\begin{table}[ht]
@@ -29,12 +29,12 @@ TempFolder                          &   string              & "."     &   Folder
 KeepTempFiles                      &   bool                & false    &   Boolean indicating if temporary files should be deleted after an AUTO session or not \\
 ScanDirection                      &   string              & "Positive" &   Parameter instructing AUTO how to sweep its principal continuation parameter \\
 PrincipalCont\-inuationParameter   &   string              & N/A      &   The principal continuation parameter (PCP) is the first parameter that AUTO will sweep. Currently only one parameter is \
-                                                                            supported, which then by default is the PCP \\
+                                                                            supported, which by default is the PCP \\
 BifurcationPoints                  &   vector$<$int$>$     & N/A      &    This integer vector holds the exact point number (in the sequence of all output data) for an AUTO solution point. It can be used together with the labels in the bifurcationlabels property to assist in 
                                                                            plotting a bifurcation diagram \\
-BifurcationLabels                  &   stringList          & N/A      &    The bifurcation labels string list holds the AUTO designated solution type label for a solution point, as found in the bifurcationpoints property. Consult the AUTO documentation for
+BifurcationLabels                  &   stringList          & N/A      &    The string list holds the AUTO designated solution type label for a solution point, as found in the bifurcationpoints property. Consult the AUTO documentation for
                                                                            possible label types and their meaning \\
-BifurcationData                    &   telluriumData       & N/A      &    The  BifurcationData property holds the bifurcation diagram after a session. First column is the values of the selected parameter, and successive columns are selected species \\
+BifurcationData                    &   telluriumData       & N/A      &    The  BifurcationData property holds the bifurcation diagram after a session. The first column contains the values of the selected parameter, and successive columns are selected species \\
 
 
 \\[2pt]                                                               
@@ -103,16 +103,16 @@ UZR                                &   vector$<$int$>$     & N/A      &    List 
 \section{The \texttt{execute(bool inThread)} function}
 The \verb|execute()| function will start a bifurcation session. Depending on the problem at hand, the algorithm may run for a long time. 
 
-The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not.
-If set to false, i.e. executing \verb|execute(false)|, the function will be a blocking function and will not return until the plugin work is done. If, 
-on the other hand, the client are setting the argument to true, the \verb|execute(true)| will return immediately and the plugin work will be executed in 
-a thread. A client can use the \verb|isPluginDone(plugin)| to query the status of the plugin progression.
+The \verb|execute(bool inThread)| method supports a boolean argument indicating if the execution of the plugin work will be done in a thread, or not.
+If set to false, i.e. executing \verb|execute(false)|, the function will be a blocking function and will not return until the plugin work is done. If it is set
+to true, the \verb|execute(true)| will return immediately and the plugin work will be executed in 
+a thread. The user can use the \verb|isPluginDone(plugin)| to query the status of the plugin progression.
 
 The inThread argument defaults to \textbf{false}. 
 
 
 \section{Plugin Events}
-The auto2000 plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+The auto2000 plugin uses all of the available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
 The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
 the plugins execute function (in the assignOn() family of functions), can be retrieved \emph{unmodified} in the corresponding event function.
@@ -135,7 +135,7 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \end{table}
 
 \section{Python example}
-The following Python script illustrate how the auto plugin can be invoked, how to set its properties and finally how to plot a bifurcation diagram. 
+The following Python script illustrates how the auto plugin can be invoked, how to set its properties and finally how to plot a bifurcation diagram. 
 
 \begin{singlespace}
 \lstinputlisting[label=AutoPluginExample,caption={Bifurcation example using a complex model.},language=Python]{Examples/telAUTO2000.py}
