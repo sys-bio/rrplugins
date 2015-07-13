@@ -114,7 +114,7 @@ The inThread argument defaults to \textbf{false}.
 \section{Plugin Events}
 The auto2000 plugin uses all of the available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to 
+The available data variables for each event are internally treated as \emph{pass through} variables, so any data, for any of the events, assigned prior to 
 the plugins execute function (in the assignOn() family of functions), can be retrieved \emph{unmodified} in the corresponding event function.
 
 \begin{table}[ht]
@@ -124,9 +124,9 @@ the plugins execute function (in the assignOn() family of functions), can be ret
 Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table 
 %heading
 \hline % inserts single horizontal line
-PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
-PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin. \\[0.5ex]
-PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\
+PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\[0.5ex]
+PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass through} parameters and are unused internally by the plugin. \\[0.5ex]
+PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\
 
 \hline %inserts single line
 \end{tabular}

@@ -197,7 +197,9 @@ class DataSeries(object):
     def readDataSeries(cls, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
-        data = tpc.createTelluriumDataFromFile (fileName)
+        print "Stage 1"
+		data = tpc.createTelluriumDataFromFile (fileName)
+		print "Stage 2"
         return cls (data, True)
 
     ## \brief Write a dataseries to a file

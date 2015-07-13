@@ -71,7 +71,7 @@ Gamma                        	&   double              & 1                   	&  
 \section{Plugin Events}
 The Nelder-Mead plugin uses all of the available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
+The available data variables for each event are internally treated as \emph{pass through} variables, so any data, for any of the events, assigned prior to
 the plugin's execute function (in the assignOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
@@ -81,9 +81,9 @@ the plugin's execute function (in the assignOn() family of functions), can be re
 Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
-PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
-PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin. \\[0.5ex]
-PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\
+PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\[0.5ex]
+PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass through} parameters and are unused internally by the plugin. \\[0.5ex]
+PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\
 
 \hline %inserts single line
 \end{tabular}
