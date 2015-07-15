@@ -5,7 +5,7 @@
 \setcounter{chapter}{1}
 \emph{Get some confidence estimates}
 \section{Introduction}
-The Monte Carlo plugin is used to get estimates of a models parameters confidence limits. This is in the context where experimental data exists and a parameter minimization method, such as Levenberg-Marquardt or Nelder-Mead is used first in order to find a parameter minimum.
+The Monte Carlo plugin is used to obtain estimates of the confidence limits for a model's parameters. This is in the context where experimental data exists and a parameter minimization method, such as Levenberg-Marquardt or Nelder-Mead has already been used in order to find a parameter minimum.
 
 The Monte Carlo algorithm is used subsequently at this minimum and will give an estimate of parameter confidence limits corresponding to the variance in the original experimental data.
 
@@ -45,7 +45,7 @@ MinimizerPlugin					&   string   			& N/A    &	 Minimizer used by the Monte Carl
 \section{The \texttt{execute(bool inThread)} function}
 The \verb|execute()| function will start the \pname\ algorithm. Depending on the problem at hand, the algorithm may run for a long time.
 
-The \verb|execute(bool inThread)|, do support a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the \pname\ plugin.
+The \verb|execute(bool inThread)|, method supports a boolean argument indicating if the execution of the plugin work will be done in a thread, or not. Threading is fully implemented in the \pname\ plugin.
 
 The inThread argument defaults to \textbf{false}.
 
@@ -53,10 +53,10 @@ Each generated Monte Carlo dataset is available in a file named, MCDataSets.dat 
 
 
 \section{Plugin Events}
-The \pname\ plugin are using all of a plugins available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
+The \pname\ plugin uses all of the available plugin events, i.e. the \emph{PluginStarted}, \emph{PluginProgress} and the \emph{PluginFinished} events.
 
-The available data variables for each event are internally treated as \emph{pass trough} variables, so any data, for any of the events, assigned prior to
-the plugins execute function (in the assingOn() family of functions), can be retrieved unmodified in the corresponding event function.
+The available data variables for each event are internally treated as \emph{pass through} variables, so any data, for any of the events, assigned prior to
+the plugins execute function (in the assignOn() family of functions), can be retrieved unmodified in the corresponding event function.
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -65,9 +65,9 @@ the plugins execute function (in the assingOn() family of functions), can be ret
 Event & Arguments & Purpose and argument types \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
-PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\[0.5ex]
-PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin. \\[0.5ex]
-PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass trough} parameters and are unused internally by the plugin.\\
+PluginStarted  	& 	void*, void*  & Signal to application that the plugin has started. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\[0.5ex]
+PluginProgress	& 	void*, void*  & Communicating progress of fitting. Both parameters are \emph{pass through} parameters and are unused internally by the plugin. \\[0.5ex]
+PluginFinished	& 	void*, void*  & Signals to application that execution of the plugin has finished. Both parameters are \emph{pass through} parameters and are unused internally by the plugin.\\
 
 \hline %inserts single line
 \end{tabular}
@@ -76,7 +76,7 @@ PluginFinished	& 	void*, void*  & Signals to application that execution of the p
 \end{table}
 
 \section{Python example}
-The following Python script illustrate how the plugin can be used.
+The following Python script illustrates how the plugin can be used.
 
 \begin{singlespace}
 \lstinputlisting[label=MonteCarloExample,caption={\pname\ plugin example.},language=Python]{Examples/telMonteCarlo.py}

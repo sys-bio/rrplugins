@@ -7,7 +7,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html --> 
 <meta name="src" content="mainDoc.tex"> 
-<meta name="date" content="2014-03-29 10:37:00"> 
+<meta name="date" content="2015-07-13 15:24:00"> 
 <link rel="stylesheet" type="text/css" href="mainDoc.css"> 
 </head><body 
 >
@@ -24,9 +24,9 @@ class="cmti-12">Get some confidence</span>
 class="cmti-12">estimates</span>
    <h3 class="sectionHead"><span class="titlemark">1.1   </span> <a 
  id="x1-20001.1"></a>Introduction</h3>
-<!--l. 8--><p class="noindent" >The Monte Carlo plugin is used to get estimates of a models parameters confidence limits. This
-is in the context where experimental data exists and a parameter minimization method,
-such as Levenberg-Marquardt or Nelder-Mead is used first in order to find a parameter
+<!--l. 8--><p class="noindent" >The Monte Carlo plugin is used to obtain estimates of the confidence limits for a model&#8217;s parameters.
+This is in the context where experimental data exists and a parameter minimization method, such as
+Levenberg-Marquardt or Nelder-Mead has already been used in order to find a parameter
 minimum.
 <!--l. 10--><p class="indent" >   The Monte Carlo algorithm is used subsequently at this minimum and will give an estimate
 of parameter confidence limits corresponding to the variance in the original experimental
@@ -193,8 +193,8 @@ class="cmtt-12">execute()</span></span></span> function will start the Monte Car
 algorithm may run for a long time.
 <!--l. 48--><p class="indent" >   The <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-12">execute(bool</span><span 
-class="cmtt-12">&#x00A0;inThread)</span></span></span>, do support a boolean argument indicating if the execution of the
-plugin work will be done in a thread, or not. Threading is fully implemented in the Monte
+class="cmtt-12">&#x00A0;inThread)</span></span></span>, method supports a boolean argument indicating if the execution of
+the plugin work will be done in a thread, or not. Threading is fully implemented in the Monte
 Carlo&#x00A0;plugin.
 <!--l. 50--><p class="indent" >   The inThread argument defaults to <span 
 class="cmbx-12">false</span>.
@@ -203,15 +203,15 @@ working directory).
 <!--l. 55--><p class="noindent" >
    <h3 class="sectionHead"><span class="titlemark">1.4   </span> <a 
  id="x1-50001.4"></a>Plugin Events</h3>
-<!--l. 56--><p class="noindent" >The Monte Carlo&#x00A0;plugin are using all of a plugins available plugin events, i.e. the <span 
-class="cmti-12">PluginStarted</span>,
-<span 
-class="cmti-12">PluginProgress </span>and the <span 
+<!--l. 56--><p class="noindent" >The Monte Carlo&#x00A0;plugin uses all of the available plugin events, i.e. the <span 
+class="cmti-12">PluginStarted</span>, <span 
+class="cmti-12">PluginProgress</span>
+and the <span 
 class="cmti-12">PluginFinished </span>events.
 <!--l. 58--><p class="indent" >   The available data variables for each event are internally treated as <span 
-class="cmti-12">pass trough </span>variables,
+class="cmti-12">pass through </span>variables,
 so any data, for any of the events, assigned prior to the plugins execute function (in the
-assingOn() family of functions), can be retrieved unmodified in the corresponding event
+assignOn() family of functions), can be retrieved unmodified in the corresponding event
 function.
    <div class="table">
                                                                                               
@@ -243,7 +243,7 @@ class="td11">PluginStarted </td><td  style="white-space:nowrap; text-align:left;
 class="td11">void*, void*</td><td  style="white-space:wrap; text-align:left;" id="TBL-2-2-3"  
 class="td11"><!--l. 68--><p class="noindent" >Signal to application that the plugin has started.
 Both parameters are <span 
-class="cmti-12">pass trough </span>parameters and
+class="cmti-12">pass through </span>parameters and
 are unused internally by the plugin.                  </td>
 </tr><tr 
 class="vspace" style="font-size:2.58333pt"><td 
@@ -255,7 +255,7 @@ class="td11">PluginProgress</td><td  style="white-space:nowrap; text-align:left;
 class="td11">void*, void*</td><td  style="white-space:wrap; text-align:left;" id="TBL-2-3-3"  
 class="td11"><!--l. 69--><p class="noindent" >Communicating        progress        of        fitting.
 Both parameters are <span 
-class="cmti-12">pass trough </span>parameters and
+class="cmti-12">pass through </span>parameters and
 are unused internally by the plugin.                  </td>
 </tr><tr 
 class="vspace" style="font-size:2.58333pt"><td 
@@ -267,7 +267,7 @@ class="td11">PluginFinished</td><td  style="white-space:nowrap; text-align:left;
 class="td11">void*, void*</td><td  style="white-space:wrap; text-align:left;" id="TBL-2-4-3"  
 class="td11"><!--l. 70--><p class="noindent" >Signals to application that execution of the plugin
 has  finished.  Both  parameters  are  <span 
-class="cmti-12">pass  trough</span>
+class="cmti-12">pass  through</span>
 parameters  and  are  unused  internally  by  the
 plugin.                                                        </td>
 </tr><tr 
@@ -283,7 +283,7 @@ class="content">Plugin Events</span></div><!--tex4ht:label?: x1-5001r2 -->
    </div>
    <h3 class="sectionHead"><span class="titlemark">1.5   </span> <a 
  id="x1-60001.5"></a>Python example</h3>
-<!--l. 79--><p class="noindent" >The following Python script illustrate how the plugin can be used.
+<!--l. 79--><p class="noindent" >The following Python script illustrates how the plugin can be used.
    <!--l. 82--><div class="lstinputlisting">
 <a 
  id="x1-6001r1"></a>
@@ -1908,15 +1908,16 @@ class="content">Monte
             Carlo&#x00A0;plugin
             example.</span></div><!--tex4ht:label?: x1-60001.5 -->
    </div>
-                                                                                              
-                                                                                              
-<!--l. 86--><p class="indent" >   <a 
- id="x1-6087r1"></a><hr class="float"><div class="float" 
+<!--l. 85--><p class="indent" >   <hr class="figure"><div class="figure" 
 >
                                                                                               
                                                                                               
+<a 
+ id="x1-6087r1"></a>
+                                                                                              
+                                                                                              
 
-<img 
+<!--l. 87--><p class="noindent" ><img 
 src="./Figures/MonteCarloOutput.png" alt="PIC"  
 >
 <br /> <div class="caption" 
@@ -1926,7 +1927,7 @@ shows the distribution for the model parameter, &#8217;k1&#8217;. The mean for t
 and obtained confidence limits were +/- 0.001.</span></div><!--tex4ht:label?: x1-6087r1 -->
                                                                                               
                                                                                               
-   </div><hr class="endfloat" />
+<!--l. 90--><p class="indent" >   </div><hr class="endfigure">
                                                                                               
                                                                                               
     
