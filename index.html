@@ -35,9 +35,9 @@
 					<div class="entry-content">
 						<h1>Tellurium Plugins for RoadRunner</h1>
 						<h2>API's</h2>
-Four (4) APIs are available to enable interaction with the plugin system. For Python users the most important is the Python Interface.
+Full documents for all APIs are provided below:
 <ol>
-<li><a href="docs/python/html/index.html">Python Interface, use this API for plugin interaction</a></li>
+<li><a href="docs/python/html/index.html">Python API</a></li>
 <li><a href="docs/c/html/index.html">C API</a></li>
 <li><a href="docs/cpp/html/index.html">C++ API</a></li>
 <li><a href="docs/python_ctypes/html/index.html">Raw (ctypes) Python Interface. For reference only </a></li>
@@ -45,7 +45,7 @@ Four (4) APIs are available to enable interaction with the plugin system. For Py
 
 <h2>Released Plugins</h2>
 <p>
-The following plugins are part of the official Tellurium release. The documentation for each plugin is available in PDF or HTML (experimental) format. 
+The following plugins are part of the official Tellurium release. The documentation for each plugin is available in PDF and HTML (experimental) format. 
 </p>
 
 <table id="pluginsTable" width="100%" >
@@ -59,7 +59,7 @@ The following plugins are part of the official Tellurium release. The documentat
     <td>AddNoise </td> <td>Add Gaussian noise to Tellurium Data </td> <td><a href="docs/plugins/add_noise/add_noise.pdf">pdf</a> <a href="docs/plugins/add_noise/index.html">html</a> </td>
    </tr>
    <tr>
-    <td>TestModel </td> <td> Plugin providing a SBML test model, as well as test data </td> <td><a href="docs/plugins/test_model/test_model.pdf">pdf</a> <a href="docs/plugins/test_model/index.html">html</a> </td>
+    <td>TestModel </td> <td> Provides a SBML test model and corresponding test data </td> <td><a href="docs/plugins/test_model/test_model.pdf">pdf</a> <a href="docs/plugins/test_model/index.html">html</a> </td>
    </tr>
    <tr>
     <td>ChiSquare  </td> <td>Plugin that calculates the ChiSquare for two Tellurium data sets. </td> <td><a href="docs/plugins/chisquare/chisquare.pdf">pdf</a> <a href="docs/plugins/chisquare/index.html">html</a> </td>
@@ -84,24 +84,24 @@ The following plugins are part of the official Tellurium release. The documentat
 <p>The Plugin source code is <a title="Apache 2.0 License" href="http://www.apache.org/licenses/LICENSE-2.0">licensed for free</a> (Apache License, Version 2.0)
 as an open source programmatic <strong>library</strong>.</p>
 <p>The Source Code is <a title="GitHub" href="https://github.com/sys-bio/telPlugins">available for download</a> at Github.</p>
-<p>A binary build, together with examples in python, can be <a title="SourceForge" href="https://sourceforge.net/projects/pytellurium/files/teplugins/">downloaded from SourceForge.</a> </p>
+<p>A binary build, together with examples in Python, can be <a title="SourceForge" href="https://sourceforge.net/projects/pytellurium/files/teplugins/">downloaded from SourceForge.</a> </p>
 
 <h2>Build from source</h2>
-<p>The Tellurium plugin library can be compiled and built from sources using Visual Studio 2010. 
-The first step of the build process involve to build the roadrunner library. See <a href="http://libroadrunner.org/build-roarunner-from-source/"> http://libroadrunner.org/build-roadrunner-from-source</a> 
-for information on how to build roadrunner and its third party dependencies from sources. <br> <br>
+<p>The Tellurium plugin library can be built from the source using Visual Studio 2010 and above. 
+The first step of the build process requires a build of libRoadRunner. See <a href="http://libroadrunner.org/build-roarunner-from-source/"> libRoadRunner website</a> 
+for information on how to build libRoadRunner and its third party dependencies from sources. <br> <br>
 
-The second step is to use <a href="http://www.cmake.org/cmake/resources/software.html">CMake</a> to generate Visual Studio solution files for the Plugins themselves, and plugins third party libs. 
+<a href="http://www.cmake.org/cmake/resources/software.html">CMake</a> is also required to generate solution files for the plugins and third party libraries.
 
-A document on the build process in more detail is found here: <a href="docs/build/index.html">Build Tellurium Plugins</a>
+For detailed instructions, go to: <a href="docs/build/index.html">Build Tellurium Plugins</a>
 
 </p> 
 <h3>Acknowledgements</h3>
-<p>This work is funded by the generous support of the NIH/NIGMS grant: GM081070</p>
+<p>This work is funded by the generous support of the NIH/NIGMS grant GM081070</p>
 <p><a href="http://libroadrunner.org/wp-content/uploads/2013/11/nigms_logo_Small.png"><img class="alignnone size-thumbnail wp-image-206" alt="nigms_logo_Small" src="http://libroadrunner.org/wp-content/uploads/2013/11/nigms_logo_Small-120x150.png" width="120" height="150" /></a></p>
 <h2><a name="license"></a></h2>
 <h3>Licence</h3>
-<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 <p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
 <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 <p>In plain English this means:</p>
