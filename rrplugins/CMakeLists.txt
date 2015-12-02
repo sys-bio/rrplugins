@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
-project(tellurium)
+project(rrplugins)
 
 include_directories(
-  ${TLP_ROOT}/source/core
-  ${TLP_ROOT}/source/common
+  ${TLP_ROOT}/rrplugins/core
+  ${TLP_ROOT}/rrplugins/common
   ${THIRD_PARTY_INSTALL_FOLDER}/include
   ${THIRD_PARTY_INSTALL_FOLDER}/include/rr # deprecated
   ${THIRD_PARTY_INSTALL_FOLDER}/include/roadrunner

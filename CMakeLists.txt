@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
-project(telplugins)
+project(rrplugins)
 
 # Add local modules to CMake
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Variables used in project
 set ( TLP_DEPENDENCIES_PATH "" CACHE PATH "Path to TelPlugins dependencies" )
-set ( TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source )
+set ( TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/rrplugins )
 set ( TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR} )
 set ( TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
