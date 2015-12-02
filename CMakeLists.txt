@@ -1,12 +1,14 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 project(telplugins)
 
+# Add local modules to CMake
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Variables used in project
-set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
-set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-set(TLP_DEPENDENCIES_PATH "" CACHE PATH "Path to TelPlugins dependencies")
+set ( TLP_DEPENDENCIES_PATH "" CACHE PATH "Path to TelPlugins dependencies" )
+set ( TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source )
+set ( TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR} )
+set ( TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
 if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
@@ -24,7 +26,6 @@ set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
-set(TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 message(STATUS "Using third party library prefix of ${THIRD_PARTY_INSTALL_FOLDER}")
 message(STATUS "Installing TelluriumPlugins to ${CMAKE_INSTALL_PREFIX}")
@@ -44,30 +45,20 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)
 
-include_directories(
-    ${TLP_ROOT}
-    ${TLP_ROOT}/manager
-    ${THIRD_PARTY_INSTALL_FOLDER}/include
-)
-
-link_directories (
-    ${THIRD_PARTY_INSTALL_FOLDER}/lib
-)
 if(${MSVC})
-    add_definitions(
-        -DPOCO_NO_AUTOMATIC_LIBS
-        -DCRT_NONSTDC_NO_DEPRECATE
-        -D_CRT_SECURE_NO_WARNINGS    #MS wanting you to changes basically all standard C functions :(
-        )
-        
-    #  4251 About exporting std classes
-    #  4018 Comparing unsigned/signed ints
-    #  4996 Deprecated functions   
-    add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
+  add_definitions(
+    -DPOCO_NO_AUTOMATIC_LIBS
+    -DCRT_NONSTDC_NO_DEPRECATE
+    -D_CRT_SECURE_NO_WARNINGS    #MS wanting you to changes basically all standard C functions :(
+    )
+      
+  #  4251 About exporting std classes
+  #  4018 Comparing unsigned/signed ints
+  #  4996 Deprecated functions   
+  add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
 
-    SET (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
-    SET (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
-
+  set (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
+  set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
 
 #=== COMPILER FLAGS
@@ -120,6 +111,12 @@ TelPlugins
     "
 )
 
+# common includes
+include_directories(
+    ${TLP_ROOT}
+    ${TLP_ROOT}/manager
+    ${THIRD_PARTY_INSTALL_FOLDER}/include
+)
 
 add_subdirectory(source)
 add_subdirectory(plugins)
