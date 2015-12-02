@@ -66,7 +66,7 @@ if(UNIX)
 
 endif()
 
-#if(${INSTALL_EXAMPLES})
+#if(${TLP_BUILD_EXAMPLES})
 #add_subdirectory(Examples)
 #endif()
 

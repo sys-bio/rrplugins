@@ -35,10 +35,16 @@ set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
+# Dependencies
+
 # Poco
 set ( POCO_DIRECTORY "${TLP_DEPENDENCIES_PATH}" CACHE PATH "Path to directory containing Poco" )
 set ( ENV{Poco_DIR} ${POCO_DIRECTORY} )
 find_package ( Poco REQUIRED )
+
+# libxml2
+# set( CMAKE_PREFIX_PATH "${TLP_DEPENDENCIES_PATH}" )
+# find_package ( LibXml2 REQUIRED )
 
 message(STATUS "
 -------------------------------------------------------------------------------
@@ -77,6 +83,13 @@ if(Poco_FOUND)
     message( "  *** Poco includes               ${Poco_INCLUDE_DIRS}")
 else()
     message( "  *** Poco                        *N/A")
+endif()
+
+if(LIBXML2_FOUND)
+    message( "  *** libxml2 libs                ${LIBXML2_LIBRARIES}")
+    message( "  *** libxml2 includes            ${LIBXML2_INCLUDE_DIR}")
+else()
+    message( "  *** libxml2                     *N/A")
 endif()
 
 # Common includes
