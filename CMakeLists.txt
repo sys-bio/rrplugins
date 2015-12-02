@@ -6,10 +6,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 # Variables used in project
 set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
 set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-set(TLP_DEPENDENCIES_PATH CACHE PATH "Path to TelPlugins dependencies" "")
+set(TLP_DEPENDENCIES_PATH "" CACHE PATH "Path to TelPlugins dependencies")
 
+message( STATUS "TLP_DEPENDENCIES_PATH = \"${TLP_DEPENDENCIES_PATH}\"" )
 if( TLP_DEPENDENCIES_PATH STREQUAL "" )
-  message( FATAL_ERROR "Set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
+  message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
   message( FATAL_ERROR "TLP_DEPENDENCIES_PATH is missing include/Poco" )
 elseif( NOT EXISTS "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
@@ -18,11 +19,11 @@ elseif( NOT EXISTS "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR
 endif()
 
 # Feature selection
-set (TLP_BUILD_SHARED_LIB CACHE BOOL   "Build shared library"  ON)
-set (TLP_BUILD_STATIC_LIB  CACHE BOOL  "Build static library"  ON)
-set (TLP_BUILD_APPS CACHE BOOL       "Build apps"            ON )
-set (TLP_BUILD_EXAMPLES CACHE BOOL     "Build examples"        OFF)
-set (TLP_BUILD_TEST_TOOLS CACHE BOOL   "Build test tools"      OFF)
+set ( TLP_BUILD_SHARED_LIB ON  CACHE BOOL   "Build shared library" )
+set ( TLP_BUILD_STATIC_LIB  ON CACHE BOOL   "Build static library" )
+set ( TLP_BUILD_APPS ON        CACHE BOOL   "Build apps" )
+set ( TLP_BUILD_EXAMPLES OFF   CACHE BOOL   "Build examples" )
+set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
 set(TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
