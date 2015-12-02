@@ -13,7 +13,7 @@ if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
   message( FATAL_ERROR "TLP_DEPENDENCIES_PATH is missing include/Poco" )
-elseif( NOT EXISTS "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
+elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
         IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" )
   message( FATAL_ERROR "Could not find Foundation.h in TLP_DEPENDENCIES_PATH/include/Poco" )
 endif()
