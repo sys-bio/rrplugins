@@ -116,7 +116,7 @@ if( MSVC )
   set (CMAKE_SHARED_LINKER_FLAGS   "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
 
-add_subdirectory(source)
+add_subdirectory(rrplugins)
 add_subdirectory(plugins)
 add_subdirectory(scripts)
 add_subdirectory(wrappers)

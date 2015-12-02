@@ -10,6 +10,8 @@ include_directories(
   ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
   ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
   ${THIRD_PARTY_INSTALL_FOLDER}/include/clapack
+  ${Poco_INCLUDE_DIRS}
+  ${LIBXML2_INCLUDE_DIR}
 )
 
 add_subdirectory(common)
