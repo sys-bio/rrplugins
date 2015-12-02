@@ -136,26 +136,18 @@ endif()
 add_subdirectory(wrappers)
 
 if(TLP_BUILD_TEST_TOOLS)
-    message(STATUS "building tests")
-    add_subdirectory(testing)
-else()
-    message(STATUS "NOT building tests")
-endif(TLP_BUILD_TEST_TOOLS)
+  add_subdirectory(testing)
+endif()
 
 
 #======================= INSTALL STUFF ============================
-#Install the "installer". Can make this more elegant later on
+# Install the "installer". Can make this more elegant later on
 FILE (GLOB installerFiles installer/windows/*.*)
-install ( FILES 
-${installerFiles} 
-DESTINATION ./installer/windows
-)
+install ( FILES ${installerFiles} DESTINATION ./installer/windows )
 
-#Install createPythonReleaseScript
-install (
-FILES scripts/createPythonRelease.sh
-DESTINATION ./../
-)
+# Install createPythonReleaseScript
+# install ( FILES scripts/createPythonRelease.sh DESTINATION ./../ )
+
 #=== ThirdParties
 if(${BORLAND})
     set(CG_RUNTIMES        cc32110MT.dll)
