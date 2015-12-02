@@ -43,8 +43,8 @@ set ( ENV{Poco_DIR} ${POCO_DIRECTORY} )
 find_package ( Poco REQUIRED )
 
 # libxml2
-# set( CMAKE_PREFIX_PATH "${TLP_DEPENDENCIES_PATH}" )
-# find_package ( LibXml2 REQUIRED )
+set( LIBXML2_PATH "${TLP_DEPENDENCIES_PATH}" )
+find_package ( LibXml2 REQUIRED )
 
 message(STATUS "
 -------------------------------------------------------------------------------
