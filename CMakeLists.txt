@@ -20,9 +20,9 @@ endif()
 
 # Feature selection
 set ( TLP_BUILD_SHARED_LIB ON  CACHE BOOL   "Build shared library" )
-set ( TLP_BUILD_STATIC_LIB  ON CACHE BOOL   "Build static library" )
-set ( TLP_BUILD_APPS ON        CACHE BOOL   "Build apps" )
-set ( TLP_BUILD_EXAMPLES OFF   CACHE BOOL   "Build examples" )
+set ( TLP_BUILD_STATIC_LIB ON  CACHE BOOL   "Build static library" )
+set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
+set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
 set(TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
