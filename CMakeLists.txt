@@ -110,6 +110,13 @@ include_directories(
     ${Poco_INCLUDE_DIRS}
 )
 
+if(UNIX)
+  find_package(Threads REQUIRED)
+  set(RRPLUGINS_COMMON_LIBS ${LIBROADRUNNER_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} dl)
+else()
+  set(RRPLUGINS_COMMON_LIBS ${LIBROADRUNNER_LIBRARIES})
+endif()
+
 # Flags
 if( MSVC )
   add_definitions(
