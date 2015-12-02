@@ -46,6 +46,10 @@ find_package ( Poco REQUIRED )
 set( LIBXML2_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibXml2 REQUIRED )
 
+# libRoadRunner
+set( LIBROADRUNNER_PATH "${TLP_DEPENDENCIES_PATH}" )
+find_package ( LibRoadRunner REQUIRED )
+
 message(STATUS "
 -------------------------------------------------------------------------------
 TelPlugins
@@ -77,6 +81,13 @@ TelPlugins
     Dependencies (packages marked with *** are required):
     "
 )
+
+if(LIBXML2_FOUND)
+    message( "  *** roadrunner libs             ${LIBROADRUNNER_LIBRARIES}")
+    message( "  *** roadrunner includes         ${LIBROADRUNNER_INCLUDE_DIR}")
+else()
+    message( "  *** roadrunner                  *N/A")
+endif()
 
 if(Poco_FOUND)
     message( "  *** Poco libs                   ${Poco_LIBRARIES}")

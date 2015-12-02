@@ -1,13 +1,5 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 project(telplugins)
-
-set(target telplugins_common)
-
-include_directories(
-    ${TLP_ROOT}/source
-    ${THIRD_PARTY_INSTALL_FOLDER}/include
-    ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2
-    )
 
 set(sources
 telArrayList.cpp
@@ -46,67 +38,60 @@ telTelluriumData.h
 telUtils.h
 )
 
-#SHARED VERSION ----------------
-add_library(${target} SHARED ${sources})
+# ** Shared lib ******
+add_library(telplugins_common SHARED ${sources})
 
-set_property(TARGET ${target}
-    PROPERTY  COMPILE_DEFINITIONS
-EXPORT_COMMON_API
-LIBSBML_USE_CPP_NAMESPACE
-LIBSBML_STATIC
-LIBLAX_STATIC
-STATIC_LIBSTRUCT
-STATIC_NLEQ
-POCO_STATIC
-POCO_NO_AUTOMATIC_LIBS
+set_property(TARGET telplugins_common
+  PROPERTY  COMPILE_DEFINITIONS
+  EXPORT_COMMON_API
+  LIBSBML_USE_CPP_NAMESPACE
+  LIBSBML_STATIC
+  LIBLAX_STATIC
+  STATIC_LIBSTRUCT
+  STATIC_NLEQ
+  POCO_STATIC
+  POCO_NO_AUTOMATIC_LIBS
 )
 
-#libraries to link with our shared lib
-if(UNIX)
-    set(staticLibExt ".a")
-else()
-    set(staticLibExt "")
-endif(UNIX)
-
-target_link_libraries (${target}
-    roadrunner
-    sundials_cvode
-    sundials_nvecserial
-    blas
-    lapack
-    nleq-static
-    rr-libstruct-static
-    poco_foundation-static
-    )
+target_link_libraries (telplugins_common
+  roadrunner
+  sundials_cvode
+  sundials_nvecserial
+  blas
+  lapack
+  nleq-static
+  rr-libstruct-static
+  poco_foundation-static
+  )
 
 if(UNIX)
-    target_link_libraries(${target} xml2)
+    target_link_libraries(telplugins_common xml2)
 elseif(${WIN32})
-    target_link_libraries (${target} libxml2)
+    target_link_libraries (telplugins_common libxml2)
 elseif(${BORLAND})
-    target_link_libraries (${target} libxml2_xe)
+    target_link_libraries (telplugins_common libxml2_xe)
 endif()
 
 if(${MSVC})
-    target_link_libraries (${target}
+    target_link_libraries (telplugins_common
         iphlpapi)
 endif()
 
 if(UNIX)
-    target_link_libraries (${target}
+    target_link_libraries (telplugins_common
         pthread
         sbml
         dl
         f2c${staticLibExt}
         )
 else()
-    target_link_libraries (${target}
+    target_link_libraries (telplugins_common
         libf2c
         libsbml-static
         )
 endif(UNIX)
 
-install(TARGETS ${target}
+install(TARGETS telplugins_common
         RUNTIME DESTINATION bin COMPONENT pluginsLib
         LIBRARY DESTINATION lib COMPONENT pluginsLib
         ARCHIVE DESTINATION lib COMPONENT pluginsLib
@@ -115,9 +100,9 @@ install(TARGETS ${target}
 #END OF SHARED VERSION ----------------
 
 #STATIC VERSION
-add_library(${target}-static STATIC ${sources})
+add_library(telplugins_common-static STATIC ${sources})
 
-set_property(TARGET ${target}-static
+set_property(TARGET telplugins_common-static
     PROPERTY COMPILE_DEFINITIONS
     STATIC_PLUGIN_API
     LIBSBML_USE_CPP_NAMESPACE
@@ -130,7 +115,7 @@ set_property(TARGET ${target}-static
     )
 
 #libraries to link with static lib
-target_link_libraries (${target}-static
+target_link_libraries (telplugins_common-static
     sundials_cvode
     sundials_nvecserial
     blas
@@ -141,7 +126,7 @@ target_link_libraries (${target}-static
     )
 
 if(WIN32)
-    target_link_libraries (${target}-static
+    target_link_libraries (telplugins_common-static
         libsbml-static
         libf2c
         iphlpapi
@@ -150,7 +135,7 @@ if(WIN32)
 endif(WIN32)
 
 if(UNIX)
-    target_link_libraries (${target}-static
+    target_link_libraries (telplugins_common-static
         sbml-static
         f2c
         xml2
@@ -161,7 +146,7 @@ endif(UNIX)
 
 #Libxml we can't build right now
 if(${BORLAND})
-    target_link_libraries (${target}-static
+    target_link_libraries (telplugins_common-static
         libxml2_xe
         )
 endif()
@@ -180,7 +165,7 @@ if(BUILD_TESTS)
 endif()
 
 #--- INSTALL STUFF
-install(TARGETS ${target}-static
+install(TARGETS telplugins_common-static
     LIBRARY DESTINATION lib COMPONENT pluginsLib
     ARCHIVE DESTINATION lib COMPONENT pluginsLib
     )
