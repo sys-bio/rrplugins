@@ -1,47 +1,46 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 project(telplugins)
 
-set(sources
-telArrayList.cpp
-telArrayedParameter.cpp
-telConstants.cpp
-telException.cpp
-telFileName.cpp
-telIniFile.cpp
-telIniKey.cpp
-telIniSection.cpp
-telLogger.cpp
-telProperties.cpp
-telPropertyBase.cpp
-telStringBuilder.cpp
-telStringList.cpp
-telStringListContainer.cpp
-telStringUtils.cpp
-telTelluriumData.cpp
-telUtils.cpp
-telArrayList.h
-telArrayedParameter.h
-telConstants.h
-telException.h
-telFileName.h
-telIniFile.h
-telIniKey.h
-telIniSection.h
-telLogger.h
-telProperties.h
-telPropertyBase.h
-telStringBuilder.h
-telStringList.h
-telStringListContainer.h
-telStringUtils.h
-telTelluriumData.h
-telUtils.h
-)
+set(RRPLUGINS_COMMON_SOURCES
+    telArrayList.cpp
+    telArrayedParameter.cpp
+    telConstants.cpp
+    telException.cpp
+    telFileName.cpp
+    telIniFile.cpp
+    telIniKey.cpp
+    telIniSection.cpp
+    telLogger.cpp
+    telProperties.cpp
+    telPropertyBase.cpp
+    telStringBuilder.cpp
+    telStringList.cpp
+    telStringListContainer.cpp
+    telStringUtils.cpp
+    telTelluriumData.cpp
+    telUtils.cpp
+    telArrayList.h
+    telArrayedParameter.h
+    telConstants.h
+    telException.h
+    telFileName.h
+    telIniFile.h
+    telIniKey.h
+    telIniSection.h
+    telLogger.h
+    telProperties.h
+    telPropertyBase.h
+    telStringBuilder.h
+    telStringList.h
+    telStringListContainer.h
+    telStringUtils.h
+    telTelluriumData.h
+    telUtils.h)
 
 # ** Shared lib ******
 
 if (TLP_BUILD_SHARED_LIB)
-  add_library(telplugins_common SHARED ${sources})
+  add_library(telplugins_common SHARED ${RRPLUGINS_COMMON_SOURCES})
 
   set_property(TARGET telplugins_common
     PROPERTY  COMPILE_DEFINITIONS
@@ -68,7 +67,7 @@ endif()
 # ** Static lib ******
 
 if (TLP_BUILD_STATIC_LIB)
-  add_library(telplugins_common-static STATIC ${sources})
+  add_library(telplugins_common-static STATIC ${RRPLUGINS_COMMON_SOURCES})
 
   set_property(TARGET telplugins_common-static
       PROPERTY COMPILE_DEFINITIONS
