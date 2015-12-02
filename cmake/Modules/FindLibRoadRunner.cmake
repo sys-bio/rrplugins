@@ -39,16 +39,59 @@ if(LIBROADRUNNER_VERSION_FILE AND EXISTS "${LIBROADRUNNER_VERSION_FILE}" AND NOT
       REGEX "^[0-9]+.[0-9]+.[0-9]+")
 endif()
 
+# include dirs
 find_path(LIBROADRUNNER_INCLUDE_DIR NAMES rrRoadRunner.h
   HINTS
   ${LIBROADRUNNER_PATH}/include/rr
   )
 
-find_library(LIBROADRUNNER_LIBRARIES NAMES roadrunner
+# libraries
+find_library(LIBROADRUNNER_LIBRARY NAMES roadrunner
   HINTS
   ${LIBROADRUNNER_PATH}/lib
   )
 
+find_library(SUNDIALS_CVODE_LIBRARY NAMES sundials_cvode
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(SUNDIALS_NVECSERIAL_LIBRARY NAMES sundials_nvecserial
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(BLAS_LIBRARY NAMES blas
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(LAPACK_LIBRARY NAMES lapack
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(NLEQ_LIBRARY_STATIC NAMES nleq-static
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(RR_LIBSTRUCT_LIBRARY_STATIC NAMES rr-libstruct-static
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+find_library(POCO_FOUNDATION_LIBRARY_STATIC NAMES PocoFoundation
+  HINTS
+  ${LIBROADRUNNER_PATH}/lib
+  )
+
+set ( LIBROADRUNNER_LIBRARIES ${LIBROADRUNNER_LIBRARY} ${SUNDIALS_CVODE_LIBRARY}
+      ${SUNDIALS_NVECSERIAL_LIBRARY} ${BLAS_LIBRARY} ${LAPACK_LIBRARY} 
+      ${NLEQ_LIBRARY_STATIC} ${RR_LIBSTRUCT_LIBRARY_STATIC} 
+      ${POCO_FOUNDATION_LIBRARY_STATIC} )
+message( STATUS ${LIBROADRUNNER_LIBRARIES} )
+  
 # handle the QUIETLY and REQUIRED arguments and set LIBROADRUNNER_FOUND to TRUE if
 # all listed variables are TRUE
 include(${CMAKE_CURRENT_LIST_DIR}/FindPackageHandleStandardArgs.cmake)
