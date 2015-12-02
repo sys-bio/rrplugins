@@ -84,7 +84,7 @@ string PluginManager::getInfo() const
                 info<<"  "<<setw(25)<<left<<p->getName()<<setw(25)<<left<<p->getLibraryName()<<"\n";
             }
 
-        } while(p = getNextPlugin());
+        } while((p = getNextPlugin()));
     }
     return info.str();
 }

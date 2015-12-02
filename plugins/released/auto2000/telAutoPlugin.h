@@ -14,7 +14,7 @@ using tlp::Property;
 using std::vector;
 class AutoPlugin : public tlp::CPPPlugin
 {
-    friend AutoWorker;
+    friend class AutoWorker;
     public:
                                                 AutoPlugin();
                                                ~AutoPlugin();

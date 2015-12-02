@@ -204,7 +204,7 @@ OPEN_FP3:
         global_setubv_type = SETUBV_MPI;
         break;
 #endif
-        scheme_not_supported_error("mpi");
+        scheme_not_supported_error((char*)"mpi");
         break;
     case 't':
 #ifdef PTHREADS
@@ -229,7 +229,7 @@ OPEN_FP3:
         }
         break;
 #endif
-        scheme_not_supported_error("threads");
+        scheme_not_supported_error((char*)"threads");
         break;
     case '#':
         global_num_procs=atoi(optarg);
@@ -375,10 +375,10 @@ OPEN_FP3:
         usage_end(total_usage,"total");
 
 #endif
-        time_end(time0,"Total Time ",fp9);
+        time_end(time0,(char*)"Total Time ",fp9);
         fprintf(fp9,"----------------------------------------------");
         fprintf(fp9,"----------------------------------------------\n");
-        time_end(time1,"",fp6);
+        time_end(time1,(char*)"",fp6);
 #ifdef AUTO_CONSTRUCT_DESTRUCT
         user_destruct();
 #endif
