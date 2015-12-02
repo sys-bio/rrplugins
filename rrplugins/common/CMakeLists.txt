@@ -43,10 +43,9 @@ if (TLP_BUILD_SHARED_LIB)
   add_library(telplugins_common SHARED ${RRPLUGINS_COMMON_SOURCES})
 
   set_property(TARGET telplugins_common
-    PROPERTY  COMPILE_DEFINITIONS
+    PROPERTY COMPILE_DEFINITIONS
     EXPORT_COMMON_API
     LIBSBML_USE_CPP_NAMESPACE
-    LIBSBML_STATIC
     LIBLAX_STATIC
     STATIC_LIBSTRUCT
     STATIC_NLEQ
@@ -54,7 +53,7 @@ if (TLP_BUILD_SHARED_LIB)
     POCO_NO_AUTOMATIC_LIBS
   )
 
-  target_link_libraries (telplugins_common ${RRPLUGINS_COMMON_LIBS})
+  target_link_libraries (telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
   target_link_libraries(telplugins_common xml2)
 
@@ -70,27 +69,27 @@ if (TLP_BUILD_STATIC_LIB)
   add_library(telplugins_common-static STATIC ${RRPLUGINS_COMMON_SOURCES})
 
   set_property(TARGET telplugins_common-static
-      PROPERTY COMPILE_DEFINITIONS
-      STATIC_PLUGIN_API
-      LIBSBML_USE_CPP_NAMESPACE
-      LIBSBML_STATIC
-      LIBLAX_STATIC
-      STATIC_LIBSTRUCT
-      STATIC_NLEQ
-      POCO_STATIC
-      POCO_NO_AUTOMATIC_LIBS
-      )
+    PROPERTY COMPILE_DEFINITIONS
+    STATIC_PLUGIN_API
+    LIBSBML_USE_CPP_NAMESPACE
+    LIBSBML_STATIC
+    LIBLAX_STATIC
+    STATIC_LIBSTRUCT
+    STATIC_NLEQ
+    POCO_STATIC
+    POCO_NO_AUTOMATIC_LIBS
+  )
 
   #libraries to link with static lib
   target_link_libraries (telplugins_common-static
-      sundials_cvode
-      sundials_nvecserial
-      blas
-      lapack
-      nleq-static
-      rr-libstruct-static
-      poco_foundation-static
-      )
+    sundials_cvode
+    sundials_nvecserial
+    blas
+    lapack
+    nleq-static
+    rr-libstruct-static
+    poco_foundation-static
+    )
 
   if(WIN32)
       target_link_libraries (telplugins_common-static
