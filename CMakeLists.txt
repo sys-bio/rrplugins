@@ -5,9 +5,17 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Variables used in project
 set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
-set(TLP_ROADRUNNER_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
-set(TLP_ROADRUNNER_INSTALL_LIB_PATH ${TLP_ROADRUNNER_INSTALL_PATH}/lib)
 set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+set(TLP_DEPENDENCIES_PATH CACHE PATH "Path to TelPlugins dependencies" "")
+
+if( TLP_DEPENDENCIES_PATH STREQUAL "" )
+  message( FATAL_ERROR "Set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
+elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
+  message( FATAL_ERROR "TLP_DEPENDENCIES_PATH is missing include/Poco" )
+elseif( NOT EXISTS "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
+        IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" )
+  message( FATAL_ERROR "Could not find Foundation.h in TLP_DEPENDENCIES_PATH/include/Poco" )
+endif()
 
 # Feature selection
 set (TLP_BUILD_SHARED_LIB CACHE BOOL   "Build shared library"  ON)
@@ -20,34 +28,6 @@ set(TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 message(STATUS "Using third party library prefix of ${THIRD_PARTY_INSTALL_FOLDER}")
 message(STATUS "Installing TelluriumPlugins to ${CMAKE_INSTALL_PREFIX}")
-
-set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
-    "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
-     CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel.")
-if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
-        "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
-  CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
-endif()
-
-IF(WIN32)
-    IF(${MSVC})
-        IF(CMAKE_BUILD_TYPE MATCHES "Debug")
-            set(exe_path ${exe_path}/Debug)
-            set(lib_path ${lib_path}/Debug)
-        ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
-               set(exe_path ${exe_path}/Release)
-               set(lib_path ${lib_path}/Release)
-        ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
-    ELSE(WIN32)
-   # Linux
-    ENDIF(${MSVC})
-ENDIF(WIN32)
-
-# TODO libxml2 handling is excedingly hackish, it is all homegrown
-# manually linking crap, need to fix this!
-
-#NOTE:  if fixed here, need to make the same fix in roadrunner/CMakeLists.txt
 
 if (WIN32)
     message(STATUS "adding ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2 to include path")
