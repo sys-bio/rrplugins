@@ -121,6 +121,7 @@ include_directories(
 add_subdirectory(source)
 add_subdirectory(plugins)
 add_subdirectory(scripts)
+add_subdirectory(wrappers)
 
 if(TLP_BUILD_APPS)
     add_subdirectory(apps)
@@ -129,8 +130,6 @@ endif()
 if(TLP_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
-
-add_subdirectory(wrappers)
 
 if(TLP_BUILD_TEST_TOOLS)
   add_subdirectory(testing)
