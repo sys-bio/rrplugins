@@ -168,7 +168,7 @@ int PluginManager::load(const string& pluginName)
     if(!folderExists(mPluginFolder))
     {
         errors<<"The plugin folder: \""<<mPluginFolder<<"\" does not exist.";
-        Log(lError)<<errors.str();
+        RRPLOG(lError)<<errors.str();
         mLoadPluginErrors << errors.str();
         throw(Exception(errors.str()));
     }
@@ -192,20 +192,20 @@ int PluginManager::load(const string& pluginName)
     for (; it != files.end(); ++it)
     {
         string plugin = getFileName(*it);
-        Log(lInfo)<<"Loading plugin: "<<plugin;
+        RRPLOG(lInfo)<<"Loading plugin: "<<plugin;
         try
         {
             bool res = loadPlugin(plugin);
             if(!res)
             {
-                Log(lError)<<"There was a problem loading plugin: "<<plugin;
+                RRPLOG(lError)<<"There was a problem loading plugin: "<<plugin;
                 continue;
             }
             nrOfLoadedPlugins++;
         }
         catch(...)
         {
-            Log(lError)<<"There was a serious problem loading plugin: "<<plugin;
+            RRPLOG(lError)<<"There was a serious problem loading plugin: "<<plugin;
         }
     }
     return nrOfLoadedPlugins;
@@ -232,7 +232,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         if(getPlugin(libName))
         {
             info<<"The Plugin: "<<libName<<" is already loaded";
-            Log(lWarning)<<info.str();
+            RRPLOG(lWarning)<<info.str();
             //throw(info.str());
             return true; //Don't make this an error..
         }
@@ -307,7 +307,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
         info<<"Plugin loading exception: "<<msg;
         mLoadPluginErrors<<info.str();
-        Log(lError)<<info.str();
+        RRPLOG(lError)<<info.str();
         return false;
     }
     catch(const Exception& e)
@@ -315,7 +315,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
         info<<"Exception: "<<e.what()<<endl;
         mLoadPluginErrors<<info.str();
-        Log(lError)<<info.str();
+        RRPLOG(lError)<<info.str();
         return false;
     }
     catch(const Poco::Exception& ex)
@@ -323,7 +323,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
         info<<"POCO Exception: "<<ex.displayText()<<endl;
         mLoadPluginErrors<<info.str();
-        Log(lError)<<info.str();
+        RRPLOG(lError)<<info.str();
         return false;
     }
     catch(...)
@@ -331,7 +331,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;        
         info<<"Unknown error occured attempting to load plugin"<<_libName;
         mLoadPluginErrors<<info.str();
-        Log(lError)<<info.str();
+        RRPLOG(lError)<<info.str();
         return false;
     }
 }
@@ -426,7 +426,7 @@ bool PluginManager::checkImplementationLanguage(Poco::SharedLibrary* plugin)
     {
         stringstream msg;
         msg<<"Poco exception: "<<ex.displayText()<<endl;
-        Log(lError)<<msg.str();
+        RRPLOG(lError)<<msg.str();
         return false;
     }
 }
@@ -443,7 +443,7 @@ const char* PluginManager::getImplementationLanguage(Poco::SharedLibrary* plugin
     {
         stringstream msg;
         msg<<"Poco exception: "<<ex.displayText()<<endl;
-        Log(lError)<<msg.str();
+        RRPLOG(lError)<<msg.str();
         return NULL;
     }
 }

@@ -524,7 +524,7 @@ inline void Property<Properties>::setValue(const Properties& val)
 template<>
 inline void Property<Properties>::setValueFromString(const string& val)
 {
-    Log(lError)<<"Trying to set Properties container by a string. This is not implemented!";
+    RRPLOG(lError)<<"Trying to set Properties container by a string. This is not implemented!";
 }
 
 template<>
@@ -634,7 +634,7 @@ inline void Property< ls::Matrix<double> >::setValue(const void* val)
 template<>
 inline void Property< ls::Matrix<double> >::setValueFromString(const string& val)
 {
-    Log(lError)<<"Trying to set Properties container by a string. This is not implemented!";
+    RRPLOG(lError)<<"Trying to set Properties container by a string. This is not implemented!";
 }
 
 template<>

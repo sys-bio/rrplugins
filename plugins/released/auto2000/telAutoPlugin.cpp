@@ -163,7 +163,7 @@ string AutoPlugin::getResult()
 
 bool AutoPlugin::execute(bool inThread)
 {
-    Log(lInfo)<<"Executing the AutoPlugin plugin";
+    RRPLOG(lInfo)<<"Executing the AutoPlugin plugin";
 
     //Tempfolder setup
     if(getTempFolder() == ".")

@@ -36,7 +36,7 @@ The TestModel plugin was developed at the University of Washington by Totte Karl
     }
     catch(const exception& ex)
     {
-        Log(lError)<<"There was a problem in the TestModel plugin: "<<ex.what();
+        RRPLOG(lError)<<"There was a problem in the TestModel plugin: "<<ex.what();
     }
 }
 
@@ -55,7 +55,7 @@ unsigned int TestModel::getPDFManualByteSize()
 
 bool TestModel::execute(bool inThread)
 {
-    Log(lDebug)<<"Executing the TestModel plugin by Totte Karlsson";
+    RRPLOG(lDebug)<<"Executing the TestModel plugin by Totte Karlsson";
     RoadRunner rr;
     rr.load(mModel);
 

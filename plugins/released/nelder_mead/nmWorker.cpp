@@ -41,7 +41,7 @@ void nmWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -59,16 +59,16 @@ void nmWorker::run()
     setupRoadRunner();
 
     StringList& species = mHost.mExperimentalDataSelectionList.getValueReference();
-    Log(lInfo)<<"The following species are selected: "<<species.asString();
+    RRPLOG(lInfo)<<"The following species are selected: "<<species.asString();
 
     Properties& inParas  =  mHost.mInputParameterList.getValueReference();
     Properties& outParas =  mHost.mOutputParameterList.getValueReference();
     int         nrOfParameters = inParas.count();
 
-    Log(lInfo)<<"The following parameters are to be minimized";
+    RRPLOG(lInfo)<<"The following parameters are to be minimized";
     for(int i = 0; i < nrOfParameters; i++)
     {
-        Log(lInfo)<<inParas[i]->getName()<<" with initial value: "<<inParas[i]->getValueAsString();
+        RRPLOG(lInfo)<<inParas[i]->getName()<<" with initial value: "<<inParas[i]->getValueAsString();
     }
 
     mHost.mNrOfIter.setValue(0);
@@ -108,21 +108,21 @@ void nmWorker::run()
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The Nelder-Mead minimization was terminated.. aborting";
+        RRPLOG(lInfo)<<"The Nelder-Mead minimization was terminated.. aborting";
         workerFinished();
         return;
     }
 
     //Post fitting data calculations
-    Log(lDebug)<<"==================== Fitting Result ================================";
-    Log(lDebug)<<"Nr of function evaluations: "  <<  mHost.mNrOfIter.getValue();
-    Log(lDebug)<<"Minimized parameter values: ";
+    RRPLOG(lDebug)<<"==================== Fitting Result ================================";
+    RRPLOG(lDebug)<<"Nr of function evaluations: "  <<  mHost.mNrOfIter.getValue();
+    RRPLOG(lDebug)<<"Minimized parameter values: ";
     for (int i = 0; i < inParas.count(); ++i)
     {
-        Log(lDebug)<<"\t"<<outParas[i]->getName()<<" = "<< outParas[i]->getValueAsString();
+        RRPLOG(lDebug)<<"\t"<<outParas[i]->getName()<<" = "<< outParas[i]->getValueAsString();
     }
 
-    Log(lDebug)<<"Final Norm:  "<<mHost.mNorm.getValue();
+    RRPLOG(lDebug)<<"Final Norm:  "<<mHost.mNorm.getValue();
     postFittingWork();
     workerFinished();
 }
@@ -181,7 +181,7 @@ void nmWorker::postFittingWork()
     }
     catch(...)
     {
-        Log(lError) << "There was problems calculating fit statistics";
+        RRPLOG(lError) << "There was problems calculating fit statistics";
     }
 
 }
@@ -220,13 +220,13 @@ void nmWorker::calculateChiSquare()
     mHost.mChiSquare.setValue(chiSquare->getValue());
     mHost.mReducedChiSquare.setValue(rChiSquare->getValue());
 
-    Log(lDebug)<<"Chi Square = "<<chiSquare->getValue();
-    Log(lDebug)<<"Reduced Chi Square = "<<rChiSquare->getValue();
+    RRPLOG(lDebug)<<"Chi Square = "<<chiSquare->getValue();
+    RRPLOG(lDebug)<<"Reduced Chi Square = "<<rChiSquare->getValue();
 }
 
 double nmWorker::getChi(const Properties& parameters)
 {
-    Log(lDebug)<<"Getting chisquare using parameters: "<<parameters;
+    RRPLOG(lDebug)<<"Getting chisquare using parameters: "<<parameters;
     //Reset RoadRunner
     mHost.mRRI->reset();
 
@@ -445,7 +445,7 @@ void nmWorker::createResidualsData(TelluriumData* _data)
                 }
                 else
                 {
-                    Log(lError)<<"Problem with column names when creating residual data!";
+                    RRPLOG(lError)<<"Problem with column names when creating residual data!";
                 }
             }
         }

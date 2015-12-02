@@ -61,7 +61,7 @@ bool AddNoise::isWorking() const
 
 bool AddNoise::execute(bool inThread)
 {
-    Log(lDebug)<<"Executing the AddNoise plugin by Totte Karlsson";
+    RRPLOG(lDebug)<<"Executing the AddNoise plugin by Totte Karlsson";
 
     //go away and carry out the work in a thread
     return mAddNoiseWorker.start(inThread);

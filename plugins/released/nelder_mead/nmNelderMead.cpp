@@ -207,7 +207,7 @@ bool NelderMead::execute(bool inThread)
     stringstream msg;
     try
     {
-        Log(lInfo)<<"Executing the Nelder-Mead plugin";
+        RRPLOG(lInfo)<<"Executing the Nelder-Mead plugin";
         mWorker.start(inThread);
         return true;
     }

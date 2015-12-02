@@ -210,11 +210,11 @@ COMMON_DECLSPEC Poco::Logger& getLogger();
 #define gLog Logger()
 
 #ifndef NO_LOGGER
-    #define Log(level) \
+    #define RRPLOG(level) \
         if (level > tlp::Logger::getLevel()) { ; } \
         else tlp::LoggingBuffer(level, __FILE__, __LINE__).stream()
 #else
-    #define Log(level) \
+    #define RRPLOG(level) \
         if (true) {  }\
         else \
         LoggingBuffer(level, __FILE__, __LINE__)

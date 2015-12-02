@@ -94,19 +94,19 @@ begin
   
   if RegQueryStringValue(HKEY_LOCAL_MACHINE, pyReg, '', InstallPath) then
     begin
-    Log('HKLM pyReg: '+ InstallPath);
+    RRPLOG('HKLM pyReg: '+ InstallPath);
     Result := InstallPath + 'Lib\site-packages\';
     end
   else
   if RegQueryStringValue(HKEY_CURRENT_USER, pyReg, '', InstallPath) then
     begin
-    Log('HKCU pyReg: '+ InstallPath);
+    RRPLOG('HKCU pyReg: '+ InstallPath);
     Result := InstallPath + 'Lib\site-packages\'; 
     end
   else
   if RegQueryStringValue(HKEY_LOCAL_MACHINE, pyRegWow6443Node, '', InstallPath) then
     begin
-    Log('HKLM pyRegWow6443Node: '+ InstallPath);
+    RRPLOG('HKLM pyRegWow6443Node: '+ InstallPath);
     Result := InstallPath + 'Lib\site-packages\';
     end
   else
@@ -157,10 +157,10 @@ begin
   //if isInstalled('{#Py}\PythonCore','{#PyVer}') then
   if IsPythonInstalled() then
   begin
-    Log('Python: ' + 'True');
+    RRPLOG('Python: ' + 'True');
     //Python must be installed, get its path
     DefaultAppDirName := GetPathForPythonSitePackages() + AppDir;
-    Log('SetDefaultAppDirName: ' + DefaultAppDirName);    
+    RRPLOG('SetDefaultAppDirName: ' + DefaultAppDirName);    
   end;
 
   Result := True; //Required for fwd progress, false would exist
@@ -171,5 +171,5 @@ procedure InitializeWizard();
 begin
   //Python must be installed, get its path
   DefaultAppDirName := GetPathForPythonSitePackages() + AppDir;
-  Log('SetDefaultAppDirName: ' + DefaultAppDirName);
+  RRPLOG('SetDefaultAppDirName: ' + DefaultAppDirName);
 end;

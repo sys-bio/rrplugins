@@ -93,18 +93,18 @@ bool Stat::execute(bool inThread)
 {
     try
     {
-        Log(lInfo)<<"Executing the Stat plugin";
+        RRPLOG(lInfo)<<"Executing the Stat plugin";
         mWorker.start(inThread);
         return true;
     }
     catch(const Exception& ex)
     {
-        Log(lError) << "There was a problem in the execute of the Stat plugin: " << ex.getMessage();
+        RRPLOG(lError) << "There was a problem in the execute of the Stat plugin: " << ex.getMessage();
         throw(ex);
     }
     catch(...)
     {
-        Log(lError) << "There was an unknown problem in the execute of the StatFIT plugin.";
+        RRPLOG(lError) << "There was an unknown problem in the execute of the StatFIT plugin.";
         throw("There was an unknown problem in the execute of the StatFIT plugin.");
     }
 }

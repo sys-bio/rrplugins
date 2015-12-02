@@ -62,8 +62,8 @@ int main()
         PluginManager PM("..\\plugins");
         PM.load();
 
-        Log(lInfo) << "The following plugins are loaded";
-        Log(lInfo) << PM.getPluginNames();
+        RRPLOG(lInfo) << "The following plugins are loaded";
+        RRPLOG(lInfo) << PM.getPluginNames();
 
         Plugin* model = PM.getPlugin("SBMLModel");
         if(!model)
@@ -89,11 +89,11 @@ int main()
     }
     catch(const rr::Exception& e)
     {
-        Log(lError) << "There was a problem: " << e.what();
+        RRPLOG(lError) << "There was a problem: " << e.what();
     }
     catch(const tlp::Exception& e)
     {
-        Log(lError) << "There was a problem: " << e.what();
+        RRPLOG(lError) << "There was a problem: " << e.what();
     }
 
 

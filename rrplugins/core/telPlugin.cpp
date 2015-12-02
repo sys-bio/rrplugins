@@ -47,7 +47,7 @@ void Plugin::terminate()
 {
     if(!mIsWorking)
     {
-        Log(lWarning) << "Can't terminate a non working plugin..";
+        RRPLOG(lWarning) << "Can't terminate a non working plugin..";
         return;
     }
     mTerminate = true;

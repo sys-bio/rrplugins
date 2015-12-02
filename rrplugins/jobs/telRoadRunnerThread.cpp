@@ -57,7 +57,7 @@ void RoadRunnerThread::start(RoadRunner* instance)
 
     if(mIsWorking)
     {
-        Log(lError)<<"Tried to start a working thread!";
+        RRPLOG(lError)<<"Tried to start a working thread!";
         return ;
     }
 

@@ -32,7 +32,7 @@ bool AutoWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return false;
         }
 
@@ -55,7 +55,7 @@ void AutoWorker::run()
 
     if(!setupAuto())
     {
-        Log(lError)<<"Failed to setup auto..";
+        RRPLOG(lError)<<"Failed to setup auto..";
         if(mTheHost.hasFinishedEvent())
         {
             pair<void*, void*> passTroughData = mTheHost.getWorkFinishedData();
@@ -156,7 +156,7 @@ bool AutoWorker::setupAuto()
 	//mRRAuto.setPreSimulation(mTheHost.mPreSimulation.getValue());
 
     string str = mRRAuto.getConstantsAsString();
-    Log(lInfo)<<str;
+    RRPLOG(lInfo)<<str;
     return true;
 }
 

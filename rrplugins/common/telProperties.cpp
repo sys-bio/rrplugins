@@ -231,7 +231,7 @@ string Properties::asXML()
     int buffersize;
     xmlDocDumpFormatMemory(doc, &xmlbuff, &buffersize, 1);
 
-    Log(lDebug)<<(char*) xmlbuff;
+    RRPLOG(lDebug)<<(char*) xmlbuff;
 
     string xml = xmlbuff != NULL ? string((char*) xmlbuff) : string("");
     xmlFreeDoc(doc);

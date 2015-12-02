@@ -93,7 +93,7 @@ void LoadModelThread::worker()
             Mutex::ScopedLock lock(mJobsMutex);
             if(mJobs.size() == 0)
             {
-                Log(tlp::lDebug5)<<"Waiting for jobs in loadSBML worker";
+                RRPLOG(tlp::lDebug5)<<"Waiting for jobs in loadSBML worker";
                 //mJobsCondition.wait(mJobsMutex);
                 break;
             }
@@ -113,7 +113,7 @@ void LoadModelThread::worker()
         //Do the job
         if(rri)
         {
-            Log(lDebug2)<<"Loading model into instance: "<<rri->getInstanceID();
+            RRPLOG(lDebug2)<<"Loading model into instance: "<<rri->getInstanceID();
             if(mModelFileName.size())
             {
                 rri->load(mModelFileName, &mLoadSBMLOptions);
@@ -125,11 +125,11 @@ void LoadModelThread::worker()
         }
         else
         {
-            Log(lError)<<"Null job pointer...!";
+            RRPLOG(lError)<<"Null job pointer...!";
         }
     }
 
-    Log(lDebug)<<"Exiting Load Model thread: "<<mThread.id();
+    RRPLOG(lDebug)<<"Exiting Load Model thread: "<<mThread.id();
     mIsWorking  = false;
     Mutex::ScopedLock lock2(mNrOfWorkersMutex);
     mNrOfWorkers--;

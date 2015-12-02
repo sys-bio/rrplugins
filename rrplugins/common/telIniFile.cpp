@@ -30,7 +30,7 @@ mAutoCreateSections(1)
 	if(mIniFileName.size() > 2 && autoLoad == true)
 	{
 		Load();	//Load all sections and keys upon creation...
-		Log(lDebug3)<<"Loaded file: " << mIniFileName.Get();
+		RRPLOG(lDebug3)<<"Loaded file: " << mIniFileName.Get();
 	}
 }
 
@@ -96,20 +96,20 @@ bool IniFile::Load(const string& newfName)
 
 	if(mIniFileName.size() < 1)
 	{
-									Log(Logger::LOG_ERROR)<<"Ini file name is not set!";
+									RRPLOG(Logger::LOG_ERROR)<<"Ini file name is not set!";
 		return false;
 	}
 	else
 	{
-									Log(lDebug3)<<"Loading IniFile: " <<mIniFileName.Get();
+									RRPLOG(lDebug3)<<"Loading IniFile: " <<mIniFileName.Get();
 	}
 
     if(!fileExists(mIniFileName))
     {
-									Log(lDebug2)<<"The ini file: \"" <<mIniFileName.Get()<<"\" does not exist. It will be created";
+									RRPLOG(lDebug2)<<"The ini file: \"" <<mIniFileName.Get()<<"\" does not exist. It will be created";
         if(!createFile(mIniFileName))
         {
-    								Log(Logger::LOG_ERROR)<<"Failed to create ini file.. returning..";
+    								RRPLOG(Logger::LOG_ERROR)<<"Failed to create ini file.. returning..";
             return false;
         }
 	}
@@ -119,12 +119,12 @@ bool IniFile::Load(const string& newfName)
 	file.open(fName.c_str(), ios::in|ios::out);
 	if(file.fail())
     {
-    								Log(Logger::LOG_ERROR)<<"Opening file caused failbit to be set";
+    								RRPLOG(Logger::LOG_ERROR)<<"Opening file caused failbit to be set";
     }
 
 	if (!file.is_open() )
 	{
-									Log(Logger::LOG_ERROR)<<"The ini file: '" <<mIniFileName<<"' could not be opened";
+									RRPLOG(Logger::LOG_ERROR)<<"The ini file: '" <<mIniFileName<<"' could not be opened";
 		return false;
 	}
 	else
@@ -162,7 +162,7 @@ bool IniFile::Load(const string& newfName)
 				Line.erase( 0, 1 );
 				Line.erase( Line.find_last_of(']'), 1 );
 				pSection = GetSection(Line, true);
-            	Log(lDebug3)<<"Located section: " + pSection->mName;
+            	RRPLOG(lDebug3)<<"Located section: " + pSection->mName;
 				Comment = string("");
 			}
 			else if ( Line.size() > 0 ) // we have a key, add this key/value pair
@@ -185,12 +185,12 @@ bool IniFile::Load(const string& newfName)
 					if(pSection)
 					{
 						WriteValue(Key, Value, Comment, pSection->mName);
-						Log(lDebug5)<<Key << " = "  <<Value;
+						RRPLOG(lDebug5)<<Key << " = "  <<Value;
 					}
 					else
 					{
-                		Log(lDebug5)<<Key << " = " << Value;
-						Log(lWarning)<<"No section for key"<<Key<<". Key was ignored..";
+                		RRPLOG(lDebug5)<<Key << " = " << Value;
+						RRPLOG(lWarning)<<"No section for key"<<Key<<". Key was ignored..";
 					}
 					Comment = string("");
 				}
@@ -200,7 +200,7 @@ bool IniFile::Load(const string& newfName)
 					{
 						WriteNonKey(Line, pSection->mName);
 					}
-					Log(lDebug5)<<"Read NonKey on line: " << lines;
+					RRPLOG(lDebug5)<<"Read NonKey on line: " << lines;
 				}
 			}
 		}
@@ -226,30 +226,30 @@ IniSection* IniFile::LoadSection(const string& theSection)
     IniSection* pSection = NULL;
 	if(mIniFileName.size() < 1)
 	{
-									Log(Logger::LOG_ERROR)<<"Ini file name is not set!";
+									RRPLOG(Logger::LOG_ERROR)<<"Ini file name is not set!";
 		return NULL;
 	}
 	else
 	{
-									Log(lDebug3)<<"Loading IniFile: " <<mIniFileName.Get();
+									RRPLOG(lDebug3)<<"Loading IniFile: " <<mIniFileName.Get();
 	}
 
     fstream file;
     if(!fileExists(mIniFileName))
     {
-									Log(lDebug2)<<"The ini file: \"" <<mIniFileName.Get()<<"\" does not exist. It will be created";
+									RRPLOG(lDebug2)<<"The ini file: \"" <<mIniFileName.Get()<<"\" does not exist. It will be created";
 	}
 
 	string fName(mIniFileName);
 	file.open(fName.c_str(), ios::in|ios::out);
 	if(file.fail())
     {
-    								Log(Logger::LOG_ERROR)<<"Opening file caused failbit to be set";
+    								RRPLOG(Logger::LOG_ERROR)<<"Opening file caused failbit to be set";
     }
 
 	if (!file.is_open() )
 	{
-									Log(Logger::LOG_ERROR)<<"The ini file: '" <<mIniFileName<<"' could not be opened";
+									RRPLOG(Logger::LOG_ERROR)<<"The ini file: '" <<mIniFileName<<"' could not be opened";
 		return NULL;
 	}
 	else
@@ -291,7 +291,7 @@ IniSection* IniFile::LoadSection(const string& theSection)
                 {
     				CreateSection(Line, Comment);
 	    			pSection = GetSection(Line);
-										Log(lDebug3)<<"Located ini section: " + pSection->mName;
+										RRPLOG(lDebug3)<<"Located ini section: " + pSection->mName;
 				    Comment = string("");
                     bDone = true;
                 }
@@ -306,12 +306,12 @@ IniSection* IniFile::LoadSection(const string& theSection)
 					if(pSection)
 					{
 						WriteValue(Key, Value, Comment, pSection->mName);
-										Log(lDebug5)<<"Read Key " + Key + " Value = " + Value;
+										RRPLOG(lDebug5)<<"Read Key " + Key + " Value = " + Value;
 					}
 					else
 					{
-										Log(lDebug5)<<"Read Key " + Key + " Value = " + Value;
-										Log(lWarning)<<"No section for key" + Key + ". Key was ignored..";
+										RRPLOG(lDebug5)<<"Read Key " + Key + " Value = " + Value;
+										RRPLOG(lWarning)<<"No section for key" + Key + ". Key was ignored..";
 					}
 					Comment = string("");
 				}
@@ -320,7 +320,7 @@ IniSection* IniFile::LoadSection(const string& theSection)
 					if(pSection)
 					{
 						WriteNonKey(Key, pSection->mName);
-						Log(lDebug5)<<"Read a NonKey: " + Key;
+						RRPLOG(lDebug5)<<"Read a NonKey: " + Key;
 					}
 				}
 			}
@@ -349,7 +349,7 @@ bool IniFile::Save(ios_base::openmode openMode)
 {
 	if ( mIniFileName.size() == 0 )
 	{
-		Log(Logger::LOG_ERROR)<<"No filename has been set. Can't save..";
+		RRPLOG(Logger::LOG_ERROR)<<"No filename has been set. Can't save..";
 		return false;
 	}
 
@@ -400,14 +400,14 @@ bool IniFile::Save(ios_base::openmode openMode)
 	}
 	else
 	{
-		Log(Logger::LOG_ERROR)<<"[IniFile::Save] Unable to save file.";
+		RRPLOG(Logger::LOG_ERROR)<<"[IniFile::Save] Unable to save file.";
 		return false;
 	}
 
 	mIsDirty = false;
 	aFstream.flush();
 	aFstream.close();
-								Log(lDebug3)<<"IniFile was saved";
+								RRPLOG(lDebug3)<<"IniFile was saved";
 	return true;
 }
 
@@ -739,7 +739,7 @@ bool IniFile::CreateSection(const string& Section, const string& mComment)
 
 	if ( pSection )
 	{
-		Log(lDebug5)<<"[IniFile::CreateSection] Section "<<Section.c_str()<<" already exists. Aborting.";
+		RRPLOG(lDebug5)<<"[IniFile::CreateSection] Section "<<Section.c_str()<<" already exists. Aborting.";
 		return false;
 	}
 

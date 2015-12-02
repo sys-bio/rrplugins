@@ -27,7 +27,7 @@ void ChiWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -48,7 +48,7 @@ void ChiWorker::run()
     {
         //user did set the terminate flag to true.. discard any data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The ChiWorker was terminated.. aborting";
+        RRPLOG(lInfo)<<"The ChiWorker was terminated.. aborting";
         workerFinished();
         return;
     }
@@ -81,8 +81,8 @@ void ChiWorker::run()
     redChiSquare = chi/degreeOfFreedom;
 
 
-    Log(lInfo)<<"Chi Square = "<<chiSquare;
-    Log(lInfo)<<"Reduced Chi Square = "<<redChiSquare;
+    RRPLOG(lInfo)<<"Chi Square = "<<chiSquare;
+    RRPLOG(lInfo)<<"Reduced Chi Square = "<<redChiSquare;
 
     //Post fitting data calculations
     workerFinished();

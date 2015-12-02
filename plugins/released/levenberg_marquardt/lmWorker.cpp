@@ -42,7 +42,7 @@ void lmWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -60,13 +60,13 @@ void lmWorker::run()
     setupRoadRunner();
 
     StringList& species = mTheHost.mExperimentalDataSelectionList.getValueReference();//mMinData.getExperimentalDataSelectionList();
-    Log(lInfo)<<"The following species are selected: "<<species.asString();
+    RRPLOG(lInfo)<<"The following species are selected: "<<species.asString();
 
     Properties& Paras =  mTheHost.mInputParameterList.getValueReference(); //mMinData.getProperties();
-    Log(lInfo)<<"The following parameters are to be minimized";
+    RRPLOG(lInfo)<<"The following parameters are to be minimized";
     for(int i = 0; i < Paras.count(); i++)
     {
-        Log(lInfo)<<Paras[i]->getName()<<" with initial value: "<<Paras[i]->getValueAsString();
+        RRPLOG(lInfo)<<Paras[i]->getName()<<" with initial value: "<<Paras[i]->getValueAsString();
     }
 
     mTheHost.mNrOfIter.setValue(0);
@@ -102,25 +102,25 @@ void lmWorker::run()
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The minimization was terminated.. aborting";
+        RRPLOG(lInfo)<<"The minimization was terminated.. aborting";
         workerFinished();
         return;
     }
 
     //Post fitting data calculations
-    Log(lInfo)<<"==================== Fitting Result ================================";
-    Log(lInfo)<<"Nr of function evaluations: "  <<  mTheHost.mLMStatus.nfev;
-    Log(lInfo)<<"Status message: "              <<  lm_infmsg[mTheHost.mLMStatus.outcome];
-    Log(lInfo)<<"Minimized parameter values: ";
+    RRPLOG(lInfo)<<"==================== Fitting Result ================================";
+    RRPLOG(lInfo)<<"Nr of function evaluations: "  <<  mTheHost.mLMStatus.nfev;
+    RRPLOG(lInfo)<<"Status message: "              <<  lm_infmsg[mTheHost.mLMStatus.outcome];
+    RRPLOG(lInfo)<<"Minimized parameter values: ";
 
     mTheHost.mStatusMessage.setValueFromString(lm_infmsg[mTheHost.mLMStatus.outcome]);
 
     for (int i = 0; i < mLMData.nrOfParameters; ++i)
     {
-        Log(lInfo)<<"Parameter "<<mLMData.parameterLabels[i]<<" = "<< mLMData.parameters[i];
+        RRPLOG(lInfo)<<"Parameter "<<mLMData.parameterLabels[i]<<" = "<< mLMData.parameters[i];
     }
 
-    Log(lInfo)<<"Norm:  "<<mTheHost.mLMStatus.fnorm;
+    RRPLOG(lInfo)<<"Norm:  "<<mTheHost.mLMStatus.fnorm;
     postFittingWork();
     workerFinished();
 }
@@ -135,7 +135,7 @@ void lmWorker::postFittingWork()
         parsOut.add(new Property<double>(mLMData.parameters[i], mLMData.parameterLabels[i], ""), true);
     }
 
-    Log(lError) <<"Parameters out.."<<parsOut;
+    RRPLOG(lError) <<"Parameters out.."<<parsOut;
     //Set the norm property
     mTheHost.mNorm.setValue(mTheHost.mLMStatus.fnorm);
 
@@ -176,7 +176,7 @@ void lmWorker::postFittingWork()
     }
     catch(...)
     {
-        Log(lError) << "There was problems calculating fit statistics";
+        RRPLOG(lError) << "There was problems calculating fit statistics";
     }
 
 }
@@ -212,13 +212,13 @@ void lmWorker::calculateChiSquare()
     mTheHost.mChiSquare.setValue(chiSquare->getValue());
     mTheHost.mReducedChiSquare.setValue(rChiSquare->getValue());
 
-    Log(lInfo)<<"Chi Square = "<<chiSquare->getValue();
-    Log(lInfo)<<"Reduced Chi Square = "<<rChiSquare->getValue();
+    RRPLOG(lInfo)<<"Chi Square = "<<chiSquare->getValue();
+    RRPLOG(lInfo)<<"Reduced Chi Square = "<<rChiSquare->getValue();
 }
 
 double lmWorker::getChi(const Properties& parameters)
 {
-    Log(lDebug)<<"Getting chisquare using parameters: "<<parameters;
+    RRPLOG(lDebug)<<"Getting chisquare using parameters: "<<parameters;
     //Reset RoadRunner
     reset(mRRI);
 
@@ -549,7 +549,7 @@ void lmWorker::createResidualsData(TelluriumData* _data)
                 }
                 else
                 {
-                    Log(lError)<<"Problem with column names when creating residual data!";
+                    RRPLOG(lError)<<"Problem with column names when creating residual data!";
                 }
             }
         }

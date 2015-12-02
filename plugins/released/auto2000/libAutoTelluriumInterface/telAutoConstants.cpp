@@ -122,15 +122,15 @@ void AutoConstants::populateFrom(Properties* props)
     }
     catch(Exception&)
     {                   
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
     catch(const std::bad_cast&)
     {
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
     catch(...)
     {
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
 
 

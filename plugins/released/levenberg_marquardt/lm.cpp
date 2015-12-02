@@ -200,7 +200,7 @@ bool LM::execute(bool inThread)
     stringstream msg;
     try
     {
-        Log(lInfo)<<"Executing the Levenberg-Marquardt plugin";
+        RRPLOG(lInfo)<<"Executing the Levenberg-Marquardt plugin";
         mWorker.start(inThread);
         return true;
     }

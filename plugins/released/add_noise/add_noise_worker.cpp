@@ -21,7 +21,7 @@ bool AddNoiseWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start a working thread!";
+            RRPLOG(lError)<<"Tried to start a working thread!";
             return false;
         }
 

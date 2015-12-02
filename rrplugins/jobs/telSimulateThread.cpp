@@ -100,20 +100,20 @@ void SimulateThread::worker()
         //Do the job
         if(rri)
         {
-            Log(lInfo)<<"Simulating RR instance: "<<rri->getInstanceID();
+            RRPLOG(lInfo)<<"Simulating RR instance: "<<rri->getInstanceID();
 
             if(!rri->simulate())
             {
-                Log(lError)<<"Failed simulating instance: "<<rri->getInstanceID();
+                RRPLOG(lError)<<"Failed simulating instance: "<<rri->getInstanceID();
             }
         }
         else
         {
-            Log(lError)<<"Null job pointer...!";
+            RRPLOG(lError)<<"Null job pointer...!";
         }
     }
 
-    Log(lDebug)<<"Exiting Simulate thread: "<<mThread.id();
+    RRPLOG(lDebug)<<"Exiting Simulate thread: "<<mThread.id();
 
     mIsWorking  = false;
     Mutex::ScopedLock lock2(mNrOfWorkersMutex);

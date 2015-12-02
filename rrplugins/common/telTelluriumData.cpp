@@ -338,7 +338,7 @@ void TelluriumData::setData(const DoubleMatrix& theData)
 	for (int k = 0; k < theData.getColNames().size(); ++k) {
 		mColumnNames.add(theData.getColNames().at(k));
 	}
-    Log(Logger::LOG_DEBUG) << "Simulation Data =========== \n" << mTheData;
+    RRPLOG(Logger::LOG_DEBUG) << "Simulation Data =========== \n" << mTheData;
     check();
 }
 
@@ -346,7 +346,7 @@ bool TelluriumData::check() const
 {
     if(mTheData.CSize() != mColumnNames.size())
     {
-        Log(Logger::LOG_ERROR)<<"Number of columns ("<<mTheData.CSize()<<") in simulation data is not equal to number of columns in column header ("<<mColumnNames.size()<<")";
+        RRPLOG(Logger::LOG_ERROR)<<"Number of columns ("<<mTheData.CSize()<<") in simulation data is not equal to number of columns in column header ("<<mColumnNames.size()<<")";
         return false;
     }
     return true;
@@ -362,12 +362,12 @@ bool TelluriumData::readCSV(const string& fName)
     vector<string> lines = getLinesInFile(fName.c_str());
     if(!lines.size())
     {
-        Log(Logger::LOG_ERROR)<<"Failed reading/opening file "<<fName;
+        RRPLOG(Logger::LOG_ERROR)<<"Failed reading/opening file "<<fName;
         return false;
     }
 
     mColumnNames = splitString(lines[0], ",");
-    Log(lInfo) << toString(mColumnNames);
+    RRPLOG(lInfo) << toString(mColumnNames);
 
     mTheData.resize(lines.size() -1, mColumnNames.size());
 
@@ -390,7 +390,7 @@ bool TelluriumData::write(const string& fileName) const
     {
         stringstream s;
         s<<"Failed opening file: "<<fileName;
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -399,7 +399,7 @@ bool TelluriumData::write(const string& fileName) const
 
         stringstream s;
         s<<"Can't write data.. the dimension of the header don't agree with nr of cols of data";
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -415,7 +415,7 @@ bool TelluriumData::read(const string& fileName)
     {
         stringstream s;
         s<<"Failed opening file: "<<fileName;
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -429,7 +429,7 @@ ostream& operator << (ostream& ss, const TelluriumData& data)
     //Check that the dimensions of col header and data is ok
     if(!data.check())
     {
-        Log(Logger::LOG_ERROR)<<"Can't write data.. the dimension of the header don't agree with nr of cols of data";
+        RRPLOG(Logger::LOG_ERROR)<<"Can't write data.. the dimension of the header don't agree with nr of cols of data";
         return ss;
     }
 
@@ -531,7 +531,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
         stringstream s;
         s<<"Tellurium data file is missing section: [INFO]. Exiting reading file...";
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -542,7 +542,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
         stringstream s;
         s<<"Tellurium data file is missing ini key: COLUMN_HEADERS. Exiting reading file...";
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -556,7 +556,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
         stringstream s;
         s<<"Tellurium data file is missing ini key: COMMENTS..";
-        Log(lDebug3)<<s.str();
+        RRPLOG(lDebug3)<<s.str();
     }
     else
     {
@@ -569,7 +569,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
         stringstream s;
         s<<"Tellurium data file is missing section: [ARRAYED_PARAMETER].";
-        Log(lDebug3)<<s.str();
+        RRPLOG(lDebug3)<<s.str();
     }
     //Todo: implement reading of an arrayed parameter..
 
@@ -580,7 +580,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
        stringstream s;
        s<<"Tellurium data file is missing ini key: NUMBER_OF_COLS and/or NUMBER_OF_ROWS. Exiting reading file...";
-       Log(Logger::LOG_ERROR)<<s.str();
+       RRPLOG(Logger::LOG_ERROR)<<s.str();
        throw(Exception(s.str()));
     }
 
@@ -593,7 +593,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
        stringstream s;
        s<<"Tellurium data format error: NUMBER_OF_COLS ("<<cDim<<") don't correspond to number of column headers ("<<colNames.size()<<").";
-       Log(Logger::LOG_ERROR)<<s.str();
+       RRPLOG(Logger::LOG_ERROR)<<s.str();
        throw(Exception(s.str()));
     }
 
@@ -605,7 +605,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     {
         stringstream s;
         s<<"Tellurium data file is missing ini section: DATA. Exiting reading file...";
-        Log(Logger::LOG_ERROR)<<s.str();
+        RRPLOG(Logger::LOG_ERROR)<<s.str();
         throw(Exception(s.str()));
     }
 
@@ -621,7 +621,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
 
         for(int col = 0; col < cDim; col++)
         {
-            Log(lDebug5)<<"Word "<<aLine[col];
+            RRPLOG(lDebug5)<<"Word "<<aLine[col];
             double value = toDouble(trim(aLine[col],' '));
             data(row, col) = value;
         }
@@ -631,7 +631,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
     IniSection* weightsSection = ini.GetSection("WEIGHTS");
     if(!weightsSection)    //Optional
     {
-        Log(lDebug4)<<"Tellurium data file is missing section: [WEIGHTS]. ";
+        RRPLOG(lDebug4)<<"Tellurium data file is missing section: [WEIGHTS]. ";
         return ss;
     }
     data.mWeights.Allocate(rDim, cDim);
@@ -648,7 +648,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
 
         for(int col = 0; col < cDim; col++)
         {
-            Log(lDebug5)<<"Word "<<aLine[col];
+            RRPLOG(lDebug5)<<"Word "<<aLine[col];
             double value = toDouble(aLine[col]);
             data.mWeights(row, col) = value;
         }

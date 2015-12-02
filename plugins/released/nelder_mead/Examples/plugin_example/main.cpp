@@ -26,8 +26,8 @@ int main()
         PluginManager PM("..\\plugins");
         PM.load();
 
-        Log(lInfo) << "The following plugins are loaded";
-        Log(lInfo) << PM.getPluginNames();
+        RRPLOG(lInfo) << "The following plugins are loaded";
+        RRPLOG(lInfo) << PM.getPluginNames();
 
         Plugin* test_model = PM.getPlugin("TestModel");
         if(!test_model)
@@ -66,37 +66,37 @@ int main()
         NMP->execute();
 
 
-        Log(lInfo) <<"======== RESULT ==========";
-        Log(lInfo) << NMP->getResult();
+        RRPLOG(lInfo) <<"======== RESULT ==========";
+        RRPLOG(lInfo) << NMP->getResult();
 
-//        Log(lInfo) << "Norms: "<<NMP->getPropertyValueAsString("Norms");
+//        RRPLOG(lInfo) << "Norms: "<<NMP->getPropertyValueAsString("Norms");
 
     }
     catch(const rr::Exception& e)
     {
-        Log(lError) << "There was a problem: " << e.what();
+        RRPLOG(lError) << "There was a problem: " << e.what();
     }
     catch(const tlp::Exception& e)
     {
-        Log(lError) << "There was a problem: " << e.what();
+        RRPLOG(lError) << "There was a problem: " << e.what();
     }
     return 0;
 }
 
 void onStarted(void* data1, void* data2)
 {
-    Log(lInfo) <<"Started ..";
+    RRPLOG(lInfo) <<"Started ..";
 }
 
 void onProgress(void* data1, void* data2)
 {
     Plugin* NMP = (Plugin*) data1;
 
-    Log(lInfo) <<"Iteration, FuncIter, NORM: "<<NMP->getPropertyValueAsString("NrOfIter")<<", "<<NMP->getPropertyValueAsString("NrOfFuncIter")<<", "<<NMP->getPropertyValueAsString("Norm");
+    RRPLOG(lInfo) <<"Iteration, FuncIter, NORM: "<<NMP->getPropertyValueAsString("NrOfIter")<<", "<<NMP->getPropertyValueAsString("NrOfFuncIter")<<", "<<NMP->getPropertyValueAsString("Norm");
 }
 
 void onFinished(void* data1, void* data2)
 {
-    Log(lInfo) <<"Finished..";
+    RRPLOG(lInfo) <<"Finished..";
 }
 

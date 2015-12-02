@@ -145,11 +145,11 @@ string getUsersTempDataFolder()
     DWORD dwRetVal = GetTempPathA(MAX_PATH, lpTempPathBuffer); // buffer for path
     if (dwRetVal > MAX_PATH || (dwRetVal == 0))
     {
-        Log(lError)<<"GetTempPath failed";
+        RRPLOG(lError)<<"GetTempPath failed";
     }
     else
     {
-        Log(lDebug3)<<"Users temporary files folder is: "<<string(lpTempPathBuffer);
+        RRPLOG(lDebug3)<<"Users temporary files folder is: "<<string(lpTempPathBuffer);
     }
 
     return string(lpTempPathBuffer);
@@ -175,12 +175,12 @@ string getCurrentExeFolder()
     if (_NSGetExecutablePath(exepath, &bufsize) == 0)
     {
         string thePath = getFilePath(exepath);
-        Log(lDebug1) << "Current exe folder says:" << thePath;
+        RRPLOG(lDebug1) << "Current exe folder says:" << thePath;
         return thePath;
     }
     else
     {
-        Log(Logger::LOG_ERROR) << "_NSGetExecutablePath failed";
+        RRPLOG(Logger::LOG_ERROR) << "_NSGetExecutablePath failed";
         return "";
     }
 #elif defined (__linux)
@@ -196,7 +196,7 @@ string getCurrentExeFolder()
     }
 
     string thePath = getFilePath(exepath);
-    Log(lDebug1) << "Current exe folder says:" << thePath;
+    RRPLOG(lDebug1) << "Current exe folder says:" << thePath;
     return thePath;
 #endif
 
@@ -240,7 +240,7 @@ string getCWD()
     // Get the current working directory:
     if( (buffer = getcwd( NULL, 512 )) == NULL )
     {
-        Log(Logger::LOG_ERROR)<<"getCWD failed";
+        RRPLOG(Logger::LOG_ERROR)<<"getCWD failed";
         return "";
     }
     else
@@ -283,7 +283,7 @@ vector<string> getLinesInFile(const string& fName)
     ifstream ifs(fName.c_str());
     if(!ifs)
     {
-        Log(Logger::LOG_ERROR)<<"Failed opening file: "<<fName;
+        RRPLOG(Logger::LOG_ERROR)<<"Failed opening file: "<<fName;
         return lines;
     }
 
@@ -455,7 +455,7 @@ bool copyStdVectorToCArray(const vector<double>& src, double* dest,  int size)
 {
     if((size && !dest) || size > src.size())
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy to NULL vector, or incompatible size of vectors";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy to NULL vector, or incompatible size of vectors";
         return false;
     }
 
@@ -470,7 +470,7 @@ bool copyStdVectorToCArray(const vector<bool>&   src,  bool*  dest,  int size)
 {
     if((size && !dest) || size > src.size())
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy to NULL vector, or incompatible size of vectors";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy to NULL vector, or incompatible size of vectors";
         return false;
     }
 
@@ -486,7 +486,7 @@ vector<double> createVector(const double* src, const int& size)
     vector<double> dest;
     if(size && !src)
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
         return dest;
     }
 
@@ -502,7 +502,7 @@ bool copyCArrayToStdVector(const int* src, vector<int>& dest, int size)
 {
     if(size && !src)
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
         return false;
     }
 
@@ -518,7 +518,7 @@ bool copyCArrayToStdVector(const double* src, vector<double>& dest, int size)
 {
     if(size && !src)
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
         return false;
     }
 
@@ -534,7 +534,7 @@ bool copyCArrayToStdVector(const bool* src, vector<bool>& dest, int size)
 {
     if(size && !src)
     {
-        Log(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
+        RRPLOG(Logger::LOG_ERROR)<<"Tried to copy from NULL vector";
         return false;
     }
 
@@ -551,7 +551,7 @@ double* createVector(const vector<double>& vec)
     double* avec = new double[vec.size()];
     if(!avec)
     {
-        Log(Logger::LOG_ERROR)<<"Failed to allocate c vector";
+        RRPLOG(Logger::LOG_ERROR)<<"Failed to allocate c vector";
         return NULL;
     }
 

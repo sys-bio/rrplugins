@@ -51,7 +51,7 @@ void ThreadPool::start()
                 }
                 else
                 {
-                    Log(lError)<<"Tried to start an active thread";
+                    RRPLOG(lError)<<"Tried to start an active thread";
                 }
             }
         }
@@ -65,7 +65,7 @@ bool ThreadPool::isJobQueueEmpty()
         bool val = mThreads.front()->getNrOfJobsInQueue() > 0 ? false : true;
         if(val == true)
         {
-            Log(lInfo)<<"Job queue is empty!";
+            RRPLOG(lInfo)<<"Job queue is empty!";
         }
         return val;
     }

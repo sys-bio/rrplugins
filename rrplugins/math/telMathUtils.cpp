@@ -160,7 +160,7 @@ double getChiSquare(const vector<double>& O, const vector<double>& E, const vect
         }
         else
         {
-            Log(lError)<<"Tried to divide by zero in gtChiSquare()";
+            RRPLOG(lError)<<"Tried to divide by zero in gtChiSquare()";
         }
     }
     return chiSquare;
@@ -289,7 +289,7 @@ vector<double> getWeightValuesInColumn(int col, const TelluriumData& data)
     vector<double> vals;
     if(!data.hasWeights()) //Return weights of '1'
     {
-        Log(lDebug3) <<"Trying to read non-existent weight values from data";
+        RRPLOG(lDebug3) <<"Trying to read non-existent weight values from data";
     }
 
     if(col < data.cSize())
@@ -333,7 +333,7 @@ TelluriumData getStandardizedPopulations(const TelluriumData& population)
                 stdPop(dataPtn, col) =  population(dataPtn, col) / stdDeviations[nonTimeDataIndex];
             }
         }
-        Log(lDebug)<<"Standard deviation: "<<stdDeviations[nonTimeDataIndex];
+        RRPLOG(lDebug)<<"Standard deviation: "<<stdDeviations[nonTimeDataIndex];
     }
 
     return stdPop;
@@ -357,7 +357,7 @@ vector<double> getStandardDeviations(const TelluriumData& population)
         }
         double variance =  (1. /  (population.rSize() -1) ) * sumOfSquaredDifferences ;
         double stdDev =  sqrt(variance) ;
-        Log(lInfo) << "Std Dev = " << stdDev;
+        RRPLOG(lInfo) << "Std Dev = " << stdDev;
         stds.push_back(stdDev);
     }
     return stds;
@@ -378,7 +378,7 @@ double getStandardDeviation(const vector<double>& population, double* theMean)
     }
     double variance =  (1. /  (population.size() -1) ) * sumOfSquaredDifferences;
     double stdDev =  sqrt(variance) ;
-    Log(lInfo) << "Std Dev = " << stdDev;
+    RRPLOG(lInfo) << "Std Dev = " << stdDev;
 
     return stdDev;
 }

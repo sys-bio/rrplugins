@@ -15,24 +15,24 @@ int main(int argc, char** argv)
         const string modelFile = joinPath(rootPath, "models", "test_1.xml");
 
         //Load modelFiles..
-        Log(lInfo)<<" ---------- LOADING/GENERATING MODELS ------";
+        RRPLOG(lInfo)<<" ---------- LOADING/GENERATING MODELS ------";
 
         RoadRunner rr1;
         LoadSBMLOptions opt;
         opt.modelGeneratorOpt |= LoadSBMLOptions::RECOMPILE;
         if(!rr1.load(modelFile, &opt))
         {
-            Log(Logger::LOG_ERROR)<<"There was a problem loading model in file: "<<modelFile;
+            RRPLOG(Logger::LOG_ERROR)<<"There was a problem loading model in file: "<<modelFile;
             throw(Exception("Bad things in loadSBMLFromFile function"));
         }
 
-        Log(lInfo)<<" ---------- SIMULATE ---------------------";
-        Log(lInfo)<<"Data:"<<*(rr1.simulate());
+        RRPLOG(lInfo)<<" ---------- SIMULATE ---------------------";
+        RRPLOG(lInfo)<<"Data:"<<*(rr1.simulate());
     }
     catch(const exception& ex)
     {
 
-        Log(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.what();
+        RRPLOG(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.what();
     }
 
     return 0;
