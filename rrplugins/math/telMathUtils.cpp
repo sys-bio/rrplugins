@@ -320,7 +320,7 @@ TelluriumData getStandardizedPopulations(const TelluriumData& population)
 
     for(int col =0; col <population.cSize(); col++)
     {
-        int nonTimeDataIndex = col - (timeIsFirstCol == true) ? 1 : 0;
+        int nonTimeDataIndex = (col - (timeIsFirstCol == true)) ? 1 : 0;
 
         for(int dataPtn = 0; dataPtn < population.rSize(); dataPtn++)
         {
@@ -352,7 +352,7 @@ vector<double> getStandardDeviations(const TelluriumData& population)
         double sumOfSquaredDifferences  = 0;
         for(int row = 0; row < population.rSize(); row++)
         {
-            int meansIndex = col - (timeIsFirstCol == true) ? 1 : 0;
+            int meansIndex = (col - (timeIsFirstCol == true)) ? 1 : 0;
             sumOfSquaredDifferences += pow( population(row, col) - means[meansIndex], 2);
         }
         double variance =  (1. /  (population.rSize() -1) ) * sumOfSquaredDifferences ;

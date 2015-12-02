@@ -91,7 +91,7 @@ typedef void    (event_cc *PluginEvent)(void* data1, void* data2);
 //      CORE_DECLSPEC
 class CORE_DECLSPEC Plugin
 {
-    friend PluginManager;
+    friend class PluginManager;
     public:
         /**
             Create a plugin

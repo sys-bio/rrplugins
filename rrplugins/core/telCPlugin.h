@@ -64,7 +64,7 @@ typedef void* (*getAPropertyF)(const char*);
  */
 class CORE_DECLSPEC CPlugin : public Plugin
 {
-    friend PluginManager;
+    friend class PluginManager;
     public:
                                 //!Create a plugin written in C
                                 CPlugin(const string& name, const string& cat = gNoneString,
