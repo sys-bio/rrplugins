@@ -8,7 +8,6 @@ set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
 set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(TLP_DEPENDENCIES_PATH "" CACHE PATH "Path to TelPlugins dependencies")
 
-message( STATUS "TLP_DEPENDENCIES_PATH = \"${TLP_DEPENDENCIES_PATH}\"" )
 if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
