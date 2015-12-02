@@ -38,19 +38,19 @@ telplugins_math
 )
 
 if(UNIX) 
-    if(APPLE)
-        set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-    else()
-        set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
-    endif()
+  if(APPLE)
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+  else()
+    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
+  endif()
 
-    set_property(TARGET ${target}
-        PROPERTY  COMPILE_DEFINITIONS
-        )
+  set_property(TARGET ${target}
+      PROPERTY  COMPILE_DEFINITIONS
+      )
 endif()
 
-if(${INSTALL_EXAMPLES})
-add_subdirectory(Examples)
+if(${TLP_BUILD_EXAMPLES})
+  add_subdirectory(Examples)
 endif()
 
 install (TARGETS ${target}

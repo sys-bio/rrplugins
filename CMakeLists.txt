@@ -3,18 +3,20 @@ project(telplugins)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
+# Variables used in project
 set(TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source)
 set(TLP_ROADRUNNER_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
 set(TLP_ROADRUNNER_INSTALL_LIB_PATH ${TLP_ROADRUNNER_INSTALL_PATH}/lib)
 set(TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
-OPTION (INSTALL_APPS            "Build and Install Apps"                         ON )
-OPTION (INSTALL_STATIC_LIB      "Install TelluriumPlugins CXX Static Lib"        OFF)
-OPTION (TLP_BUILD_SHARED_CORE   "Build TelluriumPlugins Core Shared Library"     ON)
-OPTION (INSTALL_EXAMPLES        "Build and Install Tellurium Plugin Examples"    OFF)
-OPTION (BUILD_TEST_TOOLS        "Build Tellurium Plugins Test Tools"             OFF)
+# Feature selection
+set (TLP_BUILD_SHARED_LIB CACHE BOOL   "Build shared library"  ON)
+set (TLP_BUILD_STATIC_LIB  CACHE BOOL  "Build static library"  ON)
+set (TLP_BUILD_APPS CACHE BOOL       "Build apps"            ON )
+set (TLP_BUILD_EXAMPLES CACHE BOOL     "Build examples"        OFF)
+set (TLP_BUILD_TEST_TOOLS CACHE BOOL   "Build test tools"      OFF)
 
-set(TLP_ROOT                     ${CMAKE_CURRENT_SOURCE_DIR})
+set(TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 message(STATUS "Using third party library prefix of ${THIRD_PARTY_INSTALL_FOLDER}")
 message(STATUS "Installing TelluriumPlugins to ${CMAKE_INSTALL_PREFIX}")
@@ -118,6 +120,13 @@ TelPlugins
       host OS                   ${CMAKE_SYSTEM_NAME}
       host architecture         ${CMAKE_SYSTEM_PROCESSOR}
 
+    Features:
+      Enable shared library?    ${TLP_BUILD_SHARED_LIB}
+      Enable static library?    ${TLP_BUILD_STATIC_LIB}
+      Enable apps?              ${TLP_BUILD_APPS}
+      Enable examples?          ${TLP_BUILD_EXAMPLES}
+      Enable test tools?        ${TLP_BUILD_TEST_TOOLS}
+      
     General flags:
       CC                        ${CMAKE_C_COMPILER}
       CXX (not used)            ${CMAKE_CXX_COMPILER}
@@ -136,22 +145,22 @@ add_subdirectory(source)
 add_subdirectory(plugins)
 add_subdirectory(scripts)
 
-if(INSTALL_APPS)
+if(TLP_BUILD_APPS)
     add_subdirectory(apps)
 endif()
 
-if(INSTALL_EXAMPLES)
+if(TLP_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
 add_subdirectory(wrappers)
 
-if(BUILD_TEST_TOOLS)
+if(TLP_BUILD_TEST_TOOLS)
     message(STATUS "building tests")
     add_subdirectory(testing)
 else()
     message(STATUS "NOT building tests")
-endif(BUILD_TEST_TOOLS)
+endif(TLP_BUILD_TEST_TOOLS)
 
 
 #======================= INSTALL STUFF ============================
