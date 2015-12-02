@@ -195,12 +195,12 @@ string AutoConstants::getICP()
 
     for(int i = 0; i < ICP.size(); i++)
     {
-        builder<<(" " + i);
+        builder << " " << i; // NOTE: Totte used to have `builder<<(" " + i);` here
     }
 
     if (ICP.size() == 0)
     {
-        builder<<(" 0");
+        builder << " 0";
     }
 
     return builder.ToString();
