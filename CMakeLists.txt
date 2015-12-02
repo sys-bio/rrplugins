@@ -10,6 +10,12 @@ set ( TLP_GENERATED_HEADER_PATH ${CMAKE_CURRENT_BINARY_DIR}/source )
 set ( TLP_SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR} )
 set ( TLP_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
+# Global settings
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)
+
+# Check dependencies
 if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
@@ -25,25 +31,6 @@ set ( TLP_BUILD_STATIC_LIB ON  CACHE BOOL   "Build static library" )
 set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
-
-
-message(STATUS "Using third party library prefix of ${THIRD_PARTY_INSTALL_FOLDER}")
-message(STATUS "Installing TelluriumPlugins to ${CMAKE_INSTALL_PREFIX}")
-
-if (WIN32)
-    message(STATUS "adding ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2 to include path")
-    include_directories(${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2)
-else()
-    #UNIX
-    find_package(LibXml2 REQUIRED)
-	message(STATUS "found libxml2, include dir: ${LIBXML2_INCLUDE_DIR}") 
-	include_directories(${LIBXML2_INCLUDE_DIR})
-endif(WIN32)
-
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY     ${PROJECT_BINARY_DIR}/bin)
 
 if(${MSVC})
   add_definitions(
@@ -110,6 +97,13 @@ TelPlugins
     Dependencies (packages marked with *** are required):
     "
 )
+
+if(WITH_LIBXML2)
+    message( "  *** libxml2 libs                ${LIBXML2_LIBRARIES}")
+    message( "  *** libxml2 includes            ${LIBXML2_INCLUDE_DIRS}")
+else()
+    message( "  *** libxml2                     *N/A")
+endif()
 
 # common includes
 include_directories(
