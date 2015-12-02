@@ -48,24 +48,6 @@ if(${MSVC})
   set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
 
-#=== COMPILER FLAGS
-if(${BORLAND})
-add_definitions(
-    -DUSE_PCH                   #Enable pre-compiled headers
-    -H=${PROJECT_BINARY_DIR}/rr_pch.csm
-    -w-8012                     #Comparing signed /unsigned
-    -w-8057                     #Parameter never used
-    -w-8004                     #'var' is assigned a value that is never used
-    )
-endif()
-
-if(UNIX)
-    if(CMAKE_COMPILER_IS_GNUCXX)
-        set (CMAKE_C_FLAGS      "${CMAKE_C_FLAGS} -fPIC")
-        set (CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -fPIC")
-    endif()
-endif()
-
 message(STATUS "
 -------------------------------------------------------------------------------
 TelPlugins
