@@ -32,11 +32,11 @@ set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
-if(${MSVC})
+if( MSVC )
   add_definitions(
     -DPOCO_NO_AUTOMATIC_LIBS
     -DCRT_NONSTDC_NO_DEPRECATE
-    -D_CRT_SECURE_NO_WARNINGS    #MS wanting you to changes basically all standard C functions :(
+    -D_CRT_SECURE_NO_WARNINGS      # MS wanting you to change basically all standard C functions :(
     )
       
   #  4251 About exporting std classes
@@ -45,7 +45,7 @@ if(${MSVC})
   add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
 
   set (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
-  set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
+  set (CMAKE_SHARED_LINKER_FLAGS   "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
 
 message(STATUS "
@@ -87,7 +87,7 @@ else()
     message( "  *** libxml2                     *N/A")
 endif()
 
-# common includes
+# Common includes
 include_directories(
     ${TLP_ROOT}
     ${TLP_ROOT}/manager
