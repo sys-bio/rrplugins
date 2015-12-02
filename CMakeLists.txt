@@ -20,6 +20,9 @@ if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
   message( FATAL_ERROR "TLP_DEPENDENCIES_PATH is missing include/Poco" )
+elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Poco.h" OR 
+        IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Poco.h" )
+  message( FATAL_ERROR "Could not find Poco.h in TLP_DEPENDENCIES_PATH/include/Poco" )
 elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
         IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" )
   message( FATAL_ERROR "Could not find Foundation.h in TLP_DEPENDENCIES_PATH/include/Poco" )
@@ -32,21 +35,10 @@ set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 
-if( MSVC )
-  add_definitions(
-    -DPOCO_NO_AUTOMATIC_LIBS
-    -DCRT_NONSTDC_NO_DEPRECATE
-    -D_CRT_SECURE_NO_WARNINGS      # MS wanting you to change basically all standard C functions :(
-    )
-      
-  #  4251 About exporting std classes
-  #  4018 Comparing unsigned/signed ints
-  #  4996 Deprecated functions   
-  add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
-
-  set (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
-  set (CMAKE_SHARED_LINKER_FLAGS   "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
-endif()
+# Poco
+set ( POCO_DIRECTORY "${TLP_DEPENDENCIES_PATH}" CACHE PATH "Path to directory containing Poco" )
+set ( ENV{Poco_DIR} ${POCO_DIRECTORY} )
+find_package ( Poco REQUIRED )
 
 message(STATUS "
 -------------------------------------------------------------------------------
@@ -80,19 +72,36 @@ TelPlugins
     "
 )
 
-if(WITH_LIBXML2)
-    message( "  *** libxml2 libs                ${LIBXML2_LIBRARIES}")
-    message( "  *** libxml2 includes            ${LIBXML2_INCLUDE_DIRS}")
+if(Poco_FOUND)
+    message( "  *** Poco libs                   ${Poco_LIBRARIES}")
+    message( "  *** Poco includes               ${Poco_INCLUDE_DIRS}")
 else()
-    message( "  *** libxml2                     *N/A")
+    message( "  *** Poco                        *N/A")
 endif()
 
 # Common includes
 include_directories(
     ${TLP_ROOT}
     ${TLP_ROOT}/manager
-    ${THIRD_PARTY_INSTALL_FOLDER}/include
+    ${Poco_INCLUDE_DIRS}
 )
+
+# Flags
+if( MSVC )
+  add_definitions(
+    -DPOCO_NO_AUTOMATIC_LIBS
+    -DCRT_NONSTDC_NO_DEPRECATE
+    -D_CRT_SECURE_NO_WARNINGS      # MS wanting you to change basically all standard C functions :(
+    )
+      
+  #  4251 About exporting std classes
+  #  4018 Comparing unsigned/signed ints
+  #  4996 Deprecated functions   
+  add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
+
+  set (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
+  set (CMAKE_SHARED_LINKER_FLAGS   "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
+endif()
 
 add_subdirectory(source)
 add_subdirectory(plugins)
