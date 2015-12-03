@@ -1,12 +1,6 @@
 # M Totte Karlsson
 # J Kyle Medley
 
-include_directories(
-  ${TLP_ROOT}/source
-  ${THIRD_PARTY_INSTALL_FOLDER}/include
-  ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2
-  )
-
 set(sources
   telCPlugin
   telCPPPlugin
@@ -35,6 +29,7 @@ if (TLP_BUILD_SHARED_LIB)
   target_link_libraries (telplugins_core 
     telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
+  # Install shared library
   install(TARGETS telplugins_core
     RUNTIME DESTINATION bin COMPONENT pluginsLib
     LIBRARY DESTINATION lib COMPONENT pluginsLib
