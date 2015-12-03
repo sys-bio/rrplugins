@@ -3,17 +3,6 @@
 
 project( chisquared )
 
-# include_directories(
-# ../source
-# ../../source
-# ${THIRD_PARTY_INSTALL_FOLDER}/include
-# ${CMAKE_INSTALL_PREFIX}/include
-# )
-# 
-# link_directories(
-# ${CMAKE_INSTALL_PREFIX}/lib
-# )
-
 set(RRP_CHISQUARED_SOURCES
   chisquare_doc.cpp
   csChiSquare.cpp
