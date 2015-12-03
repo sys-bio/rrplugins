@@ -32,7 +32,8 @@ if (TLP_BUILD_SHARED_LIB)
     POCO_NO_AUTOMATIC_LIBS
   )
 
-  target_link_libraries (telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
+  target_link_libraries (telplugins_core 
+    telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
   install(TARGETS telplugins_core
     RUNTIME DESTINATION bin COMPONENT pluginsLib
@@ -58,7 +59,8 @@ if (TLP_BUILD_STATIC_LIB)
     POCO_NO_AUTOMATIC_LIBS
     )
 
-  target_link_libraries (telplugins_core-static ${RRPLUGINS_COMMON_STATIC_LIBS})
+  target_link_libraries (telplugins_core-static 
+    telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS})
 
   # Install static library
   install(TARGETS telplugins_core-static
