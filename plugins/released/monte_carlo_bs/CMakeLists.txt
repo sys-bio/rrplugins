@@ -37,7 +37,7 @@ if(UNIX)
 
   set_property(TARGET tel_monte_carlo_bs
     PROPERTY  COMPILE_DEFINITIONS
-    LIBSBML_STATIC
+    LIBSBML_STATIC # FIXME: using shared libsbml
     LIBLAX_STATIC
     STATIC_PUGI
     STATIC_LIBSTRUCT
