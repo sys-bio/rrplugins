@@ -1,7 +1,7 @@
 # M Totte Karlsson
 # J Kyle Medley
 
-set(target tel_auto2000)
+project( auto2000 )
 
 add_subdirectory(libAuto)
 add_subdirectory(libAutoTelluriumInterface)
