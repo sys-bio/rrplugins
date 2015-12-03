@@ -1,95 +1,52 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-project(telplugins)
-
-set(target telplugins_core)
+# M Totte Karlsson
+# J Kyle Medley
 
 include_directories(
-    ${TLP_ROOT}/source
-    ${THIRD_PARTY_INSTALL_FOLDER}/include
-    ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2
-    )
+  ${TLP_ROOT}/source
+  ${THIRD_PARTY_INSTALL_FOLDER}/include
+  ${THIRD_PARTY_INSTALL_FOLDER}/include/libxml2
+  )
 
 set(sources
-telCPlugin
-telCPPPlugin
-telPlugin
-telPluginManager
-telVersionInfo
+  telCPlugin
+  telCPPPlugin
+  telPlugin
+  telPluginManager
+  telVersionInfo
 )
 
-#SHARED VERSION ----------------
-add_library(${target} SHARED ${sources})
+# ** Shared lib ******
 
-set_property(TARGET ${target}
-    PROPERTY  COMPILE_DEFINITIONS
-EXPORT_CORE_API
-LIBSBML_USE_CPP_NAMESPACE
-LIBSBML_STATIC
-LIBLAX_STATIC
-STATIC_LIBSTRUCT
-STATIC_NLEQ
-POCO_STATIC
-POCO_NO_AUTOMATIC_LIBS
-)
+if (TLP_BUILD_SHARED_LIB)
+  add_library(telplugins_core SHARED ${sources})
 
-#libraries to link with our shared lib
-if(UNIX)
-    set(staticLibExt ".a")
-else()
-    set(staticLibExt "")
-endif(UNIX)
+  set_property(TARGET telplugins_core
+    PROPERTY COMPILE_DEFINITIONS
+    EXPORT_CORE_API
+    LIBSBML_USE_CPP_NAMESPACE
+    LIBSBML_STATIC
+    LIBLAX_STATIC
+    STATIC_LIBSTRUCT
+    STATIC_NLEQ
+    POCO_STATIC
+    POCO_NO_AUTOMATIC_LIBS
+  )
 
-target_link_libraries (${target}
-roadrunner
-telplugins_common
-sundials_cvode
-sundials_nvecserial
-blas
-lapack
-nleq-static
-rr-libstruct-static
-poco_foundation-static
-)
+  target_link_libraries (telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
 
-if(UNIX)
-    target_link_libraries(${target} xml2)
-elseif(${MSVC})
-    target_link_libraries (${target} libxml2)
-elseif(${BORLAND})
-    target_link_libraries (${target} libxml2_xe)
+  install(TARGETS telplugins_core
+    RUNTIME DESTINATION bin COMPONENT pluginsLib
+    LIBRARY DESTINATION lib COMPONENT pluginsLib
+    ARCHIVE DESTINATION lib COMPONENT pluginsLib
+  )
 endif()
+        
+# ** Static lib ******
 
-if(${MSVC})
-    target_link_libraries (${target}
-        iphlpapi)
-endif()
+if (TLP_BUILD_STATIC_LIB)
+  add_library(telplugins_core-static STATIC ${sources})
 
-if(UNIX)
-    target_link_libraries (${target}
-        pthread
-        sbml
-        dl
-        f2c${staticLibExt}
-        )
-else()
-    target_link_libraries (${target}
-        libf2c
-        libsbml-static
-        )
-endif(UNIX)
-
-install(TARGETS ${target}
-        RUNTIME DESTINATION bin COMPONENT pluginsLib
-        LIBRARY DESTINATION lib COMPONENT pluginsLib
-        ARCHIVE DESTINATION lib COMPONENT pluginsLib
-)
-
-#END OF SHARED VERSION ----------------
-
-#STATIC VERSION
-add_library(${target}-static STATIC ${sources})
-
-set_property(TARGET ${target}-static
+  set_property(TARGET telplugins_core-static
     PROPERTY COMPILE_DEFINITIONS
     STATIC_PLUGIN_API
     LIBSBML_USE_CPP_NAMESPACE
@@ -101,47 +58,20 @@ set_property(TARGET ${target}-static
     POCO_NO_AUTOMATIC_LIBS
     )
 
-#libraries to link with static lib
-target_link_libraries (${target}-static
-    sundials_cvode
-    sundials_nvecserial
-    blas
-    lapack
-    nleq-static
-    rr-libstruct-static
-    poco_foundation-static
+  target_link_libraries (telplugins_core-static ${RRPLUGINS_COMMON_STATIC_LIBS})
+
+  # Install static library
+  install(TARGETS telplugins_core-static
+    LIBRARY DESTINATION lib COMPONENT pluginsLib
+    ARCHIVE DESTINATION lib COMPONENT pluginsLib
     )
-
-if(WIN32)
-    target_link_libraries (${target}-static
-        libsbml-static
-        libf2c
-        iphlpapi
-        )
-endif(WIN32)
-
-if(UNIX)
-    target_link_libraries (${target}-static
-        sbml-static
-        f2c
-        dl
-        pthread
-        )
-endif(UNIX)
-
-if(UNIX)
-    target_link_libraries(${target}-static xml2)
-elseif(${MSVC})
-    target_link_libraries (${target}-static libxml2)
-elseif(${BORLAND})
-    target_link_libraries (${target}-static libxml2_xe)
 endif()
 
 if(${MSVC})
     #Disable some VS Warnings 
-    #           4251 About exporting std classes
-    #           4018 Comparing unsigned/signed ints
-    #           4996 Deprecated functions   
+    # 4251 About exporting std classes
+    # 4018 Comparing unsigned/signed ints
+    # 4996 Deprecated functions   
     add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
 
 endif()
@@ -149,18 +79,4 @@ endif()
 if(BUILD_TESTS)
     add_subdirectory(testing)
 endif()
-
-#--- INSTALL STUFF
-install(TARGETS ${target}-static
-    LIBRARY DESTINATION lib COMPONENT pluginsLib
-    ARCHIVE DESTINATION lib COMPONENT pluginsLib
-    )
-
-#=== HEADERS
-FILE (GLOB headers rr*.h)
-install (   
-    FILES ${headers}
-    DESTINATION include/telplugins
-    COMPONENT pluginsLib
-    )
 

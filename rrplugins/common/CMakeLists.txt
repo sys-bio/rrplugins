@@ -1,5 +1,5 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
-project(telplugins)
+# M Totte Karlsson
+# J Kyle Medley
 
 set(RRPLUGINS_COMMON_SOURCES
     telArrayList.cpp
@@ -57,6 +57,7 @@ if (TLP_BUILD_SHARED_LIB)
 
   target_link_libraries(telplugins_common xml2)
 
+  # Install shared library
   install(TARGETS telplugins_common
           RUNTIME DESTINATION bin COMPONENT pluginsLib
           LIBRARY DESTINATION lib COMPONENT pluginsLib
@@ -82,31 +83,22 @@ if (TLP_BUILD_STATIC_LIB)
 
   target_link_libraries (telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS})
 
-  if(${MSVC})
-    # Disable some VS Warnings 
-    # 4251 About exporting std classes
-    # 4018 Comparing unsigned/signed ints
-    # 4996 Deprecated functions   
-    add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
-  endif()
-
-  if(BUILD_TESTS)
-      add_subdirectory(testing)
-  endif()
-
   # Install static library
   install(TARGETS telplugins_common-static
     LIBRARY DESTINATION lib COMPONENT pluginsLib
     ARCHIVE DESTINATION lib COMPONENT pluginsLib
     )
 endif()
-    
-# ** Headers ****
 
-FILE (GLOB headers rr*.h)
-install (   
-    FILES ${headers}
-    DESTINATION include/telplugins
-    COMPONENT pluginsLib
-    )
+if(${MSVC})
+  # Disable some VS Warnings 
+  # 4251 About exporting std classes
+  # 4018 Comparing unsigned/signed ints
+  # 4996 Deprecated functions   
+  add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
+endif()
+
+if(BUILD_TESTS)
+    add_subdirectory(testing)
+endif()
 
