@@ -1,15 +1,12 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(plugins_wrappers)
+# M Totte Karlsson
+# J Kyle Medley
 
-OPTION (TLP_BUILD_PLUGINS_C_API	                        "Build Plugins C API"	            ON)
-OPTION (TLP_INSTALL_PLUGINS_PYTHON_API	                "Install Plugins Python API"	    ON)
-
-if(${TLP_BUILD_PLUGINS_C_API} STREQUAL ON)
-add_subdirectory("C")
+if(TLP_BUILD_PLUGINS_C_API)
+  add_subdirectory("C")
 endif()
 
-if(${TLP_INSTALL_PLUGINS_PYTHON_API} STREQUAL ON)
-add_subdirectory("python")
+if(TLP_BUILD_PLUGINS_PYTHON_API)
+  add_subdirectory("python")
 endif()
 
 

@@ -1,6 +1,8 @@
 # M Totte Karlsson
 # J Kyle Medley
 
+project(plugin_info)
+
 add_executable(plugin_info main.cpp)
 
 target_link_libraries (plugin_info telplugins_core)

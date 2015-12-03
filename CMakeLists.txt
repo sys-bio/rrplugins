@@ -34,6 +34,8 @@ set ( TLP_BUILD_STATIC_LIB ON  CACHE BOOL   "Build static library" )
 set ( TLP_BUILD_APPS       ON  CACHE BOOL   "Build apps" )
 set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
+set ( TLP_BUILD_PLUGINS_C_API ON CACHE BOOL      "Build Plugins C API")
+set ( TLP_BUILD_PLUGINS_PYTHON_API ON CACHE BOOL "Build Plugins Python API")
 
 # Dependencies
 
@@ -54,6 +56,11 @@ find_package ( LibRoadRunner REQUIRED )
 set( LIBROADRUNNERSTATIC_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibRoadRunnerStatic REQUIRED )
 
+# Threading
+if(UNIX)
+  find_package(Threads REQUIRED)
+endif()
+
 message(STATUS "
 -------------------------------------------------------------------------------
 rrplugins
@@ -72,6 +79,10 @@ rrplugins
       Enable apps?              ${TLP_BUILD_APPS}
       Enable examples?          ${TLP_BUILD_EXAMPLES}
       Enable test tools?        ${TLP_BUILD_TEST_TOOLS}
+
+    Language bindings:
+      Enable C bindings?        ${TLP_BUILD_PLUGINS_C_API}
+      Enable python bindings?   ${TLP_BUILD_PLUGINS_PYTHON_API}
       
     General flags:
       CC                        ${CMAKE_C_COMPILER}
@@ -122,7 +133,6 @@ include_directories(
 )
 
 if(UNIX)
-  find_package(Threads REQUIRED)
   set(RRPLUGINS_COMMON_SHARED_LIBS ${LIBROADRUNNER_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} dl)
 else()
   if(${MSVC})
