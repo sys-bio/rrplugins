@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+# M Totte Karlsson
+# J Kyle Medley
+
 set(target tel_auto2000)
 
 add_subdirectory(libAuto)
