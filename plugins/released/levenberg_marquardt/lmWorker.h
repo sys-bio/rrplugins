@@ -19,7 +19,7 @@ using tlp::Properties;
 
 class lmWorker : public Poco::Runnable
 {
-    friend LM;
+    friend class LM;
 
     protected:
         rr::RoadRunner             *mRRI;

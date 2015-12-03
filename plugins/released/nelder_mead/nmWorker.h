@@ -17,7 +17,7 @@ class NelderMead;
 
 class nmWorker : public Poco::Runnable
 {
-    friend NelderMead;
+    friend class NelderMead;
 
     public:
                                     nmWorker(NelderMead& host);

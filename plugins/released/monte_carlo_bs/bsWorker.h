@@ -18,7 +18,7 @@ using tlpc::TELHandle;
 
 class bsWorker : public Poco::Runnable
 {
-    friend MonteCarlo;
+    friend class MonteCarlo;
 
     public:
                                         bsWorker(MonteCarlo& plugin);
