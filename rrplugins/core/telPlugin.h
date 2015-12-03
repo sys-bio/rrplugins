@@ -42,9 +42,9 @@
 #define telPluginH
 #include <sstream>
 #include <string>
-#include "telCoreExporter.h"
-#include "telPluginsManagerSettings.h"
-#include "telProperties.h"
+#include "rrplugins/core/telCoreExporter.h"
+#include "rrplugins/core/telPluginsManagerSettings.h"
+#include "rrplugins/common/telProperties.h"
 
 namespace rr
 {
