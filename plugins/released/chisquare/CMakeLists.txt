@@ -25,7 +25,9 @@ set(RRP_CHISQUARED_SOURCES
 
 add_definitions(
   -DPOCO_STATIC
+  -DLIBSBML_STATIC # FIXME: using shared libsbml
   -DEXPORT_TEL_PLUGIN
+  -DSTATIC_LIBSTRUCT
 )
 
 # TODO: change to tel_chisquared
@@ -47,6 +49,10 @@ if(UNIX)
 
   set_property(TARGET tel_chisquare
     PROPERTY  COMPILE_DEFINITIONS
+    LIBSBML_STATIC # FIXME: using shared libsbml
+    LIBLAX_STATIC
+    STATIC_PUGI
+    STATIC_LIBSTRUCT
   )
 endif()
 
