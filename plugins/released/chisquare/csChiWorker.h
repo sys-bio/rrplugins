@@ -11,7 +11,7 @@ using tlp::TelluriumData;
 
 class ChiWorker : public Poco::Runnable
 {
-    friend ChiSquare;
+    friend class ChiSquare;
 
     protected:
         Poco::Thread                mThread;
