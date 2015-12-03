@@ -92,7 +92,7 @@ find_library(POCO_FOUNDATION_LIBRARY_STATIC NAMES PocoFoundation
   ${LIBROADRUNNERSTATIC_PATH}/lib
   )
 
-find_library(SBML_LIBRARY NAMES sbml
+find_library(SBML_LIBRARY NAMES sbml-static
   HINTS
   ${LIBROADRUNNERSTATIC_PATH}/lib
   )
