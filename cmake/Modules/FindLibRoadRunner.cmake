@@ -9,7 +9,7 @@
 #
 # ::
 #
-#   LIBROADRUNNER_FOUND - System has LibXml2
+#   LIBROADRUNNER_FOUND - System has libRoadRunner
 #   LIBROADRUNNER_INCLUDE_DIR - The libRoadRunner include directory
 #   LIBROADRUNNER_LIBRARIES - The libraries needed to use libRoadRunner
 #   LIBROADRUNNER_DEFINITIONS - Compiler switches required for using libRoadRunner
