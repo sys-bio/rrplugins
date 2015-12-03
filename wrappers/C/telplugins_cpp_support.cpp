@@ -1,7 +1,6 @@
 #pragma hdrstop
-#include "telTelluriumData.h"
-#include "telPlugin.h"
-#include "telStringUtils.h"
+#include "rrplugins/core/telPlugin.h"
+#include "rrplugins/common/telStringUtils.h"
 #include "telplugins_c_api.h"
 #include "telplugins_utilities.h"
 #include "telplugins_cpp_support.h"

@@ -13,8 +13,8 @@
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
 #include "rrplugins/common/telOSSpecifics.h"
-#include "telException.h"
-#include "telVersionInfo.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/core/telVersionInfo.h"
 
 using namespace std;
 using rr::RoadRunner;

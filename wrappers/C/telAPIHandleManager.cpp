@@ -1,11 +1,14 @@
 #pragma hdrstop
+
+#include "telAPIHandleManager.h"
+
+#include "rrplugins/common/telLogger.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/common/telProperties.h"
+#include "rrplugins/common/telProperty.h"
+
 #include <sstream>
 #include <exception>
-#include "telLogger.h"
-#include "telAPIHandleManager.h"
-#include "telException.h"
-#include "telProperties.h"
-#include "telProperty.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
