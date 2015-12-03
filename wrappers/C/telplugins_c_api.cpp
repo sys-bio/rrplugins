@@ -480,7 +480,7 @@ bool tlp_cc tpUnRegisterHandle(TELHandle handle)
 {
     start_try
         return gHM.unRegisterHandle(handle);
-    catch_ptr_macro
+    catch_bool_macro
 }
 
 TLP_C_DS char* tlp_cc tpGetVersion()
