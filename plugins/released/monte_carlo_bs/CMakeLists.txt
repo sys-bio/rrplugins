@@ -24,7 +24,7 @@ add_library(tel_monte_carlo_bs MODULE ${RRP_MONTE_CARLO_BS_SOURCES})
 target_link_libraries (tel_monte_carlo_bs
   telplugins_core
   telplugins_math
-  telplugins_c_api                 
+  telplugins_c_api
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
