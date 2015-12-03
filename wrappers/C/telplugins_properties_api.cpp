@@ -1,15 +1,15 @@
 #pragma hdrstop
 #include <string>
 #include "rr/rrRoadRunner.h"
-#include "telException.h"
-#include "telLogger.h"
-#include "telOSSpecifics.h"
-#include "telTelluriumData.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/common/telLogger.h"
+#include "rrplugins/common/telOSSpecifics.h"
+#include "rrplugins/common/telTelluriumData.h"
 #include "telplugins_properties_api.h"
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
-#include "telProperty.h"
-#include "telPropertyBase.h"
+#include "rrplugins/common/telProperty.h"
+#include "rrplugins/common/telPropertyBase.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
