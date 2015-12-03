@@ -3,19 +3,6 @@
 
 project( nelder_mead )
 
-# include_directories(
-# ../source
-# ../../source
-# ../../wrappers/C
-# ${THIRD_PARTY_INSTALL_FOLDER}/include
-# ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
-# ${CMAKE_INSTALL_PREFIX}/include
-# )
-# 
-# link_directories(
-# ${CMAKE_INSTALL_PREFIX}/lib
-# )
-
 set(RRP_NELDER_MEAD_SOURCES
   nelder_mead_doc.cpp
   nmWorker.cpp
@@ -53,7 +40,7 @@ if(UNIX)
 
   set_property(TARGET tel_nelder_mead
     PROPERTY COMPILE_DEFINITIONS
-    LIBSBML_STATIC
+    LIBSBML_STATIC # FIXME: using shared libsbml
     LIBLAX_STATIC
     STATIC_PUGI
     STATIC_LIBSTRUCT
