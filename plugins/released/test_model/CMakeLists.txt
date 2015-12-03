@@ -1,51 +1,30 @@
-cmake_minimum_required(VERSION 2.8)
-set(target tel_test_model)
+# M Totte Karlsson
+# J Kyle Medley
 
-set(sources
-TestModel.h
-test_model_doc.h
-TestModel.cpp
-test_model_doc.cpp
+project( test_model )
+
+set(RRP_TEST_MODEL_SOURCES
+  TestModel.h
+  test_model_doc.h
+  TestModel.cpp
+  test_model_doc.cpp
 )
-
-add_library(${target} MODULE ${sources})
 
 add_definitions(
--DEXPORT_TEL_PLUGIN
--DPOCO_STATIC
+  -DEXPORT_TEL_PLUGIN
+  -DPOCO_STATIC
 )
+
+add_library(tel_test_model MODULE ${RRP_TEST_MODEL_SOURCES})
 
 if(WIN32)
-target_link_libraries (${target}
-roadrunner
-telplugins_core
-)
-else() #UNIX
-    if(APPLE)
-        set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-    else()
-        set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
-    endif()
-
-    set_property(TARGET ${target}
-        PROPERTY  COMPILE_DEFINITIONS
-        )
-
-    target_link_libraries ( ${target}
-        )
+  target_link_libraries (tel_test_model telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
+else()
+  if(APPLE)
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+  else()
+    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
+  endif()
 endif()
 
-if(${MSVC})
-#set (CMAKE_SHARED_LINKER_FLAGS     "${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/add_noise.def\"")
-endif()
-
-install (TARGETS ${target}
-DESTINATION plugins
-COMPONENT plugins
-)
-
-install(FILES
-DESTINATION plugins
-)
-
-
+install (TARGETS tel_test_model DESTINATION plugins COMPONENT plugins)

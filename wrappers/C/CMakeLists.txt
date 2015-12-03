@@ -1,6 +1,8 @@
 # M Totte Karlsson
 # J Kyle Medley
 
+project( rrplugins_c_api )
+
 #The C-api is built as a shared library..
 add_library(telplugins_c_api SHARED
   telplugins_c_api
