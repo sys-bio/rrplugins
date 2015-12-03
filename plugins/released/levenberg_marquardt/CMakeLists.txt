@@ -21,7 +21,7 @@ add_subdirectory(lib)
 
 add_definitions(
   -DPOCO_STATIC
-  -DLIBSBML_STATIC
+  -DLIBSBML_STATIC # FIXME: using shared libsbml
   -DEXPORT_TEL_PLUGIN
   -DSTATIC_LIBSTRUCT
 )
