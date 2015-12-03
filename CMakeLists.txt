@@ -41,6 +41,17 @@ set ( TLP_BUILD_PLUGINS_C_API ON CACHE BOOL      "Build Plugins C API")
 set ( TLP_BUILD_PLUGINS_PYTHON_API ON CACHE BOOL "Build Plugins Python API")
 set ( TLP_BUILD_BETA_PLUGINS  ON CACHE BOOL      "Build beta (unreleased) plugins" )
 
+# Plugin selection: Released
+
+set (TLP_BUILD_TEST_MODEL_PLUGIN ON CACHE BOOL "Build the Test Model Plugin")
+set (TLP_BUILD_ADD_NOISE_PLUGIN ON CACHE BOOL "Build the Add Noise Plugin")
+set (TLP_BUILD_CHISQUARE_PLUGIN ON CACHE BOOL "Build the ChiSquare Plugin")
+set (TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN ON CACHE BOOL "Build the Levenberg-Marquardt Plugin")
+set (TLP_BUILD_NELDER_MEAD_PLUGIN ON CACHE BOOL "Build the Nelder-Mead Plugin")
+set (TLP_BUILD_MONTE_CARLO_BS_PLUGIN ON CACHE BOOL "Build the Monte Carlo BS (bootstrap) Plugin")
+set (TLP_BUILD_AUTO2000_PLUGIN ON CACHE BOOL "Build the Auto 2000 Plugin")
+set (TLP_BUILD_STAT_PLUGIN OFF CACHE BOOL "Build the STAT (statistics) Plugin")
+
 # Dependencies
 
 # Poco
@@ -88,6 +99,16 @@ rrplugins
     Language bindings:
       Enable C bindings?        ${TLP_BUILD_PLUGINS_C_API}
       Enable python bindings?   ${TLP_BUILD_PLUGINS_PYTHON_API}
+      
+    Released plugins:
+      Test Model                ${TLP_BUILD_TEST_MODEL_PLUGIN}
+      Add Noise                 ${TLP_BUILD_ADD_NOISE_PLUGIN}
+      Chi-squared               ${TLP_BUILD_CHISQUARE_PLUGIN}
+      Levenberg-Marquardt       ${TLP_BUILD_LEVENBERG_MARQUARDT_PLUGIN}
+      Nelder Mead               ${TLP_BUILD_NELDER_MEAD_PLUGIN}
+      Monte Carlo Bootstrap     ${TLP_BUILD_MONTE_CARLO_BS_PLUGIN}
+      Bifurcation Auto2k        ${TLP_BUILD_AUTO2000_PLUGIN}
+      Stat                      ${TLP_BUILD_STAT_PLUGIN}
       
     General flags:
       CC                        ${CMAKE_C_COMPILER}
