@@ -1,3 +1,6 @@
+# M Totte Karlsson
+# J Kyle Medley
+
 cmake_minimum_required(VERSION 3.2)
 project( rrplugins )
 
@@ -36,6 +39,7 @@ set ( TLP_BUILD_EXAMPLES   OFF CACHE BOOL   "Build examples" )
 set ( TLP_BUILD_TEST_TOOLS OFF CACHE BOOL   "Build test tools" )
 set ( TLP_BUILD_PLUGINS_C_API ON CACHE BOOL      "Build Plugins C API")
 set ( TLP_BUILD_PLUGINS_PYTHON_API ON CACHE BOOL "Build Plugins Python API")
+set ( TLP_BUILD_BETA_PLUGINS  ON CACHE BOOL      "Build beta (unreleased) plugins" )
 
 # Dependencies
 
@@ -74,8 +78,9 @@ rrplugins
       host architecture         ${CMAKE_SYSTEM_PROCESSOR}
 
     Features:
-      Enable shared library?    ${TLP_BUILD_SHARED_LIB}
-      Enable static library?    ${TLP_BUILD_STATIC_LIB}
+      Enable shared libs?       ${TLP_BUILD_SHARED_LIB}
+      Enable static libs?       ${TLP_BUILD_STATIC_LIB}
+      Enable beta plugins?      ${TLP_BUILD_BETA_PLUGINS}
       Enable apps?              ${TLP_BUILD_APPS}
       Enable examples?          ${TLP_BUILD_EXAMPLES}
       Enable test tools?        ${TLP_BUILD_TEST_TOOLS}
@@ -86,7 +91,7 @@ rrplugins
       
     General flags:
       CC                        ${CMAKE_C_COMPILER}
-      CXX (not used)            ${CMAKE_CXX_COMPILER}
+      CXX                       ${CMAKE_CXX_COMPILER}
       CFLAGS                    ${CMAKE_C_FLAGS}
       CXXFLAGS                  ${CMAKE_CXX_FLAGS}
       LDFLAGS                   ${CMAKE_EXE_LINKER_FLAGS}
