@@ -56,7 +56,7 @@ find_package ( LibRoadRunnerStatic REQUIRED )
 
 message(STATUS "
 -------------------------------------------------------------------------------
-TelPlugins
+rrplugins
 -------------------------------------------------------------------------------
 
     For up-to-date news, releases, and documentation, please visit:
