@@ -25,7 +25,7 @@ if (TLP_BUILD_SHARED_LIB)
   )
 
   target_link_libraries (telplugins_math
-    telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS}
+    telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
   # Install shared library
   install(TARGETS telplugins_math
