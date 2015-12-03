@@ -52,8 +52,8 @@ else()
 endif()
 
 install (TARGETS tel_add_noise
-DESTINATION plugins
-COMPONENT plugins
+  DESTINATION plugins
+  COMPONENT plugins
 )
 
 

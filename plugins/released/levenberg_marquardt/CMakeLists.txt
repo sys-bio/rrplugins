@@ -1,75 +1,68 @@
-cmake_minimum_required(VERSION 2.8)
-set(target tel_levenberg_marquardt)
+# M Totte Karlsson
+# J Kyle Medley
 
-include_directories(
-../source
-../../source
-../../wrappers/C
-${THIRD_PARTY_INSTALL_FOLDER}/include
-${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
-${CMAKE_INSTALL_PREFIX}/include
-)
+project( test_model )
 
-link_directories(
-${CMAKE_INSTALL_PREFIX}/lib
-)
+# include_directories(
+# ../source
+# ../../source
+# ../../wrappers/C
+# ${THIRD_PARTY_INSTALL_FOLDER}/include
+# ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
+# ${CMAKE_INSTALL_PREFIX}/include
+# )
 
-set(sources
-lm.cpp
-lmWorker.cpp
-lmUtils.cpp
-lmObjectiveFunction.cpp
-levenberg_marquardt_doc.cpp
-lm.h
-lmWorker.h
-lmUtils.h
-lmObjectiveFunction.h
-levenberg_marquardt_doc.h
+# link_directories(
+# ${CMAKE_INSTALL_PREFIX}/lib
+# )
+
+set(RRP_LEVENBERG_MARQUARDT_SOURCES
+  lm.cpp
+  lmWorker.cpp
+  lmUtils.cpp
+  lmObjectiveFunction.cpp
+  levenberg_marquardt_doc.cpp
+  lm.h
+  lmWorker.h
+  lmUtils.h
+  lmObjectiveFunction.h
+  levenberg_marquardt_doc.h
 )
 
 #This is where the Levenberg C lib is built
 add_subdirectory(lib)
 
 add_definitions(
--DPOCO_STATIC
--DLIBSBML_STATIC
--DEXPORT_TEL_PLUGIN
--DSTATIC_LIBSTRUCT
+  -DPOCO_STATIC
+  -DLIBSBML_STATIC
+  -DEXPORT_TEL_PLUGIN
+  -DSTATIC_LIBSTRUCT
 )
 
-add_library(${target} MODULE ${sources})
+add_library(tel_levenberg_marquardt MODULE ${RRP_LEVENBERG_MARQUARDT_SOURCES})
 
-target_link_libraries (${target}
-roadrunner
-telplugins_common
-telplugins_core
-lmfit-static
-telplugins_c_api                 
-roadrunner_c_api
-blas
-lapack
-rr-libstruct-static
-
+target_link_libraries (tel_levenberg_marquardt
+  telplugins_core
+  ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
 if(UNIX) 
-    if(APPLE)
-        set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-    else()
-        set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
-    endif()
+  if(APPLE)
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+  else()
+    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
+  endif()
 
-    set_property(TARGET ${target}
-        PROPERTY  COMPILE_DEFINITIONS
-        LIBSBML_STATIC
-        LIBLAX_STATIC
-        STATIC_PUGI
-        STATIC_LIBSTRUCT
-        )
-
+  set_property(TARGET tel_levenberg_marquardt
+    PROPERTY COMPILE_DEFINITIONS
+    LIBSBML_STATIC
+    LIBLAX_STATIC
+    STATIC_PUGI
+    STATIC_LIBSTRUCT
+  )
 endif()
 
-install (TARGETS ${target}
-DESTINATION plugins
-COMPONENT plugins
+install (TARGETS tel_levenberg_marquardt
+  DESTINATION plugins
+  COMPONENT plugins
 )
