@@ -242,7 +242,7 @@ double nmWorker::getChi(const Properties& parameters)
     options.duration    = expData->getTimeEnd() - expData->getTimeStart();
     options.steps       = expData->rSize() - 1;
 
-    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+    mHost.mRRI->reset();
 
     const ls::DoubleMatrix *modelData = NULL;
     if(mHost.mRRI->simulate(&options))
@@ -404,7 +404,7 @@ void nmWorker::createModelData(TelluriumData* _data)
     options.duration    = expData->getTimeEnd() - expData->getTimeStart();
     options.steps       = expData->rSize() - 1;
 
-    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+    mHost.mRRI->reset();
 
     if(mHost.mRRI->simulate(&options))
     {

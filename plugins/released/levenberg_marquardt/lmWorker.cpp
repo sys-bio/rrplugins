@@ -232,7 +232,7 @@ double lmWorker::getChi(const Properties& parameters)
     options.start = mLMData.timeStart;
     options.duration = mLMData.timeEnd - mLMData.timeStart;
     options.steps = mLMData.nrOfTimePoints - 1;
-    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+    mRRI->reset();
 
     const DoubleMatrix* modelData = NULL;
     if(mRRI->simulate(&options))
@@ -509,7 +509,7 @@ void lmWorker::createModelData(TelluriumData* _data)
     options.start = mLMData.timeStart;
     options.duration = mLMData.timeEnd - mLMData.timeStart;
     options.steps = mLMData.nrOfTimePoints - 1;
-    options.flags = options.flags | rr::SimulateOptions::RESET_MODEL;
+    mRRI->reset();
 
     if(mRRI->simulate(&options))
     {
