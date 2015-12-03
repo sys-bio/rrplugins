@@ -47,8 +47,12 @@ set( LIBXML2_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibXml2 REQUIRED )
 
 # libRoadRunner
+# - Shared
 set( LIBROADRUNNER_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibRoadRunner REQUIRED )
+# - Static
+set( LIBROADRUNNERSTATIC_PATH "${TLP_DEPENDENCIES_PATH}" )
+find_package ( LibRoadRunnerStatic REQUIRED )
 
 message(STATUS "
 -------------------------------------------------------------------------------
@@ -82,11 +86,18 @@ TelPlugins
     "
 )
 
-if(LIBXML2_FOUND)
+if(LIBROADRUNNER_FOUND)
     message( "  *** roadrunner libs             ${LIBROADRUNNER_LIBRARIES}")
     message( "  *** roadrunner includes         ${LIBROADRUNNER_INCLUDE_DIR}")
 else()
     message( "  *** roadrunner                  *N/A")
+endif()
+
+if(LIBROADRUNNERSTATIC_FOUND)
+    message( "  *** roadrunner static libs      ${LIBROADRUNNERSTATIC_LIBRARIES}")
+    message( "  *** roadrunner static includes  ${LIBROADRUNNERSTATIC_INCLUDE_DIR}")
+else()
+    message( "  *** roadrunner static           *N/A")
 endif()
 
 if(Poco_FOUND)
