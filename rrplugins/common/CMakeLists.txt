@@ -80,61 +80,25 @@ if (TLP_BUILD_STATIC_LIB)
     POCO_NO_AUTOMATIC_LIBS
   )
 
-  #libraries to link with static lib
-  target_link_libraries (telplugins_common-static
-    sundials_cvode
-    sundials_nvecserial
-    blas
-    lapack
-    nleq-static
-    rr-libstruct-static
-    poco_foundation-static
-    )
-
-  if(WIN32)
-      target_link_libraries (telplugins_common-static
-          libsbml-static
-          libf2c
-          iphlpapi
-    libxml2
-          )
-  endif(WIN32)
-
-  if(UNIX)
-      target_link_libraries (telplugins_common-static
-          sbml-static
-          f2c
-          xml2
-          dl
-          pthread
-          )
-  endif(UNIX)
-
-  #Libxml we can't build right now
-  if(${BORLAND})
-      target_link_libraries (telplugins_common-static
-          libxml2_xe
-          )
-  endif()
+  target_link_libraries (telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS})
 
   if(${MSVC})
-      #Disable some VS Warnings 
-      #           4251 About exporting std classes
-      #           4018 Comparing unsigned/signed ints
-      #           4996 Deprecated functions   
-  add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
-
+    # Disable some VS Warnings 
+    # 4251 About exporting std classes
+    # 4018 Comparing unsigned/signed ints
+    # 4996 Deprecated functions   
+    add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
   endif()
 
   if(BUILD_TESTS)
       add_subdirectory(testing)
   endif()
 
-  #--- INSTALL STUFF
+  # Install static library
   install(TARGETS telplugins_common-static
-      LIBRARY DESTINATION lib COMPONENT pluginsLib
-      ARCHIVE DESTINATION lib COMPONENT pluginsLib
-      )
+    LIBRARY DESTINATION lib COMPONENT pluginsLib
+    ARCHIVE DESTINATION lib COMPONENT pluginsLib
+    )
 endif()
     
 # ** Headers ****
