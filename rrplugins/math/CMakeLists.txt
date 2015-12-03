@@ -1,4 +1,5 @@
-set(target telplugins_math)
+# M Totte Karlsson
+# J Kyle Medley
 
 set(RRPLUGINS_MATH_SOURCES
   telRandom

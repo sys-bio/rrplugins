@@ -175,7 +175,7 @@ bool tlp_cc tpFreeProperties(TELHandle handle)
         Properties* props   = castHandle<Properties>(handle, __FUNC__);
         delete props;
         return true;
-    catch_ptr_macro
+    catch_bool_macro
 }
 
 bool tlp_cc tpAddPropertyToList(TELHandle handle, TELHandle para)

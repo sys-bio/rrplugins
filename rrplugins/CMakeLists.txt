@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.2)
+# M Totte Karlsson
+# J Kyle Medley
 
 include_directories(
   ${TLP_ROOT}/rrplugins/core
