@@ -3,19 +3,6 @@
 
 project( monte_carlo_bs )
 
-# include_directories(
-# ../source
-# ../../../source
-# ../../../wrappers/C
-# ${THIRD_PARTY_INSTALL_FOLDER}/include
-# ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
-# ${CMAKE_INSTALL_PREFIX}/include
-# )
-# 
-# link_directories(
-# ${CMAKE_INSTALL_PREFIX}/lib
-# )
-
 set(RRP_MONTE_CARLO_BS_SOURCES
   bsMonteCarlo.cpp
   bsWorker.cpp
@@ -24,8 +11,6 @@ set(RRP_MONTE_CARLO_BS_SOURCES
   bsWorker.h
   monte_carlo_bs_doc.h
 )
-
-#This is where the Levenberg C lib is built
 
 add_definitions(
   -DPOCO_STATIC
