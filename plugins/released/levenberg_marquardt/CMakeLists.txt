@@ -3,19 +3,6 @@
 
 project( test_model )
 
-# include_directories(
-# ../source
-# ../../source
-# ../../wrappers/C
-# ${THIRD_PARTY_INSTALL_FOLDER}/include
-# ${THIRD_PARTY_INSTALL_FOLDER}/include/c_api
-# ${CMAKE_INSTALL_PREFIX}/include
-# )
-
-# link_directories(
-# ${CMAKE_INSTALL_PREFIX}/lib
-# )
-
 set(RRP_LEVENBERG_MARQUARDT_SOURCES
   lm.cpp
   lmWorker.cpp
@@ -29,7 +16,7 @@ set(RRP_LEVENBERG_MARQUARDT_SOURCES
   levenberg_marquardt_doc.h
 )
 
-#This is where the Levenberg C lib is built
+# This is where the Levenberg lib is built
 add_subdirectory(lib)
 
 add_definitions(
