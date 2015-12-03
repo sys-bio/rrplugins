@@ -46,11 +46,11 @@
 #include <string>
 #include <typeinfo>
 #include "telplugins_c_api.h"
-#include "telTelluriumData.h"
-#include "telPluginManager.h"
-#include "telProperties.h"
-#include "telPlugin.h"
-#include "telProperty.h"
+#include "rrplugins/common/telTelluriumData.h"
+#include "rrplugins/core/telPluginManager.h"
+#include "rrplugins/common/telProperties.h"
+#include "rrplugins/core/telPlugin.h"
+#include "rrplugins/common/telProperty.h"
 #include "telAPIHandleManager.h"
 namespace rr
 {
