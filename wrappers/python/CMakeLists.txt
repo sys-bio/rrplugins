@@ -9,9 +9,6 @@ set (RRP_PYTHON_API_SOURCE
   __init__.py
   telplugins.py
   telplugins_c_api.py
-  telpluginutils.py
-  telfindsharedlib.py
-  telplugins_telluriumdata_api.py
 )
 
 install(
