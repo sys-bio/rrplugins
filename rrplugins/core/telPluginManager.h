@@ -44,9 +44,9 @@
 #include <string>
 #include <sstream>
 #include <ostream>
-#include "telCoreExporter.h"
-#include "telConstants.h"
-#include "telStringList.h"
+#include "rrplugins/core/telCoreExporter.h"
+#include "rrplugins/common/telConstants.h"
+#include "rrplugins/common/telStringList.h"
 #include "Poco/SharedLibrary.h"
 
 //---------------------------------------------------------------------------
