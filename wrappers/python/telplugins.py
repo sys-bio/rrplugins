@@ -287,6 +287,7 @@ class Plugin (object):
     ## myPlugin = Plugin ("tel_add_noise")
     ##@endcode         
     def __init__(self, pluginName):
+        print('__init__ {}'.format(pluginName))
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
         if not self.plugin:
