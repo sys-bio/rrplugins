@@ -9,7 +9,7 @@ import time
 from ctypes import *
 from ctypes import CDLL
 import matplotlib.pyplot as plt
-from os.path import isfile, join
+from os.path import isfile
 
 """
 CTypes Python Bindings to the Tellurium Plugin API.
@@ -27,11 +27,12 @@ def rrpPlatformIsWin():
     return sys.platform.startswith('win32')
 
 # expect lib file to be in this directory
-rrplugins_path = join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib')
+rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib'))
+
 if not os.path.exists(rrplugins_path):
     raise RuntimeError('==== ERROR: path to rrplugin binaries could not be found =====')
 
-#temporary change into this path so we can load our shared libs
+# temporarily change into this path so we can load our shared libs
 os.chdir(rrplugins_path)
 
 #rrpLib will be our handle returned by ctypes
@@ -42,7 +43,7 @@ for name in [
              libTitle + '.dll', 
              'lib' + libTitle + '.dylib',
              'lib' + libTitle + '.so']:
-    fullpath = join(rrplugins_path, name)
+    fullpath = os.path.join(rrplugins_path, name)
     
     # if the lib file exists, try to load it
     if isfile(fullpath):
@@ -56,8 +57,8 @@ if rrpLib is None:
 
 # restore working dir
 os.chdir(originalWorkingDirectory)
-    
-gDefaultPluginsPath = rrplugins_path
+
+gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'plugins'))
 
 #=======================tel_api========================#
 #Type of plugin events, first argument is return type
