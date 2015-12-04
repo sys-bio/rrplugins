@@ -1,7 +1,7 @@
 # M Totte Karlsson
 # J Kyle Medley
 
-set(src
+set(RRP_LIB_AUTO_INTERFACE_SRC
   telAutoConstants.cpp
   telAutoTelluriumInterface.cpp
   telAutoUtils.cpp
@@ -10,7 +10,7 @@ set(src
   telAutoUtils.h
 )
 
-add_library(libTelluriumAutoInterface-static STATIC ${src})
+add_library( libTelluriumAutoInterface-static STATIC ${RRP_LIB_AUTO_INTERFACE_SRC} )
 
 set_target_properties(
   libTelluriumAutoInterface-static
