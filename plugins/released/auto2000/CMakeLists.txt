@@ -41,6 +41,8 @@ add_library(tel_auto2000 MODULE ${RRP_AUTO2000_SOURCES})
 
 target_link_libraries (tel_auto2000
   telplugins_core
+  libTelluriumAutoInterface-static
+  libAuto-static
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
