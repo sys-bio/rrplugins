@@ -26,6 +26,9 @@ originalWorkingDirectory = os.getcwd()
 def rrpPlatformIsWin():
     return sys.platform.startswith('win32')
 
+def rrpPlatformIsOSX():
+    return sys.platform.startswith('darwin')
+
 # expect lib file to be in this directory
 rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib'))
 
@@ -449,11 +452,16 @@ def displayPluginManual(pluginHandle):
     if numOfBytes == 0:
        print 'This plugin does not have a manual.'
        return False
-    outFName = tempfile.gettempdir() + '\\' + getPluginName (pluginHandle) + '.pdf'
-    print outFName
+    outFName = os.path.join(tempfile.gettempdir(), getPluginName (pluginHandle) + '.pdf')
+    print(outFName)
     with open(outFName, 'wb') as output:
       output.write(manual)
-    os.system('start ' + outFName)
+    if rrpPlatformIsWin():
+        os.system('start ' + outFName)
+    elif rrpPlatformIsOSX():
+        os.system('open ' + outFName)
+    else:
+        os.system('xdg-open ' + outFName)
 
 ## \brief Assign a roadrunner instance handle for the plugin to use.
 ##   A plugin may use an externally created roadrunner instance for its internal work.

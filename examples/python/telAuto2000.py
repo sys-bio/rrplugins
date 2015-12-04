@@ -36,5 +36,5 @@ biData  = auto.BifurcationData
 
 biData.plotBifurcationDiagram(pts, lbls) 
 
-#auto.viewManual()
+auto.viewManual()
 print('Plugin version: {}'.format(auto.getVersion()))
