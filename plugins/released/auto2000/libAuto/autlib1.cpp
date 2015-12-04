@@ -4,6 +4,7 @@
 #include <iostream>
 #include "auto_f2c.h"
 #include "auto_c.h"
+#include <time.h>
 using namespace std;
 namespace autolib {
 

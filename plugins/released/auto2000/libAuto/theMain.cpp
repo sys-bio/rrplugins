@@ -1,5 +1,6 @@
 #include "libf2c/auto_f2c.h"
 #include "auto_c.h"
+#include <time.h>
 
 int AUTO_main(int argc,char *argv[]);
 
@@ -96,7 +97,9 @@ int AUTO_main(int argc, char *argv[])
 #if defined(_WIN32) || defined(__WIN32__)
     clock_t time0, time1;
 #else
-    struct timeval  *time0,*time1;
+//     struct timeval  *time0,*time1;
+    clock_t time0;
+    clock_t time1;
 #endif
     integer *icp = new integer[num_total_pars];
     doublereal *par = new doublereal[num_total_pars], *thl = new doublereal[num_total_pars];

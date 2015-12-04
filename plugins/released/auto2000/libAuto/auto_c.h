@@ -11,6 +11,8 @@
 #undef MPI
 #endif
 
+#include <sys/times.h>
+
 #ifdef PTHREADS
 #include <pthread.h>
 #endif
@@ -91,8 +93,8 @@ int AUTO_main(int argc, char *argv[]);
 void time_start(clock_t *);
 void time_end(clock_t, char *, FILE *fp);
 #else
-void time_start(struct timeval **);
-void time_end(struct timeval *, char *, FILE *fp);
+void time_start(clock_t *);
+void time_end(clock_t, char *, FILE *fp);
 #endif
 
 #ifdef USAGE
