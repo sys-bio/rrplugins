@@ -204,8 +204,8 @@ endif()
 
 
 #======================= INSTALL FILES ============================
-FILE (GLOB installerFiles installer/windows/*.*)
-install ( FILES ${installerFiles} DESTINATION ./installer/windows )
+# FILE (GLOB installerFiles installer/windows/*.*)
+# install ( FILES ${installerFiles} DESTINATION ./installer/windows )
 
 install(
   FILES
