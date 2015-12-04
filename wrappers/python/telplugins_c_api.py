@@ -28,7 +28,7 @@ def rrpPlatformIsWin():
 
 # expect lib file to be in this directory
 rrplugins_path = join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib')
-if not os.path.exists(gDefaultPluginsPath):
+if not os.path.exists(rrplugins_path):
     raise RuntimeError('==== ERROR: path to rrplugin binaries could not be found =====')
 
 #temporary change into this path so we can load our shared libs
