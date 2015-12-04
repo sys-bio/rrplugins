@@ -203,35 +203,20 @@ if(TLP_BUILD_TEST_TOOLS)
 endif()
 
 
-#======================= INSTALL STUFF ============================
-# Install the "installer". Can make this more elegant later on
+#======================= INSTALL FILES ============================
 FILE (GLOB installerFiles installer/windows/*.*)
 install ( FILES ${installerFiles} DESTINATION ./installer/windows )
 
-# Install createPythonReleaseScript
-# install ( FILES scripts/createPythonRelease.sh DESTINATION ./../ )
-
-#=== ThirdParties
-if(${BORLAND})
-    set(CG_RUNTIMES        cc32110MT.dll)
-    foreach(runtime ${CG_RUNTIMES})
-        install (FILES
-            ${THIRD_PARTY_FOLDER}/dependencies/cg/xe/${runtime}
-            DESTINATION bin
-            COMPONENT rr_core)
-    endforeach()
-endif()
-
 install(
-    FILES     
-    README.txt 
-    LICENSE.txt 
-    AUTHORS.txt 
-    FUNDING.txt
-    VERSION.txt
-    NEWS.txt
-    NOTICE.txt
-    CHANGELOG.txt
-    DESTINATION .
+  FILES     
+  README.txt 
+  LICENSE.txt 
+  AUTHORS.txt 
+  FUNDING.txt
+  VERSION.txt
+  NEWS.txt
+  NOTICE.txt
+  CHANGELOG.txt
+  DESTINATION .
 )
 
