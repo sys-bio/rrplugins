@@ -351,11 +351,11 @@ def getPluginCopyright(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
-rrpLib.tpGetPluginVersion.restype = c_char_p
+rrpLib.tpGetPluginVersion.restype = c_void_p
 def getPluginVersion(pluginHandle):
-    data =  rrpLib.tpGetPluginVersion(pluginHandle)
-    res = data
-    rrpLib.tpFreeText(data)
+    ptr = rrpLib.tpGetPluginVersion(pluginHandle)
+    res = ctypes.cast(ptr, ctypes.c_char_p).value
+    rrpLib.tpFreeText(ptr)
     return res
 
 ## \brief Get the Description of a Plugin. This is assigned by the pluging developer
