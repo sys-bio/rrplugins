@@ -39,15 +39,17 @@ rrpLib=None
 
 # search for known lib prefixes/suffixes
 for name in [
-    libTitle + '.dll', 
-    'lib' + libTitle + '.dylib',
-    'lib' + libTitle + '.so']:
+             libTitle + '.dll', 
+             'lib' + libTitle + '.dylib',
+             'lib' + libTitle + '.so']:
     fullpath = join(rrplugins_path, name)
-    print('file? {}'.format(isfile(fullpath)))
-    try:
-        rrpLib=CDLL(fullpath)
-    except Exception as e:
-        print('Exception when trying to load Tellurium plugins: {}'.format(e))
+    
+    # if the lib file exists, try to load it
+    if isfile(fullpath):
+        try:
+            rrpLib=CDLL(fullpath)
+        except Exception as e:
+            print('Exception when trying to load Tellurium plugins: {}'.format(e))
     
 if rrpLib is None:
     raise RuntimeError('Cannot find telplugins_c_api library in {}'.format(rrplugins_path))
