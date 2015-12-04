@@ -7,6 +7,7 @@
 #include "telplugins_cpp_support.h"
 #include "rrplugins/common/telStringUtils.h"
 #include "rrplugins/common/telTelluriumData.h"
+#include "rrplugins/common/telLogger.h"
 
 using rr::RoadRunner;
 using namespace std;
@@ -87,7 +88,8 @@ char* tlp_cc tpGetTelluriumDataColumnHeader(TELHandle handle)
 {
     start_try
         TelluriumData* data = castHandle< TelluriumData >(handle, __FUNC__);
-        return tpCreateText(data->getColumnNamesAsString());
+        char* text = tpCreateText(data->getColumnNamesAsString());
+        return text;
     catch_ptr_macro
 }
 

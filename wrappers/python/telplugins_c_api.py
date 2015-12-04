@@ -6,7 +6,8 @@ import numpy as np
 import roadrunner
 import tempfile
 import time
-from ctypes import *
+import ctypes
+from ctypes import * # FIXME: remove this sinful line
 from ctypes import CDLL
 import matplotlib.pyplot as plt
 from os.path import isfile
@@ -1138,7 +1139,7 @@ def getPropertyValue(propertyHandle):
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataElement.restype = c_bool
 def getNumpyData(telDataHandle):
-    colHeader = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
+    colHeader = getTelluriumDataColumnHeader(telDataHandle)
     rowCount = rrpLib.tpGetTelluriumDataNumRows(telDataHandle)
     colCount = rrpLib.tpGetTelluriumDataNumCols(telDataHandle)
     resultArray = np.zeros([rowCount, colCount])
@@ -1235,12 +1236,13 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-rrpLib.tpGetTelluriumDataColumnHeader.restype = c_char_p
+rrpLib.tpGetTelluriumDataColumnHeader.restype = c_void_p
 def getTelluriumDataColumnHeader(telDataHandle):
+    # http://stackoverflow.com/questions/13445568/python-ctypes-how-to-free-memory-getting-invalid-pointer-error
     hdr = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
 
     if hdr:
-        res = hdr
+        res = ctypes.cast(hdr, ctypes.c_char_p).value
         rrpLib.tpFreeText(hdr)
         return res.split(',')
     else:

@@ -9,6 +9,7 @@
 #include <cstring>
 #include "rr-libstruct/lsMatrix.h"
 #include "telException.h"
+#include "telLogger.h"
 
 //---------------------------------------------------------------------------
 
@@ -70,7 +71,7 @@ string substituteCharInString(const string& text, char chToReplace, char withCha
 
 bool freeText(char* str)
 {
-	delete [] str;
+    delete [] str;
     return true;
 }
 

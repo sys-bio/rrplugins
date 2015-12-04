@@ -25,16 +25,16 @@ auto.setProperty("NMX", 5000)
         
 #Execute the plugin
 auto.execute()
-        
+
 # Bifurcation summary
 print "Summary: " + auto.BifurcationSummary
 
 #Plot Bifurcation diagram
 pts     = auto.BifurcationPoints
 lbls    = auto.BifurcationLabels
-biData  = auto.BifurcationData    
+biData  = auto.BifurcationData
 
 biData.plotBifurcationDiagram(pts, lbls) 
 
-auto.viewManual()
+#auto.viewManual()
 print('Plugin version: {}'.format(auto.getVersion()))
