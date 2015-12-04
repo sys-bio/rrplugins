@@ -88,6 +88,8 @@ TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
         {
             //Register plugins with Handle manager.
             Plugin* handle = pm->getPlugin(pluginName);
+            if (!handle)
+                throw std::runtime_error("Could not load plugin " + std::string(pluginName));
             return tpRegisterPlugin(handle);
         }
         else
