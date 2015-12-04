@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <iostream>
+#include <stdexcept>
 #include "Poco/Glob.h"
 #include "Poco/SharedLibrary.h"
 #include "rr/rrRoadRunner.h"
@@ -18,8 +19,9 @@
 namespace tlp
 {
 static bool  hasFileExtension(const string& fName);
-static const char* getPluginExtension();
-static const char* getPluginPrefix();
+static std::string getPluginExtension();
+static std::string getPluginOSPrefix();
+static std::string getPluginLibNamePrefix();
 
 #if defined(__BORLANDC__)
     #define exp_fnc_prefix "_"
@@ -44,7 +46,7 @@ PluginManager::PluginManager(const std::string& folder)
 :
 mPluginFolder(folder),
 mPluginExtension(getPluginExtension()),
-mPluginPrefix(getPluginPrefix())
+mPluginPrefix(getPluginOSPrefix())
 {}
 
 PluginManager::~PluginManager()
@@ -174,11 +176,12 @@ int PluginManager::load(const string& pluginName)
     }
 
     set<string> files;
-    string globPath =  joinPath(mPluginFolder, "tel_*." + mPluginExtension);
+    // FIXME: add platform check
+    string globPath =  joinPath(mPluginFolder, getPluginOSPrefix() + getPluginLibNamePrefix() + "*." + mPluginExtension);
 
     if(pluginName.size())
     {
-        string temp = joinPath(mPluginFolder, pluginName + "." + mPluginExtension);
+        string temp = joinPath(mPluginFolder, getPluginOSPrefix() + pluginName + "." + mPluginExtension);
         files.insert(temp);
      }
     else
@@ -225,7 +228,6 @@ bool PluginManager::loadPlugin(const string& _libName)
         {
             info<<"The Plugin: "<<libName<<" is already loaded";
             RRPLOG(lWarning)<<info.str();
-            //throw(info.str());
             return true; //Don't make this an error..
         }
 
@@ -240,7 +242,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         if(!fileExists(fullName))
         {
             info<<"The Plugin: "<<fullName<<" could not be found";
-            throw(info.str());
+            throw std::runtime_error(info.str());
         }
 
         //This one throws if there is a problem..
@@ -250,7 +252,7 @@ bool PluginManager::loadPlugin(const string& _libName)
         if(!checkImplementationLanguage(libHandle))
         {
             info<<"The plugin: "<<_libName<<" has not implemented the function getImplementationLanguage properly. Plugin can not be loaded";
-            throw(info.str());
+            throw std::runtime_error(info.str());
         }
 
         //Check plugin language
@@ -577,7 +579,7 @@ bool destroyRRPlugin(Plugin *plugin)
 }
 
 
-const char* getPluginExtension()
+std::string getPluginExtension()
 {
 
 #if defined(_WIN32)
@@ -590,7 +592,7 @@ const char* getPluginExtension()
 #endif
 }
 
-const char* getPluginPrefix()
+std::string getPluginOSPrefix()
 {
 
 #if defined(_WIN32)
@@ -598,8 +600,13 @@ const char* getPluginPrefix()
 #elif defined(__linux__)
     return "lib";
 #else
-    return "DEFINE_PLATFORM";
+    return "lib";
 #endif
+}
+
+std::string getPluginLibNamePrefix()
+{
+    return "tel_";
 }
 
 bool hasFileExtension(const string& fName)
