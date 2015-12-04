@@ -4,7 +4,7 @@
 #
 # Author:      Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from teplugins import *
+from rrplugins import *
 
 try:  
     sbmlModel ="BIOMD0000000203.xml"                              

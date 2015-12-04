@@ -43,7 +43,7 @@ for name in [
     'lib' + libTitle + '.dylib',
     'lib' + libTitle + '.so']:
     fullpath = join(rrplugins_path, name)
-    print('file? {}'.format(isfile(fullpath))
+    print('file? {}'.format(isfile(fullpath)))
     try:
         rrpLib=CDLL(fullpath)
     except Exception as e:
