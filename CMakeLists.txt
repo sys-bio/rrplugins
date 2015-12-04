@@ -208,15 +208,15 @@ FILE (GLOB installerFiles installer/windows/*.*)
 install ( FILES ${installerFiles} DESTINATION ./installer/windows )
 
 install(
-  FILES     
-  README.txt 
-  LICENSE.txt 
-  AUTHORS.txt 
-  FUNDING.txt
-  VERSION.txt
-  NEWS.txt
-  NOTICE.txt
-  CHANGELOG.txt
+  FILES
+  RRP_README.txt 
+  RRP_LICENSE.txt 
+  RRP_AUTHORS.txt 
+  RRP_FUNDING.txt
+  RRP_VERSION.txt
+  RRP_NEWS.txt
+  RRP_NOTICE.txt
+  RRP_CHANGELOG.txt
   DESTINATION .
 )
 
