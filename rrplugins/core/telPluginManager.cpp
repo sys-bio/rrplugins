@@ -504,7 +504,7 @@ Plugin* PluginManager::getPlugin(const string& _name) const
             {
                    return aPlugin;
             }
-            if(aPlugin && aPlugin->getLibraryName() == name)
+            if(aPlugin && (aPlugin->getLibraryName() == name|| aPlugin->getLibraryName() == getPluginOSPrefix() + name))
             {
                    return aPlugin;
             }
