@@ -3,15 +3,15 @@
 # This example also shows how to plot data and how to view a plugins 
 # embedded manual 
 #
-# Author: Totte Karlsson (totte@dunescientific.com)
+# Authors: Totte Karlsson (totte@dunescientific.com), J Kyle Medley
 #-------------------------------------------------------------------------------
-import teplugins as tel
+from rrplugins import Plugin
 
 try:    
-    modelPlugin = tel.Plugin("tel_test_model")            
+    modelPlugin = Plugin("tel_test_model")            
     
     #Test model plugin depends on the add_noise plugin
-    noisePlugin = tel.Plugin("tel_add_noise")
+    noisePlugin = Plugin("tel_add_noise")
     
     #Generate internal test data
     modelPlugin.execute()
