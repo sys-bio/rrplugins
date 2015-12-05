@@ -17,9 +17,9 @@ add_definitions(
 
 add_library(tel_test_model MODULE ${RRP_TEST_MODEL_SOURCES})
 
-if(WIN32)
-  target_link_libraries (tel_test_model telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
-else()
+target_link_libraries (tel_test_model telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
+
+if(NOT WIN32)
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
   else()

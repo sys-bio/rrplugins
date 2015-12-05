@@ -28,10 +28,11 @@ add_library(tel_nelder_mead MODULE ${RRP_NELDER_MEAD_SOURCES})
 
 target_link_libraries (tel_nelder_mead
   telplugins_core
+  telplugins_c_api
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
-if(UNIX) 
+if(UNIX)
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
   else()

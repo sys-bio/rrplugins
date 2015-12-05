@@ -35,12 +35,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#ifdef MACOSX
-    #include <malloc/malloc.h>
-#else
-    #include <malloc.h>
-#endif
-
 
 void my_constraints(double x[], int n);
 

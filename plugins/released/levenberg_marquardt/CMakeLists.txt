@@ -1,7 +1,7 @@
 # M Totte Karlsson
 # J Kyle Medley
 
-project( test_model )
+project( levenberg_marquardt )
 
 set(RRP_LEVENBERG_MARQUARDT_SOURCES
   lm.cpp
@@ -29,11 +29,14 @@ add_definitions(
 add_library(tel_levenberg_marquardt MODULE ${RRP_LEVENBERG_MARQUARDT_SOURCES})
 
 target_link_libraries (tel_levenberg_marquardt
+  lmfit-static
   telplugins_core
+  telplugins_c_api
+  roadrunner_c_api
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
-if(UNIX) 
+if(UNIX)
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
   else()
