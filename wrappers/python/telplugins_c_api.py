@@ -754,6 +754,7 @@ def setProperty(propertyHandle, paraValue):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetPropertyDescription.restype = c_bool
+rrpLib.tpSetPropertyDescription.argtypes = [c_void_p, c_char_p]
 def setPropertyDescription(propertyHandle, descr):
     return rrpLib.tpSetPropertyDescription(propertyHandle, descr)
 
@@ -763,6 +764,7 @@ def setPropertyDescription(propertyHandle, descr):
 ## \return Returns the description if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyDescription.restype = c_char_p
+rrpLib.tpGetPropertyDescription.argtypes = [c_void_p]
 def getPropertyDescription(propertyHandle):
     descr = rrpLib.tpGetPropertyDescription(propertyHandle)
     if descr is None:
@@ -778,6 +780,7 @@ def getPropertyDescription(propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetPropertyHint.restype = c_bool
+rrpLib.tpSetPropertyHint.argtypes = [c_void_p, c_char_p]
 def setPropertyHint(propertyHandle, descr):
     return rrpLib.tpSetPropertyHint(propertyHandle, descr)
 
@@ -798,6 +801,7 @@ def setPropertyHint(propertyHandle, descr):
 ## \endhtmlonly
 ## \ingroup plugin_properties
 rrpLib.tpCreateProperty.restype = c_void_p
+rrpLib.tpCreateProperty.argtypes = [c_char_p, c_char_p, c_char_p, c_void_p]
 def createProperty(name, the_type, hint="", value=None):
     if value == None:
        return rrpLib.tpCreateProperty(name, the_type, hint, value)
@@ -827,6 +831,7 @@ def createProperty(name, the_type, hint="", value=None):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpFreeProperty.restype = c_bool
+rrpLib.tpFreeProperty.argtypes = [c_void_p]
 def freeProperty(propertyHandle):
     return rrpLib.tpFreeProperty(propertyHandle)
 
@@ -848,6 +853,7 @@ def freeProperty(propertyHandle):
 ## \endhtmlonly
 ## \ingroup plugin_properties
 rrpLib.tpAddPropertyToList.restype = c_bool
+rrpLib.tpAddPropertyToList.argtypes = [c_void_p, c_void_p]
 def addPropertyToList(propertyHandle, addMe):
     #Make sure the Property is of type list
     if getPropertyType(propertyHandle) == 'listOfProperties':
@@ -862,6 +868,7 @@ def addPropertyToList(propertyHandle, addMe):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetPropertyByString.restype = c_bool
+rrpLib.tpSetPropertyByString.argtypes = [c_void_p, c_char_p]
 def setPropertyByString(PropertyHandle, value):
     return rrpLib.tpSetPropertyByString(PropertyHandle, value)
 
@@ -870,6 +877,7 @@ def setPropertyByString(PropertyHandle, value):
 ## \return Returns informational text about the Property if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyInfo.restype = c_char_p
+rrpLib.tpGetPropertyInfo.argtypes = [c_void_p]
 def getPropertyInfo(propertyHandle):
     return rrpLib.tpGetPropertyInfo(propertyHandle)
 
@@ -878,6 +886,7 @@ def getPropertyInfo(propertyHandle):
 ## \return Returns the Properties value if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyValueAsString.restype = c_char_p
+rrpLib.tpGetPropertyValueAsString.argtypes = [c_void_p]
 def getPropertyValueAsString(propertyHandle):
     return rrpLib.tpGetPropertyValueAsString(propertyHandle)
 
@@ -929,7 +938,7 @@ def getPropertyType(propertyHandle):
 ## \return Returns a Boolean value. Throws an exception if the property type is not a Boolean
 ## \ingroup plugin_properties
 rrpLib.tpGetBoolProperty.restype = c_bool
-rrpLib.tpGetBoolProperty.argtypes = [c_void_p]
+rrpLib.tpGetBoolProperty.argtypes = [c_void_p, c_bool_p]
 def getBoolProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "bool":
         val = c_bool()
@@ -946,7 +955,7 @@ def getBoolProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetBoolProperty.restype = c_bool
-rrpLib.tpSetBoolProperty.argtypes = [c_void_p, c_int]
+rrpLib.tpSetBoolProperty.argtypes = [c_void_p, c_bool]
 def setBoolProperty(propertyHandle, value):
     return rrpLib.tpSetBoolProperty (propertyHandle, c_bool(value))
 
@@ -955,7 +964,7 @@ def setBoolProperty(propertyHandle, value):
 ## \return Returns an integer value. Throws an exception if the property type is not an integer
 ## \ingroup plugin_properties
 rrpLib.tpGetIntProperty.restype = c_int
-rrpLib.tpGetIntProperty.argtypes = [c_void_p]
+rrpLib.tpGetIntProperty.argtypes = [c_void_p, c_int_p]
 def getIntProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "int":
         val = c_int()
@@ -981,7 +990,7 @@ def setIntProperty(propertyHandle, value):
 ## \return Returns a double value. Throws an exception if the property type is not a double
 ## \ingroup plugin_properties
 rrpLib.tpGetDoubleProperty.restype = c_double
-rrpLib.tpGetDoubleProperty.argtypes = [c_void_p]
+rrpLib.tpGetDoubleProperty.argtypes = [c_void_p, c_double_p]
 def getDoubleProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "double":
         val = c_double()
@@ -1007,7 +1016,7 @@ def setDoubleProperty(propertyHandle, value):
 ## \return Returns a string value. Throws an exception if the property type is not a string
 ## \ingroup plugin_properties
 rrpLib.tpGetStringProperty.restype = c_bool
-rrpLib.tpGetStringProperty.argtypes = [c_void_p]
+rrpLib.tpGetStringProperty.argtypes = [c_void_p, c_char_p]
 def getStringProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "string" or getPropertyType (propertyHandle) == "std::string":
         val = c_char_p()
@@ -1033,6 +1042,7 @@ def setStringProperty(propertyHandle, value):
 ## \return Returns a handle to a ListProperty. Throws an exception of the property type is not a list of properties
 ## \ingroup plugin_properties
 rrpLib.tpGetListProperty.restype = c_bool
+rrpLib.tpGetListProperty.argtypes = [c_void_p, c_void_p]
 def getListProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "listOfProperty":
         return getPropertyValueHandle(propertyHandle)
@@ -1045,6 +1055,7 @@ def getListProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetListProperty.restype = c_bool
+rrpLib.tpSetListProperty.argtypes = [c_void_p, c_void_p]
 def setListProperty(propertyHandle, value):
     handle = getPropertyValueHandle(value)
     return rrpLib.tpSetListProperty(propertyHandle, c_void_p(handle))
@@ -1062,6 +1073,7 @@ def getTelluriumDataProperty(propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetTelluriumDataProperty.restype = c_bool
+rrpLib.tpSetTelluriumDataProperty.argtypes = [c_void_p, c_void_p]
 def setTelluriumDataProperty(propertyHandle, value):
     return rrpLib.tpSetTelluriumDataProperty(propertyHandle, c_void_p(value))
 
