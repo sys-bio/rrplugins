@@ -62,6 +62,10 @@ if rrpLib is None:
 # restore working dir
 os.chdir(originalWorkingDirectory)
 
+# custom primitives
+
+c_double_p = POINTER(c_double)
+
 gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'plugins'))
 
 #=======================tel_api========================#
@@ -1155,7 +1159,6 @@ def getPropertyValue(propertyHandle):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-rrpLib.tpGetTelluriumDataElement.restype = c_bool
 def getNumpyData(telDataHandle):
     colHeader = getTelluriumDataColumnHeader(telDataHandle)
     rowCount = rrpLib.tpGetTelluriumDataNumRows(telDataHandle)
@@ -1302,7 +1305,7 @@ def setTelluriumDataColumnHeaderByIndex(telDataHandle, index, hdr):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataElement.restype = c_bool
-rrpLib.tpGetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double]
+rrpLib.tpGetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double_p]
 def getTelluriumDataElement(telDataHandle, row, col):
     val = c_double()
     if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
@@ -1324,7 +1327,7 @@ def setTelluriumDataElement(telDataHandle, row, col, number):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataWeight.restype = c_bool
-rrpLib.tpGetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double]
+rrpLib.tpGetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double_p]
 def getTelluriumDataWeight(telDataHandle, row, col):
     val = c_double()
     if rrpLib.tpGetTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
