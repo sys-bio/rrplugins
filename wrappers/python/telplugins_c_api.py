@@ -611,7 +611,7 @@ def wasTerminated(pluginHandle):
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
 rrpLib.tpAssignOnStartedEvent.restype = c_bool
-rrpLib.tpAssignOnStartedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+rrpLib.tpAssignOnStartedEvent.argtypes =[c_void_p, NotifyEvent, c_void_p]
 def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
     return rrpLib.tpAssignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
@@ -621,7 +621,8 @@ def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.tpAssignOnProgressEvent.args =[c_void_p, c_void_p, c_void_p]
+rrpLib.tpAssignOnProgressEvent.restype = c_bool
+rrpLib.tpAssignOnProgressEvent.argtypes =[c_void_p, c_void_p, c_void_p]
 def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
     return rrpLib.tpAssignOnProgressEvent(pluginHandle, pluginEvent, userData1, userData2)
 
@@ -633,7 +634,8 @@ def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-rrpLib.tpAssignOnFinishedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+rrpLib.tpAssignOnFinishedEvent.restype = c_bool
+rrpLib.tpAssignOnFinishedEvent.argtypes =[c_void_p, NotifyEvent, c_void_p]
 def assignOnFinishedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
     return rrpLib.tpAssignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
@@ -643,6 +645,7 @@ def assignOnFinishedEvent(pluginHandle, pluginEvent, userData1 = None, userData2
 ## \return Returns a handle to a list of Properties on success, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPluginProperties.restype = c_void_p
+rrpLib.tpGetPluginProperties.argtypes = [c_void_p]
 def getPluginProperties(pluginHandle):
     return rrpLib.tpGetPluginProperties(pluginHandle)
 
@@ -651,6 +654,7 @@ def getPluginProperties(pluginHandle):
 ## \return Returns the netire list of top level property names, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetListOfPluginPropertyNames.restype = c_char_p
+rrpLib.tpGetListOfPluginPropertyNames.argtypes = [c_void_p]
 def getListOfPluginPropertyNames(pluginHandle):
     paraNames =  rrpLib.tpGetListOfPluginPropertyNames(pluginHandle)
     if not paraNames:
@@ -665,6 +669,7 @@ def getListOfPluginPropertyNames(pluginHandle):
 ## \return True or false, indicating result. The top level list of properties in a plugin can not be cleared.
 ## \ingroup plugin_properties
 rrpLib.tpClearPropertyList.restype = c_bool
+rrpLib.tpClearPropertyList.argtypes = [c_void_p]
 def clearPropertyList(propertyListHandle):
     handle = getPropertyValueHandle(propertyListHandle)
     return rrpLib.tpClearPropertyList(handle)
@@ -674,6 +679,7 @@ def clearPropertyList(propertyListHandle):
 ## \return Returns names for all properties in the list
 ## \ingroup plugin_properties
 rrpLib.tpGetNamesFromPropertyList.restype = c_char_p
+rrpLib.tpGetNamesFromPropertyList.argtypes = [c_void_p]
 def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if not paraType:
@@ -693,6 +699,7 @@ def getNamesFromPropertyList(propertyHandle):
 ## \return Returns a string on success, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPluginPropertiesAsXML.restype = c_char_p
+rrpLib.tpGetPluginPropertiesAsXML.argtypes = [c_void_p]
 def getPluginPropertiesAsXML(pluginHandle):
     return rrpLib.tpGetPluginPropertiesAsXML(pluginHandle)
 
@@ -700,6 +707,8 @@ def getPluginPropertiesAsXML(pluginHandle):
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetFirstProperty.restype = c_void_p
+rrpLib.tpGetFirstProperty.argtypes = [c_void_p]
 def getFirstProperty(paraListHandle):
     handle = getPropertyValueHandle(paraListHandle)
     return rrpLib.tpGetFirstProperty(handle)
@@ -708,6 +717,8 @@ def getFirstProperty(paraListHandle):
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetNextProperty.restype = c_void_p
+rrpLib.tpGetNextProperty.argtypes = [c_void_p]
 def getNextProperty(paraListHandle):
     handle = getPropertyValueHandle(paraListHandle)
     return rrpLib.tpGetNextProperty(handle)
@@ -729,6 +740,7 @@ def getPluginProperty(pluginHandle, propertyName):
 ## \return true if succesful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetPluginProperty.restype = c_bool
+rrpLib.tpSetPluginProperty.argtypes = [c_void_p, c_char_p, c_char_p]
 def setPluginProperty(pluginHandle, propertyName, propertyValue):
     propertyHandle = getPluginProperty(pluginHandle, propertyName)
     if propertyHandle:
