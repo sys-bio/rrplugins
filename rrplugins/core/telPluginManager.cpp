@@ -588,7 +588,7 @@ std::string getPluginExtension()
     return "so";
 #else
     // OSX
-    return "dylib";
+    return "so";
 #endif
 }
 

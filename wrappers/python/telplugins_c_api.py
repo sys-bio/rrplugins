@@ -187,6 +187,7 @@ def unLoadPlugins(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 ##
+rrpLib.tpLoadPlugin.argtypes = [c_void_p, c_char_p]
 def loadPlugin(pm, pluginName):
     return rrpLib.tpLoadPlugin(pm, pluginName)
 
@@ -883,6 +884,7 @@ def getPropertyValueAsString(propertyHandle):
 ## \endhtmlonly
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyValueHandle.restype = c_void_p
+rrpLib.tpGetPropertyValueHandle.argtypes = [c_void_p]
 def getPropertyValueHandle(propertyHandle):
     return rrpLib.tpGetPropertyValueHandle(propertyHandle)
 
@@ -891,6 +893,7 @@ def getPropertyValueHandle(propertyHandle):
 ## \return Returns the Properties name if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyName.restype = c_char_p
+rrpLib.tpGetPropertyName.argtypes = [c_void_p]
 def getPropertyName(propertyHandle):
     return rrpLib.tpGetPropertyName(propertyHandle)
 
@@ -899,6 +902,7 @@ def getPropertyName(propertyHandle):
 ## \return Returns the hint value for a Property if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyHint.restype = c_char_p
+rrpLib.tpGetPropertyHint.argtypes = [c_void_p]
 def getPropertyHint(propertyHandle):
     return rrpLib.tpGetPropertyHint(propertyHandle)
 
@@ -907,6 +911,7 @@ def getPropertyHint(propertyHandle):
 ## \return Returns the Properties type as a string if successful, None otherwise
 ## \ingroup plugin_properties
 rrpLib.tpGetPropertyType.restype = c_char_p
+rrpLib.tpGetPropertyType.argtypes = [c_void_p]
 def getPropertyType(propertyHandle):
     return rrpLib.tpGetPropertyType(propertyHandle)
 
@@ -915,6 +920,7 @@ def getPropertyType(propertyHandle):
 ## \return Returns a Boolean value. Throws an exception if the property type is not a Boolean
 ## \ingroup plugin_properties
 rrpLib.tpGetBoolProperty.restype = c_bool
+rrpLib.tpGetBoolProperty.argtypes = [c_void_p]
 def getBoolProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "bool":
         val = c_bool()
@@ -931,6 +937,7 @@ def getBoolProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetBoolProperty.restype = c_bool
+rrpLib.tpSetBoolProperty.argtypes = [c_void_p, c_int]
 def setBoolProperty(propertyHandle, value):
     return rrpLib.tpSetBoolProperty (propertyHandle, c_bool(value))
 
@@ -939,6 +946,7 @@ def setBoolProperty(propertyHandle, value):
 ## \return Returns an integer value. Throws an exception if the property type is not an integer
 ## \ingroup plugin_properties
 rrpLib.tpGetIntProperty.restype = c_int
+rrpLib.tpGetIntProperty.argtypes = [c_void_p]
 def getIntProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "int":
         val = c_int()
@@ -955,6 +963,7 @@ def getIntProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetIntProperty.restype = c_bool
+rrpLib.tpSetIntProperty.argtypes = [c_void_p, c_int]
 def setIntProperty(propertyHandle, value):
     return rrpLib.tpSetIntProperty(propertyHandle, c_int(value))
 
@@ -962,7 +971,8 @@ def setIntProperty(propertyHandle, value):
 ## \param propertyHandle to a property instance
 ## \return Returns a double value. Throws an exception if the property type is not a double
 ## \ingroup plugin_properties
-rrpLib.tpGetDoubleProperty.restype = c_bool
+rrpLib.tpGetDoubleProperty.restype = c_double
+rrpLib.tpGetDoubleProperty.argtypes = [c_void_p]
 def getDoubleProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "double":
         val = c_double()
@@ -979,6 +989,7 @@ def getDoubleProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetDoubleProperty.restype = c_bool
+rrpLib.tpSetDoubleProperty.argtypes = [c_void_p, c_double]
 def setDoubleProperty(propertyHandle, value):
     return rrpLib.tpSetDoubleProperty(propertyHandle, c_double(value))
 
@@ -987,6 +998,7 @@ def setDoubleProperty(propertyHandle, value):
 ## \return Returns a string value. Throws an exception if the property type is not a string
 ## \ingroup plugin_properties
 rrpLib.tpGetStringProperty.restype = c_bool
+rrpLib.tpGetStringProperty.argtypes = [c_void_p]
 def getStringProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "string" or getPropertyType (propertyHandle) == "std::string":
         val = c_char_p()
@@ -1003,6 +1015,7 @@ def getStringProperty (propertyHandle):
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
 rrpLib.tpSetStringProperty.restype = c_bool
+rrpLib.tpSetStringProperty.argtypes = [c_void_p, c_char_p]
 def setStringProperty(propertyHandle, value):
     return rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value))
 
