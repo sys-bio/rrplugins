@@ -88,8 +88,8 @@ gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realp
 ## assignOnStartedEvent(plugin,  c_event)
 ##@endcode
 ## \ingroup plugins
-NotifyEvent  = CFUNCTYPE(None)
-NotifyEventEx  = CFUNCTYPE(None, c_void_p)
+NotifyEvent  = CFUNCTYPE(None, c_void_p, c_void_p)
+#NotifyEventEx  = CFUNCTYPE(None, c_void_p)
 
 ## \brief Get Tellurium Plugins copyright. 
 ## \return Returns a string if successful, None otherwise
