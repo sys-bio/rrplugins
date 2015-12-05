@@ -388,7 +388,8 @@ char* tlp_cc tpGetPropertyType(TELHandle handle)
 {
     start_try
         PropertyBase* para = castHandle<PropertyBase>(handle, __FUNC__);
-        return tlp::createText(para->getType());
+        char* text = tlp::createText(para->getType());
+        return text;
     catch_ptr_macro
 }
 

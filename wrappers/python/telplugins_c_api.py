@@ -674,6 +674,7 @@ def getNextProperty(paraListHandle):
 ## \param propertyName Name of the property
 ## \return Returns a propertyHandle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetPluginProperty.restype = c_void_p
 rrpLib.tpGetPluginProperty.argtypes = [c_void_p, c_char_p]
 def getPluginProperty(pluginHandle, propertyName):
     return rrpLib.tpGetPluginProperty(pluginHandle, propertyName)
