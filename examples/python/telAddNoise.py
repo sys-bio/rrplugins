@@ -2,13 +2,13 @@
 # Purpose: Example demonstrating how to setup the add noise pluging and
 # add noise to simulated data
 #
-# Author: Totte Karlsson (totte@dunescientific.com)
+# Authors: Totte Karlsson (totte@dunescientific.com), J Kyle Medley
 #-------------------------------------------------------------------------------
-import teplugins as tel
+from rrplugins import Plugin
 
 try:
-    modelPlugin = tel.Plugin("tel_test_model")        
-    noisePlugin = tel.Plugin("tel_add_noise")
+    modelPlugin = Plugin("tel_test_model")        
+    noisePlugin = Plugin("tel_add_noise")
     
     #Generate internal test data
     modelPlugin.execute()
