@@ -457,7 +457,7 @@ def displayPluginManual(pluginHandle):
     numOfBytes = getPluginManualNrOfBytes(pluginHandle)
     manual = cast(ptr, POINTER(c_char * numOfBytes))[0]
     if numOfBytes == 0:
-       print 'This plugin does not have a manual.'
+       print('This plugin does not have a manual.')
        return False
     outFName = os.path.join(tempfile.gettempdir(), getPluginName (pluginHandle) + '.pdf')
     print(outFName)
@@ -640,7 +640,7 @@ rrpLib.tpGetNamesFromPropertyList.restype = c_char_p
 def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if not paraType:
-        print getLastError()
+        print(getLastError())
     if paraType != 'listOfProperties':        
         raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
@@ -819,7 +819,7 @@ def createProperty(name, the_type, hint="", value=None):
            setStringProperty (ptr, value)
 
         else:
-            print "Error: Can't set the value of Property with type:" + the_type
+            print("Error: Can't set the value of Property with type: " + the_type)
         return ptr
 
 ## \brief Free memory for a Property
@@ -1170,7 +1170,7 @@ def getNumpyData(telDataHandle):
                 if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
                     resultArray[row, col] = val.value
                 else:
-                    print "problem"
+                    print("problem")
     #resultArray = np.append(resultArray, colHeader.split(","))
     #Not sure how to append the col names.
     return resultArray
@@ -1180,7 +1180,7 @@ def plotTelluriumData(data, colHeaders):
     nrRows = data.shape[0]
 
     if colHeaders == None or len(colHeaders) < 1:
-        print "Bad Data ColumnHeader"
+        print("Bad Data ColumnHeader")
         return
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
@@ -1200,7 +1200,7 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     nrRows = data.shape[0]
 
     if colHeaders == None or len(colHeaders) < 1:
-        print "Bad Data ColumnHeader"
+        print("Bad Data ColumnHeader")
         return
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
@@ -1409,7 +1409,7 @@ def createTelluriumDataFromFile(fName):
     #Create a Tellurium data object
     telDataHandle = rrpLib.tpCreateTelluriumData(0,0, None)
     if rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName) == False:
-        print 'Failed to read data'
+        print('Failed to read data')
     return telDataHandle
 
 ## \brief Check if tellurium data has weights allocated
