@@ -124,6 +124,7 @@ def getVersion():
 ## \endhtmlonly
 ## \ingroup plugin_manager
 rrpLib.tpCreatePluginManager.restype = c_void_p
+rrpLib.tpCreatePluginManager.argtypes = [c_char_p]
 def createPluginManager(pluginDir = None):
     if pluginDir == None:
         pluginDir = gDefaultPluginsPath
@@ -135,6 +136,7 @@ def createPluginManager(pluginDir = None):
 ##
 ## \ingroup plugin_manager
 rrpLib.tpFreePluginManager.restype = c_bool
+rrpLib.tpFreePluginManager.argtypes = [c_void_p]
 def freePluginManager(pm):
     return rrpLib.tpFreePluginManager(pm)
 
@@ -148,6 +150,7 @@ def freePluginManager(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 rrpLib.tpLoadPlugins.restype = c_bool
+rrpLib.tpLoadPlugins.argtypes = [c_void_p]
 def loadPlugins(pm):
     return rrpLib.tpLoadPlugins(pm)
 
@@ -167,6 +170,7 @@ def hasLoadPluginErrors(pm):
 ## \return Returns a string if there was errors, None otherwise
 ## \ingroup plugin_manager
 rrpLib.tpGetPluginLoadErrors.restype = c_char_p
+rrpLib.tpGetPluginLoadErrors.argtypes = [c_void_p]
 def getPluginLoadErrors(pm):
     return rrpLib.tpGetPluginLoadErrors(pm)
 
@@ -177,6 +181,7 @@ def getPluginLoadErrors(pm):
 ## \ingroup plugin_manager
 ##
 rrpLib.tpUnLoadPlugins.restype = c_bool
+rrpLib.tpUnLoadPlugins.argtypes = [c_void_p]
 def unLoadPlugins(pm):
     return rrpLib.tpUnLoadPlugins(pm)
 
@@ -204,6 +209,8 @@ def loadPlugin(pm, pluginName):
 ## \return Returns true if the Plugin are unloaded succesfully, false otherwise
 ## \ingroup plugin_manager
 ##
+rrpLib.tpUnLoadPlugin.restype = c_bool
+rrpLib.tpUnLoadPlugin.argtypes = [c_void_p]
 def unLoadPlugin(pm, pHandle):
     return rrpLib.tpUnLoadPlugin(pm, pHandle)
 
@@ -212,6 +219,7 @@ def unLoadPlugin(pm, pHandle):
 ## \return Returns the number of loaded plugins, -1 if a problem is encountered. Call telPlugins.getLastError() to obtain error message.
 ## \ingroup plugin_manager
 rrpLib.tpGetNumberOfPlugins.restype = c_int
+rrpLib.tpGetNumberOfPlugins.argtypes = [c_void_p]
 def getNumberOfPlugins(pm):
     return rrpLib.tpGetNumberOfPlugins(pm)
 
@@ -228,6 +236,7 @@ def getNumberOfPlugins(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 rrpLib.tpGetPluginNames.restype = c_char_p
+rrpLib.tpGetPluginNames.argtypes = [c_void_p]
 def getPluginNames(pm):
     names = rrpLib.tpGetPluginNames(pm)
     res = names
@@ -249,6 +258,7 @@ def getPluginNames(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 rrpLib.tpGetPluginLibraryNames.restype = c_char_p
+rrpLib.tpGetPluginLibraryNames.argtypes = [c_void_p]
 def getPluginLibraryNames(pm):
     names = rrpLib.tpGetPluginLibraryNames(pm)
     if not names:
@@ -261,6 +271,7 @@ def getPluginLibraryNames(pm):
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
 rrpLib.tpGetFirstPlugin.restype = c_void_p
+rrpLib.tpGetFirstPlugin.argtypes = [c_void_p]
 def getFirstPlugin(pm):
     return rrpLib.tpGetFirstPlugin(pm)
 
@@ -270,6 +281,7 @@ def getFirstPlugin(pm):
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
 rrpLib.tpGetNextPlugin.restype = c_void_p
+rrpLib.tpGetNextPlugin.argtypes = [c_void_p]
 def getNextPlugin(pm):
     return rrpLib.tpGetNextPlugin(pm)
 
@@ -279,6 +291,7 @@ def getNextPlugin(pm):
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
 rrpLib.tpGetPreviousPlugin.restype = c_void_p
+rrpLib.tpGetPreviousPlugin.argtypes = [c_void_p]
 def getPreviousPlugin(pm):
     return rrpLib.tpGetPreviousPlugin(pm)
 
@@ -288,6 +301,7 @@ def getPreviousPlugin(pm):
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
 rrpLib.tpGetCurrentPlugin.restype = c_void_p
+rrpLib.tpGetCurrentPlugin.argtypes = [c_void_p]
 def getCurrentPlugin(pm):
     return rrpLib.tpGetCurrentPlugin(pm)
 
@@ -298,6 +312,7 @@ def getCurrentPlugin(pm):
 ## Returns None if the plugin is not found
 ## \ingroup plugin_manager
 rrpLib.tpGetPlugin.restype = c_void_p
+rrpLib.tpGetPlugin.argtypes = [c_void_p, c_char_p]
 def getPlugin(pm, pluginName):
     return rrpLib.tpGetPlugin(pm, c_char_p(pluginName))
 
@@ -313,6 +328,7 @@ def getPlugin(pm, pluginName):
 ## \endhtmlonly
 ## \ingroup plugins
 rrpLib.tpGetPluginName.restype = c_char_p
+rrpLib.tpGetPluginName.argtypes = [c_void_p]
 def getPluginName(pluginHandle):
     return rrpLib.tpGetPluginName(pluginHandle)
 
@@ -327,6 +343,7 @@ def getPluginName(pluginHandle):
 ## \endhtmlonly
 ## \ingroup plugins
 rrpLib.tpGetPluginCategory.restype = c_char_p
+rrpLib.tpGetPluginCategory.argtypes = [c_void_p]
 def getPluginCategory(pluginHandle):
     data =  rrpLib.tpGetPluginCategory(pluginHandle)
     res = data
@@ -338,6 +355,7 @@ def getPluginCategory(pluginHandle):
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginAuthor.restype = c_char_p
+rrpLib.tpGetPluginAuthor.argtypes = [c_void_p]
 def getPluginAuthor(pluginHandle):
     data =  rrpLib.tpGetPluginAuthor(pluginHandle)
     res = data
@@ -349,6 +367,7 @@ def getPluginAuthor(pluginHandle):
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginCopyright.restype = c_char_p
+rrpLib.tpGetPluginCopyright.argtypes = [c_void_p]
 def getPluginCopyright(pluginHandle):
     data =  rrpLib.tpGetPluginCopyright(pluginHandle)
     res = data
@@ -360,6 +379,7 @@ def getPluginCopyright(pluginHandle):
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginVersion.restype = c_void_p
+rrpLib.tpGetPluginVersion.argtypes = [c_void_p]
 def getPluginVersion(pluginHandle):
     ptr = rrpLib.tpGetPluginVersion(pluginHandle)
     res = ctypes.cast(ptr, ctypes.c_char_p).value
@@ -377,6 +397,7 @@ def getPluginVersion(pluginHandle):
 ## \endhtmlonly
 ## \ingroup plugins
 rrpLib.tpGetPluginDescription.restype = c_char_p
+rrpLib.tpGetPluginDescription.argtypes = [c_void_p]
 def getPluginDescription(pluginHandle):
     data =  rrpLib.tpGetPluginDescription(pluginHandle)
     res = data
@@ -394,6 +415,7 @@ def getPluginDescription(pluginHandle):
 ## \endhtmlonly
 ## \ingroup plugins
 rrpLib.tpGetPluginHint.restype = c_char_p
+rrpLib.tpGetPluginHint.argtypes = [c_void_p]
 def getPluginHint(pluginHandle):
     data =  rrpLib.tpGetPluginHint(pluginHandle)
     res = data
@@ -405,6 +427,7 @@ def getPluginHint(pluginHandle):
 ## \return Returns information as a string for the plugin, None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginInfo.restype = c_char_p
+rrpLib.tpGetPluginInfo.argtypes = [c_void_p]
 def getPluginInfo(pluginHandle):
     data =  rrpLib.tpGetPluginInfo(pluginHandle)
     res = data
@@ -433,6 +456,7 @@ def getPluginInfo(pluginHandle):
 ## \endhtmlonly
 ## \ingroup plugins
 rrpLib.tpGetPluginManualAsPDF.restype =  POINTER(c_ubyte)
+rrpLib.tpGetPluginManualAsPDF.argtypes = [c_void_p]
 def getPluginManualAsPDF(pluginHandle):
     return rrpLib.tpGetPluginManualAsPDF(pluginHandle)
 
@@ -440,6 +464,8 @@ def getPluginManualAsPDF(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns the number of bytes in the plugin's manual pdf file as an unsigned int.
 ## \ingroup plugins
+rrpLib.tpGetPluginManualNrOfBytes.restype = c_uint
+rrpLib.tpGetPluginManualNrOfBytes.argtypes = [c_void_p]
 def getPluginManualNrOfBytes(pluginHandle):
     return rrpLib.tpGetPluginManualNrOfBytes(pluginHandle)
 
@@ -479,6 +505,7 @@ def displayPluginManual(pluginHandle):
 ##  \return Returns true or false indicating success/failure
 ## \ingroup plugins
 rrpLib.tpAssignRoadRunnerInstance.restype = c_bool
+rrpLib.tpAssignRoadRunnerInstance.argtypes = [c_void_p, c_void_p]
 def assignRoadRunnerInstance(pluginHandle, rrHandle):
     return rrpLib.tpAssignRoadRunnerInstance(pluginHandle, rrHandle)
 
@@ -510,6 +537,7 @@ def executePluginEx(pluginHandle, inAThread=False):
 ## \return Returns plugin status if available, as a string. None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginStatus.restype = c_char_p
+rrpLib.tpGetPluginStatus.argtypes = [c_void_p]
 def getPluginStatus(pluginHandle):
     return rrpLib.tpGetPluginStatus(pluginHandle)
 
@@ -521,6 +549,7 @@ def getPluginStatus(pluginHandle):
 ## \return Returns a plugins result if available. None otherwise
 ## \ingroup plugins
 rrpLib.tpGetPluginResult.restype = c_char_p
+rrpLib.tpGetPluginResult.argtypes = [c_void_p]
 def getPluginResult(pluginHandle):
     return rrpLib.tpGetPluginResult(pluginHandle)
 
@@ -529,6 +558,7 @@ def getPluginResult(pluginHandle):
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
 rrpLib.tpResetPlugin.restype = c_bool
+rrpLib.tpResetPlugin.argtypes = [c_void_p]
 def resetPlugin(pluginHandle):
     return rrpLib.tpResetPlugin(pluginHandle)
 
@@ -540,6 +570,7 @@ def resetPlugin(pluginHandle):
 ## \return Returns true or false indicating if the plugin is busy or not
 ## \ingroup plugins
 rrpLib.tpIsPluginWorking.restype = c_bool
+rrpLib.tpIsPluginWorking.argtypes = [c_void_p]
 def isPluginWorking(pluginHandle):
     return rrpLib.tpIsPluginWorking(pluginHandle)
 
@@ -549,6 +580,7 @@ def isPluginWorking(pluginHandle):
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
 rrpLib.tpTerminateWork.restype = c_bool
+rrpLib.tpTerminateWork.argtypes = [c_void_p]
 def terminateWork(pluginHandle):
     return rrpLib.tpTerminateWork(pluginHandle)
 
@@ -557,6 +589,7 @@ def terminateWork(pluginHandle):
 ## \return Returns true or false indicating if the work within the plugin is in the process of being terminated
 ## \ingroup plugins
 rrpLib.tpIsBeingTerminated.restype = c_bool
+rrpLib.tpIsBeingTerminated.argtypes = [c_void_p]
 def isBeingTerminated(pluginHandle):
     return rrpLib.tpIsBeingTerminated(pluginHandle)
 
@@ -566,6 +599,7 @@ def isBeingTerminated(pluginHandle):
 ## \return Returns true or false indicating if the work in the plugin was terminated or not
 ## \ingroup plugins
 rrpLib.tpWasTerminated.restype = c_bool
+rrpLib.tpWasTerminated.argtypes = [c_void_p]
 def wasTerminated(pluginHandle):
     return rrpLib.tpWasTerminated(pluginHandle)
 
@@ -576,6 +610,7 @@ def wasTerminated(pluginHandle):
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
+rrpLib.tpAssignOnStartedEvent.restype = c_bool
 rrpLib.tpAssignOnStartedEvent.args =[c_void_p, NotifyEvent, c_void_p]
 def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
     return rrpLib.tpAssignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
