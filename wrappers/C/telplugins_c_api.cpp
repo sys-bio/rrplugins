@@ -32,7 +32,6 @@ TELHandle tlp_cc tpCreatePluginManager(const char* _pluginDir)
         PluginManager* pm = new PluginManager(pluginDir);
         gHM.registerHandle(pm, typeid(pm).name());
 
-        RRPLOG(lWarning) << " tpCreatePluginManager pm = " << pm;
         return pm;
     catch_ptr_macro
 }
