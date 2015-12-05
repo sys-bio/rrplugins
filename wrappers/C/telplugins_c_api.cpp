@@ -32,6 +32,7 @@ TELHandle tlp_cc tpCreatePluginManager(const char* _pluginDir)
         PluginManager* pm = new PluginManager(pluginDir);
         gHM.registerHandle(pm, typeid(pm).name());
 
+        RRPLOG(lWarning) << " tpCreatePluginManager pm = " << pm;
         return pm;
     catch_ptr_macro
 }
@@ -83,6 +84,7 @@ TELHandle tlp_cc tpGetCurrentPlugin(TELHandle handle)
 TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
+
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         if(pm->load(pluginName))
         {
@@ -498,4 +500,3 @@ TLP_C_DS char* tlp_cc tpGetCopyright()
         return createText(tlp::getCopyright());
     catch_ptr_macro
 }
-

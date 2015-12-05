@@ -485,6 +485,7 @@ def assignRoadRunnerInstance(pluginHandle, rrHandle):
 ## the executePluginEx function that has the option to execute the plugin code in the background (in a thread);
 ## \ingroup plugins
 rrpLib.tpExecutePlugin.restype = c_bool
+rrpLib.tpExecutePlugin.argtypes = [c_void_p]
 def executePlugin(pluginHandle):
     return rrpLib.tpExecutePlugin(pluginHandle)
 
@@ -494,6 +495,7 @@ def executePlugin(pluginHandle):
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
 rrpLib.tpExecutePluginEx.restype = c_bool
+rrpLib.tpExecutePluginEx.argtypes = [c_void_p, c_bool]
 def executePluginEx(pluginHandle, inAThread=False):
     return rrpLib.tpExecutePluginEx(pluginHandle, c_bool(inAThread))
 
