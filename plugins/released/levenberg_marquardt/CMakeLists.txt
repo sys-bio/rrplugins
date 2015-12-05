@@ -32,7 +32,7 @@ target_link_libraries (tel_levenberg_marquardt
   lmfit-static
   telplugins_core
   telplugins_c_api
-  roadrunner_c_api
+  ${LIBROADRUNNER_C_API_LIBRARY}
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 

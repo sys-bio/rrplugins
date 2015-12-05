@@ -23,10 +23,10 @@ if( TLP_DEPENDENCIES_PATH STREQUAL "" )
   message( FATAL_ERROR "Please set TLP_DEPENDENCIES_PATH to point to the directory containing third-party dependencies" )
 elseif( NOT IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco" )
   message( FATAL_ERROR "TLP_DEPENDENCIES_PATH is missing include/Poco" )
-elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Poco.h" OR 
+elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Poco.h" OR
         IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Poco.h" )
   message( FATAL_ERROR "Could not find Poco.h in TLP_DEPENDENCIES_PATH/include/Poco" )
-elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR 
+elseif( NOT EXISTS   "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" OR
         IS_DIRECTORY "${TLP_DEPENDENCIES_PATH}/include/Poco/Foundation.h" )
   message( FATAL_ERROR "Could not find Foundation.h in TLP_DEPENDENCIES_PATH/include/Poco" )
 endif()
@@ -71,6 +71,12 @@ find_package ( LibRoadRunner REQUIRED )
 set( LIBROADRUNNERSTATIC_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibRoadRunnerStatic REQUIRED )
 
+# roadrunner C API, currently not available in static config
+find_library(LIBROADRUNNER_C_API_LIBRARY NAMES roadrunner_c_api
+  HINTS
+  ${TLP_DEPENDENCIES_PATH}/lib
+  )
+
 # Threading
 if(UNIX)
   find_package(Threads REQUIRED)
@@ -99,7 +105,7 @@ rrplugins
     Language bindings:
       Enable C bindings?        ${TLP_BUILD_PLUGINS_C_API}
       Enable python bindings?   ${TLP_BUILD_PLUGINS_PYTHON_API}
-      
+
     Released plugins:
       Test Model                ${TLP_BUILD_TEST_MODEL_PLUGIN}
       Add Noise                 ${TLP_BUILD_ADD_NOISE_PLUGIN}
@@ -109,7 +115,7 @@ rrplugins
       Monte Carlo Bootstrap     ${TLP_BUILD_MONTE_CARLO_BS_PLUGIN}
       Bifurcation Auto2k        ${TLP_BUILD_AUTO2000_PLUGIN}
       Stat                      ${TLP_BUILD_STAT_PLUGIN}
-      
+
     General flags:
       CC                        ${CMAKE_C_COMPILER}
       CXX                       ${CMAKE_CXX_COMPILER}
@@ -175,11 +181,11 @@ if( MSVC )
     -DCRT_NONSTDC_NO_DEPRECATE
     -D_CRT_SECURE_NO_WARNINGS      # MS wanting you to change basically all standard C functions :(
     )
-      
+
   #  4251 About exporting std classes
   #  4018 Comparing unsigned/signed ints
-  #  4996 Deprecated functions   
-  add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )   
+  #  4996 Deprecated functions
+  add_definitions( "/wd4251 /wd4018 /wd4996 /nologo" )
 
   set (CMAKE_CXX_FLAGS             "${CMAKE_CXX_FLAGS} /EHsc ")
   set (CMAKE_SHARED_LINKER_FLAGS   "${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
@@ -209,9 +215,9 @@ endif()
 
 install(
   FILES
-  RRP_README.txt 
-  RRP_LICENSE.txt 
-  RRP_AUTHORS.txt 
+  RRP_README.txt
+  RRP_LICENSE.txt
+  RRP_AUTHORS.txt
   RRP_FUNDING.txt
   RRP_VERSION.txt
   RRP_NEWS.txt
@@ -219,4 +225,3 @@ install(
   RRP_CHANGELOG.txt
   DESTINATION .
 )
-
