@@ -187,6 +187,7 @@ def unLoadPlugins(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 ##
+rrpLib.tpLoadPlugin.restype = c_void_p
 rrpLib.tpLoadPlugin.argtypes = [c_void_p, c_char_p]
 def loadPlugin(pm, pluginName):
     return rrpLib.tpLoadPlugin(pm, pluginName)
@@ -673,6 +674,7 @@ def getNextProperty(paraListHandle):
 ## \param propertyName Name of the property
 ## \return Returns a propertyHandle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetPluginProperty.argtypes = [c_void_p, c_char_p]
 def getPluginProperty(pluginHandle, propertyName):
     return rrpLib.tpGetPluginProperty(pluginHandle, propertyName)
 

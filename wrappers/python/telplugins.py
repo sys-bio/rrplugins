@@ -714,4 +714,3 @@ def getDataSeries (numPyData):
 ## To run the example, make sure you have some 'Experimental' data available.
 ##
 ## \image html lmFit1_output.jpg "Image output using the example below."
-
