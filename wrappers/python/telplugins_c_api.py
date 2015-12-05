@@ -1272,6 +1272,7 @@ def getTelluriumDataColumnHeader(telDataHandle):
 ## \return Returns the column name on success, or None on failure
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataColumnHeaderByIndex.restype = c_char_p
+rrpLib.tpGetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int]
 def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
     return rrpLib.tpGetTelluriumDataColumnHeaderByIndex(telDataHandle, index)
 
@@ -1281,6 +1282,7 @@ def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
 ## \return True or false indicating success
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataColumnHeader.restype = c_bool
+rrpLib.tpSetTelluriumDataColumnHeader.argtypes = [c_void_p, c_char_p]
 def setTelluriumDataColumnHeader(telDataHandle, hdr):
     return rrpLib.tpSetTelluriumDataColumnHeader(telDataHandle, hdr)
 
@@ -1291,7 +1293,8 @@ def setTelluriumDataColumnHeader(telDataHandle, hdr):
 ## \return True or false indicating success
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataColumnHeaderByIndex.restype = c_bool
-def setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index):
+rrpLib.tpSetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int, c_char_p]
+def setTelluriumDataColumnHeaderByIndex(telDataHandle, index, hdr):
     return rrpLib.tpSetTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
 
 ## \brief Get Tellurium data element at row,col
@@ -1299,6 +1302,7 @@ def setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataElement.restype = c_bool
+rrpLib.tpGetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double]
 def getTelluriumDataElement(telDataHandle, row, col):
     val = c_double()
     if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
@@ -1311,6 +1315,7 @@ def getTelluriumDataElement(telDataHandle, row, col):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataElement.restype = c_bool
+rrpLib.tpSetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double]
 def setTelluriumDataElement(telDataHandle, row, col, number):    
     return rrpLib.tpSetTelluriumDataElement(telDataHandle, row, col, c_double(number))
 
@@ -1319,6 +1324,7 @@ def setTelluriumDataElement(telDataHandle, row, col, number):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataWeight.restype = c_bool
+rrpLib.tpGetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double]
 def getTelluriumDataWeight(telDataHandle, row, col):
     val = c_double()
     if rrpLib.tpGetTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
@@ -1331,6 +1337,7 @@ def getTelluriumDataWeight(telDataHandle, row, col):
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataWeight.restype = c_bool
+rrpLib.tpSetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double]
 def setTelluriumDataWeight(telDataHandle, row, col, number):    
     return rrpLib.tpSetTelluriumDataWeight(telDataHandle, row, col, c_double(number))
 
@@ -1338,6 +1345,8 @@ def setTelluriumDataWeight(telDataHandle, row, col, number):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of rows in the data object
 ## \ingroup utilities
+rrpLib.tpGetTelluriumDataNumRows.restype = c_int
+rrpLib.tpGetTelluriumDataNumRows.argtypes = [c_void_p]
 def getTelluriumDataNumRows(telDataHandle):
     return rrpLib.tpGetTelluriumDataNumRows(telDataHandle)
 
@@ -1345,6 +1354,8 @@ def getTelluriumDataNumRows(telDataHandle):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of cols in the data object
 ## \ingroup utilities
+rrpLib.tpGetTelluriumDataNumCols.restype = c_int
+rrpLib.tpGetTelluriumDataNumCols.argtypes = [c_void_p]
 def getTelluriumDataNumCols(telDataHandle):
     return rrpLib.tpGetTelluriumDataNumCols(telDataHandle)
 
@@ -1355,6 +1366,7 @@ def getTelluriumDataNumCols(telDataHandle):
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 rrpLib.tpWriteTelluriumDataToFile.restype = c_bool
+rrpLib.tpWriteTelluriumDataToFile.argtypes = [c_void_p, c_char_p]
 def writeTelluriumData(telDataHandle, fName):
     return rrpLib.tpWriteTelluriumDataToFile(telDataHandle, fName)
 
@@ -1365,6 +1377,7 @@ def writeTelluriumData(telDataHandle, fName):
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 rrpLib.tpReadTelluriumDataFromFile.restype = c_bool
+rrpLib.tpReadTelluriumDataFromFile.argtypes = [c_void_p, c_char_p]
 def readTelluriumData(telDataHandle, fName):
     return rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName)
 
