@@ -55,9 +55,10 @@ unsigned int TestModel::getPDFManualByteSize()
 
 bool TestModel::execute(bool inThread)
 {
-    RRPLOG(lDebug)<<"Executing the TestModel plugin by Totte Karlsson";
-    RoadRunner rr;
-    rr.load(mModel);
+    tlp::Logger::setLevel(tlp::Logger::LOG_DEBUG);
+    RRPLOG(lDebug)<<"Executing the TestModel plugin by J Kyle Medley and Totte Karlsson";
+    RRPLOG(lDebug) << "Using SBML model: \n" << mModel.getValue();
+    RoadRunner rr(mModel.getValue());
 
     rr::SimulateOptions opt;
     opt.start       = 0;
