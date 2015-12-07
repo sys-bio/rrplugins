@@ -29,11 +29,11 @@ if(WIN32)
     telplugins_math
   )
 else()
-  if(APPLE)
-      set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
-  else()
-      set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
-  endif()
+#   if(APPLE)
+#       set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+#   else()
+#       set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
+#   endif()
 
   set_property(TARGET tel_add_noise
     PROPERTY COMPILE_DEFINITIONS
