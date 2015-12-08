@@ -59,7 +59,7 @@ bool TestModel::execute(bool inThread)
     RRPLOG(lDebug)<<"Executing the TestModel plugin by J Kyle Medley and Totte Karlsson";
     RRPLOG(lDebug) << "Using SBML model: \n" << mModel.getValue();
     RoadRunner rr(mModel.getValue());
-
+return true;
     rr::SimulateOptions opt;
     opt.start       = 0;
     opt.duration    = 10;

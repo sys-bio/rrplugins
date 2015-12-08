@@ -27,6 +27,7 @@ if(WIN32)
     telplugins_common
     telplugins_core
     telplugins_math
+    {RRPLUGINS_COMMON_STATIC_LIBS}
   )
 else()
 #   if(APPLE)

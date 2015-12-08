@@ -17,7 +17,7 @@ add_definitions(
 
 add_library(tel_test_model MODULE ${RRP_TEST_MODEL_SOURCES})
 
-target_link_libraries (tel_test_model telplugins_core ${RRPLUGINS_COMMON_SHARED_LIBS})
+target_link_libraries (tel_test_model telplugins_core-static ${RRPLUGINS_COMMON_SHARED_LIBS})
 
 # if(NOT WIN32)
 #   if(APPLE)

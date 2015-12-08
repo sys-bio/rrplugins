@@ -14,11 +14,11 @@ noisePlugin = Plugin("tel_add_noise")
 
 #Generate internal test data
 modelPlugin.execute()
-test_data = modelPlugin.TestData
-test_data_with_noise = modelPlugin.TestDataWithNoise
+#test_data = modelPlugin.TestData
+#test_data_with_noise = modelPlugin.TestDataWithNoise
     
-test_data.plot()
-test_data_with_noise.plot()
+#test_data.plot()
+#test_data_with_noise.plot()
     
 #modelPlugin.viewManual()   
-print('Plugin version: {}'.format(modelPlugin.getVersion()))
+#print('Plugin version: {}'.format(modelPlugin.getVersion()))

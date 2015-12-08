@@ -81,7 +81,7 @@ if (TLP_BUILD_STATIC_LIB)
     POCO_NO_AUTOMATIC_LIBS
   )
 
-  target_link_libraries (telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS})
+  target_link_libraries (telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS} xml2)
 
   # Install static library
   install(TARGETS telplugins_common-static
