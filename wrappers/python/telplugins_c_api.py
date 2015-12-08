@@ -1319,6 +1319,7 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
 ## \return Returns a numpy data object
 ## \ingroup utilities
 rrpLib.tpGetTelluriumDataColumnHeader.restype = c_void_p
+rrpLib.tpGetTelluriumDataColumnHeader.argtypes = [c_void_p]
 def getTelluriumDataColumnHeader(telDataHandle):
     # http://stackoverflow.com/questions/13445568/python-ctypes-how-to-free-memory-getting-invalid-pointer-error
     hdr = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
