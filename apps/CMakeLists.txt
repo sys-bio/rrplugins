@@ -13,3 +13,4 @@ include_directories(
 )
 
 add_subdirectory(plugin_info)
+add_subdirectory(test_model_demo)
