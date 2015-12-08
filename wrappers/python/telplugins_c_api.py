@@ -1323,9 +1323,10 @@ rrpLib.tpGetTelluriumDataColumnHeader.argtypes = [c_void_p]
 def getTelluriumDataColumnHeader(telDataHandle):
     # http://stackoverflow.com/questions/13445568/python-ctypes-how-to-free-memory-getting-invalid-pointer-error
     hdr = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
+    print('getTelluriumDataColumnHeader hdr = {}'.format(hex(hdr)))
 
     if hdr:
-        res = ctypes.cast(hdr, ctypes.c_char_p).value
+        res = str(ctypes.cast(hdr, ctypes.c_char_p).value)
         rrpLib.tpFreeText(hdr)
         return res.split(',')
     else:

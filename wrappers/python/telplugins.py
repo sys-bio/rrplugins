@@ -221,7 +221,10 @@ class DataSeries(object):
     ## d.plot()
     ##@endcode       
     def plotBifurcationDiagram (self, bfPoints, bfLabels):
+        print('plotBifurcationDiagram')
+        print('self._data = {}'.format(hex(self._data)))
         hdr = tpc.getTelluriumDataColumnHeader(self._data)
+        print('hdr: {}'.format(hdr))
         npData = tpc.getNumpyData(self._data)
         tpc.plotBifurcationData(npData, hdr, bfPoints, bfLabels)
 
