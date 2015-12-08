@@ -23,7 +23,7 @@ install (TARGETS test_model_demo
   COMPONENT apps
 )
 
-install (FILES test_model_demo.py
+install (FILES test_model_demo.py test_model_demo_tpc.py
   DESTINATION bin
   COMPONENT apps
 )
