@@ -1453,6 +1453,7 @@ def readTelluriumData(telDataHandle, fName):
 ## \note Use the freeTelluriumData to free memory allocated 
 ## \ingroup utilities
 rrpLib.tpCreateTelluriumData.restype = c_void_p
+rrpLib.tpCreateTelluriumData.argtypes = [c_int, c_int, c_char_p]
 def createTelluriumData(rows, cols):
     #Create a Tellurium data object
     #Create a column header
@@ -1466,7 +1467,6 @@ def createTelluriumData(rows, cols):
 ## \return Returns a handle to Tellurium data if successful, None otherwise
 ## \note Use the freeTelluriumData to free memory allocated by the returned data
 ## \ingroup utilities
-rrpLib.tpCreateTelluriumData.restype = c_void_p
 def createTelluriumDataFromFile(fName):
     #Create a Tellurium data object
     telDataHandle = rrpLib.tpCreateTelluriumData(0,0, None)
@@ -1479,6 +1479,7 @@ def createTelluriumDataFromFile(fName):
 ## \return Returns true or false indicating if the data object has weights or not
 ## \ingroup utilities
 rrpLib.tpHasWeights.restype = c_bool
+rrpLib.tpHasWeights.argtypes = [c_void_p, c_bool_p]
 def hasWeights(dataHandle):
     hasIt = c_bool()
     if not rrpLib.tpHasWeights(dataHandle, byref(hasIt)):
@@ -1491,6 +1492,7 @@ def hasWeights(dataHandle):
 ## \return Returns true or false indicating if allocating weights were successful or not
 ## \ingroup utilities
 rrpLib.tpAllocateWeights.restype = c_bool
+rrpLib.tpAllocateWeights.argtypes = [c_void_p, c_bool_p]
 def allocateWeights(dataHandle):
     success = c_bool()    
     if not rrpLib.tpAllocateWeights(dataHandle, byref(success)):
@@ -1518,6 +1520,7 @@ def readAllText(fName):
 ## \return Returns True or false indicating result
 ## \ingroup utilities
 rrpLib.tpFreeTelluriumData.restype = c_bool
+rrpLib.tpFreeTelluriumData.argtypes = [c_void_p]
 def freeTelluriumData(telDataHandle):
     return rrpLib.tpFreeTelluriumData(telDataHandle)
 
@@ -1539,7 +1542,8 @@ def unLoadAPI():
 ## \brief Return unerlying data array for a Tellurium matrix
 ## \return Returns a ctypes pointer to double object on success, None otherwise
 ## \ingroup utilities
-rrpLib.tpGetDataArray.restype = int
+rrpLib.tpGetDataArray.restype = c_int
+rrpLib.tpGetDataArray.restype = [c_void_p]
 def getDataArray(matrixH):
     mat = rrpLib.tpGetDataArray(matrixH)
     if mat:            
@@ -1547,7 +1551,8 @@ def getDataArray(matrixH):
     else:
         return None
 
-rrpLib.tpGetMatrixNumRows.restype = int
+rrpLib.tpGetMatrixNumRows.restype = c_int
+rrpLib.tpGetMatrixNumRows.argtypes = [c_void_p]
 def getMatrixNumRows(matrixH):
     rSize = rrpLib.tpGetMatrixNumRows(matrixH)
     if rSize != -1:            
@@ -1555,7 +1560,8 @@ def getMatrixNumRows(matrixH):
     else:
         return None
 
-rrpLib.tpGetMatrixNumCols.restype = int
+rrpLib.tpGetMatrixNumCols.restype = c_int
+rrpLib.tpGetMatrixNumCols.argtypes = [c_void_p]
 def getMatrixNumCols(matrixH):
     cSize = rrpLib.tpGetMatrixNumCols(matrixH)
     if cSize != -1:            
