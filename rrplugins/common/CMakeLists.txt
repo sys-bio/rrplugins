@@ -83,6 +83,8 @@ if (TLP_BUILD_STATIC_LIB)
 
   target_link_libraries (telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS} xml2)
 
+  set_target_properties( telplugins_common-static  PROPERTIES POSITION_INDEPENDENT_CODE True )
+
   # Install static library
   install(TARGETS telplugins_common-static
     LIBRARY DESTINATION lib COMPONENT pluginsLib
