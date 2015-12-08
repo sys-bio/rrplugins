@@ -21,11 +21,14 @@ int main() {
   AN(add_noise_plugin);
 
   res = tpExecutePlugin(test_model_plugin);
-//   fprintf(stderr, "executed test model plugin: %d\n", res);
-//   if(!res) {
-//     fprintf(stderr, "failed to execute test model plugin\n");
-//     return res;
-//   }
+  fprintf(stderr, "executed test model plugin: %d\n", res);
+  if(!res) {
+    fprintf(stderr, "failed to execute test model plugin\n");
+    return res;
+  }
+
+  // free resources
+  AN(tpFreePluginManager(manager));
 
   return 0;
 }

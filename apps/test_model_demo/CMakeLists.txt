@@ -7,7 +7,7 @@ include_directories(${CMAKE_SOURCE_DIR}/wrappers/C)
 
 add_executable(test_model_demo main.c)
 
-target_link_libraries (test_model_demo telplugins_core telplugins_c_api)
+target_link_libraries (test_model_demo telplugins_c_api)
 
 if(WIN32)
   add_definitions (-DWIN32)

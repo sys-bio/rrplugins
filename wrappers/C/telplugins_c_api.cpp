@@ -83,7 +83,6 @@ TELHandle tlp_cc tpGetCurrentPlugin(TELHandle handle)
 TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
-
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         if(pm->load(pluginName))
         {
