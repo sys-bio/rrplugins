@@ -83,14 +83,14 @@ class DataSeries(object):
         
     # Use x.rows to get the number of rows    
     def __getNumberOfRows (self):
-        return tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        return tpc.getTelluriumDataNumRows(self._data)
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
 
     # Use x.cols to get the number of columns    
     def __getNumberOfColumns (self):
-        return tpc.telLib.tpGetTelluriumDataNumCols(self._data)
+        return tpc.getTelluriumDataNumCols(self._data)
      
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
@@ -289,13 +289,13 @@ class Plugin (object):
     def __init__(self, pluginName):
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
-        if not self.plugin:
+        if self.plugin == 0:
             raise Exception(tpc.getLastError())             
         else:
             lp = self.listOfProperties()
             for element in lp:
                 self._propertyNames.append (element[0])
-            tpc.resetPlugin(self.plugin)                
+            tpc.resetPlugin(self.plugin)
       
     ## \brief Retrieve the plugins version
     ##@code
