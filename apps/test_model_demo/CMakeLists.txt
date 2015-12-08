@@ -22,3 +22,8 @@ install (TARGETS test_model_demo
   DESTINATION bin 
   COMPONENT apps
 )
+
+install (FILES test_model_demo.py
+  DESTINATION bin
+  COMPONENT apps
+)
