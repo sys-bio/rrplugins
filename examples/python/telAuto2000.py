@@ -31,8 +31,15 @@ print "Summary: " + auto.BifurcationSummary
 
 #Plot Bifurcation diagram
 pts     = auto.BifurcationPoints
+print('pts:')
+print(pts)
 lbls    = auto.BifurcationLabels
+print('lbls:')
+print(lbls)
 biData  = auto.BifurcationData
+print('biData')
+print(biData)
+print('biData rows = {}, cols = {}'.format(biData.rows, biData.cols))
 
 biData.plotBifurcationDiagram(pts, lbls) 
 
