@@ -3,7 +3,7 @@
 import os
 import sys
 import numpy as np
-import roadrunner
+#import roadrunner
 import tempfile
 import time
 import ctypes
