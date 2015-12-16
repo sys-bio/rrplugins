@@ -34,6 +34,7 @@ if(WIN32)
 else() 
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+    set_target_properties(telplugins_c_api PROPERTIES INSTALL_RPATH "@loader_path")
   else()
     set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
   endif()
@@ -61,4 +62,3 @@ install(
   ARCHIVE DESTINATION lib COMPONENT pluginsLib
   LIBRARY DESTINATION lib COMPONENT pluginsLib
 )
-
