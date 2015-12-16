@@ -31,14 +31,14 @@ if(WIN32)
     POCO_STATIC
     STATIC_LIBSTRUCT
   )
-else() 
+else()
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
     set_target_properties(telplugins_c_api PROPERTIES INSTALL_RPATH "@loader_path")
   else()
     set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
   endif()
-  
+
   set_property(TARGET telplugins_c_api
     PROPERTY  COMPILE_DEFINITIONS
     LIBSBML_STATIC
