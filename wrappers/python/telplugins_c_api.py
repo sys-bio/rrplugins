@@ -44,18 +44,18 @@ rrpLib=None
 
 # search for known lib prefixes/suffixes
 for name in [
-             libTitle + '.dll', 
+             libTitle + '.dll',
              'lib' + libTitle + '.dylib',
              'lib' + libTitle + '.so']:
     fullpath = os.path.join(rrplugins_path, name)
-    
+
     # if the lib file exists, try to load it
     if isfile(fullpath):
         try:
             rrpLib=CDLL(fullpath)
         except Exception as e:
             print('Exception when trying to load Tellurium plugins: {}'.format(e))
-    
+
 if rrpLib is None:
     raise RuntimeError('Cannot find telplugins_c_api library in {}'.format(rrplugins_path))
 
@@ -96,7 +96,7 @@ rrpLib.tpFreeText.argtypes = [c_void_p]
 def freeText(text):
     rrpLib.tpFreeText(text)
 
-## \brief Get Tellurium Plugins copyright. 
+## \brief Get Tellurium Plugins copyright.
 ## \return Returns a string if successful, None otherwise
 ## \ingroup utilities
 rrpLib.tpGetCopyright.restype = c_char_p
@@ -106,7 +106,7 @@ def getCopyright():
     freeText(data)
     return res
 
-## \brief Get Tellurium plugin API version. 
+## \brief Get Tellurium plugin API version.
 ## \return Returns a string if successful, None otherwise
 ## \ingroup utilities
 rrpLib.tpGetVersion.restype = c_char_p
@@ -159,7 +159,7 @@ rrpLib.tpLoadPlugins.argtypes = [c_void_p]
 def loadPlugins(pm):
     return rrpLib.tpLoadPlugins(pm)
 
-## \brief Check if there was any Errors catched during loading of plugins. 
+## \brief Check if there was any Errors catched during loading of plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true or false indicating if there was errors
 ## \ingroup plugin_manager
@@ -170,7 +170,7 @@ def hasLoadPluginErrors(pm):
     else:
         return False
 
-## \brief Get any Errors catched during loading of plugins. 
+## \brief Get any Errors catched during loading of plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a string if there was errors, None otherwise
 ## \ingroup plugin_manager
@@ -367,7 +367,7 @@ def getPluginAuthor(pluginHandle):
     freeText(data)
     return res
 
-## \brief Get the plugin copyright. 
+## \brief Get the plugin copyright.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
@@ -379,7 +379,7 @@ def getPluginCopyright(pluginHandle):
     freeText(data)
     return res
 
-## \brief Get the plugin version. 
+## \brief Get the plugin version.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
@@ -689,7 +689,7 @@ def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if not paraType:
         print(getLastError())
-    if paraType != 'listOfProperties':        
+    if paraType != 'listOfProperties':
         raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
     paras = rrpLib.tpGetNamesFromPropertyList(listHandle)
@@ -1166,8 +1166,8 @@ def getProperty(propertyHandle):
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
 
-    if paraType == 'vector<int>': 
-        return getPropertyValueAsString(propertyHandle) 
+    if paraType == 'vector<int>':
+        return getPropertyValueAsString(propertyHandle)
 
     if paraType == 'vector<double>':
         return getPropertyValueAsString(propertyHandle)
@@ -1260,7 +1260,7 @@ def plotTelluriumData(data, colHeaders):
     plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
     plt.show()
-    
+
 def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
@@ -1271,37 +1271,37 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
     x = data[:,0]
-     
+
     previousLbl = ''
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = np.zeros([nrRows])
-        ySeries = data[:,serie + 1]        
+        ySeries = data[:,serie + 1]
         xIndx = 0
-        ax = plt.subplot(1,1,1)        
+        ax = plt.subplot(1,1,1)
         colors = ax._get_lines.color_cycle
-        theColor = colors.next()        
+        theColor = colors.next()
         for label in bfLabels:
-            xPtn = bfPoints[labelNr] - 1                
+            xPtn = bfPoints[labelNr] - 1
             xSegment = x[xIndx:xPtn]
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)                    
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)                                                           
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)
             elif label == 'LP':
                 #Check Previous label
-                if previousLbl == 'LP':  
+                if previousLbl == 'LP':
                     plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
                 elif previousLbl == 'EP':
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)                                                        
-                                
-            xIndx = xPtn                                 
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)
+
+            xIndx = xPtn
             labelNr = labelNr + 1
-            previousLbl = label            
-    
-    #Plot bifurcation labels       
+            previousLbl = label
+
+    #Plot bifurcation labels
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = data[:,serie + 1]
@@ -1309,15 +1309,15 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
             if label != 'EP':
                 xPtn = bfPoints[labelNr] - 1
                 xCoord = x[xPtn]
-                yCoord = ySeries[xPtn] 
+                yCoord = ySeries[xPtn]
                 plt.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
             labelNr = labelNr + 1
-            
+
     plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
-    
+
     plt.show()
-        
+
 
 ## \brief Get column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
@@ -1386,7 +1386,7 @@ def getTelluriumDataElement(telDataHandle, row, col):
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataElement.restype = c_bool
 rrpLib.tpSetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double]
-def setTelluriumDataElement(telDataHandle, row, col, number):    
+def setTelluriumDataElement(telDataHandle, row, col, number):
     return rrpLib.tpSetTelluriumDataElement(telDataHandle, row, col, c_double(number))
 
 ## \brief Get Tellurium data element at row,col
@@ -1408,7 +1408,7 @@ def getTelluriumDataWeight(telDataHandle, row, col):
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataWeight.restype = c_bool
 rrpLib.tpSetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double]
-def setTelluriumDataWeight(telDataHandle, row, col, number):    
+def setTelluriumDataWeight(telDataHandle, row, col, number):
     return rrpLib.tpSetTelluriumDataWeight(telDataHandle, row, col, c_double(number))
 
 ## \brief Get number of rows in a tellurium data object
@@ -1455,7 +1455,7 @@ def readTelluriumData(telDataHandle, fName):
 ## \param rows Number of rows in the data to be created
 ## \param cols Number of columns in the data to be created
 ## \return Returns a handle to Tellurium data if successful, None otherwise
-## \note Use the freeTelluriumData to free memory allocated 
+## \note Use the freeTelluriumData to free memory allocated
 ## \ingroup utilities
 rrpLib.tpCreateTelluriumData.restype = c_void_p
 rrpLib.tpCreateTelluriumData.argtypes = [c_int, c_int, c_char_p]
@@ -1463,8 +1463,8 @@ def createTelluriumData(rows, cols):
     #Create a Tellurium data object
     #Create a column header
     nrs = range(cols)
-    col_hdr = str(nrs).strip('[]')     
-    return rrpLib.tpCreateTelluriumData(rows, cols, col_hdr)    
+    col_hdr = str(nrs).strip('[]')
+    return rrpLib.tpCreateTelluriumData(rows, cols, col_hdr)
 
 ## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
@@ -1490,7 +1490,7 @@ def hasWeights(dataHandle):
     if not rrpLib.tpHasWeights(dataHandle, byref(hasIt)):
         throw(getLastError())
     else:
-        return hasIt.value                
+        return hasIt.value
 
 ## \brief Allocate weights for tellurium data object
 ## \param dataHandle Handle to a tellurium data object
@@ -1499,11 +1499,11 @@ def hasWeights(dataHandle):
 rrpLib.tpAllocateWeights.restype = c_bool
 rrpLib.tpAllocateWeights.argtypes = [c_void_p, c_bool_p]
 def allocateWeights(dataHandle):
-    success = c_bool()    
+    success = c_bool()
     if not rrpLib.tpAllocateWeights(dataHandle, byref(success)):
         throw(getLastError())
     else:
-        return success.value        
+        return success.value
 
 def getText(fName):
     file = open(fName, 'r')
@@ -1551,7 +1551,7 @@ rrpLib.tpGetDataArray.restype = c_int
 rrpLib.tpGetDataArray.argtypes = [c_void_p]
 def getDataArray(matrixH):
     mat = rrpLib.tpGetDataArray(matrixH)
-    if mat:            
+    if mat:
         return mat
     else:
         return None
@@ -1560,7 +1560,7 @@ rrpLib.tpGetMatrixNumRows.restype = c_int
 rrpLib.tpGetMatrixNumRows.argtypes = [c_void_p]
 def getMatrixNumRows(matrixH):
     rSize = rrpLib.tpGetMatrixNumRows(matrixH)
-    if rSize != -1:            
+    if rSize != -1:
         return rSize
     else:
         return None
@@ -1569,7 +1569,7 @@ rrpLib.tpGetMatrixNumCols.restype = c_int
 rrpLib.tpGetMatrixNumCols.argtypes = [c_void_p]
 def getMatrixNumCols(matrixH):
     cSize = rrpLib.tpGetMatrixNumCols(matrixH)
-    if cSize != -1:            
+    if cSize != -1:
         return cSize
     else:
         return None
@@ -1577,14 +1577,14 @@ def getMatrixNumCols(matrixH):
 ##\mainpage Plugins for Tellurium
 #\section Introduction
 #The Tellurium plugin library exposes a simple framework for adding functionality to the RoadRunner core, by means of
-#external plugins. 
+#external plugins.
 #The code fragment below shows briefly how to load plugins, check for plugins, and use an individual plugin.
 #
 #\include telGetPluginInformation.py
 #
 # The above code produces something like the following output (depends on installed plugins):
 #@code
-##>>> 
+##>>>
 ##Number of Plugins: 3
 ##Plugin Names: ['AddNoise', 'ChiSquare', 'Levenberg-Marquardt', 'SBMLModel']
 ##==========================================
@@ -1619,7 +1619,7 @@ def getMatrixNumCols(matrixH):
 ##Category: 'Examples'
 ##Description:'The SBMLModel plugin exposes one property containing data, as a string, for an ExampleModel. The ExampleModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.'
 ##Parameters: ['Model']
-##>>> 
+##>>>
 #@endcode
 #    \section plugins_overview Overview
 #    The Tellurium Plugin API is centered around three important concepts:
