@@ -289,7 +289,7 @@ class Plugin (object):
     def __init__(self, pluginName):
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
-        if self.plugin == 0:
+        if self.plugin is None:
             raise Exception(tpc.getLastError())             
         else:
             lp = self.listOfProperties()
