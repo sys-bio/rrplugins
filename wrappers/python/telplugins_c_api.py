@@ -3,7 +3,7 @@
 import os
 import sys
 import numpy as np
-#import roadrunner
+import roadrunner
 import tempfile
 import time
 import ctypes
@@ -30,9 +30,14 @@ def rrpPlatformIsWin():
 def rrpPlatformIsOSX():
     return sys.platform.startswith('darwin')
 
-# expect lib file to be in this directory
+# try the appropriate path for a standalone installation
 rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib'))
 
+# try the appropriate path for a Spyder environment
+if not os.path.exists(rrplugins_path):
+    rrplugins_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+
+# bail if the path still hasn't been found
 if not os.path.exists(rrplugins_path):
     raise RuntimeError('==== ERROR: path to rrplugin binaries could not be found =====')
 
