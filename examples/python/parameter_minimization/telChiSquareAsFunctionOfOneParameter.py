@@ -34,9 +34,10 @@ try:
     
     #Sweep the k value
     for k in np.arange(kStart, kEnd, kStep):      
-          
-        rr.setValue("k1", k)   
+        
         rr.reset()
+        rr.setValue("k1", k)   
+        
         #Simulate using the same numbers as in the 'Experimental' data
         data = rr.simulate(0,10,15)
         #roadrunner.plot(data)

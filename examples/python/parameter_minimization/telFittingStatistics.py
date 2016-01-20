@@ -85,6 +85,7 @@ try:
     plt.plot(x2,y2, 'x')
 
     plt.show()
+    Config.setValue(Config.SIMULATEOPTIONS_STRUCTURED_RESULT, False)
 
 except Exception as e:
     print 'Exception: ' + `e`
