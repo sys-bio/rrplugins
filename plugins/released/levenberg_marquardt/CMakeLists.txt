@@ -38,7 +38,8 @@ target_link_libraries (tel_levenberg_marquardt
 
 if(UNIX)
   if(APPLE)
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+    #set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
+    SET_TARGET_PROPERTIES(tel_levenberg_marquardt PROPERTIES INSTALL_RPATH "@loader_path/../python2.7/roadrunner/" INSTALL_NAME_DIR "@rpath")
   else()
     set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
   endif()
