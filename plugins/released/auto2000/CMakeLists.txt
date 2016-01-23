@@ -50,4 +50,3 @@ install (TARGETS tel_auto2000
   DESTINATION plugins
   COMPONENT plugins
 )
-

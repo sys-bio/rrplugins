@@ -113,4 +113,3 @@ void lmObjectiveFunction(const double *par,       //Property vector
         plugin->WorkProgressEvent(passTroughData.first, passTroughData.second);
     }
 }
-
