@@ -3,7 +3,6 @@
 #include "telLogger.h"
 #include "rr/rrException.h"
 #include "telException.h"
-#include "rr/rrRoadRunner.h"
 #include "levenberg_marquardt_doc.h"
 #include "lm.h"
 #include "telTelluriumData.h"
