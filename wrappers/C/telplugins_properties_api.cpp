@@ -295,7 +295,16 @@ bool tlp_cc tpGetDoubleProperty(TELHandle handle, double *value)
 bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
 {
     start_try
-        Property<string>* para = castHandle< Property<string> >(handle, __FUNC__);
+        PropertyBase* base = castHandle< PropertyBase >(handle, __FUNC__);
+        if(!base) {
+            RRPLOG(lError) << "tpSetStringProperty: Failed to get handle";
+            throw std::runtime_error("Failed to get handle");
+        }
+        Property<string>* para = dynamic_cast< Property<string>* >(base);
+        if(!para) {
+            RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
+            throw std::runtime_error("Failed to cast property");
+        }
         string temp(value);
         para->setValue(temp);
         return true;
