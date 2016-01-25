@@ -11,7 +11,7 @@ using namespace tlp;
 /* function evaluation, determination of residues */
 void lmObjectiveFunction(const double *par,//Property vector
               int           m_dat,         //Dimension of residue vector
-              void   *userData,            //Data structure
+              const void   *userData,            //Data structure
               double       *fvec,          //residue vector..
               int          *userBreak      //Non zero value means termination
 )
@@ -26,13 +26,18 @@ void lmObjectiveFunction(const double *par,//Property vector
         return;
     }
 
+    if (!myData->roadrunner) {
+        RRPLOG(lError) << "No roadrunner instance\n";
+        throw std::runtime_error("No roadrunner instance");
+    }
+
     //Reset RoadRunner
-    myData->roadrunner.reset();
+    myData->roadrunner->reset();
 
     for(int i = 0; i < myData->nrOfParameters; i++)
     {
         RRPLOG(lDebug) << myData->parameterLabels[i] << " = " << par[i] << "\n";
-        myData->roadrunner.setValue(myData->parameterLabels[i], par[i]);
+        myData->roadrunner->setValue(myData->parameterLabels[i], par[i]);
     }
 
     rr::SimulateOptions opt;
@@ -40,9 +45,9 @@ void lmObjectiveFunction(const double *par,//Property vector
     opt.duration    = myData->timeEnd - opt.start;
     opt.steps       = myData->nrOfTimePoints;
 
-    myData->roadrunner.simulate(&opt);
+    myData->roadrunner->simulate(&opt);
 
-    if(!myData->roadrunner.getSimulationData())
+    if(!myData->roadrunner->getSimulationData())
     {
         stringstream msg;
         msg << "NULL data returned from RoadRunner simulate() function.";
@@ -58,7 +63,7 @@ void lmObjectiveFunction(const double *par,//Property vector
         fvec[count] = 0;
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
-            double modelValue = (*myData->roadrunner.getSimulationData())(j,i);
+            double modelValue = (*myData->roadrunner->getSimulationData())(j,i);
 
             if(!isNaN(myData->experimentalData[i][j]))
             {

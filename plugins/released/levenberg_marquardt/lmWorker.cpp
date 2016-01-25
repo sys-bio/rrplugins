@@ -3,9 +3,6 @@
 #include "telLogger.h"
 #include "rr/rrRoadRunnerOptions.h"
 #include "rr-libstruct/lsLA.h"
-
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert and use the CPP api directly
-#include "rr/C/rrc_utilities.h"
 #include "telException.h"
 #include "telTelluriumData.h"
 #include "lm.h"
@@ -18,7 +15,6 @@
 //---------------------------------------------------------------------------
 namespace lmfit
 {
-using namespace rrc;
 using namespace std;
 using namespace tlp;
 using namespace tlpc;
@@ -92,7 +88,7 @@ void lmWorker::run()
     lmmin(  mLMData.nrOfParameters,
             mLMData.parameters,
             mLMData.nrOfResiduePoints,
-			(const void*) &mTheHost,
+            (const void*) &mTheHost,
             lmObjectiveFunction,
             &control,
             &mTheHost.mLMStatus);
@@ -220,7 +216,7 @@ double lmWorker::getChi(const Properties& parameters)
 {
     RRPLOG(lDebug)<<"Getting chisquare using parameters: "<<parameters;
     //Reset RoadRunner
-    reset(mRRI);
+    mRRI->reset();
 
     for(int i = 0; i < parameters.count(); i++)
     {
@@ -467,7 +463,7 @@ bool lmWorker::setup()
         mLMData.parameterLabels[i]     = createText(parameters[i]->getName());
     }
 
-    mLMData.rrHandle                = mRRI;
+    mLMData.roadrunner = mRRI;
     mRRI->setSelections(species);
 
     mLMData.mProgressEvent               = mTheHost.mWorkProgressEvent;

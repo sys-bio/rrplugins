@@ -3,6 +3,7 @@
 #include "telplugins_types.h"
 #include "telplugins_settings.h"
 #include "telPluginsManagerSettings.h"
+#include "rr/rrRoadRunner.h"
 //---------------------------------------------------------------------------
 
 namespace lmfit
@@ -24,7 +25,6 @@ typedef struct
     double**                experimentalDataWeights;        //experimental weights..
     double                  timeStart;
     double                  timeEnd;
-    TELHandle               rrHandle;
     double*                 time;
     TELHandle               mLMPlugin;
     PluginEvent             mProgressEvent;
@@ -32,6 +32,7 @@ typedef struct
     char*                   mProgressEventMessage;
     int                     mNrOfIterations;
     double                  mNorm;
+    rr::RoadRunner*         roadrunner;
 } lmDataStructure;
 
 //Evaluate is the event function that lmfit call to evaulate residuals
