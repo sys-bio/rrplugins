@@ -1101,7 +1101,8 @@ def getStringProperty (propertyHandle):
 rrpLib.tpSetStringProperty.restype = c_bool
 rrpLib.tpSetStringProperty.argtypes = [c_void_p, c_char_p]
 def setStringProperty(propertyHandle, value):
-    return rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value))
+    if not rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value)):
+        raise TypeError('Failed to set string property')
 
 ## \brief Get the list value for a property
 ## \param propertyHandle to a property instance
