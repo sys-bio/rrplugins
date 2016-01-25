@@ -2,19 +2,19 @@
 #include <sstream>
 #include "rr-libstruct/lsMatrix.h"
 #include "rr/rrRoadRunner.h"
-#include "telLogger.h"
-#include "telTelluriumData.h"
-#include "telUtils.h"
-#include "telPluginManager.h"
-#include "telPlugin.h"
-#include "telProperty.h"
-#include "telStringUtils.h"
+#include "rrplugins/common/telLogger.h"
+#include "rrplugins/common/telTelluriumData.h"
+#include "rrplugins/common/telUtils.h"
+#include "rrplugins/core/telPluginManager.h"
+#include "rrplugins/core/telPlugin.h"
+#include "rrplugins/common/telProperty.h"
+#include "rrplugins/common/telStringUtils.h"
 #include "tel_macros.h"
 #include "telplugins_c_api.h"
 #include "telplugins_cpp_support.h"
-#include "telOSSpecifics.h"
-#include "telException.h"
-#include "telVersionInfo.h"
+#include "rrplugins/common/telOSSpecifics.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/core/telVersionInfo.h"
 
 using namespace std;
 using rr::RoadRunner;
@@ -83,11 +83,14 @@ TELHandle tlp_cc tpGetCurrentPlugin(TELHandle handle)
 TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
+
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         if(pm->load(pluginName))
         {
             //Register plugins with Handle manager.
             Plugin* handle = pm->getPlugin(pluginName);
+            if (!handle)
+                throw std::runtime_error("Could not load plugin " + std::string(pluginName));
             return tpRegisterPlugin(handle);
         }
         else
@@ -480,7 +483,7 @@ bool tlp_cc tpUnRegisterHandle(TELHandle handle)
 {
     start_try
         return gHM.unRegisterHandle(handle);
-    catch_ptr_macro
+    catch_bool_macro
 }
 
 TLP_C_DS char* tlp_cc tpGetVersion()
@@ -496,4 +499,3 @@ TLP_C_DS char* tlp_cc tpGetCopyright()
         return createText(tlp::getCopyright());
     catch_ptr_macro
 }
-

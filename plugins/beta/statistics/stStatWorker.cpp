@@ -27,7 +27,7 @@ void stStatWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -48,7 +48,7 @@ void stStatWorker::run()
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The stat worker was terminated.. aborting";
+        RRPLOG(lInfo)<<"The stat worker was terminated.. aborting";
         workerFinished();
         return;
     }
@@ -89,7 +89,7 @@ void stStatWorker::run()
 //    mTheHost.mChiSquare.setValue(chiSquare);
 //    mTheHost.mReducedChiSquare.setValue(chiSquare/degreeOfFreedom);
 
-    Log(lInfo)<<"Chi Square = "<<chiSquare;
+    RRPLOG(lInfo)<<"Chi Square = "<<chiSquare;
 
     //Post fitting data calculations
     workerFinished();

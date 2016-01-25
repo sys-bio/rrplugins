@@ -35,7 +35,7 @@ void lmObjectiveFunction(const double *par,       //Property vector
     for(int i = 0; i < myData->nrOfParameters; i++)
     {
         setValue(myData->rrHandle, myData->parameterLabels[i], par[i]);
-        Log(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
+        RRPLOG(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
     }
 
     rrc::RRCDataPtr rrcData = NULL;
@@ -54,7 +54,7 @@ void lmObjectiveFunction(const double *par,       //Property vector
             msg << "\nLast error was: "<<lastError;
         }
 
-        Log(lError)<<msg.str();
+        RRPLOG(lError)<<msg.str();
         rrc::freeText(lastError);
         return;
     }
@@ -113,4 +113,3 @@ void lmObjectiveFunction(const double *par,       //Property vector
         plugin->WorkProgressEvent(passTroughData.first, passTroughData.second);
     }
 }
-

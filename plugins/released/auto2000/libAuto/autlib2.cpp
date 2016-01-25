@@ -7,7 +7,7 @@
 #include "auto_f2c.h"
 #include "auto_c.h"
 #ifndef DARWIN
-#include "malloc.h"
+#include "stdlib.h"
 #endif
 namespace autolib {
 

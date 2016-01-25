@@ -1,29 +1,22 @@
-cmake_minimum_required(VERSION 2.8)
-set(target plugin_info)
+# M Totte Karlsson
+# J Kyle Medley
 
-add_executable(${target} 
-main.cpp 
-)
+project(plugin_info)
 
-target_link_libraries (${target} 
-telplugins_core
-)
+add_executable(plugin_info main.cpp)
+
+target_link_libraries (plugin_info telplugins_core)
 
 if(WIN32)
-add_definitions(
--DWIN32
-)
-
+  add_definitions (-DWIN32)
 endif()
 
 if(UNIX)
-add_definitions(
--DPOCO_STATIC
-)
+  add_definitions (-DPOCO_STATIC)
 endif()
 
 
-install (TARGETS ${target} 		
-DESTINATION bin 
-COMPONENT apps
+install (TARGETS plugin_info
+  DESTINATION bin 
+  COMPONENT apps
 )

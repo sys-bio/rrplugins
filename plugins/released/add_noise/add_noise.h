@@ -62,6 +62,8 @@ inline string Property<addNoise::AddNoise::NoiseType>::getValueAsString() const
             return "Gaussian";
         case addNoise::AddNoise::ntPsychological:
             return "SomethingElse";
+        case addNoise::AddNoise::ntUndefined:
+            return "Undefined";
     }
     return "";
 }

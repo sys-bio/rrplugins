@@ -16,7 +16,7 @@ class DataSeries(object):
 
     _data = 0
     _myData = False
-    ## \brief Constructor for DataSeries class 
+    ## \brief Constructor for DataSeries class
     ##@code
     ## d = DataSeries()
     ## d = DataSeries (rr)
@@ -24,55 +24,55 @@ class DataSeries(object):
     def __init__ (self, handle=None, myData = False):
         if handle == None:
            self._myData = True
-           self._data = tpc.telLib.tpCreateTelluriumData(0, 0, "")           
-        else:   
+           self._data = tpc.telLib.tpCreateTelluriumData(0, 0, "")
+        else:
            self._data = handle
-           self._myData = myData 
-           
+           self._myData = myData
+
 
     @classmethod
     def fromNumPy(cls, numPyData):
-        
+
         # We have to check the following because roadrunner issues structured arrays
-        if numPyData.dtype.names != None: 
+        if numPyData.dtype.names != None:
             # Convert to a unstructured type to obtain array dims
             unstructNumPyData = numPyData.view((float, len (numPyData.dtype.names)))
             nrCols  = unstructNumPyData.shape[1]
-            nrRows  = len(unstructNumPyData) 
+            nrRows  = len(unstructNumPyData)
         else:
             nrCols  = numPyData.shape[1]
-            nrRows  = len(numPyData) 
+            nrRows  = len(numPyData)
             unstructNumPyData = numPyData
-         
+
         if len (unstructNumPyData.shape) < 2:
             raise ValueError ('fromNumPy only accepts two dimensional arrays')
-        
-        # If there are no column names then make some up                     
+
+        # If there are no column names then make some up
         if numPyData.dtype.names == None:
             colHdr = []
             for i in range (nrCols):
-                colHdr.append ('x' + str (i))               
+                colHdr.append ('x' + str (i))
         else:
-           colHdr  = numPyData.dtype.names 
+           colHdr  = numPyData.dtype.names
 
         columnStr = str(colHdr).strip('[]')
         columnStr = columnStr.strip('()')
         columnStr = columnStr.translate(None, '\' ')
-        dataHandle = tpc.telLib.tpCreateTelluriumData(nrRows,nrCols, columnStr)        
-                
+        dataHandle = tpc.telLib.tpCreateTelluriumData(nrRows,nrCols, columnStr)
+
         #Copy the data
         for row in range(nrRows):
-            for col in range(nrCols):                
-                val = unstructNumPyData[row][col] 
-                tpc.setTelluriumDataElement(dataHandle, row, col, val)        
+            for col in range(nrCols):
+                val = unstructNumPyData[row][col]
+                tpc.setTelluriumDataElement(dataHandle, row, col, val)
         return cls(dataHandle, True)
-    
+
     def __del__ (self):
         if (self._data != 0):
             try:
                 if self._myData == True:
                     tpc.freeTelluriumData (self._data)
-                #else:                    
+                #else:
                 #    print 'not freeing data'
             except:
                 print "Failed freeing data in DataSeries"
@@ -80,22 +80,22 @@ class DataSeries(object):
 
     def __getHandle (self):
         return self._data
-        
-    # Use x.rows to get the number of rows    
+
+    # Use x.rows to get the number of rows
     def __getNumberOfRows (self):
-        return tpc.telLib.tpGetTelluriumDataNumRows(self._data)
+        return tpc.getTelluriumDataNumRows(self._data)
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
 
-    # Use x.cols to get the number of columns    
+    # Use x.cols to get the number of columns
     def __getNumberOfColumns (self):
-        return tpc.telLib.tpGetTelluriumDataNumCols(self._data)
-     
+        return tpc.getTelluriumDataNumCols(self._data)
+
     # Use x.toNumpy to get NumPy array
     def __toNumpy (self):
         return tpc.getNumpyData (self._data)
-           
+
     ## \brief Retrieve the column headers as a list
     ##@code
     ## print d.getColumnHeaders()
@@ -109,7 +109,7 @@ class DataSeries(object):
     ## \brief Get a specific element from a dataseries
     ##@code
     ## print d.getElement (1,2)
-    ##@endcode       
+    ##@endcode
     def getElement (self, row, col):
         rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
         colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
@@ -124,14 +124,14 @@ class DataSeries(object):
         if tpc.telLib.tpGetTelluriumDataElement(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
         else:
-           # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
+           # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
            # Is there a getLastError for this?
            raise Exception("Unable to retrieve element")
 
     ## \brief Set a specific element
     ##@code
     ## d.setElement (1,2, 3.1415)
-    ##@endcode       
+    ##@endcode
     def setElement (self, row, col, value):
         rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
         colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
@@ -141,12 +141,12 @@ class DataSeries(object):
             raise Exception("Row index out of bounds in dataseries element access")
         if col >= colCount:
             raise Exception("Column index out of bounds in dataseries element access")
-        setTelluriumDataElement(self._data, row, col, value)    
+        setTelluriumDataElement(self._data, row, col, value)
 
     ## \brief Get the weight for a specific data element
     ##@code
     ## print d.getWeight (1,2)
-    ##@endcode       
+    ##@endcode
     def getWeight (self, row, col):
         rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
         colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
@@ -159,11 +159,11 @@ class DataSeries(object):
 
         if not tpc.telLib.tpHasWeights(self._data):
             raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
-        
+
         val = ctypes.c_double()
         if tpc.telLib.tpGetTelluriumDataWeight(self._data, row, col, ctypes.byref(val)) == True:
            return val.value
-        else:                               
+        else:
            # Is there a getLastError for this?
            # TK: When an API function fails, the reason for the failure should always be recorded in a message in getLastError()
            msg = tpc.telLib.tpGetLastError()
@@ -172,7 +172,7 @@ class DataSeries(object):
     ## \brief Set a specific element
     ##@code
     ## d.setElement (1,2, 3.1415)
-    ##@endcode       
+    ##@endcode
     def setWeight (self, row, col, value):
         rowCount = tpc.telLib.tpGetTelluriumDataNumRows(self._data)
         colCount = tpc.telLib.tpGetTelluriumDataNumCols(self._data)
@@ -182,18 +182,18 @@ class DataSeries(object):
             raise Exception("Row index out of bounds in dataseries element access")
         if col >= colCount:
             raise Exception("Column index out of bounds in dataseries element access")
-        
+
         if not tpc.telLib.tpHasWeights(self._data):
             raise Exception("This data object do not have any weights allocated. Allocate weights first before using.")
 
         tpc.setTelluriumDataWeight(self._data, row, col, value)
-            
+
 
     ## \brief Read a dataseries from a file
     ##@code
     ## d.readDataSeries ("myDataSeries.txt")
-    ##@endcode 
-    @classmethod      
+    ##@endcode
+    @classmethod
     def readDataSeries(cls, fileName):
         if not os.path.isfile (fileName):
             raise Exception ("File not found: " + fileName)
@@ -203,14 +203,14 @@ class DataSeries(object):
     ## \brief Write a dataseries to a file
     ##@code
     ## d.writeDataSeries ("myDataSeries.txt")
-    ##@endcode       
+    ##@endcode
     def writeDataSeries(self, fileName):
         tpc.writeTelluriumData(self._data, fileName)
 
     ## \brief Plot a dataseries as a graph
     ##@code
     ## d.plot()
-    ##@endcode       
+    ##@endcode
     def plot (self):
         hdr = tpc.getTelluriumDataColumnHeader(self._data)
         npData = tpc.getNumpyData(self._data)
@@ -219,7 +219,7 @@ class DataSeries(object):
     ## \brief Plot a dataseries using Bifurcation additional data as input
     ##@code
     ## d.plot()
-    ##@endcode       
+    ##@endcode
     def plotBifurcationDiagram (self, bfPoints, bfLabels):
         hdr = tpc.getTelluriumDataColumnHeader(self._data)
         npData = tpc.getNumpyData(self._data)
@@ -230,19 +230,19 @@ class DataSeries(object):
     ## \brief Return a numpy array from a data series
     ##@code
     ## myarray = d.toNumpy
-    ##@endcode         
+    ##@endcode
     toNumpy = property (__toNumpy)
-    
+
     ## \brief Return the number of rows in the data series
     ##@code
     ## print d.rows
-    ##@endcode         
+    ##@endcode
     rows = property (__getNumberOfRows)
 
     ## \brief Return the number of columns in the data series
     ##@code
     ## print d.cols
-    ##@endcode         
+    ##@endcode
     cols = property (__getNumberOfColumns)
 
 
@@ -285,18 +285,18 @@ class Plugin (object):
     ## \brief Create a Plugin instance
     ##@code
     ## myPlugin = Plugin ("tel_add_noise")
-    ##@endcode         
+    ##@endcode
     def __init__(self, pluginName):
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
-        if not self.plugin:
-            raise Exception(tpc.getLastError())             
+        if self.plugin is None:
+            raise Exception(tpc.getLastError())
         else:
             lp = self.listOfProperties()
             for element in lp:
                 self._propertyNames.append (element[0])
-            tpc.resetPlugin(self.plugin)                
-      
+            tpc.resetPlugin(self.plugin)
+
     ## \brief Retrieve the plugins version
     ##@code
     ## print plugin.getVersion()
@@ -308,7 +308,7 @@ class Plugin (object):
     ## \brief Set a given propoerty in the plugin.
     ##@code
     ## myPlugin.setProperty ("Sigma", 0.1)
-    ##@endcode         
+    ##@endcode
     def setProperty(self, name, value):
         if (isinstance (value, DataSeries)):
            if not tpc.setPluginProperty (self.plugin, name, value.data):
@@ -336,20 +336,20 @@ class Plugin (object):
     ## \brief Get the value for a given propoerty in the plugin.
     ##@code
     ## print myPlugin.getProperty("Sigma")
-    ##@endcode         
+    ##@endcode
     def getProperty (self, name):
         handle = tpc.getPluginProperty (self.plugin, name)
         if handle == 0:
             raise ValueError ("Property: " + name + " does not exist")
-        
+
         value = tpc.getProperty (handle)
-        
+
         if tpc.getPropertyType(handle) == "telluriumData":
             return DataSeries (value)
-        
+
         elif tpc.getPropertyType(handle) == "stringList":
             return value.split(',')
-        
+
         elif tpc.getPropertyType(handle) == "vector<int>":
             val = value.strip('{}')
             val = val.split(',')
@@ -357,18 +357,18 @@ class Plugin (object):
 
         elif tpc.getPropertyType(handle) == "matrix":
             dblArray = tpc.getDataArray(value)
-            
+
             rSize = tpc.getMatrixNumRows(value)
-            cSize = tpc.getMatrixNumCols(value)            
-            length = rSize*cSize            
-            shape = (rSize, cSize)                                    
-                                    
-            arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double * length))                                                            
-            a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))      
-                              
-            a= a.reshape(rSize,cSize)                              
-            return a            
-            
+            cSize = tpc.getMatrixNumCols(value)
+            length = rSize*cSize
+            shape = (rSize, cSize)
+
+            arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double * length))
+            a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))
+
+            a= a.reshape(rSize,cSize)
+            return a
+
         else:
            return value
 
@@ -386,7 +386,7 @@ class Plugin (object):
     ## \brief List all the properties in the plugin
     ##@code
     ## print myPlugin.listOfProperties()
-    ##@endcode         
+    ##@endcode
     def listOfProperties (self):
         if not self:
             return []
@@ -402,18 +402,18 @@ class Plugin (object):
 ## \brief List all the property names in the plugin
     ##@code
     ## print myPlugin.listOfPropertyNames()
-    ##@endcode         
+    ##@endcode
     def listOfPropertyNames(self):
-        return tpc.getListOfPluginPropertyNames (self.plugin)        
+        return tpc.getListOfPluginPropertyNames (self.plugin)
 
     ## \brief List all the property descriptions in the plugin
     ##@code
     ## print myPlugin.listOfPropertyDescriptions()
-    ##@endcode 
+    ##@endcode
     ##@code
     ## import pprint
-    ## print pprint.pprint (na.listOfProperties())  
-    ##@endcode    
+    ## print pprint.pprint (na.listOfProperties())
+    ##@endcode
     def listOfPropertyDescriptions (self):
         nameList = tpc.getListOfPluginPropertyNames (self.plugin)
         aList = []
@@ -427,7 +427,7 @@ class Plugin (object):
     ## \brief List all the property hints in the plugin
     ##@code
     ## print myPlugin.listOfPropertyHints()
-    ##@endcode         
+    ##@endcode
     def listOfPropertyHints (self):
         nameList = tpc.getListOfPluginPropertyNames (self.plugin)
         aList = []
@@ -441,7 +441,7 @@ class Plugin (object):
     ## \brief List all the property hints in the plugin
     ##@code
     ## print myPlugin.listOfPropertyHints()
-    ##@endcode         
+    ##@endcode
     def loadDataSeriesAsNumPy (self, fileName):
         rrDataHandle = tpc.createTelluriumDataFromFile (fileName)
         return tpc.getNumpyData (rrDataHandle)
@@ -458,7 +458,7 @@ class Plugin (object):
     ## \brief Execute the plugin
     ##@code
     ## print myPlugin.execute()
-    ##@endcode         
+    ##@endcode
     def execute (self):
         if tpc.executePlugin (self.plugin) == True:
             return True
@@ -471,7 +471,7 @@ class Plugin (object):
     ## \brief Read all text from a file
     ##@code
     ## print myplugin.readAllText ("myfile.txt")
-    ##@endcode         
+    ##@endcode
     def readAllText(self, fName):
         file = open(fName, 'r')
         str = file.read()
@@ -484,7 +484,7 @@ class Plugin (object):
     ## \brief Static method to list all plugins
     ##@code
     ## print Plugin.listOfPlugins()
-    ##@endcode         
+    ##@endcode
     @staticmethod
     def listOfPlugins():
         global _pluginsAlreadyLoaded
@@ -512,32 +512,32 @@ class Plugin (object):
     ## \brief If a plugin has a manual, view it
     ##@code
     ## myPlugin.viewManual()
-    ##@endcode         
+    ##@endcode
     def viewManual (self):
         tpc.displayPluginManual(self.plugin)
 
     ## \brief Returns the name of the plugin
     ##@code
     ## print myPlugin.name()
-    ##@endcode         
+    ##@endcode
     def name (self):
         return tpc.getPluginName(self.plugin)
 
     ## \brief Returns the description of the plugin
     ##@code
     ## print myPlugin.description()
-    ##@endcode         
+    ##@endcode
     def description (self):
         return tpc.getPluginDescription(self.plugin)
 
     ## \brief Returns the hint of the plugin
     ##@code
     ## print myPlugin.hint()
-    ##@endcode         
+    ##@endcode
     def hint (self):
         return tpc.getPluginHint(self.plugin)
 
-     
+
     def info (self):
         return tpc.telLib.tpGetPluginInfo(self.plugin)
 
@@ -561,7 +561,7 @@ def getTelluriumData (rr):
     rrDataHandle = tpc.getTelluriumDataHandle(rr)
     return DataSeries (rrDataHandle)
 
-def getDataSeries (numPyData):    
+def getDataSeries (numPyData):
     return DataSeries.fromNumPy(numPyData)
 
 ##\mainpage Working with RoadRunner Plugins
@@ -579,7 +579,7 @@ def getDataSeries (numPyData):
 #@code
 ##p = tel.Plugin ("tel_add_noise")
 #@endcode
-## The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For 
+## The variable p now represents the plugin. Plugins expose a number of properties, these are variables that can be inspected or set. For
 ## example the add noise plugin has a property called Sigma. To set this to a particular value we would use:
 #@code
 ## p.Sigma = 0.5
@@ -603,7 +603,7 @@ def getDataSeries (numPyData):
 #@code
 ## p.execute()
 #@endcode
-## The results from an execute call will either be saved to a file or more likely via properties of the plugin. As a trivial example, 
+## The results from an execute call will either be saved to a file or more likely via properties of the plugin. As a trivial example,
 ## consider a plugin called "add" that has three properties, x, y and z. When the execute() method is called the plugin will
 ## take the values stored in x and y, add them together and store the result in z. The following script illustrates how the plugin would be used from Python:
 #@code
@@ -621,8 +621,8 @@ def getDataSeries (numPyData):
 ##
 ##\section DataSeries
 ## The plugin system supports a special data type called a Data Series. This is a convenient way to represent rows and colums of
-## data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional 
-## value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure 
+## data. The data type also has the ability to label columns with a text string and to associate each value in the data series with an additional
+## value called a weight. In practice the data series will usually store experimental data and the weights will represent a measure
 ## of undertaintly, perhaps a standard deviation, of the data point. A Data Series can be created using the call:
 #@code
 ## import teplugins as tel
@@ -631,7 +631,7 @@ def getDataSeries (numPyData):
 ## Data can be entered into a data series either by loading the data from a specially formated file or from a Python NumPy array. For example:
 #@code
 ## data.readDataSeries ("mydata.txt")
-#@endcode 
+#@endcode
 ## To read numpy arrays into a data series use the code:
 #@code
 ## import numpy as py
@@ -688,7 +688,7 @@ def getDataSeries (numPyData):
 #@code
 #p.execute()
 #@endcode
-#Once a plugin has been executed, any output from the plugin can be retrieved via properties. Let's 
+#Once a plugin has been executed, any output from the plugin can be retrieved via properties. Let's
 #suppose for example there is a plugin all add, which has three properties called, x, y and result. When executed
 #the plugin will take the values in x and y, compute the sum and assign it to result. The plugin can therefore
 #be used as follows:
@@ -714,4 +714,3 @@ def getDataSeries (numPyData):
 ## To run the example, make sure you have some 'Experimental' data available.
 ##
 ## \image html lmFit1_output.jpg "Image output using the example below."
-

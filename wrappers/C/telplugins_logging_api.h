@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 /*!
- \brief Log level enum
+ \brief RRPLOG level enum
 */
 enum  CLogLevel
     {
@@ -146,7 +146,7 @@ TLP_C_DS char* tlp_cc tpGetLogFileName(void);
 /*!
  \brief Create a log message
  \param lvl Loglevel for message
- \param msg Log message
+ \param msg RRPLOG message
  \ingroup logging
 */
 TLP_C_DS void tlp_cc tpLogMsg(enum CLogLevel lvl, const char* msg);

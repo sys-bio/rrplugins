@@ -1,4 +1,6 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+# M Totte Karlsson
+# J Kyle Medley
+
 project(lmfit)
 
 set(target lmfit) 
@@ -8,7 +10,9 @@ lmmin.c
 lmmin.h
 )
 
-add_library(${target}-static STATIC 
+add_library(lmfit-static STATIC 
 ${sources}
 )
+
+set_target_properties( lmfit-static PROPERTIES POSITION_INDEPENDENT_CODE True )
 

@@ -29,21 +29,21 @@ int main(int argc, char* argv[])
         rrAuto.setEndParameterValue(1.5);
         rrAuto.setScanDirection(sdNegative);
 
-        Log(lInfo)<<rrAuto.getConstantsAsString();
+        RRPLOG(lInfo)<<rrAuto.getConstantsAsString();
 
         rrAuto.run();
 
         //Print the result
-        Log(lInfo)<<rrAuto.getAutoData();
+        RRPLOG(lInfo)<<rrAuto.getAutoData();
         pause(true);
     }
     catch(const rr::Exception& ex)
     {
-        Log(lError)<<"There was a problem: "<<ex.getMessage();
+        RRPLOG(lError)<<"There was a problem: "<<ex.getMessage();
     }
     catch (std::exception &e)
     {
-        Log(lError) << "caught Exception: " << e.what() << "\n";
+        RRPLOG(lError) << "caught Exception: " << e.what() << "\n";
     }
     return 0;
 }

@@ -67,7 +67,7 @@ mA1(                                10000,                  "A1",               
 mNPR(                               50,                     "NPR",                                  "Save the solution in the solution file every NPR continuation steps",                 "",         ""),
 mMXBF(                              -1,                     "MXBF",                                 "Maximum number of branch switches",                               "",         ""),
 mIID(                               0,                      "IID",                                  "Controls the diagnostic file output",                             "",         ""),
-mITMX(                              8,                      "ITMX",                                 "Maximum number of iterations for detecting “special” solutions",  "",         ""),
+mITMX(                              8,                      "ITMX",                                 "Maximum number of iterations for detecting special solutions",  "",         ""),
 mITNW(                              5,                      "ITNW",                                 "Maximum number of Newton+Chord iterations",                       "",         ""),
 mNWTN(                              3,                      "NWTN",                                 "Maximum number of Newton iterations",                             "",         ""),
 mJAC(                               0,                      "JAC",                                  "Jacobian supplied ?",                                             "",         ""),
@@ -82,7 +82,7 @@ mNTHL(                              0,                      "NTHL",             
 mTHL(                               vector<int>(0),         "THL",                                  "Parameter index, parameter weight",                               "",         ""),
 mNTHU(                              0,                      "NTHU",                                 "The number of modified solution component \"weights\" (for BVP)", "",         ""),
 mTHU(                               vector<int>(0),         "THU",                                  "Component index, component weight",                               "",         ""),
-mNUZR(                              0,                      "NUZR",                                 "The number of “user output points” specified",                    "",         ""),
+mNUZR(                              0,                      "NUZR",                                 "The number of user output points specified",                    "",         ""),
 mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         "")
 {
     mVersion = "1.0.0";
@@ -163,7 +163,7 @@ string AutoPlugin::getResult()
 
 bool AutoPlugin::execute(bool inThread)
 {
-    Log(lInfo)<<"Executing the AutoPlugin plugin";
+    RRPLOG(lInfo)<<"Executing the AutoPlugin plugin";
 
     //Tempfolder setup
     if(getTempFolder() == ".")
@@ -444,19 +444,19 @@ assignDescription(mDSMAX, s);
 s << "Step size adaption every IADS steps; 0=OFF";
 assignDescription(mIADS, s);
 
-s << "The number of modified parameter “weights” (for BVP)";
+s << "The number of modified parameter weights (for BVP)";
 assignDescription(mNTHL, s);
 
 s << "Parameter index, parameter weight (e.g., ICP(11)=0 means PAR(11) is excluded from the step size)";
 assignDescription(mTHL, s);
 
-s << "The number of modified solution component “weights” (for BVP)";
+s << "The number of modified solution component weights (for BVP)";
 assignDescription(mNTHU, s);
 
 s << "Component index, Component weight";
 assignDescription(mTHU, s);
 
-s << "The number of “user output points” specified";
+s << "The number of user output points specified";
 assignDescription(mNUZR, s);
 
 s << "Parameter index, parameter value (if I is negative the continuation stops at the parameter value)";

@@ -77,18 +77,18 @@ bool ChiSquare::execute(bool inThread)
 {
     try
     {
-        Log(lInfo)<<"Executing the ChiSquare plugin";
+        RRPLOG(lInfo)<<"Executing the ChiSquare plugin";
         mWorker.start(inThread);
         return true;
     }
     catch(const tlp::Exception& ex)
     {
-        Log(lError) << "There was a problem in the execute function of the ChiSquare plugin: " << ex.getMessage();
+        RRPLOG(lError) << "There was a problem in the execute function of the ChiSquare plugin: " << ex.getMessage();
         throw(ex);
     }
     catch(...)
     {
-        Log(lError) << "There was an unknown problem in the execute of the ChiSquare plugin.";
+        RRPLOG(lError) << "There was an unknown problem in the execute of the ChiSquare plugin.";
         throw("There was an unknown problem in the execute of the ChiSquare plugin.");
     }
 }

@@ -6,9 +6,11 @@ import numpy as np
 import roadrunner
 import tempfile
 import time
-from ctypes import *
+import ctypes
+from ctypes import * # FIXME: remove this sinful line
+from ctypes import CDLL
 import matplotlib.pyplot as plt
-#from telpluginutils import *
+from os.path import isfile
 
 """
 CTypes Python Bindings to the Tellurium Plugin API.
@@ -18,40 +20,60 @@ Currently this is a fairly raw implementation with few Pythonic refinements
 
 __version__ = "1.0.0"
 
-sharedLib='telplugins_c_api'
+libTitle='telplugins_c_api'
 
 originalWorkingDirectory = os.getcwd()
 
-#telLib will be our handle returned by ctypes
-telLib=None
-try:
-    if sys.platform.startswith('win32'):
-        sharedLib = sharedLib + '.dll'
-                
-        telplugins_path = os.path.dirname(os.path.realpath(__file__))
+def rrpPlatformIsWin():
+    return sys.platform.startswith('win32')
 
-        #temporary change into this path so we can load our shared libs
-        os.chdir(telplugins_path)                 
-        telLib=CDLL(sharedLib)                         
+def rrpPlatformIsOSX():
+    return sys.platform.startswith('darwin')
 
-    #elif sys.platform.startswith('Linux'):
-    #    sharedLib = sharedLib + '.a'
-    #    telLib = cdll.LoadLibrary(sharedLib)
-    else:
-        raise Exception('Tellurium plugins are not supported on this platform')
-except Exception as e:
-    print 'Exception when trying to load Tellurium plugins: ' + `e`        
-finally:    
-       #Change back to our original working directory
-       os.chdir(originalWorkingDirectory)
+# try the appropriate path for a standalone installation
+rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib'))
 
-if telLib == None:
-        raise Exception('Failed loading Tellurium Plugins C API shared library')
-    
-gDefaultPluginsPath   = telplugins_path 
-if not os.path.exists(gDefaultPluginsPath):
-    print '==== WARNING: Roadrunner plugin folder could not be found =====\n'
-    gDefaultPluginsPath = ''
+# try the appropriate path for a Spyder environment
+if not os.path.exists(rrplugins_path):
+    rrplugins_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+
+# bail if the path still hasn't been found
+if not os.path.exists(rrplugins_path):
+    raise RuntimeError('==== ERROR: path to rrplugin binaries could not be found =====')
+
+# temporarily change into this path so we can load our shared libs
+os.chdir(rrplugins_path)
+
+#rrpLib will be our handle returned by ctypes
+rrpLib=None
+
+# search for known lib prefixes/suffixes
+for name in [
+             libTitle + '.dll',
+             'lib' + libTitle + '.dylib',
+             'lib' + libTitle + '.so']:
+    fullpath = os.path.join(rrplugins_path, name)
+
+    # if the lib file exists, try to load it
+    if isfile(fullpath):
+        try:
+            rrpLib=CDLL(fullpath)
+        except Exception as e:
+            print('Exception when trying to load Tellurium plugins: {}'.format(e))
+
+if rrpLib is None:
+    raise RuntimeError('Cannot find telplugins_c_api library in {}'.format(rrplugins_path))
+
+# restore working dir
+os.chdir(originalWorkingDirectory)
+
+# custom primitives
+
+c_double_p = POINTER(c_double)
+c_bool_p   = POINTER(c_bool)
+c_int_p    = POINTER(c_int)
+
+gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'plugins'))
 
 #=======================tel_api========================#
 #Type of plugin events, first argument is return type
@@ -71,27 +93,32 @@ if not os.path.exists(gDefaultPluginsPath):
 ## assignOnStartedEvent(plugin,  c_event)
 ##@endcode
 ## \ingroup plugins
-NotifyEvent  = CFUNCTYPE(None)
-NotifyEventEx  = CFUNCTYPE(None, c_void_p)
+NotifyEvent  = CFUNCTYPE(None, c_void_p, c_void_p)
+#NotifyEventEx  = CFUNCTYPE(None, c_void_p)
 
-## \brief Get Tellurium Plugins copyright. 
+rrpLib.tpFreeText.restype = c_bool
+rrpLib.tpFreeText.argtypes = [c_void_p]
+def freeText(text):
+    rrpLib.tpFreeText(text)
+
+## \brief Get Tellurium Plugins copyright.
 ## \return Returns a string if successful, None otherwise
 ## \ingroup utilities
-telLib.tpGetCopyright.restype = c_char_p
+rrpLib.tpGetCopyright.restype = c_char_p
 def getCopyright():
-    data =  telLib.tpGetCopyright()
+    data =  rrpLib.tpGetCopyright()
     res = data
-    telLib.tpFreeText(data)
+    freeText(data)
     return res
 
-## \brief Get Tellurium plugin API version. 
+## \brief Get Tellurium plugin API version.
 ## \return Returns a string if successful, None otherwise
 ## \ingroup utilities
-telLib.tpGetVersion.restype = c_char_p
+rrpLib.tpGetVersion.restype = c_char_p
 def getVersion():
-    data =  telLib.tpGetVersion()
+    data =  rrpLib.tpGetVersion()
     res = data
-    telLib.tpFreeText(data)
+    freeText(data)
     return res
 
 ## \brief Create a new instance of a plugin manager.
@@ -106,20 +133,22 @@ def getVersion():
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-telLib.tpCreatePluginManager.restype = c_void_p
+rrpLib.tpCreatePluginManager.restype = c_void_p
+rrpLib.tpCreatePluginManager.argtypes = [c_char_p]
 def createPluginManager(pluginDir = None):
     if pluginDir == None:
         pluginDir = gDefaultPluginsPath
-    return telLib.tpCreatePluginManager(pluginDir)
+    return rrpLib.tpCreatePluginManager(pluginDir)
 
 ## \brief Free the plugin manager. A call to this function will also unload any loaded plugins.
 ## \param pm Handle to a plugin manager.
 ## \return true if success, false otherwise.
 ##
 ## \ingroup plugin_manager
-telLib.tpFreePluginManager.restype = c_bool
+rrpLib.tpFreePluginManager.restype = c_bool
+rrpLib.tpFreePluginManager.argtypes = [c_void_p]
 def freePluginManager(pm):
-    return telLib.tpFreePluginManager(pm)
+    return rrpLib.tpFreePluginManager(pm)
 
 ## \brief Load plugins. The function will look in the default plugin folder for plugins, and load them.
 ## \param pm Handle to a PluginManager instance
@@ -130,28 +159,30 @@ def freePluginManager(pm):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-telLib.tpLoadPlugins.restype = c_bool
+rrpLib.tpLoadPlugins.restype = c_bool
+rrpLib.tpLoadPlugins.argtypes = [c_void_p]
 def loadPlugins(pm):
-    return telLib.tpLoadPlugins(pm)
+    return rrpLib.tpLoadPlugins(pm)
 
-## \brief Check if there was any Errors catched during loading of plugins. 
+## \brief Check if there was any Errors catched during loading of plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns true or false indicating if there was errors
 ## \ingroup plugin_manager
 def hasLoadPluginErrors(pm):
-    aStr = telLib.tpGetPluginLoadErrors(pm)
+    aStr = rrpLib.tpGetPluginLoadErrors(pm)
     if aStr != None and len(aStr) > 0:
         return True
     else:
         return False
 
-## \brief Get any Errors catched during loading of plugins. 
+## \brief Get any Errors catched during loading of plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a string if there was errors, None otherwise
 ## \ingroup plugin_manager
-telLib.tpGetPluginLoadErrors.restype = c_char_p
+rrpLib.tpGetPluginLoadErrors.restype = c_char_p
+rrpLib.tpGetPluginLoadErrors.argtypes = [c_void_p]
 def getPluginLoadErrors(pm):
-    return telLib.tpGetPluginLoadErrors(pm)
+    return rrpLib.tpGetPluginLoadErrors(pm)
 
 ## \brief Unload all plugins.
 ## \param pm Handle to a PluginManager instance
@@ -159,9 +190,10 @@ def getPluginLoadErrors(pm):
 ##
 ## \ingroup plugin_manager
 ##
-telLib.tpUnLoadPlugins.restype = c_bool
+rrpLib.tpUnLoadPlugins.restype = c_bool
+rrpLib.tpUnLoadPlugins.argtypes = [c_void_p]
 def unLoadPlugins(pm):
-    return telLib.tpUnLoadPlugins(pm)
+    return rrpLib.tpUnLoadPlugins(pm)
 
 ## \brief Load a particular plugin
 ## \param pm Handle to a PluginManager instance
@@ -176,8 +208,10 @@ def unLoadPlugins(pm):
 ## \endhtmlonly
 ## \ingroup plugin_manager
 ##
+rrpLib.tpLoadPlugin.restype = c_void_p
+rrpLib.tpLoadPlugin.argtypes = [c_void_p, c_char_p]
 def loadPlugin(pm, pluginName):
-    return telLib.tpLoadPlugin(pm, pluginName)
+    return rrpLib.tpLoadPlugin(pm, pluginName)
 
 ## \brief Unload a particular plugin
 ## \param pm Handle to a PluginManager instance
@@ -185,16 +219,19 @@ def loadPlugin(pm, pluginName):
 ## \return Returns true if the Plugin are unloaded succesfully, false otherwise
 ## \ingroup plugin_manager
 ##
+rrpLib.tpUnLoadPlugin.restype = c_bool
+rrpLib.tpUnLoadPlugin.argtypes = [c_void_p]
 def unLoadPlugin(pm, pHandle):
-    return telLib.tpUnLoadPlugin(pm, pHandle)
+    return rrpLib.tpUnLoadPlugin(pm, pHandle)
 
 ## \brief Get number of loaded plugins.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns the number of loaded plugins, -1 if a problem is encountered. Call telPlugins.getLastError() to obtain error message.
 ## \ingroup plugin_manager
-telLib.tpGetNumberOfPlugins.restype = c_int
+rrpLib.tpGetNumberOfPlugins.restype = c_int
+rrpLib.tpGetNumberOfPlugins.argtypes = [c_void_p]
 def getNumberOfPlugins(pm):
-    return telLib.tpGetNumberOfPlugins(pm)
+    return rrpLib.tpGetNumberOfPlugins(pm)
 
 ## \brief Function to retrieve the names of all currently loaded plugins.
 ## \param pm Handle to a PluginManager instance
@@ -208,11 +245,12 @@ def getNumberOfPlugins(pm):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-telLib.tpGetPluginNames.restype = c_char_p
+rrpLib.tpGetPluginNames.restype = c_void_p
+rrpLib.tpGetPluginNames.argtypes = [c_void_p]
 def getPluginNames(pm):
-    names = telLib.tpGetPluginNames(pm)
-    res = names
-    telLib.tpFreeText(c_char_p(names))
+    names = rrpLib.tpGetPluginNames(pm)
+    res = ctypes.cast(names, ctypes.c_char_p).value
+    freeText(names)
     if not res:
         return list()
     return res.split(",")
@@ -229,9 +267,10 @@ def getPluginNames(pm):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_manager
-telLib.tpGetPluginLibraryNames.restype = c_char_p
+rrpLib.tpGetPluginLibraryNames.restype = c_char_p
+rrpLib.tpGetPluginLibraryNames.argtypes = [c_void_p]
 def getPluginLibraryNames(pm):
-    names = telLib.tpGetPluginLibraryNames(pm)
+    names = rrpLib.tpGetPluginLibraryNames(pm)
     if not names:
         return list()
     return names.split(",")
@@ -241,36 +280,40 @@ def getPluginLibraryNames(pm):
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-telLib.tpGetFirstPlugin.restype = c_void_p
+rrpLib.tpGetFirstPlugin.restype = c_void_p
+rrpLib.tpGetFirstPlugin.argtypes = [c_void_p]
 def getFirstPlugin(pm):
-    return telLib.tpGetFirstPlugin(pm)
+    return rrpLib.tpGetFirstPlugin(pm)
 
 ## \brief getNextPlugin retrieves the "next" plugin in the plugin managers internal list of plugins. This function
 ## is typically used together with the getFirstPlugin and getPreviousPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-telLib.tpGetNextPlugin.restype = c_void_p
+rrpLib.tpGetNextPlugin.restype = c_void_p
+rrpLib.tpGetNextPlugin.argtypes = [c_void_p]
 def getNextPlugin(pm):
-    return telLib.tpGetNextPlugin(pm)
+    return rrpLib.tpGetNextPlugin(pm)
 
 ## \brief getPreviousPlugin retrieves the "previous" plugin in the plugin managers internal list of plugins. This function
 ##    is typically used together with the getFirstPlugin and getNextPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-telLib.tpGetPreviousPlugin.restype = c_void_p
+rrpLib.tpGetPreviousPlugin.restype = c_void_p
+rrpLib.tpGetPreviousPlugin.argtypes = [c_void_p]
 def getPreviousPlugin(pm):
-    return telLib.tpGetPreviousPlugin(pm)
+    return rrpLib.tpGetPreviousPlugin(pm)
 
 ## \brief getCurrentPlugin retrieves the "current" plugin in the plugin managers internal list of plugins. This function
 ##    is typically used together with the getFirst, Next and getPreviousPlugin functions.
 ## \param pm Handle to a PluginManager instance
 ## \return Returns a handle to a plugin. Returns None if the plugin is not found
 ## \ingroup plugin_manager
-telLib.tpGetCurrentPlugin.restype = c_void_p
+rrpLib.tpGetCurrentPlugin.restype = c_void_p
+rrpLib.tpGetCurrentPlugin.argtypes = [c_void_p]
 def getCurrentPlugin(pm):
-    return telLib.tpGetCurrentPlugin(pm)
+    return rrpLib.tpGetCurrentPlugin(pm)
 
 ## \brief Get the plugin handle for the named plugin
 ## \param pm Handle to a PluginManager instance
@@ -278,9 +321,10 @@ def getCurrentPlugin(pm):
 ## \return Returns a handle to a plugin, with name as supplied in the property pluginName.
 ## Returns None if the plugin is not found
 ## \ingroup plugin_manager
-telLib.tpGetPlugin.restype = c_void_p
+rrpLib.tpGetPlugin.restype = c_void_p
+rrpLib.tpGetPlugin.argtypes = [c_void_p, c_char_p]
 def getPlugin(pm, pluginName):
-    return telLib.tpGetPlugin(pm, c_char_p(pluginName))
+    return rrpLib.tpGetPlugin(pm, c_char_p(pluginName))
 
 #---------- PLUGIN HANDLING FUNCTIONS ============================================
 ## \brief Get the name of a Plugin
@@ -293,9 +337,10 @@ def getPlugin(pm, pluginName):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-telLib.tpGetPluginName.restype = c_char_p
+rrpLib.tpGetPluginName.restype = c_char_p
+rrpLib.tpGetPluginName.argtypes = [c_void_p]
 def getPluginName(pluginHandle):
-    return telLib.tpGetPluginName(pluginHandle)
+    return rrpLib.tpGetPluginName(pluginHandle)
 
 ## \brief Get the Category of a Plugin. This is assigned by the pluging developer
 ## \param pluginHandle Handle to a plugin
@@ -307,44 +352,48 @@ def getPluginName(pluginHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-telLib.tpGetPluginCategory.restype = c_char_p
+rrpLib.tpGetPluginCategory.restype = c_void_p
+rrpLib.tpGetPluginCategory.argtypes = [c_void_p]
 def getPluginCategory(pluginHandle):
-    data =  telLib.tpGetPluginCategory(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginCategory(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
 ## \brief Get the author of a Plugin. This is assigned by the pluging developer
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginAuthor.restype = c_char_p
+rrpLib.tpGetPluginAuthor.restype = c_void_p
+rrpLib.tpGetPluginAuthor.argtypes = [c_void_p]
 def getPluginAuthor(pluginHandle):
-    data =  telLib.tpGetPluginAuthor(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginAuthor(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
-## \brief Get the plugin copyright. 
+## \brief Get the plugin copyright.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginCopyright.restype = c_char_p
+rrpLib.tpGetPluginCopyright.restype = c_void_p
+rrpLib.tpGetPluginCopyright.argtypes = [c_void_p]
 def getPluginCopyright(pluginHandle):
-    data =  telLib.tpGetPluginCopyright(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginCopyright(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
-## \brief Get the plugin version. 
+## \brief Get the plugin version.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string if successful, None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginVersion.restype = c_char_p
+rrpLib.tpGetPluginVersion.restype = c_void_p
+rrpLib.tpGetPluginVersion.argtypes = [c_void_p]
 def getPluginVersion(pluginHandle):
-    data =  telLib.tpGetPluginVersion(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    ptr = rrpLib.tpGetPluginVersion(pluginHandle)
+    res = ctypes.cast(ptr, ctypes.c_char_p).value
+    freeText(ptr)
     return res
 
 ## \brief Get the Description of a Plugin. This is assigned by the pluging developer
@@ -357,11 +406,12 @@ def getPluginVersion(pluginHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-telLib.tpGetPluginDescription.restype = c_char_p
+rrpLib.tpGetPluginDescription.restype = c_void_p
+rrpLib.tpGetPluginDescription.argtypes = [c_void_p]
 def getPluginDescription(pluginHandle):
-    data =  telLib.tpGetPluginDescription(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginDescription(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
 ## \brief Get a plugins Hint. A plugins hint is a short description on what the plugin is doing.This is assigned by the pluging developer
@@ -374,22 +424,24 @@ def getPluginDescription(pluginHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-telLib.tpGetPluginHint.restype = c_char_p
+rrpLib.tpGetPluginHint.restype = c_void_p
+rrpLib.tpGetPluginHint.argtypes = [c_void_p]
 def getPluginHint(pluginHandle):
-    data =  telLib.tpGetPluginHint(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginHint(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
 ## \brief Returns information about a Plugin.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns information as a string for the plugin, None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginInfo.restype = c_char_p
+rrpLib.tpGetPluginInfo.restype = c_char_p
+rrpLib.tpGetPluginInfo.argtypes = [c_void_p]
 def getPluginInfo(pluginHandle):
-    data =  telLib.tpGetPluginInfo(pluginHandle)
-    res = data
-    telLib.tpFreeText(data)
+    data =  rrpLib.tpGetPluginInfo(pluginHandle)
+    res = ctypes.cast(data, ctypes.c_char_p).value
+    freeText(data)
     return res
 
 ## \brief Get Plugin manual as PDF. A plugin may embedd a help manual as a PDF.
@@ -413,16 +465,19 @@ def getPluginInfo(pluginHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugins
-telLib.tpGetPluginManualAsPDF.restype =  POINTER(c_ubyte)
+rrpLib.tpGetPluginManualAsPDF.restype =  POINTER(c_ubyte)
+rrpLib.tpGetPluginManualAsPDF.argtypes = [c_void_p]
 def getPluginManualAsPDF(pluginHandle):
-    return telLib.tpGetPluginManualAsPDF(pluginHandle)
+    return rrpLib.tpGetPluginManualAsPDF(pluginHandle)
 
 ## \brief Get the byte size for the PDF manual.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns the number of bytes in the plugin's manual pdf file as an unsigned int.
 ## \ingroup plugins
+rrpLib.tpGetPluginManualNrOfBytes.restype = c_uint
+rrpLib.tpGetPluginManualNrOfBytes.argtypes = [c_void_p]
 def getPluginManualNrOfBytes(pluginHandle):
-    return telLib.tpGetPluginManualNrOfBytes(pluginHandle)
+    return rrpLib.tpGetPluginManualNrOfBytes(pluginHandle)
 
 ## \brief If a plugin has a built-in PDF manual, display it.
 ## \param pluginHandle Handle to a plugin
@@ -440,13 +495,18 @@ def displayPluginManual(pluginHandle):
     numOfBytes = getPluginManualNrOfBytes(pluginHandle)
     manual = cast(ptr, POINTER(c_char * numOfBytes))[0]
     if numOfBytes == 0:
-       print 'This plugin does not have a manual.'
+       print('This plugin does not have a manual.')
        return False
-    outFName = tempfile.gettempdir() + '\\' + getPluginName (pluginHandle) + '.pdf'
-    print outFName
+    outFName = os.path.join(tempfile.gettempdir(), getPluginName (pluginHandle) + '.pdf')
+    print(outFName)
     with open(outFName, 'wb') as output:
       output.write(manual)
-    os.system('start ' + outFName)
+    if rrpPlatformIsWin():
+        os.system('start ' + outFName)
+    elif rrpPlatformIsOSX():
+        os.system('open ' + outFName)
+    else:
+        os.system('xdg-open ' + outFName)
 
 ## \brief Assign a roadrunner instance handle for the plugin to use.
 ##   A plugin may use an externally created roadrunner instance for its internal work.
@@ -454,9 +514,10 @@ def displayPluginManual(pluginHandle):
 ##  \param rrHandle Handle to a roadrunner instance
 ##  \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpAssignRoadRunnerInstance.restype = c_bool
+rrpLib.tpAssignRoadRunnerInstance.restype = c_bool
+rrpLib.tpAssignRoadRunnerInstance.argtypes = [c_void_p, c_void_p]
 def assignRoadRunnerInstance(pluginHandle, rrHandle):
-    return telLib.tpAssignRoadRunnerInstance(pluginHandle, rrHandle)
+    return rrpLib.tpAssignRoadRunnerInstance(pluginHandle, rrHandle)
 
 ## \brief The executePlugin function is called to start the plugin so that it can carry out its
 ## function. The call is plugin dependent meaning that it could result in a calculation, starting up a GUI etc.
@@ -466,26 +527,29 @@ def assignRoadRunnerInstance(pluginHandle, rrHandle):
 ## If the plugin is asked to carry out a lengthy calculation, consider using
 ## the executePluginEx function that has the option to execute the plugin code in the background (in a thread);
 ## \ingroup plugins
-telLib.tpExecutePlugin.restype = c_bool
+rrpLib.tpExecutePlugin.restype = c_bool
+rrpLib.tpExecutePlugin.argtypes = [c_void_p]
 def executePlugin(pluginHandle):
-    return telLib.tpExecutePlugin(pluginHandle)
+    return rrpLib.tpExecutePlugin(pluginHandle)
 
 ## \brief The executePluginEx is similar to the executePlugin function, except it takes one extra argument.
 ## \param pluginHandle Handle to a plugin
 ## \param inAThread bool indicating if the plugin should be executed in the background (in a thread)
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpExecutePluginEx.restype = c_bool
+rrpLib.tpExecutePluginEx.restype = c_bool
+rrpLib.tpExecutePluginEx.argtypes = [c_void_p, c_bool]
 def executePluginEx(pluginHandle, inAThread=False):
-    return telLib.tpExecutePluginEx(pluginHandle, c_bool(inAThread))
+    return rrpLib.tpExecutePluginEx(pluginHandle, c_bool(inAThread))
 
 ## \brief Get status information from a plugin. This call is plugin dependent, see the plugin documentation for details
 ## \param pluginHandle Handle to a plugin
 ## \return Returns plugin status if available, as a string. None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginStatus.restype = c_char_p
+rrpLib.tpGetPluginStatus.restype = c_char_p
+rrpLib.tpGetPluginStatus.argtypes = [c_void_p]
 def getPluginStatus(pluginHandle):
-    return telLib.tpGetPluginStatus(pluginHandle)
+    return rrpLib.tpGetPluginStatus(pluginHandle)
 
 ## \brief Returns a plugins result, as a string. This is plugin dependent, and a plugin designer may, or may not, implement
 ## this function. See the plugin documentation for details.
@@ -494,17 +558,19 @@ def getPluginStatus(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a plugins result if available. None otherwise
 ## \ingroup plugins
-telLib.tpGetPluginResult.restype = c_char_p
+rrpLib.tpGetPluginResult.restype = c_char_p
+rrpLib.tpGetPluginResult.argtypes = [c_void_p]
 def getPluginResult(pluginHandle):
-    return telLib.tpGetPluginResult(pluginHandle)
+    return rrpLib.tpGetPluginResult(pluginHandle)
 
 ## \brief Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpResetPlugin.restype = c_bool
+rrpLib.tpResetPlugin.restype = c_bool
+rrpLib.tpResetPlugin.argtypes = [c_void_p]
 def resetPlugin(pluginHandle):
-    return telLib.tpResetPlugin(pluginHandle)
+    return rrpLib.tpResetPlugin(pluginHandle)
 
 ## \brief Check if a plugin is actively working. This function is used when the work in the plugin is
 ## executed in a thread (see executeEx). The isPluginWorking will return true as long work is being active
@@ -513,35 +579,39 @@ def resetPlugin(pluginHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating if the plugin is busy or not
 ## \ingroup plugins
-telLib.tpIsPluginWorking.restype = c_bool
+rrpLib.tpIsPluginWorking.restype = c_bool
+rrpLib.tpIsPluginWorking.argtypes = [c_void_p]
 def isPluginWorking(pluginHandle):
-    return telLib.tpIsPluginWorking(pluginHandle)
+    return rrpLib.tpIsPluginWorking(pluginHandle)
 
 ## \brief Terminate any work that is in progress in a plugin. If the plugins worker is executed in a thread, this function
 ## will signal the internals of the plugin to terminate. This function is used when a plugins work is executed in a thread.
 ## \param pluginHandle Handle to a plugin
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpTerminateWork.restype = c_bool
+rrpLib.tpTerminateWork.restype = c_bool
+rrpLib.tpTerminateWork.argtypes = [c_void_p]
 def terminateWork(pluginHandle):
-    return telLib.tpTerminateWork(pluginHandle)
+    return rrpLib.tpTerminateWork(pluginHandle)
 
 ## \brief Check if the work of a plugin is currently being terminated. This function is useful when a plugin is executed in a thread.
 ## \param pluginHandle Handle to the plugin
 ## \return Returns true or false indicating if the work within the plugin is in the process of being terminated
 ## \ingroup plugins
-telLib.tpIsBeingTerminated.restype = c_bool
+rrpLib.tpIsBeingTerminated.restype = c_bool
+rrpLib.tpIsBeingTerminated.argtypes = [c_void_p]
 def isBeingTerminated(pluginHandle):
-    return telLib.tpIsBeingTerminated(pluginHandle)
+    return rrpLib.tpIsBeingTerminated(pluginHandle)
 
 ## \brief Query a plugin if work was terminated succesfully. This function may be used in combination with
 ## the terminateWork, and isBeingTerminated functions.
 ## \param pluginHandle Handle to the plugin
 ## \return Returns true or false indicating if the work in the plugin was terminated or not
 ## \ingroup plugins
-telLib.tpWasTerminated.restype = c_bool
+rrpLib.tpWasTerminated.restype = c_bool
+rrpLib.tpWasTerminated.argtypes = [c_void_p]
 def wasTerminated(pluginHandle):
-    return telLib.tpWasTerminated(pluginHandle)
+    return rrpLib.tpWasTerminated(pluginHandle)
 
 ## \brief Assigns a plugins OnStartedEvent function.Plugin dependent. Intended usage is to report back on plugin initialization.
 ## \param pluginHandle Handle to a plugin
@@ -550,9 +620,10 @@ def wasTerminated(pluginHandle):
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpAssignOnStartedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+rrpLib.tpAssignOnStartedEvent.restype = c_bool
+rrpLib.tpAssignOnStartedEvent.argtypes =[c_void_p, NotifyEvent, c_void_p]
 def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return telLib.tpAssignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return rrpLib.tpAssignOnStartedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 ## \brief Assigns a plugins OnProgressEvent function. Plugin dependent. Intended usage is to report back progress
 ## \param pluginHandle Handle to a pluginevent routine
@@ -560,9 +631,10 @@ def assignOnStartedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpAssignOnProgressEvent.args =[c_void_p, c_void_p, c_void_p]
+rrpLib.tpAssignOnProgressEvent.restype = c_bool
+rrpLib.tpAssignOnProgressEvent.argtypes =[c_void_p, c_void_p, c_void_p]
 def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return telLib.tpAssignOnProgressEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return rrpLib.tpAssignOnProgressEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 ## \brief Assigns a plugins OnFinishedEvent function. Plugin dependent. Intended usage is to report back on plugin finalization.
 
@@ -572,26 +644,29 @@ def assignOnProgressEvent(pluginHandle, pluginEvent, userData1 = None, userData2
 ## \param userData2 void* pointer to user data.
 ## \return Returns true or false indicating success/failure
 ## \ingroup plugins
-telLib.tpAssignOnFinishedEvent.args =[c_void_p, NotifyEvent, c_void_p]
+rrpLib.tpAssignOnFinishedEvent.restype = c_bool
+rrpLib.tpAssignOnFinishedEvent.argtypes =[c_void_p, NotifyEvent, c_void_p]
 def assignOnFinishedEvent(pluginHandle, pluginEvent, userData1 = None, userData2 = None):
-    return telLib.tpAssignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
+    return rrpLib.tpAssignOnFinishedEvent(pluginHandle, pluginEvent, userData1, userData2)
 
 #================ Plugin Property functionality ======================
 ## \brief Get a handle to the list of properties for a plugin
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a handle to a list of Properties on success, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPluginProperties.restype = c_void_p
+rrpLib.tpGetPluginProperties.restype = c_void_p
+rrpLib.tpGetPluginProperties.argtypes = [c_void_p]
 def getPluginProperties(pluginHandle):
-    return telLib.tpGetPluginProperties(pluginHandle)
+    return rrpLib.tpGetPluginProperties(pluginHandle)
 
 ## \brief Get a list of property names in a plugin
 ## \param pluginHandle Handle to a plugin
 ## \return Returns the netire list of top level property names, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetListOfPluginPropertyNames.restype = c_char_p
+rrpLib.tpGetListOfPluginPropertyNames.restype = c_char_p
+rrpLib.tpGetListOfPluginPropertyNames.argtypes = [c_void_p]
 def getListOfPluginPropertyNames(pluginHandle):
-    paraNames =  telLib.tpGetListOfPluginPropertyNames(pluginHandle)
+    paraNames =  rrpLib.tpGetListOfPluginPropertyNames(pluginHandle)
     if not paraNames:
         return list()
     else:
@@ -603,24 +678,26 @@ def getListOfPluginPropertyNames(pluginHandle):
 ## \param parasHandle Handle to a list of properties
 ## \return True or false, indicating result. The top level list of properties in a plugin can not be cleared.
 ## \ingroup plugin_properties
-telLib.tpClearPropertyList.restype = c_bool
+rrpLib.tpClearPropertyList.restype = c_bool
+rrpLib.tpClearPropertyList.argtypes = [c_void_p]
 def clearPropertyList(propertyListHandle):
     handle = getPropertyValueHandle(propertyListHandle)
-    return telLib.tpClearPropertyList(handle)
+    return rrpLib.tpClearPropertyList(handle)
 
 ## \brief If the property is a list, this method returns the list of property names in that list
 ## \param propertyHandle Handle to a property
 ## \return Returns names for all properties in the list
 ## \ingroup plugin_properties
-telLib.tpGetNamesFromPropertyList.restype = c_char_p
+rrpLib.tpGetNamesFromPropertyList.restype = c_char_p
+rrpLib.tpGetNamesFromPropertyList.argtypes = [c_void_p]
 def getNamesFromPropertyList(propertyHandle):
     paraType = getPropertyType(propertyHandle)
     if not paraType:
-        print getLastError()
-    if paraType != 'listOfProperties':        
+        print(getLastError())
+    if paraType != 'listOfProperties':
         raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
-    paras = telLib.tpGetNamesFromPropertyList(listHandle)
+    paras = rrpLib.tpGetNamesFromPropertyList(listHandle)
     if not paras:
         return list()
     else:
@@ -631,33 +708,40 @@ def getNamesFromPropertyList(propertyHandle):
 ## \param pluginHandle Handle to a plugin
 ## \return Returns a string on success, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPluginPropertiesAsXML.restype = c_char_p
+rrpLib.tpGetPluginPropertiesAsXML.restype = c_char_p
+rrpLib.tpGetPluginPropertiesAsXML.argtypes = [c_void_p]
 def getPluginPropertiesAsXML(pluginHandle):
-    return telLib.tpGetPluginPropertiesAsXML(pluginHandle)
+    return rrpLib.tpGetPluginPropertiesAsXML(pluginHandle)
 
 ## \brief Get the 'first' property handle to a property in a list of properties
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetFirstProperty.restype = c_void_p
+rrpLib.tpGetFirstProperty.argtypes = [c_void_p]
 def getFirstProperty(paraListHandle):
     handle = getPropertyValueHandle(paraListHandle)
-    return telLib.tpGetFirstProperty(handle)
+    return rrpLib.tpGetFirstProperty(handle)
 
 ## \brief Get the 'next' property handle to a property in a list of properties
 ## \param paraListHandle Handle to a propertyList
 ## \return Returns a handle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetNextProperty.restype = c_void_p
+rrpLib.tpGetNextProperty.argtypes = [c_void_p]
 def getNextProperty(paraListHandle):
     handle = getPropertyValueHandle(paraListHandle)
-    return telLib.tpGetNextProperty(handle)
+    return rrpLib.tpGetNextProperty(handle)
 
 ## \brief Get a property handle to a property given the name of the property.
 ## \param pluginHandle Handle to a plugin
 ## \param propertyName Name of the property
 ## \return Returns a propertyHandle to a property. Returns None if not found
 ## \ingroup plugin_properties
+rrpLib.tpGetPluginProperty.restype = c_void_p
+rrpLib.tpGetPluginProperty.argtypes = [c_void_p, c_char_p]
 def getPluginProperty(pluginHandle, propertyName):
-    return telLib.tpGetPluginProperty(pluginHandle, propertyName)
+    return rrpLib.tpGetPluginProperty(pluginHandle, propertyName)
 
 ## \brief Set the value of a PluginProperty
 ## \param pluginHandle Handle to a plugin
@@ -665,7 +749,8 @@ def getPluginProperty(pluginHandle, propertyName):
 ## \param propertyValue Value of property
 ## \return true if succesful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetPluginProperty.restype = c_bool
+rrpLib.tpSetPluginProperty.restype = c_bool
+rrpLib.tpSetPluginProperty.argtypes = [c_void_p, c_char_p, c_char_p]
 def setPluginProperty(pluginHandle, propertyName, propertyValue):
     propertyHandle = getPluginProperty(pluginHandle, propertyName)
     if propertyHandle:
@@ -727,23 +812,25 @@ def setProperty(propertyHandle, paraValue):
 ## \param descr String holding the description
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetPropertyDescription.restype = c_bool
+rrpLib.tpSetPropertyDescription.restype = c_bool
+rrpLib.tpSetPropertyDescription.argtypes = [c_void_p, c_char_p]
 def setPropertyDescription(propertyHandle, descr):
-    return telLib.tpSetPropertyDescription(propertyHandle, descr)
+    return rrpLib.tpSetPropertyDescription(propertyHandle, descr)
 
 ## \brief Get the description of a Property
 ## \param propertyHandle Handle to a Property instance
 ## \param descr String holding the description
 ## \return Returns the description if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyDescription.restype = c_char_p
+rrpLib.tpGetPropertyDescription.restype = c_char_p
+rrpLib.tpGetPropertyDescription.argtypes = [c_void_p]
 def getPropertyDescription(propertyHandle):
-    descr = telLib.tpGetPropertyDescription(propertyHandle)
+    descr = rrpLib.tpGetPropertyDescription(propertyHandle)
     if descr is None:
         return None
 
-    val = descr
-    telLib.tpFreeText(descr)
+    val = ctypes.cast(descr, ctypes.c_char_p).value
+    freeText(descr)
     return val
 
 ## \brief Set the hint property of a Property
@@ -751,9 +838,10 @@ def getPropertyDescription(propertyHandle):
 ## \param descr String holding the hint text
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetPropertyHint.restype = c_bool
+rrpLib.tpSetPropertyHint.restype = c_bool
+rrpLib.tpSetPropertyHint.argtypes = [c_void_p, c_char_p]
 def setPropertyHint(propertyHandle, descr):
-    return telLib.tpSetPropertyHint(propertyHandle, descr)
+    return rrpLib.tpSetPropertyHint(propertyHandle, descr)
 
 ## \brief Create a Property of type "type" with a name and hint property
 ##  Valid types include: 'bool', 'int', 'double', 'string', and 'listOfProperties'
@@ -771,14 +859,15 @@ def setPropertyHint(propertyHandle, descr):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-telLib.tpCreateProperty.restype = c_void_p
+rrpLib.tpCreateProperty.restype = c_void_p
+rrpLib.tpCreateProperty.argtypes = [c_char_p, c_char_p, c_char_p, c_void_p]
 def createProperty(name, the_type, hint="", value=None):
     if value == None:
-       return telLib.tpCreateProperty(name, the_type, hint, value)
+       return rrpLib.tpCreateProperty(name, the_type, hint, value)
     else:
         if the_type == 'string':    #Otherwise underlying string type will be char*, don't
             the_type = 'std::string'
-        ptr = telLib.tpCreateProperty(name, the_type, hint)
+        ptr = rrpLib.tpCreateProperty(name, the_type, hint)
         if the_type is "bool":
            setBoolProperty (ptr, value)
         elif the_type is "int":
@@ -793,16 +882,17 @@ def createProperty(name, the_type, hint="", value=None):
            setStringProperty (ptr, value)
 
         else:
-            print "Error: Can't set the value of Property with type:" + the_type
+            print("Error: Can't set the value of Property with type: " + the_type)
         return ptr
 
 ## \brief Free memory for a Property
 ## \param propertyHandle Handle to a Property instance
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpFreeProperty.restype = c_bool
+rrpLib.tpFreeProperty.restype = c_bool
+rrpLib.tpFreeProperty.argtypes = [c_void_p]
 def freeProperty(propertyHandle):
-    return telLib.tpFreeProperty(propertyHandle)
+    return rrpLib.tpFreeProperty(propertyHandle)
 
 ## \brief Add a Property to a list of Property.
 ## Some plugins may have Property that
@@ -821,12 +911,13 @@ def freeProperty(propertyHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-telLib.tpAddPropertyToList.restype = c_bool
+rrpLib.tpAddPropertyToList.restype = c_bool
+rrpLib.tpAddPropertyToList.argtypes = [c_void_p, c_void_p]
 def addPropertyToList(propertyHandle, addMe):
     #Make sure the Property is of type list
     if getPropertyType(propertyHandle) == 'listOfProperties':
         listHandle = getPropertyValue(propertyHandle)
-        return telLib.tpAddPropertyToList(listHandle, addMe)
+        return rrpLib.tpAddPropertyToList(listHandle, addMe)
     else:
         return False
 
@@ -835,25 +926,28 @@ def addPropertyToList(propertyHandle, addMe):
 ## \param value Pointer to string holding the value to assign to the Property, e.g. "0.01" to set a double to 0.01
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetPropertyByString.restype = c_bool
+rrpLib.tpSetPropertyByString.restype = c_bool
+rrpLib.tpSetPropertyByString.argtypes = [c_void_p, c_char_p]
 def setPropertyByString(PropertyHandle, value):
-    return telLib.tpSetPropertyByString(PropertyHandle, value)
+    return rrpLib.tpSetPropertyByString(PropertyHandle, value)
 
 ## \brief Get inforamtion on a Property
 ## \param propertyHandle Handle to a Property instance
 ## \return Returns informational text about the Property if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyInfo.restype = c_char_p
+rrpLib.tpGetPropertyInfo.restype = c_char_p
+rrpLib.tpGetPropertyInfo.argtypes = [c_void_p]
 def getPropertyInfo(propertyHandle):
-    return telLib.tpGetPropertyInfo(propertyHandle)
+    return rrpLib.tpGetPropertyInfo(propertyHandle)
 
 ## \brief Get a Property value in the form of a string
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties value if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyValueAsString.restype = c_char_p
+rrpLib.tpGetPropertyValueAsString.restype = c_char_p
+rrpLib.tpGetPropertyValueAsString.argtypes = [c_void_p]
 def getPropertyValueAsString(propertyHandle):
-    return telLib.tpGetPropertyValueAsString(propertyHandle)
+    return rrpLib.tpGetPropertyValueAsString(propertyHandle)
 
 ## \brief Get a handle to a Property value. Such properties could be any type, including a list of Properties.
 ## Use getlistProperty(propertyaHandle) instead.
@@ -866,43 +960,48 @@ def getPropertyValueAsString(propertyHandle):
 ## \htmlonly  <br/>
 ## \endhtmlonly
 ## \ingroup plugin_properties
-telLib.tpGetPropertyValueHandle.restype = c_void_p
+rrpLib.tpGetPropertyValueHandle.restype = c_void_p
+rrpLib.tpGetPropertyValueHandle.argtypes = [c_void_p]
 def getPropertyValueHandle(propertyHandle):
-    return telLib.tpGetPropertyValueHandle(propertyHandle)
+    return rrpLib.tpGetPropertyValueHandle(propertyHandle)
 
 ## \brief Get the name of a Property
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties name if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyName.restype = c_char_p
+rrpLib.tpGetPropertyName.restype = c_char_p
+rrpLib.tpGetPropertyName.argtypes = [c_void_p]
 def getPropertyName(propertyHandle):
-    return telLib.tpGetPropertyName(propertyHandle)
+    return rrpLib.tpGetPropertyName(propertyHandle)
 
 ## \brief Get the hint text for a Property
 ## \param propertyHandle to a Property instance
 ## \return Returns the hint value for a Property if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyHint.restype = c_char_p
+rrpLib.tpGetPropertyHint.restype = c_char_p
+rrpLib.tpGetPropertyHint.argtypes = [c_void_p]
 def getPropertyHint(propertyHandle):
-    return telLib.tpGetPropertyHint(propertyHandle)
+    return rrpLib.tpGetPropertyHint(propertyHandle)
 
 ## \brief Get the type of a property
 ## \param propertyHandle to a Property instance
 ## \return Returns the Properties type as a string if successful, None otherwise
 ## \ingroup plugin_properties
-telLib.tpGetPropertyType.restype = c_char_p
+rrpLib.tpGetPropertyType.restype = c_char_p
+rrpLib.tpGetPropertyType.argtypes = [c_void_p]
 def getPropertyType(propertyHandle):
-    return telLib.tpGetPropertyType(propertyHandle)
+    return rrpLib.tpGetPropertyType(propertyHandle)
 
 ## \brief Get the Boolean value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a Boolean value. Throws an exception if the property type is not a Boolean
 ## \ingroup plugin_properties
-telLib.tpGetBoolProperty.restype = c_bool
+rrpLib.tpGetBoolProperty.restype = c_bool
+rrpLib.tpGetBoolProperty.argtypes = [c_void_p, c_bool_p]
 def getBoolProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "bool":
         val = c_bool()
-        if telLib.tpGetBoolProperty (propertyHandle, byref(val)) == True:
+        if rrpLib.tpGetBoolProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -914,19 +1013,21 @@ def getBoolProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetBoolProperty.restype = c_bool
+rrpLib.tpSetBoolProperty.restype = c_bool
+rrpLib.tpSetBoolProperty.argtypes = [c_void_p, c_bool]
 def setBoolProperty(propertyHandle, value):
-    return telLib.tpSetBoolProperty (propertyHandle, c_bool(value))
+    return rrpLib.tpSetBoolProperty (propertyHandle, c_bool(value))
 
 ## \brief Get the integer value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns an integer value. Throws an exception if the property type is not an integer
 ## \ingroup plugin_properties
-telLib.tpGetIntProperty.restype = c_int
+rrpLib.tpGetIntProperty.restype = c_int
+rrpLib.tpGetIntProperty.argtypes = [c_void_p, c_int_p]
 def getIntProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "int":
         val = c_int()
-        if telLib.tpGetIntProperty (propertyHandle, byref(val)) == True:
+        if rrpLib.tpGetIntProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -938,19 +1039,21 @@ def getIntProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetIntProperty.restype = c_bool
+rrpLib.tpSetIntProperty.restype = c_bool
+rrpLib.tpSetIntProperty.argtypes = [c_void_p, c_int]
 def setIntProperty(propertyHandle, value):
-    return telLib.tpSetIntProperty(propertyHandle, c_int(value))
+    return rrpLib.tpSetIntProperty(propertyHandle, c_int(value))
 
 ## \brief Get the double value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a double value. Throws an exception if the property type is not a double
 ## \ingroup plugin_properties
-telLib.tpGetDoubleProperty.restype = c_bool
+rrpLib.tpGetDoubleProperty.restype = c_double
+rrpLib.tpGetDoubleProperty.argtypes = [c_void_p, c_double_p]
 def getDoubleProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "double":
         val = c_double()
-        if telLib.tpGetDoubleProperty (propertyHandle, byref(val)) == True:
+        if rrpLib.tpGetDoubleProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -962,19 +1065,21 @@ def getDoubleProperty (propertyHandle):
 ## \param value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetDoubleProperty.restype = c_bool
+rrpLib.tpSetDoubleProperty.restype = c_bool
+rrpLib.tpSetDoubleProperty.argtypes = [c_void_p, c_double]
 def setDoubleProperty(propertyHandle, value):
-    return telLib.tpSetDoubleProperty(propertyHandle, c_double(value))
+    return rrpLib.tpSetDoubleProperty(propertyHandle, c_double(value))
 
 ## \brief Get the string value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a string value. Throws an exception if the property type is not a string
 ## \ingroup plugin_properties
-telLib.tpGetStringProperty.restype = c_bool
+rrpLib.tpGetStringProperty.restype = c_bool
+rrpLib.tpGetStringProperty.argtypes = [c_void_p, c_char_p]
 def getStringProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "string" or getPropertyType (propertyHandle) == "std::string":
         val = c_char_p()
-        if telLib.tpGetStringProperty (propertyHandle, byref(val)) == True:
+        if rrpLib.tpGetStringProperty (propertyHandle, byref(val)) == True:
             return val.value
         else:
             raise ('Property value could not be retrieved')
@@ -986,15 +1091,17 @@ def getStringProperty (propertyHandle):
 ## \param value Value to assign to the property.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetStringProperty.restype = c_bool
+rrpLib.tpSetStringProperty.restype = c_bool
+rrpLib.tpSetStringProperty.argtypes = [c_void_p, c_char_p]
 def setStringProperty(propertyHandle, value):
-    return telLib.tpSetStringProperty(propertyHandle, c_char_p(value))
+    return rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value))
 
 ## \brief Get the list value for a property
 ## \param propertyHandle to a property instance
 ## \return Returns a handle to a ListProperty. Throws an exception of the property type is not a list of properties
 ## \ingroup plugin_properties
-telLib.tpGetListProperty.restype = c_bool
+rrpLib.tpGetListProperty.restype = c_bool
+rrpLib.tpGetListProperty.argtypes = [c_void_p, c_void_p]
 def getListProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "listOfProperty":
         return getPropertyValueHandle(propertyHandle)
@@ -1006,10 +1113,11 @@ def getListProperty (propertyHandle):
 ## \param value Value to assign to the property (must be a handle to a Property of listOfProperties.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetListProperty.restype = c_bool
+rrpLib.tpSetListProperty.restype = c_bool
+rrpLib.tpSetListProperty.argtypes = [c_void_p, c_void_p]
 def setListProperty(propertyHandle, value):
     handle = getPropertyValueHandle(value)
-    return telLib.tpSetListProperty(propertyHandle, c_void_p(handle))
+    return rrpLib.tpSetListProperty(propertyHandle, c_void_p(handle))
 
 ## \brief Get the value of a telluriumData property
 ## \param propertyHandle A Handle to a property
@@ -1023,9 +1131,10 @@ def getTelluriumDataProperty(propertyHandle):
 ## \param value Value to assign to the property (must be a handle to telluriumData.
 ## \return Returns true if successful, false otherwise
 ## \ingroup plugin_properties
-telLib.tpSetTelluriumDataProperty.restype = c_bool
+rrpLib.tpSetTelluriumDataProperty.restype = c_bool
+rrpLib.tpSetTelluriumDataProperty.argtypes = [c_void_p, c_void_p]
 def setTelluriumDataProperty(propertyHandle, value):
-    return telLib.tpSetTelluriumDataProperty(propertyHandle, c_void_p(value))
+    return rrpLib.tpSetTelluriumDataProperty(propertyHandle, c_void_p(value))
 
 ## \brief Get the value of a property.
 ## \param propertyHandle A Handle to a property
@@ -1062,8 +1171,8 @@ def getProperty(propertyHandle):
     if paraType == 'listOfProperties':
         return getPropertyValueHandle(propertyHandle)
 
-    if paraType == 'vector<int>': 
-        return getPropertyValueAsString(propertyHandle) 
+    if paraType == 'vector<int>':
+        return getPropertyValueAsString(propertyHandle)
 
     if paraType == 'vector<double>':
         return getPropertyValueAsString(propertyHandle)
@@ -1121,19 +1230,18 @@ def getPropertyValue(propertyHandle):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-telLib.tpGetTelluriumDataElement.restype = c_bool
 def getNumpyData(telDataHandle):
-    colHeader = telLib.tpGetTelluriumDataColumnHeader(telDataHandle)
-    rowCount = telLib.tpGetTelluriumDataNumRows(telDataHandle)
-    colCount = telLib.tpGetTelluriumDataNumCols(telDataHandle)
+    colHeader = getTelluriumDataColumnHeader(telDataHandle)
+    rowCount = rrpLib.tpGetTelluriumDataNumRows(telDataHandle)
+    colCount = rrpLib.tpGetTelluriumDataNumCols(telDataHandle)
     resultArray = np.zeros([rowCount, colCount])
     for row in range(rowCount):
         for col in range(colCount):
                 val = c_double()
-                if telLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
+                if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
                     resultArray[row, col] = val.value
                 else:
-                    print "problem"
+                    print("problem")
     #resultArray = np.append(resultArray, colHeader.split(","))
     #Not sure how to append the col names.
     return resultArray
@@ -1143,7 +1251,7 @@ def plotTelluriumData(data, colHeaders):
     nrRows = data.shape[0]
 
     if colHeaders == None or len(colHeaders) < 1:
-        print "Bad Data ColumnHeader"
+        print("Bad Data ColumnHeader")
         return
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
@@ -1157,48 +1265,48 @@ def plotTelluriumData(data, colHeaders):
     plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
     plt.show()
-    
+
 def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
     if colHeaders == None or len(colHeaders) < 1:
-        print "Bad Data ColumnHeader"
+        print("Bad Data ColumnHeader")
         return
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
     x = data[:,0]
-     
+
     previousLbl = ''
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = np.zeros([nrRows])
-        ySeries = data[:,serie + 1]        
+        ySeries = data[:,serie + 1]
         xIndx = 0
-        ax = plt.subplot(1,1,1)        
+        ax = plt.subplot(1,1,1)
         colors = ax._get_lines.color_cycle
-        theColor = colors.next()        
+        theColor = colors.next()
         for label in bfLabels:
-            xPtn = bfPoints[labelNr] - 1                
+            xPtn = bfPoints[labelNr] - 1
             xSegment = x[xIndx:xPtn]
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)                    
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)                                                           
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)
             elif label == 'LP':
                 #Check Previous label
-                if previousLbl == 'LP':  
+                if previousLbl == 'LP':
                     plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
                 elif previousLbl == 'EP':
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)                                                        
-                                
-            xIndx = xPtn                                 
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)
+
+            xIndx = xPtn
             labelNr = labelNr + 1
-            previousLbl = label            
-    
-    #Plot bifurcation labels       
+            previousLbl = label
+
+    #Plot bifurcation labels
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = data[:,serie + 1]
@@ -1206,27 +1314,29 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
             if label != 'EP':
                 xPtn = bfPoints[labelNr] - 1
                 xCoord = x[xPtn]
-                yCoord = ySeries[xPtn] 
+                yCoord = ySeries[xPtn]
                 plt.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
             labelNr = labelNr + 1
-            
+
     plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
-    
+
     plt.show()
-        
+
 
 ## \brief Get column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns a numpy data object
 ## \ingroup utilities
-telLib.tpGetTelluriumDataColumnHeader.restype = c_char_p
+rrpLib.tpGetTelluriumDataColumnHeader.restype = c_void_p
+rrpLib.tpGetTelluriumDataColumnHeader.argtypes = [c_void_p]
 def getTelluriumDataColumnHeader(telDataHandle):
-    hdr = telLib.tpGetTelluriumDataColumnHeader(telDataHandle)
+    # http://stackoverflow.com/questions/13445568/python-ctypes-how-to-free-memory-getting-invalid-pointer-error
+    hdr = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
 
     if hdr:
-        res = hdr
-        telLib.tpFreeText(hdr)
+        res = ctypes.cast(hdr, ctypes.c_char_p).value
+        freeText(hdr)
         return res.split(',')
     else:
         return None
@@ -1236,18 +1346,20 @@ def getTelluriumDataColumnHeader(telDataHandle):
 ## \param index Index of requested column name
 ## \return Returns the column name on success, or None on failure
 ## \ingroup utilities
-telLib.tpGetTelluriumDataColumnHeaderByIndex.restype = c_char_p
+rrpLib.tpGetTelluriumDataColumnHeaderByIndex.restype = c_char_p
+rrpLib.tpGetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int]
 def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
-    return telLib.tpGetTelluriumDataColumnHeaderByIndex(telDataHandle, index)
+    return rrpLib.tpGetTelluriumDataColumnHeaderByIndex(telDataHandle, index)
 
 ## \brief Set column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
 ## \param colHeader A string containing the column header as comma separated values (spaces allowed too)
 ## \return True or false indicating success
 ## \ingroup utilities
-telLib.tpSetTelluriumDataColumnHeader.restype = c_bool
+rrpLib.tpSetTelluriumDataColumnHeader.restype = c_bool
+rrpLib.tpSetTelluriumDataColumnHeader.argtypes = [c_void_p, c_char_p]
 def setTelluriumDataColumnHeader(telDataHandle, hdr):
-    return telLib.tpSetTelluriumDataColumnHeader(telDataHandle, hdr)
+    return rrpLib.tpSetTelluriumDataColumnHeader(telDataHandle, hdr)
 
 ## \brief Set column header by index in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
@@ -1255,18 +1367,20 @@ def setTelluriumDataColumnHeader(telDataHandle, hdr):
 ## \param colName A string containing the column name
 ## \return True or false indicating success
 ## \ingroup utilities
-telLib.tpSetTelluriumDataColumnHeaderByIndex.restype = c_bool
-def setTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index):
-    return telLib.tpSetTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
+rrpLib.tpSetTelluriumDataColumnHeaderByIndex.restype = c_bool
+rrpLib.tpSetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int, c_char_p]
+def setTelluriumDataColumnHeaderByIndex(telDataHandle, index, hdr):
+    return rrpLib.tpSetTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
 
 ## \brief Get Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.tpGetTelluriumDataElement.restype = c_bool
+rrpLib.tpGetTelluriumDataElement.restype = c_bool
+rrpLib.tpGetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double_p]
 def getTelluriumDataElement(telDataHandle, row, col):
     val = c_double()
-    if telLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
+    if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
@@ -1275,18 +1389,20 @@ def getTelluriumDataElement(telDataHandle, row, col):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.tpSetTelluriumDataElement.restype = c_bool
-def setTelluriumDataElement(telDataHandle, row, col, number):    
-    return telLib.tpSetTelluriumDataElement(telDataHandle, row, col, c_double(number))
+rrpLib.tpSetTelluriumDataElement.restype = c_bool
+rrpLib.tpSetTelluriumDataElement.argtypes = [c_void_p, c_int, c_int, c_double]
+def setTelluriumDataElement(telDataHandle, row, col, number):
+    return rrpLib.tpSetTelluriumDataElement(telDataHandle, row, col, c_double(number))
 
 ## \brief Get Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.tpGetTelluriumDataWeight.restype = c_bool
+rrpLib.tpGetTelluriumDataWeight.restype = c_bool
+rrpLib.tpGetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double_p]
 def getTelluriumDataWeight(telDataHandle, row, col):
     val = c_double()
-    if telLib.tpGetTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
+    if rrpLib.tpGetTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
         throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
@@ -1295,23 +1411,28 @@ def getTelluriumDataWeight(telDataHandle, row, col):
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns the numeric value at row,col
 ## \ingroup utilities
-telLib.tpSetTelluriumDataWeight.restype = c_bool
-def setTelluriumDataWeight(telDataHandle, row, col, number):    
-    return telLib.tpSetTelluriumDataWeight(telDataHandle, row, col, c_double(number))
+rrpLib.tpSetTelluriumDataWeight.restype = c_bool
+rrpLib.tpSetTelluriumDataWeight.argtypes = [c_void_p, c_int, c_int, c_double]
+def setTelluriumDataWeight(telDataHandle, row, col, number):
+    return rrpLib.tpSetTelluriumDataWeight(telDataHandle, row, col, c_double(number))
 
 ## \brief Get number of rows in a tellurium data object
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of rows in the data object
 ## \ingroup utilities
+rrpLib.tpGetTelluriumDataNumRows.restype = c_int
+rrpLib.tpGetTelluriumDataNumRows.argtypes = [c_void_p]
 def getTelluriumDataNumRows(telDataHandle):
-    return telLib.tpGetTelluriumDataNumRows(telDataHandle)
+    return rrpLib.tpGetTelluriumDataNumRows(telDataHandle)
 
 ## \brief Get number of columns in a tellurium data object
 ## \param telDataHandle A handle to a tellurium data object
 ## \return Returns number of cols in the data object
 ## \ingroup utilities
+rrpLib.tpGetTelluriumDataNumCols.restype = c_int
+rrpLib.tpGetTelluriumDataNumCols.argtypes = [c_void_p]
 def getTelluriumDataNumCols(telDataHandle):
-    return telLib.tpGetTelluriumDataNumCols(telDataHandle)
+    return rrpLib.tpGetTelluriumDataNumCols(telDataHandle)
 
 ## \brief Write TelluriumData to a file
 ## \param telDataHandle A handle to roadunnerdata
@@ -1319,9 +1440,10 @@ def getTelluriumDataNumCols(telDataHandle):
 ## current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.tpWriteTelluriumDataToFile.restype = c_bool
+rrpLib.tpWriteTelluriumDataToFile.restype = c_bool
+rrpLib.tpWriteTelluriumDataToFile.argtypes = [c_void_p, c_char_p]
 def writeTelluriumData(telDataHandle, fName):
-    return telLib.tpWriteTelluriumDataToFile(telDataHandle, fName)
+    return rrpLib.tpWriteTelluriumDataToFile(telDataHandle, fName)
 
 ## \brief Read TelluriumData from a file
 ## \param telDataHandle A handle to roadunnerdata
@@ -1329,23 +1451,25 @@ def writeTelluriumData(telDataHandle, fName):
 ## in current working directory
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.tpReadTelluriumDataFromFile.restype = c_bool
+rrpLib.tpReadTelluriumDataFromFile.restype = c_bool
+rrpLib.tpReadTelluriumDataFromFile.argtypes = [c_void_p, c_char_p]
 def readTelluriumData(telDataHandle, fName):
-    return telLib.tpReadTelluriumDataFromFile(telDataHandle, fName)
+    return rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName)
 
 ## \brief Create a TelluriumData object
 ## \param rows Number of rows in the data to be created
 ## \param cols Number of columns in the data to be created
 ## \return Returns a handle to Tellurium data if successful, None otherwise
-## \note Use the freeTelluriumData to free memory allocated 
+## \note Use the freeTelluriumData to free memory allocated
 ## \ingroup utilities
-telLib.tpCreateTelluriumData.restype = c_void_p
+rrpLib.tpCreateTelluriumData.restype = c_void_p
+rrpLib.tpCreateTelluriumData.argtypes = [c_int, c_int, c_char_p]
 def createTelluriumData(rows, cols):
     #Create a Tellurium data object
     #Create a column header
     nrs = range(cols)
-    col_hdr = str(nrs).strip('[]')     
-    return telLib.tpCreateTelluriumData(rows, cols, col_hdr)    
+    col_hdr = str(nrs).strip('[]')
+    return rrpLib.tpCreateTelluriumData(rows, cols, col_hdr)
 
 ## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
@@ -1353,37 +1477,38 @@ def createTelluriumData(rows, cols):
 ## \return Returns a handle to Tellurium data if successful, None otherwise
 ## \note Use the freeTelluriumData to free memory allocated by the returned data
 ## \ingroup utilities
-telLib.tpCreateTelluriumData.restype = c_void_p
 def createTelluriumDataFromFile(fName):
     #Create a Tellurium data object
-    telDataHandle = telLib.tpCreateTelluriumData(0,0, None)
-    if telLib.tpReadTelluriumDataFromFile(telDataHandle, fName) == False:
-        print 'Failed to read data'
+    telDataHandle = rrpLib.tpCreateTelluriumData(0,0, None)
+    if rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName) == False:
+        print('Failed to read data')
     return telDataHandle
 
 ## \brief Check if tellurium data has weights allocated
 ## \param dataHandle Handle to a tellurium data object
 ## \return Returns true or false indicating if the data object has weights or not
 ## \ingroup utilities
-telLib.tpHasWeights.restype = c_bool
+rrpLib.tpHasWeights.restype = c_bool
+rrpLib.tpHasWeights.argtypes = [c_void_p, c_bool_p]
 def hasWeights(dataHandle):
     hasIt = c_bool()
-    if not telLib.tpHasWeights(dataHandle, byref(hasIt)):
+    if not rrpLib.tpHasWeights(dataHandle, byref(hasIt)):
         throw(getLastError())
     else:
-        return hasIt.value                
+        return hasIt.value
 
 ## \brief Allocate weights for tellurium data object
 ## \param dataHandle Handle to a tellurium data object
 ## \return Returns true or false indicating if allocating weights were successful or not
 ## \ingroup utilities
-telLib.tpAllocateWeights.restype = c_bool
+rrpLib.tpAllocateWeights.restype = c_bool
+rrpLib.tpAllocateWeights.argtypes = [c_void_p, c_bool_p]
 def allocateWeights(dataHandle):
-    success = c_bool()    
-    if not telLib.tpAllocateWeights(dataHandle, byref(success)):
+    success = c_bool()
+    if not rrpLib.tpAllocateWeights(dataHandle, byref(success)):
         throw(getLastError())
     else:
-        return success.value        
+        return success.value
 
 def getText(fName):
     file = open(fName, 'r')
@@ -1404,21 +1529,22 @@ def readAllText(fName):
 ## \param dataHandle Handle to a tellurium data object
 ## \return Returns True or false indicating result
 ## \ingroup utilities
-telLib.tpFreeTelluriumData.restype = c_bool
+rrpLib.tpFreeTelluriumData.restype = c_bool
+rrpLib.tpFreeTelluriumData.argtypes = [c_void_p]
 def freeTelluriumData(telDataHandle):
-    return telLib.tpFreeTelluriumData(telDataHandle)
+    return rrpLib.tpFreeTelluriumData(telDataHandle)
 
 ## \brief Get last (API) error. This returns the last error if any.
 ## \return Returns a string with an error success, None otherwise
 ## \ingroup utilities
-telLib.tpGetLastError.restype = c_char_p
+rrpLib.tpGetLastError.restype = c_char_p
 def getLastError():
-    return telLib.tpGetLastError()
+    return rrpLib.tpGetLastError()
 
 ## \brief Unload the plugins api shared library
 ## \ingroup utilities
 def unLoadAPI():
-    windll.kernel32.FreeLibrary(telLib._handle)
+    windll.kernel32.FreeLibrary(rrpLib._handle)
 
 
 
@@ -1426,26 +1552,29 @@ def unLoadAPI():
 ## \brief Return unerlying data array for a Tellurium matrix
 ## \return Returns a ctypes pointer to double object on success, None otherwise
 ## \ingroup utilities
-telLib.tpGetDataArray.restype = int
+rrpLib.tpGetDataArray.restype = c_int
+rrpLib.tpGetDataArray.argtypes = [c_void_p]
 def getDataArray(matrixH):
-    mat = telLib.tpGetDataArray(matrixH)
-    if mat:            
+    mat = rrpLib.tpGetDataArray(matrixH)
+    if mat:
         return mat
     else:
         return None
 
-telLib.tpGetMatrixNumRows.restype = int
+rrpLib.tpGetMatrixNumRows.restype = c_int
+rrpLib.tpGetMatrixNumRows.argtypes = [c_void_p]
 def getMatrixNumRows(matrixH):
-    rSize = telLib.tpGetMatrixNumRows(matrixH)
-    if rSize != -1:            
+    rSize = rrpLib.tpGetMatrixNumRows(matrixH)
+    if rSize != -1:
         return rSize
     else:
         return None
 
-telLib.tpGetMatrixNumCols.restype = int
+rrpLib.tpGetMatrixNumCols.restype = c_int
+rrpLib.tpGetMatrixNumCols.argtypes = [c_void_p]
 def getMatrixNumCols(matrixH):
-    cSize = telLib.tpGetMatrixNumCols(matrixH)
-    if cSize != -1:            
+    cSize = rrpLib.tpGetMatrixNumCols(matrixH)
+    if cSize != -1:
         return cSize
     else:
         return None
@@ -1453,14 +1582,14 @@ def getMatrixNumCols(matrixH):
 ##\mainpage Plugins for Tellurium
 #\section Introduction
 #The Tellurium plugin library exposes a simple framework for adding functionality to the RoadRunner core, by means of
-#external plugins. 
+#external plugins.
 #The code fragment below shows briefly how to load plugins, check for plugins, and use an individual plugin.
 #
 #\include telGetPluginInformation.py
 #
 # The above code produces something like the following output (depends on installed plugins):
 #@code
-##>>> 
+##>>>
 ##Number of Plugins: 3
 ##Plugin Names: ['AddNoise', 'ChiSquare', 'Levenberg-Marquardt', 'SBMLModel']
 ##==========================================
@@ -1495,7 +1624,7 @@ def getMatrixNumCols(matrixH):
 ##Category: 'Examples'
 ##Description:'The SBMLModel plugin exposes one property containing data, as a string, for an ExampleModel. The ExampleModel plugin was developed at the University of Washington by Totte Karlsson, 2012-2014.'
 ##Parameters: ['Model']
-##>>> 
+##>>>
 #@endcode
 #    \section plugins_overview Overview
 #    The Tellurium Plugin API is centered around three important concepts:

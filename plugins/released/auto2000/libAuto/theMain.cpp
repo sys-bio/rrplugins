@@ -1,5 +1,6 @@
 #include "libf2c/auto_f2c.h"
 #include "auto_c.h"
+#include <time.h>
 
 int AUTO_main(int argc,char *argv[]);
 
@@ -96,7 +97,9 @@ int AUTO_main(int argc, char *argv[])
 #if defined(_WIN32) || defined(__WIN32__)
     clock_t time0, time1;
 #else
-    struct timeval  *time0,*time1;
+//     struct timeval  *time0,*time1;
+    clock_t time0;
+    clock_t time1;
 #endif
     integer *icp = new integer[num_total_pars];
     doublereal *par = new doublereal[num_total_pars], *thl = new doublereal[num_total_pars];
@@ -204,7 +207,7 @@ OPEN_FP3:
         global_setubv_type = SETUBV_MPI;
         break;
 #endif
-        scheme_not_supported_error("mpi");
+        scheme_not_supported_error((char*)"mpi");
         break;
     case 't':
 #ifdef PTHREADS
@@ -229,7 +232,7 @@ OPEN_FP3:
         }
         break;
 #endif
-        scheme_not_supported_error("threads");
+        scheme_not_supported_error((char*)"threads");
         break;
     case '#':
         global_num_procs=atoi(optarg);
@@ -375,10 +378,10 @@ OPEN_FP3:
         usage_end(total_usage,"total");
 
 #endif
-        time_end(time0,"Total Time ",fp9);
+        time_end(time0,(char*)"Total Time ",fp9);
         fprintf(fp9,"----------------------------------------------");
         fprintf(fp9,"----------------------------------------------\n");
-        time_end(time1,"",fp6);
+        time_end(time1,(char*)"",fp6);
 #ifdef AUTO_CONSTRUCT_DESTRUCT
         user_destruct();
 #endif

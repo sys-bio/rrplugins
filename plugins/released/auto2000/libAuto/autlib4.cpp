@@ -228,10 +228,10 @@ flowkm(integer ndim, doublereal **c0, doublereal **c1, integer iid, doublecomple
     doublereal tmp0 = 0.0;
     logical tmp_false = FALSE_;
 
-    dgemm("n", "n", &ndim, &ndim, &ndim, &tmp1, *c0, &ndim, svdv, 
+    dgemm((char*)"n", (char*)"n", &ndim, &ndim, &ndim, &tmp1, *c0, &ndim, svdv, 
       &ndim, &tmp0, rwork, &ndim, 1L, 1L);
     dgemc(&ndim, &ndim, rwork, &ndim, *c0, &ndim, &tmp_false);
-    dgemm("n", "n", &ndim, &ndim, &ndim, &tmp1, *c1, &ndim, svdv, 
+    dgemm((char*)"n", (char*)"n", &ndim, &ndim, &ndim, &tmp1, *c1, &ndim, svdv, 
       &ndim, &tmp0, rwork, &ndim, 1L, 1L);
     dgemc(&ndim, &ndim, rwork, &ndim, *c1, &ndim, &tmp_false);
   }

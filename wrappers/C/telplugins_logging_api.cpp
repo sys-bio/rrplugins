@@ -74,11 +74,11 @@ void tlp_cc tpLogMsg(CLogLevel lvl, const char* msg)
     start_try
         if(msg)
         {
-            Log((LogLevel) lvl)<<msg;
+            RRPLOG((LogLevel) lvl)<<msg;
         }
         else
         {
-            Log((LogLevel) lvl)<<"You passed a NULL message pointer to logMsg";
+            RRPLOG((LogLevel) lvl)<<"You passed a NULL message pointer to logMsg";
         }
     catch_void_macro
 }

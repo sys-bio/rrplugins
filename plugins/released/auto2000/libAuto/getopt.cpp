@@ -55,19 +55,19 @@ char    *optarg;        /* argument associated with option */
 
 int getopt(int nargc, char *const *nargv, const char *ostr)
 {
-    char *place = EMSG;        /* option letter processing */
-    register char *oli;        /* option letter list index */
+    char *place = (char*)(EMSG);     /* option letter processing */
+    register char *oli;              /* option letter list index */
     char *p;
 
     if (optreset || !*place) {        /* update scanning pointer */
         optreset = 0;
         if (optind >= nargc || *(place = nargv[optind]) != '-') {
-            place = EMSG;
+            place = (char*)(EMSG);
             return(-1);
         }
         if (place[1] && *++place == '-') {    /* found "--" */
             ++optind;
-            place = EMSG;
+            place = (char*)(EMSG);
             return(-1);
         }
     }                    /* option letter okay? */
@@ -100,7 +100,7 @@ int getopt(int nargc, char *const *nargv, const char *ostr)
         if (*place)            /* no white space */
             optarg = place;
         else if (nargc <= ++optind) {    /* no arg */
-            place = EMSG;
+            place = (char*)(EMSG);
             if (!(p = strrchr(*nargv, '/')))
                 p = *nargv;
             else
@@ -115,7 +115,7 @@ int getopt(int nargc, char *const *nargv, const char *ostr)
         }
          else                /* white space */
             optarg = nargv[optind];
-        place = EMSG;
+        place = (char*)(EMSG);
         ++optind;
     }
     return(optopt);                /* dump back option letter */

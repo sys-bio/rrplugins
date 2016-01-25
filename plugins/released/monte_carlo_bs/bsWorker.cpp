@@ -67,7 +67,7 @@ void bsWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -88,7 +88,7 @@ void bsWorker::run()
     {
         //user did set the terminate flag to true.. discard any minimization data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The Monte Carlo plugin was terminated. Aborting";
+        RRPLOG(lInfo)<<"The Monte Carlo plugin was terminated. Aborting";
         workerFinished();
         return;
     }
@@ -96,7 +96,7 @@ void bsWorker::run()
     //Get to work..
     if(!setup())
     {
-        Log(lError)<<"Failed setting up the Monte Carlo Bootstrap plugin. Aborting.";
+        RRPLOG(lError)<<"Failed setting up the Monte Carlo Bootstrap plugin. Aborting.";
         return;
     }
 
@@ -105,22 +105,22 @@ void bsWorker::run()
     //First get initial residuals
     if(!createInitialResiduals())
     {
-        Log(lError)<<"Failed creating initial residuals in Monte Carlo plugin.";
+        RRPLOG(lError)<<"Failed creating initial residuals in Monte Carlo plugin.";
         return;
     }
     else
     {
-        Log(lDebug)<<"Monte Carlo initial residuals created.";
+        RRPLOG(lDebug)<<"Monte Carlo initial residuals created.";
     }
 
     if(!createMonteCarloDataSets())
     {
-        Log(lError)<<"Failed creating Monte Carlo Data sets.";
+        RRPLOG(lError)<<"Failed creating Monte Carlo Data sets.";
         return;
     }
     else
     {
-        Log(lDebug)<<"Monte Carlo Data sets was created.";
+        RRPLOG(lDebug)<<"Monte Carlo Data sets was created.";
     }
 
     //Now fit each data set and collect parameter statistics
@@ -149,14 +149,14 @@ void bsWorker::run()
     //Copy parameters to parameters container
     for(int i = 0; i < mParent.mNrOfMCRuns; i++)
     {
-        Log(lInfo) << "MC Run: "<<i;
+        RRPLOG(lInfo) << "MC Run: "<<i;
         Properties& vecParas = mMCParameters[i];
 
 
         for(int para = 0; para < vecParas.count(); para++)
         {
             double value = *((double*) vecParas[para]->getValueHandle());
-            Log(lInfo)<<vecParas[para]->getName()<<" = " << value;
+            RRPLOG(lInfo)<<vecParas[para]->getName()<<" = " << value;
             parasData(i, para) = value;
         }
     }
@@ -182,7 +182,7 @@ void bsWorker::run()
 
         Property<double>* prop = new Property<double>(limit, inpParaList[para]->getName());
         confidenceLimits.add(prop);
-        Log(lInfo) <<"Parameter means: "<<mean;
+        RRPLOG(lInfo) <<"Parameter means: "<<mean;
     }
 
     workerFinished();
@@ -228,15 +228,15 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
     if(ExpDataSelectionList.count() > modelDataSelectionList.count())
     {
-        Log(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
-        Log(lError)<<"Exiting Monte Carlo.";
+        RRPLOG(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
+        RRPLOG(lError)<<"Exiting Monte Carlo.";
         return false;
     }
 
     string strVal = mParent.mSBML.getValue();
     if(!tpSetPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
-        Log(lError)<<"Failed setting sbml";
+        RRPLOG(lError)<<"Failed setting sbml";
         return false;
     }
 
@@ -251,7 +251,7 @@ Properties bsWorker::getParameters(TelluriumData* mcData)
     }
 
     Properties *newProps = (Properties*) parasHandle;
-    Log(lDebug) << "Properties: " <<  (*newProps);
+    RRPLOG(lDebug) << "Properties: " <<  (*newProps);
     return Properties(*newProps);
 }
 
@@ -301,15 +301,15 @@ bool bsWorker::createInitialResiduals()
     //Requirement => the modelDataSelection list must be equal or larger than the expSelectionlist
     if(ExpDataSelectionList.count() > modelDataSelectionList.count())
     {
-        Log(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
-        Log(lError)<<"Exiting Monte Carlo.";
+        RRPLOG(lError)<<"The minimization engine requires the model selection list to be equal or larger than Experimental selection list";
+        RRPLOG(lError)<<"Exiting Monte Carlo.";
         return false;
     }
 
     string strVal = mParent.mSBML.getValue();
     if(!tpSetPluginProperty(mMinimizerPlugin, "SBML", strVal.c_str()))
     {
-        Log(lError)<<"Failed setting sbml";
+        RRPLOG(lError)<<"Failed setting sbml";
         return false;
     }
 
@@ -320,8 +320,8 @@ bool bsWorker::createInitialResiduals()
     //We should now have residuals
     TelluriumData* residuals =   (TelluriumData*) tpGetPluginPropertyValueHandle(mMinimizerPlugin, "Residuals");
 
-    Log(lDebug) <<"Logging residuals: ";
-    Log(lDebug) << *(residuals);
+    RRPLOG(lDebug) <<"Logging residuals: ";
+    RRPLOG(lDebug) << *(residuals);
 
     //Add residuals to double vectgor
     for(int col = residuals->isFirstColumnTime() ? 1 : 0; col < residuals->cSize(); col++)

@@ -1,11 +1,14 @@
 #pragma hdrstop
+
+#include "telAPIHandleManager.h"
+
+#include "rrplugins/common/telLogger.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/common/telProperties.h"
+#include "rrplugins/common/telProperty.h"
+
 #include <sstream>
 #include <exception>
-#include "telLogger.h"
-#include "telAPIHandleManager.h"
-#include "telException.h"
-#include "telProperties.h"
-#include "telProperty.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -42,7 +45,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
                 {
                     //For now don't check ParameterBase types. See todo above
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                    Log(lDebug)<<msg.str();
+                    RRPLOG(lDebug)<<msg.str();
                     return handle;
                 }
                 else

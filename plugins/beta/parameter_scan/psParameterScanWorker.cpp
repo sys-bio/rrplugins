@@ -29,7 +29,7 @@ void ParameterScanWorker::start(bool runInThread)
     {
         if(mThread.isRunning())
         {
-            Log(lError)<<"Tried to start an already working thread!";
+            RRPLOG(lError)<<"Tried to start an already working thread!";
             return;
         }
 
@@ -50,7 +50,7 @@ void ParameterScanWorker::run()
     {
         //user did set the terminate flag to true.. discard any data and get out of the
         //plugin execute code..
-        Log(lInfo)<<"The ParameterScanWorker was terminated.. aborting";
+        RRPLOG(lInfo)<<"The ParameterScanWorker was terminated.. aborting";
         workerFinished();
         return;
     }

@@ -36,7 +36,7 @@ The TestModel plugin was developed at the University of Washington by Totte Karl
     }
     catch(const exception& ex)
     {
-        Log(lError)<<"There was a problem in the TestModel plugin: "<<ex.what();
+        RRPLOG(lError)<<"There was a problem in the TestModel plugin: "<<ex.what();
     }
 }
 
@@ -55,9 +55,10 @@ unsigned int TestModel::getPDFManualByteSize()
 
 bool TestModel::execute(bool inThread)
 {
-    Log(lDebug)<<"Executing the TestModel plugin by Totte Karlsson";
-    RoadRunner rr;
-    rr.load(mModel);
+    tlp::Logger::setLevel(tlp::Logger::LOG_DEBUG);
+    RRPLOG(lDebug)<<"Executing the TestModel plugin by J Kyle Medley and Totte Karlsson";
+    RRPLOG(lDebug) << "Using SBML model: \n" << mModel.getValue();
+    RoadRunner rr(mModel.getValue());
 
     rr::SimulateOptions opt;
     opt.start       = 0;
@@ -155,41 +156,41 @@ const char* plugins_cc getImplementationLanguage()
 }
 
 string  theModel =
-"<?xml version=\"1.0\" encoding=\"UTF-8\"?>                                                                                     \
-<sbml xmlns=\"http://www.sbml.org/sbml/level2/version4\" level=\"2\" version=\"4\">                                             \
-  <model metaid=\"_case00001\" id=\"case00001\" name=\"case00001\">                                                             \
-    <listOfCompartments>                                                                                                        \
-      <compartment id=\"compartment\" name=\"compartment\" size=\"1\" units=\"volume\"/>                                        \
-    </listOfCompartments>                                                                                                       \
-    <listOfSpecies>                                                                                                             \
-      <species id=\"S1\" name=\"S1\" compartment=\"compartment\" initialAmount=\"0.00015\" substanceUnits=\"substance\"/>       \
-      <species id=\"S2\" name=\"S2\" compartment=\"compartment\" initialAmount=\"0\" substanceUnits=\"substance\"/>             \
-    </listOfSpecies>                                                                                                            \
-    <listOfParameters>                                                                                                          \
-      <parameter id=\"k1\" name=\"k1\" value=\"1\"/>                                                                            \
-    </listOfParameters>                                                                                                         \
-    <listOfReactions>                                                                                                           \
-      <reaction id=\"reaction1\" name=\"reaction1\" reversible=\"false\" fast=\"false\">                                        \
-        <listOfReactants>                                                                                                       \
-          <speciesReference species=\"S1\"/>                                                                                    \
-        </listOfReactants>                                                                                                      \
-        <listOfProducts>                                                                                                        \
-          <speciesReference species=\"S2\"/>                                                                                    \
-        </listOfProducts>                                                                                                       \
-        <kineticLaw>                                                                                                            \
-          <math xmlns=\"http://www.w3.org/1998/Math/MathML\">                                                                   \
-            <apply>                                                                                                             \
-              <times/>                                                                                                          \
-              <ci> compartment </ci>                                                                                            \
-              <ci> k1 </ci>                                                                                                     \
-              <ci> S1 </ci>                                                                                                     \
-            </apply>                                                                                                            \
-          </math>                                                                                                               \
-        </kineticLaw>                                                                                                           \
-      </reaction>                                                                                                               \
-    </listOfReactions>                                                                                                          \
-  </model>                                                                                                                      \
-</sbml>                                                                                                                         \
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
+<sbml xmlns=\"http://www.sbml.org/sbml/level2/version4\" level=\"2\" version=\"4\">\n\
+  <model metaid=\"_case00001\" id=\"case00001\" name=\"case00001\">\n\
+    <listOfCompartments>\n\
+      <compartment id=\"compartment\" name=\"compartment\" size=\"1\" units=\"volume\"/>\n\
+    </listOfCompartments>\n\
+    <listOfSpecies>\n\
+      <species id=\"S1\" name=\"S1\" compartment=\"compartment\" initialAmount=\"0.00015\" substanceUnits=\"substance\"/>\n\
+      <species id=\"S2\" name=\"S2\" compartment=\"compartment\" initialAmount=\"0\" substanceUnits=\"substance\"/>\n\
+    </listOfSpecies>\n\
+    <listOfParameters>\n\
+      <parameter id=\"k1\" name=\"k1\" value=\"1\"/>\n\
+    </listOfParameters>\n\
+    <listOfReactions>\n\
+      <reaction id=\"reaction1\" name=\"reaction1\" reversible=\"false\" fast=\"false\">\n\
+        <listOfReactants>\n\
+          <speciesReference species=\"S1\"/>\n\
+        </listOfReactants>\n\
+        <listOfProducts>\n\
+          <speciesReference species=\"S2\"/>\n\
+        </listOfProducts>\n\
+        <kineticLaw>\n\
+          <math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n\
+            <apply>\n\
+              <times/>\n\
+              <ci> compartment </ci>\n\
+              <ci> k1 </ci>\n\
+              <ci> S1 </ci>\n\
+            </apply>\n\
+          </math>\n\
+        </kineticLaw>\n\
+      </reaction>\n\
+    </listOfReactions>\n\
+  </model>\n\
+</sbml>\n\
 "
 ;
 

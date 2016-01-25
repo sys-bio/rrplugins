@@ -1,8 +1,8 @@
 #include <iostream>
-#include "telException.h"
-#include "telUtils.h"
-#include "telPluginManager.h"
-#include "telPlugin.h"
+#include "rrplugins/common/telException.h"
+#include "rrplugins/common/telUtils.h"
+#include "rrplugins/core/telPluginManager.h"
+#include "rrplugins/core/telPlugin.h"
 #pragma hdrstop
 
 using namespace std;

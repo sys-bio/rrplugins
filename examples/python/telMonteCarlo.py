@@ -4,7 +4,7 @@
 #
 # Author: Totte Karlsson (totte@dunescientific.com)
 #-------------------------------------------------------------------------------
-from teplugins import *
+from rrplugins import *
 import matplotlib.pyplot as plt
 
 try:    

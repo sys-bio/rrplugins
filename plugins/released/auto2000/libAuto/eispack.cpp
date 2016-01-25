@@ -4211,8 +4211,8 @@ dgemm(char *transa, char *transb, integer *m, integer *n, integer *k, doublereal
     c__ -= c_offset;
 
     /* Function Body */
-    nota = lsame(transa, "N", 1L, 1L);
-    notb = lsame(transb, "N", 1L, 1L);
+    nota = lsame(transa, (char*)"N", 1L, 1L);
+    notb = lsame(transb, (char*)"N", 1L, 1L);
     if (nota) {
     nrowa = *m;
     ncola = *k;
@@ -4229,11 +4229,11 @@ dgemm(char *transa, char *transb, integer *m, integer *n, integer *k, doublereal
 /*     Test the input parameters. */
 
     info = 0;
-    if (! nota && ! lsame(transa, "C", 1L, 1L) && ! lsame(transa, "T", 1L, 
+    if (! nota && ! lsame(transa, (char*)"C", 1L, 1L) && ! lsame(transa, (char*)"T", 1L, 
         1L)) {
     info = 1;
-    } else if (! notb && ! lsame(transb, "C", 1L, 1L) && ! lsame(transb, 
-        "T", 1L, 1L)) {
+    } else if (! notb && ! lsame(transb, (char*)"C", 1L, 1L) && ! lsame(transb, 
+        (char*)"T", 1L, 1L)) {
     info = 2;
     } else if (*m < 0) {
     info = 3;
@@ -4249,7 +4249,7 @@ dgemm(char *transa, char *transb, integer *m, integer *n, integer *k, doublereal
     info = 13;
     }
     if (info != 0) {
-    xerbla("DGEMM ", &info, 6L);
+    xerbla((char*)"DGEMM ", &info, 6L);
     return 0;
     }
 

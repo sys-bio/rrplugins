@@ -13,7 +13,7 @@ using tlp::TelluriumData;
 
 class stStatWorker : public Poco::Runnable
 {
-    friend Stat;
+    friend class Stat;
 
     protected:
         Poco::Thread                mThread;

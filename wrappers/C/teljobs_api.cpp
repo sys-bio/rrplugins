@@ -324,7 +324,7 @@ bool tlp_cc freeJob(TELHandle aJob, RRJobType jt)
             break;
             default:
             {
-               Log(tlp::lError)<<"Failed to free job handle";
+               RRPLOG(tlp::lError)<<"Failed to free job handle";
                return false;
             }
         }

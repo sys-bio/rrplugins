@@ -34,14 +34,14 @@ class TA_DS AutoData
 template<>
 inline string Property< AutoData >::getValueAsString() const
 {
-    Log(lDebug2)<<"Getting AutoData value as a string is not implemented";
+    RRPLOG(lDebug2)<<"Getting AutoData value as a string is not implemented";
     return "";
 }
 
 template<>
 inline void Property< AutoData >::setValueFromString(const string& val)
 {
-    Log(lDebug2)<<"Setting AutoData value from string is not implemented";
+    RRPLOG(lDebug2)<<"Setting AutoData value from string is not implemented";
     return;
 }
 

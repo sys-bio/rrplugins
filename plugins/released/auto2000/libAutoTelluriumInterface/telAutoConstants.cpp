@@ -122,15 +122,15 @@ void AutoConstants::populateFrom(Properties* props)
     }
     catch(Exception&)
     {                   
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
     catch(const std::bad_cast&)
     {
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
     catch(...)
     {
-        Log(lError) << "Failed transfer data to auto constants class";
+        RRPLOG(lError) << "Failed transfer data to auto constants class";
     }
 
 
@@ -195,12 +195,12 @@ string AutoConstants::getICP()
 
     for(int i = 0; i < ICP.size(); i++)
     {
-        builder<<(" " + i);
+        builder << " " << i; // NOTE: Totte used to have `builder<<(" " + i);` here
     }
 
     if (ICP.size() == 0)
     {
-        builder<<(" 0");
+        builder << " 0";
     }
 
     return builder.ToString();

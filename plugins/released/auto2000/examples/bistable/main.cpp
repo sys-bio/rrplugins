@@ -31,7 +31,7 @@ int main()
         //Load auto plugin
         if(!pm.load(pluginName))
         {
-            Log(lError)<<"Failed to load plugin: "<<pluginName;
+            RRPLOG(lError)<<"Failed to load plugin: "<<pluginName;
             return 0;
         }
 
@@ -39,7 +39,7 @@ int main()
         AutoPlugin* autoPlugin = (AutoPlugin*) pm.getPlugin(pluginName);
         if(!autoPlugin)
         {
-            Log(lError)<<"Problem..";
+            RRPLOG(lError)<<"Problem..";
             throw("AutoPlugin don't exist");
         }
 
@@ -65,14 +65,14 @@ int main()
 
         if(!autoPlugin->execute(false))
         {
-            Log(lError)<<"Problem executing the Auto plugin";
+            RRPLOG(lError)<<"Problem executing the Auto plugin";
             return 0;
         }
 
-        Log(lInfo)<<"Auto plugin is done.";
+        RRPLOG(lInfo)<<"Auto plugin is done.";
         Property<string>* biD = (Property<string>*) autoPlugin->getProperty("BifurcationDiagram");
         Property<string>* biS = (Property<string>*) autoPlugin->getProperty("BifurcationSummary");
-        Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
+        RRPLOG(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Check bifurcaation data
         Property< vector<int> >*    biPtsP      = (Property< vector<int> >*)       autoPlugin->getProperty("BifurcationPoints");
@@ -83,20 +83,20 @@ int main()
         vector<string>      biLbls = biLblsP->getValue();
         TelluriumData       biData = biDataP->getValue();
 
-        Log(lInfo) << "Number of bifurc points: "  <<biPts.size();
-        Log(lInfo) << "Number of bifurc labels: "  <<biLbls.size();
+        RRPLOG(lInfo) << "Number of bifurc points: "  <<biPts.size();
+        RRPLOG(lInfo) << "Number of bifurc labels: "  <<biLbls.size();
 
-        Log(lInfo) <<"\n\n";
+        RRPLOG(lInfo) <<"\n\n";
 
         if(biPts.size() != biLbls.size())
         {
             throw("Bad");
         }
 
-        Log(lInfo) << "Solution points ===";
+        RRPLOG(lInfo) << "Solution points ===";
         for(int i = 0; i < biPts.size(); i++)
         {
-            Log(lInfo) << "Point, Label " << biPts[i] << ": "<< biLbls[i];
+            RRPLOG(lInfo) << "Point, Label " << biPts[i] << ": "<< biLbls[i];
         }
 
 //###
@@ -120,14 +120,14 @@ int main()
 
         if(!autoPlugin->execute(false))
         {
-            Log(lError)<<"Problem executing the Auto plugin";
+            RRPLOG(lError)<<"Problem executing the Auto plugin";
             return 0;
         }
 
-        Log(lInfo)<<"Auto plugin is done.";
+        RRPLOG(lInfo)<<"Auto plugin is done.";
         biD = (Property<string>*) autoPlugin->getProperty("BifurcationDiagram");
         biS = (Property<string>*) autoPlugin->getProperty("BifurcationSummary");
-        Log(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
+        RRPLOG(lInfo)<<"BIFURCATION SUMMARY\n"<< biS->getValue();
 
         //Check bifurcaation data
         biPtsP      = (Property< vector<int> >*)       autoPlugin->getProperty("BifurcationPoints");
@@ -138,46 +138,46 @@ int main()
         biLbls = biLblsP->getValue();
         biData = biDataP->getValue();
 
-        Log(lInfo) << "Number of bifurc points: "  <<biPts.size();
-        Log(lInfo) << "Number of bifurc labels: "  <<biLbls.size();
+        RRPLOG(lInfo) << "Number of bifurc points: "  <<biPts.size();
+        RRPLOG(lInfo) << "Number of bifurc labels: "  <<biLbls.size();
 
-        Log(lInfo) <<"\n\n";
+        RRPLOG(lInfo) <<"\n\n";
 
         if(biPts.size() != biLbls.size())
         {
             throw("Bad");
         }
 
-        Log(lInfo) << "Solution points ===";
+        RRPLOG(lInfo) << "Solution points ===";
         for(int i = 0; i < biPts.size(); i++)
         {
-            Log(lInfo) << "Point, Label " << biPts[i] << ": "<< biLbls[i];
+            RRPLOG(lInfo) << "Point, Label " << biPts[i] << ": "<< biLbls[i];
         }
 
 
-        Log(lInfo) << "Save TelluriumData ===";
+        RRPLOG(lInfo) << "Save TelluriumData ===";
         biData.write(joinPath(tempFolder, "auto_data.dat"));
-        Log(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
+        RRPLOG(lInfo)<<"\n\nAUTO 2000 is unloading...\n";
 
         //Check plugin data..
 //        pm.unload(autoPlugin);
     }
     catch(Exception& ex)
     {
-        Log(lError)<<ex.getMessage();
+        RRPLOG(lError)<<ex.getMessage();
     }
     catch(Poco::Exception& ex)
     {
-        Log(lError)<<"Problem..."<<ex.message();
+        RRPLOG(lError)<<"Problem..."<<ex.message();
     }
     catch(exception& ex)
     {
-        Log(lError)<<"Bad problem...!"<<ex.what();
+        RRPLOG(lError)<<"Bad problem...!"<<ex.what();
     }
 
     catch(...)
     {
-        Log(lError)<<"Bad problem...!";
+        RRPLOG(lError)<<"Bad problem...!";
     }
 
     pause(true);

@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
         if(!rr1.load(modelFile, &opt))
         {
-            Log(lError)<<"There was a problem loading model in file: "<<modelFile;
+            RRPLOG(lError)<<"There was a problem loading model in file: "<<modelFile;
             throw(Exception("Bad things in loadSBMLFromFile function"));
         }
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         rr1.setGlobalParameterByIndex(2, 0.2);
         double ss = rr1.steadyState();
 
-        Log(lInfo) << "Steady State: " <<ss;
+        RRPLOG(lInfo) << "Steady State: " <<ss;
         const RoadRunnerData* rrData = rr1.simulate(&simOpt);
 
         TELHandle dataHandle = tpCreateTelluriumDataFromRoadRunnerData( (TELHandle) rrData);
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     catch(const exception& ex)
     {
 
-        Log(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.what();
+        RRPLOG(Logger::LOG_ERROR)<<"There was a  problem: "<<ex.what();
     }
 
     return 0;
