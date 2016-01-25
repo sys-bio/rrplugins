@@ -375,7 +375,7 @@ class Plugin (object):
 
     def __setattr__ (self, name, value):
         if (name in self._propertyNames):
-           self.setProperty (name, value)
+            self.setProperty (name, value)
         else:
             super(Plugin, self).__setattr__(name, value)
 
