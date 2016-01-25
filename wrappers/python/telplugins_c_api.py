@@ -863,11 +863,16 @@ rrpLib.tpCreateProperty.restype = c_void_p
 rrpLib.tpCreateProperty.argtypes = [c_char_p, c_char_p, c_char_p, c_void_p]
 def createProperty(name, the_type, hint="", value=None):
     if value == None:
-       return rrpLib.tpCreateProperty(name, the_type, hint, value)
+        ptr = rrpLib.tpCreateProperty(name, the_type, hint, value)
+        if not ptr:
+            raise TypeError('Unable to create property {}'.format(name))
+        return ptr
     else:
         if the_type == 'string':    #Otherwise underlying string type will be char*, don't
             the_type = 'std::string'
         ptr = rrpLib.tpCreateProperty(name, the_type, hint)
+        if not ptr:
+            raise TypeError('Unable to create property {}'.format(name))
         if the_type is "bool":
            setBoolProperty (ptr, value)
         elif the_type is "int":
@@ -877,9 +882,11 @@ def createProperty(name, the_type, hint="", value=None):
         elif the_type is "double":
            setDoubleProperty (ptr, value)
         elif the_type is "string":
-           setStringProperty (ptr, value)
+           if not setStringProperty (ptr, value):
+             raise TypeError('Unable to create property {}'.format(name))
         elif the_type is "std::string":
-           setStringProperty (ptr, value)
+           if not setStringProperty (ptr, value):
+             raise TypeError('Unable to create property {}'.format(name))
 
         else:
             print("Error: Can't set the value of Property with type: " + the_type)

@@ -331,7 +331,8 @@ class Plugin (object):
               else:
                  raise  TypeError ("Expecting a list in setProperty")
            else:
-              tpc.setPluginProperty (self.plugin, name, value)
+              if not tpc.setPluginProperty (self.plugin, name, value):
+                  raise TypeError("Failed to set property {} = {}".format(name, value))
 
     ## \brief Get the value for a given propoerty in the plugin.
     ##@code
