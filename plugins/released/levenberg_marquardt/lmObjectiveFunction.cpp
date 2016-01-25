@@ -1,26 +1,23 @@
 #pragma hdrstop
 #include "lmObjectiveFunction.h"
-#include "rr/rrRoadRunner.h"
-#include "rr/C/rrc_api.h" //Todo: no reason using the roaddrunner C API here, convert and use the CPP api directly
 #include "telMathUtils.h"
 #include "lm.h"
+#include "rr/rrRoadRunner.h"
 
 using namespace std;
 using namespace lmfit;
 using namespace tlp;
-using namespace rrc;
 //---------------------------------------------------------------------------
 /* function evaluation, determination of residues */
-void lmObjectiveFunction(const double *par,       //Property vector
-              int           m_dat,      //Dimension of residue vector
-              const void   *userData,  //Data structure
-              double       *fvec,      //residue vector..
-              int          *userBreak  //Non zero value means termination
+void lmObjectiveFunction(const double *par,//Property vector
+              int           m_dat,         //Dimension of residue vector
+              void   *userData,            //Data structure
+              double       *fvec,          //residue vector..
+              int          *userBreak      //Non zero value means termination
 )
 {
-    const LM    *thePlugin = (const LM*) userData;
-    LM*         plugin = const_cast<LM*>(thePlugin);
-	const       lmDataStructure* myData = &(thePlugin->mLMData);
+    LM*         thePlugin = (LM*) userData;
+    lmDataStructure* myData = &(thePlugin->mLMData);
 
     //Check if user have asked for termination..
     if(thePlugin->isBeingTerminated())
@@ -30,33 +27,27 @@ void lmObjectiveFunction(const double *par,       //Property vector
     }
 
     //Reset RoadRunner
-    reset(myData->rrHandle);
+    myData->roadrunner.reset();
 
     for(int i = 0; i < myData->nrOfParameters; i++)
     {
-        setValue(myData->rrHandle, myData->parameterLabels[i], par[i]);
-        RRPLOG(lDebug)<<myData->parameterLabels[i]<<" = "<<par[i]<<endl;
+        RRPLOG(lDebug) << myData->parameterLabels[i] << " = " << par[i] << "\n";
+        myData->roadrunner.setValue(myData->parameterLabels[i], par[i]);
     }
 
-    rrc::RRCDataPtr rrcData = NULL;
-    rrcData = simulateEx(  myData->rrHandle,
-                           myData->timeStart,
-                           myData->timeEnd,
-                           myData->nrOfTimePoints);
-    if(!rrcData)
+    rr::SimulateOptions opt;
+    opt.start       = myData->timeStart;
+    opt.duration    = myData->timeEnd - opt.start;
+    opt.steps       = myData->nrOfTimePoints;
+
+    myData->roadrunner.simulate(&opt);
+
+    if(!myData->roadrunner.getSimulationData())
     {
         stringstream msg;
-        msg << "NULL data returned from RoadRunner simulateEx() function.";
-        char* lastError = getLastError();
-
-        if(lastError)
-        {
-            msg << "\nLast error was: "<<lastError;
-        }
-
+        msg << "NULL data returned from RoadRunner simulate() function.";
         RRPLOG(lError)<<msg.str();
-        rrc::freeText(lastError);
-        return;
+        throw std::runtime_error("NULL data returned from RoadRunner simulate() function");
     }
 
     //calculate fvec for each specie
@@ -67,11 +58,7 @@ void lmObjectiveFunction(const double *par,       //Property vector
         fvec[count] = 0;
         for(int j = 0; j < myData->nrOfTimePoints; j++ )
         {
-            double modelValue;
-            if(!rrc::getRRCDataElement(rrcData, j, i, &modelValue))
-            {
-                throw("Bad stuff...") ;
-            }
+            double modelValue = (*myData->roadrunner.getSimulationData())(j,i);
 
             if(!isNaN(myData->experimentalData[i][j]))
             {
@@ -96,20 +83,18 @@ void lmObjectiveFunction(const double *par,       //Property vector
         }
     }
 
-    freeRRCData(rrcData);
-
     //Assign data relevant to the progress
-    plugin->mNrOfIter.setValue(plugin->mNrOfIter.getValue() + 1);
+    thePlugin->mNrOfIter.setValue(thePlugin->mNrOfIter.getValue() + 1);
     double norm = getEuclideanNorm(residuals);
-    plugin->mNorm.setValue(norm);
+    thePlugin->mNorm.setValue(norm);
 
     //Add norm to Norms property
-    plugin->rNormsData(plugin->mNrOfIter.getValue() -1, 0) = plugin->mNorm.getValue();
+    thePlugin->rNormsData(thePlugin->mNrOfIter.getValue() -1, 0) = thePlugin->mNorm.getValue();
 
-    if(plugin->hasProgressEvent())
+    if(thePlugin->hasProgressEvent())
     {
         //Pass trough event data
-        pair<void*, void*> passTroughData = plugin->getWorkProgressData();
-        plugin->WorkProgressEvent(passTroughData.first, passTroughData.second);
+        pair<void*, void*> passTroughData = thePlugin->getWorkProgressData();
+        thePlugin->WorkProgressEvent(passTroughData.first, passTroughData.second);
     }
 }
