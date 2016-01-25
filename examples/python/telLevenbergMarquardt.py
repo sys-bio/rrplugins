@@ -15,7 +15,7 @@ addNoisePlugin  = Plugin("tel_add_noise")
 
 try:    
     #========== EVENT FUNCTION SETUP ===========================
-    def myEvent(dummy): #We are not capturing any data from the plugin, so just pass a dummy
+    def myEvent(dummy1, dummy2): #We are not capturing any data from the plugin, so just pass a dummy
         print 'Iteration, Norm = ' + `lm.getProperty("NrOfIter")`  + ', ' + `lm.getProperty("Norm")`
 
     #Setup progress event function

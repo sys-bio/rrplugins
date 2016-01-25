@@ -94,7 +94,7 @@ gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realp
 ##@endcode
 ## \ingroup plugins
 NotifyEvent  = CFUNCTYPE(None, c_void_p, c_void_p)
-#NotifyEventEx  = CFUNCTYPE(None, c_void_p)
+NotifyEventEx  = CFUNCTYPE(None, c_void_p, c_void_p)
 
 rrpLib.tpFreeText.restype = c_bool
 rrpLib.tpFreeText.argtypes = [c_void_p]
