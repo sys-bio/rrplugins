@@ -36,7 +36,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
             //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
             //type A should be validated as OK.
 
-            msg<<"Questionable Handle passed to API function: "<<fnc<<endl;
+            msg<<"Questionable Handle passed to API function: " << fnc << "; ";
 
             if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
             {
@@ -46,11 +46,12 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
                     //For now don't check ParameterBase types. See todo above
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
                     RRPLOG(lDebug)<<msg.str();
-                    return handle;
+                    throw(BadHandleException(msg.str()));
                 }
                 else
                 {
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                    RRPLOG(lDebug)<<msg.str();
                     throw(BadHandleException(msg.str()));
                 }
             }

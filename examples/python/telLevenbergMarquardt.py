@@ -22,14 +22,18 @@ progressEvent =  NotifyEventEx(myEvent)
 assignOnProgressEvent(lm.plugin, progressEvent)
 #============================================================
 
+print('modelPlugin.execute')
 #Create model data, with and without noise using the test_model plugin
 modelPlugin.execute()
 
 #Setup lmfit properties.
+print('lm.SBML')
 lm.SBML             = modelPlugin.Model
+print('lm.ExperimentalData')
 lm.ExperimentalData = modelPlugin.TestDataWithNoise
 
 # Add the parameters that we're going to fit and an initial 'start' value
+print('set prop InputParameterList')
 lm.setProperty("InputParameterList", ["k1", .3])
 lm.setProperty("FittedDataSelectionList", "[S1] [S2]")
 lm.setProperty("ExperimentalDataSelectionList", "[S1] [S2]")
