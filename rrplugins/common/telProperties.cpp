@@ -127,6 +127,10 @@ PropertyBase* Properties::getProperty(const string& paraName)
 {
     for(int i = 0; i < count(); i++)
     {
+        if(!mProperties[i].first) {
+            RRPLOG(lError) << "Properties::getProperty: found empty property";
+            throw std::runtime_error("Properties::getProperty: found empty property");
+        }
         if(paraName == mProperties[i].first->getName())
         {
             return mProperties[i].first;
@@ -246,7 +250,7 @@ ostream& operator<<(ostream& stream, const Properties& props)
     {
         PropertyBase* bProp = props.mProperties[i].first;
         stream << *(bProp);
-        
+
     }
     return stream;
 }
