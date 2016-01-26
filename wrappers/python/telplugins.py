@@ -357,15 +357,23 @@ class Plugin (object):
             return map(int, val)
 
         elif tpc.getPropertyType(handle) == "matrix":
+            print('getProperty: value is matrix')
             dblArray = tpc.getDataArray(value)
 
             rSize = tpc.getMatrixNumRows(value)
             cSize = tpc.getMatrixNumCols(value)
+            print('getProperty: matrix size is {}x{}'.format(rSize, cSize))
             length = rSize*cSize
             shape = (rSize, cSize)
 
-            arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double * length))
-            a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))
+            arrPtr = ctypes.cast(dblArray, ctypes.POINTER(ctypes.c_double))
+            print('getProperty: arrPtr = {}'.format(arrPtr))
+            #a = np.ctypeslib.as_array((ctypes.c_double * length).from_address(ctypes.addressof(arrPtr.contents)))
+            a = np.empty(shape)
+            for i in range(rSize):
+                for j in range(cSize):
+                    a[i,j] = dblArray[j+i*rSize]
+            print('getProperty: a = {}'.format(a))
 
             a= a.reshape(rSize,cSize)
             return a
