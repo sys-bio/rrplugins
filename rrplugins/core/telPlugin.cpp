@@ -221,6 +221,8 @@ void Plugin::setPropertyValue(const string& nameOf, const void* value)
         if(type == "double")
         {
             Property<double>* prop = dynamic_cast< Property<double>* >(property);
+            if (!prop)
+                throw std::runtime_error("Plugin::setPropertyValue: failed to cast to double property");
             const double* theData = (double*) value;
             prop->setValue(*theData);
             return;
@@ -394,4 +396,3 @@ string Plugin::getResult()
 }
 
 }
-
