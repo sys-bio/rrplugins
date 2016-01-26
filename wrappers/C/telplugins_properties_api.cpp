@@ -306,7 +306,7 @@ bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
             throw std::runtime_error("Failed to cast property");
         }
         string temp(value);
-        para->setValue(temp);
+        para->setValueFromString(temp);
         return true;
     catch_bool_macro
 }
