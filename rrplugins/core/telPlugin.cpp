@@ -220,9 +220,11 @@ void Plugin::setPropertyValue(const string& nameOf, const void* value)
 
         if(type == "double")
         {
-            Property<double>* prop = dynamic_cast< Property<double>* >(property);
-            if (!prop)
+            Property<double>* prop = static_cast< Property<double>* >(property);
+            if (!prop) {
+                RRPLOG(lError) << "Plugin::setPropertyValue: failed to cast to double property";
                 throw std::runtime_error("Plugin::setPropertyValue: failed to cast to double property");
+            }
             const double* theData = (double*) value;
             prop->setValue(*theData);
             return;
@@ -238,7 +240,7 @@ void Plugin::setPropertyValue(const string& nameOf, const void* value)
 
         if(type == "telluriumData")
         {
-            Property<TelluriumData>* prop = dynamic_cast< Property<TelluriumData>* >(property);
+            Property<TelluriumData>* prop = static_cast< Property<TelluriumData>* >(property);
             const TelluriumData* theData = (TelluriumData*) value;
             prop->setValue(*theData);
             return;
