@@ -344,8 +344,19 @@ bool tlp_cc tpGetListProperty(TELHandle handle, void* (value))
 bool tlp_cc tpSetTelluriumDataProperty(TELHandle handle, void* value)
 {
     start_try
-        Property<TelluriumData>* para = castHandle< Property<TelluriumData> >(handle, __FUNC__);
-        para->setValue(*((TelluriumData*) value));
+        PropertyBase* base = castHandle< PropertyBase >(handle, __FUNC__);
+        if(!base) {
+            RRPLOG(lError) << "tpSetStringProperty: Failed to get handle";
+            throw std::runtime_error("Failed to get handle");
+        }
+        Property<TelluriumData>* para = dynamic_cast< Property<TelluriumData>* >(base);
+        if(!para) {
+            RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
+            throw std::runtime_error("Failed to cast property");
+        }
+        TelluriumData* data = (TelluriumData*) value;
+        data->byteCheck();
+        para->setValue(*data);
         return true;
     catch_bool_macro
 }

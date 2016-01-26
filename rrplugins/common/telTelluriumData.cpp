@@ -17,7 +17,8 @@ namespace tlp
 TelluriumData::TelluriumData(const int& rSize, const int& cSize ) 
 :
 mTimePrecision(6),
-mDataPrecision(12)
+mDataPrecision(12),
+mBytePattern(0xdedeafaf)
 {
     if(cSize && rSize)
     {
@@ -30,15 +31,18 @@ TelluriumData::TelluriumData(const StringList& colNames, const DoubleMatrix& the
 mTimePrecision(6),
 mDataPrecision(16),
 mColumnNames(colNames),
-mTheData(theData)
+mTheData(theData),
+mBytePattern(0xdedeafaf)
 {}
 
 TelluriumData::TelluriumData(const TelluriumData& data)
+: mBytePattern(0xdedeafaf)
 {
     (*this) = data;
 }
 
 TelluriumData::TelluriumData(const TelluriumData* data)
+: mBytePattern(0xdedeafaf)
 {
     if(data)
     {
@@ -665,6 +669,11 @@ const DoubleMatrix& TelluriumData::getData() const
 const DoubleMatrix& TelluriumData::getWeights() const
 {
     return mWeights;
+}
+
+void TelluriumData::byteCheck() const {
+    if (mBytePattern != 0xdedeafaf)
+        throw std::runtime_error("TelluriumData::byteCheck failed");
 }
 
 }//namespace

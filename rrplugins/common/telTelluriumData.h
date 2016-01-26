@@ -385,6 +385,8 @@ class COMMON_DECLSPEC TelluriumData
         ArrayedParameter    getArrayedParameter() const;
         void                setArrayedParameter(const ArrayedParameter& para);
 
+        void byteCheck() const;
+
     protected:
         /**
         * \brief Container holding column names.
@@ -420,6 +422,8 @@ class COMMON_DECLSPEC TelluriumData
         * \brief Currently only one arrayed parameter is supported
         */
         ArrayedParameter    mArrayedParameter;
+
+        unsigned int mBytePattern;
 
 };
 
