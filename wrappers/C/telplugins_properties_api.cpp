@@ -36,7 +36,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
                 iniVal = (*val);
             }
             Property<bool>* para = new Property<bool>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -50,7 +50,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
                 iniVal = (*val);
             }
             Property<int> *para = new Property<int>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -65,7 +65,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
                 iniVal = (*dVal);
             }
             Property<double> *para = new Property<double>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -79,7 +79,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
                 iniVal = (*dVal);
             }
             Property<double> *para = new Property<double>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -106,7 +106,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
                 iniVal = (*val);
             }
             Property<string> *para = new Property<string>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -121,7 +121,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
             }
 
             Property<Properties> *para = new Property<Properties>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
@@ -136,7 +136,7 @@ TELHandle tlp_cc tpCreateProperty(const char* label, const char* type, const cha
             }
 
             Property<TelluriumData> *para = new Property<TelluriumData>(iniVal, label, hint);
-            gHM.registerHandle(para, typeid(para).name());
+            gHM.registerHandle(para, typeid(static_cast<PropertyBase*>(para)).name());
             return para;
         }
 
