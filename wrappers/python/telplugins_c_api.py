@@ -1562,7 +1562,7 @@ def unLoadAPI():
 ## \brief Return unerlying data array for a Tellurium matrix
 ## \return Returns a ctypes pointer to double object on success, None otherwise
 ## \ingroup utilities
-rrpLib.tpGetDataArray.restype = c_int
+rrpLib.tpGetDataArray.restype = c_double_p
 rrpLib.tpGetDataArray.argtypes = [c_void_p]
 def getDataArray(matrixH):
     mat = rrpLib.tpGetDataArray(matrixH)
