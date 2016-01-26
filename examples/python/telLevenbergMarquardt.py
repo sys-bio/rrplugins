@@ -25,6 +25,7 @@ assignOnProgressEvent(lm.plugin, progressEvent)
 
 #Create model data, with and without noise using the test_model plugin
 modelPlugin.execute()
+#raise RuntimeError('an error')
 
 #Setup lmfit properties.
 lm.SBML             = modelPlugin.Model

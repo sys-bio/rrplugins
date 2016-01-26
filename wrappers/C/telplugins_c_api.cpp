@@ -15,6 +15,7 @@
 #include "rrplugins/common/telOSSpecifics.h"
 #include "rrplugins/common/telException.h"
 #include "rrplugins/core/telVersionInfo.h"
+#include <iostream>
 
 using namespace std;
 using rr::RoadRunner;
@@ -83,7 +84,7 @@ TELHandle tlp_cc tpGetCurrentPlugin(TELHandle handle)
 TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
 {
     start_try
-
+        std::cerr << "tpLoadPlugin " << pluginName << "\n";
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         if(pm->load(pluginName))
         {
@@ -108,6 +109,7 @@ TELHandle tlp_cc tpLoadPlugin(TELHandle handle, const char* pluginName)
 bool tlp_cc tpLoadPlugins(TELHandle handle)
 {
     start_try
+        RRPLOG(lError) << "tpLoadPlugins";
         PluginManager *pm = castHandle<PluginManager>(handle, __FUNC__);
         pm->load();
 

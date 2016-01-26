@@ -287,6 +287,7 @@ class Plugin (object):
     ## myPlugin = Plugin ("tel_add_noise")
     ##@endcode
     def __init__(self, pluginName):
+        print('Plugin __init__ for {}'.format(pluginName))
         self.pluginName = pluginName
         self.plugin = tpc.loadPlugin (_pluginManager, pluginName)
         if self.plugin is None:
@@ -344,6 +345,7 @@ class Plugin (object):
             raise ValueError ("Property: " + name + " does not exist")
 
         value = tpc.getProperty (handle)
+        print('getProperty: got value')
 
         if tpc.getPropertyType(handle) == "telluriumData":
             return DataSeries (value)

@@ -5,6 +5,7 @@
 #include "telTelluriumData.h"
 #include "noise.h"
 #include "add_noise_doc.h"
+#include <iostream>
 
 //---------------------------------------------------------------------------
 namespace addNoise
@@ -19,6 +20,7 @@ mData(              TelluriumData(),    "InputData",   "Data on which noise will
 mProgress(          0,                  "Progress",    "Indicate progress in (0-100%)"),
 mAddNoiseWorker(*this)
 {
+    std::cerr << "AddNoise: add mSigma = " << &mSigma << "\n";
     mVersion = "1.0.1";
 
     //Setup the plugins capabilities
@@ -92,6 +94,7 @@ s.str("");
 // Plugin factory function
 Plugin* plugins_cc createPlugin()
 {
+    std::cerr << "AddNoise: createPlugin\n";
     //allocate a new object and return it
     return new AddNoise;
 }
@@ -102,6 +105,3 @@ const char* plugins_cc getImplementationLanguage()
 }
 
 }
-
-
-

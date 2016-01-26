@@ -196,9 +196,29 @@ void Plugin::setPropertyByString(const string& nameOf, const char* value)
     }
 }
 
+class myBase {
+public:
+  virtual ~myBase() {}
+};
+
+class myDerived : public myBase {
+public:
+  virtual ~myDerived() {}
+};
+
 void Plugin::setPropertyValue(const string& nameOf, const void* value)
 {
     PropertyBase* property = mProperties.getProperty(nameOf);
+    if (!property) {
+        RRPLOG(lError) << "Plugin::setPropertyValue: no such property " << nameOf;
+        throw std::runtime_error("Plugin::setPropertyValue: no such property");
+    }
+    RRPLOG(lError) << "Plugin::setPropertyValue: property = " << property << ", typeid of property = " << typeid(*property).name();
+    //RRPLOG(lError) << "Plugin::setPropertyValue: dyn cast: " << typeid(dynamic_cast< tlp::Property<double>& >(*property)).name();
+    myDerived derv;
+    myBase* baseptr = &derv;
+    myDerived* derv2 = dynamic_cast<myDerived*>(baseptr);
+    RRPLOG(lError) << "Plugin::setPropertyValue: derv = " << &derv << ", baseptr = " << baseptr << ", derv2 = " << derv2;
     if(property)
     {
         string type = property->getType();

@@ -71,6 +71,7 @@ bool TestModel::execute(bool inThread)
     mTestData.setValue(data);
 
     //Add noise
+    RRPLOG(lDebug) << "Get add noise plugin\n";
     const PluginManager* PM = this->getPluginManager();
     Plugin* noise = PM->getPlugin("AddNoise");
 
@@ -82,16 +83,21 @@ bool TestModel::execute(bool inThread)
         throw(Exception(msg.str()));
 
     }
+    RRPLOG(lDebug) << "Have add noise plugin\n";
     mTestDataWithNoise.setValue(mTestData.getValue());
 
+    RRPLOG(lDebug) << "Set prop sigma\n";
     noise->setPropertyValue("Sigma", mSigma.getValueHandle());
+    RRPLOG(lDebug) << "Set prop input data\n";
     noise->setPropertyValue("InputData", mTestDataWithNoise.getValueHandle());
+    RRPLOG(lDebug) << "Execute add noise\n";
     noise->execute();
 
     mTestDataWithNoise.setValue(noise->getPropertyValueHandle("InputData"));
 
     //Add weights
     addWeights();
+    RRPLOG(lDebug) << "Finished executing test model plugin\n";
     return true;
 }
 
@@ -193,4 +199,3 @@ string  theModel =
 </sbml>\n\
 "
 ;
-

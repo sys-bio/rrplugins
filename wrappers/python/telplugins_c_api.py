@@ -211,6 +211,7 @@ def unLoadPlugins(pm):
 rrpLib.tpLoadPlugin.restype = c_void_p
 rrpLib.tpLoadPlugin.argtypes = [c_void_p, c_char_p]
 def loadPlugin(pm, pluginName):
+    print('rrpLib.tpLoadPlugin {}'.format(pluginName))
     return rrpLib.tpLoadPlugin(pm, pluginName)
 
 ## \brief Unload a particular plugin
