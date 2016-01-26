@@ -862,7 +862,7 @@ def setPropertyHint(propertyHandle, descr):
 rrpLib.tpCreateProperty.restype = c_void_p
 rrpLib.tpCreateProperty.argtypes = [c_char_p, c_char_p, c_char_p, c_void_p]
 def createProperty(name, the_type, hint="", value=None):
-    if value == None:
+    if value is None:
         ptr = rrpLib.tpCreateProperty(name, the_type, hint, value)
         if not ptr:
             raise TypeError('Unable to create property {}'.format(name))
@@ -870,7 +870,7 @@ def createProperty(name, the_type, hint="", value=None):
     else:
         if the_type == 'string':    #Otherwise underlying string type will be char*, don't
             the_type = 'std::string'
-        ptr = rrpLib.tpCreateProperty(name, the_type, hint)
+        ptr = rrpLib.tpCreateProperty(name, the_type, hint, None)
         if not ptr:
             raise TypeError('Unable to create property {}'.format(name))
         if the_type is "bool":
