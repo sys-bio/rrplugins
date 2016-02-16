@@ -1293,24 +1293,21 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
         ySeries = np.zeros([nrRows])
         ySeries = data[:,serie + 1]
         xIndx = 0
-        ax = plt.subplot(1,1,1)
-        colors = ax._get_lines.color_cycle
-        theColor = colors.next()
         for label in bfLabels:
             xPtn = bfPoints[labelNr] - 1
             xSegment = x[xIndx:xPtn]
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1], color = theColor)
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1])
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = theColor)
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0)
             elif label == 'LP':
                 #Check Previous label
                 if previousLbl == 'LP':
                     plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
                 elif previousLbl == 'EP':
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0,  color = theColor)
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0)
 
             xIndx = xPtn
             labelNr = labelNr + 1
