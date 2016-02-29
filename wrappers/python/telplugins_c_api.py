@@ -31,7 +31,7 @@ def rrpPlatformIsOSX():
     return sys.platform.startswith('darwin')
 
 # try the appropriate path for a standalone installation
-rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'lib'))
+rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'roadrunner'))
 
 # try the appropriate path for a Spyder environment
 if not os.path.exists(rrplugins_path):
