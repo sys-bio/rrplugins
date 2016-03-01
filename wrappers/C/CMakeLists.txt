@@ -62,3 +62,5 @@ install(
   ARCHIVE DESTINATION lib COMPONENT pluginsLib
   LIBRARY DESTINATION lib COMPONENT pluginsLib
 )
+
+install(TARGETS telplugins_c_api DESTINATION site-packages/roadrunner)

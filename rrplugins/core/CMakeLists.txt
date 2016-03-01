@@ -26,7 +26,7 @@ if (TLP_BUILD_SHARED_LIB)
     POCO_NO_AUTOMATIC_LIBS
   )
 
-  target_link_libraries (telplugins_core 
+  target_link_libraries (telplugins_core
     telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
   # Install shared library
@@ -35,8 +35,12 @@ if (TLP_BUILD_SHARED_LIB)
     LIBRARY DESTINATION lib COMPONENT pluginsLib
     ARCHIVE DESTINATION lib COMPONENT pluginsLib
   )
+
+  if(RR_PLUGINS_INSTALL_TO_RR_SITE_PACKAGES)
+    install(TARGETS telplugins_core DESTINATION site-packages/roadrunner)
+  endif()
 endif()
-        
+
 # ** Static lib ******
 
 if (TLP_BUILD_STATIC_LIB)
@@ -54,7 +58,7 @@ if (TLP_BUILD_STATIC_LIB)
     POCO_NO_AUTOMATIC_LIBS
     )
 
-  target_link_libraries (telplugins_core-static 
+  target_link_libraries (telplugins_core-static
     telplugins_common-static ${RRPLUGINS_COMMON_STATIC_LIBS})
 
   # Install static library
@@ -65,10 +69,10 @@ if (TLP_BUILD_STATIC_LIB)
 endif()
 
 if(${MSVC})
-    #Disable some VS Warnings 
+    #Disable some VS Warnings
     # 4251 About exporting std classes
     # 4018 Comparing unsigned/signed ints
-    # 4996 Deprecated functions   
+    # 4996 Deprecated functions
     add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4251 /wd4018 /wd4996 /nologo" )
 
 endif()
@@ -76,4 +80,3 @@ endif()
 if(BUILD_TESTS)
     add_subdirectory(testing)
 endif()
-
