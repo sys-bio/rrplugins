@@ -279,8 +279,11 @@ bool tlp_cc tpGetIntProperty(TELHandle handle, int *value)
 bool tlp_cc tpSetDoubleProperty(TELHandle handle, double value)
 {
     start_try
+        std::cerr << "tpSetDoubleProperty: begin\n";
         Property<double>* para = castHandle< Property<double> >(handle, __FUNC__);
+        std::cerr << "tpSetDoubleProperty: cast handle\n";
         para->setValue(value);
+        std::cerr << "tpSetDoubleProperty: set value\n";
         return true;
     catch_bool_macro
 }
@@ -297,15 +300,12 @@ bool tlp_cc tpGetDoubleProperty(TELHandle handle, double *value)
 bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
 {
     start_try
-        std::cerr << "tpSetStringProperty: begin\n";
         PropertyBase* base = castHandle< PropertyBase >(handle, __FUNC__);
-        std:cerr << "tpSetStringProperty: cast property\n";
         if(!base) {
             RRPLOG(lError) << "tpSetStringProperty: Failed to get handle";
             throw std::runtime_error("Failed to get handle");
         }
         Property<string>* para = dynamic_cast< Property<string>* >(base);
-        std::cerr << "tpSetStringProperty: dyncast property\n";
         if(!para) {
             RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
             RRPLOG(lError) << "tpSetStringProperty: typeinfo = " << typeid(*base).name();
@@ -313,9 +313,7 @@ bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
             //throw std::runtime_error("Failed to cast property");
         }
         string temp(value);
-        std::cerr << "tpSetStringProperty: temp value\n";
         para->setValueFromString(temp);
-        std::cerr << "tpSetStringProperty: set value from string\n";
         return true;
     catch_bool_macro
 }

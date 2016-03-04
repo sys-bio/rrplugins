@@ -45,13 +45,14 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
                 {
                     //For now don't check ParameterBase types. See todo above
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                    RRPLOG(lDebug)<<msg.str();
-                    throw(BadHandleException(msg.str()));
+                    RRPLOG(lError)<<msg.str();
+                    // throw(BadHandleException(msg.str())); // so much for type safety
+                    return handle;
                 }
                 else
                 {
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                    RRPLOG(lDebug)<<msg.str();
+                    RRPLOG(lError)<<msg.str();
                     throw(BadHandleException(msg.str()));
                 }
             }
@@ -67,6 +68,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
         }
         msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
         msg<<"No such handle is registered. "<<endl;
+        RRPLOG(lError)<<msg.str();
         throw(BadHandleException(msg.str()));
     }
     return NULL;
@@ -112,4 +114,3 @@ TELHandle APIHandleManager::searchFor(TELHandle handle)
     }
     return NULL;
 }
-
