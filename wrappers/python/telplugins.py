@@ -75,7 +75,7 @@ class DataSeries(object):
                 #else:
                 #    print 'not freeing data'
             except:
-                print "Failed freeing data in DataSeries"
+                print("Failed freeing data in DataSeries")
             self._data = 0
 
     def __getHandle (self):
@@ -294,7 +294,6 @@ class Plugin (object):
         else:
             lp = self.listOfProperties()
             for element in lp:
-                print('property: {}', element[0])
                 self._propertyNames.append (element[0])
             tpc.resetPlugin(self.plugin)
 
@@ -319,7 +318,6 @@ class Plugin (object):
            if handle == 0:
               raise ValueError ("Unable to locate property: ", name)
            t1 = tpc.getPropertyType (handle)
-           print('Property type: {}'.format(t1))
            if (t1 == "listOfProperties"):
               if isinstance (value, list):
                  if len(value) != 2:
@@ -394,7 +392,6 @@ class Plugin (object):
         if not self:
             return []
         nameList = tpc.getListOfPluginPropertyNames (self.plugin)
-        print('listOfProperties: names = {}'.format(nameList))
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]
@@ -500,8 +497,6 @@ class Plugin (object):
         aList = []
         names = tpc.getPluginLibraryNames (_pluginManager)
         n = tpc.getNumberOfPlugins (_pluginManager)
-        print names
-        print n
         # This is a hack to get round thelack of metadata in the plugin
         # Will be resolved in next revision of library
         for i in range (0, n):
