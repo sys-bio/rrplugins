@@ -53,6 +53,6 @@ if(${TLP_BUILD_EXAMPLES})
 endif()
 
 install (TARGETS tel_nelder_mead
-  DESTINATION plugins
+  DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
 )

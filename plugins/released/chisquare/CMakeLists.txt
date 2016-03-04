@@ -29,7 +29,7 @@ target_link_libraries (tel_chisquare
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
-if(UNIX) 
+if(UNIX)
   if(APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-no_implicit_dylibs -undefined error")
   else()
@@ -46,6 +46,6 @@ if(UNIX)
 endif()
 
 install (TARGETS tel_chisquare
-  DESTINATION plugins
+  DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
 )

@@ -27,4 +27,4 @@ target_link_libraries (tel_test_model telplugins_core ${RRPLUGINS_COMMON_SHARED_
 #   endif()
 # endif()
 
-install (TARGETS tel_test_model DESTINATION plugins COMPONENT plugins)
+install (TARGETS tel_test_model DESTINATION ${RRP_PLUGINS_DIR} COMPONENT plugins)

@@ -52,8 +52,6 @@ else()
 endif()
 
 install (TARGETS tel_add_noise
-  DESTINATION plugins
+  DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
 )
-
-

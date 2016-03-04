@@ -63,4 +63,6 @@ install(
   LIBRARY DESTINATION lib COMPONENT pluginsLib
 )
 
-install(TARGETS telplugins_c_api DESTINATION site-packages/roadrunner)
+if(RR_PLUGINS_INSTALL_TO_RR_SITE_PACKAGES)
+  install(TARGETS telplugins_c_api DESTINATION site-packages/roadrunner)
+endif()

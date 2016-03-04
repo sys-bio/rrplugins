@@ -47,6 +47,6 @@ target_link_libraries (tel_auto2000
 )
 
 install (TARGETS tel_auto2000
-  DESTINATION plugins
+  DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
 )

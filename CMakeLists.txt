@@ -41,6 +41,7 @@ set ( TLP_BUILD_PLUGINS_C_API ON CACHE BOOL      "Build Plugins C API")
 set ( TLP_BUILD_PLUGINS_PYTHON_API ON CACHE BOOL "Build Plugins Python API")
 set ( TLP_BUILD_BETA_PLUGINS  ON CACHE BOOL      "Build beta (unreleased) plugins" )
 set ( RR_PLUGINS_INSTALL_TO_RR_SITE_PACKAGES TRUE CACHE BOOL "Install libs to roadrunner site-packages directory")
+set ( RRP_PLUGINS_DIR site-packages/roadrunner CACHE PATH "Destination for plugins")
 
 # Plugin selection: Released
 

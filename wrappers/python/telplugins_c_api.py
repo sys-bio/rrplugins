@@ -73,7 +73,7 @@ c_double_p = POINTER(c_double)
 c_bool_p   = POINTER(c_bool)
 c_int_p    = POINTER(c_int)
 
-gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '..', 'plugins'))
+gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'roadrunner'))
 
 #=======================tel_api========================#
 #Type of plugin events, first argument is return type

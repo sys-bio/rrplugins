@@ -54,6 +54,6 @@ if(UNIX)
 endif()
 
 install (TARGETS tel_levenberg_marquardt
-  DESTINATION plugins
+  DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
 )
