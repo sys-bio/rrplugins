@@ -294,6 +294,7 @@ class Plugin (object):
         else:
             lp = self.listOfProperties()
             for element in lp:
+                print('property: {}', element[0])
                 self._propertyNames.append (element[0])
             tpc.resetPlugin(self.plugin)
 
@@ -318,6 +319,7 @@ class Plugin (object):
            if handle == 0:
               raise ValueError ("Unable to locate property: ", name)
            t1 = tpc.getPropertyType (handle)
+           print('Property type: {}'.format(t1))
            if (t1 == "listOfProperties"):
               if isinstance (value, list):
                  if len(value) != 2:
@@ -392,6 +394,7 @@ class Plugin (object):
         if not self:
             return []
         nameList = tpc.getListOfPluginPropertyNames (self.plugin)
+        print('listOfProperties: names = {}'.format(nameList))
         aList = []
         for i in range (0, len (nameList)):
             name = nameList[i]

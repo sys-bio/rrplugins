@@ -10,6 +10,8 @@
 #include "telplugins_cpp_support.h"
 #include "rrplugins/common/telProperty.h"
 #include "rrplugins/common/telPropertyBase.h"
+
+#include <iostream>
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -295,18 +297,25 @@ bool tlp_cc tpGetDoubleProperty(TELHandle handle, double *value)
 bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
 {
     start_try
+        std::cerr << "tpSetStringProperty: begin\n";
         PropertyBase* base = castHandle< PropertyBase >(handle, __FUNC__);
+        std:cerr << "tpSetStringProperty: cast property\n";
         if(!base) {
             RRPLOG(lError) << "tpSetStringProperty: Failed to get handle";
             throw std::runtime_error("Failed to get handle");
         }
         Property<string>* para = dynamic_cast< Property<string>* >(base);
+        std::cerr << "tpSetStringProperty: dyncast property\n";
         if(!para) {
             RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
-            throw std::runtime_error("Failed to cast property");
+            RRPLOG(lError) << "tpSetStringProperty: typeinfo = " << typeid(*base).name();
+            para = static_cast< Property<string>* >(base); // so much for type safety
+            //throw std::runtime_error("Failed to cast property");
         }
         string temp(value);
+        std::cerr << "tpSetStringProperty: temp value\n";
         para->setValueFromString(temp);
+        std::cerr << "tpSetStringProperty: set value from string\n";
         return true;
     catch_bool_macro
 }
@@ -346,12 +355,12 @@ bool tlp_cc tpSetTelluriumDataProperty(TELHandle handle, void* value)
     start_try
         PropertyBase* base = castHandle< PropertyBase >(handle, __FUNC__);
         if(!base) {
-            RRPLOG(lError) << "tpSetStringProperty: Failed to get handle";
+            RRPLOG(lError) << "tpSetTelluriumDataProperty: Failed to get handle";
             throw std::runtime_error("Failed to get handle");
         }
         Property<TelluriumData>* para = dynamic_cast< Property<TelluriumData>* >(base);
         if(!para) {
-            RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
+            RRPLOG(lError) << "tpSetTelluriumDataProperty: Failed to cast property";
             throw std::runtime_error("Failed to cast property");
         }
         TelluriumData* data = (TelluriumData*) value;

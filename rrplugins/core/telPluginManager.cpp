@@ -166,6 +166,8 @@ int PluginManager::load(const string& pluginName)
     clearLoadErrors();
     int nrOfLoadedPlugins = 0;
 
+    std::cerr << "PluginManager::load: Looking in plugin directory " << mPluginFolder << "\n";
+
     //Throw if plugin folder don't exist
     if(!folderExists(mPluginFolder))
     {
@@ -196,12 +198,14 @@ int PluginManager::load(const string& pluginName)
     {
         string plugin = getFileName(*it);
         RRPLOG(lInfo)<<"Loading plugin: "<<plugin;
+        std::cerr << "Loading plugin: " << plugin << "\n";
         try
         {
             bool res = loadPlugin(plugin);
             if(!res)
             {
                 RRPLOG(lError)<<"There was a problem loading plugin: "<<plugin;
+                std::cerr << "There was a problem loading plugin: "<<plugin<<"\n";
                 continue;
             }
             nrOfLoadedPlugins++;
@@ -209,6 +213,7 @@ int PluginManager::load(const string& pluginName)
         catch(...)
         {
             RRPLOG(lError)<<"There was a serious problem loading plugin: "<<plugin;
+            std::cerr<<"There was a serious problem loading plugin: "<<plugin<<"\n";
         }
     }
     return nrOfLoadedPlugins;
@@ -322,7 +327,7 @@ bool PluginManager::loadPlugin(const string& _libName)
     }
     catch(...)
     {
-        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;        
+        info<<"========== In attempt to load plugin: "<<_libName<<" ==========="<<endl;
         info<<"Unknown error occured attempting to load plugin"<<_libName;
         mLoadPluginErrors<<info.str();
         RRPLOG(lError)<<info.str();
@@ -514,7 +519,7 @@ Plugin* PluginManager::getPlugin(const string& _name) const
 }
 
 Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
-{    
+{
     //Minimum bare bone plugin need these
     charStarFnc         getName                 = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getName");
     charStarFnc         getCategory             = (charStarFnc) libHandle->getSymbol(string(exp_fnc_prefix) + "getCategory");
@@ -542,7 +547,7 @@ Plugin* PluginManager::createCPlugin(SharedLibrary *libHandle)
     aPlugin->getCPropertyNames  =    (charStarFnc)      libHandle->getSymbol(string(exp_fnc_prefix) + "getListOfCPluginPropertyNames");
     aPlugin->getCProperty       =    (getAPropertyF)    libHandle->getSymbol(string(exp_fnc_prefix) + "getCPluginProperty");
     return aPlugin;
-        
+
     return NULL;
 }
 
