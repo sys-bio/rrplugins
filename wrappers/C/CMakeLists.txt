@@ -20,6 +20,7 @@ target_link_libraries ( telplugins_c_api
   telplugins_math
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
+message(STATUS "C API: RRPLUGINS_COMMON_SHARED_LIBS = ${RRPLUGINS_COMMON_SHARED_LIBS}")
 
 #Link C_api shared lib statically to roadrunner and libsbml
 if(WIN32)

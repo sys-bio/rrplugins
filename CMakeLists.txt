@@ -131,6 +131,10 @@ rrplugins
     "
 )
 
+message( " *** libsbml libdir               ${SBML_LIBRARY_DIR}")
+message( " *** libsbml                      ${SBML_LIBRARY_BARE}")
+link_directories(${SBML_LIBRARY_DIR})
+
 if(LIBROADRUNNER_FOUND)
     message( "  *** roadrunner libs             ${LIBROADRUNNER_LIBRARIES}")
     message( "  *** roadrunner includes         ${LIBROADRUNNER_INCLUDE_DIR}")
