@@ -138,7 +138,7 @@ rrpLib.tpCreatePluginManager.argtypes = [c_char_p]
 def createPluginManager(pluginDir = None):
     if pluginDir == None:
         pluginDir = gDefaultPluginsPath
-    return rrpLib.tpCreatePluginManager(pluginDir)
+    return rrpLib.tpCreatePluginManager(pluginDir.encode('utf-8'))
 
 ## \brief Free the plugin manager. A call to this function will also unload any loaded plugins.
 ## \param pm Handle to a plugin manager.
@@ -211,7 +211,7 @@ def unLoadPlugins(pm):
 rrpLib.tpLoadPlugin.restype = c_void_p
 rrpLib.tpLoadPlugin.argtypes = [c_void_p, c_char_p]
 def loadPlugin(pm, pluginName):
-    return rrpLib.tpLoadPlugin(pm, pluginName)
+    return rrpLib.tpLoadPlugin(pm, pluginName.encode('utf-8'))
 
 ## \brief Unload a particular plugin
 ## \param pm Handle to a PluginManager instance
@@ -324,7 +324,7 @@ def getCurrentPlugin(pm):
 rrpLib.tpGetPlugin.restype = c_void_p
 rrpLib.tpGetPlugin.argtypes = [c_void_p, c_char_p]
 def getPlugin(pm, pluginName):
-    return rrpLib.tpGetPlugin(pm, c_char_p(pluginName))
+    return rrpLib.tpGetPlugin(pm, c_char_p(pluginName.encode('utf-8')))
 
 #---------- PLUGIN HANDLING FUNCTIONS ============================================
 ## \brief Get the name of a Plugin
@@ -741,7 +741,7 @@ def getNextProperty(paraListHandle):
 rrpLib.tpGetPluginProperty.restype = c_void_p
 rrpLib.tpGetPluginProperty.argtypes = [c_void_p, c_char_p]
 def getPluginProperty(pluginHandle, propertyName):
-    return rrpLib.tpGetPluginProperty(pluginHandle, propertyName)
+    return rrpLib.tpGetPluginProperty(pluginHandle, propertyName.encode('utf-8'))
 
 ## \brief Set the value of a PluginProperty
 ## \param pluginHandle Handle to a plugin
@@ -815,7 +815,7 @@ def setProperty(propertyHandle, paraValue):
 rrpLib.tpSetPropertyDescription.restype = c_bool
 rrpLib.tpSetPropertyDescription.argtypes = [c_void_p, c_char_p]
 def setPropertyDescription(propertyHandle, descr):
-    return rrpLib.tpSetPropertyDescription(propertyHandle, descr)
+    return rrpLib.tpSetPropertyDescription(propertyHandle, descr.encode('utf-8'))
 
 ## \brief Get the description of a Property
 ## \param propertyHandle Handle to a Property instance
@@ -841,7 +841,7 @@ def getPropertyDescription(propertyHandle):
 rrpLib.tpSetPropertyHint.restype = c_bool
 rrpLib.tpSetPropertyHint.argtypes = [c_void_p, c_char_p]
 def setPropertyHint(propertyHandle, descr):
-    return rrpLib.tpSetPropertyHint(propertyHandle, descr)
+    return rrpLib.tpSetPropertyHint(propertyHandle, descr.encode('utf-8'))
 
 ## \brief Create a Property of type "type" with a name and hint property
 ##  Valid types include: 'bool', 'int', 'double', 'string', and 'listOfProperties'
@@ -863,7 +863,7 @@ rrpLib.tpCreateProperty.restype = c_void_p
 rrpLib.tpCreateProperty.argtypes = [c_char_p, c_char_p, c_char_p, c_void_p]
 def createProperty(name, the_type, hint="", value=None):
     if value is None:
-        ptr = rrpLib.tpCreateProperty(name, the_type, hint, value)
+        ptr = rrpLib.tpCreateProperty(name.encode('utf-8'), the_type.encode('utf-8'), hint.encode('utf-8'), value)
         if not ptr:
             raise TypeError('Unable to create property {}'.format(name))
         return ptr
@@ -936,7 +936,7 @@ def addPropertyToList(propertyHandle, addMe):
 rrpLib.tpSetPropertyByString.restype = c_bool
 rrpLib.tpSetPropertyByString.argtypes = [c_void_p, c_char_p]
 def setPropertyByString(PropertyHandle, value):
-    return rrpLib.tpSetPropertyByString(PropertyHandle, value)
+    return rrpLib.tpSetPropertyByString(PropertyHandle, value.encode('utf-8'))
 
 ## \brief Get inforamtion on a Property
 ## \param propertyHandle Handle to a Property instance
@@ -1101,7 +1101,7 @@ def getStringProperty (propertyHandle):
 rrpLib.tpSetStringProperty.restype = c_bool
 rrpLib.tpSetStringProperty.argtypes = [c_void_p, c_char_p]
 def setStringProperty(propertyHandle, value):
-    r = rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value))
+    r = rrpLib.tpSetStringProperty(propertyHandle, c_char_p(value.encode('utf-8')))
     if not r:
         raise TypeError('Failed to set string property')
     return r
@@ -1366,7 +1366,7 @@ def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
 rrpLib.tpSetTelluriumDataColumnHeader.restype = c_bool
 rrpLib.tpSetTelluriumDataColumnHeader.argtypes = [c_void_p, c_char_p]
 def setTelluriumDataColumnHeader(telDataHandle, hdr):
-    return rrpLib.tpSetTelluriumDataColumnHeader(telDataHandle, hdr)
+    return rrpLib.tpSetTelluriumDataColumnHeader(telDataHandle, hdr.encode('utf-8'))
 
 ## \brief Set column header by index in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
@@ -1375,9 +1375,9 @@ def setTelluriumDataColumnHeader(telDataHandle, hdr):
 ## \return True or false indicating success
 ## \ingroup utilities
 rrpLib.tpSetTelluriumDataColumnHeaderByIndex.restype = c_bool
-rrpLib.tpSetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int, c_char_p]
+rrpLib.tpSetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int, c_char_p] #FIXME: Out of order
 def setTelluriumDataColumnHeaderByIndex(telDataHandle, index, hdr):
-    return rrpLib.tpSetTelluriumDataColumnHeaderByIndex(telDataHandle, hdr, index)
+    return rrpLib.tpSetTelluriumDataColumnHeaderByIndex(telDataHandle, hdr.encode('utf-8'), index)
 
 ## \brief Get Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
@@ -1450,7 +1450,7 @@ def getTelluriumDataNumCols(telDataHandle):
 rrpLib.tpWriteTelluriumDataToFile.restype = c_bool
 rrpLib.tpWriteTelluriumDataToFile.argtypes = [c_void_p, c_char_p]
 def writeTelluriumData(telDataHandle, fName):
-    return rrpLib.tpWriteTelluriumDataToFile(telDataHandle, fName)
+    return rrpLib.tpWriteTelluriumDataToFile(telDataHandle, fName.encode('utf-8'))
 
 ## \brief Read TelluriumData from a file
 ## \param telDataHandle A handle to roadunnerdata
@@ -1461,7 +1461,7 @@ def writeTelluriumData(telDataHandle, fName):
 rrpLib.tpReadTelluriumDataFromFile.restype = c_bool
 rrpLib.tpReadTelluriumDataFromFile.argtypes = [c_void_p, c_char_p]
 def readTelluriumData(telDataHandle, fName):
-    return rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName)
+    return rrpLib.tpReadTelluriumDataFromFile(telDataHandle, fName.encode('utf-8'))
 
 ## \brief Create a TelluriumData object
 ## \param rows Number of rows in the data to be created
@@ -1476,7 +1476,7 @@ def createTelluriumData(rows, cols):
     #Create a column header
     nrs = range(cols)
     col_hdr = str(nrs).strip('[]')
-    return rrpLib.tpCreateTelluriumData(rows, cols, col_hdr)
+    return rrpLib.tpCreateTelluriumData(rows, cols, col_hdr.encode('utf-8'))
 
 ## \brief Create TelluriumData from a file
 ## \param fName Name of input file, including path. If no path is given, the file is read
