@@ -7,6 +7,7 @@
 #include "telStringUtils.h"
 #include "telIniFile.h"
 #include "telTelluriumData.h"
+#include <stdexcept>
 
 //---------------------------------------------------------------------------
 using namespace std;
@@ -14,7 +15,7 @@ using namespace std;
 namespace tlp
 {
 
-TelluriumData::TelluriumData(const int& rSize, const int& cSize ) 
+TelluriumData::TelluriumData(const int& rSize, const int& cSize )
 :
 mTimePrecision(6),
 mDataPrecision(12),
