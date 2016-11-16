@@ -355,7 +355,7 @@ class Plugin (object):
         elif tpc.getPropertyType(handle) == "vector<int>":
             val = value.strip('{}')
             val = val.split(',')
-            return map(int, val)
+            return list(map(int, val))
 
         elif tpc.getPropertyType(handle) == "matrix":
             dblArray = tpc.getDataArray(value)
