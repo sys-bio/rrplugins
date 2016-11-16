@@ -9,6 +9,7 @@ import numpy as np
 import os.path
 import ctypes
 
+# MTK signature Inception-style versioning (versions within versions)
 __version__ = "0.6.6"
 
 ## \brief DataSeries class for handling roadrunner data types
