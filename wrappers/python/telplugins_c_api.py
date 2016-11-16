@@ -30,6 +30,12 @@ def rrpPlatformIsWin():
 def rrpPlatformIsOSX():
     return sys.platform.startswith('darwin')
 
+def decodeIfBytes(x):
+    if hasattr(x, 'decode'):
+        return x.decode('utf-8')
+    else:
+        return x
+
 # try the appropriate path for a standalone installation
 rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'roadrunner'))
 
@@ -109,7 +115,7 @@ def getCopyright():
     data =  rrpLib.tpGetCopyright()
     res = data
     freeText(data)
-    return res
+    return decodeIfBytes(res)
 
 ## \brief Get Tellurium plugin API version.
 ## \return Returns a string if successful, None otherwise
@@ -119,7 +125,7 @@ def getVersion():
     data =  rrpLib.tpGetVersion()
     res = data
     freeText(data)
-    return res
+    return decodeIfBytes(res)
 
 ## \brief Create a new instance of a plugin manager.
 ## \brief A PluginManager manages a collection of plugins, loaded and unloaded by
@@ -182,7 +188,7 @@ def hasLoadPluginErrors(pm):
 rrpLib.tpGetPluginLoadErrors.restype = c_char_p
 rrpLib.tpGetPluginLoadErrors.argtypes = [c_void_p]
 def getPluginLoadErrors(pm):
-    return rrpLib.tpGetPluginLoadErrors(pm)
+    return decodeIfBytes(rrpLib.tpGetPluginLoadErrors(pm))
 
 ## \brief Unload all plugins.
 ## \param pm Handle to a PluginManager instance
@@ -249,7 +255,7 @@ rrpLib.tpGetPluginNames.restype = c_void_p
 rrpLib.tpGetPluginNames.argtypes = [c_void_p]
 def getPluginNames(pm):
     names = rrpLib.tpGetPluginNames(pm)
-    res = ctypes.cast(names, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(names, ctypes.c_char_p).value)
     freeText(names)
     if not res:
         return list()
@@ -273,7 +279,7 @@ def getPluginLibraryNames(pm):
     names = rrpLib.tpGetPluginLibraryNames(pm)
     if not names:
         return list()
-    return names.split(",")
+    return decodeIfBytes(names).split(",")
 
 ## \brief getFirstPlugin retrieves the "first" plugin in the plugin managers internal list of plugins.
 ## This function is typically used together with the getNextPlugin and the getPreviousPlugin functions.
@@ -340,7 +346,7 @@ def getPlugin(pm, pluginName):
 rrpLib.tpGetPluginName.restype = c_char_p
 rrpLib.tpGetPluginName.argtypes = [c_void_p]
 def getPluginName(pluginHandle):
-    return rrpLib.tpGetPluginName(pluginHandle)
+    return decodeIfBytes(rrpLib.tpGetPluginName(pluginHandle))
 
 ## \brief Get the Category of a Plugin. This is assigned by the pluging developer
 ## \param pluginHandle Handle to a plugin
@@ -356,7 +362,7 @@ rrpLib.tpGetPluginCategory.restype = c_void_p
 rrpLib.tpGetPluginCategory.argtypes = [c_void_p]
 def getPluginCategory(pluginHandle):
     data =  rrpLib.tpGetPluginCategory(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -368,7 +374,7 @@ rrpLib.tpGetPluginAuthor.restype = c_void_p
 rrpLib.tpGetPluginAuthor.argtypes = [c_void_p]
 def getPluginAuthor(pluginHandle):
     data =  rrpLib.tpGetPluginAuthor(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -380,7 +386,7 @@ rrpLib.tpGetPluginCopyright.restype = c_void_p
 rrpLib.tpGetPluginCopyright.argtypes = [c_void_p]
 def getPluginCopyright(pluginHandle):
     data =  rrpLib.tpGetPluginCopyright(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -392,7 +398,7 @@ rrpLib.tpGetPluginVersion.restype = c_void_p
 rrpLib.tpGetPluginVersion.argtypes = [c_void_p]
 def getPluginVersion(pluginHandle):
     ptr = rrpLib.tpGetPluginVersion(pluginHandle)
-    res = ctypes.cast(ptr, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(ptr, ctypes.c_char_p).value)
     freeText(ptr)
     return res
 
@@ -410,7 +416,7 @@ rrpLib.tpGetPluginDescription.restype = c_void_p
 rrpLib.tpGetPluginDescription.argtypes = [c_void_p]
 def getPluginDescription(pluginHandle):
     data =  rrpLib.tpGetPluginDescription(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -428,7 +434,7 @@ rrpLib.tpGetPluginHint.restype = c_void_p
 rrpLib.tpGetPluginHint.argtypes = [c_void_p]
 def getPluginHint(pluginHandle):
     data =  rrpLib.tpGetPluginHint(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -440,7 +446,7 @@ rrpLib.tpGetPluginInfo.restype = c_char_p
 rrpLib.tpGetPluginInfo.argtypes = [c_void_p]
 def getPluginInfo(pluginHandle):
     data =  rrpLib.tpGetPluginInfo(pluginHandle)
-    res = ctypes.cast(data, ctypes.c_char_p).value
+    res = decodeIfBytes(ctypes.cast(data, ctypes.c_char_p).value)
     freeText(data)
     return res
 
@@ -549,7 +555,7 @@ def executePluginEx(pluginHandle, inAThread=False):
 rrpLib.tpGetPluginStatus.restype = c_char_p
 rrpLib.tpGetPluginStatus.argtypes = [c_void_p]
 def getPluginStatus(pluginHandle):
-    return rrpLib.tpGetPluginStatus(pluginHandle)
+    return decodeIfBytes(rrpLib.tpGetPluginStatus(pluginHandle))
 
 ## \brief Returns a plugins result, as a string. This is plugin dependent, and a plugin designer may, or may not, implement
 ## this function. See the plugin documentation for details.
@@ -561,7 +567,7 @@ def getPluginStatus(pluginHandle):
 rrpLib.tpGetPluginResult.restype = c_char_p
 rrpLib.tpGetPluginResult.argtypes = [c_void_p]
 def getPluginResult(pluginHandle):
-    return rrpLib.tpGetPluginResult(pluginHandle)
+    return decodeIfBytes(rrpLib.tpGetPluginResult(pluginHandle))
 
 ## \brief Reset a Plugin. Plugin dependent. A reset function should bring the internal state of a plugin to a known state
 ## \param pluginHandle Handle to a plugin
@@ -666,7 +672,7 @@ def getPluginProperties(pluginHandle):
 rrpLib.tpGetListOfPluginPropertyNames.restype = c_char_p
 rrpLib.tpGetListOfPluginPropertyNames.argtypes = [c_void_p]
 def getListOfPluginPropertyNames(pluginHandle):
-    paraNames =  rrpLib.tpGetListOfPluginPropertyNames(pluginHandle)
+    paraNames = decodeIfBytes(rrpLib.tpGetListOfPluginPropertyNames(pluginHandle))
     if not paraNames:
         return list()
     else:
@@ -697,7 +703,7 @@ def getNamesFromPropertyList(propertyHandle):
     if paraType != 'listOfProperties':
         raise Exception('That is not a valid list property')
     listHandle = getPropertyValueHandle(propertyHandle)
-    paras = rrpLib.tpGetNamesFromPropertyList(listHandle)
+    paras = decodeIfBytes(rrpLib.tpGetNamesFromPropertyList(listHandle))
     if not paras:
         return list()
     else:
@@ -711,7 +717,7 @@ def getNamesFromPropertyList(propertyHandle):
 rrpLib.tpGetPluginPropertiesAsXML.restype = c_char_p
 rrpLib.tpGetPluginPropertiesAsXML.argtypes = [c_void_p]
 def getPluginPropertiesAsXML(pluginHandle):
-    return rrpLib.tpGetPluginPropertiesAsXML(pluginHandle)
+    return decodeIfBytes(rrpLib.tpGetPluginPropertiesAsXML(pluginHandle))
 
 ## \brief Get the 'first' property handle to a property in a list of properties
 ## \param paraListHandle Handle to a propertyList
@@ -829,7 +835,7 @@ def getPropertyDescription(propertyHandle):
     if descr is None:
         return None
 
-    val = ctypes.cast(descr, ctypes.c_char_p).value
+    val = decodeIfBytes(ctypes.cast(descr, ctypes.c_char_p).value)
     freeText(descr)
     return val
 
@@ -945,7 +951,7 @@ def setPropertyByString(PropertyHandle, value):
 rrpLib.tpGetPropertyInfo.restype = c_char_p
 rrpLib.tpGetPropertyInfo.argtypes = [c_void_p]
 def getPropertyInfo(propertyHandle):
-    return rrpLib.tpGetPropertyInfo(propertyHandle)
+    return decodeIfBytes(rrpLib.tpGetPropertyInfo(propertyHandle))
 
 ## \brief Get a Property value in the form of a string
 ## \param propertyHandle to a Property instance
@@ -954,7 +960,7 @@ def getPropertyInfo(propertyHandle):
 rrpLib.tpGetPropertyValueAsString.restype = c_char_p
 rrpLib.tpGetPropertyValueAsString.argtypes = [c_void_p]
 def getPropertyValueAsString(propertyHandle):
-    return rrpLib.tpGetPropertyValueAsString(propertyHandle)
+    return decodeIfBytes(rrpLib.tpGetPropertyValueAsString(propertyHandle))
 
 ## \brief Get a handle to a Property value. Such properties could be any type, including a list of Properties.
 ## Use getlistProperty(propertyaHandle) instead.
@@ -979,7 +985,7 @@ def getPropertyValueHandle(propertyHandle):
 rrpLib.tpGetPropertyName.restype = c_char_p
 rrpLib.tpGetPropertyName.argtypes = [c_void_p]
 def getPropertyName(propertyHandle):
-    return rrpLib.tpGetPropertyName(propertyHandle)
+    return decodeIfBytes(rrpLib.tpGetPropertyName(propertyHandle))
 
 ## \brief Get the hint text for a Property
 ## \param propertyHandle to a Property instance
@@ -988,7 +994,7 @@ def getPropertyName(propertyHandle):
 rrpLib.tpGetPropertyHint.restype = c_char_p
 rrpLib.tpGetPropertyHint.argtypes = [c_void_p]
 def getPropertyHint(propertyHandle):
-    return rrpLib.tpGetPropertyHint(propertyHandle)
+    return decodeIfBytes(rrpLib.tpGetPropertyHint(propertyHandle))
 
 ## \brief Get the type of a property
 ## \param propertyHandle to a Property instance
@@ -997,7 +1003,7 @@ def getPropertyHint(propertyHandle):
 rrpLib.tpGetPropertyType.restype = c_char_p
 rrpLib.tpGetPropertyType.argtypes = [c_void_p]
 def getPropertyType(propertyHandle):
-    return rrpLib.tpGetPropertyType(propertyHandle)
+    return decodeIfBytes(rrpLib.tpGetPropertyType(propertyHandle))
 
 ## \brief Get the Boolean value for a property
 ## \param propertyHandle to a property instance
@@ -1087,7 +1093,7 @@ def getStringProperty (propertyHandle):
     if getPropertyType (propertyHandle) == "string" or getPropertyType (propertyHandle) == "std::string":
         val = c_char_p()
         if rrpLib.tpGetStringProperty (propertyHandle, byref(val)) == True:
-            return val.value
+            return str(val.value)
         else:
             raise ('Property value could not be retrieved')
     else:
@@ -1342,7 +1348,7 @@ def getTelluriumDataColumnHeader(telDataHandle):
     hdr = rrpLib.tpGetTelluriumDataColumnHeader(telDataHandle)
 
     if hdr:
-        res = ctypes.cast(hdr, ctypes.c_char_p).value
+        res = decodeIfBytes(ctypes.cast(hdr, ctypes.c_char_p).value)
         freeText(hdr)
         return res.split(',')
     else:
@@ -1356,7 +1362,7 @@ def getTelluriumDataColumnHeader(telDataHandle):
 rrpLib.tpGetTelluriumDataColumnHeaderByIndex.restype = c_char_p
 rrpLib.tpGetTelluriumDataColumnHeaderByIndex.argtypes = [c_void_p, c_int]
 def getTelluriumDataColumnHeaderByIndex(telDataHandle, index):
-    return rrpLib.tpGetTelluriumDataColumnHeaderByIndex(telDataHandle, index)
+    return decodeIfBytes(rrpLib.tpGetTelluriumDataColumnHeaderByIndex(telDataHandle, index))
 
 ## \brief Set column header in tellurium data
 ## \param telDataHandle A handle to a tellurium data object
@@ -1546,7 +1552,7 @@ def freeTelluriumData(telDataHandle):
 ## \ingroup utilities
 rrpLib.tpGetLastError.restype = c_char_p
 def getLastError():
-    return rrpLib.tpGetLastError()
+    return decodeIfBytes(rrpLib.tpGetLastError())
 
 ## \brief Unload the plugins api shared library
 ## \ingroup utilities
