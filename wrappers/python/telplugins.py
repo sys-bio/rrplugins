@@ -3,7 +3,7 @@
 ## Wrapper around C API to help avoid use of handle.
 # An example is given at the end of the code.
 
-import telplugins_c_api as tpc
+import rrplugins.telplugins_c_api as tpc
 import matplotlib.pyplot as plt
 import numpy as np
 import os.path
