@@ -168,7 +168,7 @@ class DataSeries(object):
            # Is there a getLastError for this?
            # TK: When an API function fails, the reason for the failure should always be recorded in a message in getLastError()
            msg = tpc.telLib.tpGetLastError()
-           raise Exception("Unable to retrieve element. The problem was: " + `msg`)
+           raise Exception("Unable to retrieve element. The problem was: {}".format(msg))
 
     ## \brief Set a specific element
     ##@code

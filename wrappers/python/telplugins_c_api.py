@@ -1390,7 +1390,7 @@ def getTelluriumDataElement(telDataHandle, row, col):
     if rrpLib.tpGetTelluriumDataElement(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
-        throw('Failed retrieving data at (row, col) = (' + `row` + ', ' + col + ')')
+        throw('Failed retrieving data at (row, col) = ({}'.format(row) + ', {}'.format(col) + ')')
 
 ## \brief Set Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
@@ -1412,7 +1412,7 @@ def getTelluriumDataWeight(telDataHandle, row, col):
     if rrpLib.tpGetTelluriumDataWeight(telDataHandle, row, col, byref(val)) == True:
         return val.value
     else:
-        throw('Failed retrieving weight data at (row, col) = (' + `row` + ', ' + col + ')')
+        throw('Failed retrieving weight data at (row, col) = ({}'.format(row) + ', {}'.format(col) + ')')
 
 ## \brief Set Tellurium data element at row,col
 ## \param telDataHandle A handle to a tellurium data object
