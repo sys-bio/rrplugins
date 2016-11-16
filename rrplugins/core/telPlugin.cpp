@@ -5,6 +5,8 @@
 #include "telPlugin.h"
 #include "telProperty.h"
 #include "telTelluriumData.h"
+#include <stdexcept>
+
 //---------------------------------------------------------------------------
 
 namespace tlp
