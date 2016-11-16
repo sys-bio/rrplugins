@@ -382,8 +382,9 @@ class Plugin (object):
 
     def __getattr__ (self, name):
         if name in self._propertyNames:
-          return self.getProperty(name)
-        else:  raise AttributeError, name
+              return self.getProperty(name)
+        else:
+              raise AttributeError(name)
 
     ## \brief List all the properties in the plugin
     ##@code
