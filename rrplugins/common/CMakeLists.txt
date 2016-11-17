@@ -57,6 +57,10 @@ if (TLP_BUILD_SHARED_LIB)
 
   target_link_libraries(telplugins_common xml2)
 
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties( telplugins_common PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
+  endif ()
+
   # Install shared library
   install(TARGETS telplugins_common
           RUNTIME DESTINATION bin COMPONENT pluginsLib

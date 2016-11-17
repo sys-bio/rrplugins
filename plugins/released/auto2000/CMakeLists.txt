@@ -46,6 +46,10 @@ target_link_libraries (tel_auto2000
   ${RRPLUGINS_COMMON_SHARED_LIBS}
 )
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  set_target_properties( tel_auto2000 PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
+endif ()
+
 install (TARGETS tel_auto2000
   DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins

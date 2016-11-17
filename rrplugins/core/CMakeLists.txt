@@ -28,6 +28,9 @@ if (TLP_BUILD_SHARED_LIB)
 
   target_link_libraries (telplugins_core
     telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties( telplugins_core PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
+  endif ()
 
   # Install shared library
   install(TARGETS telplugins_core

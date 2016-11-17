@@ -28,6 +28,10 @@ if (TLP_BUILD_SHARED_LIB)
   target_link_libraries (telplugins_math
     telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set_target_properties( telplugins_math PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
+  endif ()
+
   # Install shared library
   install(TARGETS telplugins_math
     RUNTIME DESTINATION bin COMPONENT pluginsLib

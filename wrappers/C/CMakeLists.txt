@@ -38,6 +38,8 @@ else()
     set_target_properties(telplugins_c_api PROPERTIES INSTALL_RPATH "@loader_path;@loader_path/../roadrunner")
   else()
     set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
+    # add rpath for site-packages/rrplugins directory
+    set_target_properties( telplugins_c_api PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
   endif()
 
   set_property(TARGET telplugins_c_api

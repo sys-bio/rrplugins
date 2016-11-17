@@ -51,6 +51,10 @@ else()
   )
 endif()
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  set_target_properties( tel_add_noise PROPERTIES INSTALL_RPATH "$ORIGIN/./" )
+endif ()
+
 install (TARGETS tel_add_noise
   DESTINATION ${RRP_PLUGINS_DIR}
   COMPONENT plugins
