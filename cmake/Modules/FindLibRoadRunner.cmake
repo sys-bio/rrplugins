@@ -118,7 +118,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     )
   find_library(ZLIB_LIBRARY
     NAMES
-    zdll.l${ZLIB_LIBRARY};ib
+    zdll.lib
     HINTS
     ${LIBROADRUNNER_PATH}/lib
     )
