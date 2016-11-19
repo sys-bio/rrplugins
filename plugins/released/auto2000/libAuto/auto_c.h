@@ -11,7 +11,9 @@
 #undef MPI
 #endif
 
+#ifndef _WIN32
 #include <sys/times.h>
+#endif
 
 #ifdef PTHREADS
 #include <pthread.h>
