@@ -55,7 +55,7 @@ if (TLP_BUILD_SHARED_LIB)
 
   target_link_libraries (telplugins_common ${RRPLUGINS_COMMON_SHARED_LIBS})
 
-  target_link_libraries(telplugins_common xml2)
+  target_link_libraries(telplugins_common ${LIBXML2_LIBRARIES})
 
   if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set_target_properties( telplugins_common PROPERTIES INSTALL_RPATH "$ORIGIN/./" )

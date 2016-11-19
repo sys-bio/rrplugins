@@ -61,7 +61,10 @@ find_library(SUNDIALS_NVECSERIAL_LIBRARY NAMES sundials_nvecserial
   ${LIBROADRUNNER_PATH}/lib
   )
 
-find_library(F2C_LIBRARY NAMES f2c
+find_library(F2C_LIBRARY
+  NAMES
+  f2c
+  libf2c.lib # Windows
   HINTS
   ${LIBROADRUNNER_PATH}/lib
   )
@@ -91,7 +94,10 @@ find_library(POCO_FOUNDATION_LIBRARY_STATIC NAMES PocoFoundation
   ${LIBROADRUNNER_PATH}/lib
   )
 
-find_library(SBML_LIBRARY NAMES sbml-static
+find_library(SBML_LIBRARY
+  NAMES
+  sbml-static
+  libsbml-static.lib # Windows
   HINTS
   ${LIBROADRUNNER_PATH}/lib
   )
@@ -102,7 +108,7 @@ set ( LIBROADRUNNER_LIBRARIES ${LIBROADRUNNER_LIBRARY} ${SUNDIALS_CVODE_LIBRARY}
       ${SUNDIALS_NVECSERIAL_LIBRARY} ${F2C_LIBRARY} ${BLAS_LIBRARY} ${LAPACK_LIBRARY}
       ${NLEQ_LIBRARY_STATIC} ${RR_LIBSTRUCT_LIBRARY_STATIC}
       ${POCO_FOUNDATION_LIBRARY_STATIC} ${SBML_LIBRARY_BARE} )
-message( STATUS ${LIBROADRUNNER_LIBRARIES} )
+message( STATUS "LIBROADRUNNER_LIBRARIES: ${LIBROADRUNNER_LIBRARIES}" )
 
 # handle the QUIETLY and REQUIRED arguments and set LIBROADRUNNER_FOUND to TRUE if
 # all listed variables are TRUE

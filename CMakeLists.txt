@@ -68,9 +68,7 @@ find_package ( LibXml2 REQUIRED )
 # libRoadRunner
 # - Shared
 set( LIBROADRUNNER_PATH "${TLP_DEPENDENCIES_PATH}" )
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-  find_package ( LibRoadRunner REQUIRED )
-endif ()
+find_package ( LibRoadRunner REQUIRED )
 # - Static
 set( LIBROADRUNNERSTATIC_PATH "${TLP_DEPENDENCIES_PATH}" )
 find_package ( LibRoadRunnerStatic REQUIRED )
