@@ -36,12 +36,10 @@ def decodeIfBytes(x):
     else:
         return x
 
-# try the appropriate path for a standalone installation
-rrplugins_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'roadrunner'))
-
-# try the appropriate path for a Spyder environment
-if not os.path.exists(rrplugins_path):
-    rrplugins_path = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+# if not os.path.exists(rrplugins_path):
+import roadrunner
+rrplugins_path = os.path.abspath(os.path.dirname(roadrunner.__file__))
+gDefaultPluginsPath = rrplugins_path
 
 # bail if the path still hasn't been found
 if not os.path.exists(rrplugins_path):
@@ -78,8 +76,6 @@ os.chdir(originalWorkingDirectory)
 c_double_p = POINTER(c_double)
 c_bool_p   = POINTER(c_bool)
 c_int_p    = POINTER(c_int)
-
-gDefaultPluginsPath = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'roadrunner'))
 
 #=======================tel_api========================#
 #Type of plugin events, first argument is return type
