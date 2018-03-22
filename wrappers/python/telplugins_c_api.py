@@ -9,6 +9,7 @@ import time
 import ctypes
 from ctypes import * # FIXME: remove this sinful line
 from ctypes import CDLL
+import matplotlib
 import matplotlib.pyplot as plt
 from os.path import isfile
 
@@ -1278,7 +1279,7 @@ def plotTelluriumData(data, colHeaders):
     plt.xlabel(xlbl)
     plt.show()
 
-def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend):
+def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=None):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
@@ -1288,32 +1289,63 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend):
     xlbl = colHeaders[0]
     nrOfSeries = nrCols -1
     x = data[:,0]
+    ccmap = []
+    
+    if cmap == None:
+        color = plt.rcParams['axes.prop_cycle'].by_key()['color']
+        for i in range(len(color)):
+            ccmap.append(matplotlib.colors.rgb2hex(color[i]))
+    else:
+        if type(cmap) == list:
+            for i in range(len(cmap)):
+                ccmap.append(matplotlib.colors.rgb2hex(cmap[i]))
+        elif type(cmap) == str:
+            try:
+                color = matplotlib.cm.get_cmap(cmap)
+                for i in range(len(color)):
+                    ccmap.append(matplotlib.colors.rgb2hex(color[i]))
+            except:
+                try:
+                    import seaborn
+                    ccmap = seaborn.color_palette(cmap).as_hex()
+                except:
+                    raise Exception("Cannot find colormap named " + str(cmap))
+        else:
+            try:
+                ccmap = cmap.as_hex()
+            except:
+                raise Exception("Cannot process colormap. Put either a list of RGB ",
+                            "tuples or name of colormap")
 
     previousLbl = ''
+    cm_i = 0
     for serie in range(nrOfSeries):
         labelNr = 0
         ySeries = np.zeros([nrRows])
         ySeries = data[:,serie + 1]
         xIndx = 0
+
         for label in bfLabels:
             xPtn = bfPoints[labelNr] - 1
             xSegment = x[xIndx:xPtn]
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, label=colHeaders[serie + 1])
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i],
+                             label=colHeaders[serie + 1])
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0)
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
             elif label == 'LP':
                 #Check Previous label
                 if previousLbl == 'LP':
                     plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
                 elif previousLbl == 'EP':
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0)
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
 
             xIndx = xPtn
             labelNr = labelNr + 1
             previousLbl = label
+        cm_i += 1
 
     #Plot bifurcation labels
     for serie in range(nrOfSeries):

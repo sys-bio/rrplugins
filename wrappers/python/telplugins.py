@@ -221,10 +221,10 @@ class DataSeries(object):
     ##@code
     ## d.plot()
     ##@endcode
-    def plotBifurcationDiagram (self, bfPoints, bfLabels, legend=True):
+    def plotBifurcationDiagram (self, bfPoints, bfLabels, legend=True, cmap=None):
         hdr = tpc.getTelluriumDataColumnHeader(self._data)
         npData = tpc.getNumpyData(self._data)
-        tpc.plotBifurcationData(npData, hdr, bfPoints, bfLabels, legend)
+        tpc.plotBifurcationData(npData, hdr, bfPoints, bfLabels, legend, cmap)
 
     data = property (__getHandle)
 
