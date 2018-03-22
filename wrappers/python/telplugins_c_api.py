@@ -1279,14 +1279,18 @@ def plotTelluriumData(data, colHeaders):
     plt.xlabel(xlbl)
     plt.show()
 
-def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=None):
+def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=None,
+                        xlabel=None, ylabel=None):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
     if colHeaders == None or len(colHeaders) < 1:
         print("Bad Data ColumnHeader")
         return
-    xlbl = colHeaders[0]
+    if xlabel == None:
+        xlbl = colHeaders[0]
+    else:
+        xlbl = xlabel
     nrOfSeries = nrCols -1
     x = data[:,0]
     ccmap = []
@@ -1362,6 +1366,8 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
     if legend:
         plt.legend(loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
+    if ylabel != None:
+        plt.ylabel(ylabel)
 
     plt.show()
 
