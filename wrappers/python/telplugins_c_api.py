@@ -1278,7 +1278,7 @@ def plotTelluriumData(data, colHeaders):
     plt.xlabel(xlbl)
     plt.show()
 
-def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
+def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
 
@@ -1327,7 +1327,8 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels):
                 plt.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
             labelNr = labelNr + 1
 
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=1, borderaxespad=0.)
+    if legend:
+        plt.legend(loc=1, borderaxespad=0.)
     plt.xlabel(xlbl)
 
     plt.show()
