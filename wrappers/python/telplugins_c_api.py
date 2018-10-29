@@ -19,7 +19,7 @@ CTypes Python Bindings to the Tellurium Plugin API.
 Currently this is a fairly raw implementation with few Pythonic refinements
 """
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 
 libTitle='telplugins_c_api'
 
