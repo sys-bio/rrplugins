@@ -1343,7 +1343,13 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
                 #Check Previous label
                 if previousLbl == 'LP':
                     plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
-                elif previousLbl == 'EP':
+                else:
+                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
+            elif label == 'HB':
+                #Check Previous label
+                if previousLbl == 'HB':
+                    plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
+                else:
                     plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
 
             xIndx = xPtn
