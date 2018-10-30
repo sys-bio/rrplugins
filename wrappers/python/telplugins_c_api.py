@@ -1280,9 +1280,11 @@ def plotTelluriumData(data, colHeaders):
     plt.show()
 
 def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=None,
-                        xlabel=None, ylabel=None):
+                        xlabel=None, ylabel=None, selections=None):
     nrCols = data.shape[1]
     nrRows = data.shape[0]
+    from tellurium import plot, show
+    from tellurium.plotting import plot_text
 
     if colHeaders == None or len(colHeaders) < 1:
         print("Bad Data ColumnHeader")
@@ -1323,7 +1325,12 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
 
     previousLbl = ''
     cm_i = 0
+    plotargs = {'xtitle': xlbl}
+    if ylabel != None:
+        plotargs['ytitle'] = ylabel
     for serie in range(nrOfSeries):
+        if selections is not None and not colHeaders[serie + 1] in selections:
+            continue
         labelNr = 0
         ySeries = np.zeros([nrRows])
         ySeries = data[:,serie + 1]
@@ -1335,22 +1342,18 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
             ySegment = ySeries[xIndx:xPtn]
             if label == 'EP':
                 if xIndx == 0 :
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i],
-                             label=colHeaders[serie + 1])
+                    plot(xSegment, ySegment, name=colHeaders[serie + 1], tag=colHeaders[serie + 1], show=False, **plotargs)
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
+                    plot(xSegment, ySegment, name=colHeaders[serie + 1], tag=colHeaders[serie + 1], show=False, **plotargs)
             elif label == 'LP':
                 #Check Previous label
                 if previousLbl == 'LP':
-                    plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
+                    plot(xSegment, ySegment, dash=['dash'], color=['black'], alpha=[0.5], showlegend=False, show=False, **plotargs)
                 else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
+                    plot(xSegment, ySegment, name=colHeaders[serie + 1], tag=colHeaders[serie + 1], show=False, **plotargs)
             elif label == 'HB':
-                #Check Previous label
-                if previousLbl == 'HB':
-                    plt.plot(xSegment, ySegment, "--", linewidth=1.0,  color = 'black')
-                else:
-                    plt.plot(xSegment, ySegment, "-", linewidth=3.0, color = ccmap[cm_i])
+                #print('plot {} vs {}'.format(xSegment,ySegment))
+                plot(xSegment, ySegment, name=colHeaders[serie + 1], tag=colHeaders[serie + 1], show=False, **plotargs)
 
             xIndx = xPtn
             labelNr = labelNr + 1
@@ -1359,6 +1362,8 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
 
     #Plot bifurcation labels
     for serie in range(nrOfSeries):
+        if selections is not None and not colHeaders[serie + 1] in selections:
+            continue
         labelNr = 0
         ySeries = data[:,serie + 1]
         for label in bfLabels:
@@ -1366,16 +1371,10 @@ def plotBifurcationData(data, colHeaders, bfPoints, bfLabels, legend=True, cmap=
                 xPtn = bfPoints[labelNr] - 1
                 xCoord = x[xPtn]
                 yCoord = ySeries[xPtn]
-                plt.text(xCoord, yCoord, label, bbox=dict(facecolor='white', alpha=1))
+                plot_text(xCoord, yCoord, text=label, show=False)
             labelNr = labelNr + 1
 
-    if legend:
-        plt.legend(loc=1, borderaxespad=0.)
-    plt.xlabel(xlbl)
-    if ylabel != None:
-        plt.ylabel(ylabel)
-
-    plt.show()
+    show()
 
 
 ## \brief Get column header in tellurium data
