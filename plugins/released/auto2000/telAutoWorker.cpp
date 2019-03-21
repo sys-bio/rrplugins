@@ -140,6 +140,10 @@ bool AutoWorker::setupAuto()
     {
         mTheHost.mRR->setConservedMoietyAnalysis(true);
     }
+    else
+    {
+        mTheHost.mRR->setConservedMoietyAnalysis(false);
+    }
 
     //Transfer AUTO constants to AUTO interface
     mRRAuto.assignProperties(&(mTheHost.mProperties));
