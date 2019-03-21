@@ -54,6 +54,7 @@ class AutoPlugin : public tlp::CPPPlugin
         Property< StringList >                  mBifurcationLabels;
 
         Property<bool>                          mCaptureOutputFiles;
+        Property<bool>                          mAllowConservedMoiety;
         Property<string>                        mFort2;
         Property<string>                        mFort3;
         Property<string>                        mFort6;     //Alias BifurcationSummary

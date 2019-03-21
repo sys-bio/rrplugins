@@ -33,7 +33,8 @@ mPreSimulationSteps(				100,					"PreSimulationSteps",					"Set the resolution f
 mCaptureOutputFiles(                false,                  "CaptureOutputFiles",                   "Set flag to true to capture all of Autos output",              "",                 ""),
 mBifurcationPoints(                 vector<int>(0),         "BifurcationPoints",                    "Points that AUTO marked as 'special'",                         "",                 ""),
 mBifurcationLabels(                 StringList(""),         "BifurcationLabels",                    "Bifurcation labels for the data.",                             "",                 ""),
-mBifurcationData(                   TelluriumData(),        "BifurcationData",                      "Parsed Bifurcation data.",                             "",                 ""),
+mBifurcationData(                   TelluriumData(),        "BifurcationData",                      "Parsed Bifurcation data.",                                     "",                 ""),
+mAllowConservedMoiety(              true,                   "AllowConservedMoiety",                 "Allow conserved moiety conversion."                            "",                 ""),
 mFort2(                             "<none>",               "fort2",                                "fort2",                                                        "",                 ""),
 mFort3(                             "<none>",               "fort3",                                "fort3",                                                        "",                 ""),
 mFort6(                             "<none>",               "BifurcationSummary",                   "BifurcationSummary (auto output file fort.6)",                 "",                 "BifurcationSummary"),
@@ -206,6 +207,7 @@ void AutoPlugin::addProperties()
     mProperties.add(&mBifurcationPoints);
     mProperties.add(&mBifurcationLabels);
     mProperties.add(&mBifurcationData);
+    mProperties.add(&mAllowConservedMoiety);
 
     //AUTO parameters
     mProperties.add(&mNDIM);
@@ -340,6 +342,9 @@ assignDescription(mBifurcationLabels, s);
 
 s << "The Tellurium type property, BifurcationData holds the bifurcation diagram after a session. First column is the values of the selected parameter, and succesive columns are selected species.";
 assignDescription(mBifurcationData, s);
+
+s << "Instructs the plugin to perform conserved moiety conversion. Note that if turned off, plugin might fail to return proper output.";
+assignDescription(mAllowConservedMoiety, s);
 
 s << "The NDIM property correspond to the dimension of the system of equations.";
 assignDescription(mNDIM, s);
