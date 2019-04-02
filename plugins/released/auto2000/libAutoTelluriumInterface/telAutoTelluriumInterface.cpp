@@ -139,7 +139,7 @@ void AutoTellurimInterface::run()
 
 bool AutoTellurimInterface::setupUsingCurrentModel()
 {
-    mAutoConstants.NDIM =  mRR->getNumberOfIndependentSpecies();
+    mAutoConstants.NDIM = mRR->getModel()->getNumIndFloatingSpecies() + mRR->getModel()->getNumRateRules();
 
     //k1,k2 etc
     mModelParameters        = mRR->getGlobalParameterIds();
@@ -212,7 +212,7 @@ int autoCallConv AutoTellurimInterface::ModelInitializationCallback(long ndim, d
 		par[i] = parameterValues[i];
 	}
 
-	int     nrIndFloatingSpecies = theModel->getNumIndFloatingSpecies();
+	int    nrIndFloatingSpecies = theModel->getNumIndFloatingSpecies() + theModel->getNumRateRules();
 	double* floatCon            = new double[nrIndFloatingSpecies];
 
 	theModel->getFloatingSpeciesConcentrations(nrIndFloatingSpecies, NULL, floatCon);
@@ -286,7 +286,7 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
 		variableTemp[i] = oVariables[i];
 	}
 
-	int     numIndFloatingSpecies  = theModel->getNumIndFloatingSpecies();
+	int  numIndFloatingSpecies  = theModel->getNumIndFloatingSpecies() + theModel->getNumRateRules();
 	double* tempConc            = new double[numIndFloatingSpecies];
 	if(!tempConc)
 	{
@@ -310,8 +310,8 @@ void autoCallConv AutoTellurimInterface::ModelFunctionCallback(const double* oVa
 
 	//theModel->convertToAmounts();
 
-	double  time             = theModel->getTime();
-	int     stateVecSize    = theModel->getNumIndFloatingSpecies() + theModel->getNumRateRules();
+	double  time            = theModel->getTime();
+	int     stateVecSize    = theModel->getStateVector(NULL);
 	double* dydts           = new double[stateVecSize];
 
 	theModel->getStateVectorRate(time, NULL, dydts);
