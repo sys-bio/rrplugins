@@ -9,7 +9,7 @@ import numpy as np
 import os.path
 import ctypes
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 
 ## \brief DataSeries class for handling roadrunner data types
 class DataSeries(object):
