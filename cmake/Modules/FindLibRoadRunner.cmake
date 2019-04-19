@@ -79,7 +79,7 @@ find_library(LAPACK_LIBRARY NAMES lapack
   ${LIBROADRUNNER_PATH}/lib
   )
 
-find_library(NLEQ_LIBRARY_STATIC NAMES nleq-static
+find_library(NLEQ_LIBRARY_STATIC NAMES nleq-static nleq1-static
   HINTS
   ${LIBROADRUNNER_PATH}/lib
   )

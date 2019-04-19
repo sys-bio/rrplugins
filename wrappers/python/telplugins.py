@@ -101,7 +101,7 @@ class DataSeries(object):
     ## print d.getColumnHeaders()
     ##@endcode
     def getColumnHeaders (self):
-        value = tpc.telLib.tpGetTelluriumDataColumnHeader(self._data)
+        value = tpc.getTelluriumDataColumnHeader(self._data)
         if value == None:
            value = []
         return value

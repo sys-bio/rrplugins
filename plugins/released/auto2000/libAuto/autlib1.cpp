@@ -3004,11 +3004,11 @@ wrline(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, integer *icu
     n2 = ndm;
     nt = n1 + n2;
 
-    if (n1 > 7) {
-        n1 = 7;
+    if (n1 > 256) {
+        n1 = 256;
         n2 = 0;
-    } else if (nt > 7) {
-        n2 = 7 - n1;
+    } else if (nt > 256) {
+        n2 = 256 - n1;
     }
 
     /* Write a heading above the first line. */
@@ -8150,6 +8150,3 @@ int set_function_pointers(const iap_type iap,function_list *data) {
 }
 
 }
-
-
-
