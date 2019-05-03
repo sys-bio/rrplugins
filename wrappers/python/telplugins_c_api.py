@@ -1632,6 +1632,11 @@ def getMatrixNumCols(matrixH):
     else:
         return None
 
+rrpLib.tpSetLogLevel.restype = c_bool
+rrpLib.tpSetLogLevel.argtypes = [c_char_p]
+def setLogLevel(lvl):
+    return rrpLib.tpSetLogLevel(lvl.encode('utf-8'))
+
 ##\mainpage Plugins for Tellurium
 #\section Introduction
 #The Tellurium plugin library exposes a simple framework for adding functionality to the RoadRunner core, by means of

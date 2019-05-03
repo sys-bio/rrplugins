@@ -11,6 +11,7 @@ add_library(telplugins_c_api SHARED
   telplugins_matrix_api
   telplugins_cpp_support
   telplugins_utilities
+  telplugins_logging_api
   telAPIHandleManager
 )
 

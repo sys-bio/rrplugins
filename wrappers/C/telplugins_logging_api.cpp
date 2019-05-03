@@ -1,7 +1,8 @@
 #pragma hdrstop
-#include "telLogger.h"
+#include "rrplugins/common/telLogger.h"
 #include "telplugins_logging_api.h"
 #include "telplugins_cpp_support.h"
+#include "rr/rrRoadRunner.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -48,7 +49,8 @@ bool tlp_cc tpSetLogLevel(const char* _lvl)
 {
     start_try
         Logger::Level lvl = Logger::stringToLevel(_lvl);
-        Logger::setLevel(lvl);
+        tlp::Logger::setLevel(lvl);
+        rr::Logger::setLevel(lvl);
         return true;
     catch_bool_macro
 }
@@ -82,5 +84,3 @@ void tlp_cc tpLogMsg(CLogLevel lvl, const char* msg)
         }
     catch_void_macro
 }
-
-

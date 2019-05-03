@@ -279,11 +279,8 @@ bool tlp_cc tpGetIntProperty(TELHandle handle, int *value)
 bool tlp_cc tpSetDoubleProperty(TELHandle handle, double value)
 {
     start_try
-        std::cerr << "tpSetDoubleProperty: begin\n";
         Property<double>* para = castHandle< Property<double> >(handle, __FUNC__);
-        std::cerr << "tpSetDoubleProperty: cast handle\n";
         para->setValue(value);
-        std::cerr << "tpSetDoubleProperty: set value\n";
         return true;
     catch_bool_macro
 }

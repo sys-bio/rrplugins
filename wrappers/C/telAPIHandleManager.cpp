@@ -24,7 +24,6 @@ APIHandleManager::~APIHandleManager()
 TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const char* fnc)
 {
     HandleMap::iterator it = mHandles.find(handle);
-    stringstream msg;
     if(it !=  mHandles.end()) //There is something like this registered
     {
         if(string(it->second) == string(type))
@@ -36,21 +35,21 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
             //Todo later: if an object of type B, derived from A is registered in the handles container, a passed handle of
             //type A should be validated as OK.
 
-            msg<<"Questionable Handle passed to API function: " << fnc << "; ";
-
             if(it !=  mHandles.end()) //Found a registered handle with proper address, but types differ.
             {
                 string allowed("Property");
                 if(strstr(it->second, allowed.c_str()) != NULL)
                 {
                     //For now don't check ParameterBase types. See todo above
-                    msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
-                    RRPLOG(lError)<<msg.str();
+                    // msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
+                    // RRPLOG(lError)<<msg.str();
                     // throw(BadHandleException(msg.str())); // so much for type safety
                     return handle;
                 }
                 else
                 {
+                    stringstream msg;
+                    msg<<"Questionable Handle passed to API function: " << fnc << "; ";
                     msg<<"Received handle of type: "<<it->second<<" but expected type: "<<type;
                     RRPLOG(lError)<<msg.str();
                     throw(BadHandleException(msg.str()));
@@ -66,6 +65,7 @@ TELHandle APIHandleManager::validate(TELHandle handle, const char* type, const c
         {
             return handle;
         }
+        stringstream msg;
         msg<<"Invalid Handle passed to API function: "<<fnc<<endl;
         msg<<"No such handle is registered. "<<endl;
         RRPLOG(lError)<<msg.str();

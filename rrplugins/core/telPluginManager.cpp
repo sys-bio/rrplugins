@@ -166,7 +166,7 @@ int PluginManager::load(const string& pluginName)
     clearLoadErrors();
     int nrOfLoadedPlugins = 0;
 
-    std::cerr << "PluginManager::load: Looking in plugin directory " << mPluginFolder << "\n";
+    RRPLOG(lInfo) << "PluginManager::load: Looking in plugin directory " << mPluginFolder << "\n";
 
     //Throw if plugin folder don't exist
     if(!folderExists(mPluginFolder))
@@ -198,14 +198,12 @@ int PluginManager::load(const string& pluginName)
     {
         string plugin = getFileName(*it);
         RRPLOG(lInfo)<<"Loading plugin: "<<plugin;
-        std::cerr << "Loading plugin: " << plugin << "\n";
         try
         {
             bool res = loadPlugin(plugin);
             if(!res)
             {
                 RRPLOG(lError)<<"There was a problem loading plugin: "<<plugin;
-                std::cerr << "There was a problem loading plugin: "<<plugin<<"\n";
                 continue;
             }
             nrOfLoadedPlugins++;
@@ -213,7 +211,6 @@ int PluginManager::load(const string& pluginName)
         catch(...)
         {
             RRPLOG(lError)<<"There was a serious problem loading plugin: "<<plugin;
-            std::cerr<<"There was a serious problem loading plugin: "<<plugin<<"\n";
         }
     }
     return nrOfLoadedPlugins;
