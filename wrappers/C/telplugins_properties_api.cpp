@@ -304,8 +304,11 @@ bool tlp_cc tpSetStringProperty(TELHandle handle, char* value)
         }
         Property<string>* para = dynamic_cast< Property<string>* >(base);
         if(!para) {
+            // can't dyncast string props; check typeid, better than nothing
+            if (typeid(*base).name().find("Property") == std::string::npos) {
             RRPLOG(lError) << "tpSetStringProperty: Failed to cast property";
             RRPLOG(lError) << "tpSetStringProperty: typeinfo = " << typeid(*base).name();
+            }
             para = static_cast< Property<string>* >(base); // so much for type safety
             //throw std::runtime_error("Failed to cast property");
         }
