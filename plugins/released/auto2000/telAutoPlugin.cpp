@@ -2,6 +2,7 @@
 #include <sstream>
 #include "telLogger.h"
 #include "rr/rrRoadRunner.h"
+#include "rr/SteadyStateSolver.h"
 #include "telTelluriumData.h"
 #include "telAutoPlugin.h"
 #include "telUtils.h"
@@ -92,6 +93,11 @@ mUZR(                               vector<int>(0),         "UZR",              
 
     //Create a roadrunner to use
     mRR = new RoadRunner;
+    mRR->setSteadyStateSolver("nleq2");
+    mRR->getSteadyStateSolver()->setValue("allow_presimulation", true);
+    mRR->getSteadyStateSolver()->setValue("allow_approx", true);
+    mRR->getSteadyStateSolver()->setValue("relative_tolerance", 1e-16);
+    mRR->getSteadyStateSolver()->setValue("minimum_damping", 1e-4);
     mRRAuto.assignRoadRunner(mRR);
 
     mHint ="Bifurcation Analyis using AUTO2000";
@@ -469,6 +475,3 @@ assignDescription(mUZR, s);
 
 
 }
-
-
-
