@@ -627,7 +627,7 @@ istream& operator >> (istream& ss, TelluriumData& data)
         for(int col = 0; col < cDim; col++)
         {
             RRPLOG(lDebug5)<<"Word "<<aLine[col];
-            double value = toDouble(trim(aLine[col],' '));
+            double value = toDouble(trim(trim(aLine[col],' '),'\t'));
             data(row, col) = value;
         }
     }

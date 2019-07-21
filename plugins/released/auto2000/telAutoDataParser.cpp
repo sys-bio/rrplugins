@@ -94,7 +94,7 @@ bool AutoDataParser::parse(const string& input)
 
     for(int i = 0; i < diagram.size(); i++)
     {
-        string line = trim(diagram[i]);
+        string line = trim(trim(diagram[i]), '\t');
         //Process lines starting with a '0'
         if(line.size() && line[0] == '0')
         {
@@ -104,7 +104,7 @@ bool AutoDataParser::parse(const string& input)
         //Process lines starting with a '1', the data
         if(line.size() && line[0] == '1')
         {
-            StringList dataRecord = splitString(line, " ");
+            StringList dataRecord = splitString(line, " \t");
             mRawSolutionData.add(line);
 
             //look for special points, i.e. third record not being 0 or 4
@@ -236,7 +236,7 @@ int AutoDataParser::getNrOfSolutions()
     //A solution is one data trace..
     int cnt = 0;
     string hdrStr = getDataHeaderLine();
-    StringList hdr(hdrStr, " ");
+    StringList hdr(hdrStr, " \t");
     for(int i = 0; i < hdr.count(); i++)
     {
         string token = hdr[i];
@@ -257,4 +257,3 @@ string AutoDataParser::getDataHeaderLine()
 
     return "";    
 }
-
