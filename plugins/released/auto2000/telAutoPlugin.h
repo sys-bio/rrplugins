@@ -93,7 +93,7 @@ class AutoPlugin : public tlp::CPPPlugin
         Property<int>                           mIAD;
 
         /// Detection of branch points:
-        ///   0 : don’t detect
+        ///   0 : donï¿½t detect
         ///   1 : detect for algebraic problems
         ///   2 : detect for all problems
         Property<int>                           mISP;
@@ -104,7 +104,7 @@ class AutoPlugin : public tlp::CPPPlugin
         ///   2 : two-parameter continuation (LPs, HBs, PDs, TRs)
         Property<int>                           mISW;
 
-        /// The ”principal solution measure”
+        /// The ï¿½principal solution measureï¿½
         /// (the second real column in the bifurcation diagram file):
         ///      0 : the L2 norm
         ///   != 0 : other measures (see manual)
@@ -119,28 +119,28 @@ class AutoPlugin : public tlp::CPPPlugin
         /// maximum number of continuation step along any branch
         Property<int>                           mNMX;
 
-        /// bifurcation diagram lower limit for the “first” parameter
+        /// bifurcation diagram lower limit for the ï¿½firstï¿½ parameter
         Property<double>                        mRL0;
 
-        /// bifurcation diagram upper limit for the “first” parameter
+        /// bifurcation diagram upper limit for the ï¿½firstï¿½ parameter
         Property<double>                        mRL1;
 
-        /// bifurcation diagram lower limit for the “principal solution measure”
+        /// bifurcation diagram lower limit for the ï¿½principal solution measureï¿½
         Property<double>                        mA0;
 
-        /// bifurcation diagram upper limit for the “principal solution measure”
+        /// bifurcation diagram upper limit for the ï¿½principal solution measureï¿½
         Property<double>                        mA1;
 
         /// Save the solution in the solution file every NPR continuation steps
         Property<int>                           mNPR;
 
-        /// For algebraic problems: Maximum number of branch switches (if negative only one “leg” will be computed)
+        /// For algebraic problems: Maximum number of branch switches (if negative only one ï¿½legï¿½ will be computed)
         Property<int>                           mMXBF;
 
         /// Controls the diagnostic file output (normal value is 2; see manual)
         Property<int>                           mIID;
 
-        /// maximum number of iterations for detecting “special” solutions
+        /// maximum number of iterations for detecting ï¿½specialï¿½ solutions
         Property<int>                           mITMX;
 
         /// maximum number of Newton+Chord iterations
@@ -173,23 +173,26 @@ class AutoPlugin : public tlp::CPPPlugin
         /// Adapt the continuation step size every IADS steps
         Property<int>                           mIADS;
 
-        /// the number of modified parameter “weights” (for BVP)
+        /// the number of modified parameter ï¿½weightsï¿½ (for BVP)
         Property<int>                           mNTHL;
 
         /// parameter index, parameter weight (e.g., ICP(11)=0 means PAR(11) is excluded from the step size)
         Property< vector<int> >                 mTHL;
 
-        /// the number of modified solution component “weights” (for BVP)
+        /// the number of modified solution component ï¿½weightsï¿½ (for BVP)
         Property<int>                           mNTHU;
 
         /// component index, component weight
         Property< vector<int> >                 mTHU;
 
-        /// the number of “user output points” specified
+        /// the number of ï¿½user output pointsï¿½ specified
         Property<int>                           mNUZR;
 
         /// parameter index, parameter value (if I is negative the continuation stops at the parameter value)
         Property< vector<int> >                 mUZR;
+
+        /// max number of columns in fort.7 file
+        Property< int >                 mMaxColumns;
 
         string                                  getTempFolder();
         string                                  getSBML();

@@ -85,7 +85,8 @@ mTHL(                               vector<int>(0),         "THL",              
 mNTHU(                              0,                      "NTHU",                                 "The number of modified solution component \"weights\" (for BVP)", "",         ""),
 mTHU(                               vector<int>(0),         "THU",                                  "Component index, component weight",                               "",         ""),
 mNUZR(                              0,                      "NUZR",                                 "The number of user output points specified",                    "",         ""),
-mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         "")
+mUZR(                               vector<int>(0),         "UZR",                                  "Parameter index, parameter value",                                "",         ""),
+mMaxColumns(                        7,         "MaxColumns",                           "The maximum number of columns that the auto library can write out at one time",                                "",         "")
 {
     mVersion = "1.0.0";
     //Setup the plugin properties
@@ -255,6 +256,7 @@ void AutoPlugin::addProperties()
     mProperties.add(&mTHU);
     mProperties.add(&mNUZR);
     mProperties.add(&mUZR);
+    mProperties.add(&mMaxColumns);
 }
 
 
@@ -472,6 +474,9 @@ assignDescription(mNUZR, s);
 
 s << "Parameter index, parameter value (if I is negative the continuation stops at the parameter value)";
 assignDescription(mUZR, s);
+
+s << "The maximum number of columns that the auto library can write out at one time";
+assignDescription(mMaxColumns, s);
 
 
 }

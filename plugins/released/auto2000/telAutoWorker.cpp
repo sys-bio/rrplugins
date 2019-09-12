@@ -9,6 +9,8 @@
 #include "telAutoUtils.h"
 //---------------------------------------------------------------------------
 
+extern int max_auto_columns_;
+
 using namespace tlp;
 using namespace telauto;
 
@@ -159,6 +161,8 @@ bool AutoWorker::setupAuto()
     {
         mRRAuto.setScanDirection(sdNegative);
     }
+
+    max_auto_columns_ = mTheHost.mMaxColumns.getValue();
 
 	//mRRAuto.setPreSimulation(mTheHost.mPreSimulation.getValue());
 

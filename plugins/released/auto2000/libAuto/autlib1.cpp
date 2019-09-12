@@ -6,6 +6,9 @@
 #include "auto_c.h"
 #include <time.h>
 using namespace std;
+
+int max_auto_columns_ = 7;
+
 namespace autolib {
 
 /* The memory for these are taken care of in main, and setubv for the
@@ -3004,11 +3007,11 @@ wrline(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, integer *icu
     n2 = ndm;
     nt = n1 + n2;
 
-    if (n1 > 256) {
-        n1 = 256;
+    if (n1 > max_auto_columns_) {
+        n1 = max_auto_columns_;
         n2 = 0;
-    } else if (nt > 256) {
-        n2 = 256 - n1;
+    } else if (nt > max_auto_columns_) {
+        n2 = max_auto_columns_ - n1;
     }
 
     /* Write a heading above the first line. */
