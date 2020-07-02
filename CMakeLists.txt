@@ -168,6 +168,7 @@ include_directories(
   ${TLP_ROOT}
   ${TLP_ROOT}/manager
   ${Poco_INCLUDE_DIRS}
+  ${LIBROADRUNNER_INCLUDE_DIR}
 )
 
 if(UNIX)
